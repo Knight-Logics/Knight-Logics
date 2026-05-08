@@ -1641,50 +1641,9 @@ function initChatLauncher(config) {
         launcher.innerHTML = isOpen ? closeIconMarkup : chatIconMarkup;
     };
 
-    const revealTidioContainers = () => {
-        const root = document.getElementById('tidio-chat');
-        const codeFrame = document.getElementById('tidio-chat-code');
+    const revealTidioContainers = () => {};
 
-        if (root) {
-            root.style.setProperty('display', 'block', 'important');
-            root.style.setProperty('visibility', 'visible', 'important');
-            root.style.setProperty('pointer-events', 'auto', 'important');
-            root.style.setProperty('position', 'fixed', 'important');
-            root.style.setProperty('right', '0', 'important');
-            root.style.setProperty('bottom', '0', 'important');
-            root.style.setProperty('top', 'auto', 'important');
-            root.style.setProperty('left', 'auto', 'important');
-            root.style.setProperty('width', '380px', 'important');
-            root.style.setProperty('height', '520px', 'important');
-        }
-
-        if (codeFrame) {
-            codeFrame.style.setProperty('display', 'block', 'important');
-            codeFrame.style.setProperty('visibility', 'visible', 'important');
-            codeFrame.style.setProperty('pointer-events', 'auto', 'important');
-            codeFrame.style.setProperty('position', 'fixed', 'important');
-            codeFrame.style.setProperty('right', '20px', 'important');
-            codeFrame.style.setProperty('bottom', '92px', 'important');
-            codeFrame.style.setProperty('top', 'auto', 'important');
-            codeFrame.style.setProperty('left', 'auto', 'important');
-            codeFrame.style.setProperty('z-index', '2147482999', 'important');
-        }
-    };
-
-    const hideTidioContainers = () => {
-        const root = document.getElementById('tidio-chat');
-        const codeFrame = document.getElementById('tidio-chat-code');
-
-        if (root) {
-            root.style.setProperty('pointer-events', 'none', 'important');
-        }
-
-        if (codeFrame) {
-            codeFrame.style.setProperty('display', 'none', 'important');
-            codeFrame.style.setProperty('visibility', 'hidden', 'important');
-            codeFrame.style.setProperty('pointer-events', 'none', 'important');
-        }
-    };
+    const hideTidioContainers = () => {};
 
     const style = document.createElement('style');
     style.id = 'kl-chat-launcher-style';

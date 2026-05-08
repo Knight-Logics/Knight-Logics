@@ -1540,40 +1540,19 @@ function scrollToTop() {
 }
 
 function initSiteChatWidget() {
-    const chatDefaults = {
-        provider: 'tidio',
-        enabled: true,
-        tidioPublicKey: 'vxyavzev0ezmockhadrsnje3xvyupl43'
-    };
-
-    const config = Object.assign({}, chatDefaults, window.KLChatConfig || {});
-    if (!config.enabled) return;
-
-    initChatLauncher(config);
-
-    if (config.provider === 'tidio') {
-        suppressDefaultTidioLauncher();
-
-        const publicKey = (config.tidioPublicKey || '').trim();
-        if (!publicKey) {
-            console.info('KL chat enabled, but no Tidio public key is set yet.');
-            return;
-        }
-
-        if (document.querySelector('script[data-kl-chat="tidio"]')) return;
-
-        const script = document.createElement('script');
-        script.src = `https://code.tidio.co/${publicKey}.js`;
-        script.async = true;
-        script.dataset.klChat = 'tidio';
-        script.addEventListener('load', () => {
-            suppressDefaultTidioLauncher();
-        });
-        document.body.appendChild(script);
-    }
+    if (document.querySelector('script[data-kl-chat="tidio"]')) return;
+    const script = document.createElement('script');
+    script.src = 'https://code.tidio.co/vxyavzev0ezmockhadrsnje3xvyupl43.js';
+    script.async = true;
+    script.dataset.klChat = 'tidio';
+    document.body.appendChild(script);
 }
 
 function suppressDefaultTidioLauncher() {
+    // no-op — using stock Tidio widget
+}
+
+function _suppressDefaultTidioLauncher_unused() {
     const shadowObserverRoots = new WeakSet();
     const shadowStyleRoots = new WeakSet();
 
@@ -1944,6 +1923,10 @@ function initChatLauncher(config) {
     });
 
     document.body.appendChild(launcher);
+}
+
+function initChatLauncher() {
+    // no-op — using stock Tidio widget
 }
 
 // Add scroll to top button

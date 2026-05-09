@@ -20,6 +20,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
+  <url>
+    <loc>https://knightlogics.com/pricing</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.92</priority>
+  </url>
 
   <!-- Service Pages -->
   <url>
@@ -66,6 +72,18 @@
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
+  <url>
+    <loc>https://knightlogics.com/case-study-screen-team</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/case-study-moms-resin-tables</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
 
   <!-- Projects -->
   <url>
@@ -104,31 +122,31 @@
   <!-- Legal / Policy Pages -->
   <url>
     <loc>https://knightlogics.com/privacy-policy</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-05-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://knightlogics.com/terms-of-service</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-05-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://knightlogics.com/cookie-policy</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-05-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://knightlogics.com/refund-policy</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-05-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://knightlogics.com/disclaimer</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-05-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>

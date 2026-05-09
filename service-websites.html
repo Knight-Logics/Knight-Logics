@@ -115,7 +115,7 @@
                 "name": "How much does web design cost in Tampa Bay?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Most small-business websites in Tampa Bay range from $1,500 to $4,500 depending on page count, content, and functionality. E-commerce builds and sites with custom integrations cost more. Every project starts with a free consultation to scope the work before any numbers are committed."
+                    "text": "Knight Logics offers a clear upgrade ladder: Starter Preview Site ($500), Starter Live Site ($700), Search-Ready Starter ($1,200), Local Launch Website ($1,997), Local Launch Plus ($2,997+), and Growth System (custom from $3,500). Monthly Visibility Plans start at $197/mo."
                 }
             },
             {
@@ -123,7 +123,7 @@
                 "name": "How much does a custom website typically cost?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Scope drives price, but most small-business brochure and lead-generation sites land in the mid four figures. Larger multi-page builds, migrations, and system-integrated sites cost more depending on content, features, and SEO depth."
+                    "text": "A Starter Preview Site is $500 — custom-coded, mobile-friendly, no domain or Google setup. A Starter Live Site is $700 and adds domain, DNS, and SSL. A Search-Ready Starter is $1,200 and adds Search Console, schema, and analytics. The Local Launch Website is $1,997 and includes everything for a full local search-ready launch. Larger builds start at $2,997."
                 }
             },
             {
@@ -581,6 +581,245 @@
             line-height: 1.65;
             margin-bottom: 28px;
         }
+        /* ── Pricing Section ── */
+        .svc-pricing {
+            padding: 90px 0;
+            background: #0a0a0a;
+        }
+        .svc-pricing-section-label {
+            text-align: center;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #64ffda;
+            margin-bottom: 32px;
+        }
+        .svc-pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 20px;
+        }
+        .svc-pricing-grid--2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .svc-pricing-grid--3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .svc-pricing-card {
+            position: relative;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(100,255,218,0.14);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .svc-pricing-card:hover {
+            border-color: rgba(100,255,218,0.35);
+            transform: translateY(-3px);
+        }
+        .svc-pricing-card--featured {
+            border-color: rgba(100,255,218,0.45);
+            background: rgba(100,255,218,0.06);
+        }
+        .svc-pricing-badge {
+            background: linear-gradient(135deg, #64ffda, #00c8ff);
+            color: #0a0a0a;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 6px 0;
+        }
+        .svc-pricing-header {
+            padding: 28px 28px 18px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+        .svc-pricing-name {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: #64ffda;
+            margin-bottom: 10px;
+        }
+        .svc-pricing-price {
+            font-size: clamp(1.9rem, 3vw, 2.5rem);
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .svc-pricing-price-note {
+            font-size: 1rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.50);
+        }
+        .svc-pricing-tagline {
+            font-size: 0.87rem;
+            color: rgba(255,255,255,0.62);
+            line-height: 1.5;
+            margin: 0;
+        }
+        .svc-pricing-body {
+            padding: 20px 28px;
+            flex: 1;
+        }
+        .svc-pricing-list-label {
+            font-size: 0.71rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(100,255,218,0.85);
+            margin: 0 0 10px;
+        }
+        .svc-pricing-list-label--no {
+            color: rgba(255,255,255,0.38);
+            margin-top: 18px;
+        }
+        .svc-pricing-includes,
+        .svc-pricing-excludes {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .svc-pricing-includes li,
+        .svc-pricing-excludes li {
+            font-size: 0.83rem;
+            line-height: 1.5;
+            padding: 4px 0 4px 22px;
+            position: relative;
+        }
+        .svc-pricing-includes li {
+            color: rgba(255,255,255,0.78);
+        }
+        .svc-pricing-includes li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #64ffda;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        .svc-pricing-excludes li {
+            color: rgba(255,255,255,0.35);
+        }
+        .svc-pricing-excludes li::before {
+            content: '✕';
+            position: absolute;
+            left: 0;
+            color: rgba(255,90,90,0.5);
+            font-weight: 700;
+            font-size: 0.78rem;
+        }
+        .svc-pricing-example {
+            margin-top: 16px;
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.48);
+            font-style: italic;
+            line-height: 1.5;
+            border-left: 2px solid rgba(100,255,218,0.25);
+            padding-left: 12px;
+        }
+        .svc-pricing-cta {
+            display: block;
+            margin: 0 28px 28px;
+            padding: 13px 20px;
+            text-align: center;
+            border-radius: 10px;
+            border: 1px solid rgba(100,255,218,0.35);
+            color: #64ffda;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .svc-pricing-cta:hover {
+            background: rgba(100,255,218,0.12);
+        }
+        .svc-pricing-cta--featured {
+            background: linear-gradient(135deg, #64ffda, #00c8ff);
+            color: #0a0a0a;
+            border-color: transparent;
+            font-weight: 700;
+        }
+        .svc-pricing-cta--featured:hover {
+            opacity: 0.9;
+            color: #0a0a0a;
+        }
+        .svc-pricing-monthly-header {
+            text-align: center;
+            margin: 72px 0 36px;
+        }
+        .svc-pricing-monthly-header h3 {
+            font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        .svc-pricing-monthly-header p {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.62);
+        }
+        .svc-pricing-ladder {
+            margin-top: 64px;
+            padding: 36px 40px;
+            background: rgba(100,255,218,0.04);
+            border: 1px solid rgba(100,255,218,0.16);
+            border-radius: 20px;
+            text-align: center;
+        }
+        .svc-pricing-ladder h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 24px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+        .svc-pricing-ladder-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .svc-ladder-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .svc-ladder-label {
+            font-size: 0.76rem;
+            color: rgba(255,255,255,0.55);
+            font-weight: 500;
+        }
+        .svc-ladder-price {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #64ffda;
+        }
+        .svc-ladder-arrow {
+            font-size: 1.1rem;
+            color: rgba(100,255,218,0.3);
+            margin-bottom: 10px;
+        }
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .svc-pricing-grid--2 { grid-template-columns: 1fr; }
+            .svc-pricing-grid--3 { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 700px) {
+            .svc-pricing-grid { grid-template-columns: 1fr; }
+            .svc-pricing-grid--3 { grid-template-columns: 1fr; }
+            .svc-pricing-ladder { padding: 24px 20px; }
+            .svc-ladder-arrow { display: none; }
+        }
         /* Responsive */
         @media (max-width: 900px) {
             .svc-stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -703,6 +942,30 @@
                 <p>These are production websites — not mock-ups. Every project is deployed, indexed by Google, and built to perform.</p>
             </div>
             <div class="svc-work-grid svc-work-grid--3">
+                <a class="svc-work-card fade-in" href="/case-study-screen-team">
+                    <div class="svc-work-thumb">
+                        <img src="https://screenteamllc.com/Images/ScreenTeamBanner.png" alt="ScreenTeamLLC.com local lead-generation website case study" loading="lazy">
+                    </div>
+                    <div class="svc-work-copy">
+                        <p class="svc-work-label">Client Website</p>
+                        <h3>ScreenTeamLLC.com</h3>
+                        <p>Service-focused local site with direct-call flows, trust pages, and schema-first local SEO structure.</p>
+                        <span class="svc-work-cta">View Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a class="svc-work-card fade-in" href="/case-study-moms-resin-tables">
+                    <div class="svc-work-thumb">
+                        <img src="https://momsresintables.com/assets/images/picwish_8813969001_image1.webp" alt="MomsResinTables.com e-commerce case study" loading="lazy">
+                    </div>
+                    <div class="svc-work-copy">
+                        <p class="svc-work-label">E-Commerce Build</p>
+                        <h3>Mom's Resin Tables</h3>
+                        <p>Premium product-brand site with custom quote flow, trust pages, and e-commerce-ready presentation.</p>
+                        <span class="svc-work-cta">View Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
                 <a class="svc-work-card fade-in" href="/case-study-jns">
                     <div class="svc-work-thumb">
                         <img src="./images/JNS%20-%20HomeImage.png" alt="JNSBuilds.com construction website — Tampa Bay web design by Knight Logics" loading="lazy">
@@ -857,6 +1120,594 @@
         </div>
     </section>
 
+    <!-- ══ PRICING ══ -->
+    <section class="svc-pricing" id="pricing">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Start Simple. Upgrade When You're Ready.</h2>
+                <p>Not every business needs the full growth system on day one. Choose the starting point that fits your budget and situation — and add layers as your business grows.</p>
+            </div>
+
+            <p class="svc-pricing-section-label fade-in">One-Time Project Pricing</p>
+            <div class="svc-pricing-grid fade-in">
+
+                <!-- Starter Preview Site -->
+                <div class="svc-pricing-card">
+                    <div class="svc-pricing-header">
+                        <p class="svc-pricing-name">Starter Preview Site</p>
+                        <p class="svc-pricing-price">$500</p>
+                        <p class="svc-pricing-tagline">A professional custom-coded page to show customers — fast. Best when you need something real before investing in a domain and Google setup.</p>
+                    </div>
+                    <div class="svc-pricing-body">
+                        <p class="svc-pricing-list-label">What's included</p>
+                        <ul class="svc-pricing-includes">
+                            <li>Custom-coded single-page site (HTML, CSS, JS)</li>
+                            <li>Mobile-friendly, responsive design</li>
+                            <li>Hero, services, about, gallery, and contact sections</li>
+                            <li>Service-area mention in copy</li>
+                            <li>Click-to-call buttons and phone number display</li>
+                            <li>Email and social media links</li>
+                            <li>Basic copy cleanup from your notes or existing content</li>
+                            <li>Temporary public preview link via GitHub Pages</li>
+                            <li>1 round of revisions</li>
+                        </ul>
+                        <p class="svc-pricing-list-label svc-pricing-list-label--no">Not included</p>
+                        <ul class="svc-pricing-excludes">
+                            <li>Custom domain or DNS setup</li>
+                            <li>SSL / HTTPS configuration</li>
+                            <li>Google Search Console or sitemap</li>
+                            <li>Indexing submission</li>
+                            <li>Schema / structured data markup</li>
+                            <li>Analytics (GA4 or Microsoft Clarity)</li>
+                            <li>Google Business Profile setup or alignment</li>
+                            <li>Directory or citation setup</li>
+                            <li>Working contact form with backend delivery</li>
+                            <li>CRM or lead tracking</li>
+                            <li>Monthly support or edits</li>
+                        </ul>
+                    </div>
+                    <a href="/contact" class="svc-pricing-cta">Start with a preview</a>
+                </div>
+
+                <!-- Starter Live Site -->
+                <div class="svc-pricing-card">
+                    <div class="svc-pricing-header">
+                        <p class="svc-pricing-name">Starter Live Site</p>
+                        <p class="svc-pricing-price">$700</p>
+                        <p class="svc-pricing-tagline">Same custom-coded site, launched on your real domain with HTTPS and proper hosting. The fastest way to go from nothing to a live URL.</p>
+                    </div>
+                    <div class="svc-pricing-body">
+                        <p class="svc-pricing-list-label">What's included</p>
+                        <ul class="svc-pricing-includes">
+                            <li>Everything in the Starter Preview Site</li>
+                            <li>Domain connection and DNS configuration</li>
+                            <li>SSL / HTTPS setup and verification</li>
+                            <li>WWW / non-WWW redirect configuration</li>
+                            <li>Hosting connection and deployment</li>
+                            <li>Launch QA: mobile, desktop, and speed review</li>
+                            <li>Click-to-call and contact link test</li>
+                            <li>Favicon and social preview image check</li>
+                        </ul>
+                        <p class="svc-pricing-list-label svc-pricing-list-label--no">Not included</p>
+                        <ul class="svc-pricing-excludes">
+                            <li>Google Search Console setup or sitemap</li>
+                            <li>Indexing submission</li>
+                            <li>Schema / structured data markup</li>
+                            <li>Analytics (GA4 or Microsoft Clarity)</li>
+                            <li>Google Business Profile work</li>
+                            <li>Directory or citation setup</li>
+                            <li>Working contact form with backend delivery</li>
+                            <li>CRM or lead tracking</li>
+                            <li>Monthly support or edits</li>
+                        </ul>
+                    </div>
+                    <a href="/contact" class="svc-pricing-cta">Launch your site</a>
+                </div>
+
+                <!-- Search-Ready Starter -->
+                <div class="svc-pricing-card">
+                    <div class="svc-pricing-header">
+                        <p class="svc-pricing-name">Search-Ready Starter</p>
+                        <p class="svc-pricing-price">$1,200</p>
+                        <p class="svc-pricing-tagline">Live site with the complete technical Google setup — Search Console, sitemap, schema, and analytics done right from day one.</p>
+                    </div>
+                    <div class="svc-pricing-body">
+                        <p class="svc-pricing-list-label">What's included</p>
+                        <ul class="svc-pricing-includes">
+                            <li>Everything in the Starter Live Site</li>
+                            <li>Google Search Console setup and verification</li>
+                            <li>XML sitemap generated and submitted</li>
+                            <li>Robots.txt configuration</li>
+                            <li>Google indexing request submitted</li>
+                            <li>LocalBusiness + BreadcrumbList schema (JSON-LD)</li>
+                            <li>Open Graph and social preview tags on all pages</li>
+                            <li>Google Analytics 4 (GA4) setup and verification</li>
+                            <li>Microsoft Clarity heatmap installation</li>
+                            <li>Basic local keyword alignment in page copy</li>
+                            <li>Title tag and meta description cleanup across all pages</li>
+                        </ul>
+                        <p class="svc-pricing-list-label svc-pricing-list-label--no">Not included</p>
+                        <ul class="svc-pricing-excludes">
+                            <li>Google Business Profile setup or optimization</li>
+                            <li>Directory or citation building</li>
+                            <li>Service-area SEO expansion pages</li>
+                            <li>Working contact form with backend delivery</li>
+                            <li>CRM or lead tracking</li>
+                            <li>Monthly support or reporting</li>
+                        </ul>
+                    </div>
+                    <a href="/contact" class="svc-pricing-cta">Get Google-ready</a>
+                </div>
+
+                <!-- Local Launch Website — Featured -->
+                <div class="svc-pricing-card svc-pricing-card--featured">
+                    <div class="svc-pricing-badge">Most Popular</div>
+                    <div class="svc-pricing-header">
+                        <p class="svc-pricing-name">Local Launch Website</p>
+                        <p class="svc-pricing-price">$1,997</p>
+                        <p class="svc-pricing-tagline">The complete local-ready website — built to rank, built to convert, and handed off fully yours.</p>
+                    </div>
+                    <div class="svc-pricing-body">
+                        <p class="svc-pricing-list-label">What's included</p>
+                        <ul class="svc-pricing-includes">
+                            <li>Custom-coded multi-page site (up to 6 pages)</li>
+                            <li>Mobile-first design with stronger copy and CTA structure</li>
+                            <li>Hero, services, about, gallery, contact, and service-area page</li>
+                            <li>Click-to-call, contact form, and quote-request flow</li>
+                            <li>Domain connection, DNS, SSL, and hosting</li>
+                            <li>Google Search Console, XML sitemap, and indexing request</li>
+                            <li>LocalBusiness, Service, FAQ, and BreadcrumbList schema</li>
+                            <li>Open Graph and social preview tags across all pages</li>
+                            <li>Google Analytics 4 + Microsoft Clarity</li>
+                            <li>Google Business Profile alignment — categories, service areas, and description</li>
+                            <li>Basic local keyword structure across all pages</li>
+                            <li>2 rounds of revisions</li>
+                            <li>Full site handoff with ownership documentation</li>
+                        </ul>
+                        <p class="svc-pricing-list-label svc-pricing-list-label--no">Not included</p>
+                        <ul class="svc-pricing-excludes">
+                            <li>Service-area expansion pages beyond the included one</li>
+                            <li>CRM or automated lead tracking</li>
+                            <li>Paid ad setup or management</li>
+                            <li>Directory or citation building campaign</li>
+                            <li>Monthly management or reporting</li>
+                            <li>Growth System automation stack</li>
+                        </ul>
+                    </div>
+                    <a href="/contact" class="svc-pricing-cta svc-pricing-cta--featured">Launch properly</a>
+                </div>
+
+            </div><!-- /svc-pricing-grid -->
+
+            <!-- Larger packages -->
+            <div class="svc-pricing-grid svc-pricing-grid--2 fade-in" style="margin-top:24px;">
+
+                <!-- Local Launch Plus -->
+                <div class="svc-pricing-card">
+                    <div class="svc-pricing-header">
+                        <p class="svc-pricing-name">Local Launch Plus</p>
+                        <p class="svc-pricing-price">$2,997<span class="svc-pricing-price-note">+</span></p>
+                        <p class="svc-pricing-tagline">For contractors and multi-service businesses that need more pages, more service areas, and more conversion depth.</p>
+                    </div>
+                    <div class="svc-pricing-body">
+                        <p class="svc-pricing-list-label">What's included</p>
+                        <ul class="svc-pricing-includes">
+                            <li>Everything in the Local Launch Website</li>
+                            <li>Multi-page build up to 10 pages</li>
+                            <li>Up to 3 dedicated service-area SEO pages</li>
+                            <li>Stronger copywriting, conversion architecture, and CTA structure</li>
+                            <li>Working contact form with email forwarding to your inbox</li>
+                            <li>Custom gallery or project portfolio section</li>
+                            <li>Deeper schema: Service, HowTo, and expanded FAQ structured data</li>
+                            <li>Competitor keyword and local positioning review</li>
+                            <li>On-page local keyword optimization across every page</li>
+                            <li>3 rounds of revisions</li>
+                        </ul>
+                        <p class="svc-pricing-list-label svc-pricing-list-label--no">Not included</p>
+                        <ul class="svc-pricing-excludes">
+                            <li>CRM or automated lead tracking</li>
+                            <li>Automated email follow-up sequences</li>
+                            <li>Paid ad setup or management</li>
+                            <li>Active GBP management — posts, Q&amp;A, review responses</li>
+                            <li>Monthly retainer work</li>
+                            <li>Growth System automation</li>
+                        </ul>
+                    </div>
+                    <a href="/contact" class="svc-pricing-cta">Scope out your project</a>
+                </div>
+
+                <!-- Growth System -->
+                <div class="svc-pricing-card">
+                    <div class="svc-pricing-header">
+                        <p class="svc-pricing-name">Growth System</p>
+                        <p class="svc-pricing-price">Custom<span class="svc-pricing-price-note"> from $3,500</span></p>
+                        <p class="svc-pricing-tagline">The system behind the site — lead capture, automated follow-up, CRM, and reporting built around your business.</p>
+                    </div>
+                    <div class="svc-pricing-body">
+                        <p class="svc-pricing-list-label">What's included</p>
+                        <ul class="svc-pricing-includes">
+                            <li>Everything in the Local Launch Website</li>
+                            <li>Lead capture form connected to a CRM or tracking dashboard</li>
+                            <li>Automated follow-up email sequences — typically 3–5 emails</li>
+                            <li>Lead tracking, contact management, and pipeline visibility</li>
+                            <li>Analytics and reporting setup tailored to your goals</li>
+                            <li>Optional: booking or scheduling integration</li>
+                            <li>Optional: custom automation workflows for your specific process</li>
+                            <li>Fully scoped per project — no padded packages</li>
+                        </ul>
+                        <p class="svc-pricing-list-label svc-pricing-list-label--no">Not included</p>
+                        <ul class="svc-pricing-excludes">
+                            <li>Paid media or ad account management</li>
+                            <li>Social content creation or posting</li>
+                            <li>Ongoing content writing or blog management</li>
+                            <li>Continued work after delivery without a retainer agreement</li>
+                        </ul>
+                        <p class="svc-pricing-example">Example: A $3,500 project typically covers a full site + lead capture form + CRM connection + 3-email automated follow-up sequence.</p>
+                    </div>
+                    <a href="/contact" class="svc-pricing-cta">Build the growth system</a>
+                </div>
+
+            </div><!-- /svc-pricing-grid--2 -->
+
+            <!-- Monthly Plans -->
+            <div class="svc-pricing-monthly-header fade-in">
+                <h3>Monthly Visibility Plans</h3>
+                <p>Keep your site active, your GBP updated, and your rankings healthy after launch. No long-term contract — cancel any month.</p>
+            </div>
+            <div class="svc-pricing-grid svc-pricing-grid--3 fade-in">
+
+                <!-- Visibility Lite -->
+                <div class="svc-pricing-card">
+                    <div class="svc-pricing-header">
+                        <p class="svc-pricing-name">Visibility Lite</p>
+                        <p class="svc-pricing-price">$197<span class="svc-pricing-price-note">/mo</span></p>
+                        <p class="svc-pricing-tagline">Stay maintained and visible with minimal overhead.</p>
+                    </div>
+                    <div class="svc-pricing-body">
+                        <p class="svc-pricing-list-label">What's included</p>
+                        <ul class="svc-pricing-includes">
+                            <li>1 Google Business Profile post per month</li>
+                            <li>Search Console monitoring and status check</li>
+                            <li>Minor site content or copy edits — up to 1 hour/month</li>
+                            <li>Site uptime monitoring</li>
+                            <li>Priority email support</li>
+                        </ul>
+                        <p class="svc-pricing-list-label svc-pricing-list-label--no">Not included</p>
+                        <ul class="svc-pricing-excludes">
+                            <li>Link building or citation work</li>
+                            <li>New page creation or redesign</li>
+                            <li>CRM or lead system management</li>
+                            <li>Social media posting</li>
+                            <li>Monthly analytics or ranking reports</li>
+                        </ul>
+                    </div>
+                    <a href="/contact" class="svc-pricing-cta">Start Lite</a>
+                </div>
+
+                <!-- Visibility Standard — Featured -->
+                <div class="svc-pricing-card svc-pricing-card--featured">
+                    <div class="svc-pricing-badge">Best Value</div>
+                    <div class="svc-pricing-header">
+                        <p class="svc-pricing-name">Visibility Standard</p>
+                        <p class="svc-pricing-price">$397<span class="svc-pricing-price-note">/mo</span></p>
+                        <p class="svc-pricing-tagline">Active monthly maintenance with real edits, reporting, and local citation work.</p>
+                    </div>
+                    <div class="svc-pricing-body">
+                        <p class="svc-pricing-list-label">What's included</p>
+                        <ul class="svc-pricing-includes">
+                            <li>4 Google Business Profile posts per month</li>
+                            <li>Monthly Search Console + GA4 performance report</li>
+                            <li>Keyword ranking check and trend review</li>
+                            <li>Up to 3 hours of site edits or updates per month</li>
+                            <li>Technical SEO fixes as issues arise</li>
+                            <li>1 local citation audit and correction per month</li>
+                            <li>Priority email and phone support</li>
+                        </ul>
+                        <p class="svc-pricing-list-label svc-pricing-list-label--no">Not included</p>
+                        <ul class="svc-pricing-excludes">
+                            <li>New page development or design work</li>
+                            <li>CRM or lead system management</li>
+                            <li>Paid ad account management</li>
+                            <li>Social media posting or management</li>
+                        </ul>
+                    </div>
+                    <a href="/contact" class="svc-pricing-cta svc-pricing-cta--featured">Start Standard</a>
+                </div>
+
+                <!-- Visibility Pro -->
+                <div class="svc-pricing-card">
+                    <div class="svc-pricing-header">
+                        <p class="svc-pricing-name">Visibility Pro</p>
+                        <p class="svc-pricing-price">$697<span class="svc-pricing-price-note">/mo</span></p>
+                        <p class="svc-pricing-tagline">Active growth support for businesses that want to keep pushing after launch.</p>
+                    </div>
+                    <div class="svc-pricing-body">
+                        <p class="svc-pricing-list-label">What's included</p>
+                        <ul class="svc-pricing-includes">
+                            <li>8 Google Business Profile posts per month</li>
+                            <li>Full monthly Search Console + analytics report with commentary</li>
+                            <li>Keyword tracking and trend analysis</li>
+                            <li>Up to 6 hours of site edits or improvements per month</li>
+                            <li>Proactive technical SEO as issues surface</li>
+                            <li>Citation monitoring and corrections</li>
+                            <li>Monthly competitor local visibility check</li>
+                            <li>Same-day response during business hours</li>
+                        </ul>
+                        <p class="svc-pricing-list-label svc-pricing-list-label--no">Not included</p>
+                        <ul class="svc-pricing-excludes">
+                            <li>Paid ad setup or management</li>
+                            <li>Full social media management</li>
+                            <li>CRM development or automation builds</li>
+                            <li>Content writing beyond basic copy edits</li>
+                        </ul>
+                    </div>
+                    <a href="/contact" class="svc-pricing-cta">Start Pro</a>
+                </div>
+
+            </div><!-- /svc-pricing-grid--3 -->
+
+            <!-- Upgrade ladder -->
+            <div class="svc-pricing-ladder fade-in">
+                <h3>The upgrade path — start anywhere</h3>
+                <div class="svc-pricing-ladder-steps">
+                    <div class="svc-ladder-step">
+                        <span class="svc-ladder-label">Preview only</span>
+                        <span class="svc-ladder-price">$500</span>
+                    </div>
+                    <div class="svc-ladder-arrow">→</div>
+                    <div class="svc-ladder-step">
+                        <span class="svc-ladder-label">Essential launch</span>
+                        <span class="svc-ladder-price">$700</span>
+                    </div>
+                    <div class="svc-ladder-arrow">→</div>
+                    <div class="svc-ladder-step">
+                        <span class="svc-ladder-label">Launch plus</span>
+                        <span class="svc-ladder-price">$850</span>
+                    </div>
+                    <div class="svc-ladder-arrow">→</div>
+                    <div class="svc-ladder-step">
+                        <span class="svc-ladder-label">Search foundation</span>
+                        <span class="svc-ladder-price">$1,200+</span>
+                    </div>
+                    <div class="svc-ladder-arrow">→</div>
+                    <div class="svc-ladder-step">
+                        <span class="svc-ladder-label">Local launch</span>
+                        <span class="svc-ladder-price">$1,997</span>
+                    </div>
+                    <div class="svc-ladder-arrow">→</div>
+                    <div class="svc-ladder-step">
+                        <span class="svc-ladder-label">Local launch plus</span>
+                        <span class="svc-ladder-price">$2,997+</span>
+                    </div>
+                    <div class="svc-ladder-arrow">→</div>
+                    <div class="svc-ladder-step">
+                        <span class="svc-ladder-label">E-commerce</span>
+                        <span class="svc-ladder-price">$2,497+</span>
+                    </div>
+                    <div class="svc-ladder-arrow">→</div>
+                    <div class="svc-ladder-step">
+                        <span class="svc-ladder-label">Growth system</span>
+                        <span class="svc-ladder-price">$3,500+</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- E-Commerce Package -->
+            <div class="svc-pricing-monthly-header fade-in">
+                <h3>E-Commerce Launch</h3>
+                <p>A real custom-coded storefront — no Shopify fees, no platform lock-in, fully yours.</p>
+            </div>
+            <div class="svc-pricing-grid svc-pricing-grid--2 fade-in">
+
+                <div class="svc-pricing-card">
+                    <div class="svc-pricing-header">
+                        <p class="svc-pricing-name">E-Commerce Launch</p>
+                        <p class="svc-pricing-price">$2,497</p>
+                        <p class="svc-pricing-tagline">Custom-coded storefront built on the Local Launch foundation — Stripe checkout, product pages, cart, and Google-ready setup included.</p>
+                    </div>
+                    <div class="svc-pricing-body">
+                        <p class="svc-pricing-list-label">What's included</p>
+                        <ul class="svc-pricing-includes">
+                            <li>Everything in the Local Launch Website</li>
+                            <li>Custom product catalog — up to 20 products</li>
+                            <li>Individual product pages with images, descriptions, pricing</li>
+                            <li>Stripe or Snipcart cart and checkout integration</li>
+                            <li>Order confirmation flow and receipt email</li>
+                            <li>Mobile-optimized shop layout</li>
+                            <li>Basic inventory display (no CMS required)</li>
+                            <li>Product schema (Product, Offer, AggregateRating markup)</li>
+                            <li>No monthly platform fees — you own the code</li>
+                            <li>2 revision rounds + full handoff</li>
+                        </ul>
+                        <p class="svc-pricing-list-label svc-pricing-list-label--no">Not included</p>
+                        <ul class="svc-pricing-excludes">
+                            <li>CMS / admin panel for self-managing products</li>
+                            <li>Product variant support (size, color, etc.) beyond 2 options</li>
+                            <li>Inventory management or stock tracking</li>
+                            <li>Shipping rate calculators or label generation</li>
+                            <li>More than 20 products</li>
+                            <li>Subscription or recurring billing</li>
+                            <li>CRM or automated post-purchase follow-up</li>
+                        </ul>
+                    </div>
+                    <a href="/contact" class="svc-pricing-cta">Build your store</a>
+                </div>
+
+                <div class="svc-pricing-card svc-pricing-card--featured">
+                    <div class="svc-pricing-badge">Full Store Build</div>
+                    <div class="svc-pricing-header">
+                        <p class="svc-pricing-name">E-Commerce Growth Store</p>
+                        <p class="svc-pricing-price">$3,997<span class="svc-pricing-price-note">+</span></p>
+                        <p class="svc-pricing-tagline">A full custom storefront with CMS-managed products, variant support, automated post-purchase emails, and lead/order tracking.</p>
+                    </div>
+                    <div class="svc-pricing-body">
+                        <p class="svc-pricing-list-label">What's included</p>
+                        <ul class="svc-pricing-includes">
+                            <li>Everything in the E-Commerce Launch</li>
+                            <li>Unlimited products with CMS admin panel (Sanity or Contentful)</li>
+                            <li>Product variants — size, color, material, quantity</li>
+                            <li>Basic inventory / stock-level display</li>
+                            <li>Automated post-purchase email sequence (3 emails)</li>
+                            <li>Order dashboard or Airtable/Notion tracker</li>
+                            <li>Coupon or discount code support via Stripe</li>
+                            <li>Customer review section per product</li>
+                            <li>GA4 e-commerce event tracking (add to cart, purchase)</li>
+                            <li>3 revision rounds + full handoff documentation</li>
+                        </ul>
+                        <p class="svc-pricing-list-label svc-pricing-list-label--no">Not included</p>
+                        <ul class="svc-pricing-excludes">
+                            <li>Shipping integration (UPS, USPS, FedEx rate calc)</li>
+                            <li>Subscription or recurring billing</li>
+                            <li>Full ERP or inventory management system</li>
+                            <li>Paid ad management</li>
+                            <li>Monthly retainer work</li>
+                        </ul>
+                        <p class="svc-pricing-example">Example: Mom's Resin Tables — custom product brand site with quote flow, custom image gallery, and e-commerce-ready structure.</p>
+                    </div>
+                    <a href="/contact" class="svc-pricing-cta svc-pricing-cta--featured">Scope your store</a>
+                </div>
+
+            </div><!-- /e-commerce grid -->
+
+            <!-- Add-On Menu -->
+            <div class="svc-pricing-monthly-header fade-in">
+                <h3>Add-Ons — Available with Any Package</h3>
+                <p>Add individual services to any project. All are one-time unless noted.</p>
+            </div>
+            <div class="svc-pricing-grid fade-in" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;">
+
+                <div class="svc-pricing-card" style="border-radius:14px;">
+                    <div class="svc-pricing-header" style="padding:20px 22px 14px;">
+                        <p class="svc-pricing-name">Working Contact Form</p>
+                        <p class="svc-pricing-price" style="font-size:1.4rem;">+$100</p>
+                        <p class="svc-pricing-tagline">Form connected to your inbox via Formspree — real email leads, not a mailto link. Spam filtering included.</p>
+                    </div>
+                    <div class="svc-pricing-body" style="padding:10px 22px;">
+                        <ul class="svc-pricing-includes">
+                            <li>Fields: name, phone, email, message</li>
+                            <li>Spam-filtered email delivery to your inbox</li>
+                            <li>Auto-reply confirmation to submitter</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="svc-pricing-card" style="border-radius:14px;">
+                    <div class="svc-pricing-header" style="padding:20px 22px 14px;">
+                        <p class="svc-pricing-name">Business Email Setup</p>
+                        <p class="svc-pricing-price" style="font-size:1.4rem;">+$150</p>
+                        <p class="svc-pricing-tagline">Google Workspace setup so you send/receive as yourname@yourdomain.com. You pay ~$7/mo to Google directly after setup.</p>
+                    </div>
+                    <div class="svc-pricing-body" style="padding:10px 22px;">
+                        <ul class="svc-pricing-includes">
+                            <li>Google Workspace account creation</li>
+                            <li>MX record and DNS configuration</li>
+                            <li>Email signature setup</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="svc-pricing-card" style="border-radius:14px;">
+                    <div class="svc-pricing-header" style="padding:20px 22px 14px;">
+                        <p class="svc-pricing-name">Google Voice Business Number</p>
+                        <p class="svc-pricing-price" style="font-size:1.4rem;">+$75</p>
+                        <p class="svc-pricing-tagline">Local business phone number with voicemail, call forwarding, and text — free to you after setup via Google Voice.</p>
+                    </div>
+                    <div class="svc-pricing-body" style="padding:10px 22px;">
+                        <ul class="svc-pricing-includes">
+                            <li>Local area code number selection</li>
+                            <li>Call forwarding to your mobile</li>
+                            <li>Voicemail and text enabled</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="svc-pricing-card" style="border-radius:14px;">
+                    <div class="svc-pricing-header" style="padding:20px 22px 14px;">
+                        <p class="svc-pricing-name">Social Profile Setup</p>
+                        <p class="svc-pricing-price" style="font-size:1.4rem;">+$200</p>
+                        <p class="svc-pricing-tagline">Creation or optimization of up to 3 social profiles — Facebook, Instagram, LinkedIn. Bio, cover image, links, and first post.</p>
+                    </div>
+                    <div class="svc-pricing-body" style="padding:10px 22px;">
+                        <ul class="svc-pricing-includes">
+                            <li>Profile creation or cleanup</li>
+                            <li>Bio, cover, logo, and link setup</li>
+                            <li>First branded post on each profile</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="svc-pricing-card" style="border-radius:14px;">
+                    <div class="svc-pricing-header" style="padding:20px 22px 14px;">
+                        <p class="svc-pricing-name">Booking Integration</p>
+                        <p class="svc-pricing-price" style="font-size:1.4rem;">+$150</p>
+                        <p class="svc-pricing-tagline">Embed Calendly, Square Appointments, or similar into your site's contact flow so prospects can book directly.</p>
+                    </div>
+                    <div class="svc-pricing-body" style="padding:10px 22px;">
+                        <ul class="svc-pricing-includes">
+                            <li>Platform setup (Calendly free tier or Square)</li>
+                            <li>Embed in contact or hero section</li>
+                            <li>Confirmation email configuration</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="svc-pricing-card" style="border-radius:14px;">
+                    <div class="svc-pricing-header" style="padding:20px 22px 14px;">
+                        <p class="svc-pricing-name">Starter CRM Setup</p>
+                        <p class="svc-pricing-price" style="font-size:1.4rem;">+$250</p>
+                        <p class="svc-pricing-tagline">Airtable or Notion lead tracker connected to your contact form — visible pipeline, contact log, no monthly fee.</p>
+                    </div>
+                    <div class="svc-pricing-body" style="padding:10px 22px;">
+                        <ul class="svc-pricing-includes">
+                            <li>Airtable or Notion base setup</li>
+                            <li>Form-to-CRM connection via Zapier/Make</li>
+                            <li>Pipeline view: New / Contacted / Closed</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="svc-pricing-card" style="border-radius:14px;">
+                    <div class="svc-pricing-header" style="padding:20px 22px 14px;">
+                        <p class="svc-pricing-name">Welcome Email Sequence</p>
+                        <p class="svc-pricing-price" style="font-size:1.4rem;">+$300</p>
+                        <p class="svc-pricing-tagline">3 automated emails triggered when someone submits your contact form — sent through Mailchimp or MailerLite (free tiers available).</p>
+                    </div>
+                    <div class="svc-pricing-body" style="padding:10px 22px;">
+                        <ul class="svc-pricing-includes">
+                            <li>Immediate confirmation email</li>
+                            <li>Follow-up at 24hrs and 72hrs</li>
+                            <li>Platform setup + branded templates</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="svc-pricing-card" style="border-radius:14px;">
+                    <div class="svc-pricing-header" style="padding:20px 22px 14px;">
+                        <p class="svc-pricing-name">Phone &amp; Email Bundle</p>
+                        <p class="svc-pricing-price" style="font-size:1.4rem;">+$200</p>
+                        <p class="svc-pricing-tagline">Google Voice business number + Google Workspace business email together at a slight discount.</p>
+                    </div>
+                    <div class="svc-pricing-body" style="padding:10px 22px;">
+                        <ul class="svc-pricing-includes">
+                            <li>Google Voice local number setup</li>
+                            <li>Google Workspace email setup</li>
+                            <li>Both DNS records configured</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div><!-- /add-ons grid -->
+
+            <!-- Link to full pricing page -->
+            <div style="text-align:center;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.08);">
+                <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:1.2rem;">Looking for e-commerce, CRM &amp; job records, contractor documents, citations, monthly plans, or the performance partner option?</p>
+                <a href="/pricing" class="cta-button primary" style="display:inline-block;margin-right:1rem;">View Full Pricing &amp; Add-Ons →</a>
+                <a href="/contact" class="cta-button secondary" style="display:inline-block;">Get a Free Audit</a>
+            </div>
+
+        </div>
+    </section>
+
     <section class="svc-faq">
         <div class="container">
             <div class="section-header fade-in">
@@ -866,11 +1717,11 @@
             <div class="svc-faq-grid">
                 <article class="svc-faq-item fade-in">
                     <h3>How much does web design cost in Tampa Bay?</h3>
-                    <p>Most small-business websites in Tampa Bay range from $1,500 to $4,500 depending on page count, content, and functionality. E-commerce builds and sites with custom integrations cost more. Every project starts with a free consultation to scope the work before any numbers are committed.</p>
+                    <p>Knight Logics uses a clear upgrade ladder so you only pay for what you actually need: Starter Preview Site ($500), Starter Live Site ($700), Search-Ready Starter ($1,200), Local Launch Website ($1,997), Local Launch Plus ($2,997+), and Growth System (custom from $3,500). Monthly maintenance plans start at $197/mo.</p>
                 </article>
                 <article class="svc-faq-item fade-in">
                     <h3>How much does a custom website usually cost?</h3>
-                    <p>Scope drives price, but most brochure and lead-generation builds land in the mid four figures. Multi-page sites, migrations, and more technical builds cost more depending on content volume, features, and SEO depth.</p>
+                    <p>A quick custom-coded preview site starts at $500 — no domain, no Google setup, just a clean professional page. Adding domain and live hosting brings it to $700. Adding the full Google technical setup (Search Console, schema, analytics) brings it to $1,200. The full Local Launch with multi-page design, GBP alignment, and everything launch-ready is $1,997. Larger builds and growth systems start at $2,997.</p>
                 </article>
                 <article class="svc-faq-item fade-in">
                     <h3>What's the difference between a custom-coded site and a template or website builder?</h3>

@@ -39,6 +39,13 @@ body {
     height: auto;
 }
 
+a:not(.cta-button):not(.nav-link):not(.nav-brand-link):not(.nav-dropdown-toggle),
+a:not(.cta-button):not(.nav-link):not(.nav-brand-link):not(.nav-dropdown-toggle):visited,
+a:not(.cta-button):not(.nav-link):not(.nav-brand-link):not(.nav-dropdown-toggle):hover,
+a:not(.cta-button):not(.nav-link):not(.nav-brand-link):not(.nav-dropdown-toggle):focus {
+    color: #64ffda;
+}
+
 .container {
     max-width: 1800px;
     margin: 0 auto;
@@ -338,7 +345,7 @@ body {
 }
 
 .nav-link:hover {
-    color: #64ffda;
+    color: #ffffff;
     transform: translateY(-2px);
 }
 
@@ -1007,7 +1014,7 @@ body {
 
 .cta-button.primary {
     background: linear-gradient(135deg, #64ffda, #4ecdc4);
-    color: #0a0a0a;
+    color: #ffffff;
     box-shadow: 0 8px 32px rgba(100, 255, 218, 0.3);
 }
 
@@ -2514,7 +2521,7 @@ section::before {
 
 .services-showcase-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 1.2rem;
 }
 

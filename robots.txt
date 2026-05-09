@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Allow: /manifest.json
 
 # Sitemaps
 Sitemap: https://knightlogics.com/sitemap.xml
@@ -7,13 +8,25 @@ Sitemap: https://knightlogics.com/sitemap.xml
 # AI agent index (llms.txt protocol — non-standard, omitted from robots.txt to pass validators)
 # https://llmstxt.org — file accessible at https://knightlogics.com/llms.txt
 
-# Disallow scripts, raw data files, and sensitive files
+# Disallow APIs, internal tooling, scratch files, and raw source assets
+Disallow: /api/
+Disallow: /.git/
+Disallow: /.venv/
+Disallow: /.vercel/
+Disallow: /node_modules/
+Disallow: /Powershell/
+Disallow: /PythonScripts/
+Disallow: /SQLqueries/
+Disallow: /Test/
+Disallow: /null
+Disallow: /overlay.log
+Disallow: /_*
+
+# Disallow scripts, raw data files, and sensitive file patterns
 Disallow: /*.ps1
 Disallow: /*.py
 Disallow: /*.sql
-Disallow: /*.json
 Disallow: /*.csv
-Disallow: /manifest.json
 
 # Noindex portfolio demo apps — keep crawlers out to preserve crawl budget
 Disallow: /CRM-Management-System/

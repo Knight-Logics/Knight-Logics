@@ -1541,10 +1541,52 @@ function scrollToTop() {
 
 function initSiteChatWidget() {
     if (document.querySelector('script[data-kl-chat="tidio"]')) return;
+
+    const forceTidioCollapsed = () => {
+        const collapseViaDom = () => {
+            const minimizeButton = document.querySelector('button[aria-label="Minimize chat widget"], button[aria-label="Close chat widget"], button[aria-label="Minimize"]');
+            if (minimizeButton) {
+                minimizeButton.click();
+                return true;
+            }
+            return false;
+        };
+
+        const collapseViaApi = () => {
+            const api = window.tidioChatApi;
+            if (!api) return false;
+
+            if (typeof api.close === 'function') {
+                api.close();
+                return true;
+            }
+
+            if (typeof api.hide === 'function') {
+                api.hide();
+                return true;
+            }
+
+            return false;
+        };
+
+        let attempts = 0;
+        const maxAttempts = 20;
+        const intervalMs = 500;
+        const collapseInterval = window.setInterval(() => {
+            attempts += 1;
+            const collapsed = collapseViaApi() || collapseViaDom();
+
+            if (collapsed || attempts >= maxAttempts) {
+                window.clearInterval(collapseInterval);
+            }
+        }, intervalMs);
+    };
+
     const script = document.createElement('script');
     script.src = 'https://code.tidio.co/rmlhzyory69fi9cbvxvlfy9hwlt4v6kf.js';
     script.async = true;
     script.dataset.klChat = 'tidio';
+    script.addEventListener('load', forceTidioCollapsed);
     document.body.appendChild(script);
 }
 

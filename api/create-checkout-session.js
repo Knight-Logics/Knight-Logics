@@ -686,11 +686,11 @@ function normalizeReturnPath(value) {
     const raw = normalizeSingleLine(value, 120);
 
     if (!raw || !raw.startsWith('/')) {
-        return '/pricing.html';
+        return '/pricing';
     }
 
     if (raw.startsWith('//') || raw.includes('://')) {
-        return '/pricing.html';
+        return '/pricing';
     }
 
     return raw;
@@ -833,7 +833,7 @@ function buildCheckoutMetadata(packageKey, packageDefinition, intakeDetails, pay
     metadata.contactName = intakeDetails.contactName;
     metadata.intakeEmail = intakeDetails.email;
     metadata.preferredContact = intakeDetails.preferredContact || 'email';
-    metadata.returnPath = intakeDetails.returnPath || '/pricing.html';
+    metadata.returnPath = intakeDetails.returnPath || '/pricing';
     metadata.intakeSummary = intakeDetails.projectDetails.slice(0, 400);
 
     if (intakeDetails.phone) {
@@ -1021,11 +1021,11 @@ module.exports = async function handler(req, res) {
 
         const baseUrl = allowedOrigin || getBaseUrl(req);
         const checkoutMetadata = buildCheckoutMetadata(packageKey, packageDefinition, intakeDetails, paymentSelection);
-        const successReturnUrl = new URL(intakeDetails.returnPath || '/pricing.html', `${baseUrl}/`);
+        const successReturnUrl = new URL(intakeDetails.returnPath || '/pricing', `${baseUrl}/`);
         successReturnUrl.searchParams.set('purchase', 'success');
         successReturnUrl.searchParams.set('package', packageKey);
 
-        const cancelReturnUrl = new URL(intakeDetails.returnPath || '/pricing.html', `${baseUrl}/`);
+        const cancelReturnUrl = new URL(intakeDetails.returnPath || '/pricing', `${baseUrl}/`);
         cancelReturnUrl.searchParams.set('purchase', 'cancelled');
         cancelReturnUrl.searchParams.set('package', packageKey);
 

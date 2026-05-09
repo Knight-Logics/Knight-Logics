@@ -953,7 +953,7 @@
         const payload = serializeFormFields(formElement);
 
         payload.intakeUploadCompleted = Boolean(config.intakeUploadCompleted);
-        payload.returnPath = window.location.pathname || '/pricing.html';
+        payload.returnPath = window.location.pathname || '/pricing';
         return payload;
     }
 

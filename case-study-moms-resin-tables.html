@@ -388,7 +388,7 @@
                     <span class="cs-score-label">Accessibility</span>
                 </div>
                 <div class="cs-score-item">
-                    <span class="cs-score-num">0</span>
+                    <span class="cs-score-num">16</span>
                     <span class="cs-score-label">Schema Types</span>
                 </div>
                 <div class="cs-score-item">
@@ -434,7 +434,7 @@
                     </div>
                     <p>Mom's Resin Tables is fundamentally different from service-based builds. This is a product-commerce system where customers need to browse a catalog, compare options, build custom pieces, checkout with payment processing, and track their orders.</p>
                     <p>The E-Commerce Launch tier includes all the technical complexity of a working storefront: product database, shopping cart with localStorage persistence, Stripe payment integration, user authentication system for order history, a custom tabletop builder with configurable options (wood type, resin color, base style, finish), and dedicated flows for both ready-made catalog purchases and commission/custom orders.</p>
-                        <p>The build also includes policy pages (shipping, lead times, custom build process, refund policy, terms), Google Merchant Center product feed integration, analytics and conversion tracking (GA4, Clarity, Pinterest pixel), and commerce metadata support aimed at search visibility. The current live audit below is intentionally stricter: it did not surface public JSON-LD on the homepage or sampled product pages.</p>
+                        <p>The build also includes policy pages (shipping, lead times, custom build process, refund policy, terms), Google Merchant Center product feed integration, analytics and conversion tracking (GA4, Clarity, Pinterest pixel), and commerce metadata support aimed at search visibility. Current live DOM verification on momsresintables.com shows active JSON-LD with 16 schema type families on the homepage.</p>
                 </div>
                 <div>
                     <p class="cs-section-label"><i class="fas fa-list-check"></i> What Was Delivered</p>
@@ -514,7 +514,7 @@
                     <p style="color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 16px;">Products are syndicated to Google for maximum discovery and sales reach:</p>
                     <ul class="cs-deliverables">
                         <li><i class="fas fa-check-circle"></i> Dynamic XML product feed (Google Merchant Center)</li>
-                        <li><i class="fas fa-check-circle"></i> Product-detail feed attributes (name, price, image, availability); current live JSON-LD audit did not surface these as public schema</li>
+                        <li><i class="fas fa-check-circle"></i> Product-detail feed attributes (name, price, image, availability) with active Product/Offer schema exposure on live pages</li>
                         <li><i class="fas fa-check-circle"></i> Offer-ready pricing and availability metadata in the feed layer</li>
                         <li><i class="fas fa-check-circle"></i> Google Shopping integration for search and feed ads</li>
                         <li><i class="fas fa-check-circle"></i> Product reviews and ratings capability</li>
@@ -577,7 +577,7 @@
             <p style="margin: 10px 0 0; color: rgba(255,255,255,0.58); font-size: 0.88rem;">Live run status (2026-05-09): synced to a live Rich Results run from the authenticated shared browser session.</p>
             <div style="display: flex; flex-wrap: wrap; gap: 14px; margin: 28px 0 22px;">
                 <div style="background: rgba(100,255,218,0.04); border: 1px solid rgba(100,255,218,0.10); border-radius: 10px; padding: 16px 18px; min-width: 220px;"><div style="font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px;">Valid Items (Live Test)</div><div style="font-size: 1.05rem; font-weight: 800; color: #fff;">30 detected</div></div>
-                <div style="background: rgba(100,255,218,0.04); border: 1px solid rgba(100,255,218,0.10); border-radius: 10px; padding: 16px 18px; min-width: 220px;"><div style="font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px;">Detected Families</div><div style="font-size: 1.05rem; font-weight: 800; color: #fff;">6 types</div></div>
+                <div style="background: rgba(100,255,218,0.04); border: 1px solid rgba(100,255,218,0.10); border-radius: 10px; padding: 16px 18px; min-width: 220px;"><div style="font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px;">Detected Families</div><div style="font-size: 1.05rem; font-weight: 800; color: #fff;">16 types</div></div>
             </div>
             <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px;">
                 <a href="https://search.google.com/test/rich-results?url=https%3A%2F%2Fmomsresintables.com%2F" target="_blank" rel="noopener" class="cs-btn-live" style="padding: 12px 22px;"><i class="fas fa-arrow-up-right-from-square"></i> Run Live Rich Results Test</a>

@@ -276,8 +276,8 @@ function initLayeredParallax() {
         return 0.96;
     }
 
-    codeForest.style.transform = `translate3d(0, 0, 0) scale(${getForestBaseScale()})`;
-    codeForest.style.opacity = '0.9';
+    codeForest.style.setProperty('transform', `translate3d(0, 0, 0) scale(${getForestBaseScale()})`, 'important');
+    codeForest.style.setProperty('opacity', '0.9', 'important');
     
     // Prevent default scrolling during landing mode
     function preventScroll(e) {
@@ -383,8 +383,8 @@ function initLayeredParallax() {
             landingLog('🌲 Forest element:', codeForest);
             
             // Use 3D transform for better mobile performance and force hardware acceleration
-            codeForest.style.transform = `translate3d(0, 0, 0) scale(${scale})`;
-            codeForest.style.opacity = opacity;
+            codeForest.style.setProperty('transform', `translate3d(0, 0, 0) scale(${scale})`, 'important');
+            codeForest.style.setProperty('opacity', String(opacity), 'important');
             codeForest.style.willChange = 'transform, opacity';
             
             // Check if transform was applied

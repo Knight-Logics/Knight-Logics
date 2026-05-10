@@ -645,6 +645,23 @@
             .title-line.company-name::after { display: none; }
             #loading-screen { display: none; }
         }
+
+        /* Mobile-specific refinements (max-width: 600px) */
+        @media (max-width: 600px) {
+            .hero-content-wrapper {
+                min-height: auto;
+                padding-top: 20px !important;
+                padding-bottom: 40px !important;
+                align-items: flex-start !important;
+                justify-content: flex-start !important;
+            }
+            .hero-layout {
+                margin-top: 0 !important;
+            }
+            .parallax-bg-near {
+                opacity: 0.75;
+            }
+        }
     
         /* content-visibility: skip painting off-screen sections until scroll */
         .section-about,.section-services,.section-portfolio,.section-process,

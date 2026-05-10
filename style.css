@@ -4737,6 +4737,23 @@ section::before {
         padding-bottom: 24px;
     }
 
+    /* Mobile: Drastically reduce hero height and padding */
+    @media (max-width: 600px) {
+        .hero-content-wrapper {
+            min-height: auto !important;
+            padding-top: 20px !important;
+            padding-bottom: 40px !important;
+            align-items: flex-start !important;
+            justify-content: flex-start !important;
+        }
+        .hero-layout {
+            margin-top: 0 !important;
+        }
+        .parallax-bg-near {
+            opacity: 0.75 !important;
+        }
+    }
+
     .scroll-indicator {
         display: none;
     }

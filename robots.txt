@@ -45,7 +45,8 @@ Disallow: /Employee-Management-System/
 Disallow: /Invoice-Management-System/
 Disallow: /Project-Management-System/
 Disallow: /JavaScript-Tic-Tac-Toe-master/
-Disallow: /Chess-Game/
+Disallow: /Tic-Tac-Toe/
+Disallow: /Chess-Game-main/
 
 # Block URL parameters that generate junk crawl URLs
 Disallow: /*?search=

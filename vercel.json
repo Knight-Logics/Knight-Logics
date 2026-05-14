@@ -7,6 +7,16 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/ref/:partner",
+      "destination": "/?ref=:partner",
+      "permanent": false
+    },
+    {
+      "source": "/offer/:code",
+      "destination": "/?offer=:code",
+      "permanent": false
+    },
+    {
       "source": "/index.html",
       "destination": "/",
       "permanent": true
@@ -284,6 +294,14 @@
     {
       "source": "/disclaimer",
       "destination": "/disclaimer.html"
+    },
+    {
+      "source": "/pay-invoice",
+      "destination": "/pay-invoice.html"
+    },
+    {
+      "source": "/referral-dashboard",
+      "destination": "/referral-dashboard.html"
     }
   ],
   "headers": [

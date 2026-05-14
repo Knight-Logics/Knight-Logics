@@ -788,7 +788,12 @@ function buildIntakeDetails(body, packageDefinition) {
         assetLink: normalizeSingleLine(body && body.assetLink, 255),
         paymentOption: normalizeSingleLine(body && body.paymentOption, 30).toLowerCase() || 'full',
         intakeUploadCompleted: body && (body.intakeUploadCompleted === true || body.intakeUploadCompleted === 'true'),
-        returnPath: normalizeReturnPath(body && body.returnPath)
+        returnPath: normalizeReturnPath(body && body.returnPath),
+        referralPartner: normalizeSingleLine(body && (body.kl_ref || body.referralPartner), 80),
+        referralOffer: normalizeSingleLine(body && (body.kl_offer || body.referralOffer), 80),
+        utmMedium: normalizeSingleLine(body && (body.kl_utm_medium || body.utmMedium), 80),
+        utmCampaign: normalizeSingleLine(body && (body.kl_utm_campaign || body.utmCampaign), 80),
+        utmFirstUrl: normalizeSingleLine(body && (body.kl_first_url || body.utmFirstUrl), 300)
     };
 
     if (!intakeDetails.businessName || !intakeDetails.contactName || !intakeDetails.email || !intakeDetails.projectDetails) {
@@ -932,6 +937,22 @@ function buildCheckoutMetadata(packageKey, packageDefinition, intakeDetails, pay
         metadata.specialFeatures = intakeDetails.specialFeatures.slice(0, 200);
     }
 
+    if (intakeDetails.referralPartner) {
+        metadata.referralPartner = intakeDetails.referralPartner;
+    }
+
+    if (intakeDetails.referralOffer) {
+        metadata.referralOffer = intakeDetails.referralOffer;
+    }
+
+    if (intakeDetails.utmMedium) {
+        metadata.utmMedium = intakeDetails.utmMedium;
+    }
+
+    if (intakeDetails.utmCampaign) {
+        metadata.utmCampaign = intakeDetails.utmCampaign;
+    }
+
     return metadata;
 }
 
@@ -963,6 +984,11 @@ function buildFormspreePayload(packageDefinition, intakeDetails, paymentSelectio
         packagePrice: packageDefinition.priceDisplay,
         packageBillingMode: packageDefinition.mode,
         additionalDetails: 'Buyer can also send more files, links, and final notes through the pricing-page post-payment handoff.',
+        referralPartner: intakeDetails.referralPartner || '',
+        referralOffer: intakeDetails.referralOffer || '',
+        utmMedium: intakeDetails.utmMedium || '',
+        utmCampaign: intakeDetails.utmCampaign || '',
+        utmFirstUrl: intakeDetails.utmFirstUrl || '',
         _replyto: intakeDetails.email,
         _subject: `Starter Package Intake: ${packageDefinition.name}`
     };
@@ -1113,6 +1139,33 @@ module.exports = async function handler(req, res) {
         }
 
         const session = await stripe.checkout.sessions.create(sessionParams);
+
+        /* Fire-and-forget referral checkout_start event — never blocks checkout */
+        if (intakeDetails.referralPartner || intakeDetails.referralOffer) {
+            Promise.resolve().then(function () {
+                const eventPayload = JSON.stringify({
+                    eventType: 'checkout_start',
+                    referralPartner: intakeDetails.referralPartner || '',
+                    referralOffer:   intakeDetails.referralOffer   || '',
+                    utmMedium:       intakeDetails.utmMedium       || '',
+                    utmCampaign:     intakeDetails.utmCampaign     || '',
+                    firstUrl:        intakeDetails.utmFirstUrl     || '',
+                    pagePath:        '/checkout',
+                    contactEmail:    intakeDetails.email           || '',
+                    contactName:     intakeDetails.name            || '',
+                    packageName:     packageKey                    || '',
+                    amountCents:     paymentSelection && paymentSelection.amountCents != null
+                                        ? paymentSelection.amountCents : 0
+                });
+                /* Internal loopback via fetch — works in Vercel Node.js runtime */
+                const apiBase = (allowedOrigin || getBaseUrl(req)).replace(/\/$/, '');
+                fetch(apiBase + '/api/referral-event', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: eventPayload
+                }).catch(function () {});
+            });
+        }
 
         return sendJson(res, 200, {
             url: session.url,

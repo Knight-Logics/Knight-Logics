@@ -664,14 +664,17 @@
         .hero-form-phone-row { display: none; }
         @media (max-width: 1024px) {
             .hero {
-                position: relative;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
                 min-height: 100vh;
-                height: auto;
+                height: 100vh;
             }
-            .hero + section { margin-top: 0; }
+            .hero + section { margin-top: 100vh; }
             .hero-content-wrapper {
                 min-height: 100svh;
-                height: auto;
+                height: 100%;
                 padding: 110px 20px 40px;
             }
             .hero-layout {
@@ -690,20 +693,21 @@
             .hero-form-shell { display: none; }
             .parallax-bg-far {
                 display: block;
-                background-image: url('./images/city-hero-mobile.webp');
+                background-image: url('./images/city hero.webp');
                 background-attachment: scroll;
-                opacity: 0.52;
-                filter: brightness(0.52) contrast(1.04);
+                opacity: 0.70;
+                filter: brightness(0.6) contrast(1.1);
             }
-            .parallax-bg-mid { display: none; }
+            .parallax-bg-mid { display: block; opacity: 0.2; }
             .parallax-bg-near {
                 background-image: url('./images/CircuitBrush3.webp');
-                background-size: cover;
-                background-position: center top;
-                transform: none;
-                will-change: auto;
-                opacity: 0.66;
-                filter: brightness(0.68) contrast(1.06);
+                background-size: 100vw 100vh;
+                background-position: center center;
+                transform: translate3d(0, 0, 0) scale(1.10);
+                transform-origin: center center;
+                will-change: transform, opacity;
+                opacity: 0.9;
+                filter: brightness(0.72) contrast(1.15);
             }
         }
     

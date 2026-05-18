@@ -31,19 +31,19 @@ module.exports = async function handler(req, res) {
         const partners = [
             { slug: 'ae-printing-graphics', displayName: 'AE Printing & Graphics', latestOffer: 'AEPRINT250' },
             { slug: 'dvc-signs', displayName: 'DVC Signs', latestOffer: 'DVC250' },
-            { slug: 'fastsigns-clearwater', displayName: 'FASTSIGNS Clearwater', latestOffer: '' },
-            { slug: 'fastsigns-largo', displayName: 'FASTSIGNS Largo', latestOffer: '' },
-            { slug: 'fastsigns-palm-harbor', displayName: 'FASTSIGNS Palm Harbor', latestOffer: '' },
-            { slug: 'ldi-printing-signs', displayName: 'LDI Printing & Signs', latestOffer: '' },
-            { slug: 'minuteman-press-dunedin', displayName: 'Minuteman Press Dunedin', latestOffer: '' },
-            { slug: 'minuteman-press-largo', displayName: 'Minuteman Press Largo', latestOffer: '' },
+            { slug: 'fastsigns-clearwater', displayName: 'FASTSIGNS Clearwater', latestOffer: 'FASTCLR250' },
+            { slug: 'fastsigns-largo', displayName: 'FASTSIGNS Largo', latestOffer: 'FASTLARGO250' },
+            { slug: 'fastsigns-palm-harbor', displayName: 'FASTSIGNS Palm Harbor', latestOffer: 'FASTPH250' },
+            { slug: 'ldi-printing-signs', displayName: 'LDI Printing & Signs', latestOffer: 'LDI250' },
+            { slug: 'minuteman-press-dunedin', displayName: 'Minuteman Press Dunedin', latestOffer: 'MMPDUN250' },
+            { slug: 'minuteman-press-largo', displayName: 'Minuteman Press Largo', latestOffer: 'MMPLARGO250' },
             { slug: 'post-office-square', displayName: 'Post Office Square', latestOffer: 'POSSH250' },
-            { slug: 'print-shop-dunedin', displayName: 'Print Shop Dunedin', latestOffer: '' },
-            { slug: 'prints2go', displayName: 'Prints2Go', latestOffer: '' },
+            { slug: 'print-shop-dunedin', displayName: 'Print Shop Dunedin', latestOffer: 'TPSDUN250' },
+            { slug: 'prints2go', displayName: 'Prints2Go', latestOffer: 'P2GO250' },
             { slug: 'davidson-sign-services', displayName: 'Davidson Sign Services Inc', latestOffer: 'DAVID250' },
-            { slug: 'sir-speedy-clearwater-142nd', displayName: 'Sir Speedy Clearwater 142nd', latestOffer: '' },
-            { slug: 'sir-speedy-clearwater-drew', displayName: 'Sir Speedy Clearwater Drew', latestOffer: '' },
-            { slug: 'sir-speedy-palm-harbor', displayName: 'Sir Speedy Palm Harbor', latestOffer: '' }
+            { slug: 'sir-speedy-clearwater-142nd', displayName: 'Sir Speedy Clearwater 142nd', latestOffer: 'SIR142250' },
+            { slug: 'sir-speedy-clearwater-drew', displayName: 'Sir Speedy Clearwater Drew', latestOffer: 'SIRDRW250' },
+            { slug: 'sir-speedy-palm-harbor', displayName: 'Sir Speedy Palm Harbor', latestOffer: 'SIRPH250' }
         ];
 
         return json(200, {

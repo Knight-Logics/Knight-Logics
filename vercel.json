@@ -7,11 +7,6 @@
   "cleanUrls": true,
   "redirects": [
     {
-      "source": "/ref/:partner",
-      "destination": "/?ref=:partner",
-      "permanent": false
-    },
-    {
       "source": "/offer/:code",
       "destination": "/?offer=:code",
       "permanent": false
@@ -284,6 +279,10 @@
   ],
   "rewrites": [
     {
+      "source": "/ref/:partner",
+      "destination": "/index.html"
+    },
+    {
       "source": "/pricing",
       "destination": "/pricing.html"
     },
@@ -382,6 +381,10 @@
     {
       "source": "/referral-dashboard",
       "destination": "/referral-dashboard.html"
+    },
+    {
+      "source": "/referral-verify",
+      "destination": "/referral-verify.html"
     }
   ],
   "headers": [
@@ -404,6 +407,15 @@
       ]
     },
     {
+      "source": "/ref/:partner",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow, noarchive"
+        }
+      ]
+    },
+    {
       "source": "/referral-dashboard",
       "headers": [
         {
@@ -414,6 +426,24 @@
     },
     {
       "source": "/referral-dashboard.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive, nosnippet"
+        }
+      ]
+    },
+    {
+      "source": "/referral-verify",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive, nosnippet"
+        }
+      ]
+    },
+    {
+      "source": "/referral-verify.html",
       "headers": [
         {
           "key": "X-Robots-Tag",

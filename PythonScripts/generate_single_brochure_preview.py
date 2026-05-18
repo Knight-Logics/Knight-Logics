@@ -1,9 +1,11 @@
 import os
+from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
-BASE = r"c:\Users\nknig\Downloads\KnightLogics-clean-sync\images\referral-brochures\KLBrochureFinal.png"
-QR = r"c:\Users\nknig\Downloads\KnightLogics-clean-sync\images\referral-qrcodes\ae-printing-graphics--AEPRINT250.png"
-OUT = r"c:\Users\nknig\Downloads\KnightLogics-clean-sync\images\referral-brochures\brochure--ae-printing-graphics--AEPRINT250.png"
+ROOT = Path(__file__).resolve().parents[1]
+BASE = ROOT / "images" / "referral-brochures" / "KLBrochureFinal.png"
+QR = ROOT / "images" / "referral-qrcodes" / "ae-printing-graphics--AEPRINT250.png"
+OUT = ROOT / "images" / "referral-brochures" / "brochure--ae-printing-graphics--AEPRINT250.png"
 
 PLACEHOLDER = (885, 1300, 1006, 1398)
 QR_MARGIN = 0

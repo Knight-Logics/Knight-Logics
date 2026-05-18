@@ -545,6 +545,12 @@
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
                 <button class="copy-link-btn" id="lbCopyBtn">Copy link</button>
                 <button class="copy-link-btn" id="lbQrBtn" style="color:var(--text);">Show QR code</button>
+                <button class="copy-link-btn" id="lbVerifyBtn" style="color:var(--yellow);">Partner dashboard link</button>
+            </div>
+            <div class="link-builder-output" id="lbVerifyOutput" style="margin-top:14px;">
+                <div style="font-size:0.78rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Private partner proof URL</div>
+                <div class="link-output-url" id="lbVerifyUrl"></div>
+                <button class="copy-link-btn" id="lbVerifyCopyBtn" style="margin-top:8px;">Copy partner dashboard link</button>
             </div>
         </div>
 
@@ -678,6 +684,8 @@
     var currentQrUrl   = '';
     var currentQrSize  = 300;
     var currentPartnerLabel = '';
+    var currentPartnerSlug = '';
+    var currentVerifyUrl = '';
 
     document.getElementById('lbGenBtn').addEventListener('click', function () {
         var partner = document.getElementById('lbPartner').value.trim();
@@ -687,8 +695,11 @@
         if (offer) url += '?offer=' + encodeURIComponent(offer);
         currentQrUrl = url;
         currentPartnerLabel = partner + (offer ? ' / ' + offer : '');
+        currentPartnerSlug = partner;
+        currentVerifyUrl = '';
         document.getElementById('lbUrl').textContent = url;
         document.getElementById('lbOutput').style.display = 'block';
+        document.getElementById('lbVerifyOutput').style.display = 'none';
         document.getElementById('qrSection').style.display = 'none';
     });
 
@@ -706,6 +717,42 @@
         if (!currentQrUrl) return;
         renderQr(currentQrUrl, currentQrSize, currentPartnerLabel);
         document.getElementById('qrSection').style.display = 'flex';
+    });
+
+    document.getElementById('lbVerifyBtn').addEventListener('click', function () {
+        if (!currentPartnerSlug) return;
+        fetch(SITE + '/api/referral-admin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                secret: secret,
+                action: 'generate_partner_verify_link',
+                partnerSlug: currentPartnerSlug
+            })
+        })
+        .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
+        .then(function (result) {
+            if (!result.ok || !result.data || !result.data.verifyUrl) {
+                alert(result.data && result.data.error ? result.data.error : 'Could not generate partner dashboard link.');
+                return;
+            }
+            currentVerifyUrl = result.data.verifyUrl;
+            document.getElementById('lbVerifyUrl').textContent = currentVerifyUrl;
+            document.getElementById('lbVerifyOutput').style.display = 'block';
+        })
+        .catch(function () {
+            alert('Could not generate partner dashboard link.');
+        });
+    });
+
+    document.getElementById('lbVerifyCopyBtn').addEventListener('click', function () {
+        if (!currentVerifyUrl) return;
+        navigator.clipboard.writeText(currentVerifyUrl).then(function () {
+            var btn = document.getElementById('lbVerifyCopyBtn');
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(function () { btn.textContent = 'Copy partner dashboard link'; btn.classList.remove('copied'); }, 1800);
+        });
     });
 
     /* Size selector */

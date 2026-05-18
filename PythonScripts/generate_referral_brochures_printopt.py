@@ -1,11 +1,13 @@
 import csv
 import os
+from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-BASE_BROCHURE = r"c:\Users\nknig\Downloads\KnightLogics-clean-sync\images\KLBrochure.png"
-QR_DIR = r"c:\Users\nknig\Downloads\KnightLogics-clean-sync\images\referral-qrcodes"
-MANIFEST = os.path.join(QR_DIR, "manifest.csv")
-OUT_DIR = r"c:\Users\nknig\Downloads\KnightLogics-clean-sync\images\referral-brochures-printopt"
+ROOT = Path(__file__).resolve().parents[1]
+BASE_BROCHURE = ROOT / "images" / "KLBrochure.png"
+QR_DIR = ROOT / "images" / "referral-qrcodes"
+MANIFEST = QR_DIR / "manifest.csv"
+OUT_DIR = ROOT / "images" / "referral-brochures-printopt"
 
 # Print-optimized placement
 QR_SIZE = 82
@@ -77,7 +79,7 @@ def main():
     cta_font = get_font(10, bold=True)
     company_font = get_font(13, bold=True)
 
-    with open(MANIFEST, newline="", encoding="utf-8") as f:
+    with open(MANIFEST, newline="", encoding="utf-8-sig") as f:
         rows = list(csv.DictReader(f))
 
     for row in rows:

@@ -1,11 +1,13 @@
 import csv
 import os
+from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-BASE_BROCHURE = r"c:\Users\nknig\Downloads\KnightLogics-clean-sync\images\referral-brochures\KLBrochureFinal.png"
-QR_DIR = r"c:\Users\nknig\Downloads\KnightLogics-clean-sync\images\referral-qrcodes"
-MANIFEST = os.path.join(QR_DIR, "manifest.csv")
-OUT_DIR = r"c:\Users\nknig\Downloads\KnightLogics-clean-sync\images\referral-brochures"
+ROOT = Path(__file__).resolve().parents[1]
+BASE_BROCHURE = ROOT / "images" / "referral-brochures" / "KLBrochureFinal.png"
+QR_DIR = ROOT / "images" / "referral-qrcodes"
+MANIFEST = QR_DIR / "manifest.csv"
+OUT_DIR = ROOT / "images" / "referral-brochures"
 
 # Approved placement from single preview: fit inside white placeholder
 PLACEHOLDER = (885, 1300, 1006, 1398)
@@ -43,7 +45,7 @@ def main():
 
     base = Image.open(BASE_BROCHURE).convert("RGB")
 
-    with open(MANIFEST, newline="", encoding="utf-8") as f:
+    with open(MANIFEST, newline="", encoding="utf-8-sig") as f:
         rows = list(csv.DictReader(f))
 
     for row in rows:

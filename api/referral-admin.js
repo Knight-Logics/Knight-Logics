@@ -1,6 +1,7 @@
 'use strict';
 
 const { neon } = require('@neondatabase/serverless');
+const crypto = require('crypto');
 
 function sendJson(res, statusCode, payload) {
     res.statusCode = statusCode;
@@ -31,6 +32,26 @@ function normStr(value, maxLength) {
     return value.replace(/[<>"']/g, '').trim().slice(0, maxLength);
 }
 
+function normSlug(value, maxLength) {
+    return normStr(value, maxLength).toLowerCase().replace(/[^a-z0-9-]/g, '');
+}
+
+function generateVerifyCode(partnerSlug) {
+    const salt = process.env.KL_VERIFY_SALT || 'kl-partner-verify-2026';
+    return crypto.createHmac('sha256', salt)
+        .update(partnerSlug.toLowerCase().trim())
+        .digest('hex')
+        .slice(0, 16);
+}
+
+function getPublicOrigin(req) {
+    const origin = normStr(req.headers.origin || '', 120);
+    if (origin === 'https://knightlogics.com' || origin === 'https://www.knightlogics.com') {
+        return origin;
+    }
+    return 'https://knightlogics.com';
+}
+
 module.exports = async function handler(req, res) {
     if (req.method !== 'POST') {
         res.setHeader('Allow', 'POST');
@@ -59,6 +80,26 @@ module.exports = async function handler(req, res) {
     const sql = neon(databaseUrl);
 
     try {
+        if (action === 'generate_partner_verify_link') {
+            const partnerSlug = normSlug(body.partnerSlug || body.partner, 80);
+
+            if (!partnerSlug) {
+                return sendJson(res, 400, { error: 'Partner slug is required.' });
+            }
+
+            const verifyCode = generateVerifyCode(partnerSlug);
+            const baseUrl = getPublicOrigin(req) + '/referral-verify';
+            const verifyUrl = baseUrl +
+                '?partner=' + encodeURIComponent(partnerSlug) +
+                '&verify_code=' + encodeURIComponent(verifyCode);
+
+            return sendJson(res, 200, {
+                ok: true,
+                partnerSlug,
+                verifyUrl
+            });
+        }
+
         if (action === 'mark_payout_paid') {
             const payoutId = parseInt(body.payoutId, 10);
             const payoutNote = normStr(body.payoutNote, 1000);

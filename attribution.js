@@ -89,6 +89,10 @@
             var campaign = clean(params.get('utm_campaign'), 80);
             var content  = clean(params.get('utm_content'), 80);
 
+            if (!ref && window.location.pathname.indexOf('/ref/') === 0) {
+                ref = clean(decodeURIComponent(window.location.pathname.split('/')[2] || ''), 80);
+            }
+
             /* Use utm_source as fallback ref when no explicit ref param */
             if (!ref && src) ref = src;
 

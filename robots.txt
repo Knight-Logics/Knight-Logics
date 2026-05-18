@@ -49,3 +49,6 @@ Allow: /style.css
 Allow: /script.js
 Disallow: /referral-dashboard
 Disallow: /referral-dashboard.html
+Disallow: /referral-verify
+Disallow: /referral-verify.html
+Disallow: /ref/

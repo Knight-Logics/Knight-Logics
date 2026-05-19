@@ -322,12 +322,12 @@ module.exports = async function handler(req, res) {
             if (!isMatch(row)) continue;
             const partnerKey = normalizeText(row.partner_slug);
             const amount = moneyCents(row.commission_amount_cents);
-            if (row.payout_status === 'owed') summary.payout_outstanding_cents += amount;
+            if (row.payout_status === 'owed' || row.payout_status === 'pending_review') summary.payout_outstanding_cents += amount;
             if (row.payout_status === 'paid') summary.payout_paid_cents += amount;
 
             if (partnerKey && partnerMap.has(partnerKey)) {
                 const bucket = partnerMap.get(partnerKey);
-                if (row.payout_status === 'owed') bucket.payout_outstanding_cents += amount;
+                if (row.payout_status === 'owed' || row.payout_status === 'pending_review') bucket.payout_outstanding_cents += amount;
                 if (row.payout_status === 'paid') bucket.payout_paid_cents += amount;
             }
         }
@@ -395,8 +395,8 @@ module.exports = async function handler(req, res) {
         const payoutQueue = payoutRows
             .filter(isMatch)
             .sort(function (a, b) {
-                const statusA = normalizeText(a.payout_status) === 'owed' ? 0 : 1;
-                const statusB = normalizeText(b.payout_status) === 'owed' ? 0 : 1;
+                const statusA = normalizeText(a.payout_status) === 'paid' ? 1 : 0;
+                const statusB = normalizeText(b.payout_status) === 'paid' ? 1 : 0;
                 const aTime = a.event_created_at ? new Date(a.event_created_at).getTime() : 0;
                 const bTime = b.event_created_at ? new Date(b.event_created_at).getTime() : 0;
                 return statusA - statusB || bTime - aTime || Number(b.id || 0) - Number(a.id || 0);

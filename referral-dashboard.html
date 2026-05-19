@@ -499,7 +499,7 @@
         <div class="stat-card"><div class="stat-card-value" id="sumCo">—</div><div class="stat-card-label">Checkout Starts</div></div>
         <div class="stat-card"><div class="stat-card-value" id="sumPaid">—</div><div class="stat-card-label">Payments Completed</div></div>
         <div class="stat-card"><div class="stat-card-value" id="sumRevenue">—</div><div class="stat-card-label">Referred Revenue</div></div>
-        <div class="stat-card"><div class="stat-card-value" id="sumCommissionOwed">—</div><div class="stat-card-label">Bounty Owed</div></div>
+        <div class="stat-card"><div class="stat-card-value" id="sumCommissionOwed">—</div><div class="stat-card-label">Bounty Pending</div></div>
         <div class="stat-card"><div class="stat-card-value" id="sumCommissionPaid">—</div><div class="stat-card-label">Bounty Paid</div></div>
         <div class="stat-card"><div class="stat-card-value" id="sumSessions">—</div><div class="stat-card-label">Unique Sessions</div></div>
         <div class="stat-card"><div class="stat-card-value" id="sumPartners">—</div><div class="stat-card-label">Partners Active</div></div>
@@ -586,7 +586,7 @@
                     <th>Checkout Starts</th>
                     <th>Paid Checkouts</th>
                     <th>Revenue</th>
-                    <th>Bounty Owed</th>
+                    <th>Bounty Pending</th>
                     <th>Bounty Paid</th>
                     <th>First Seen</th>
                     <th>Last Seen</th>
@@ -956,7 +956,7 @@
         tb.innerHTML = rows.map(function (r) {
             var status = r.payout_status === 'paid'
                 ? '<span class="status-pill status-pill--paid">paid</span>'
-                : '<span class="status-pill status-pill--owed">owed</span>';
+                : '<span class="status-pill status-pill--owed">' + (r.payout_status === 'pending_review' ? 'pending review' : 'owed') + '</span>';
             var action = r.payout_status === 'paid'
                 ? '<span class="td-muted">—</span>'
                 : '<button class="mini-btn mini-btn--paid" data-payout-id="' + escAttr(String(r.id)) + '" data-amount-cents="' + escAttr(String(r.commission_amount_cents || 0)) + '">Record paid</button>';

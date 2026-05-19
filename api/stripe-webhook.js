@@ -8,6 +8,24 @@ const HANDLED_EVENT_TYPES = new Set([
     'checkout.session.async_payment_succeeded'
 ]);
 
+const APPROVED_REFERRAL_PARTNERS = new Map([
+    ['ae-printing-graphics', 'AEPRINT250'],
+    ['dvc-signs', 'DVC250'],
+    ['fastsigns-clearwater', 'FASTCLR250'],
+    ['fastsigns-largo', 'FASTLARGO250'],
+    ['fastsigns-palm-harbor', 'FASTPH250'],
+    ['ldi-printing-signs', 'LDI250'],
+    ['minuteman-press-dunedin', 'MMPDUN250'],
+    ['minuteman-press-largo', 'MMPLARGO250'],
+    ['post-office-square', 'POSSH250'],
+    ['print-shop-dunedin', 'TPSDUN250'],
+    ['prints2go', 'P2GO250'],
+    ['davidson-sign-services', 'DAVID250'],
+    ['sir-speedy-clearwater-142nd', 'SIR142250'],
+    ['sir-speedy-clearwater-drew', 'SIRDRW250'],
+    ['sir-speedy-palm-harbor', 'SIRPH250']
+]);
+
 function sendJson(res, statusCode, payload) {
     res.statusCode = statusCode;
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -64,8 +82,19 @@ function getBountyForAmount(grossAmountCents) {
     return { payoutAmountCents: 50000, tierLabel: '$5,000+ => $500' };
 }
 
-async function ensurePayout(sql, referralEventId, partnerSlug, grossAmountCents, contactEmail) {
+function isApprovedPayoutAttribution(partnerSlug, offerCode) {
+    if (!partnerSlug) return false;
+    const expectedOffer = APPROVED_REFERRAL_PARTNERS.get(partnerSlug);
+    if (!expectedOffer) return false;
+    return !offerCode || expectedOffer.toUpperCase() === offerCode.toUpperCase();
+}
+
+async function ensurePayout(sql, referralEventId, partnerSlug, offerCode, grossAmountCents, contactEmail) {
     if (!referralEventId || !partnerSlug || !grossAmountCents || grossAmountCents <= 0 || !contactEmail) {
+        return;
+    }
+
+    if (!isApprovedPayoutAttribution(partnerSlug, offerCode)) {
         return;
     }
 
@@ -92,7 +121,7 @@ async function ensurePayout(sql, referralEventId, partnerSlug, grossAmountCents,
         INSERT INTO kl_referral_payouts
             (referral_event_id, partner_slug, gross_amount_cents, commission_percent, commission_amount_cents, payout_status, payout_note)
         VALUES
-            (${referralEventId}, ${partnerSlug}, ${grossAmountCents}, 0, ${bounty.payoutAmountCents}, 'owed', ${'Flat bounty tier: ' + bounty.tierLabel})
+            (${referralEventId}, ${partnerSlug}, ${grossAmountCents}, 0, ${bounty.payoutAmountCents}, 'pending_review', ${'Flat bounty tier: ' + bounty.tierLabel + ' - pending admin review'})
         ON CONFLICT (referral_event_id) DO NOTHING
     `;
 }
@@ -209,7 +238,7 @@ module.exports = async function handler(req, res) {
             referralEventId = existing ? existing.id : null;
         }
 
-        await ensurePayout(sql, referralEventId, referralPartner, amountCents, contactEmail);
+        await ensurePayout(sql, referralEventId, referralPartner, referralOffer, amountCents, contactEmail);
 
         return sendJson(res, 200, { received: true, ok: true });
     } catch (error) {

@@ -67,6 +67,26 @@
       "permanent": true
     },
     {
+      "source": "/case-studies",
+      "destination": "/automation",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies.html",
+      "destination": "/automation",
+      "permanent": true
+    },
+    {
+      "source": "/automation.html",
+      "destination": "/automation",
+      "permanent": true
+    },
+    {
+      "source": "/referral-program.html",
+      "destination": "/referral-program",
+      "permanent": true
+    },
+    {
       "source": "/service-desktop-apps.html",
       "destination": "/service-desktop-apps",
       "permanent": true
@@ -305,6 +325,14 @@
     {
       "source": "/service-ai-automation",
       "destination": "/service-ai-automation.html"
+    },
+    {
+      "source": "/automation",
+      "destination": "/automation.html"
+    },
+    {
+      "source": "/referral-program",
+      "destination": "/referral-program.html"
     },
     {
       "source": "/service-desktop-apps",

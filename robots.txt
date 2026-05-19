@@ -8,6 +8,7 @@ Allow: /.well-known/security.txt
 
 # Sitemaps
 Sitemap: https://knightlogics.com/sitemap.xml
+Sitemap: https://knightlogics.com/video-sitemap.xml
 
 # AI / LLM summary files (kept as comments here to avoid validator issues with non-standard directives)
 # Summary: https://knightlogics.com/llms.txt

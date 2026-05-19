@@ -37,6 +37,24 @@ const ALLOWED_ORIGINS = new Set([
     'https://www.knightlogics.com'
 ]);
 
+const APPROVED_REFERRAL_PARTNERS = new Map([
+    ['ae-printing-graphics', 'AEPRINT250'],
+    ['dvc-signs', 'DVC250'],
+    ['fastsigns-clearwater', 'FASTCLR250'],
+    ['fastsigns-largo', 'FASTLARGO250'],
+    ['fastsigns-palm-harbor', 'FASTPH250'],
+    ['ldi-printing-signs', 'LDI250'],
+    ['minuteman-press-dunedin', 'MMPDUN250'],
+    ['minuteman-press-largo', 'MMPLARGO250'],
+    ['post-office-square', 'POSSH250'],
+    ['print-shop-dunedin', 'TPSDUN250'],
+    ['prints2go', 'P2GO250'],
+    ['davidson-sign-services', 'DAVID250'],
+    ['sir-speedy-clearwater-142nd', 'SIR142250'],
+    ['sir-speedy-clearwater-drew', 'SIRDRW250'],
+    ['sir-speedy-palm-harbor', 'SIRPH250']
+]);
+
 function normStr(val, maxLen) {
     if (!val || typeof val !== 'string') return null;
     return val.replace(/[<>"']/g, '').trim().slice(0, maxLen) || null;
@@ -75,6 +93,13 @@ function getBountyForAmount(grossAmountCents) {
 function hashIp(ip) {
     if (!ip) return null;
     return crypto.createHash('sha256').update(ip + (process.env.KL_IP_SALT || 'kl2026')).digest('hex').slice(0, 16);
+}
+
+function isApprovedPayoutAttribution(partnerSlug, offerCode) {
+    if (!partnerSlug) return false;
+    const expectedOffer = APPROVED_REFERRAL_PARTNERS.get(partnerSlug);
+    if (!expectedOffer) return false;
+    return !offerCode || expectedOffer.toUpperCase() === offerCode.toUpperCase();
 }
 
 function getCorsHeaders(origin) {
@@ -180,14 +205,14 @@ module.exports = async function handler(req, res) {
             RETURNING id
         `;
 
-        if (inserted.length && eventType === 'payment_completed' && referralPartner) {
+        if (inserted.length && eventType === 'payment_completed' && isApprovedPayoutAttribution(referralPartner, referralOffer)) {
             const bounty = getBountyForAmount(amountCents || 0);
             if (bounty) {
                 await sql`
                     INSERT INTO kl_referral_payouts
                         (referral_event_id, partner_slug, gross_amount_cents, commission_percent, commission_amount_cents, payout_status, payout_note)
                     VALUES
-                        (${inserted[0].id}, ${referralPartner}, ${amountCents}, 0, ${bounty.payoutAmountCents}, 'owed', ${'Flat bounty tier: ' + bounty.tierLabel})
+                        (${inserted[0].id}, ${referralPartner}, ${amountCents}, 0, ${bounty.payoutAmountCents}, 'pending_review', ${'Flat bounty tier: ' + bounty.tierLabel + ' - pending admin review'})
                     ON CONFLICT (referral_event_id) DO NOTHING
                 `;
             }

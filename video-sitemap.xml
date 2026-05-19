@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://knightlogics.com/automation</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/images/KnightLogicsLogo2.webp</video:thumbnail_loc>
+      <video:title>CRM Outreach Dashboard Demo</video:title>
+      <video:description>Short demo of the Knight Logics CRM outreach dashboard and lead preview workflow.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/automation/crm-outreach-dashboard.mp4</video:content_loc>
+      <video:duration>10</video:duration>
+      <video:publication_date>2026-05-19</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/images/KnightLogicsLogo2.webp</video:thumbnail_loc>
+      <video:title>Email-Agent Routing Demo</video:title>
+      <video:description>Short demo of Email-Agent routing business inbox activity and CRM replies.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/automation/email-agent-routing.mp4</video:content_loc>
+      <video:duration>10</video:duration>
+      <video:publication_date>2026-05-19</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/images/KnightLogicsLogo2.webp</video:thumbnail_loc>
+      <video:title>Social Media Manager Demo</video:title>
+      <video:description>Short demo of social media automation status and account-level publishing visibility.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/automation/social-media-manager.mp4</video:content_loc>
+      <video:duration>10</video:duration>
+      <video:publication_date>2026-05-19</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/images/KnightLogicsLogo2.webp</video:thumbnail_loc>
+      <video:title>Referral System Dashboard Demo</video:title>
+      <video:description>Short demo of the Knight Logics referral dashboard, QR codes, and partner attribution workflow.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/automation/referral-system-dashboard.mp4</video:content_loc>
+      <video:duration>10</video:duration>
+      <video:publication_date>2026-05-19</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+</urlset>

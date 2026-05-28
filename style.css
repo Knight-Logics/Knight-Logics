@@ -536,6 +536,7 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
     justify-content: center;
     overflow: hidden;
     z-index: 1000;
+    background-color: #0a0a0a; /* WAVE a11y fallback — parallax images always cover this */
 }
 
 /* Landing Screen Background Images */
@@ -1620,6 +1621,7 @@ section::before {
 /* Contact Section with Form */
 .contact {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+    background-color: #0a0a0a; /* WAVE a11y fallback */
     position: relative;
     z-index: 10;
     padding: 78px 0;
@@ -2080,6 +2082,7 @@ section::before {
 /* Solutions Showcase Section */
 .solutions {
     background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, #111111 50%, #0a0a0a 100%);
+    background-color: #0a0a0a; /* WAVE a11y fallback */
     position: relative;
     z-index: 10;
     padding: 100px 0;
@@ -2253,6 +2256,7 @@ section::before {
 /* Services Section - Alias for Solutions */
 .services {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    background-color: #1a1a2e; /* WAVE a11y fallback */
     padding: 96px 0;
     position: relative;
     overflow: hidden;
@@ -2907,6 +2911,7 @@ section::before {
 /* About Section - New Title/Description Area */
 .about {
     background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, #111111 50%, #111111 100%);
+    background-color: #111111; /* WAVE a11y fallback */
     position: relative;
     z-index: 10;
     padding-top: 88px;
@@ -3207,7 +3212,7 @@ section::before {
 
 .about-phone-label {
     font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.42);
+    color: rgba(255, 255, 255, 0.75);
     text-transform: uppercase;
     letter-spacing: 0.06em;
 }
@@ -3775,6 +3780,7 @@ section::before {
 /* Contact Section */
 .contact {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+    background-color: #0a0a0a; /* WAVE a11y fallback */
 }
 
 .contact-content {
@@ -8539,7 +8545,7 @@ html {
     .mobile-sheet-sub {
         margin: 0;
         font-size: 0.82rem;
-        color: rgba(255, 255, 255, 0.6);
+        color: rgba(255, 255, 255, 0.85);
         line-height: 1.4;
     }
 
@@ -9651,6 +9657,7 @@ html {
 .clients-strip {
     padding: 48px 0 40px;
     background: var(--bg-alt, #0d1117);
+    background-color: #0d1117; /* WAVE a11y fallback — can't resolve CSS vars */
     border-top: 1px solid rgba(100,255,218,.12);
     border-bottom: 1px solid rgba(100,255,218,.12);
 }
@@ -9696,6 +9703,7 @@ html {
 .results-strip {
     padding: 64px 0;
     background: var(--bg, #0a0f1c);
+    background-color: #0a0f1c; /* WAVE a11y fallback — can't resolve CSS vars */
 }
 .results-strip-label {
     font-size: .8rem;

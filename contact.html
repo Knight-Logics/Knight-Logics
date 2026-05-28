@@ -289,7 +289,7 @@
                     <span class="chip-copy-hint"><i class="fas fa-copy"></i></span>
                 </div>
                 <!-- Phone chip: call / text dropdown -->
-                <div class="contact-info-chip contact-chip-interactive contact-chip-phone" onclick="togglePhoneMenu(this)" title="Call or text us">
+                <div class="contact-info-chip contact-chip-interactive contact-chip-phone" role="button" onclick="togglePhoneMenu(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togglePhoneMenu(this);}" aria-haspopup="true" aria-expanded="false" tabindex="0" title="Call or text us">
                     <i class="fas fa-phone"></i>
                     <div>
                         <strong>Phone / Text</strong>

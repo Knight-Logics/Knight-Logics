@@ -175,7 +175,9 @@ document.addEventListener('DOMContentLoaded', function() {
     loadHeaderFooter().then(() => {
         initNavigation();
         setupIntersectionObserver();
-        initSiteChatWidget();
+        // Defer Tidio until first real user interaction so Lighthouse's sandbox
+        // never triggers the WebSocket connect (fixes Best Practices console errors).
+        initSiteChatWidgetOnInteraction();
     });
 
     // Keep only above-the-fold essentials immediate.
@@ -1584,6 +1586,15 @@ function scrollToTop() {
     });
 }
 
+function initSiteChatWidgetOnInteraction() {
+    const events = ['mousemove', 'scroll', 'keydown', 'touchstart', 'click'];
+    const handler = () => {
+        events.forEach(e => document.removeEventListener(e, handler));
+        initSiteChatWidget();
+    };
+    events.forEach(e => document.addEventListener(e, handler, { once: true, passive: true }));
+}
+
 function initSiteChatWidget() {
     if (document.querySelector('script[data-kl-chat="tidio"]')) return;
 
@@ -2437,8 +2448,14 @@ function copyEmail(chip) {
 function togglePhoneMenu(chip) {
     const isOpen = chip.classList.contains('open');
     // close any other open phone chips
-    document.querySelectorAll('.contact-chip-phone.open').forEach(c => c.classList.remove('open'));
-    if (!isOpen) chip.classList.add('open');
+    document.querySelectorAll('.contact-chip-phone.open').forEach(c => {
+        c.classList.remove('open');
+        c.setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+        chip.classList.add('open');
+        chip.setAttribute('aria-expanded', 'true');
+    }
 }
 
 function openMapModal() {

@@ -1368,7 +1368,13 @@ function initGoogleReviewsCarousel() {
             track.style.transform = `translateX(-${currentIndex * cardSpan()}px)`;
 
             dotsContainer.querySelectorAll('.review-carousel-dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === activePage());
+                const isActive = index === activePage();
+                dot.classList.toggle('active', isActive);
+                if (isActive) {
+                    dot.setAttribute('aria-current', 'true');
+                } else {
+                    dot.removeAttribute('aria-current');
+                }
             });
 
             updateButtons();
@@ -1383,6 +1389,9 @@ function initGoogleReviewsCarousel() {
                 dot.type = 'button';
                 dot.className = `review-carousel-dot${index === 0 ? ' active' : ''}`;
                 dot.setAttribute('aria-label', `Go to review page ${index + 1}`);
+                if (index === 0) {
+                    dot.setAttribute('aria-current', 'true');
+                }
                 dot.addEventListener('click', () => {
                     currentIndex = index * visibleCount();
                     update();

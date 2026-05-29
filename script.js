@@ -398,9 +398,10 @@ function initLayeredParallax() {
         
         // City background stays COMPLETELY STATIC (never moves)
         if (cityBg) {
+            const heroBackgroundPosition = window.innerWidth >= 1025 ? 'top center' : 'center center';
             cityBg.style.transform = 'none';
             cityBg.style.transformOrigin = 'center center';
-            cityBg.style.backgroundPosition = 'center center';
+            cityBg.style.backgroundPosition = heroBackgroundPosition;
             cityBg.style.backgroundSize = 'cover';
             cityBg.style.opacity = Math.min(0.8 + (progress * 0.3), 1);
         }

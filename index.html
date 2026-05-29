@@ -400,11 +400,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- LCP hero images use a desktop WebP plus a tighter mobile crop -->
-        <link rel="preload" as="image" href="./images/website-hero-mobile.webp?v=20260528a" fetchpriority="high" type="image/webp" media="(max-width: 1024px)">
-        <link rel="preload" as="image" href="./images/websitehero-uw.webp" fetchpriority="high" type="image/webp" media="(min-width: 3200px)">
-        <link rel="preload" as="image" href="./images/websitehero-hd.webp?v=20260529b" fetchpriority="high" type="image/webp" media="(min-width: 1900px) and (max-width: 3199px)">
-        <link rel="preload" as="image" href="./images/websitehero.webp?v=20260529a" fetchpriority="high" type="image/webp" media="(min-width: 1025px) and (max-width: 1899px)">
+    <!-- LCP hero images use high-quality responsive WebP variants generated from the 5200px master -->
+        <link rel="preload" as="image" href="./images/website-hero-mobile.webp?v=20260529sharp" fetchpriority="high" type="image/webp" media="(max-width: 1024px)">
+        <link rel="preload" as="image" href="./images/websitehero-uw.webp?v=20260529sharp" fetchpriority="high" type="image/webp" media="(min-width: 3200px)">
+        <link rel="preload" as="image" href="./images/websitehero-hd.webp?v=20260529sharp" fetchpriority="high" type="image/webp" media="(min-width: 2560px) and (max-width: 3199px)">
+        <link rel="preload" as="image" href="./images/websitehero.webp?v=20260529sharp" fetchpriority="high" type="image/webp" media="(min-width: 1600px) and (max-width: 2559px)">
+        <link rel="preload" as="image" href="./images/websitehero-1920.webp?v=20260529sharp" fetchpriority="high" type="image/webp" media="(min-width: 1025px) and (max-width: 1599px)">
     <link rel="preload" as="image" href="./images/CircuitBrush3.webp" fetchpriority="low" type="image/webp" media="(min-width: 1025px)">
 
     <!-- Sitemap reference -->
@@ -480,24 +481,31 @@
             background-size: cover;
         }
         .parallax-bg-far {
-            background-image: url('./images/websitehero.webp?v=20260529a');
+            background-image: url('./images/websitehero-1920.webp?v=20260529sharp');
             z-index: 1;
             opacity: 0.7;
             filter: brightness(0.6) contrast(1.1);
             background-position: top center;
         }
-        @media (min-width: 1900px) {
+        @media (min-width: 1600px) {
             .parallax-bg-far {
-                background-image: url('./images/websitehero-hd.webp?v=20260529b');
+                background-image: url('./images/websitehero.webp?v=20260529sharp');
                 background-size: cover;
-                background-position: center center;
+                background-position: top center;
+            }
+        }
+        @media (min-width: 2560px) {
+            .parallax-bg-far {
+                background-image: url('./images/websitehero-hd.webp?v=20260529sharp');
+                background-size: cover;
+                background-position: top center;
             }
         }
         @media (min-width: 3200px) {
             .parallax-bg-far {
-                background-image: url('./images/websitehero-uw.webp');
+                background-image: url('./images/websitehero-uw.webp?v=20260529sharp');
                 background-size: cover;
-                background-position: center center;
+                background-position: top center;
             }
         }
         .parallax-bg-mid { display: none; }
@@ -715,7 +723,7 @@
             .hero-form-shell { display: none; }
             .parallax-bg-far {
                 display: block;
-                background-image: url('./images/website-hero-mobile.webp?v=20260528a');
+                background-image: url('./images/website-hero-mobile.webp?v=20260529sharp');
                 background-attachment: scroll;
                 background-position: center center;
                 opacity: 0.70;
@@ -1571,8 +1579,8 @@
             }
         }
     </style>
-    <link rel="preload" href="style.css?v=20260528n" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="style.css?v=20260528n"></noscript>
+    <link rel="preload" href="style.css?v=20260529sharp" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.css?v=20260529sharp"></noscript>
     <!-- Non-critical brand-font CSS loads after first paint. Font Awesome removed — icons are inline SVGs. -->
     <script>
         window.addEventListener('load', function () {

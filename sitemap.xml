@@ -230,9 +230,15 @@
   </url>
   <url>
     <loc>https://knightlogics.com/web-designer-safety-harbor</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/web-designer-palm-harbor</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://knightlogics.com/web-designer-clearwater</loc>

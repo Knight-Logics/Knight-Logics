@@ -27,7 +27,7 @@
         "description": "What to look for when hiring a web designer in Safety Harbor, Clearwater, or Pinellas County — and what separates a site that ranks and converts from one that doesn't.",
         "url": "https://knightlogics.com/web-designer-safety-harbor",
         "datePublished": "2026-05-13",
-        "dateModified": "2026-05-13",
+        "dateModified": "2026-05-29",
         "image": {
             "@type": "ImageObject",
             "url": "https://knightlogics.com/images/KnightLogicsLogo2.webp",
@@ -100,8 +100,64 @@
     }
     </script>
 
-    <link rel="preload" as="style" href="style.min.css?v=20260513a" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="style.min.css?v=20260513a"></noscript>
+    <link rel="preload" as="style" href="style.min.css?v=20260529roi2" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.min.css?v=20260529roi2"></noscript>
+
+    <style>
+        .city-hero-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 330px;
+            gap: 40px;
+            align-items: center;
+            margin-top: 24px;
+        }
+        .city-hero-form-shell { width: 100%; }
+        .city-hero-form-card {
+            background: rgba(7, 18, 30, .90);
+            border: 1px solid rgba(100, 255, 218, .22);
+            border-radius: 20px;
+            padding: 22px 24px;
+            backdrop-filter: blur(14px);
+        }
+        .city-form-group { margin-bottom: 11px; }
+        .city-form-group label {
+            display: block;
+            margin-bottom: 3px;
+            font-size: .82rem;
+            color: rgba(100, 255, 218, .92);
+        }
+        .city-form-group input,
+        .city-form-group select,
+        .city-form-group textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 8px 11px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, .11);
+            border: 1px solid rgba(100, 255, 218, .28);
+            color: #fff;
+            font-size: .9rem;
+            font-family: inherit;
+        }
+        .city-form-group textarea { min-height: 70px; resize: vertical; }
+        .city-form-submit {
+            width: 100%;
+            padding: 13px;
+            border: 0;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #64ffda, #4ecdc4);
+            color: #0a0a0a;
+            font-weight: 700;
+            font-size: .95rem;
+            cursor: pointer;
+            margin-top: 8px;
+            font-family: inherit;
+        }
+        @media (max-width: 900px) {
+            .city-hero-layout { grid-template-columns: 1fr; }
+            .city-hero-form-shell { display: none; }
+        }
+    </style>
 </head>
 <body>
 
@@ -109,7 +165,7 @@
 
     <!-- Hero -->
     <section class="cs-hero" style="padding: 80px 0 60px; background: linear-gradient(160deg, #050a14 0%, #0a1628 100%);">
-        <div class="container" style="max-width: 860px;">
+        <div class="container" style="max-width: 1100px;">
             <nav aria-label="Breadcrumb" class="cs-breadcrumb">
                 <a href="/">Home</a>
                 <span>/</span>
@@ -117,15 +173,62 @@
                 <span>/</span>
                 <span>Web Designer Safety Harbor FL</span>
             </nav>
-            <h1 style="font-size: clamp(1.9rem, 4vw, 2.8rem); margin: 20px 0 18px; line-height: 1.2;">Web Designer in Safety Harbor, FL — What Local Businesses Actually Need</h1>
-            <p style="font-size: 1.08rem; color: #a8b2c8; line-height: 1.7; margin-bottom: 28px;">If you're a Safety Harbor business looking for a website that actually earns local search traffic and turns visitors into calls — this explains what to look for, what matters, and what doesn't.</p>
-            <a href="/free-website-audit" class="services-panel-link" style="display:inline-flex;align-items:center;gap:8px;">Get a Free Website + Local SEO Audit</a>
+            <div class="city-hero-layout">
+                <div>
+                    <h1 style="font-size: clamp(1.9rem, 4vw, 2.8rem); margin: 0 0 18px; line-height: 1.2;">Web Design for Safety Harbor, FL &mdash; Local, Fast, and Built to Convert</h1>
+                    <p style="font-size: 1.08rem; color: #a8b2c8; line-height: 1.7; margin-bottom: 28px;">Safety Harbor businesses need more than a pretty homepage. The site has to support local search, reinforce the Google Business Profile, and make the next step obvious on mobile. Knight Logics builds hand-coded websites that stay fast, structured, and conversion-focused for Pinellas County search.</p>
+                    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                        <a href="/free-website-audit" class="services-panel-link">Get a Free Audit</a>
+                        <a href="/contact" class="services-panel-link" style="background:transparent; border:1px solid rgba(100,255,218,.4);">Talk to Nicholas &rarr;</a>
+                    </div>
+                </div>
+                <aside class="city-hero-form-shell" aria-label="Contact Knight Logics">
+                    <div class="city-hero-form-card">
+                        <div style="margin-bottom:16px;">
+                            <span style="display:inline-flex;align-items:center;padding:5px 12px;border-radius:999px;background:rgba(100,255,218,.1);border:1px solid rgba(100,255,218,.2);color:#64ffda;font-size:.76rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;">Safety Harbor</span>
+                            <h2 style="margin:12px 0 6px;font-size:1.1rem;color:#fff;line-height:1.15;">Talk Through Your Project</h2>
+                            <p style="margin:0;color:rgba(255,255,255,.72);font-size:.86rem;line-height:1.35;">Need a stronger site or better local visibility? Start here.</p>
+                        </div>
+                        <form class="consultation-form" action="https://formspree.io/f/xnnggyzp" method="POST">
+                            <div class="city-form-group">
+                                <label for="cityBusiness_SH">Business Name</label>
+                                <input type="text" id="cityBusiness_SH" name="businessName" placeholder="Your business name" required>
+                            </div>
+                            <div class="city-form-group">
+                                <label for="cityName_SH">Your Name</label>
+                                <input type="text" id="cityName_SH" name="contactName" placeholder="First and last name" required>
+                            </div>
+                            <div class="city-form-group">
+                                <label for="cityEmail_SH">Email</label>
+                                <input type="email" id="cityEmail_SH" name="email" placeholder="you@example.com" required>
+                            </div>
+                            <div class="city-form-group">
+                                <label for="cityService_SH">What do you need?</label>
+                                <select id="cityService_SH" name="serviceType" required>
+                                    <option value="">Select a service...</option>
+                                    <option value="website">New Website / Redesign</option>
+                                    <option value="seo">Local SEO &amp; Google Business</option>
+                                    <option value="audit">Free Website Audit</option>
+                                    <option value="automation">Business Automation</option>
+                                    <option value="other">Other / Consultation</option>
+                                </select>
+                            </div>
+                            <div class="city-form-group">
+                                <label for="cityDetails_SH">Project Details (optional)</label>
+                                <textarea id="cityDetails_SH" name="projectDetails" placeholder="What&rsquo;s the goal?"></textarea>
+                            </div>
+                            <input type="hidden" name="source" value="Safety Harbor city landing page hero form">
+                            <button type="submit" class="city-form-submit">Send My Request</button>
+                        </form>
+                    </div>
+                </aside>
+            </div>
         </div>
     </section>
 
     <!-- Article Body -->
     <article style="padding: 64px 0; background: #0a0f1c;">
-        <div class="container" style="max-width: 780px; line-height: 1.8; color: #a8b2c8;">
+        <div class="container" style="max-width: 920px; line-height: 1.8; color: #a8b2c8;">
 
             <h2 style="color: #e6f1ff; font-size: 1.5rem; margin: 0 0 16px;">What "local search" means for a Safety Harbor business</h2>
             <p>When someone searches "plumber Safety Harbor" or "screen repair near me," Google uses three signals to decide what to show: your <strong>Google Business Profile</strong> (GBP), your <strong>website's technical quality</strong>, and <strong>local relevance signals</strong> — things like schema markup, city/service-area mentions, and page structure.</p>
@@ -151,6 +254,12 @@
             <h2 style="color: #e6f1ff; font-size: 1.5rem; margin: 40px 0 16px;">Safety Harbor, Clearwater, and Pinellas County coverage</h2>
             <p>Knight Logics is based in Safety Harbor, FL and focuses primarily on Pinellas County businesses — Safety Harbor, Clearwater, Dunedin, Palm Harbor, Tarpon Springs, Oldsmar, Largo, and St. Petersburg. That geographic focus means local knowledge, same-day calls, and genuine familiarity with the local business landscape.</p>
             <p>That said, all website design and SEO work is available remotely. The business is not limited to a geographic footprint — clients in Tampa, Hillsborough County, or anywhere in Florida get the same work.</p>
+
+            <div style="margin: 0 0 36px; padding: 24px 26px; background: rgba(100,255,218,.05); border: 1px solid rgba(100,255,218,.18); border-radius: 8px;">
+                <h3 style="color:#e6f1ff; font-size:1.1rem; margin:0 0 10px;">The Safety Harbor visibility stack that compounds fastest</h3>
+                <p style="margin:0 0 12px;">For Safety Harbor and nearby Pinellas businesses, the fastest lift usually comes from tightening three layers together: the <a href="/service-websites" style="color:#64ffda;">website structure</a>, the <a href="/service-local-seo" style="color:#64ffda;">local SEO layer</a>, and the <a href="/service-google-business-profile" style="color:#64ffda;">Google Business Profile plus review system</a>. When those layers match, local trust signals stop leaking into weak pages and start reinforcing rankings.</p>
+                <p style="margin:0;">If you want the gaps scoped first, start with the <a href="/free-website-audit" style="color:#64ffda;">free website audit</a>. If the scope is already clear, review <a href="/pricing" style="color:#64ffda;">pricing</a> or <a href="/book-consultation" style="color:#64ffda;">book a consultation</a>.</p>
+            </div>
 
             <h2 style="color: #e6f1ff; font-size: 1.5rem; margin: 40px 0 16px;">What a project looks like — from first call to live site</h2>
             <ol style="padding-left: 1.4em; margin-bottom: 24px;">
@@ -191,9 +300,12 @@
             <p>Knight Logics has built sites across the Tampa Bay area with verifiable Lighthouse scores, Google Search Console indexing, and working schema markup. The work is checkable before you hire.</p>
 
             <div style="margin-top: 48px; padding: 32px; background: rgba(100,255,218,.06); border: 1px solid rgba(100,255,218,.2); border-radius: 8px; text-align: center;">
-                <p style="font-size: 1.05rem; color: #e6f1ff; margin: 0 0 16px; font-weight: 600;">Free Website + Local SEO Audit — Safety Harbor &amp; Pinellas County</p>
-                <p style="font-size: .9rem; margin: 0 0 20px;">20-30 minute call. Real audit output. No obligation.</p>
-                <a href="/free-website-audit" class="services-panel-link">Book a Free Audit</a>
+                <p style="font-size: 1.05rem; color: #e6f1ff; margin: 0 0 16px; font-weight: 600;">If your Safety Harbor site exists but isn&rsquo;t pulling local leads, start with the audit.</p>
+                <p style="font-size: .9rem; margin: 0 0 20px;">Knight Logics will review the structure, local intent coverage, GBP alignment, and conversion path before recommending any rebuild or cleanup scope.</p>
+                <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+                    <a href="/free-website-audit" class="services-panel-link">Get a Free Audit</a>
+                    <a href="/contact" class="services-panel-link" style="background:transparent; border:1px solid rgba(100,255,218,.4);">Contact Nicholas &rarr;</a>
+                </div>
             </div>
 
         </div>
@@ -202,15 +314,17 @@
     <!-- Related pages -->
     <section style="padding: 48px 0; background: #050a14; border-top: 1px solid rgba(255,255,255,.06);">
         <div class="container" style="max-width: 780px;">
-            <h3 style="font-size: 1.1rem; color: #e6f1ff; margin: 0 0 20px;">Related services and case studies</h3>
+            <h3 style="font-size: 1.1rem; color: #e6f1ff; margin: 0 0 20px;">Related services and pages</h3>
             <nav aria-label="Related pages" style="display: flex; flex-wrap: wrap; gap: 12px 20px;">
                 <a href="/service-websites" style="color:#64ffda;text-decoration:none;font-size:.88rem;">Custom Websites</a>
                 <a href="/service-local-seo" style="color:#64ffda;text-decoration:none;font-size:.88rem;">Local SEO Services</a>
-                <a href="/service-google-business-profile" style="color:#64ffda;text-decoration:none;font-size:.88rem;">Google Business Profile Setup</a>
-                <a href="/pricing" style="color:#64ffda;text-decoration:none;font-size:.88rem;">Pricing</a>
-                <a href="/case-study-knight-group" style="color:#64ffda;text-decoration:none;font-size:.88rem;">Case Study: Knight Group</a>
-                <a href="/case-study-screen-team" style="color:#64ffda;text-decoration:none;font-size:.88rem;">Case Study: Screen Team LLC</a>
-                <a href="/case-study-jns" style="color:#64ffda;text-decoration:none;font-size:.88rem;">Case Study: JNS Construction</a>
+                <a href="/service-google-business-profile" style="color:#64ffda;text-decoration:none;font-size:.88rem;">Google Business Profile</a>
+                <a href="/free-website-audit" style="color:#64ffda;text-decoration:none;font-size:.88rem;">Free Website Audit</a>
+                <a href="/pricing" style="color:#64ffda;text-decoration:none;font-size:.88rem;">Pricing &amp; Packages</a>
+                <a href="/book-consultation" style="color:#64ffda;text-decoration:none;font-size:.88rem;">Book Consultation</a>
+                <a href="/web-designer-palm-harbor" style="color:#64ffda;text-decoration:none;font-size:.88rem;">Web Designer Palm Harbor</a>
+                <a href="/web-designer-clearwater" style="color:#64ffda;text-decoration:none;font-size:.88rem;">Web Designer Clearwater</a>
+                <a href="/web-designer-st-petersburg" style="color:#64ffda;text-decoration:none;font-size:.88rem;">Web Designer St. Petersburg</a>
             </nav>
         </div>
     </section>

@@ -755,6 +755,10 @@
         .section-about,.section-services,.section-portfolio,.section-process,
         .section-faq,.section-contact { content-visibility: auto; contain-intrinsic-size: auto 600px; }
 
+        /* Override contact-page-hero padding when embedded in the homepage — the 140px is for standalone page nav clearance only */
+        #contact .contact-page-hero { padding: 48px 0 44px; }
+        #contact .contact { padding: 0; }
+
         .starter-packages {
             position: relative;
             padding: 88px 0;

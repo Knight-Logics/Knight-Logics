@@ -402,7 +402,7 @@
 
     <!-- LCP hero images use high-quality responsive WebP variants generated from the 5200px master -->
         <link rel="preload" as="image" href="./images/website-hero-mobile.webp?v=20260529sharp" fetchpriority="high" type="image/webp" media="(max-width: 1024px)">
-        <link rel="preload" as="image" href="./images/websitehero-uw.webp?v=20260529sharp" fetchpriority="high" type="image/webp" media="(min-width: 3200px)">
+        <link rel="preload" as="image" href="./images/websitehero-hd.webp?v=20260529sharp" fetchpriority="high" type="image/webp" media="(min-width: 3200px)">
         <link rel="preload" as="image" href="./images/websitehero-hd.webp?v=20260529sharp" fetchpriority="high" type="image/webp" media="(min-width: 2560px) and (max-width: 3199px)">
         <link rel="preload" as="image" href="./images/websitehero.webp?v=20260529sharp" fetchpriority="high" type="image/webp" media="(min-width: 1600px) and (max-width: 2559px)">
         <link rel="preload" as="image" href="./images/websitehero-1920.webp?v=20260529sharp" fetchpriority="high" type="image/webp" media="(min-width: 1025px) and (max-width: 1599px)">
@@ -503,7 +503,7 @@
         }
         @media (min-width: 3200px) {
             .parallax-bg-far {
-                background-image: url('./images/websitehero-uw.webp?v=20260529sharp');
+                background-image: url('./images/websitehero-hd.webp?v=20260529sharp');
                 background-size: cover;
                 background-position: top center;
             }
@@ -581,7 +581,7 @@
             max-width: 36ch;
             font-size: 1.02rem;
             line-height: 1.6;
-            color: rgba(255, 255, 255, 0.88);
+            color: #f1f6f8;
         }
         .hero-cta-buttons {
             display: flex;
@@ -900,6 +900,7 @@
             padding: 0;
             display: grid;
             gap: 10px;
+            margin-bottom: auto;
         }
 
         .starter-package-points li {
@@ -930,7 +931,6 @@
 
         .starter-package-card-note {
             margin: 0 0 8px;
-            margin-top: auto;
             color: rgba(255, 255, 255, 0.64);
             font-size: 0.88rem;
             line-height: 1.6;
@@ -1579,8 +1579,8 @@
             }
         }
     </style>
-    <link rel="preload" href="style.css?v=20260529sharp" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="style.css?v=20260529sharp"></noscript>
+    <link rel="preload" href="style.css?v=20260529ultra" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.css?v=20260529ultra"></noscript>
     <!-- Non-critical brand-font CSS loads after first paint. Font Awesome removed — icons are inline SVGs. -->
     <script>
         window.addEventListener('load', function () {
@@ -1656,7 +1656,7 @@
                     <!-- CTA Buttons -->
                     <div class="hero-cta-buttons">
                         <a href="/service-websites" class="cta-button primary">See Website Services</a>
-                        <a href="/automation" class="cta-button secondary">See Automation Systems</a>
+                        <a href="/automation" class="cta-button secondary">Automation Systems</a>
                     </div>
                 </div>
 
@@ -2068,7 +2068,7 @@
                             <li>Review request workflow</li>
                             <li>Reporting dashboard</li>
                         </ul>
-                        <a href="/pricing#growth" class="cta-button primary starter-package-cta">Explore Growth Systems</a>
+                        <a href="/pricing#growth" class="cta-button primary starter-package-cta">Growth Systems</a>
                     </article>
 
                 </div><!-- /starter-packages-grid -->

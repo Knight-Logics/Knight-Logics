@@ -579,7 +579,7 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
 
 @media (min-width: 3200px) {
     .parallax-bg-far {
-        background-image: url('./images/websitehero-uw.webp?v=20260529sharp');
+        background-image: url('./images/websitehero-hd.webp?v=20260529sharp');
     }
 }
 
@@ -848,7 +848,7 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
 
 .hero-subtitle {
     font-size: clamp(0.95rem, 1.1vw, 1.05rem);
-    color: rgba(255, 255, 255, 0.93);
+    color: #f1f6f8;
     margin-bottom: 1rem;
     line-height: 1.5;
     opacity: 1;
@@ -1190,7 +1190,7 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
 .hero-subtitle {
     font-size: 24px;
     font-weight: 300;
-    color: #e8e8e8;
+    color: #f1f6f8;
     margin-bottom: 40px;
     opacity: 0;
     transform: translateY(50px) scale(0.8);
@@ -5845,7 +5845,7 @@ html {
     z-index: -1;
 }
 
-.hero-content h1 {
+.projects-hero .hero-content h1 {
     font-size: 48px;
     font-weight: 700;
     margin-bottom: 20px;
@@ -5855,7 +5855,7 @@ html {
     background-clip: text;
 }
 
-.hero-content p {
+.projects-hero .hero-content p {
     font-size: 20px;
     color: #888;
     margin-bottom: 40px;

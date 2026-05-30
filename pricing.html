@@ -2914,6 +2914,28 @@
         })();
     </script>
     -->
+    <script>
+        (function () {
+            function addPricePrefixes() {
+                document.querySelectorAll('.pricing-card-price').forEach(function (price) {
+                    if (price.querySelector('.pricing-card-price-prefix')) {
+                        return;
+                    }
+
+                    var prefix = document.createElement('span');
+                    prefix.className = 'pricing-card-price-prefix';
+                    prefix.textContent = 'Price';
+                    price.insertBefore(prefix, price.firstChild);
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', addPricePrefixes);
+            } else {
+                addPricePrefixes();
+            }
+        })();
+    </script>
     <script src="/script.min.js?v=20260528a"></script>
 </body>
 </html>

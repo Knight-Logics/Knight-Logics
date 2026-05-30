@@ -239,16 +239,20 @@ function initLayeredParallax() {
         return;
     }
     
-    // Check if mobile device (matchMedia avoids forced layout reflow vs window.innerWidth)
-    const isMobile = window.matchMedia('(max-width: 768px)').matches || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    landingLog('📱 Mobile detection: width=', window.innerWidth, 'isMobile=', isMobile, 'userAgent=', navigator.userAgent);
+    // Separate narrow desktop windows from actual handheld/touch devices.
+    const mobileUserAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isMobileViewport = window.matchMedia('(max-width: 768px)').matches;
+    const hasCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    const isHandheldTouchDevice = mobileUserAgent || (hasCoarsePointer && navigator.maxTouchPoints > 0);
+    const isMobile = isMobileViewport || mobileUserAgent;
+    landingLog('📱 Mobile detection: width=', window.innerWidth, 'isMobile=', isMobile, 'isHandheldTouchDevice=', isHandheldTouchDevice, 'userAgent=', navigator.userAgent);
     
     // Check if user navigated to a specific section (has hash in URL)
     const hasHash = window.location.hash && window.location.hash.length > 1;
 
     // Respect accessibility preferences: reduced motion users keep a static hero.
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (isMobile && prefersReducedMotion) {
+    if (isHandheldTouchDevice && prefersReducedMotion) {
         isInLandingMode = false;
         unlockLandingScroll();
 

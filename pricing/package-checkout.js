@@ -587,6 +587,12 @@
             return;
         }
 
+        if (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') {
+            referralPartnerSelect.dataset.loaded = '1';
+            setReferralStatus('', false);
+            return;
+        }
+
         if (referralPartnersRequest) {
             await referralPartnersRequest;
             return;

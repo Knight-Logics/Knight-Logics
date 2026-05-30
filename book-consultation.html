@@ -489,23 +489,26 @@
             var dropdown = document.getElementById('bookingReferredBy');
             var form = document.getElementById('bookingConsultationForm');
             if (!dropdown) return;
+            var isLocalStatic = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
 
             // Fetch list of active referral partners
-            fetch('/api/referral-partners')
-                .then(r => r.json())
-                .then(data => {
-                    if (data.ok && data.partners && data.partners.length > 0) {
-                        data.partners.forEach(function(partner) {
-                            var opt = document.createElement('option');
-                            opt.value = partner.slug;
-                            opt.textContent = partner.displayName;
-                            dropdown.appendChild(opt);
-                        });
-                    }
-                })
-                .catch(function(err) {
-                    console.log('[referral-dropdown] Failed to fetch partners:', err.message);
-                });
+            if (!isLocalStatic) {
+                fetch('/api/referral-partners')
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.ok && data.partners && data.partners.length > 0) {
+                            data.partners.forEach(function(partner) {
+                                var opt = document.createElement('option');
+                                opt.value = partner.slug;
+                                opt.textContent = partner.displayName;
+                                dropdown.appendChild(opt);
+                            });
+                        }
+                    })
+                    .catch(function(err) {
+                        console.log('[referral-dropdown] Failed to fetch partners:', err.message);
+                    });
+            }
 
             // On form submission, if a partner is selected, emit referral_contact_submit event
             if (form) {

@@ -445,18 +445,21 @@
         (function () {
             var sel = document.getElementById('invoiceReferralPartner');
             if (!sel) return;
-            fetch('/api/referral-partners')
-                .then(function (r) { return r.json(); })
-                .then(function (data) {
-                    if (!data.ok || !Array.isArray(data.partners)) return;
-                    data.partners.forEach(function (p) {
-                        var opt = document.createElement('option');
-                        opt.value = p.slug;
-                        opt.textContent = p.displayName;
-                        sel.appendChild(opt);
-                    });
-                })
-                .catch(function () {});
+            var isLocalStatic = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+            if (!isLocalStatic) {
+                fetch('/api/referral-partners')
+                    .then(function (r) { return r.json(); })
+                    .then(function (data) {
+                        if (!data.ok || !Array.isArray(data.partners)) return;
+                        data.partners.forEach(function (p) {
+                            var opt = document.createElement('option');
+                            opt.value = p.slug;
+                            opt.textContent = p.displayName;
+                            sel.appendChild(opt);
+                        });
+                    })
+                    .catch(function () {});
+            }
         })();
 
         // --- Form submission ---

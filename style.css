@@ -566,8 +566,8 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
 .parallax-bg-far {
     background-image: url('./images/websitehero-1920.webp?v=20260529hero2');
     z-index: 1;
-    opacity: 0.7;
-    filter: brightness(0.6) contrast(1.1);
+    opacity: 0.82;
+    filter: brightness(0.82) contrast(1.05);
     transform: none !important;
     background-attachment: fixed;
     background-position: top center !important;
@@ -4800,8 +4800,8 @@ section::before {
         background-image: url('./images/website-hero-mobile.webp?v=20260529hero2');
         background-attachment: scroll;
         background-position: center center !important;
-        opacity: 0.70;
-        filter: brightness(0.6) contrast(1.1);
+        opacity: 0.82;
+        filter: brightness(0.82) contrast(1.05);
     }
 
     .parallax-bg-mid {
@@ -5176,6 +5176,10 @@ section::before {
     .hero-subtitle {
         font-size: clamp(0.85rem, 1.9vw, 1.1rem);
         line-height: 1.4;
+        max-width: min(100%, 520px);
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
     }
     
     /* Adjust text positioning for mobile within CircuitBrush.png transparent area */

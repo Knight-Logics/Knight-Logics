@@ -275,6 +275,21 @@ function initLayeredParallax() {
     let lastScrollbarPosition = 0;
     let isScrollbarScrolling = false;
     const maxLandingScrolls = 3; // Stay on landing screen for 3 scroll actions
+    let landingReentryTimeoutId = null;
+
+    function suppressLandingReentryFor(duration = 1600) {
+        suppressLandingReentry = true;
+
+        if (landingReentryTimeoutId) {
+            window.clearTimeout(landingReentryTimeoutId);
+        }
+
+        landingReentryTimeoutId = window.setTimeout(() => {
+            suppressLandingReentry = false;
+            lastScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            landingReentryTimeoutId = null;
+        }, duration);
+    }
 
     function lockLandingScroll() {
         document.body.classList.add('landing-mode');
@@ -507,6 +522,7 @@ function initLayeredParallax() {
         scrollBarActionCount = 0; // Reset scrollbar tracking
         lastScrollbarPosition = 0;
         isScrollbarScrolling = false;
+        suppressLandingReentryFor();
         // Mobile now uses same scrollActionCount reset as desktop
         
         // Transition to About section (first content section)
@@ -678,11 +694,12 @@ function initLayeredParallax() {
         const currentScroll = window.pageYOffset;
         const aboutSection = document.querySelector('#about');
         const aboutSectionTop = aboutSection ? aboutSection.offsetTop : 0;
+        const scrollDelta = (lastScrollPosition || 0) - currentScroll;
         
         // Reset scrollbar tracking when returning to landing
         if (currentScroll <= aboutSectionTop + 150 && !isInLandingMode && !suppressLandingReentry) {
             // Only trigger on upward scroll motion
-            if (currentScroll < (lastScrollPosition || 0)) {
+            if (scrollDelta > 16) {
                 landingLog('🔄 resetToLanding triggered - returning to hero');
                 scrollBarActionCount = 0;
                 scrollActionCount = 0;

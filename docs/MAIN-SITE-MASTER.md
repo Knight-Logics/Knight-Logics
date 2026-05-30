@@ -1,0 +1,266 @@
+# KnightLogics.com Main Site Master
+
+Last updated: 2026-05-30
+
+This is the single current operating document for `E:\KnightLogics-Growth-System\MainSite`.
+
+The old separate MainSite Markdown files were consolidated on 2026-05-30. Their exact contents are preserved in `docs/archive/legacy-main-site-docs-2026-05-30.md`.
+
+## Source Of Truth
+
+- Authoritative local worktree: `E:\KnightLogics-Growth-System\MainSite`
+- Branch: `main`
+- GitHub remote: `https://github.com/Knight-Logics/Nicholas-Knight-Development-Portfolio.git`
+- Live site: `https://knightlogics.com`
+- Vercel project: `knight-logics-checkout`
+- Vercel project id: `prj_sHEs7MJlcpGO2gsYtnBES85EBd2h`
+- Production trigger: push `origin/main` from this folder
+- Canonical host: `https://knightlogics.com`; `www.knightlogics.com` redirects to apex at the Vercel domain layer
+
+Removed confusion sources:
+
+- `C:\Users\nknig\Downloads\KnightLogics-clean-sync`
+- `C:\Users\nknig\Downloads\KnightLogics-clean-sync.zip`
+- `E:\KnightLogics-Growth-System\_mainsite_deploy_20260529b`
+- stale Vercel project `_mainsite_deploy_20260529b`
+
+The old deploy-worktree patch remains outside MainSite at:
+
+`E:\KnightLogics-Growth-System\_mainsite_deploy_20260529b_dirty_before_removal.patch`
+
+## Current Live Baseline
+
+Most recent verified performance commit:
+
+`48e29fc fix: optimize landing hero performance`
+
+Most recent documentation consolidation commit before this file:
+
+`d021536 docs: consolidate main site operating instructions`
+
+Current live cache versions:
+
+- `style.css?v=20260530perf1`
+- `script.js?v=20260530perf1`
+- `images/CircuitBrush3.webp?v=20260530perf1`
+- `images/CircuitBrush3-mobile.webp?v=20260530perf1`
+- `images/website-hero-mobile-optimized.webp?v=20260530hero1`
+
+Live Lighthouse mobile after the performance deploy:
+
+- Performance: `91`
+- Accessibility: `100`
+- Best Practices: `100`
+- SEO: `100`
+- FCP: `1.5s`
+- LCP: `3.5s`
+- TBT: `0ms`
+- CLS: `0.036`
+- Speed Index: `2.2s`
+- Image delivery savings: `0 bytes`
+
+Live Playwright checks passed:
+
+- `412px` desktop-width viewport loads the mobile door asset and exits the landing hero on mouse-wheel scroll.
+- `1366px` desktop viewport loads the optimized desktop door asset and exits the landing hero on mouse-wheel scroll.
+- The landing doors stay pinned to the left and right edges and fill the hero viewport.
+
+## Current Docs
+
+Active MainSite Markdown is intentionally small:
+
+- `AGENTS.md` - agent instructions for this worktree.
+- `README.md` - short human entry point.
+- `docs/MAIN-SITE-MASTER.md` - this current master document.
+- `docs/archive/legacy-main-site-docs-2026-05-30.md` - exact historical archive of the old MainSite root docs.
+
+Other Markdown under subfolders may belong to demo apps, image folders, or historical audit output. They are not the current operating plan.
+
+## Legacy Docs Consolidated
+
+The following files were consolidated into this master plus the archive:
+
+- `KNIGHTLOGICS-SITE-AUDIT-LOG.md`
+- `LAUNCH_QA_CHECKLIST.md`
+- `KNIGHT-LOGICS-AUTHORITY-PLAN.md`
+- `KNIGHT-LOGICS-PACKAGE-HANDOFF.md`
+- `NEW_CHAT_KICKOFF.md`
+- `WEB_OPTIMIZATION_REFERENCE.md`
+- `URL-Structure-Optimization.md`
+- `STRATEGY_AND_OPTIMIZATION_AUDIT.md`
+- `SEO-Optimization-Plan.md`
+- the previous long `README.md`
+
+Use the archive only for full historical wording. Use this master for current decisions.
+
+## Non-Markdown Artifacts That Matter
+
+Active configuration:
+
+- `vercel.json` - Vercel redirects, rewrites, headers, noindex rules, asset cache rules.
+- `.vercel/project.json` - local Vercel project binding. Do not commit secrets from `.vercel`.
+- `package.json` - scripts and dependencies.
+- `package-lock.json` - dependency lock state.
+- `serve.json` - local clean-URL static server behavior.
+- `manifest.json` - PWA/site manifest.
+- `robots.txt` - crawl rules and sitemap pointer.
+- `sitemap.xml` - public sitemap.
+- `llms.txt` and `llms-full.txt` - AI/search-facing site summaries.
+- `security.txt` and `humans.txt` - public metadata.
+- `stripe/knightlogics-catalog-map.json` and `.csv` - package/catalog mapping.
+- `images/referral-qrcodes/manifest.csv` - referral QR inventory.
+
+Audit and generated artifacts:
+
+- `_sf_audit/**` - Screaming Frog crawl exports. Historical/reference, not current instructions.
+- `_seo_audit/**` - point-in-time SEO audit artifacts.
+- `_lh*.json`, `.lighthouse*.json`, `knightlogics*.json`, and similar large Lighthouse JSON outputs - generated reports. Read only when reproducing a specific audit.
+- `.qa-matrix/**`, `test-results/**`, `__shots/**`, and local server logs - generated QA output.
+- `node_modules/**` and `.venv/**` - dependencies. Their Markdown, JSON, TXT, CSV, and license files are not project strategy docs.
+
+## Search And IDE Hygiene
+
+If VS Code search shows dozens of Markdown files, first check whether results are from dependencies or generated artifacts.
+
+Exclude these from broad searches:
+
+- `node_modules`
+- `.venv`
+- `.git`
+- `.qa-matrix`
+- `test-results`
+- `playwright-report`
+- `_sf_audit`
+- `_seo_audit`
+- `__shots`
+- `*.log`
+- `_lh*.json`
+- `.lighthouse*.json`
+
+The workspace file and local `.vscode/settings.json` should keep these hidden from normal search.
+
+## Development Protocol
+
+1. Run `git status -sb`.
+2. Identify unrelated dirty files before editing.
+3. Stage only intentional files. Do not use `git add .` in this worktree.
+4. Use local preview before frontend commits.
+5. Validate visual changes with browser automation and screenshot inspection.
+6. For JavaScript changes, run `node --check script.js`.
+7. For performance changes, run Lighthouse locally or live.
+8. Push only focused commits from `main`.
+9. Verify the live Vercel deployment with cache-busted HTML and asset-header checks.
+
+## Local Runbook
+
+Start local preview:
+
+```powershell
+cd E:\KnightLogics-Growth-System\MainSite
+npm run dev
+```
+
+QA scripts:
+
+```powershell
+npm run qa:screenshots
+npm run qa:screenshots:services
+npm run qa:screenshots:client-demo
+npm run qa:lighthouse
+```
+
+If those scripts are unavailable or dirty in the current worktree, use direct Playwright/Lighthouse checks and record the exact command in the work summary.
+
+## Hero And Parallax Rules
+
+- `CircuitBrush3` is the intentional transparent door overlay.
+- The center transparency is intentional.
+- Doors must fill the landing hero and stay pinned to the left and right screen edges.
+- Do not remove the parallax/animation sequence unless explicitly requested.
+- Mobile and tablet widths should use `CircuitBrush3-mobile.webp`.
+- Desktop widths should use optimized `CircuitBrush3.webp`.
+- Check computed CSS and network requests. File contents alone are not enough.
+- If production looks stale, compare:
+  - live HTML query strings
+  - computed `.parallax-bg-far` and `.parallax-bg-near` URLs
+  - live asset sizes and cache headers
+
+## Current Growth Priorities
+
+Technical cleanup is no longer the main bottleneck unless a fresh audit finds a regression.
+
+Highest-value next work:
+
+1. Search Console CTR improvements on pages already earning impressions.
+2. Local service/city page improvements for Tampa, Clearwater, St. Petersburg, Safety Harbor, Palm Harbor, and nearby service-intent markets.
+3. Proof paths from homepage, case studies, services, pricing, consultation, and free audit offers.
+4. Conversion tracking for calls, forms, audits, booking, pricing starts, and checkout starts.
+5. Off-site authority and citation work through high-trust local and B2B profiles.
+6. Speed protection during visual upgrades.
+
+## Authority Plan
+
+Use consistent entity data:
+
+- Business name: `Knight Logics`
+- Founder: `Nicholas Knight`
+- URL: `https://knightlogics.com/`
+- Email: `support@knightlogics.com`
+- Phone: `+1-813-773-5553`
+- Base location: `Safety Harbor, FL 34695`
+- Primary category: web design, local SEO, and business automation studio
+
+Top authority priorities from the old authority plan:
+
+1. Fix/confirm GoodFirms public NAP propagation.
+2. Tighten Clutch and collect first legitimate review.
+3. Create DesignRush profile.
+4. Complete TechBehemoths registration.
+5. Verify Bing Places business-profile status.
+6. Verify or create Better Business Bureau profile.
+7. Evaluate Tampa Bay, St. Petersburg, and Safety Harbor chamber opportunities.
+8. Verify submitted directory listings: ChamberofCommerce.com, Hotfrog, Foursquare, EZlocal.
+
+Full target tables and historical notes are preserved in the legacy archive.
+
+## Package And Offer Notes
+
+Current package/copy details are preserved in the archive from `KNIGHT-LOGICS-PACKAGE-HANDOFF.md`.
+
+When editing package pages or CTAs, verify consistency across:
+
+- homepage
+- `pricing.html`
+- `service-websites.html`
+- `service-local-seo.html`
+- `service-google-business-profile.html`
+- `service-ai-automation.html`
+- checkout/package data
+- Stripe catalog mapping
+
+## Clean URL Notes
+
+Production uses clean extensionless URLs through Vercel rewrites and redirects.
+
+Local clean URL behavior should be tested through the configured static server, not by opening raw HTML files directly.
+
+Key files:
+
+- `vercel.json`
+- `serve.json`
+- `sitemap.xml`
+- canonical and Open Graph URLs in HTML
+- JSON-LD URLs in HTML
+
+## Documentation Policy
+
+Do not create new standalone strategy Markdown in the MainSite root.
+
+Use this pattern:
+
+- Current state and decisions: update `docs/MAIN-SITE-MASTER.md`.
+- Exact historical detail: append to `docs/archive/legacy-main-site-docs-2026-05-30.md` or create a new dated archive if the topic is large.
+- Short entry/instructions: update `README.md` or `AGENTS.md`.
+- Generated audit outputs: keep under `_sf_audit`, `_seo_audit`, `test-results`, or `.qa-matrix`, and do not treat them as operating docs.
+
+If a new doc is unavoidable, add it under `docs/` and update this master.

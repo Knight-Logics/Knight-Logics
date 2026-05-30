@@ -51,6 +51,19 @@ build/
 *.temp
 .tmp-runner-tests/
 _make_resume_pdf.py
+.venv/
+.qa-matrix/
+.qa-matrix/runs/
+playwright-report/
+__shots/
+_sf_audit/
+test-results/lighthouse/
+_lh*.json
+.lighthouse*.json
+lighthouse-*.json
+local-static-server-*.log
+local-static-server-*.err.log
+overlay.log
 
 # Archive files
 *.zip

@@ -22,10 +22,10 @@ Before work, read:
 
 1. `..\WORKSPACE-OPERATING-MANUAL.md`
 2. `..\WORKSPACE-DOCUMENTATION-INDEX.md`
-3. `KNIGHTLOGICS-SITE-AUDIT-LOG.md`
-4. `LAUNCH_QA_CHECKLIST.md`
+3. `docs\MAIN-SITE-MASTER.md`
+4. `README.md`
 
-For off-site authority, also read `KNIGHT-LOGICS-AUTHORITY-PLAN.md`.
+For old exact wording, use `docs\archive\legacy-main-site-docs-2026-05-30.md`.
 
 ## Current Deployment Baseline
 
@@ -72,7 +72,8 @@ Verified live after deploy:
 
 ## Documentation Rules
 
-- `KNIGHTLOGICS-SITE-AUDIT-LOG.md` is the site-specific current audit log.
-- `LAUNCH_QA_CHECKLIST.md` is the QA runbook.
-- `WEB_OPTIMIZATION_REFERENCE.md` is reusable technique reference.
-- Older strategy docs are preserved as detail but are not the active priority queue unless the audit log or workspace manual says so.
+- `docs\MAIN-SITE-MASTER.md` is the site-specific current source of truth.
+- `docs\archive\legacy-main-site-docs-2026-05-30.md` preserves the old separate Markdown files exactly.
+- Do not add new standalone strategy Markdown files in the MainSite root.
+- Generated audit outputs belong under `_sf_audit`, `_seo_audit`, `.qa-matrix`, or `test-results`, not in root docs.
+- Dependency Markdown under `node_modules` or `.venv` is not project context.

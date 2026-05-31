@@ -1172,6 +1172,13 @@ body.landing-mode .hero + section {
     }
 }
 
+/* 2600px+: nudge only the contact form farther right */
+@media (min-width: 2600px) {
+    .hero-form-shell {
+        transform: translateX(10%);
+    }
+}
+
 @media (max-width: 1800px) and (min-width: 1025px) {
     .parallax-bg-near {
         transform: translate3d(0, 0, 0) scale(1.10);

@@ -9894,13 +9894,13 @@ html {
 @media (max-width: 600px) {
     .hero .hero-content-wrapper {
         box-sizing: border-box !important;
-        padding: clamp(126px, 17svh, 152px) 18px clamp(28px, 5svh, 42px) !important;
+        padding: clamp(92px, 11svh, 108px) 18px clamp(92px, 12svh, 112px) !important;
     }
 
     .hero .hero-layout {
         width: min(100%, 320px) !important;
         margin: 0 auto !important;
-        transform: translateY(18px) !important;
+        transform: translateY(-20px) !important;
     }
 
     .hero .hero-byline,
@@ -9928,6 +9928,45 @@ html {
     .hero .cta-button {
         width: min(100%, 260px) !important;
         max-width: 260px !important;
+    }
+
+    .hero .hero-cta-buttons {
+        gap: 0.75rem !important;
+        margin-top: 0.35rem !important;
+    }
+}
+
+@media (max-width: 600px) and (max-height: 820px) {
+    .hero .hero-content-wrapper {
+        padding: clamp(80px, 9svh, 92px) 16px calc(124px + env(safe-area-inset-bottom)) !important;
+    }
+
+    .hero .hero-layout {
+        width: min(100%, 300px) !important;
+        transform: translateY(-42px) !important;
+        gap: 0.7rem !important;
+    }
+
+    .hero .hero-title {
+        max-width: 270px !important;
+        font-size: clamp(1.18rem, 5.8vw, 1.38rem) !important;
+        line-height: 1.12 !important;
+    }
+
+    .hero .title-line.company-name {
+        font-size: clamp(1.72rem, 7.8vw, 2rem) !important;
+    }
+
+    .hero .hero-cta-buttons {
+        gap: 0.65rem !important;
+        margin-top: 0.2rem !important;
+    }
+
+    .hero .cta-button {
+        max-width: 248px !important;
+        min-width: 0 !important;
+        padding: 11px 18px !important;
+        font-size: 0.94rem !important;
     }
 }
 

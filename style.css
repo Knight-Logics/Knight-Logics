@@ -624,7 +624,7 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
         display: block;
         background-image: url('./images/website-hero-mobile-optimized.webp?v=20260530hero1');
         background-attachment: scroll;
-        background-position: center center !important;
+        background-position: center 22% !important;
         opacity: 0.82;
         filter: brightness(0.82) contrast(1.05);
     }
@@ -5008,7 +5008,7 @@ body.reduced-motion .hero + section {
         display: block;
         background-image: url('./images/website-hero-mobile-optimized.webp?v=20260530hero1');
         background-attachment: scroll;
-        background-position: center center !important;
+        background-position: center 22% !important;
         opacity: 0.82;
         filter: brightness(0.82) contrast(1.05);
     }

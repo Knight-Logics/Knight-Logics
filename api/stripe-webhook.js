@@ -2,29 +2,17 @@
 
 const Stripe = require('stripe');
 const { neon } = require('@neondatabase/serverless');
+const {
+    isStaticApprovedPayoutAttribution,
+    normalizeOffer,
+    normalizeSlug
+} = require('./referral-roster');
 
 const HANDLED_EVENT_TYPES = new Set([
     'checkout.session.completed',
     'checkout.session.async_payment_succeeded'
 ]);
 
-const APPROVED_REFERRAL_PARTNERS = new Map([
-    ['ae-printing-graphics', 'AEPRINT250'],
-    ['dvc-signs', 'DVC250'],
-    ['fastsigns-clearwater', 'FASTCLR250'],
-    ['fastsigns-largo', 'FASTLARGO250'],
-    ['fastsigns-palm-harbor', 'FASTPH250'],
-    ['ldi-printing-signs', 'LDI250'],
-    ['minuteman-press-dunedin', 'MMPDUN250'],
-    ['minuteman-press-largo', 'MMPLARGO250'],
-    ['post-office-square', 'POSSH250'],
-    ['print-shop-dunedin', 'TPSDUN250'],
-    ['prints2go', 'P2GO250'],
-    ['davidson-sign-services', 'DAVID250'],
-    ['sir-speedy-clearwater-142nd', 'SIR142250'],
-    ['sir-speedy-clearwater-drew', 'SIRDRW250'],
-    ['sir-speedy-palm-harbor', 'SIRPH250']
-]);
 
 function sendJson(res, statusCode, payload) {
     res.statusCode = statusCode;
@@ -82,11 +70,44 @@ function getBountyForAmount(grossAmountCents) {
     return { payoutAmountCents: 50000, tierLabel: '$5,000+ => $500' };
 }
 
-function isApprovedPayoutAttribution(partnerSlug, offerCode) {
+async function ensurePartnerTermsTable(sql) {
+    await sql`
+        CREATE TABLE IF NOT EXISTS kl_referral_partner_terms (
+            partner_slug        VARCHAR(80) PRIMARY KEY,
+            partner_name        VARCHAR(120),
+            commission_percent  NUMERIC(6,3) NOT NULL DEFAULT 0,
+            is_active           BOOLEAN NOT NULL DEFAULT TRUE,
+            notes               TEXT,
+            created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+            updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        )
+    `;
+    await sql`ALTER TABLE kl_referral_partner_terms ADD COLUMN IF NOT EXISTS latest_offer VARCHAR(80)`;
+}
+
+async function isApprovedPayoutAttribution(sql, partnerSlug, offerCode) {
     if (!partnerSlug) return false;
-    const expectedOffer = APPROVED_REFERRAL_PARTNERS.get(partnerSlug);
-    if (!expectedOffer) return false;
-    return !offerCode || expectedOffer.toUpperCase() === offerCode.toUpperCase();
+    if (isStaticApprovedPayoutAttribution(partnerSlug, offerCode)) return true;
+
+    const normalizedSlug = normalizeSlug(partnerSlug);
+    const normalizedOffer = normalizeOffer(offerCode);
+    if (!normalizedSlug) return false;
+
+    try {
+        await ensurePartnerTermsTable(sql);
+        const [partner] = await sql`
+            SELECT latest_offer, is_active
+            FROM kl_referral_partner_terms
+            WHERE partner_slug = ${normalizedSlug}
+            LIMIT 1
+        `;
+        if (!partner || partner.is_active === false) return false;
+        const expectedOffer = normalizeOffer(partner.latest_offer || '');
+        return !expectedOffer || !normalizedOffer || expectedOffer === normalizedOffer;
+    } catch (error) {
+        console.error('[stripe-webhook] Partner approval lookup failed:', error && error.message);
+        return false;
+    }
 }
 
 async function ensurePayout(sql, referralEventId, partnerSlug, offerCode, grossAmountCents, contactEmail) {
@@ -94,7 +115,7 @@ async function ensurePayout(sql, referralEventId, partnerSlug, offerCode, grossA
         return;
     }
 
-    if (!isApprovedPayoutAttribution(partnerSlug, offerCode)) {
+    if (!await isApprovedPayoutAttribution(sql, partnerSlug, offerCode)) {
         return;
     }
 
@@ -174,8 +195,8 @@ module.exports = async function handler(req, res) {
         });
     }
 
-    const referralPartner = normStr(metadata.referralPartner, 80);
-    const referralOffer = normStr(metadata.referralOffer, 80);
+    const referralPartner = normalizeSlug(normStr(metadata.referralPartner, 80) || '');
+    const referralOffer = normalizeOffer(normStr(metadata.referralOffer, 80) || '');
 
     if (!referralPartner && !referralOffer) {
         return sendJson(res, 200, { received: true, skipped: true, reason: 'No attribution metadata.' });

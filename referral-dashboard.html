@@ -535,6 +535,10 @@
                 <input type="text" id="lbPartner" class="filter-input" placeholder="signshop-safety-harbor">
             </div>
             <div class="filter-group">
+                <label>Partner display name</label>
+                <input type="text" id="lbName" class="filter-input" placeholder="Sign Shop Safety Harbor">
+            </div>
+            <div class="filter-group">
                 <label>Offer code (optional)</label>
                 <input type="text" id="lbOffer" class="filter-input" placeholder="SUMMER25">
             </div>
@@ -552,6 +556,7 @@
                 <div class="link-output-url" id="lbVerifyUrl"></div>
                 <button class="copy-link-btn" id="lbVerifyCopyBtn" style="margin-top:8px;">Copy partner dashboard link</button>
             </div>
+            <div id="lbStatus" style="margin-top:10px;color:var(--muted);font-size:0.85rem;"></div>
         </div>
 
         <!-- QR output -->
@@ -569,6 +574,7 @@
                     <button class="qr-size-btn" data-size="800">800px</button>
                 </div>
                 <a class="qr-dl-btn" id="qrDlBtn" href="#" download="referral-qr.png">⬇ Download PNG</a>
+                <button class="qr-dl-btn" id="brochureDlBtn" type="button">Download brochure PNG</button>
                 <button class="qr-print-btn" id="qrPrintBtn">🖨 Print card</button>
             </div>
         </div>
@@ -685,22 +691,116 @@
     var currentQrSize  = 300;
     var currentPartnerLabel = '';
     var currentPartnerSlug = '';
+    var currentPartnerName = '';
+    var currentPartnerOffer = '';
     var currentVerifyUrl = '';
+    var currentQrApiUrl = '';
 
-    document.getElementById('lbGenBtn').addEventListener('click', function () {
-        var partner = document.getElementById('lbPartner').value.trim();
+    function slugify(value) {
+        return String(value || '')
+            .trim()
+            .toLowerCase()
+            .replace(/&/g, ' and ')
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '')
+            .slice(0, 80);
+    }
+
+    function offerCode(value) {
+        return String(value || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '').slice(0, 80);
+    }
+
+    function titleFromSlug(slug) {
+        return String(slug || '').split('-').filter(Boolean).map(function (part) {
+            if (/^[a-z]{2,4}\d*$/i.test(part)) return part.toUpperCase();
+            return part.charAt(0).toUpperCase() + part.slice(1);
+        }).join(' ');
+    }
+
+    function assetName(prefix, slug, offer, suffix) {
+        return [
+            prefix,
+            slug || 'referral',
+            offer || ''
+        ].filter(Boolean).join('--').replace(/[^a-z0-9_-]+/gi, '-').toLowerCase() + suffix;
+    }
+
+    function setBuilderStatus(message, isError) {
+        var el = document.getElementById('lbStatus');
+        if (!el) return;
+        el.textContent = message || '';
+        el.style.color = isError ? 'var(--red)' : 'var(--muted)';
+    }
+
+    function getQrApiUrl(url, size, margin) {
+        return 'https://api.qrserver.com/v1/create-qr-code/?size=' + size + 'x' + size +
+            '&ecc=M&margin=' + margin + '&data=' + encodeURIComponent(url);
+    }
+
+    function triggerBlobDownload(blob, filename) {
+        var objectUrl = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = objectUrl;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(function () { URL.revokeObjectURL(objectUrl); }, 1500);
+    }
+
+    function loadImage(url) {
+        return new Promise(function (resolve, reject) {
+            var img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function () { resolve(img); };
+            img.onerror = reject;
+            img.src = url;
+        });
+    }
+
+    document.getElementById('lbGenBtn').addEventListener('click', async function () {
+        var partner = slugify(document.getElementById('lbPartner').value);
         if (!partner) { alert('Enter a partner slug.'); return; }
-        var offer = document.getElementById('lbOffer').value.trim();
+        var partnerName = document.getElementById('lbName').value.trim() || titleFromSlug(partner);
+        var offer = offerCode(document.getElementById('lbOffer').value);
         var url = SITE + '/ref/' + encodeURIComponent(partner);
         if (offer) url += '?offer=' + encodeURIComponent(offer);
         currentQrUrl = url;
-        currentPartnerLabel = partner + (offer ? ' / ' + offer : '');
+        currentPartnerLabel = partnerName + (offer ? ' / ' + offer : '');
         currentPartnerSlug = partner;
+        currentPartnerName = partnerName;
+        currentPartnerOffer = offer;
         currentVerifyUrl = '';
+        document.getElementById('lbPartner').value = partner;
+        document.getElementById('lbName').value = partnerName;
+        document.getElementById('lbOffer').value = offer;
         document.getElementById('lbUrl').textContent = url;
         document.getElementById('lbOutput').style.display = 'block';
         document.getElementById('lbVerifyOutput').style.display = 'none';
         document.getElementById('qrSection').style.display = 'none';
+
+        setBuilderStatus('Registering partner for checkout dropdowns...');
+        try {
+            var response = await fetch(SITE + '/api/referral-admin', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    secret: secret,
+                    action: 'upsert_partner',
+                    partnerSlug: partner,
+                    partnerName: partnerName,
+                    latestOffer: offer
+                })
+            });
+            var payload = await response.json().catch(function () { return {}; });
+            if (!response.ok || !payload.ok) {
+                throw new Error(payload.error || 'Partner was not registered.');
+            }
+            setBuilderStatus('Partner registered. The dropdown API now includes this partner.');
+            loadStats();
+        } catch (error) {
+            setBuilderStatus('Link generated, but partner registration failed: ' + (error.message || error), true);
+        }
     });
 
     document.getElementById('lbCopyBtn').addEventListener('click', function () {
@@ -766,25 +866,132 @@
     });
 
     function renderQr(url, size, label) {
-        var apiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=' + size + 'x' + size +
-                     '&ecc=M&margin=1&data=' + encodeURIComponent(url);
+        var apiUrl = getQrApiUrl(url, size, 1);
+        currentQrApiUrl = apiUrl;
         var img = document.getElementById('qrImg');
         img.style.width  = Math.min(size, 220) + 'px';
         img.style.height = Math.min(size, 220) + 'px';
+        img.crossOrigin = 'anonymous';
         img.src = apiUrl;
         document.getElementById('qrLabel').textContent = label || url;
         /* Set download link */
         var dl = document.getElementById('qrDlBtn');
         dl.href = apiUrl;
-        dl.download = 'qr-' + (label || 'referral').replace(/[^a-z0-9]/gi, '-').toLowerCase() + '.png';
+        dl.download = assetName('qr', currentPartnerSlug, currentPartnerOffer, '.png');
     }
+
+    document.getElementById('qrDlBtn').addEventListener('click', async function (e) {
+        if (!currentQrUrl) return;
+        e.preventDefault();
+        var url = currentQrApiUrl || getQrApiUrl(currentQrUrl, currentQrSize, 1);
+        try {
+            var response = await fetch(url, { mode: 'cors' });
+            if (!response.ok) throw new Error('QR request failed');
+            var blob = await response.blob();
+            triggerBlobDownload(blob, assetName('qr', currentPartnerSlug, currentPartnerOffer, '.png'));
+        } catch (error) {
+            window.open(url + '&download=1', '_blank', 'noopener');
+        }
+    });
+
+    function averageCanvasColor(ctx, x, y, w, h) {
+        var pixels = ctx.getImageData(x, y, w, h).data;
+        var r = 0, g = 0, b = 0, count = 0;
+        for (var i = 0; i < pixels.length; i += 4) {
+            r += pixels[i];
+            g += pixels[i + 1];
+            b += pixels[i + 2];
+            count += 1;
+        }
+        return 'rgb(' + Math.round(r / count) + ',' + Math.round(g / count) + ',' + Math.round(b / count) + ')';
+    }
+
+    function drawCenteredText(ctx, text, y, font, fill, x0, x1) {
+        ctx.font = font;
+        ctx.fillStyle = fill;
+        ctx.textBaseline = 'top';
+        var width = ctx.measureText(text).width;
+        ctx.fillText(text, x0 + ((x1 - x0) - width) / 2, y);
+    }
+
+    function wrapTwoLines(ctx, text, font, maxWidth) {
+        ctx.font = font;
+        var words = String(text || '').split(/\s+/).filter(Boolean);
+        if (!words.length) return [''];
+        var line1 = words[0];
+        var i = 1;
+        while (i < words.length && ctx.measureText(line1 + ' ' + words[i]).width <= maxWidth) {
+            line1 += ' ' + words[i];
+            i += 1;
+        }
+        var line2 = words.slice(i).join(' ');
+        var truncated = false;
+        while (line2.length > 4 && ctx.measureText(line2 + '...').width > maxWidth) {
+            line2 = line2.slice(0, -1);
+            truncated = true;
+        }
+        return line2 ? [line1, line2 + (truncated ? '...' : '')] : [line1];
+    }
+
+    document.getElementById('brochureDlBtn').addEventListener('click', async function () {
+        if (!currentQrUrl) return;
+        setBuilderStatus('Building brochure download...');
+        try {
+            var base = await loadImage('/images/KLBrochure.png');
+            var qr = await loadImage(getQrApiUrl(currentQrUrl, 512, 2));
+            var canvas = document.createElement('canvas');
+            canvas.width = base.naturalWidth || base.width;
+            canvas.height = base.naturalHeight || base.height;
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(base, 0, 0);
+
+            var qrSize = 82;
+            var qrX = 939;
+            var qrY = 1264;
+            var clearX0 = 922;
+            var clearY0 = 1258;
+            var clearX1 = 1043;
+            var clearY1 = 1366;
+            var textX0 = 900;
+            var textX1 = 1060;
+            var fill = averageCanvasColor(ctx, 880, 1310, 30, 20);
+
+            ctx.fillStyle = fill;
+            ctx.fillRect(clearX0, clearY0, clearX1 - clearX0, clearY1 - clearY0);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(qrX - 4, qrY - 4, qrSize + 8, qrSize + 8);
+            ctx.imageSmoothingEnabled = false;
+            ctx.drawImage(qr, qrX, qrY, qrSize, qrSize);
+            ctx.imageSmoothingEnabled = true;
+
+            drawCenteredText(ctx, 'Scan for partner offer', 1348, 'bold 10px Arial, sans-serif', '#1e1e1e', textX0, textX1);
+            var companyFont = 'bold 13px Arial, sans-serif';
+            var lines = wrapTwoLines(ctx, currentPartnerName || currentPartnerSlug, companyFont, textX1 - textX0);
+            if (lines.length === 1) {
+                drawCenteredText(ctx, lines[0], 1361, companyFont, '#0a0a0a', textX0, textX1);
+            } else {
+                drawCenteredText(ctx, lines[0], 1354, companyFont, '#0a0a0a', textX0, textX1);
+                drawCenteredText(ctx, lines[1], 1368, companyFont, '#0a0a0a', textX0, textX1);
+            }
+
+            canvas.toBlob(function (blob) {
+                if (!blob) {
+                    setBuilderStatus('Could not create brochure file.', true);
+                    return;
+                }
+                triggerBlobDownload(blob, assetName('brochure', currentPartnerSlug, currentPartnerOffer, '--printopt.png'));
+                setBuilderStatus('Brochure download created.');
+            }, 'image/png');
+        } catch (error) {
+            setBuilderStatus('Could not build brochure download: ' + (error.message || error), true);
+        }
+    });
 
     /* Print card */
     document.getElementById('qrPrintBtn').addEventListener('click', function () {
         if (!currentQrUrl) return;
         var size = 500;
-        var qrApiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=' + size + 'x' + size +
-                       '&ecc=M&margin=2&data=' + encodeURIComponent(currentQrUrl);
+        var qrApiUrl = getQrApiUrl(currentQrUrl, size, 2);
         var win = window.open('', '_blank');
         win.document.write([
             '<!DOCTYPE html><html><head><meta charset="UTF-8">',

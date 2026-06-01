@@ -29,6 +29,20 @@ function json(res, status, data) {
     res.end(JSON.stringify(data));
 }
 
+function getQueryValue(req, key) {
+    if (req.query && Object.prototype.hasOwnProperty.call(req.query, key)) {
+        const value = req.query[key];
+        return Array.isArray(value) ? value[0] : value;
+    }
+
+    try {
+        const parsed = new URL(req.url || '', 'https://knightlogics.com');
+        return parsed.searchParams.get(key);
+    } catch (_) {
+        return null;
+    }
+}
+
 module.exports = async function handler(req, res) {
     try {
         // Validate request
@@ -36,7 +50,8 @@ module.exports = async function handler(req, res) {
             return json(res, 405, { ok: false, error: 'Method not allowed' });
         }
 
-        const { partner, verify_code } = req.query;
+        const partner = getQueryValue(req, 'partner');
+        const verify_code = getQueryValue(req, 'verify_code');
         if (!partner || !verify_code) {
             return json(res, 400, { ok: false, error: 'Missing partner or verify_code' });
         }

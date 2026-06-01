@@ -2,6 +2,11 @@
 
 const { neon } = require('@neondatabase/serverless');
 const crypto = require('crypto');
+const {
+    normalizeDisplayName,
+    normalizeOffer,
+    normalizeSlug
+} = require('./referral-roster');
 
 function sendJson(res, statusCode, payload) {
     res.statusCode = statusCode;
@@ -33,7 +38,7 @@ function normStr(value, maxLength) {
 }
 
 function normSlug(value, maxLength) {
-    return normStr(value, maxLength).toLowerCase().replace(/[^a-z0-9-]/g, '');
+    return normalizeSlug(value, maxLength);
 }
 
 function generateVerifyCode(partnerSlug) {
@@ -50,6 +55,21 @@ function getPublicOrigin(req) {
         return origin;
     }
     return 'https://knightlogics.com';
+}
+
+async function ensurePartnerTermsTable(sql) {
+    await sql`
+        CREATE TABLE IF NOT EXISTS kl_referral_partner_terms (
+            partner_slug        VARCHAR(80) PRIMARY KEY,
+            partner_name        VARCHAR(120),
+            commission_percent  NUMERIC(6,3) NOT NULL DEFAULT 0,
+            is_active           BOOLEAN NOT NULL DEFAULT TRUE,
+            notes               TEXT,
+            created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+            updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        )
+    `;
+    await sql`ALTER TABLE kl_referral_partner_terms ADD COLUMN IF NOT EXISTS latest_offer VARCHAR(80)`;
 }
 
 module.exports = async function handler(req, res) {
@@ -80,6 +100,39 @@ module.exports = async function handler(req, res) {
     const sql = neon(databaseUrl);
 
     try {
+        if (action === 'upsert_partner') {
+            const partnerSlug = normSlug(body.partnerSlug || body.partner, 80);
+            const partnerName = normalizeDisplayName(body.partnerName || body.displayName || '', partnerSlug, 120);
+            const latestOffer = normalizeOffer(body.latestOffer || body.offerCode || body.offer || '', 80);
+
+            if (!partnerSlug) {
+                return sendJson(res, 400, { error: 'Partner slug is required.' });
+            }
+
+            await ensurePartnerTermsTable(sql);
+            const [partner] = await sql`
+                INSERT INTO kl_referral_partner_terms
+                    (partner_slug, partner_name, latest_offer, commission_percent, is_active, notes)
+                VALUES
+                    (${partnerSlug}, ${partnerName}, ${latestOffer || null}, 0, TRUE, 'Registered from referral dashboard')
+                ON CONFLICT (partner_slug) DO UPDATE SET
+                    partner_name = EXCLUDED.partner_name,
+                    latest_offer = COALESCE(EXCLUDED.latest_offer, kl_referral_partner_terms.latest_offer),
+                    is_active = TRUE,
+                    updated_at = NOW()
+                RETURNING partner_slug, partner_name, latest_offer
+            `;
+
+            return sendJson(res, 200, {
+                ok: true,
+                partner: {
+                    slug: partner.partner_slug,
+                    displayName: partner.partner_name,
+                    latestOffer: partner.latest_offer || ''
+                }
+            });
+        }
+
         if (action === 'generate_partner_verify_link') {
             const partnerSlug = normSlug(body.partnerSlug || body.partner, 80);
 

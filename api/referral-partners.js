@@ -4,16 +4,34 @@
  *
  * GET /api/referral-partners
  *
- * Returns a list of all referral partners who have generated pageviews or events.
+ * Returns the active referral partner roster.
  * Public endpoint (no auth required) — used to populate "Who referred you?" dropdowns.
  *
- * This endpoint proxies the data from /api/referral-stats to extract unique partner names,
- * avoiding redundant database connections.
+ * The DB-backed roster is merged with the original campaign roster so generated partners
+ * appear in checkout/forms while old partners remain available as a safe fallback.
  *
  * Response: { ok: true, partners: [ { slug: "...", displayName: "..." }, ... ] }
  */
 
 'use strict';
+
+const { neon } = require('@neondatabase/serverless');
+const { mergeReferralPartners } = require('./referral-roster');
+
+async function ensurePartnerTermsTable(sql) {
+    await sql`
+        CREATE TABLE IF NOT EXISTS kl_referral_partner_terms (
+            partner_slug        VARCHAR(80) PRIMARY KEY,
+            partner_name        VARCHAR(120),
+            commission_percent  NUMERIC(6,3) NOT NULL DEFAULT 0,
+            is_active           BOOLEAN NOT NULL DEFAULT TRUE,
+            notes               TEXT,
+            created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+            updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        )
+    `;
+    await sql`ALTER TABLE kl_referral_partner_terms ADD COLUMN IF NOT EXISTS latest_offer VARCHAR(80)`;
+}
 
 module.exports = async function handler(req, res) {
     const json = (status, data) => {
@@ -26,29 +44,26 @@ module.exports = async function handler(req, res) {
             return json(405, { ok: false, error: 'Method not allowed' });
         }
 
-        // Static partner list used by referral dropdowns.
-        // Keep this in sync with the active referral campaign roster.
-        const partners = [
-            { slug: 'ae-printing-graphics', displayName: 'AE Printing & Graphics', latestOffer: 'AEPRINT250' },
-            { slug: 'dvc-signs', displayName: 'DVC Signs', latestOffer: 'DVC250' },
-            { slug: 'fastsigns-clearwater', displayName: 'FASTSIGNS Clearwater', latestOffer: 'FASTCLR250' },
-            { slug: 'fastsigns-largo', displayName: 'FASTSIGNS Largo', latestOffer: 'FASTLARGO250' },
-            { slug: 'fastsigns-palm-harbor', displayName: 'FASTSIGNS Palm Harbor', latestOffer: 'FASTPH250' },
-            { slug: 'ldi-printing-signs', displayName: 'LDI Printing & Signs', latestOffer: 'LDI250' },
-            { slug: 'minuteman-press-dunedin', displayName: 'Minuteman Press Dunedin', latestOffer: 'MMPDUN250' },
-            { slug: 'minuteman-press-largo', displayName: 'Minuteman Press Largo', latestOffer: 'MMPLARGO250' },
-            { slug: 'post-office-square', displayName: 'Post Office Square', latestOffer: 'POSSH250' },
-            { slug: 'print-shop-dunedin', displayName: 'Print Shop Dunedin', latestOffer: 'TPSDUN250' },
-            { slug: 'prints2go', displayName: 'Prints2Go', latestOffer: 'P2GO250' },
-            { slug: 'davidson-sign-services', displayName: 'Davidson Sign Services Inc', latestOffer: 'DAVID250' },
-            { slug: 'sir-speedy-clearwater-142nd', displayName: 'Sir Speedy Clearwater 142nd', latestOffer: 'SIR142250' },
-            { slug: 'sir-speedy-clearwater-drew', displayName: 'Sir Speedy Clearwater Drew', latestOffer: 'SIRDRW250' },
-            { slug: 'sir-speedy-palm-harbor', displayName: 'Sir Speedy Palm Harbor', latestOffer: 'SIRPH250' }
-        ];
+        let dynamicRows = [];
+        const databaseUrl = process.env.KL_DATABASE_URL || process.env.DATABASE_URL;
+        if (databaseUrl) {
+            try {
+                const sql = neon(databaseUrl);
+                await ensurePartnerTermsTable(sql);
+                dynamicRows = await sql`
+                    SELECT partner_slug, partner_name, latest_offer
+                    FROM kl_referral_partner_terms
+                    WHERE is_active = TRUE
+                    ORDER BY partner_name ASC, partner_slug ASC
+                `;
+            } catch (dbError) {
+                console.error('[referral-partners] DB fallback:', dbError && dbError.message);
+            }
+        }
 
         return json(200, {
             ok: true,
-            partners
+            partners: mergeReferralPartners(dynamicRows)
         });
     } catch (err) {
         console.error('[referral-partners] Error:', err.message || err);

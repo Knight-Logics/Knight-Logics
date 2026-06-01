@@ -35,12 +35,15 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_klre_external_event_id ON kl_referral_even
 CREATE TABLE IF NOT EXISTS kl_referral_partner_terms (
     partner_slug        VARCHAR(80) PRIMARY KEY,
     partner_name        VARCHAR(120),
+    latest_offer        VARCHAR(80),
     commission_percent  NUMERIC(6,3) NOT NULL DEFAULT 0,
     is_active           BOOLEAN NOT NULL DEFAULT TRUE,
     notes               TEXT,
     created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
+ALTER TABLE kl_referral_partner_terms ADD COLUMN IF NOT EXISTS latest_offer VARCHAR(80);
 
 CREATE TABLE IF NOT EXISTS kl_referral_payouts (
     id                      BIGSERIAL PRIMARY KEY,

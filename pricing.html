@@ -110,6 +110,19 @@
                     "itemListElement": [
                         {
                             "@type": "Offer",
+                            "@id": "https://knightlogics.com/pricing#offer-website-demo-preview",
+                            "name": "Demo Preview Site",
+                            "url": "https://knightlogics.com/pricing#websites",
+                            "price": "200",
+                            "priceCurrency": "USD",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Demo Preview Site",
+                                "serviceType": "Custom-coded demo preview website"
+                            }
+                        },
+                        {
+                            "@type": "Offer",
                             "@id": "https://knightlogics.com/pricing#offer-website-preview-launch",
                             "name": "Preview Launch Site",
                             "url": "https://knightlogics.com/pricing#websites",
@@ -561,7 +574,7 @@
                 "name": "How much does a small business website cost in Tampa Bay?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Knight Logics starts with a $500 Preview Launch Site, a $700 Essential Launch Site, a $1,200 Search Foundation Site, and a $1,997 Local Launch Site. Larger local SEO, e-commerce, and automation builds scale up from there based on scope."
+                    "text": "Knight Logics starts with a $200 Demo Preview Site, a $500 Preview Launch Site, a $700 Essential Launch Site, a $1,200 Search Foundation Site, and a $1,997 Local Launch Site. Larger local SEO, e-commerce, and automation builds scale up from there based on scope."
                 }
             },
             {
@@ -801,13 +814,22 @@
             background: rgba(100,255,218,0.03);
         }
 
-        /* Package cards */
+        /* Package cards — balanced grid centers partial last rows */
         .pricing-card-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.4rem;
-            margin-bottom: 2.5rem;
+            --kl-cols: 4;
+            --kl-gap: 1.4rem;
+            --kl-min: 260px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             align-items: stretch;
+            gap: var(--kl-gap);
+            margin-bottom: 2.5rem;
+        }
+        .pricing-card-row > * {
+            flex: 1 1 calc((100% - (var(--kl-cols) - 1) * var(--kl-gap)) / var(--kl-cols));
+            max-width: calc((100% - (var(--kl-cols) - 1) * var(--kl-gap)) / var(--kl-cols));
+            min-width: min(var(--kl-min), 100%);
         }
         .pricing-card {
             background: #111111;
@@ -944,10 +966,20 @@
 
         /* Add-on grid */
         .addon-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
+            --kl-cols: 4;
+            --kl-gap: 1rem;
+            --kl-min: 280px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: var(--kl-gap);
             margin-bottom: 2rem;
+        }
+        .addon-grid > * {
+            flex: 1 1 calc((100% - (var(--kl-cols) - 1) * var(--kl-gap)) / var(--kl-cols));
+            max-width: calc((100% - (var(--kl-cols) - 1) * var(--kl-gap)) / var(--kl-cols));
+            min-width: min(var(--kl-min), 100%);
         }
         .addon-card {
             background: #111111;
@@ -1014,26 +1046,29 @@
             flex-wrap: wrap;
         }
 
+        /* Column modifiers */
+        .pricing-card-row--4 { --kl-cols: 4; }
+        .pricing-card-row--3c { --kl-cols: 3; }
+
+        @media (max-width: 1024px) {
+            .pricing-card-row:not(.pricing-card-row--3c),
+            .addon-grid {
+                --kl-cols: 2;
+            }
+            .pricing-card-row--4 { --kl-cols: 2; }
+            .pricing-card-row--3c { --kl-cols: 2; }
+        }
+
         @media (max-width: 640px) {
             .pricing-table th:nth-child(3),
             .pricing-table td:nth-child(3) { display: none; }
-            .pricing-card-row { grid-template-columns: 1fr; }
-        }
-        /* 4+3 split grid */
-        .pricing-card-row--4 { grid-template-columns: repeat(4, 1fr); }
-        .pricing-card-row--3c {
-            grid-template-columns: repeat(3, 1fr);
-            max-width: 76%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        @media (max-width: 1024px) {
-            .pricing-card-row--4 { grid-template-columns: repeat(2, 1fr); }
-            .pricing-card-row--3c { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
-        }
-        @media (max-width: 640px) {
+            .pricing-card-row,
+            .addon-grid,
             .pricing-card-row--4,
-            .pricing-card-row--3c { grid-template-columns: 1fr; max-width: 100%; }
+            .pricing-card-row--3c {
+                --kl-cols: 1;
+                --kl-min: 100%;
+            }
         }
 
         body.package-intake-open {
@@ -1566,9 +1601,9 @@
         <div class="container">
             <span class="pricing-hero-kicker" aria-hidden="true">Tampa Bay Web Design Pricing</span>
             <h1>Tampa Bay Web Design, Local SEO &amp; Automation Pricing</h1>
-            <p class="pricing-hero-sub">Starter websites from $500. Search-ready local launch packages from $1,997. Monthly visibility plans from $197/mo.</p>
+            <p class="pricing-hero-sub">Demo previews from $200. Starter websites from $500. Search-ready local launch packages from $1,997. Monthly visibility plans from $197/mo.</p>
             <p class="pricing-hero-claim">Custom-coded websites, Google Business Profile support, e-commerce systems, CRM builds, and workflow automation for Tampa Bay small businesses. Pick the cleanest starting point, then scale by scope.</p>
-            <p class="pricing-hero-claim">Secure Stripe checkout is used for all packages. Larger builds can also offer deposit-based kickoff options.</p>
+            <p class="pricing-hero-claim">Secure Stripe checkout is used for all packages. Larger one-time payments may show Stripe pay-over-time options such as Affirm, Klarna, or Afterpay/Clearpay when eligible; CRM and automation systems use setup-plus-monthly subscription checkout.</p>
             <nav class="pricing-nav-pills" aria-label="Pricing sections">
                 <a href="#websites" class="pricing-nav-pill">Website Packages</a>
                 <a href="#ecommerce" class="pricing-nav-pill">E-Commerce</a>
@@ -1601,22 +1636,34 @@
                 <p style="font-size:0.88rem;color:#aaa;margin-top:0.65rem;">Website price jumps are based on page count, launch setup depth, analytics/search setup, and revision allowance — not vague custom markup.</p>
                 <p style="font-size:0.88rem;color:#aaa;margin-top:0.35rem;">Package bundles are priced to be a better value than buying equivalent setup work as separate line items.</p>
                 <p style="font-size:0.88rem;color:#aaa;margin-top:0.35rem;">Every package starts with the secure intake and checkout flow. The selector adjusts the package price before checkout instead of sending users off-page.</p>
+                <p style="font-size:0.88rem;color:#aaa;margin-top:0.35rem;">Financing: Stripe may show pay-over-time options for eligible one-time purchases. Availability depends on the amount, customer details, Stripe eligibility, and enabled payment methods.</p>
             </div>
 
             <h3 class="pricing-sub-label">Packages</h3>
             <div class="pricing-card-row pricing-card-row--4">
 
                 <div class="pricing-card">
+                    <p class="pricing-card-name" role="heading" aria-level="4">Demo Preview Site</p>
+                    <p class="pricing-card-price">$200</p>
+                    <ul>
+                        <li>Single custom-coded demo page</li>
+                        <li>Hero, services snapshot, and contact CTA</li>
+                        <li>GitHub Pages URL for fast validation</li>
+                        <li>Credit applies toward a full launch package</li>
+                    </ul>
+                    <a href="#starter-packages" class="pricing-card-cta" data-package-key="website-demo-preview">Start a demo preview</a>
+                </div>
+
+                <div class="pricing-card">
                     <p class="pricing-card-name" role="heading" aria-level="4">Preview Launch Site</p>
                     <p class="pricing-card-price">$500</p>
                     <ul>
-                        <li>Custom-coded multi-page site (2-3 pages)</li>
+                        <li>Custom-coded multi-page preview (2–4 pages)</li>
                         <li>Mobile-first responsive layout</li>
                         <li>Hero, services, about, gallery, contact</li>
                         <li>Click-to-call, email, social links</li>
                         <li>Free GitHub Pages URL · 1 revision round</li>
                     </ul>
-                    <p class="pricing-card-note">Example: <a href="https://farrell-electric.github.io/farrell-electric-website/" target="_blank" rel="nofollow noopener noreferrer">Farrell Electric</a></p>
                     <a href="#starter-packages" class="pricing-card-cta" data-package-key="website-preview-launch">Get a preview site</a>
                 </div>
 
@@ -1683,9 +1730,10 @@
                     <p class="pricing-card-name" role="heading" aria-level="4">Local Launch Site</p>
                     <p class="pricing-card-price">$1,997</p>
                     <ul>
-                        <li>Custom-coded 1–6 page site</li>
+                        <li>Up to 10 pages with premium design + motion polish</li>
                         <li>Domain, DNS, SSL + working contact form</li>
-                        <li>GSC + sitemap + LocalBusiness/Service schema</li>
+                        <li>Competitor SEO review + backlink direction</li>
+                        <li>GSC + sitemap + dynamic local SEO structure</li>
                         <li>GA4 + Clarity + GBP alignment</li>
                         <li>2 revision rounds + full handoff</li>
                     </ul>
@@ -1857,7 +1905,7 @@
             <div class="pricing-section-header">
                 <span class="kicker" aria-hidden="true">Growth &amp; CRM</span>
                 <h2>Growth Systems, CRM &amp; Job Records</h2>
-                <p>Where it stops being "website work" and becomes a business operating system — lead tracking, job records, contractor documents, automation, and reporting.</p>
+                <p>Where it stops being "website work" and becomes a business operating system — lead tracking, job records, contractor documents, automation, and reporting. CRM and automation packages include a first-time setup cost plus monthly support so the system stays useful after launch.</p>
             </div>
 
             <h3 class="pricing-sub-label">Packages</h3>
@@ -1865,48 +1913,52 @@
 
                 <div class="pricing-card">
                     <p class="pricing-card-name" role="heading" aria-level="4">Simple Lead Tracker</p>
-                    <p class="pricing-card-price">$250–$500</p>
+                    <p class="pricing-card-price">$250 setup + $49/mo</p>
                     <ul>
                         <li>Lead ID system + source field</li>
                         <li>Customer contact + service fields</li>
                         <li>Status pipeline (New → Completed → Paid)</li>
                         <li>Quote/sold amounts + notes</li>
+                        <li>Monthly upkeep and small tracker adjustments</li>
                     </ul>
                     <a href="#starter-packages" class="pricing-card-cta" data-package-key="ops-simple-lead-tracker">Set up tracking</a>
                 </div>
 
                 <div class="pricing-card">
                     <p class="pricing-card-name" role="heading" aria-level="4">Contractor CRM Starter</p>
-                    <p class="pricing-card-price">$500–$1,500</p>
+                    <p class="pricing-card-price">$500 setup + $97/mo</p>
                     <ul>
                         <li>Pipeline stages + source tracking</li>
                         <li>Quote → Booked → Completed → Paid</li>
                         <li>Review request tracking</li>
                         <li>Monthly summary + commission tracking</li>
+                        <li>Monthly CRM support and light improvements</li>
                     </ul>
                     <a href="#starter-packages" class="pricing-card-cta" data-package-key="ops-contractor-crm-starter">Build your CRM</a>
                 </div>
 
                 <div class="pricing-card">
                     <p class="pricing-card-name" role="heading" aria-level="4">Job Records System</p>
-                    <p class="pricing-card-price">$750–$3,000</p>
+                    <p class="pricing-card-price">$750 setup + $149/mo</p>
                     <ul>
                         <li>Customer intake + work authorization forms</li>
                         <li>Invoice/estimate template + Lead ID</li>
                         <li>Google Drive folder structure per job</li>
                         <li>Photo + payment proof folders</li>
+                        <li>Monthly records upkeep and support</li>
                     </ul>
                     <a href="#starter-packages" class="pricing-card-cta" data-package-key="ops-job-records-system">Build job records</a>
                 </div>
 
                 <div class="pricing-card">
                     <p class="pricing-card-name" role="heading" aria-level="4">Automated Job Records</p>
-                    <p class="pricing-card-price">$1,500–$3,500</p>
+                    <p class="pricing-card-price">$1,500 setup + $197/mo</p>
                     <ul>
                         <li>Form → Lead ID → Drive folder auto-creation</li>
                         <li>File auto-save + contractor notification</li>
                         <li>Tracker auto-update + monthly summary</li>
                         <li>Zapier / Make / Apps Script powered</li>
+                        <li>Monthly monitoring and workflow fixes</li>
                     </ul>
                     <a href="#starter-packages" class="pricing-card-cta" data-package-key="ops-automated-job-records">Automate records</a>
                 </div>
@@ -1917,36 +1969,39 @@
                 <div class="pricing-card pricing-card--featured">
                     <div class="pricing-card-badge" aria-hidden="true">Growth System</div>
                     <p class="pricing-card-name" role="heading" aria-level="4">Growth System Starter</p>
-                    <p class="pricing-card-price">$3,500–$5,000</p>
+                    <p class="pricing-card-price">$3,500 setup + $397/mo</p>
                     <ul>
                         <li>Website or upgraded existing site</li>
                         <li>Lead tracker + Lead ID + source tracking</li>
                         <li>Review request workflow</li>
                         <li>Reporting dashboard + call tracking</li>
+                        <li>Monthly optimization and support</li>
                     </ul>
                     <a href="#starter-packages" class="pricing-card-cta" data-package-key="ops-growth-system-starter">Build the system</a>
                 </div>
 
                 <div class="pricing-card">
                     <p class="pricing-card-name" role="heading" aria-level="4">Full Growth System</p>
-                    <p class="pricing-card-price">$5,000–$10,000+</p>
+                    <p class="pricing-card-price">$5,000 setup + $697/mo</p>
                     <ul>
                         <li>Full site + search + GBP + citations</li>
                         <li>CRM + job records + call/form tracking</li>
                         <li>Review + follow-up workflows</li>
                         <li>Revenue/source reporting dashboard</li>
+                        <li>Monthly growth operations support</li>
                     </ul>
                     <a href="#starter-packages" class="pricing-card-cta" data-package-key="ops-full-growth-system">Scope the full system</a>
                 </div>
 
                 <div class="pricing-card">
                     <p class="pricing-card-name" role="heading" aria-level="4">Custom Automation System</p>
-                    <p class="pricing-card-price">$10,000+</p>
+                    <p class="pricing-card-price">$10,000 setup + $1,000/mo</p>
                     <ul>
                         <li>Custom CRM or multi-brand dashboard</li>
                         <li>Automated lead routing + outreach engine</li>
                         <li>Quote/review follow-up automation</li>
                         <li>Revenue dashboard + AI-assisted reporting</li>
+                        <li>Monthly monitoring, support, and iteration</li>
                     </ul>
                     <a href="#starter-packages" class="pricing-card-cta" data-package-key="ops-custom-automation-system">Start with a call</a>
                 </div>
@@ -2215,7 +2270,7 @@
             <div class="booking-faq-grid fade-in">
                 <article class="booking-faq-item">
                     <h3>How much does a small business website cost in Tampa Bay?</h3>
-                    <p>Starter sites begin at $500, live brochure-style sites start at $700, search-ready builds start at $1,200, and full local launch packages start at $1,997. The final number depends on launch setup depth, page count, and local SEO scope.</p>
+                    <p>Demo previews begin at $200, starter sites begin at $500, search-ready builds start at $1,200, and full local launch packages start at $1,997. The final number depends on launch setup depth, design quality, SEO scope, and revision allowance — not page count alone.</p>
                 </article>
                 <article class="booking-faq-item">
                     <h3>Which package is best if I need better Google rankings?</h3>
@@ -2474,7 +2529,7 @@
         <a href="/disclaimer">Disclaimer</a>
     </nav>
 </div>
-    <script src="/pricing/package-checkout.js?v=20260530cleanup1"></script>
+    <script src="/pricing/package-checkout.js?v=20260606finance1"></script>
     <!-- Legacy pricing intake logic retained temporarily for reference.
     <script>
         (function () {
@@ -2498,13 +2553,13 @@
                 'monthly-visibility-standard': { name: 'Visibility Standard', price: '$397/mo', family: 'monthly' },
                 'monthly-visibility-pro': { name: 'Visibility Pro', price: '$697/mo', family: 'monthly' },
                 'monthly-growth-management': { name: 'Growth Management', price: '$1,000/mo', family: 'monthly' },
-                'ops-simple-lead-tracker': { name: 'Simple Lead Tracker', price: '$250', family: 'ops' },
-                'ops-contractor-crm-starter': { name: 'Contractor CRM Starter', price: '$500', family: 'ops' },
-                'ops-job-records-system': { name: 'Job Records System', price: '$750', family: 'ops' },
-                'ops-automated-job-records': { name: 'Automated Job Records', price: '$1,500', family: 'ops' },
-                'ops-growth-system-starter': { name: 'Growth System Starter', price: '$3,500', family: 'ops' },
-                'ops-full-growth-system': { name: 'Full Growth System', price: '$5,000', family: 'ops' },
-                'ops-custom-automation-system': { name: 'Custom Automation System', price: '$10,000', family: 'ops' }
+                'ops-simple-lead-tracker': { name: 'Simple Lead Tracker', price: '$250 setup + $49/mo', family: 'ops' },
+                'ops-contractor-crm-starter': { name: 'Contractor CRM Starter', price: '$500 setup + $97/mo', family: 'ops' },
+                'ops-job-records-system': { name: 'Job Records System', price: '$750 setup + $149/mo', family: 'ops' },
+                'ops-automated-job-records': { name: 'Automated Job Records', price: '$1,500 setup + $197/mo', family: 'ops' },
+                'ops-growth-system-starter': { name: 'Growth System Starter', price: '$3,500 setup + $397/mo', family: 'ops' },
+                'ops-full-growth-system': { name: 'Full Growth System', price: '$5,000 setup + $697/mo', family: 'ops' },
+                'ops-custom-automation-system': { name: 'Custom Automation System', price: '$10,000 setup + $1,000/mo', family: 'ops' }
             };
 
             const packagePresets = {

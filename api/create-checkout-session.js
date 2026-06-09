@@ -26,10 +26,23 @@ function createHttpError(statusCode, message) {
 }
 
 const PACKAGE_DEFINITIONS = {
+    'website-demo-preview': {
+        mode: 'payment',
+        name: 'Demo Preview Site',
+        description: 'Low-risk single-page custom demo on a GitHub Pages URL to validate layout, offer clarity, and conversion direction before a full build investment.',
+        amount: 20000,
+        currency: 'usd',
+        priceDisplay: '$200',
+        metadata: {
+            packageType: 'demo_preview_site',
+            fulfillment: 'project',
+            family: 'website'
+        }
+    },
     'website-preview-launch': {
         mode: 'payment',
         name: 'Preview Launch Site',
-        description: 'Hand-coded preview site with up to 3 pages, hosted on a GitHub Pages URL. Good for proof-of-concept and early sales before a full launch investment.',
+        description: 'Hand-coded preview site with 2-4 pages, hosted on a GitHub Pages URL. Good for proof-of-concept and early sales before a full launch investment.',
         amount: 50000,
         currency: 'usd',
         priceDisplay: '$500',
@@ -94,7 +107,7 @@ const PACKAGE_DEFINITIONS = {
     'website-local-seo-starter': {
         mode: 'payment',
         name: 'Local Launch Site',
-        description: 'Hand-coded website with up to 10 pages, technical SEO, Search Console and analytics setup, Google Business Profile alignment, and a 14-day post-launch polish window.',
+        description: 'Hand-coded website with up to 10 pages, premium layout and motion polish, competitor SEO review, dynamic local SEO structure, Search Console and analytics setup, Google Business Profile alignment, and a 14-day post-launch polish window.',
         amount: 199700,
         currency: 'usd',
         priceDisplay: '$1,997',
@@ -286,93 +299,128 @@ const PACKAGE_DEFINITIONS = {
         }
     },
     'ops-simple-lead-tracker': {
-        mode: 'payment',
+        mode: 'subscription',
         name: 'Simple Lead Tracker',
-        description: 'Simple lead tracker with source fields, status pipeline, and quote tracking.',
-        amount: 25000,
+        description: 'Simple lead tracker with source fields, status pipeline, quote tracking, and light monthly upkeep.',
+        setupAmount: 25000,
+        setupPriceDisplay: '$250 setup',
+        amount: 4900,
         currency: 'usd',
-        priceDisplay: '$250',
+        priceDisplay: '$250 setup + $49/mo',
+        recurring: {
+            interval: 'month'
+        },
         metadata: {
             packageType: 'simple_lead_tracker',
-            fulfillment: 'project',
+            fulfillment: 'subscription',
             family: 'ops'
         }
     },
     'ops-contractor-crm-starter': {
-        mode: 'payment',
+        mode: 'subscription',
         name: 'Contractor CRM Starter',
-        description: 'Starter CRM with pipeline stages, review-request tracking, and monthly summary fields.',
-        amount: 50000,
+        description: 'Starter CRM with pipeline stages, review-request tracking, monthly summary fields, and ongoing upkeep.',
+        setupAmount: 50000,
+        setupPriceDisplay: '$500 setup',
+        amount: 9700,
         currency: 'usd',
-        priceDisplay: '$500',
+        priceDisplay: '$500 setup + $97/mo',
+        recurring: {
+            interval: 'month'
+        },
         metadata: {
             packageType: 'contractor_crm_starter',
-            fulfillment: 'project',
+            fulfillment: 'subscription',
             family: 'ops'
         }
     },
     'ops-job-records-system': {
-        mode: 'payment',
+        mode: 'subscription',
         name: 'Job Records System',
-        description: 'Job records system with intake, estimate and invoice templates, and Drive folder structure.',
-        amount: 75000,
+        description: 'Job records system with intake, estimate and invoice templates, Drive folder structure, and monthly system care.',
+        setupAmount: 75000,
+        setupPriceDisplay: '$750 setup',
+        amount: 14900,
         currency: 'usd',
-        priceDisplay: '$750',
+        priceDisplay: '$750 setup + $149/mo',
+        recurring: {
+            interval: 'month'
+        },
         metadata: {
             packageType: 'job_records_system',
-            fulfillment: 'project',
+            fulfillment: 'subscription',
             family: 'ops'
         }
     },
     'ops-automated-job-records': {
-        mode: 'payment',
+        mode: 'subscription',
         name: 'Automated Job Records',
-        description: 'Automated records workflow connecting form submissions, folders, notifications, and tracker updates.',
-        amount: 150000,
+        description: 'Automated records workflow connecting form submissions, folders, notifications, tracker updates, and monthly monitoring.',
+        setupAmount: 150000,
+        setupPriceDisplay: '$1,500 setup',
+        amount: 19700,
         currency: 'usd',
-        priceDisplay: '$1,500',
+        priceDisplay: '$1,500 setup + $197/mo',
+        recurring: {
+            interval: 'month'
+        },
         metadata: {
             packageType: 'automated_job_records',
-            fulfillment: 'project',
+            fulfillment: 'subscription',
             family: 'ops'
         }
     },
     'ops-growth-system-starter': {
-        mode: 'payment',
+        mode: 'subscription',
         name: 'Growth System Starter',
-        description: 'Starter growth system with site upgrades, lead tracking, review workflow, and reporting dashboard.',
-        amount: 350000,
+        description: 'Starter growth system with site upgrades, lead tracking, review workflow, reporting dashboard, and monthly optimization support.',
+        setupAmount: 350000,
+        setupPriceDisplay: '$3,500 setup',
+        amount: 39700,
         currency: 'usd',
-        priceDisplay: '$3,500',
+        priceDisplay: '$3,500 setup + $397/mo',
+        recurring: {
+            interval: 'month'
+        },
         metadata: {
             packageType: 'growth_system_starter',
-            fulfillment: 'project',
+            fulfillment: 'subscription',
             family: 'ops'
         }
     },
     'ops-full-growth-system': {
-        mode: 'payment',
+        mode: 'subscription',
         name: 'Full Growth System',
-        description: 'Full business growth system including site, search, GBP, CRM, tracking, and reporting.',
-        amount: 500000,
+        description: 'Full business growth system including site, search, GBP, CRM, tracking, reporting, and monthly management.',
+        setupAmount: 500000,
+        setupPriceDisplay: '$5,000 setup',
+        amount: 69700,
         currency: 'usd',
-        priceDisplay: '$5,000',
+        priceDisplay: '$5,000 setup + $697/mo',
+        recurring: {
+            interval: 'month'
+        },
         metadata: {
             packageType: 'full_growth_system',
-            fulfillment: 'project',
+            fulfillment: 'subscription',
             family: 'ops'
         }
     },
     'ops-custom-automation-system': {
-        mode: 'payment',
+        mode: 'subscription',
         name: 'Custom Automation System',
-        description: 'Custom automation system with dashboarding, lead routing, follow-up workflows, and reporting.',
-        amount: 1000000,
+        description: 'Custom automation system with dashboarding, lead routing, follow-up workflows, reporting, and monthly support.',
+        setupAmount: 1000000,
+        setupPriceDisplay: '$10,000 setup',
+        amount: 100000,
         currency: 'usd',
-        priceDisplay: '$10,000',
+        priceDisplay: '$10,000 setup + $1,000/mo',
+        recurring: {
+            interval: 'month'
+        },
         metadata: {
             packageType: 'custom_automation_system',
-            fulfillment: 'project',
+            fulfillment: 'subscription',
             family: 'ops'
         }
     }
@@ -435,38 +483,7 @@ const PACKAGE_PAYMENT_OPTIONS = {
             description: 'Strategy deposit applied to the Advanced E-Commerce System project total. Remaining balance is invoiced after scope confirmation and milestone approvals.'
         }
     },
-    'ops-automated-job-records': {
-        deposit: {
-            amount: 75000,
-            priceDisplay: '$750 deposit',
-            lineItemName: 'Automated Job Records - Kickoff Deposit',
-            description: 'Kickoff deposit applied to the Automated Job Records project total. Remaining balance is invoiced before handoff.'
-        }
-    },
-    'ops-growth-system-starter': {
-        deposit: {
-            amount: 175000,
-            priceDisplay: '$1,750 deposit',
-            lineItemName: 'Growth System Starter - Kickoff Deposit',
-            description: 'Kickoff deposit applied to the Growth System Starter project total. Remaining balance is invoiced across milestone approvals.'
-        }
-    },
-    'ops-full-growth-system': {
-        deposit: {
-            amount: 200000,
-            priceDisplay: '$2,000 strategy deposit',
-            lineItemName: 'Full Growth System - Strategy Deposit',
-            description: 'Strategy deposit applied to the Full Growth System project total. Remaining balance is invoiced after final scope confirmation and milestone approvals.'
-        }
-    },
-    'ops-custom-automation-system': {
-        deposit: {
-            amount: 250000,
-            priceDisplay: '$2,500 strategy deposit',
-            lineItemName: 'Custom Automation System - Strategy Deposit',
-            description: 'Strategy deposit applied to the Custom Automation System project total. Remaining balance is invoiced after scope confirmation and milestone approvals.'
-        }
-    }
+    
 };
 
 function getBaseUrl(req) {
@@ -625,6 +642,10 @@ function getPackageRoute(packageKey, intakeDetails) {
 
     if (!packageDefinition) {
         return null;
+    }
+
+    if (packageKey === 'website-demo-preview') {
+        return { routeType: 'allowed' };
     }
 
     const pageRank = getPageCountRank(intakeDetails.pageCountExpectation);
@@ -882,6 +903,20 @@ function buildInlineLineItem(packageDefinition, paymentSelection) {
     };
 }
 
+function buildInlineSetupLineItem(packageDefinition) {
+    return {
+        price_data: {
+            currency: packageDefinition.currency,
+            product_data: {
+                name: `${packageDefinition.name} - Setup`,
+                description: packageDefinition.setupDescription || `One-time setup for ${packageDefinition.name}.`
+            },
+            unit_amount: packageDefinition.setupAmount
+        },
+        quantity: 1
+    };
+}
+
 function normalizeRecurringInterval(recurring) {
     if (!recurring || !recurring.interval) {
         return '';
@@ -993,6 +1028,27 @@ async function buildCatalogLineItem(stripe, packageKey, packageDefinition, payme
     };
 }
 
+async function buildCheckoutLineItems(stripe, packageKey, packageDefinition, paymentSelection) {
+    let recurringOrPaymentLineItem;
+
+    try {
+        recurringOrPaymentLineItem = await buildCatalogLineItem(stripe, packageKey, packageDefinition, paymentSelection);
+    } catch (catalogError) {
+        // Fallback keeps checkout operational if Stripe catalog lookup fails.
+        console.error('Stripe catalog lookup failed; falling back to inline checkout price data:', catalogError);
+        recurringOrPaymentLineItem = buildInlineLineItem(packageDefinition, paymentSelection);
+    }
+
+    if (packageDefinition.mode === 'subscription' && packageDefinition.setupAmount) {
+        return [
+            buildInlineSetupLineItem(packageDefinition),
+            recurringOrPaymentLineItem
+        ];
+    }
+
+    return [recurringOrPaymentLineItem];
+}
+
 function buildCheckoutMetadata(packageKey, packageDefinition, intakeDetails, paymentSelection) {
     const metadata = {
         packageKey,
@@ -1008,6 +1064,11 @@ function buildCheckoutMetadata(packageKey, packageDefinition, intakeDetails, pay
     metadata.preferredContact = intakeDetails.preferredContact || 'email';
     metadata.returnPath = intakeDetails.returnPath || '/pricing';
     metadata.intakeSummary = intakeDetails.projectDetails.slice(0, 400);
+
+    if (packageDefinition.setupAmount) {
+        metadata.setupPriceDisplay = packageDefinition.setupPriceDisplay || '';
+        metadata.monthlyPriceDisplay = paymentSelection.priceDisplay || '';
+    }
 
     if (intakeDetails.phone) {
         metadata.contactPhone = intakeDetails.phone;
@@ -1267,19 +1328,11 @@ async function handler(req, res) {
             });
         }
 
-        let lineItem;
-
-        try {
-            lineItem = await buildCatalogLineItem(stripe, packageKey, packageDefinition, paymentSelection);
-        } catch (catalogError) {
-            // Fallback keeps checkout operational if Stripe catalog lookup fails.
-            console.error('Stripe catalog lookup failed; falling back to inline checkout price data:', catalogError);
-            lineItem = buildInlineLineItem(packageDefinition, paymentSelection);
-        }
+        const lineItems = await buildCheckoutLineItems(stripe, packageKey, packageDefinition, paymentSelection);
 
         const sessionParams = {
             mode: packageDefinition.mode,
-            line_items: [lineItem],
+            line_items: lineItems,
             billing_address_collection: 'auto',
             customer_email: intakeDetails.email,
             success_url: `${successReturnUrl.toString()}#starter-packages`,

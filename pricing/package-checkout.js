@@ -1,6 +1,14 @@
 (function () {
     try {
     const packageCatalog = {
+        'website-demo-preview': {
+            name: 'Demo Preview Site',
+            price: '$200',
+            family: 'website',
+            profile: 'website-basic',
+            goalLabel: 'What should this demo page prove?',
+            goalPlaceholder: 'Tell us what you want to validate: offer clarity, layout direction, lead capture, or early customer feedback.'
+        },
         'website-preview-launch': {
             name: 'Preview Launch Site',
             price: '$500',
@@ -58,8 +66,8 @@
             price: '$1,997',
             family: 'website',
             profile: 'website-local',
-            goalLabel: 'What should this website help you get more of?',
-            goalPlaceholder: 'Example: more calls, more quote requests, cleaner positioning, or better Google visibility.',
+            goalLabel: 'What should this local launch help you win?',
+            goalPlaceholder: 'Example: stronger Google visibility, better design quality, cleaner lead capture, competitor differentiation, or GBP alignment.',
             paymentOptions: [
                 {
                     value: 'full',
@@ -239,7 +247,7 @@
         },
         'ops-simple-lead-tracker': {
             name: 'Simple Lead Tracker',
-            price: '$250',
+            price: '$250 setup + $49/mo',
             family: 'ops',
             profile: 'ops',
             goalLabel: 'What do you want this tracker to help you keep organized?',
@@ -247,7 +255,7 @@
         },
         'ops-contractor-crm-starter': {
             name: 'Contractor CRM Starter',
-            price: '$500',
+            price: '$500 setup + $97/mo',
             family: 'ops',
             profile: 'ops',
             goalLabel: 'What part of the CRM or follow-up process needs the most help?',
@@ -255,7 +263,7 @@
         },
         'ops-job-records-system': {
             name: 'Job Records System',
-            price: '$750',
+            price: '$750 setup + $149/mo',
             family: 'ops',
             profile: 'ops',
             goalLabel: 'What job records or documents need to be organized?',
@@ -263,83 +271,35 @@
         },
         'ops-automated-job-records': {
             name: 'Automated Job Records',
-            price: '$1,500',
+            price: '$1,500 setup + $197/mo',
             family: 'ops',
             profile: 'ops',
             goalLabel: 'What process do you want automated?',
-            goalPlaceholder: 'Example: form submissions, folder creation, notifications, or tracker updates.',
-            paymentOptions: [
-                {
-                    value: 'full',
-                    label: 'Pay in full - $1,500',
-                    help: 'One-time payment through Stripe.'
-                },
-                {
-                    value: 'deposit',
-                    label: 'Reserve kickoff with a $750 deposit',
-                    help: 'Deposit is applied to the project total. Remaining balance is invoiced before handoff.'
-                }
-            ]
+            goalPlaceholder: 'Example: form submissions, folder creation, notifications, or tracker updates.'
         },
         'ops-growth-system-starter': {
             name: 'Growth System Starter',
-            price: '$3,500',
+            price: '$3,500 setup + $397/mo',
             family: 'ops',
             profile: 'ops',
             goalLabel: 'What business bottleneck should this system solve first?',
-            goalPlaceholder: 'Example: lead tracking, review workflow, reporting, or a weak process behind the website.',
-            paymentOptions: [
-                {
-                    value: 'full',
-                    label: 'Pay in full - $3,500',
-                    help: 'One-time payment through Stripe.'
-                },
-                {
-                    value: 'deposit',
-                    label: 'Reserve kickoff with a $1,750 deposit',
-                    help: 'Deposit is applied to the project total. Remaining balance is invoiced across milestone approvals.'
-                }
-            ]
+            goalPlaceholder: 'Example: lead tracking, review workflow, reporting, or a weak process behind the website.'
         },
         'ops-full-growth-system': {
             name: 'Full Growth System',
-            price: '$5,000',
+            price: '$5,000 setup + $697/mo',
             family: 'ops',
             profile: 'ops',
             goalLabel: 'What should this full system improve most for the business?',
-            goalPlaceholder: 'Example: lead flow, tracking, CRM, reporting, site and search alignment, or operations cleanup.',
-            paymentOptions: [
-                {
-                    value: 'full',
-                    label: 'Pay in full - $5,000',
-                    help: 'One-time payment through Stripe.'
-                },
-                {
-                    value: 'deposit',
-                    label: 'Reserve strategy and kickoff with a $2,000 deposit',
-                    help: 'Strategy deposit is applied to the project total. Remaining balance is invoiced after scope confirmation and milestones.'
-                }
-            ]
+            goalPlaceholder: 'Example: lead flow, tracking, CRM, reporting, site and search alignment, or operations cleanup.'
         },
         'ops-custom-automation-system': {
             name: 'Custom Automation System',
-            price: '$10,000',
+            price: '$10,000 setup + $1,000/mo',
             family: 'ops',
             profile: 'ops',
             goalLabel: 'What workflow, system, or automation are we creating?',
-            goalPlaceholder: 'Example: routing leads, dashboards, follow-up automation, reporting, or a custom internal tool.',
-            paymentOptions: [
-                {
-                    value: 'full',
-                    label: 'Pay in full - $10,000',
-                    help: 'One-time payment through Stripe.'
-                },
-                {
-                    value: 'deposit',
-                    label: 'Reserve strategy and kickoff with a $2,500 deposit',
-                    help: 'Strategy deposit is applied to the project total. Remaining balance is invoiced after scope confirmation and milestones.'
-                }
-            ]
+            goalPlaceholder: 'Example: routing leads, dashboards, follow-up automation, reporting, or a custom internal tool.'
         }
     };
 
@@ -504,6 +464,14 @@
             'Starter files can be attached now or after payment'
         ];
 
+        if (packageConfig.family === 'ops') {
+            return {
+                title: 'Setup fee plus monthly system care',
+                body: 'CRM, tracking, and automation systems need a first-time build plus ongoing upkeep. Checkout starts both together: the setup is charged today, then monthly support continues through Stripe.',
+                chips: ['One-time setup fee', 'Monthly recurring support', 'Secure Stripe subscription checkout']
+            };
+        }
+
         if (packageConfig.family === 'monthly') {
             return {
                 title: 'Simple onboarding before recurring checkout',
@@ -520,10 +488,17 @@
             };
         }
 
+        const selectedPaymentConfig = Array.isArray(packageConfig.paymentOptions)
+            ? packageConfig.paymentOptions.find((option) => option.value === getSelectedPaymentOption())
+            : null;
+        const financingChip = supportsBnpl(packageConfig, selectedPaymentConfig)
+            ? ['Financing may appear in Stripe when eligible']
+            : [];
+
         return {
             title: '2-minute starter form before secure checkout',
             body: 'This is not a full discovery questionnaire. It is just enough to start the project cleanly, collect any starter files you already have, and move you into checkout without unnecessary friction.',
-            chips: baseChips
+            chips: [...baseChips, ...financingChip]
         };
     }
 
@@ -949,7 +924,7 @@
         if (configuratorLabel) {
             configuratorLabel.textContent = Array.isArray(packageConfig.paymentOptions) && packageConfig.paymentOptions.length > 0
                 ? 'Checkout Path'
-                : packageConfig.family === 'monthly'
+                : packageConfig.family === 'monthly' || packageConfig.family === 'ops'
                     ? 'Subscription Path'
                     : 'Secure Checkout';
         }
@@ -967,13 +942,17 @@
         if (configuratorCopy) {
             configuratorCopy.textContent = selectedPaymentConfig && selectedPayment === 'deposit'
                 ? selectedPaymentConfig.help
+                : packageConfig.family === 'ops'
+                    ? 'This checkout includes the setup fee today and starts the monthly support subscription in Stripe.'
                 : packageConfig.family === 'monthly'
                     ? 'This starter form confirms the property and main priority before recurring Stripe checkout starts.'
                     : 'This starter form is just enough to get the project moving cleanly before secure Stripe checkout.';
         }
 
         if (configuratorMeta) {
-            configuratorMeta.textContent = packageConfig.family === 'monthly'
+            configuratorMeta.textContent = packageConfig.family === 'ops'
+                ? 'CRM and automation systems are not one-and-done. The monthly portion covers upkeep, small adjustments, monitoring, and support after setup.'
+                : packageConfig.family === 'monthly'
                 ? 'You can attach starter files now, but the main thing we need is the site or profile you want maintained.'
                 : hasDepositOption(packageConfig)
                     ? 'If you choose a deposit, it is applied to the project total. You will still get a post-payment handoff for more files and references.'
@@ -983,7 +962,7 @@
         if (intakeSubmitText) {
             intakeSubmitText.textContent = selectedPaymentConfig
                 ? `Continue to Checkout - ${selectedPaymentConfig.label.replace(/^.*?-\s*/, '')}`
-                : packageConfig.family === 'monthly'
+                : packageConfig.family === 'monthly' || packageConfig.family === 'ops'
                     ? `Continue to Subscription Checkout - ${packageConfig.price}`
                     : `Continue to Checkout - ${packageConfig.price}`;
         }

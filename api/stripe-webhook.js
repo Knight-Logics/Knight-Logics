@@ -10,9 +10,16 @@ const {
 
 const HANDLED_EVENT_TYPES = new Set([
     'checkout.session.completed',
-    'checkout.session.async_payment_succeeded'
+    'checkout.session.async_payment_succeeded',
+    'customer.subscription.updated',
+    'customer.subscription.deleted'
 ]);
-
+const AUTOVID_FREE_LIMIT = 20;
+const AUTOVID_PLANS = {
+    credits_5: { credits: 5, mode: 'payment' },
+    credits_12: { credits: 12, mode: 'payment' },
+    monthly_unlimited: { credits: 0, mode: 'subscription' }
+};
 
 function sendJson(res, statusCode, payload) {
     res.statusCode = statusCode;
@@ -41,6 +48,159 @@ function normStr(value, maxLength) {
 function normInt(value) {
     const num = parseInt(value, 10);
     return Number.isFinite(num) ? num : null;
+}
+
+function normMachineId(value) {
+    if (typeof value !== 'string') return null;
+    const normalized = value.trim().toLowerCase();
+    return /^[a-f0-9]{64}$/.test(normalized) ? normalized : null;
+}
+
+function normAutovidQuantity(value) {
+    const quantity = parseInt(value, 10);
+    if (!Number.isFinite(quantity)) return 1;
+    return Math.max(1, Math.min(20, quantity));
+}
+
+function normAutovidPlan(value) {
+    return typeof value === 'string' && AUTOVID_PLANS[value] ? value : 'credits_5';
+}
+
+async function ensureAutovidTables(sql) {
+    await sql`
+        CREATE TABLE IF NOT EXISTS autovid_license_accounts (
+            machine_id text PRIMARY KEY,
+            free_used integer NOT NULL DEFAULT 0,
+            credits integer NOT NULL DEFAULT 0,
+            email text,
+            stripe_customer_id text,
+            stripe_subscription_id text,
+            subscription_status text,
+            subscription_current_period_end timestamptz,
+            created_at timestamptz NOT NULL DEFAULT now(),
+            updated_at timestamptz NOT NULL DEFAULT now()
+        )
+    `;
+
+    await sql`ALTER TABLE autovid_license_accounts ADD COLUMN IF NOT EXISTS stripe_customer_id text`;
+    await sql`ALTER TABLE autovid_license_accounts ADD COLUMN IF NOT EXISTS stripe_subscription_id text`;
+    await sql`ALTER TABLE autovid_license_accounts ADD COLUMN IF NOT EXISTS subscription_status text`;
+    await sql`ALTER TABLE autovid_license_accounts ADD COLUMN IF NOT EXISTS subscription_current_period_end timestamptz`;
+
+    await sql`
+        CREATE TABLE IF NOT EXISTS autovid_processed_sessions (
+            session_id text PRIMARY KEY,
+            machine_id text NOT NULL REFERENCES autovid_license_accounts(machine_id) ON DELETE CASCADE,
+            credits integer NOT NULL,
+            amount_total integer,
+            currency text,
+            plan_id text,
+            created_at timestamptz NOT NULL DEFAULT now()
+        )
+    `;
+
+    await sql`ALTER TABLE autovid_processed_sessions ADD COLUMN IF NOT EXISTS plan_id text`;
+}
+
+async function creditAutovidSession(sql, session) {
+    const metadata = session.metadata || {};
+    const machineId = normMachineId(metadata.machine_id);
+    if (!machineId) {
+        return { skipped: true, reason: 'Invalid Auto Vid machine id.' };
+    }
+
+    const planId = normAutovidPlan(metadata.plan_id || '');
+    const plan = AUTOVID_PLANS[planId];
+    const credits = plan.mode === 'subscription'
+        ? 0
+        : (plan.credits || normAutovidQuantity(metadata.credits || 1));
+    const amountTotal = normInt(session.amount_total) || 0;
+    const currency = typeof session.currency === 'string' ? session.currency : 'usd';
+    const customerId = typeof session.customer === 'string' ? session.customer : '';
+    const subscriptionId = typeof session.subscription === 'string' ? session.subscription : '';
+    const email = normStr(
+        (session.customer_details && session.customer_details.email) ||
+        session.customer_email ||
+        '',
+        160
+    );
+
+    await ensureAutovidTables(sql);
+
+    await sql`
+        INSERT INTO autovid_license_accounts (machine_id, email)
+        VALUES (${machineId}, ${email})
+        ON CONFLICT (machine_id) DO UPDATE SET
+            email = COALESCE(EXCLUDED.email, autovid_license_accounts.email),
+            stripe_customer_id = COALESCE(${customerId || null}, autovid_license_accounts.stripe_customer_id),
+            stripe_subscription_id = COALESCE(${subscriptionId || null}, autovid_license_accounts.stripe_subscription_id),
+            updated_at = now()
+    `;
+
+    const inserted = await sql`
+        INSERT INTO autovid_processed_sessions (session_id, machine_id, credits, amount_total, currency, plan_id)
+        VALUES (${session.id}, ${machineId}, ${credits}, ${amountTotal}, ${currency}, ${planId})
+        ON CONFLICT (session_id) DO NOTHING
+        RETURNING session_id
+    `;
+
+    if (plan.mode === 'subscription') {
+        let subscriptionStatus = 'active';
+        let periodEnd = null;
+        if (subscriptionId) {
+            try {
+                const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || process.env.STRIPE_API_KEY, { apiVersion: '2025-03-31.basil' });
+                const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+                subscriptionStatus = subscription.status || subscriptionStatus;
+                periodEnd = subscription.current_period_end
+                    ? new Date(subscription.current_period_end * 1000).toISOString()
+                    : null;
+            } catch (error) {
+                console.error('[stripe-webhook] Auto Vid subscription retrieve failed:', error && error.message);
+            }
+        }
+        await sql`
+            UPDATE autovid_license_accounts
+            SET subscription_status = ${subscriptionStatus},
+                subscription_current_period_end = COALESCE(${periodEnd || null}::timestamptz, subscription_current_period_end),
+                updated_at = now()
+            WHERE machine_id = ${machineId}
+        `;
+    } else if (inserted.length) {
+        await sql`
+            UPDATE autovid_license_accounts
+            SET credits = credits + ${credits}, updated_at = now()
+            WHERE machine_id = ${machineId}
+        `;
+    }
+
+    return { ok: true, credited: plan.mode === 'subscription' || inserted.length > 0, credits, plan_id: planId, free_limit: AUTOVID_FREE_LIMIT };
+}
+
+async function updateAutovidSubscription(sql, subscription) {
+    const metadata = subscription.metadata || {};
+    const machineId = normMachineId(metadata.machine_id);
+    if (!machineId) {
+        return { skipped: true, reason: 'No Auto Vid machine id on subscription.' };
+    }
+    const periodEnd = subscription.current_period_end
+        ? new Date(subscription.current_period_end * 1000).toISOString()
+        : null;
+    await ensureAutovidTables(sql);
+    await sql`
+        INSERT INTO autovid_license_accounts
+            (machine_id, stripe_customer_id, stripe_subscription_id, subscription_status, subscription_current_period_end)
+        VALUES
+            (${machineId}, ${typeof subscription.customer === 'string' ? subscription.customer : null},
+             ${subscription.id}, ${subscription.status || ''}, ${periodEnd || null}::timestamptz)
+        ON CONFLICT (machine_id) DO UPDATE SET
+            stripe_customer_id = COALESCE(EXCLUDED.stripe_customer_id, autovid_license_accounts.stripe_customer_id),
+            stripe_subscription_id = EXCLUDED.stripe_subscription_id,
+            subscription_status = EXCLUDED.subscription_status,
+            subscription_current_period_end = EXCLUDED.subscription_current_period_end,
+            updated_at = now()
+    `;
+    return { ok: true, subscription_status: subscription.status || '', plan_id: normAutovidPlan(metadata.plan_id || '') };
 }
 
 function getBountyForAmount(grossAmountCents) {
@@ -156,7 +316,7 @@ module.exports = async function handler(req, res) {
 
     const stripeSecretKey = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_API_KEY;
     const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-    const databaseUrl = process.env.KL_DATABASE_URL;
+    const databaseUrl = process.env.KL_DATABASE_URL || process.env.DATABASE_URL;
 
     if (!stripeSecretKey || !webhookSecret || !databaseUrl) {
         return sendJson(res, 503, { error: 'Stripe webhook is not configured.' });
@@ -188,12 +348,34 @@ module.exports = async function handler(req, res) {
         return sendJson(res, 200, { received: true, skipped: true, reason: 'No checkout session payload.' });
     }
 
+    if (event.type === 'customer.subscription.updated' || event.type === 'customer.subscription.deleted') {
+        try {
+            const sql = neon(databaseUrl);
+            const result = await updateAutovidSubscription(sql, session);
+            return sendJson(res, 200, { received: true, autovid: true, ...result });
+        } catch (error) {
+            console.error('[stripe-webhook] Auto Vid subscription update failed:', error && error.message);
+            return sendJson(res, 500, { error: 'Failed to record Auto Vid subscription update.' });
+        }
+    }
+
     if (event.type === 'checkout.session.completed' && session.payment_status !== 'paid') {
         return sendJson(res, 200, {
             received: true,
             skipped: true,
             reason: 'Checkout completed before payment settled.'
         });
+    }
+
+    if (metadata.app === 'autovid_compiler') {
+        try {
+            const sql = neon(databaseUrl);
+            const result = await creditAutovidSession(sql, session);
+            return sendJson(res, 200, { received: true, autovid: true, ...result });
+        } catch (error) {
+            console.error('[stripe-webhook] Auto Vid credit failed:', error && error.message);
+            return sendJson(res, 500, { error: 'Failed to record Auto Vid credit.' });
+        }
     }
 
     const referralPartner = normalizeSlug(normStr(metadata.referralPartner, 80) || '');

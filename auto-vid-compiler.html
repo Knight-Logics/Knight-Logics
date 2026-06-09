@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Open-source Windows app that turns a folder of clips into a highlight reel with intro, music, end trimming, and one-click export.">
-    <meta name="keywords" content="Auto Vid Compiler, highlight reel maker, video compilation tool, Windows desktop app, FFmpeg, open source, Knight Logics">
+    <meta name="description" content="Windows app that turns a folder of clips into a highlight reel with intro, music, end trimming, overlap-aware sequencing, and one-click export.">
+    <meta name="keywords" content="Auto Vid Compiler, highlight reel maker, video compilation tool, Windows desktop app, FFmpeg, Knight Logics">
     <meta name="author" content="Nicholas Knight">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Auto Vid Compiler | Highlight Reel Maker for Windows">
-    <meta property="og:description" content="Drop in a folder of clips, set your trim length, and get one polished compilation video. Free, open-source, and portable.">
+    <meta property="og:description" content="Drop in a folder of clips, set your trim length, and get one polished compilation video. Includes 20 free compile uses, then credit packs or monthly access.">
     <meta property="og:url" content="https://knightlogics.com/auto-vid-compiler">
     <meta property="og:site_name" content="Knight Logics">
-    <meta property="og:image" content="https://knightlogics.com/images/B-Magic%27s%20Auto%20Vid%20Compiler.webp">
+    <meta property="og:image" content="https://knightlogics.com/images/AutoVideoCompiler_header_ui.png">
     <meta property="og:image:width" content="1024">
     <meta property="og:image:height" content="1024">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Auto Vid Compiler | Highlight Reel Maker for Windows">
-    <meta name="twitter:description" content="Automated highlight reel compiler - trim clip endings, add intro and music, export one file. Free Windows tool.">
-    <meta name="twitter:image" content="https://knightlogics.com/images/B-Magic%27s%20Auto%20Vid%20Compiler.webp">
+    <meta name="twitter:description" content="Automated highlight reel compiler - trim clip endings, add intro and music, order clips, and export one file.">
+    <meta name="twitter:image" content="https://knightlogics.com/images/AutoVideoCompiler_header_ui.png">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VX36QR7HJW"></script>
     <script>
@@ -37,15 +37,16 @@
         "@id": "https://knightlogics.com/auto-vid-compiler#webpage",
         "name": "Auto Vid Compiler | Knight Logics",
         "url": "https://knightlogics.com/auto-vid-compiler",
-        "description": "Open-source Windows app that turns a folder of short clips into a polished highlight reel. Trims clip endings, prepends an intro, overlays background music, and exports one YouTube-ready video with FFmpeg.",
+        "description": "Windows app that turns a folder of short clips into a polished highlight reel. Trims clip endings, prepends an intro, overlays background music, supports clip ordering, and exports one YouTube-ready video with FFmpeg.",
         "mainEntity": {
-            "@type": "SoftwareSourceCode",
+            "@type": "SoftwareApplication",
             "@id": "https://knightlogics.com/auto-vid-compiler#software",
             "name": "Auto Vid Compiler",
-            "runtimePlatform": "Windows 10, Windows 11",
-            "version": "1.0",
+            "applicationCategory": "MultimediaApplication",
+            "operatingSystem": "Windows 10, Windows 11",
+            "softwareVersion": "1.3.0",
             "datePublished": "2024-12-01",
-            "dateModified": "2026-04-02",
+            "dateModified": "2026-05-31",
             "creator": {
                 "@type": "Organization",
                 "name": "Knight Logics"
@@ -57,12 +58,18 @@
             },
             "codeRepository": "https://github.com/Knight-Logics/Auto-Video-Editor-and-Compiler",
             "url": "https://knightlogics.com/auto-vid-compiler",
-            "isAccessibleForFree": true,
+            "isAccessibleForFree": false,
+            "offers": {
+                "@type": "Offer",
+                "price": "1.00",
+                "priceCurrency": "USD",
+                "description": "20 free compile uses, then $5 for 5 credits, $10 for 12 credits, or $10/mo unlimited access."
+            },
             "sameAs": [
                 "https://github.com/Knight-Logics/Auto-Video-Editor-and-Compiler",
                 "https://github.com/Knight-Logics/Auto-Video-Editor-and-Compiler/releases/latest"
             ],
-            "description": "Open-source Windows app that turns a folder of short clips into a polished highlight reel. Trims clip endings, prepends an intro, overlays background music, and exports one YouTube-ready video with FFmpeg."
+            "description": "Windows app that turns a folder of short clips into a polished highlight reel. Trims clip endings, prepends an intro, overlays background music, supports clip ordering, and exports one YouTube-ready video with FFmpeg."
         }
     }
     </script>
@@ -112,14 +119,14 @@
                         <span>/</span>
                         <span>Auto Vid Compiler</span>
                     </nav>
-                    <span class="displayplus-eyebrow">Free &amp; Open Source &middot; Windows Desktop Tool</span>
+                    <span class="displayplus-eyebrow">20 Free Compiles &middot; Credit Packs &middot; Windows Desktop Tool</span>
                     <div class="product-title-row">
-                        <img src="./images/B-Magic%27s%20Auto%20Vid%20Compiler.webp" alt="Auto Vid Compiler logo" class="product-title-logo" width="1024" height="1024" loading="lazy">
+                        <img src="./images/AutoVideoCompiler_header_ui.png" alt="Auto Vid Compiler logo" class="product-title-logo autovid-title-logo" width="1400" height="700" loading="lazy">
                         <h1>Auto Vid Compiler</h1>
                     </div>
                     <p class="displayplus-subtitle">Drop in a folder of clips and get one finished highlight reel. The app trims the last few seconds from each clip, prepends your intro, layers background music, and exports a single YouTube-ready video - no editing timeline required.</p>
                     <div class="displayplus-cta-row">
-                        <a href="https://github.com/Knight-Logics/Auto-Video-Editor-and-Compiler/releases/latest/download/BMagic_AutoVidCompiler_PERFECT.exe" target="_blank" rel="noopener noreferrer" class="btn-primary">&#x2B07; Download .exe (v1.2.1)</a>
+                        <a href="https://github.com/Knight-Logics/Auto-Video-Editor-and-Compiler/releases/latest/download/BMagic_AutoVidCompiler_PERFECT.exe" target="_blank" rel="noopener noreferrer" class="btn-primary">&#x2B07; Download .exe (v1.3.0)</a>
                         <a href="https://github.com/Knight-Logics/Auto-Video-Editor-and-Compiler/releases/latest" target="_blank" rel="noopener noreferrer" class="btn-secondary">View Release on GitHub</a>
                     </div>
                     <div class="displayplus-inline-notes">
@@ -144,7 +151,7 @@
                             <div class="displayplus-shell-grid">
                                 <div>
                                     <strong>Input</strong>
-                                    <span>Any folder of .mp4 / .mkv clips</span>
+                                <span>MP4, AVI, MOV, MKV, WEBM, M4V clips</span>
                                 </div>
                                 <div>
                                     <strong>Trim</strong>
@@ -181,8 +188,8 @@
                 <p>Set trim length (5&ndash;30 seconds per clip), select your intro file, choose a background music track per session.</p>
             </article>
             <article class="displayplus-proof-card">
-                <span class="displayplus-proof-number">Open Source</span>
-                <p>Full source available on GitHub. Fork it, modify the workflow, or adapt the FFmpeg pipeline for your own use case.</p>
+                <span class="displayplus-proof-number">Low Cost</span>
+                <p>Includes 20 free compile uses. After the trial, Stripe-backed options are $5 for 5 credits, $10 for 12 credits, or $10/mo unlimited.</p>
             </article>
         </div>
     </section>
@@ -197,7 +204,7 @@
                 <article class="displayplus-feature-card fade-in">
                     <i class="fas fa-folder-open"></i>
                     <h3>Folder-Based Input</h3>
-                    <p>Point the app at a folder of clips. It picks up every video file in order and runs the same trim workflow on each one.</p>
+                    <p>Point the app at a folder of clips. It picks up supported video files without depending on a specific filename pattern.</p>
                 </article>
                 <article class="displayplus-feature-card fade-in">
                     <i class="fas fa-scissors"></i>
@@ -207,12 +214,12 @@
                 <article class="displayplus-feature-card fade-in">
                     <i class="fas fa-clapperboard"></i>
                     <h3>Intro Prepend</h3>
-                    <p>Drop your own intro video file next to the executable. The compiler automatically stitches it to the front of the final output.</p>
+                    <p>Add intro videos or GIFs from the GUI. The compiler automatically stitches the selected intro to the front of the final output.</p>
                 </article>
                 <article class="displayplus-feature-card fade-in">
                     <i class="fas fa-music"></i>
                     <h3>Background Music</h3>
-                    <p>Select an audio track and it gets mixed under the compiled video at a set audio level - original clip audio is preserved on top.</p>
+                    <p>Add MP3, WAV, M4A, OGG, FLAC, or AAC tracks and mix one under the compiled video while preserving original clip audio.</p>
                 </article>
             </div>
         </div>
@@ -224,7 +231,7 @@
                 <div class="displayplus-content-column fade-in">
                     <span class="displayplus-mini-label">Important Setup Note</span>
                     <h2>The .exe must run alongside its bundled folders.</h2>
-                    <p>This is a portable-style distribution - the executable expects to find its companion folders (FFmpeg, intros, music, icons) in the same directory. Do not move the .exe out of the extracted folder or the app won't find its assets.</p>
+                    <p>This is a portable-style distribution - the executable expects to find its companion folders (FFmpeg, intros, music, icons) in the same directory. Keep the release folder together so the app can find its assets.</p>
                     <div class="displayplus-profile-list">
                         <div class="displayplus-profile-item">
                             <strong>ffmpeg/</strong>
@@ -232,11 +239,11 @@
                         </div>
                         <div class="displayplus-profile-item">
                             <strong>intros/</strong>
-                            <span>Drop your intro video files here.</span>
+                            <span>Intro videos and GIFs imported from the app live here.</span>
                         </div>
                         <div class="displayplus-profile-item">
                             <strong>music/</strong>
-                            <span>Place your background audio tracks here.</span>
+                            <span>Background audio imported from the app lives here.</span>
                         </div>
                     </div>
                 </div>
@@ -247,7 +254,7 @@
                             <li>Python - core process and GUI logic</li>
                             <li>FFmpeg - video trimming, concat, and audio mix</li>
                             <li>PyInstaller - packaged into a standalone Windows .exe</li>
-                            <li>Bundled assets - intros, music, icons included in release</li>
+                            <li>Stripe Checkout - low-cost compile credits after the trial</li>
                         </ul>
                     </div>
                     <div class="displayplus-stack-card">
@@ -278,12 +285,12 @@
                 <article class="displayplus-step fade-in">
                     <span class="displayplus-step-number">02</span>
                     <h3>Add your intros and music</h3>
-                    <p>Drop your intro video into the <code>intros/</code> folder and your background audio into <code>music/</code>.</p>
+                    <p>Use the app's Add Intro/GIF and Add Music controls, or place files directly into the bundled <code>intros/</code> and <code>music/</code> folders.</p>
                 </article>
                 <article class="displayplus-step fade-in">
                     <span class="displayplus-step-number">03</span>
                     <h3>Point it at your clips folder</h3>
-                    <p>Run the .exe and select the folder containing your source clips. Set the trim length per clip (5&ndash;30 seconds).</p>
+                    <p>Run the .exe and select the folder containing your source clips. Set the trim length and choose newest-first, oldest-first, filename, or custom clip order.</p>
                 </article>
                 <article class="displayplus-step fade-in">
                     <span class="displayplus-step-number">04</span>
@@ -299,8 +306,8 @@
             <div class="displayplus-download-layout">
                 <div class="displayplus-download-copy fade-in">
                     <span class="displayplus-mini-label">Distribution</span>
-                    <h2>Free Download &middot; Open Source &middot; v1.2.1</h2>
-                    <p>Auto Vid Compiler is free to use and the source is available in the Knight Logics GitHub organization. This was the direct predecessor tool to VideoForge Studio - a more advanced ranked video production app also available from Knight Logics.</p>
+                    <h2>20 Free Compiles &middot; Credit Packs &middot; v1.3.0</h2>
+                    <p>Auto Vid Compiler is free to try for 20 successful compiles. After that, the app uses Stripe Checkout for credit packs or monthly unlimited access tied to the device license ledger.</p>
                     <div class="displayplus-note-box">
                         <strong>Looking for more features?</strong>
                         <p>VideoForge Studio is the evolved version - adds ranked video formats, captions, custom overlays, a browser UI, and a full Windows installer.</p>
@@ -321,11 +328,11 @@
                         </div>
                         <div>
                             <strong>Version</strong>
-                            <span>v1.2.1 (stable release)</span>
+                            <span>v1.3.0 (stable release)</span>
                         </div>
                         <div>
                             <strong>License</strong>
-                            <span>Open source - see repository</span>
+                            <span>20 free uses, then credit packs or monthly unlimited</span>
                         </div>
                         <div>
                             <strong>Dependencies</strong>

@@ -1,0 +1,5 @@
+# SEO API scripts (MainSite/scripts/) — pip install -r scripts/requirements-seo.txt
+requests>=2.32
+google-api-python-client>=2.100
+google-auth-oauthlib>=1.2
+google-auth-httplib2>=0.2

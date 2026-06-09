@@ -1,6 +1,6 @@
 ﻿// Loading Screen and Initial Setup
 // Global variables for landing mode
-let isInLandingMode = true;
+let isInLandingMode = false;
 let exitLandingMode = null;
 let suppressLandingReentry = false; // Prevent immediate hero re-entry after nav clicks
 let anchorNavigationInitialized = false;
@@ -144,11 +144,11 @@ async function loadHeaderFooter() {
         };
 
         const headerCandidates = [
-            new URL('/header.html?v=20260512a', window.location.origin),
+            new URL('/header.html?v=20260604perf1', window.location.origin),
             new URL('/header', window.location.origin)
         ];
         const footerCandidates = [
-            new URL('/footer.html?v=20260512a', window.location.origin),
+            new URL('/footer.html?v=20260604perf1', window.location.origin),
             new URL('/footer', window.location.origin)
         ];
 
@@ -158,7 +158,9 @@ async function loadHeaderFooter() {
         ]);
 
         const headerContainer = document.getElementById('header-container');
-        if (headerContainer && headerContent) {
+        if (headerContainer && headerContainer.querySelector('.navbar')) {
+            // Homepage and other pages with an inlined header skip the network round-trip.
+        } else if (headerContainer && headerContent) {
             headerContainer.innerHTML = headerContent;
         } else if (headerContainer) {
             console.warn('Header partial could not be loaded from known routes.');
@@ -197,6 +199,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Keep only above-the-fold essentials immediate.
     initLayeredParallax();
+    initHeroEntranceAnimations();
+    initProofAboutEntrance();
+    initServicesEntrance();
     initMobileReadMore();
 
     // Push non-critical effects after first paint / idle time.
@@ -219,6 +224,8 @@ document.addEventListener('DOMContentLoaded', function() {
             loadingScreen.style.display = 'none';
             scheduleNonCriticalInit(initMainAnimations);
         }, 120);
+    } else {
+        scheduleNonCriticalInit(initMainAnimations, 120);
     }
 });
 
@@ -229,7 +236,7 @@ function initLayeredParallax() {
     const heroSubtitle = document.querySelector('.hero-subtitle');
     const scrollIndicator = document.querySelector('.scroll-indicator');
     const codeForest = document.querySelector('.parallax-bg-near');
-    const cityBg = document.querySelector('.parallax-bg-far');
+    const cityBg = document.querySelector('.hero-parallax-layer, #hero .parallax-bg-far, .parallax-bg-far');
     const grungeLayer = document.querySelector('.parallax-bg-mid');
     
     // Debug element selection
@@ -238,8 +245,8 @@ function initLayeredParallax() {
     landingLog('🏙️ cityBg (.parallax-bg-far):', cityBg);
     landingLog('🌫️ grungeLayer (.parallax-bg-mid):', grungeLayer);
     
-    if (!heroSection || !codeForest) {
-        landingLog('Hero elements not found');
+    if (!heroSection) {
+        landingLog('Hero section not found');
         return;
     }
     
@@ -254,19 +261,91 @@ function initLayeredParallax() {
     // Check if user navigated to a specific section (has hash in URL)
     const hasHash = window.location.hash && window.location.hash.length > 1;
 
-    // Respect reduced-motion preference: skip scroll lock + hide door layers,
-    // but leave the hero background visible so the page scrolls normally.
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-        isInLandingMode = false;
-        unlockLandingScroll();
-        if (codeForest) { codeForest.style.display = 'none'; codeForest.style.opacity = '0'; }
-        if (grungeLayer) { grungeLayer.style.display = 'none'; grungeLayer.style.opacity = '0'; }
-        if (scrollIndicator) { scrollIndicator.style.display = 'none'; }
-        applyStaticHeroLayout();
-        exitLandingMode = null;
-        return;
+
+    function applyStaticHeroLayout() {
+        if (!heroSection) return;
+
+        heroSection.style.position = 'relative';
+        heroSection.style.top = 'auto';
+        heroSection.style.left = 'auto';
+        heroSection.style.width = '100%';
+        heroSection.style.height = 'var(--landing-viewport-height, 100vh)';
+        heroSection.style.minHeight = '100svh';
+        heroSection.style.display = 'flex';
+        heroSection.style.alignItems = 'center';
+        heroSection.style.justifyContent = 'center';
+        heroSection.style.overflow = 'hidden';
+        heroSection.style.zIndex = '1';
+        heroSection.style.pointerEvents = 'auto';
+        heroSection.style.opacity = '1';
+
+        const heroNext = document.querySelector('.hero + section, .hero + .kl-proof-stack');
+        if (heroNext) {
+            heroNext.style.marginTop = '0';
+        }
     }
+
+    function hideLegacyHeroOverlay() {
+        if (codeForest) {
+            codeForest.style.display = 'none';
+            codeForest.style.opacity = '0';
+        }
+        if (grungeLayer) {
+            grungeLayer.style.display = 'none';
+            grungeLayer.style.opacity = '0';
+        }
+        if (scrollIndicator) {
+            scrollIndicator.style.display = 'none';
+        }
+    }
+
+    function initHeroScrollParallax(farLayer) {
+        if (!farLayer || !heroSection) return;
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) return;
+
+        const mobileParallax = window.matchMedia('(max-width: 1024px)').matches;
+        let ticking = false;
+
+        const getHeroVar = (name, fallback) => {
+            const raw = getComputedStyle(heroSection).getPropertyValue(name).trim();
+            const parsed = parseFloat(raw);
+            return Number.isFinite(parsed) ? parsed : fallback;
+        };
+
+        const update = () => {
+            ticking = false;
+            const rect = heroSection.getBoundingClientRect();
+            if (rect.bottom <= 0 || rect.top > window.innerHeight) return;
+
+            const shift = Math.max(0, -rect.top);
+            const rate = getHeroVar('--hero-parallax-rate', mobileParallax ? 0.55 : 0.45);
+
+            farLayer.style.transform = `translate3d(0, ${shift * rate}px, 0)`;
+        };
+
+        const onScroll = () => {
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(update);
+            }
+        };
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', update, { passive: true });
+        update();
+    }
+
+    // Clean hero: normal scroll, no door lock, no CircuitBrush — photo parallax only.
+    isInLandingMode = false;
+    unlockLandingScroll();
+    hideLegacyHeroOverlay();
+    applyStaticHeroLayout();
+    initHeroScrollParallax(cityBg);
+    exitLandingMode = null;
+    return;
 
     let scrollActionCount = 0;
     let lastScrollY = 0;
@@ -345,9 +424,9 @@ function initLayeredParallax() {
         heroSection.style.pointerEvents = 'auto';
         heroSection.style.opacity = '1';
 
-        const heroNextSection = document.querySelector('.hero + section');
-        if (heroNextSection) {
-            heroNextSection.style.marginTop = '0';
+        const heroNext = document.querySelector('.hero + section, .hero + .kl-proof-stack');
+        if (heroNext) {
+            heroNext.style.marginTop = '0';
         }
     }
 
@@ -754,9 +833,10 @@ function initLayeredParallax() {
 
 // Main Animations
 function initMainAnimations() {
-    // Animate text reveals
+    // Animate text reveals (skip hero — handled by initHeroEntranceAnimations)
     setTimeout(() => {
         document.querySelectorAll('.text-reveal').forEach((el, index) => {
+            if (el.closest('#hero')) return;
             setTimeout(() => {
                 el.classList.add('animate');
             }, index * 200);
@@ -774,6 +854,145 @@ function initMainAnimations() {
             }, index * 150);
         });
     }, 1500);
+}
+
+function initHeroEntranceAnimations() {
+    const hero = document.getElementById('hero');
+    if (!hero || hero.dataset.entranceReady === '1') return;
+    hero.dataset.entranceReady = '1';
+    document.body.classList.add('hero-js-ready');
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const textReveals = hero.querySelectorAll('.text-reveal');
+
+    const runTextRevealFlash = () => {
+        textReveals.forEach((el, index) => {
+            window.setTimeout(() => el.classList.add('animate'), index * 240);
+        });
+    };
+
+    const finishEntrance = () => {
+        hero.classList.add('hero-animate-done');
+    };
+
+    if (prefersReducedMotion) {
+        hero.classList.add('hero-animate', 'hero-animate-done');
+        runTextRevealFlash();
+        return;
+    }
+
+    requestAnimationFrame(() => {
+        hero.classList.add('hero-animate');
+        window.setTimeout(runTextRevealFlash, 1180);
+        window.setTimeout(finishEntrance, 2200);
+    });
+
+    // Safety net if animation class fails to apply
+    window.setTimeout(() => {
+        if (!hero.classList.contains('hero-animate')) {
+            hero.classList.add('hero-animate', 'hero-animate-fallback', 'hero-animate-done');
+            runTextRevealFlash();
+        }
+    }, 2500);
+}
+
+function initProofAboutEntrance() {
+    const about = document.getElementById('about');
+    if (!about || about.dataset.proofEntranceReady === '1') return;
+    about.dataset.proofEntranceReady = '1';
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const startAnimation = () => {
+        if (about.classList.contains('kl-proof-animate')) return;
+        about.classList.add('kl-proof-animate');
+        window.setTimeout(() => about.classList.add('kl-proof-animate-done'), 2800);
+    };
+
+    if (prefersReducedMotion) {
+        startAnimation();
+        return;
+    }
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    startAnimation();
+                    observer.disconnect();
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -8% 0px'
+        });
+        observer.observe(about);
+        return;
+    }
+
+    startAnimation();
+}
+
+function initServicesEntrance() {
+    const services = document.getElementById('services');
+    if (!services || !services.classList.contains('services--unified-v1') || services.dataset.servicesEntranceReady === '1') return;
+    services.dataset.servicesEntranceReady = '1';
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const startSectionAnimation = () => {
+        if (services.classList.contains('kl-services-animate')) return;
+        services.classList.add('kl-services-animate');
+        window.setTimeout(() => services.classList.add('kl-services-animate-done'), 3200);
+    };
+
+    const startShowcaseAnimation = (showcase) => {
+        if (showcase.classList.contains('kl-services-showcase-animate')) return;
+        showcase.classList.add('kl-services-showcase-animate');
+        window.setTimeout(() => showcase.classList.add('kl-services-showcase-animate-done'), 2800);
+    };
+
+    const showcaseBlocks = services.querySelectorAll('.kl-services-showcase');
+
+    if (prefersReducedMotion) {
+        startSectionAnimation();
+        showcaseBlocks.forEach(startShowcaseAnimation);
+        return;
+    }
+
+    if ('IntersectionObserver' in window) {
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    startSectionAnimation();
+                    sectionObserver.disconnect();
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -6% 0px'
+        });
+        sectionObserver.observe(services);
+
+        showcaseBlocks.forEach((showcase) => {
+            const showcaseObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        startShowcaseAnimation(showcase);
+                        showcaseObserver.disconnect();
+                    }
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -8% 0px'
+            });
+            showcaseObserver.observe(showcase);
+        });
+        return;
+    }
+
+    startSectionAnimation();
+    showcaseBlocks.forEach(startShowcaseAnimation);
 }
 
 // Counter Animation
@@ -1076,77 +1295,50 @@ function initNavigation() {
         }
     });
 
-    // Navbar scroll effect
-    let lastScrollTop = 0;
-    window.addEventListener('scroll', () => {
-        if (!navbar) return;
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > 100) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
+    // Navbar scroll effect — transparent over hero, semi-opaque after scroll
+    if (navbar && navbar.dataset.scrollBound !== '1') {
+        navbar.dataset.scrollBound = '1';
 
-        lastScrollTop = scrollTop;
-    });
+        const heroSection = document.querySelector('#hero');
+        const scrollThreshold = heroSection ? 100 : 24;
+
+        const updateNavbarScrollState = () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            navbar.classList.toggle('scrolled', scrollTop > scrollThreshold);
+        };
+
+        updateNavbarScrollState();
+        window.addEventListener('scroll', updateNavbarScrollState, { passive: true });
+        window.addEventListener('resize', updateNavbarScrollState, { passive: true });
+    }
 
     // Home navigation handlers - trigger landing mode
     const logoHomeLink = document.getElementById('logo-home');
+    const brandTitleLink = document.querySelector('.nav-brand-title-link');
     const mobileLogoHomeLink = document.getElementById('mobile-logo-home');
     
     function triggerLandingMode(e) {
         e.preventDefault();
-        
-        // Close mobile menu if open
         closeNavigationUI();
-        
-        // Get hero section
+
         const heroSection = document.querySelector('#hero');
-        
         if (!heroSection) {
-            // Not on home page — navigate there
             window.location.href = '/';
             return;
         }
-        
-        // If we're already in landing mode, just scroll to top
-        if (isInLandingMode) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            return;
-        }
-        
-        // Manually enter landing mode
-        isInLandingMode = true;
-        
-        // Reset hero section to landing mode state
-        heroSection.style.position = 'fixed';
-        heroSection.style.top = '0';
-        heroSection.style.left = '0';
-        heroSection.style.width = '100%';
-        heroSection.style.height = 'var(--landing-viewport-height, 100vh)';
-        heroSection.style.display = 'flex';
-        heroSection.style.pointerEvents = 'auto';
-        heroSection.style.opacity = '1';
-        heroSection.style.zIndex = '1000';
-        heroSection.style.transition = 'opacity 0.5s ease-in';
-        
-        // Keep native scrolling available for desktop mouse wheels and browser responsive mode.
-        document.body.classList.add('landing-mode');
+
+        isInLandingMode = false;
+        document.body.classList.remove('landing-mode');
         document.body.style.overflow = '';
         document.body.style.position = '';
         document.body.style.width = '';
         document.body.style.height = '';
         document.body.style.top = '';
         document.body.style.left = '';
-        
-        // Scroll to top
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        
-        console.log('Manually entered landing mode');
     }
     
-    [logoHomeLink, mobileLogoHomeLink].filter(Boolean).forEach((link) => {
+    [logoHomeLink, brandTitleLink, mobileLogoHomeLink].filter(Boolean).forEach((link) => {
         link.addEventListener('click', triggerLandingMode);
     });
 
@@ -1473,12 +1665,9 @@ function initGoogleReviewsCarousel() {
         };
 
         const reviewCardMarkup = (review) => {
-            const reply = review.ownerReply;
-            const replyMarkup = hasOwnerReply(review) && reply && reply.text
-                ? `<div class="review-owner-reply"><div class="review-owner-reply-head"><span class="review-owner-reply-name">${escapeHtml(reply.name || 'Knight Logics')}</span><span class="review-owner-reply-date">${escapeHtml(reply.date || '')}</span></div><p class="review-owner-reply-text">${escapeHtml(reply.text)}</p></div>`
-                : '';
+            const fullText = String(review.text || '').trim();
 
-            return `<article class="review-card" data-review-replied="${hasOwnerReply(review) ? 'true' : 'false'}"><div class="review-card-header"><div class="review-avatar" style="background:${escapeHtml(review.avatarColor || '#1d4ed8')};">${escapeHtml(getInitial(review.name))}</div><div><div class="review-name">${escapeHtml(review.name)}</div><div class="review-meta">${escapeHtml(review.meta || '')}</div></div></div><div class="review-stars" role="img" aria-label="${escapeHtml(String(Number(review.stars) || 5))} stars">${formatStars(review.stars)}</div><p class="review-text">${escapeHtml(review.text || '')}</p><div class="review-date">${escapeHtml(review.date || '')}</div>${replyMarkup}</article>`;
+            return `<article class="review-card" data-review-replied="${hasOwnerReply(review) ? 'true' : 'false'}"><div class="review-card-header"><div class="review-avatar" style="background:${escapeHtml(review.avatarColor || '#1d4ed8')};">${escapeHtml(getInitial(review.name))}</div><div class="review-card-identity"><div class="review-name">${escapeHtml(review.name)}</div><div class="review-meta">${escapeHtml(review.meta || '')}</div></div></div><div class="review-stars" role="img" aria-label="${escapeHtml(String(Number(review.stars) || 5))} stars">${formatStars(review.stars)}</div><p class="review-text"${fullText ? ` title="${escapeHtml(fullText)}"` : ''}>${escapeHtml(fullText)}</p><div class="review-date">${escapeHtml(review.date || '')}</div></article>`;
         };
 
         const applySummary = (payload) => {
@@ -1488,12 +1677,22 @@ function initGoogleReviewsCarousel() {
             summaryEl.textContent = `${rating} · ${count} reviews`;
         };
 
+        const reviewFilterPanel = showcase.querySelector('#review-filter-panel');
+
         const updateFilterButtons = () => {
+            let activeTabId = 'review-filter-tab-all';
             filterButtons.forEach((button) => {
                 const isActive = button.getAttribute('data-review-filter') === currentFilter;
                 button.classList.toggle('active', isActive);
-                button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+                button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                button.setAttribute('tabindex', isActive ? '0' : '-1');
+                if (isActive && button.id) {
+                    activeTabId = button.id;
+                }
             });
+            if (reviewFilterPanel) {
+                reviewFilterPanel.setAttribute('aria-labelledby', activeTabId);
+            }
         };
 
         const visibleCount = () => {
@@ -1519,6 +1718,19 @@ function initGoogleReviewsCarousel() {
             nextBtn.disabled = singlePage || currentIndex >= maxIndex();
         };
 
+        const equalizeReviewCardHeights = () => {
+            if (!cards.length) return;
+            cards.forEach((card) => {
+                card.style.minHeight = '';
+            });
+            const maxHeight = cards.reduce((max, card) => Math.max(max, card.offsetHeight), 0);
+            if (maxHeight > 0) {
+                cards.forEach((card) => {
+                    card.style.minHeight = `${maxHeight}px`;
+                });
+            }
+        };
+
         const update = () => {
             currentIndex = Math.max(0, Math.min(currentIndex, maxIndex()));
             track.style.transform = `translateX(-${currentIndex * cardSpan()}px)`;
@@ -1534,6 +1746,7 @@ function initGoogleReviewsCarousel() {
             });
 
             updateButtons();
+            window.requestAnimationFrame(equalizeReviewCardHeights);
         };
 
         const applyFilter = (filterKey) => {
@@ -1637,6 +1850,33 @@ function initGoogleReviewsCarousel() {
                 applyFilter(filterKey);
             });
         });
+
+        const tablist = showcase.querySelector('[role="tablist"]');
+        if (tablist && filterButtons.length) {
+            tablist.addEventListener('keydown', (event) => {
+                const currentIndex = filterButtons.findIndex(
+                    (button) => button.getAttribute('aria-selected') === 'true'
+                );
+                if (currentIndex < 0) return;
+
+                let nextIndex = currentIndex;
+                if (event.key === 'ArrowRight') {
+                    nextIndex = (currentIndex + 1) % filterButtons.length;
+                } else if (event.key === 'ArrowLeft') {
+                    nextIndex = (currentIndex - 1 + filterButtons.length) % filterButtons.length;
+                } else if (event.key === 'Home') {
+                    nextIndex = 0;
+                } else if (event.key === 'End') {
+                    nextIndex = filterButtons.length - 1;
+                } else {
+                    return;
+                }
+
+                event.preventDefault();
+                filterButtons[nextIndex].click();
+                filterButtons[nextIndex].focus();
+            });
+        }
 
         let resizeTimer;
         window.addEventListener('resize', () => {

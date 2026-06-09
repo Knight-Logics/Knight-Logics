@@ -78,3 +78,5 @@ overlay.log
 # config.js (if it contains sensitive data)
 .vercel
 .env*.local
+.gsc-token.json
+credentials/*.local.json

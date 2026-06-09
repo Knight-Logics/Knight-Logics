@@ -1,4 +1,5 @@
 package_key,package_name,family,billing_mode,payment_option,amount_usd,interval,product_name,product_id,price_id,created_now
+website-demo-preview,Demo Preview Site,website,payment,full,200.00,,KL - Demo Preview Site,,,pending
 website-preview-launch,Preview Launch Site,website,payment,full,500.00,,KL - Preview Launch Site,prod_UW8ZeNIJjjqDA8,price_1TX6IFErWiwwLYoRkwXyo3Zb,no
 website-live-essential,Essential Launch Site,website,payment,full,700.00,,KL - Essential Launch Site,prod_UW8ZpbO1fCZwL3,price_1TX6IFErWiwwLYoRLCj09vAO,no
 website-live-plus,Essential Launch Plus,website,payment,full,850.00,,KL - Essential Launch Plus,prod_UW8Zifk62E3Yn2,price_1TX6IGErWiwwLYoR6uJEmLVl,no
@@ -25,14 +26,10 @@ monthly-local-seo-starter,Local Visibility Lite,monthly,subscription,full,197.00
 monthly-visibility-standard,Visibility Standard,monthly,subscription,full,397.00,month,KL - Visibility Standard,prod_UW8Z3kpPtjARRj,price_1TX6ISErWiwwLYoRUFjmq6US,no
 monthly-visibility-pro,Visibility Pro,monthly,subscription,full,697.00,month,KL - Visibility Pro,prod_UW8ZO1OcRbvILP,price_1TX6ITErWiwwLYoRKfTAyBIm,no
 monthly-growth-management,Growth Management,monthly,subscription,full,1000.00,month,KL - Growth Management,prod_UW8ZENJO8cTPbL,price_1TX6ITErWiwwLYoRcVU5pgUt,no
-ops-simple-lead-tracker,Simple Lead Tracker,ops,payment,full,250.00,,KL - Simple Lead Tracker,prod_UW8ZTQSb01cvJ5,price_1TX6IUErWiwwLYoRXbaBqJrs,no
-ops-contractor-crm-starter,Contractor CRM Starter,ops,payment,full,500.00,,KL - Contractor CRM Starter,prod_UW8Zoapio2IO8o,price_1TX6IVErWiwwLYoROxY8IOdJ,no
-ops-job-records-system,Job Records System,ops,payment,full,750.00,,KL - Job Records System,prod_UW8ZsglciPlLBV,price_1TX6IVErWiwwLYoRvCaJrb9O,no
-ops-automated-job-records,Automated Job Records,ops,payment,full,1500.00,,KL - Automated Job Records,prod_UW8ZJC68DRxxZb,price_1TX6IWErWiwwLYoRurRRsi2T,no
-ops-automated-job-records,Automated Job Records,ops,payment,deposit,750.00,,KL - Automated Job Records,prod_UW8ZJC68DRxxZb,price_1TX6IWErWiwwLYoR2TzYLnBF,no
-ops-growth-system-starter,Growth System Starter,ops,payment,full,3500.00,,KL - Growth System Starter,prod_UW8ZRL9d8z30Ad,price_1TX6IXErWiwwLYoRLVUF5ous,no
-ops-growth-system-starter,Growth System Starter,ops,payment,deposit,1750.00,,KL - Growth System Starter,prod_UW8ZRL9d8z30Ad,price_1TX6IYErWiwwLYoRDD82GaYs,no
-ops-full-growth-system,Full Growth System,ops,payment,full,5000.00,,KL - Full Growth System,prod_UW8Z9tlHGJy7ZL,price_1TX6IYErWiwwLYoRISI0g3MT,no
-ops-full-growth-system,Full Growth System,ops,payment,deposit,2000.00,,KL - Full Growth System,prod_UW8Z9tlHGJy7ZL,price_1TX6IZErWiwwLYoRECEjpmNS,no
-ops-custom-automation-system,Custom Automation System,ops,payment,full,10000.00,,KL - Custom Automation System,prod_UW8Z3CYNrnSOBH,price_1TX6IZErWiwwLYoRDu6E5B6E,no
-ops-custom-automation-system,Custom Automation System,ops,payment,deposit,2500.00,,KL - Custom Automation System,prod_UW8Z3CYNrnSOBH,price_1TX6IaErWiwwLYoR89f70Ss4,no
+ops-simple-lead-tracker,Simple Lead Tracker,ops,subscription,full,49.00,month,KL - Simple Lead Tracker,,,pending
+ops-contractor-crm-starter,Contractor CRM Starter,ops,subscription,full,97.00,month,KL - Contractor CRM Starter,,,pending
+ops-job-records-system,Job Records System,ops,subscription,full,149.00,month,KL - Job Records System,,,pending
+ops-automated-job-records,Automated Job Records,ops,subscription,full,197.00,month,KL - Automated Job Records,,,pending
+ops-growth-system-starter,Growth System Starter,ops,subscription,full,397.00,month,KL - Growth System Starter,,,pending
+ops-full-growth-system,Full Growth System,ops,subscription,full,697.00,month,KL - Full Growth System,,,pending
+ops-custom-automation-system,Custom Automation System,ops,subscription,full,1000.00,month,KL - Custom Automation System,,,pending

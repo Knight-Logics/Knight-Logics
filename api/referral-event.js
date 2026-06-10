@@ -33,7 +33,7 @@ const {
     isStaticApprovedPayoutAttribution,
     normalizeOffer,
     normalizeSlug
-} = require('./referral-roster');
+} = require('./_lib/referral-roster');
 
 const ALLOWED_EVENT_TYPES = new Set(['pageview', 'form_submit', 'checkout_start', 'payment_completed', 'referral_contact_submit']);
 

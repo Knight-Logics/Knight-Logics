@@ -17,7 +17,7 @@
 'use strict';
 
 const { neon } = require('@neondatabase/serverless');
-const { mergeReferralPartners } = require('./referral-roster');
+const { mergeReferralPartners } = require('./_lib/referral-roster');
 
 async function ensurePartnerTermsTable(sql) {
     await sql`

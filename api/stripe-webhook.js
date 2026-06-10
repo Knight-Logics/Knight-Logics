@@ -6,7 +6,7 @@ const {
     isStaticApprovedPayoutAttribution,
     normalizeOffer,
     normalizeSlug
-} = require('./referral-roster');
+} = require('./_lib/referral-roster');
 
 const HANDLED_EVENT_TYPES = new Set([
     'checkout.session.completed',

@@ -8,7 +8,7 @@ const {
     normalizeOffer,
     normalizeSlug,
     titleFromSlug
-} = require('./referral-roster');
+} = require('./_lib/referral-roster');
 
 function sendJson(res, statusCode, payload) {
     res.statusCode = statusCode;

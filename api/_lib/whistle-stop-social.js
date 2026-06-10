@@ -85,18 +85,83 @@ function sendJson(res, status, body, corsHeaders) {
   res.end(JSON.stringify(body));
 }
 
-async function readJsonBody(req) {
-  if (req.body && typeof req.body === 'object' && !Buffer.isBuffer(req.body)) {
-    return req.body;
+const MAX_JSON_BODY_BYTES = 5 * 1024 * 1024;
+
+async function readRawBody(req) {
+  if (Buffer.isBuffer(req.rawBody)) return req.rawBody;
+  if (typeof req.rawBody === 'string') return Buffer.from(req.rawBody);
+  if (req.rawBody instanceof Uint8Array) return Buffer.from(req.rawBody);
+  if (Buffer.isBuffer(req.body)) return req.body;
+  if (typeof req.body === 'string') return Buffer.from(req.body);
+  if (req.body instanceof Uint8Array) return Buffer.from(req.body);
+  if (req.body && typeof req.body === 'object') {
+    return Buffer.from(JSON.stringify(req.body), 'utf8');
   }
-  const raw =
-    typeof req.body === 'string'
-      ? req.body
-      : Buffer.isBuffer(req.rawBody)
-        ? req.rawBody.toString('utf8')
-        : '';
-  if (!raw) return {};
-  return JSON.parse(raw);
+
+  const chunks = [];
+  let totalBytes = 0;
+  if (typeof req.on === 'function') {
+    const raw = await new Promise((resolve, reject) => {
+      const parts = [];
+      let size = 0;
+      req.on('data', (chunk) => {
+        const normalized = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
+        size += normalized.length;
+        if (size > MAX_JSON_BODY_BYTES) {
+          reject(new Error(`Request body too large (${MAX_JSON_BODY_BYTES} byte max). Use a smaller image/video.`));
+          req.destroy();
+          return;
+        }
+        parts.push(normalized);
+      });
+      req.on('end', () => resolve(Buffer.concat(parts)));
+      req.on('error', reject);
+    });
+    return raw;
+  }
+
+  for await (const chunk of req) {
+    const normalizedChunk = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
+    totalBytes += normalizedChunk.length;
+    if (totalBytes > MAX_JSON_BODY_BYTES) {
+      throw new Error(`Request body too large (${MAX_JSON_BODY_BYTES} byte max). Use a smaller image/video.`);
+    }
+    chunks.push(normalizedChunk);
+  }
+  return Buffer.concat(chunks);
+}
+
+async function readJsonBody(req) {
+  const rawBody = await readRawBody(req);
+  if (!rawBody.length) {
+    const debug = {
+      hasRawBody: Boolean(req.rawBody),
+      bodyType: typeof req.body,
+      contentLength: req.headers['content-length'] || null,
+    };
+    console.error('[whistle-stop-social] empty request body', debug);
+    throw new Error(
+      'Request body is empty. Hard-refresh the admin and retry. With media attached, keep files under ~3.5 MB.'
+    );
+  }
+
+  try {
+    const parsed = JSON.parse(rawBody.toString('utf8'));
+    console.info('[whistle-stop-social] parsed body', {
+      textLen: String(parsed.text || '').length,
+      platformCount: Array.isArray(parsed.platforms) ? parsed.platforms.length : 0,
+      mediaBytes: parsed.mediaBase64 ? String(parsed.mediaBase64).length : 0,
+      rawBytes: rawBody.length,
+    });
+    return parsed;
+  } catch (err) {
+    console.error('[whistle-stop-social] invalid JSON body', {
+      rawBytes: rawBody.length,
+      preview: rawBody.toString('utf8', 0, 120),
+      error: err.message,
+    });
+    throw new Error('Invalid JSON request body.');
+  }
 }
 
 function authorizePost(req) {

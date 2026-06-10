@@ -69,7 +69,25 @@ module.exports = async function handler(req, res) {
         const payload = await lib.handlePost(body);
         return lib.sendJson(res, 200, payload, cors);
       } catch (err) {
-        return lib.sendJson(res, 400, { ok: false, error: err.message || String(err) }, cors);
+        console.error('[whistle-stop-social] post failed', {
+          message: err.message || String(err),
+          contentType: req.headers['content-type'] || null,
+          contentLength: req.headers['content-length'] || null,
+        });
+        return lib.sendJson(
+          res,
+          400,
+          {
+            ok: false,
+            error: err.message || String(err),
+            debug: {
+              route: 'post',
+              contentType: req.headers['content-type'] || null,
+              contentLength: req.headers['content-length'] || null,
+            },
+          },
+          cors
+        );
       }
     }
 

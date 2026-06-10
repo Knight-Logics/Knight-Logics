@@ -74,7 +74,7 @@ function getCorsHeaders(origin) {
   return {
     'Access-Control-Allow-Origin': allowed,
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, X-WS-Social-Key',
+    'Access-Control-Allow-Headers': 'Content-Type, X-WS-Social-Key, X-WS-Admin-Hash',
     'Access-Control-Max-Age': '86400',
     Vary: 'Origin',
   };
@@ -165,15 +165,26 @@ async function readJsonBody(req) {
 }
 
 function authorizePost(req) {
-  const required = process.env.WS_SOCIAL_API_KEY;
-  if (!required) {
-    return { ok: false, error: 'WS_SOCIAL_API_KEY is not configured on Vercel.' };
+  const apiKey = process.env.WS_SOCIAL_API_KEY;
+  const headerKey = req.headers['x-ws-social-key'] || req.headers['X-WS-Social-Key'];
+  if (apiKey && headerKey === apiKey) {
+    return { ok: true, method: 'api-key' };
   }
-  const header = req.headers['x-ws-social-key'] || req.headers['X-WS-Social-Key'];
-  if (header !== required) {
-    return { ok: false, error: 'Invalid or missing X-WS-Social-Key.' };
+
+  const adminHashExpected = process.env.WS_ADMIN_PASSWORD_HASH;
+  const adminHash = req.headers['x-ws-admin-hash'] || req.headers['X-WS-Admin-Hash'];
+  if (adminHashExpected && adminHash === adminHashExpected) {
+    return { ok: true, method: 'admin-hash' };
   }
-  return { ok: true };
+
+  if (!apiKey && !adminHashExpected) {
+    return { ok: false, error: 'Bridge auth is not configured on Vercel (WS_SOCIAL_API_KEY or WS_ADMIN_PASSWORD_HASH).' };
+  }
+
+  return {
+    ok: false,
+    error: 'Not authorized to post. Log into Whistle Stop admin on this device, or save the optional API key under Posting connection.',
+  };
 }
 
 function fbConfigured() {

@@ -199,6 +199,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Keep only above-the-fold essentials immediate.
     initLayeredParallax();
+    initLocalTrustParallax();
+    initProofCardVideos();
     initHeroEntranceAnimations();
     initProofAboutEntrance();
     initServicesEntrance();
@@ -831,6 +833,43 @@ function initLayeredParallax() {
     landingLog('Fixed hero landing screen initialized - 3 scrolls to exit, scroll up near top to re-enter');
 }
 
+function initLocalTrustParallax() {
+    const section = document.querySelector('#testimonials.kl-local-trust--parallax');
+    const layer = section?.querySelector('.kl-local-trust-parallax');
+    if (!section || !layer) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let ticking = false;
+
+    const getRate = () => {
+        const raw = getComputedStyle(section).getPropertyValue('--kl-parallax-rate').trim();
+        const parsed = parseFloat(raw);
+        return Number.isFinite(parsed) ? parsed : 0.68;
+    };
+
+    const update = () => {
+        ticking = false;
+        const rect = section.getBoundingClientRect();
+        if (rect.bottom <= 0 || rect.top > window.innerHeight) return;
+
+        const centerOffset = rect.top + rect.height * 0.5 - window.innerHeight * 0.5;
+        const rate = getRate();
+        layer.style.transform = `translate3d(0, ${centerOffset * -rate}px, 0)`;
+    };
+
+    const onScroll = () => {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(update);
+        }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+}
+
 // Main Animations
 function initMainAnimations() {
     // Animate text reveals (skip hero — handled by initHeroEntranceAnimations)
@@ -919,7 +958,6 @@ function initProofAboutEntrance() {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     startAnimation();
-                    observer.disconnect();
                 }
             });
         }, {
@@ -931,6 +969,39 @@ function initProofAboutEntrance() {
     }
 
     startAnimation();
+}
+
+function initProofCardVideos() {
+    const cards = document.querySelectorAll('.kl-proof-card--video .kl-proof-card-video');
+    if (!cards.length) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const playVideo = (video) => {
+        const attempt = video.play();
+        if (attempt && typeof attempt.catch === 'function') {
+            attempt.catch(() => {});
+        }
+    };
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                const video = entry.target;
+                if (entry.isIntersecting) {
+                    playVideo(video);
+                } else {
+                    video.pause();
+                }
+            });
+        }, { threshold: 0.2 });
+
+        cards.forEach((video) => observer.observe(video));
+        return;
+    }
+
+    cards.forEach((video) => playVideo(video));
 }
 
 function initServicesEntrance() {

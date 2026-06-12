@@ -12,6 +12,7 @@ Usage (from MainSite/):
   python scripts/gsc_api.py queries --days 90
   python scripts/gsc_api.py queries --days 90 --export _seo_audit/2026-06-02/gsc-queries-api.json
   python scripts/gsc_api.py pages --days 90
+  python scripts/gsc_api.py coverage-export
 """
 from __future__ import annotations
 
@@ -85,10 +86,21 @@ def _get_credentials(cfg: dict[str, str], *, allow_interactive: bool):
         return creds
 
     if creds and creds.expired and creds.refresh_token:
-        creds.refresh(Request())
-        TOKEN_PATH.write_text(creds.to_json(), encoding="utf-8")
-        print("GSC access token refreshed (saved to .gsc-token.json)", file=sys.stderr)
-        return creds
+        try:
+            creds.refresh(Request())
+            TOKEN_PATH.write_text(creds.to_json(), encoding="utf-8")
+            print("GSC access token refreshed (saved to .gsc-token.json)", file=sys.stderr)
+            return creds
+        except Exception as error:
+            if not allow_interactive:
+                raise SystemExit(
+                    f"GSC token refresh failed ({error}). Run: python scripts/gsc_api.py auth"
+                ) from error
+            print(
+                f"GSC refresh token unusable ({error}); opening browser for re-auth...",
+                file=sys.stderr,
+            )
+            creds = None
 
     if not allow_interactive:
         raise SystemExit(
@@ -232,6 +244,9 @@ def main() -> int:
     p.add_argument("--days", type=int, default=90)
     p.add_argument("--export", type=Path, default=None)
 
+    c = sub.add_parser("coverage-export", help="URL Inspection export for sitemap + legacy URLs")
+    c.add_argument("--export-dir", type=Path, default=None, help="Output directory (default: _seo_audit/YYYY-MM-DD)")
+
     args = parser.parse_args()
     cfg = _config()
 
@@ -243,6 +258,11 @@ def main() -> int:
         return cmd_queries(cfg, args.days, args.export)
     if args.command == "pages":
         return cmd_pages(cfg, args.days, args.export)
+    if args.command == "coverage-export":
+        from gsc_coverage_export import main as coverage_main
+
+        coverage_main()
+        return 0
     return 1
 
 

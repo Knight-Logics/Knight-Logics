@@ -47,6 +47,51 @@
       "permanent": true
     },
     {
+      "source": "/home-service-websites.html",
+      "destination": "/home-service-websites",
+      "permanent": true
+    },
+    {
+      "source": "/free-website-audit.html",
+      "destination": "/free-website-audit",
+      "permanent": true
+    },
+    {
+      "source": "/web-designer-st-petersburg.html",
+      "destination": "/web-designer-st-petersburg",
+      "permanent": true
+    },
+    {
+      "source": "/web-designer-tampa.html",
+      "destination": "/web-designer-tampa",
+      "permanent": true
+    },
+    {
+      "source": "/web-designer-clearwater.html",
+      "destination": "/web-designer-clearwater",
+      "permanent": true
+    },
+    {
+      "source": "/web-designer-palm-harbor.html",
+      "destination": "/web-designer-palm-harbor",
+      "permanent": true
+    },
+    {
+      "source": "/web-designer-safety-harbor.html",
+      "destination": "/web-designer-safety-harbor",
+      "permanent": true
+    },
+    {
+      "source": "/pricing.html",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/pricing/index.html",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
       "source": "/service-local-seo.html",
       "destination": "/service-local-seo",
       "permanent": true
@@ -326,6 +371,38 @@
     {
       "source": "/book-consultation",
       "destination": "/book-consultation.html"
+    },
+    {
+      "source": "/nicholas-knight",
+      "destination": "/nicholas-knight.html"
+    },
+    {
+      "source": "/home-service-websites",
+      "destination": "/home-service-websites.html"
+    },
+    {
+      "source": "/free-website-audit",
+      "destination": "/free-website-audit.html"
+    },
+    {
+      "source": "/web-designer-st-petersburg",
+      "destination": "/web-designer-st-petersburg.html"
+    },
+    {
+      "source": "/web-designer-tampa",
+      "destination": "/web-designer-tampa.html"
+    },
+    {
+      "source": "/web-designer-clearwater",
+      "destination": "/web-designer-clearwater.html"
+    },
+    {
+      "source": "/web-designer-palm-harbor",
+      "destination": "/web-designer-palm-harbor.html"
+    },
+    {
+      "source": "/web-designer-safety-harbor",
+      "destination": "/web-designer-safety-harbor.html"
     },
     {
       "source": "/service-websites",
@@ -675,6 +752,15 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.mp4",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, immutable"
         }
       ]
     },

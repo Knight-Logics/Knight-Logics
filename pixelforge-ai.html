@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Windows desktop app for local video upscaling, restoration, compare previews, ETA estimates, and GitHub-powered updates.">
+    <meta name="description" content="Windows desktop app for local video and image upscaling, restoration, compare previews, ETA estimates, and GitHub-powered updates. Preserves source aspect ratio — not a YouTube Shorts converter.">
     <meta name="keywords" content="PixelForge AI, video upscaling, AI video enhancer, Real-ESRGAN Windows app, RealSR upscaling, Waifu2x upscaling, RIFE frame interpolation, video restoration, Vulkan GPU, Knight Logics, v11b upscaling app">
     <meta name="author" content="Nicholas Knight">
 
@@ -45,9 +45,9 @@
             "name": "PixelForge AI",
             "alternateName": "v11b Upscaling App",
             "runtimePlatform": "Windows 10, Windows 11",
-            "version": "1.0.16",
+            "version": "1.0.17",
             "datePublished": "2025-06-01",
-            "dateModified": "2026-04-02",
+            "dateModified": "2026-06-12",
             "creator": {
                 "@type": "Organization",
                 "name": "Knight Logics"
@@ -133,7 +133,7 @@
                     <img src="./images/pixelforge_logo.webp" alt="PixelForge AI logo" class="product-title-logo" width="1536" height="1024" loading="lazy">
                     <h1>PixelForge AI</h1>
                 </div>
-                <p class="pixelforge-subtitle">A cinematic, local-first video upscaling workflow for creators who need sharper exports, cleaner restores, and faster quality checks before committing to a long render.</p>
+                <p class="pixelforge-subtitle">A cinematic, local-first video and image upscaling workflow for creators who need sharper exports, cleaner restores, and faster quality checks before committing to a long render. Output keeps your source aspect ratio by default — this is an enhancer, not a Shorts reframer.</p>
                 <div class="pixelforge-cta-row">
                     <a href="https://github.com/Knight-Logics/v11b-upscaling-app/releases/latest/download/PixelForge-AI.exe" target="_blank" rel="noopener noreferrer" class="btn-primary">Download For Windows</a>
                     <a href="https://github.com/Knight-Logics/v11b-upscaling-app/releases/latest" target="_blank" rel="noopener noreferrer" class="btn-secondary">View Release Notes</a>
@@ -158,7 +158,7 @@
                                 <p class="pixelforge-shell-kicker">PixelForge AI Video Enhancer</p>
                                 <h2>Preview first. Commit later.</h2>
                             </div>
-                            <span class="pixelforge-shell-version">v1.0.16</span>
+                            <span class="pixelforge-shell-version">v1.0.17</span>
                         </div>
                         <div class="pixelforge-compare-mock">
                             <div class="pixelforge-before">Before</div>
@@ -203,7 +203,7 @@
             </div>
             <div class="pixelforge-proof-card">
                 <span class="pixelforge-proof-number">Compare</span>
-                <p>Draggable before/after preview helps you check results before committing to a full pass.</p>
+                <p>Draggable before/after preview samples multiple frames through your clip so you are not stuck judging quality from a black intro frame.</p>
             </div>
             <div class="pixelforge-proof-card">
                 <span class="pixelforge-proof-number">ETA</span>
@@ -302,7 +302,7 @@
                 <div class="pixelforge-step fade-in">
                     <span class="pixelforge-step-number">01</span>
                     <h3>Select input and output</h3>
-                    <p>Load a source file, choose where the export should land, and define a short clip range when you want a quick validation pass.</p>
+                    <p>Load a video or still image, choose where the export should land, and define a clip range when you want a quick validation pass on footage.</p>
                 </div>
                 <div class="pixelforge-step fade-in">
                     <span class="pixelforge-step-number">02</span>
@@ -334,11 +334,15 @@
                         <strong>System requirement</strong>
                         <p>A GPU with Vulkan support is required for GPU-based upscaling and RIFE interpolation. minterpolate is available as a CPU fallback for interpolation only.</p>
                     </div>
+                    <div class="pixelforge-note-box">
+                        <strong>What it is not</strong>
+                        <p>PixelForge AI upscales and optionally resizes in place. It does not crop landscape into vertical Shorts, reframe for TikTok, or force every export to 9:16 unless you explicitly enable final scaling with those dimensions.</p>
+                    </div>
                 </div>
                 <aside class="pixelforge-download-card fade-in">
                     <h3>Get PixelForge AI</h3>
                     <a href="https://github.com/Knight-Logics/v11b-upscaling-app/releases/latest/download/PixelForge-AI.exe" target="_blank" rel="noopener noreferrer" class="project-link">Direct Download .exe</a>
-                    <a href="https://github.com/Knight-Logics/v11b-upscaling-app/releases/tag/v1.0.16" target="_blank" rel="noopener noreferrer" class="project-link">All Release Assets</a>
+                    <a href="https://github.com/Knight-Logics/v11b-upscaling-app/releases/tag/v1.0.17" target="_blank" rel="noopener noreferrer" class="project-link">All Release Assets</a>
                     <a href="https://github.com/Knight-Logics/v11b-upscaling-app" target="_blank" rel="noopener noreferrer" class="project-link">Source Repository</a>
                     <a href="/service-desktop-apps" class="project-link">Back To Applications</a>
 

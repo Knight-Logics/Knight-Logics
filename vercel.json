@@ -813,6 +813,24 @@
       ]
     },
     {
+      "source": "/referral-dashboard",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
+    },
+    {
+      "source": "/referral-dashboard.html",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
+    },
+    {
       "source": "/script\\.js",
       "headers": [
         {

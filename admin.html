@@ -6,7 +6,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Knight Command — Admin</title>
     <link rel="icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/admin/admin.css?v=20260613admin4">
+    <link rel="stylesheet" href="/admin/admin.css?v=20260613admin5">
 </head>
 <body>
 
@@ -57,21 +57,21 @@
             <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;">
                 <div>
                     <h2 style="font-size:1.15rem;margin-bottom:4px;">Command Center</h2>
-                    <p style="color:var(--muted);font-size:0.88rem;">Cloud health plus local tool status on this PC.</p>
-                    <p style="color:var(--muted);font-size:0.82rem;margin-top:4px;"><strong>Referrals</strong> runs in the cloud. <strong>Outreach, Email, Social Ops, and Social Poster</strong> embed services on this computer (<code>127.0.0.1</code>) — start them locally, then switch tabs.</p>
+                    <p style="color:var(--muted);font-size:0.88rem;">Cloud health plus ops tools (local fallback when cloud URLs are not set).</p>
+                    <p id="overview-intro" style="color:var(--muted);font-size:0.82rem;margin-top:4px;">Loading module routing…</p>
                 </div>
                 <button type="button" class="kc-btn kc-btn-primary" id="refresh-overview-btn">Refresh status</button>
             </div>
             <div id="overview-notes"></div>
             <div class="kc-grid" id="overview-grid"></div>
             <div class="kc-card">
-                <h3>Quick open (local)</h3>
-                <p style="margin-bottom:10px;">If embeds stay blank, start services on this machine and open directly:</p>
+                <h3>Quick open</h3>
+                <p style="margin-bottom:10px;">Opens cloud ops when configured, otherwise local ports on this PC:</p>
                 <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                    <button type="button" class="kc-btn kc-btn-ghost" data-open-local="http://127.0.0.1:5050/">Outreach :5050</button>
-                    <button type="button" class="kc-btn kc-btn-ghost" data-open-local="http://127.0.0.1:5100/">Email :5100</button>
-                    <button type="button" class="kc-btn kc-btn-ghost" data-open-local="http://127.0.0.1:8500/">Social Ops :8500</button>
-                    <button type="button" class="kc-btn kc-btn-ghost" data-open-local="http://127.0.0.1:8501/">Social Poster :8501</button>
+                    <button type="button" class="kc-btn kc-btn-ghost" data-open-module="outreach" data-open-local="http://127.0.0.1:5050/">Outreach</button>
+                    <button type="button" class="kc-btn kc-btn-ghost" data-open-module="email" data-open-local="http://127.0.0.1:5100/">Email Agent</button>
+                    <button type="button" class="kc-btn kc-btn-ghost" data-open-module="social-ops" data-open-local="http://127.0.0.1:8500/">Social Ops</button>
+                    <button type="button" class="kc-btn kc-btn-ghost" data-open-module="social-poster" data-open-local="http://127.0.0.1:8501/">Social Poster</button>
                 </div>
             </div>
         </div>
@@ -161,6 +161,6 @@
     </section>
 </div>
 
-<script src="/admin/admin.js?v=20260613admin4" defer></script>
+<script src="/admin/admin.js?v=20260613admin5" defer></script>
 </body>
 </html>

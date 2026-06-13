@@ -40,6 +40,13 @@
         access: { label: 'Access', panel: 'panel-access', masterOnly: true },
     };
 
+    var REMOTE_MODULE_MAP = {
+        outreach: 'outreach',
+        email: 'email',
+        'social-ops': 'social_ops',
+        'social-poster': 'social_poster',
+    };
+
     var state = {
         token: '',
         secret: '',
@@ -48,6 +55,8 @@
         logs: [],
         health: null,
         localProbe: {},
+        remoteModules: {},
+        opsOrigins: [],
     };
 
     function $(id) { return document.getElementById(id); }
@@ -156,6 +165,57 @@
         }).join('');
     }
 
+    function applyRemoteModulesFromHealth(health) {
+        state.remoteModules = (health && health.remoteModules) || {};
+        state.opsOrigins = [];
+        Object.keys(state.remoteModules).forEach(function (key) {
+            var mod = state.remoteModules[key];
+            if (mod && mod.origin && state.opsOrigins.indexOf(mod.origin) < 0) {
+                state.opsOrigins.push(mod.origin);
+            }
+        });
+        updateOverviewIntro(health);
+        updateQuickOpenLinks();
+    }
+
+    function resolveModuleUrl(moduleId) {
+        var remoteKey = REMOTE_MODULE_MAP[moduleId];
+        var remote = remoteKey && state.remoteModules[remoteKey];
+        if (remote && remote.url && remote.status === 'ok') return remote.url;
+        var cfg = MODULES[moduleId];
+        return (cfg && cfg.localUrl) || (cfg && cfg.embed) || '';
+    }
+
+    function isRemoteModule(moduleId) {
+        var remoteKey = REMOTE_MODULE_MAP[moduleId];
+        var remote = remoteKey && state.remoteModules[remoteKey];
+        return !!(remote && remote.url && remote.status === 'ok');
+    }
+
+    function updateOverviewIntro(health) {
+        var intro = $('overview-intro');
+        if (!intro) return;
+        var hasRemote = Object.keys(state.remoteModules).some(function (key) {
+            return state.remoteModules[key] && state.remoteModules[key].status === 'ok';
+        });
+        if (hasRemote) {
+            intro.innerHTML = '<strong>Referrals</strong> runs in the cloud. ' +
+                '<strong>Outreach, Email, and Social</strong> use your configured cloud ops host when available — works from any device. ' +
+                'If cloud ops is offline, start local services on this PC as fallback.';
+        } else {
+            intro.innerHTML = '<strong>Referrals</strong> runs in the cloud. ' +
+                '<strong>Outreach, Email, Social Ops, and Social Poster</strong> use local services on this computer (<code>127.0.0.1</code>) unless cloud ops URLs are configured on Vercel.';
+        }
+    }
+
+    function updateQuickOpenLinks() {
+        document.querySelectorAll('[data-open-module]').forEach(function (btn) {
+            var moduleId = btn.getAttribute('data-open-module');
+            var url = resolveModuleUrl(moduleId);
+            if (url) btn.setAttribute('data-open-local', url);
+        });
+    }
+
     function setActiveModule(moduleId) {
         if (!MODULES[moduleId]) return;
         if (!canOpenModule(moduleId)) {
@@ -175,7 +235,13 @@
         if (cfg.embed) {
             mountEmbed(cfg.panel.replace('panel-', ''), cfg.embed);
         } else if (cfg.localUrl) {
-            mountLocalEmbed(cfg.panel.replace('panel-', ''), cfg.localUrl, cfg.help || '');
+            var prefix = cfg.panel.replace('panel-', '');
+            var url = resolveModuleUrl(moduleId);
+            if (isRemoteModule(moduleId)) {
+                mountOpsEmbed(prefix, url, cfg.help || '');
+            } else {
+                mountLocalEmbed(prefix, url, cfg.help || '');
+            }
         } else if (moduleId === 'overview') {
             refreshOverview();
         } else if (moduleId === 'access') {
@@ -272,8 +338,24 @@
     }
 
     window.addEventListener('message', function (event) {
+        if (!event.data) return;
+
+        if (event.data.type === 'kl-ops-auth-request') {
+            if (state.opsOrigins.indexOf(event.origin) < 0) return;
+            if (!state.secret && !state.token) return;
+            if (event.source && event.source.postMessage) {
+                event.source.postMessage({
+                    type: 'kl-ops-auth',
+                    token: state.token,
+                    secret: state.secret,
+                    role: state.role,
+                }, event.origin);
+            }
+            return;
+        }
+
         if (event.origin !== window.location.origin) return;
-        if (!event.data || event.data.type !== 'kl-admin-auth-request') return;
+        if (event.data.type !== 'kl-admin-auth-request') return;
         var frame = $('referrals-frame');
         if (!frame || !frame.contentWindow) return;
         frame.contentWindow.postMessage({
@@ -283,6 +365,52 @@
             role: state.role,
         }, window.location.origin);
     });
+
+    function pushOpsAuthToFrame(frame) {
+        if (!frame || !frame.contentWindow) return;
+        state.opsOrigins.forEach(function (origin) {
+            try {
+                frame.contentWindow.postMessage({
+                    type: 'kl-ops-auth',
+                    token: state.token,
+                    secret: state.secret,
+                    role: state.role,
+                }, origin);
+            } catch (err) {
+                log('warn', 'Ops auth postMessage failed', { origin: origin, error: String(err.message) });
+            }
+        });
+    }
+
+    async function mountOpsEmbed(prefix, url, help) {
+        var wrap = $('embed-status-' + prefix);
+        var frame = $(prefix + '-frame');
+        if (!frame) return;
+        if (wrap) {
+            wrap.classList.add('open');
+            wrap.querySelector('[data-embed-title]').textContent = 'Connecting to cloud ops…';
+            wrap.querySelector('[data-embed-detail]').textContent = help || 'Loading remote Outreach stack.';
+        }
+        frame.onload = function () {
+            pushOpsAuthToFrame(frame);
+            if (wrap) wrap.classList.remove('open');
+            log('info', 'Cloud ops iframe loaded', { url: url });
+        };
+        frame.onerror = function () {
+            if (wrap) {
+                wrap.classList.add('open');
+                wrap.querySelector('[data-embed-title]').textContent = 'Cloud ops unreachable';
+                wrap.querySelector('[data-embed-detail]').textContent =
+                    (help || '') + ' Confirm KL_OUTREACH_URL / ops host is running, then refresh.';
+            }
+            log('warn', 'Cloud ops iframe error', { url: url });
+        };
+        if (frame.dataset.loaded !== url) {
+            frame.src = url;
+            frame.dataset.loaded = url;
+        }
+        setTimeout(function () { pushOpsAuthToFrame(frame); }, 1200);
+    }
 
     async function mountLocalEmbed(prefix, url, help) {
         var wrap = $('embed-status-' + prefix);
@@ -365,6 +493,7 @@
         try {
             var health = await apiPost('/api/admin', { action: 'health' });
             state.health = health;
+            applyRemoteModulesFromHealth(health);
             renderOverview(health);
         } catch (err) {
             if (String(err.message).indexOf('expired') >= 0 || String(err.message).indexOf('Forbidden') >= 0) {
@@ -394,7 +523,22 @@
             );
         });
 
+        (health.remoteModules ? Object.keys(health.remoteModules) : []).forEach(function (key) {
+            var mod = health.remoteModules[key];
+            if (!mod || !mod.url) return;
+            cards.push(
+                '<div class="kc-card">' +
+                '<span class="kc-status ' + (mod.status === 'ok' ? 'ok' : 'err') + '">' + (mod.status || 'cloud') + '</span>' +
+                '<strong>' + mod.label + ' (cloud)</strong>' +
+                '<p>' + mod.detail + '</p>' +
+                '<a class="kc-btn kc-btn-ghost" href="' + mod.url + '" target="_blank" rel="noopener">Open ↗</a></div>'
+            );
+        });
+
         (health.localModules || []).forEach(function (mod) {
+            var remoteKey = mod.moduleKey || mod.id;
+            var remote = health.remoteModules && health.remoteModules[remoteKey];
+            if (remote && remote.status === 'ok') return;
             var probe = state.localProbe[mod.id.replace(/_/g, '-')] || 'pending';
             var statusClass = probe === 'maybe' ? 'warn' : (probe === 'fail' ? 'err' : 'pending');
             cards.push(
@@ -413,6 +557,9 @@
         }
 
         (health.localModules || []).forEach(function (mod) {
+            var remoteKey = mod.moduleKey || mod.id;
+            var remote = health.remoteModules && health.remoteModules[remoteKey];
+            if (remote && remote.status === 'ok') return;
             probeLocal(mod.url, mod.id.replace(/_/g, '-'));
         });
     }
@@ -421,6 +568,7 @@
         var token = sessionStorage.getItem(SESSION_KEY) || '';
         if (!token) return false;
         state.token = token;
+        state.secret = sessionStorage.getItem(SECRET_KEY) || '';
         state.role = loadSessionRole();
         try {
             var data = await apiPost('/api/admin', { action: 'verify', token: token });
@@ -429,6 +577,7 @@
             showAuth(false);
             log('info', 'Session restored', { role: state.role });
             setActiveModule('overview');
+            refreshOverview().catch(function () {});
             return true;
         } catch (err) {
             clearSession();
@@ -447,6 +596,7 @@
         showAuth(false);
         log('info', 'Login successful', { expiresAt: data.expiresAt, role: state.role });
         setActiveModule('overview');
+        refreshOverview().catch(function () {});
     }
 
     async function loadForgotInfo() {

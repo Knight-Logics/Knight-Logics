@@ -73,6 +73,7 @@ async function handleHealth(req, res, body) {
             url: 'http://127.0.0.1:5050/',
             port: 5050,
             kind: 'local',
+            moduleKey: 'outreach',
         },
         {
             id: 'email_agent',
@@ -80,6 +81,7 @@ async function handleHealth(req, res, body) {
             url: 'http://127.0.0.1:5100/',
             port: 5100,
             kind: 'local',
+            moduleKey: 'email',
         },
         {
             id: 'social_ops',
@@ -87,6 +89,7 @@ async function handleHealth(req, res, body) {
             url: 'http://127.0.0.1:8500/?embed=true',
             port: 8500,
             kind: 'local',
+            moduleKey: 'social_ops',
         },
         {
             id: 'social_poster',
@@ -94,8 +97,112 @@ async function handleHealth(req, res, body) {
             url: 'http://127.0.0.1:8501/?embed=true',
             port: 8501,
             kind: 'local',
+            moduleKey: 'social_poster',
         },
     ];
+
+    const remoteModules = {};
+    const opsSecret = getAdminSecret();
+    const remoteConfig = [
+        {
+            key: 'outreach',
+            label: 'Outreach CRM',
+            envUrl: process.env.KL_OUTREACH_URL,
+            embedPath: '/?embed=1&module=outreach',
+            probePath: '/api/ops-health',
+        },
+        {
+            key: 'email',
+            label: 'Email Agent',
+            envUrl: process.env.KL_EMAIL_AGENT_URL,
+            embedPath: '/?embed=1',
+            probePath: '/api/health',
+        },
+        {
+            key: 'social_ops',
+            label: 'Social Ops',
+            envUrl: process.env.KL_SOCIAL_OPS_URL,
+            embedPath: '/?embed=true',
+            probePath: '/',
+        },
+        {
+            key: 'social_poster',
+            label: 'Social Poster',
+            envUrl: process.env.KL_SOCIAL_POSTER_URL,
+            embedPath: '/?embed=true',
+            probePath: '/',
+        },
+    ];
+
+    for (const cfg of remoteConfig) {
+        const base = String(cfg.envUrl || '').trim().replace(/\/+$/, '');
+        if (!base) continue;
+        let origin = base;
+        try {
+            origin = new URL(base).origin;
+        } catch (error) {
+            remoteModules[cfg.key] = {
+                label: cfg.label,
+                base,
+                origin: null,
+                url: base + cfg.embedPath,
+                status: 'error',
+                detail: `Invalid KL URL: ${error.message}`,
+            };
+            continue;
+        }
+        let status = 'pending';
+        let detail = 'Configured — browser will connect on tab open.';
+        if (opsSecret) {
+            try {
+                const probeUrl = base + cfg.probePath;
+                const controller = new AbortController();
+                const timer = setTimeout(() => controller.abort(), 8000);
+                const response = await fetch(probeUrl, {
+                    method: 'GET',
+                    headers: { 'X-KL-Ops-Token': opsSecret },
+                    signal: controller.signal,
+                });
+                clearTimeout(timer);
+                if (response.ok) {
+                    status = 'ok';
+                    detail = 'Cloud ops host reachable from Vercel.';
+                } else {
+                    status = 'error';
+                    detail = `Probe HTTP ${response.status} at ${probeUrl}`;
+                }
+            } catch (error) {
+                status = 'error';
+                detail = `Probe failed: ${error.message}`;
+            }
+        } else {
+            detail = 'Set KL_ADMIN_SECRET to enable server-side ops probe.';
+        }
+        remoteModules[cfg.key] = {
+            label: cfg.label,
+            base,
+            origin,
+            url: base + cfg.embedPath,
+            status,
+            detail,
+        };
+    }
+
+    const notes = [
+        'Referrals runs fully in the cloud (Vercel + Neon).',
+    ];
+    if (Object.keys(remoteModules).length) {
+        notes.push(
+            'Outreach and Email can run on a cloud ops host when KL_OUTREACH_URL / KL_EMAIL_AGENT_URL are set on Vercel. Knight Command embeds that host from any device.',
+        );
+    } else {
+        notes.push(
+            'Outreach, Email, and Social tools fall back to this PC (127.0.0.1) when cloud ops URLs are not configured.',
+        );
+    }
+    notes.push(
+        'Local fallback: python app.py in CRM\\OutreachEngine (5050). Social: Social-Media-Manager\\run_social_services_hidden.ps1',
+    );
 
     return sendJson(res, 200, {
         ok: true,
@@ -104,10 +211,8 @@ async function handleHealth(req, res, body) {
         role: auth.role,
         modules,
         localModules,
-        notes: [
-            'Local modules run on this PC only. Browsers block public sites from probing 127.0.0.1 via fetch; use embedded iframes or open links in a new tab.',
-            'Start OutreachEngine with: python app.py (port 5050). Social services: Social-Media-Manager\\run_social_services_hidden.ps1',
-        ],
+        remoteModules,
+        notes,
     });
 }
 

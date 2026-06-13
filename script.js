@@ -148,7 +148,7 @@ async function loadHeaderFooter() {
             new URL('/header', window.location.origin)
         ];
         const footerCandidates = [
-            new URL('/footer.html?v=20260604perf1', window.location.origin),
+            new URL('/footer.html?v=20260613fb1', window.location.origin),
             new URL('/footer', window.location.origin)
         ];
 

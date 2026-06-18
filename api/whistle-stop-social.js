@@ -1,11 +1,29 @@
 'use strict';
 
-const lib = require('./_lib/whistle-stop-social');
+const socialLib = require('./_lib/whistle-stop-social');
+const contentLib = require('./_lib/whistle-stop-content');
 
-function routeSegment(req) {
+function queryParam(req, name) {
   try {
     const url = new URL(req.url || '/', 'http://localhost');
-    const parts = url.pathname.replace(/^\/api\/whistle-stop-social\/?/, '').split('/').filter(Boolean);
+    return url.searchParams.get(name) || '';
+  } catch (_) {}
+  const value = req.query?.[name];
+  return Array.isArray(value) ? String(value[0] || '') : String(value || '');
+}
+
+function isContentRequest(req) {
+  const url = String(req.url || '');
+  if (url.includes('whistle-stop-content')) return true;
+  return queryParam(req, 'service') === 'content';
+}
+
+function routeSegment(req, service) {
+  const prefix =
+    service === 'content' ? /^\/api\/whistle-stop-content\/?/ : /^\/api\/whistle-stop-social\/?/;
+  try {
+    const url = new URL(req.url || '/', 'http://localhost');
+    const parts = url.pathname.replace(prefix, '').split('/').filter(Boolean);
     if (parts[0]) return parts[0];
     const fromSearch = url.searchParams.get('route');
     if (fromSearch) return fromSearch.split('/')[0];
@@ -15,34 +33,88 @@ function routeSegment(req) {
   const q = query.route;
   if (typeof q === 'string' && q) return q.split('/')[0];
   if (Array.isArray(q) && q[0]) return String(q[0]).split('/')[0];
-
   return 'health';
 }
 
+async function handleContent(req, res) {
+  const cors = contentLib.getCorsHeaders(req.headers.origin || '');
+
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204, cors);
+    return res.end();
+  }
+
+  try {
+    const route = routeSegment(req, 'content');
+
+    if (route === 'health' || route === '') {
+      if (req.method !== 'GET') {
+        return contentLib.sendJson(res, 405, { ok: false, error: 'Method not allowed' }, cors);
+      }
+      return contentLib.sendJson(res, 200, contentLib.healthPayload(), cors);
+    }
+
+    if (route === 'status') {
+      if (req.method !== 'GET') {
+        return contentLib.sendJson(res, 405, { ok: false, error: 'Method not allowed' }, cors);
+      }
+      const version = queryParam(req, 'version');
+      return contentLib.sendJson(res, 200, await contentLib.checkLiveStatus(version), cors);
+    }
+
+    if (route === 'publish') {
+      if (req.method !== 'POST') {
+        return contentLib.sendJson(res, 405, { ok: false, error: 'Method not allowed' }, cors);
+      }
+      const body = await contentLib.readJsonBody(req);
+      const auth = contentLib.authorizePublish(req, body);
+      if (!auth.ok) {
+        return contentLib.sendJson(res, 401, { ok: false, error: auth.error }, cors);
+      }
+      delete body.adminPassword;
+      const payload = await contentLib.handlePublish(body);
+      return contentLib.sendJson(res, 200, payload, cors);
+    }
+
+    return contentLib.sendJson(res, 404, { ok: false, error: 'Not found' }, cors);
+  } catch (err) {
+    console.error('[whistle-stop-content] request failed', {
+      route: routeSegment(req, 'content'),
+      method: req.method,
+      message: err.message || String(err),
+    });
+    return contentLib.sendJson(res, 400, { ok: false, error: err.message || 'Publish failed.' }, cors);
+  }
+}
+
 module.exports = async function handler(req, res) {
+  if (isContentRequest(req)) {
+    return handleContent(req, res);
+  }
+
   try {
     const origin = req.headers.origin || '';
-    const cors = lib.getCorsHeaders(origin);
+    const cors = socialLib.getCorsHeaders(origin);
 
     if (req.method === 'OPTIONS') {
       res.writeHead(204, cors);
       return res.end();
     }
 
-    const route = routeSegment(req);
+    const route = routeSegment(req, 'social');
 
     if (route === 'health' || route === '') {
       if (req.method !== 'GET') {
-        return lib.sendJson(res, 405, { ok: false, error: 'Method not allowed' }, cors);
+        return socialLib.sendJson(res, 405, { ok: false, error: 'Method not allowed' }, cors);
       }
-      return lib.sendJson(
+      return socialLib.sendJson(
         res,
         200,
         {
           ok: true,
           service: 'whistle-stop-social-vercel',
-          facebook: lib.fbConfigured(),
-          x: lib.xConfigured(),
+          facebook: socialLib.fbConfigured(),
+          x: socialLib.xConfigured(),
           demoMode: true,
         },
         cors
@@ -51,34 +123,32 @@ module.exports = async function handler(req, res) {
 
     if (route === 'platforms') {
       if (req.method !== 'GET') {
-        return lib.sendJson(res, 405, { ok: false, error: 'Method not allowed' }, cors);
+        return socialLib.sendJson(res, 405, { ok: false, error: 'Method not allowed' }, cors);
       }
-      return lib.sendJson(res, 200, lib.getPlatformsPayload(), cors);
+      return socialLib.sendJson(res, 200, socialLib.getPlatformsPayload(), cors);
     }
 
     if (route === 'post') {
       if (req.method !== 'POST') {
-        return lib.sendJson(res, 405, { ok: false, error: 'Method not allowed' }, cors);
+        return socialLib.sendJson(res, 405, { ok: false, error: 'Method not allowed' }, cors);
       }
       try {
-        const body = await lib.readJsonBody(req);
-        const auth = lib.authorizePost(req, body);
+        const body = await socialLib.readJsonBody(req);
+        const auth = socialLib.authorizePost(req, body);
         if (!auth.ok) {
-          return lib.sendJson(res, 401, { ok: false, error: auth.error }, cors);
+          return socialLib.sendJson(res, 401, { ok: false, error: auth.error }, cors);
         }
         delete body.adminPassword;
-        delete body.adminPassword;
-        delete body.adminPassword;
         delete body.adminPasswordHash;
-        const payload = await lib.handlePost(body);
-        return lib.sendJson(res, 200, payload, cors);
+        const payload = await socialLib.handlePost(body);
+        return socialLib.sendJson(res, 200, payload, cors);
       } catch (err) {
         console.error('[whistle-stop-social] post failed', {
           message: err.message || String(err),
           contentType: req.headers['content-type'] || null,
           contentLength: req.headers['content-length'] || null,
         });
-        return lib.sendJson(
+        return socialLib.sendJson(
           res,
           400,
           {
@@ -97,9 +167,9 @@ module.exports = async function handler(req, res) {
 
     if (route === 'history') {
       if (req.method !== 'GET') {
-        return lib.sendJson(res, 405, { ok: false, error: 'Method not allowed' }, cors);
+        return socialLib.sendJson(res, 405, { ok: false, error: 'Method not allowed' }, cors);
       }
-      return lib.sendJson(
+      return socialLib.sendJson(
         res,
         200,
         {
@@ -111,13 +181,13 @@ module.exports = async function handler(req, res) {
       );
     }
 
-    return lib.sendJson(res, 404, { ok: false, error: 'Not found' }, cors);
+    return socialLib.sendJson(res, 404, { ok: false, error: 'Not found' }, cors);
   } catch (err) {
-    return lib.sendJson(
+    return socialLib.sendJson(
       res,
       500,
       { ok: false, error: err.message || 'Internal server error' },
-      lib.getCorsHeaders(req.headers.origin || '')
+      socialLib.getCorsHeaders(req.headers.origin || '')
     );
   }
 };

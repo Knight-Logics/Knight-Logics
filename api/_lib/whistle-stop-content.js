@@ -113,9 +113,10 @@ function timingSafeEqualString(a, b) {
   return crypto.timingSafeEqual(left, right);
 }
 
-function authorizePublish(req, body = {}) {
+  function authorizePublish(req, body = {}) {
+  const headers = req?.headers || {};
   const publishKey = process.env.WS_CONTENT_PUBLISH_KEY;
-  const headerKey = req.headers['x-ws-publish-key'] || req.headers['X-WS-Publish-Key'];
+  const headerKey = headers['x-ws-publish-key'] || headers['X-WS-Publish-Key'];
   if (publishKey && headerKey && timingSafeEqualString(headerKey, publishKey)) {
     return { ok: true, method: 'publish-key' };
   }

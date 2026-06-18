@@ -5,6 +5,9 @@
     }
   },
   "functions": {
+    "api/whistle-stop-content.js": {
+      "maxDuration": 60
+    },
     "api/whistle-stop-social.js": {
       "maxDuration": 60
     }
@@ -363,6 +366,14 @@
     {
       "source": "/api/whistle-stop-social/:route",
       "destination": "/api/whistle-stop-social?route=:route"
+    },
+    {
+      "source": "/api/whistle-stop-content",
+      "destination": "/api/whistle-stop-content?route=health"
+    },
+    {
+      "source": "/api/whistle-stop-content/:route",
+      "destination": "/api/whistle-stop-content?route=:route"
     },
     {
       "source": "/ref/:partner",

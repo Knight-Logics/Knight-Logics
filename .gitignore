@@ -80,3 +80,5 @@ overlay.log
 .env*.local
 .gsc-token.json
 credentials/*.local.json
+
+.vercel

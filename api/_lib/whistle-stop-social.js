@@ -2,6 +2,17 @@
 
 const crypto = require('crypto');
 
+function sha256(text) {
+  return crypto.createHash('sha256').update(String(text), 'utf8').digest('hex');
+}
+
+function timingSafeEqualString(a, b) {
+  const left = Buffer.from(String(a || ''), 'utf8');
+  const right = Buffer.from(String(b || ''), 'utf8');
+  if (left.length !== right.length) return false;
+  return crypto.timingSafeEqual(left, right);
+}
+
 const ALLOWED_ORIGINS = new Set([
   'https://knight-logics.github.io',
   'https://knightlogics.com',
@@ -167,26 +178,29 @@ async function readJsonBody(req) {
 function authorizePost(req, body = {}) {
   const apiKey = process.env.WS_SOCIAL_API_KEY;
   const headerKey = req.headers['x-ws-social-key'] || req.headers['X-WS-Social-Key'];
-  if (apiKey && headerKey === apiKey) {
+  if (apiKey && headerKey && timingSafeEqualString(headerKey, apiKey)) {
     return { ok: true, method: 'api-key' };
   }
 
-  const adminHashExpected = process.env.WS_ADMIN_PASSWORD_HASH;
-  const adminHash =
-    body.adminPasswordHash ||
-    req.headers['x-ws-admin-hash'] ||
-    req.headers['X-WS-Admin-Hash'];
-  if (adminHashExpected && adminHash === adminHashExpected) {
-    return { ok: true, method: 'admin-hash' };
+  const expectedHash = process.env.WS_ADMIN_PASSWORD_HASH;
+  const password = typeof body.adminPassword === 'string' ? body.adminPassword : '';
+  if (expectedHash && password) {
+    if (password.length > 256) {
+      return { ok: false, error: 'Admin password is incorrect.' };
+    }
+    if (timingSafeEqualString(sha256(password), expectedHash)) {
+      return { ok: true, method: 'admin-password' };
+    }
+    return { ok: false, error: 'Admin password is incorrect.' };
   }
 
-  if (!apiKey && !adminHashExpected) {
+  if (!apiKey && !expectedHash) {
     return { ok: false, error: 'Bridge auth is not configured on Vercel (WS_SOCIAL_API_KEY or WS_ADMIN_PASSWORD_HASH).' };
   }
 
   return {
     ok: false,
-    error: 'Not authorized to post. Log into Whistle Stop admin on this device, or save the optional API key under Posting connection.',
+    error: 'Not authorized to post. Sign into Whistle Stop admin and re-enter your password if this tab was refreshed.',
   };
 }
 

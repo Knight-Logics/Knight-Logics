@@ -66,6 +66,9 @@ module.exports = async function handler(req, res) {
         if (!auth.ok) {
           return lib.sendJson(res, 401, { ok: false, error: auth.error }, cors);
         }
+        delete body.adminPassword;
+        delete body.adminPassword;
+        delete body.adminPassword;
         delete body.adminPasswordHash;
         const payload = await lib.handlePost(body);
         return lib.sendJson(res, 200, payload, cors);

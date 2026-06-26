@@ -1,10 +1,19 @@
-const { KG, KG_STATS, kgMediaBlock } = require('./growth-content-kg-facts');
-
-const KG_MEDIA_SLUGS = [
-  'handyman-business-growth-systems',
-  'contractor-growth-systems',
-  'home-service-business-growth-systems'
-];
+const {
+  KG,
+  FW,
+  ST,
+  KG_STATS,
+  FW_STATS,
+  ST_STATS,
+  TRIO_PROOF,
+  TRIO_STATS,
+  kgMediaBlock,
+  clientMediaBlockForSlug,
+  clientStatsForSlug,
+  hasClientMediaBlock,
+  primaryClientForSlug,
+  CLIENT_MEDIA_SLUGS
+} = require('./growth-content-client-facts');
 
 const PROOF = {
   kg: {
@@ -17,10 +26,10 @@ const PROOF = {
   },
   screenTeam: {
     href: '/case-study-screen-team',
-    image: '/images/screen-team-showcase-800.webp',
-    imageAlt: 'Screen Team pool enclosure website',
-    title: 'Screen Team — deep local SEO',
-    text: '36+ service and city pages for pool enclosure quotes across Tampa Bay metros.',
+    image: ST.media.src,
+    imageAlt: ST.media.alt,
+    title: 'Screen Team — 36-page growth system',
+    text: `${ST.pageCount} indexable pages for pool enclosure and screen repair across Tampa Bay — st OutreachEngine lane, Email-Agent mapping, and full growth stack.`,
     badge: 'Live client'
   },
   knightCommand: {
@@ -33,10 +42,10 @@ const PROOF = {
   },
   crmOutreach: {
     href: '/case-study-crm-outreach-system',
-    image: '/images/KGHero.webp',
+    image: '/images/KnightLogicsLogo2.webp',
     imageAlt: 'CRM outreach dashboard',
     title: 'OutreachEngine in production',
-    text: 'Flask SQLite CRM with kl/kg/st brands, scheduler cadence, and Email-Agent reply routing.',
+    text: 'Flask SQLite CRM with kl, kg, st, and faithworks brand lanes — scheduler cadence and Email-Agent reply routing on live client campaigns.',
     badge: 'Live workflow'
   },
   vendoroo: {
@@ -81,10 +90,10 @@ const PROOF = {
   },
   faithWorks: {
     href: '/case-study-faith-works',
-    image: '/images/showcase/faith-works-og-card.jpg',
-    imageAlt: 'Faith Works outdoor services site',
-    title: 'Faith Works local SEO',
-    text: 'Outdoor services site with schema, geography pages, and conversion clarity.',
+    image: FW.media.src,
+    imageAlt: FW.media.alt,
+    title: 'Faith Works — 82-page growth system',
+    text: `${FW.pageCount} land clearing and forestry mulching pages across Central Florida — faithworks OutreachEngine lane, schema, GA4/GSC, and GBP alignment in the full growth stack.`,
     badge: 'Live client'
   },
   jns: {
@@ -122,13 +131,8 @@ function applyKgReplacementsDeep(obj) {
   return obj;
 }
 
-function hasKgMediaBlock(blocks) {
-  if (!blocks || !blocks.length) return false;
-  return blocks.some(
-    (b) =>
-      (b.title && /knight group/i.test(b.title)) ||
-      (b.media && b.media.src && /KGHero/i.test(b.media.src))
-  );
+function hasAnyClientMediaBlock(blocks) {
+  return hasClientMediaBlock(blocks, 'kg') || hasClientMediaBlock(blocks, 'fw') || hasClientMediaBlock(blocks, 'st');
 }
 
 function mergeStats(existing, extra) {
@@ -153,29 +157,31 @@ function deepMerge(page, enrichment) {
 }
 
 function defaultProofGrid(slug) {
+  const trio = [PROOF.faithWorks, PROOF.screenTeam, PROOF.kg];
   const map = {
-    'business-growth-systems': [PROOF.kg, PROOF.knightCommand, PROOF.crmOutreach],
-    'crm-outreach-lead-generation': [PROOF.crmOutreach, PROOF.kg, PROOF.screenTeam],
-    'ticketing-invoicing-job-workflows': [PROOF.vendoroo, PROOF.jns, PROOF.kg],
-    'referral-network-systems': [PROOF.referral, PROOF.knightCommand, PROOF.kg],
-    'local-visibility-systems': [PROOF.kg, PROOF.screenTeam, PROOF.faithWorks],
-    'website-growth-audit': [PROOF.kg, PROOF.screenTeam, PROOF.faithWorks],
-    'online-ordering-systems': [PROOF.whistleStop, PROOF.kg, PROOF.screenTeam],
-    'contractor-growth-systems': [PROOF.kg, PROOF.jns, PROOF.screenTeam],
-    'home-service-business-growth-systems': [PROOF.kg, PROOF.screenTeam, PROOF.faithWorks],
-    'performance-partner-program': [PROOF.kg, PROOF.knightCommand, PROOF.crmOutreach],
+    'business-growth-systems': [PROOF.faithWorks, PROOF.screenTeam, PROOF.kg],
+    'crm-outreach-lead-generation': [PROOF.crmOutreach, PROOF.screenTeam, PROOF.faithWorks],
+    'ticketing-invoicing-job-workflows': [PROOF.vendoroo, PROOF.jns, PROOF.screenTeam],
+    'referral-network-systems': [PROOF.referral, PROOF.knightCommand, PROOF.faithWorks],
+    'local-visibility-systems': [PROOF.faithWorks, PROOF.screenTeam, PROOF.kg],
+    'website-growth-audit': [PROOF.faithWorks, PROOF.screenTeam, PROOF.kg],
+    'online-ordering-systems': [PROOF.whistleStop, PROOF.screenTeam, PROOF.faithWorks],
+    'contractor-growth-systems': [PROOF.screenTeam, PROOF.faithWorks, PROOF.kg],
+    'home-service-business-growth-systems': [PROOF.screenTeam, PROOF.faithWorks, PROOF.kg],
+    'performance-partner-program': [PROOF.faithWorks, PROOF.knightCommand, PROOF.crmOutreach],
     'handyman-business-growth-systems': [PROOF.kg, PROOF.crmOutreach, PROOF.screenTeam],
-    'roofing-business-growth-systems': [PROOF.roofMonsters, PROOF.kg, PROOF.jns],
-    'screen-enclosure-business-growth-systems': [PROOF.screenTeam, PROOF.kg, PROOF.faithWorks],
-    'restaurant-bar-growth-systems': [PROOF.whistleStop, PROOF.kg, PROOF.screenTeam],
+    'roofing-business-growth-systems': [PROOF.roofMonsters, PROOF.faithWorks, PROOF.jns],
+    'screen-enclosure-business-growth-systems': [PROOF.screenTeam, PROOF.faithWorks, PROOF.kg],
+    'excavation-business-growth-systems': [PROOF.faithWorks, PROOF.screenTeam, PROOF.kg],
+    'restaurant-bar-growth-systems': [PROOF.whistleStop, PROOF.screenTeam, PROOF.faithWorks],
     'case-study-knight-command': [PROOF.crmOutreach, PROOF.referral, PROOF.socialPoster],
-    'case-study-crm-outreach-system': [PROOF.kg, PROOF.knightCommand, PROOF.screenTeam],
-    'case-study-vendoroo-ticket-invoice-system': [PROOF.jns, PROOF.kg, PROOF.vendoroo],
-    'case-study-referral-network-system': [PROOF.knightCommand, PROOF.kg, PROOF.crmOutreach]
+    'case-study-crm-outreach-system': [PROOF.screenTeam, PROOF.faithWorks, PROOF.kg],
+    'case-study-vendoroo-ticket-invoice-system': [PROOF.jns, PROOF.vendoroo, PROOF.screenTeam],
+    'case-study-referral-network-system': [PROOF.knightCommand, PROOF.faithWorks, PROOF.crmOutreach]
   };
   if (map[slug]) return map[slug];
-  if (slug.startsWith('case-study-')) return [PROOF.knightCommand, PROOF.kg, PROOF.crmOutreach];
-  return [PROOF.kg, PROOF.knightCommand, PROOF.screenTeam];
+  if (slug.startsWith('case-study-')) return [PROOF.knightCommand, PROOF.faithWorks, PROOF.screenTeam];
+  return trio;
 }
 
 const enrichments = {
@@ -184,8 +190,7 @@ const enrichments = {
       title: 'Why connected growth systems beat disconnected tools',
       paragraphs: [
         'Small and local businesses rarely fail because they lack a website — they fail because leads, follow-up, referrals, and field work live in separate tabs with no shared truth. A growth system wires the website, local discovery, outreach, automation, and reporting into lanes your team will actually open daily.',
-        'Knight Logics builds from production workflows already running on Tampa Bay client brands: OutreachEngine on kl/kg/st lanes, Email-Agent on port 5100, Social Poster on 8501, referral infrastructure on Neon Postgres, and Knight Command at /admin as the operator shell.',
-        'Knight Group demonstrates the website foundation at scale — 97 indexable URLs per knightgroup.com/sitemap.xml with Lighthouse 96/100/100, booking flow, and the kg brand lane in OutreachEngine producing real booked work.'
+        'Knight Logics builds from production workflows on three live growth-system clients — Faith Works (82 land-clearing pages, faithworks lane), Screen Team (36 enclosure pages, st lane), and Knight Group (97 handyman pages, kg lane) — plus OutreachEngine, Email-Agent, Social Poster, and Knight Command at /admin.'
       ]
     },
     deliverables: [
@@ -204,16 +209,16 @@ const enrichments = {
       { title: 'Fewer lost leads', text: 'Form fills and outreach replies route into tracked queues instead of personal inboxes that get checked inconsistently.' },
       { title: 'Defensible attribution', text: 'Referral partners, outreach lists, and GBP actions tie back to consults and booked work — not vanity traffic.' },
       { title: 'Operator speed', text: 'Morning review happens in one shell with queue depth, failures, and next sends visible without hunting localhost ports.' },
-      { title: 'Scalable geography', text: 'City and service silos match how customers search — Knight Group\'s 97-page architecture is the handyman benchmark.' }
+      { title: 'Scalable geography', text: 'City and service silos match how customers search — Faith Works at 82 pages and Screen Team at 36 show the pattern across trades, with Knight Group at 97 for handyman depth.' }
     ],
-    stats: KG_STATS
+    stats: TRIO_STATS
   },
   'crm-outreach-lead-generation': {
     context: {
       title: 'Production outreach, not spreadsheet Gmail',
       paragraphs: [
-        'CRM outreach for local service businesses needs brand separation, send caps, bounce discipline, and reply routing — not copy-paste from a shared spreadsheet. OutreachEngine is the live engine behind Knight Logics kl, kg, and st brand lanes.',
-        'Knight Group runs as the kg brand in OutreachEngine with separate templates, caps, and sender identity from Knight Logics and Screen Team. One well-targeted KG campaign generated substantial booked work from a segmented local list.',
+        'CRM outreach for local service businesses needs brand separation, send caps, bounce discipline, and reply routing — not copy-paste from a shared spreadsheet. OutreachEngine is the live engine behind kl, kg, st, and faithworks brand lanes.',
+        'Screen Team (st lane), Faith Works (faithworks lane), and Knight Group (kg lane) each run isolated templates, caps, and sender identity. KG produced substantial booked work from one well-targeted campaign; ST and FW use the same engine at enclosure and land-clearing scale.',
         'Replies surface in Email-Agent crm_reply views on port 5100 so operators review outreach responses without mixing them into personal Gmail threads.'
       ]
     },
@@ -226,8 +231,8 @@ const enrichments = {
       kicker: 'Reply path',
       title: 'OutreachEngine → Email-Agent → operator review',
       text: 'Outreach sends from OutreachEngine; replies land in Email-Agent views mapped to the correct brand lane; operators triage from Knight Command or dedicated CRM tabs.',
-      bullets: ['Flask + SQLite backend with reliable scheduler', 'Brand switcher prevents cross-template mistakes', 'Failure and bounce visibility before the week is wasted', 'Case study documents live KG campaign proof'],
-      links: [['/email-agent-automation', 'Email-Agent'], ['/case-study-crm-outreach-system', 'CRM Case Study'], ['/case-study-knight-group', 'Knight Group Proof']]
+      bullets: ['Flask + SQLite backend with reliable scheduler', 'Brand switcher prevents cross-template mistakes', 'Failure and bounce visibility before the week is wasted', 'Live proof on Screen Team, Faith Works, and Knight Group lanes'],
+      links: [['/email-agent-automation', 'Email-Agent'], ['/case-study-crm-outreach-system', 'CRM Case Study'], ['/case-study-screen-team', 'Screen Team Proof']]
     },
     outcomes: [
       { title: 'Predictable pipeline', text: 'Follow-up cadence enforced by scheduler instead of depending on someone remembering inbox checks.' },
@@ -297,8 +302,9 @@ const enrichments = {
       title: 'Map-pack readiness tied to real geography',
       paragraphs: [
         'Local visibility is more than meta tags — it is Google Business Profile alignment, service-area page architecture, schema validation, internal linking, and content that matches how customers search by city and service intent.',
-        'Knight Group\'s 97 indexable pages include 36 service silos, 30+ Pinellas/Pasco/Hillsborough city pages, and 8 project galleries — Lighthouse 96 performance with LocalBusiness, FAQ, BreadcrumbList, and Review snippets validated in Rich Results.',
-        'Screen Team and Faith Works demonstrate the same local SEO patterns across pool enclosure and outdoor services trades with deep geography coverage.'
+        'Faith Works deploys 82 indexable land-clearing pages across Polk County and Central Florida — service silos plus city and area coverage with schema, GA4/GSC, and faithworks OutreachEngine lane in the growth stack.',
+        'Screen Team runs 36 indexable enclosure and screen-repair pages across Tampa Bay metros with st OutreachEngine lane and Email-Agent ST mapping.',
+        'Knight Group adds the handyman reference at 97 pages — 36 service silos, 30+ city pages, Lighthouse 96 performance, and kg lane campaigns that produced real booked work.'
       ],
       note: 'Local visibility assumes a conversion-ready website — audit and fix foundation gaps before scaling city pages.'
     },
@@ -311,14 +317,14 @@ const enrichments = {
       kicker: 'Discovery stack',
       title: 'SEO, GBP, and social post cadence',
       text: 'Local visibility connects to social-media-automation-systems for scheduled GBP posts and review-request-systems for reputation growth.',
-      bullets: ['website-growth-audit for baseline before build', 'Knight Group 97-page architecture as handyman reference', 'Screen Team for enclosure trade geography depth', 'Social Poster GBP API integration on port 8501'],
+      bullets: ['website-growth-audit for baseline before build', 'Faith Works 82-page footprint for wide geography trades', 'Screen Team 36-page depth for metro enclosure coverage', 'Knight Group 97-page handyman reference when trade fits'],
       links: [['/service-area-page-strategy', 'Service Area Strategy'], ['/review-request-systems', 'Review Requests'], ['/case-study-screen-team', 'Screen Team Example']]
     },
     outcomes: [
       { title: 'Search intent match', text: 'City and service pages align to how customers actually query — not generic national template copy.' },
       { title: 'Rich result eligibility', text: 'Schema validated for LocalBusiness, FAQ, and review snippets where content supports it.' },
       { title: 'GBP coherence', text: 'Profile hours, services, and posts match owned website messaging.' },
-      { title: 'Measurable geography', text: 'Indexable page count and rankings tracked per metro — Knight Group sitemap is the scale benchmark.' }
+      { title: 'Measurable geography', text: 'Indexable page count and rankings tracked per metro — Faith Works (82), Screen Team (36), and Knight Group (97) show responsible scale by trade.' }
     ]
   },
   'website-growth-audit': {
@@ -327,7 +333,7 @@ const enrichments = {
       paragraphs: [
         'A growth audit documents what is broken, what is working, and which lanes deserve investment before anyone writes code. Most local businesses discover conversion gaps, schema issues, GBP misalignment, and automation bottlenecks they did not know existed.',
         'Audits cover website clarity, technical SEO, lead capture paths, outreach readiness, referral attribution gaps, and ops visibility — prioritized by impact and your team\'s capacity to adopt new tools.',
-        'Knight Group\'s verified metrics — 97 indexable pages, Lighthouse 96/100/100, kg OutreachEngine lane — serve as the benchmark when comparing your foundation to a production growth stack.'
+        TRIO_PROOF + ' Use these live baselines when comparing your foundation to a production growth stack.'
       ]
     },
     deliverables: [
@@ -339,7 +345,7 @@ const enrichments = {
       kicker: 'Audit → build path',
       title: 'Findings map to flagship lanes',
       text: 'Audit output routes to business-growth-systems, individual lanes, or trade-specific sub-pages depending on urgency and budget.',
-      bullets: ['Free audit entry point before paid scope', 'Knight Group benchmark for handyman trades', 'Performance-partner-program when shared upside fits', 'No obligation to adopt full stack — lane-scoped builds available'],
+      bullets: ['Free audit entry point before paid scope', 'Faith Works and Screen Team for large geography trades', 'Knight Group benchmark when handyman depth applies', 'No obligation to adopt full stack — lane-scoped builds available'],
       links: [['/business-growth-systems', 'Growth Systems'], ['/book-consultation', 'Book Consultation'], ['/performance-partner-program', 'Partner Program']]
     },
     outcomes: [
@@ -382,8 +388,9 @@ const enrichments = {
       title: 'Trades need visibility, leads, and ops — not templates',
       paragraphs: [
         'Roofing, handyman, screen enclosure, excavation, and field trades sell estimates and phone calls across Tampa Bay metros. Template contractor sites hide services, skip city pages, and dump form leads into email with no follow-up discipline.',
-        'Knight Group is the handyman benchmark: 97 indexable pages per sitemap.xml — 36 service silos, 30+ city pages, 8 galleries — with Lighthouse 96/100/100, booking at /booking, and kg brand in OutreachEngine.',
-        'JNS Construction and Screen Team show contractor bundle and deep geography patterns for construction and pool enclosure trades respectively.'
+        'Screen Team proves the full growth stack for pool enclosure trades — 36 indexable pages, st OutreachEngine lane, and Tampa Bay metro geography depth.',
+        'Faith Works demonstrates wide-footprint local SEO at 82 pages with faithworks OutreachEngine lane across Central Florida land clearing.',
+        'Knight Group remains the handyman reference at 97 pages when estimate-first repair coverage is the closest match.'
       ]
     },
     deliverables: [
@@ -395,7 +402,7 @@ const enrichments = {
       kicker: 'Trade sub-pages',
       title: 'Scoped by vertical',
       text: 'Sub-pages cover handyman, roofing, screen enclosure, and excavation — each tuned to trade-specific sales patterns and proof requirements.',
-      bullets: ['handyman-business-growth-systems with Knight Group benchmark', 'roofing-business-growth-systems with Roof Monsters preview', 'screen-enclosure with Screen Team live reference', 'ticketing-invoicing for portal-heavy vendors'],
+      bullets: ['screen-enclosure with Screen Team live reference', 'excavation-business-growth-systems with Faith Works reference', 'handyman-business-growth-systems with Knight Group when trade fits', 'ticketing-invoicing for portal-heavy vendors'],
       links: [['/handyman-business-growth-systems', 'Handyman Systems'], ['/roofing-business-growth-systems', 'Roofing Systems'], ['/case-study-jns', 'JNS Case Study']]
     },
     outcomes: [
@@ -404,15 +411,15 @@ const enrichments = {
       { title: 'Portal discipline', text: 'Ticket-to-invoice path available when vendor portal work dominates ops.' },
       { title: 'Trade-specific proof', text: 'Case studies per vertical — not one generic contractor portfolio page.' }
     ],
-    stats: [{ value: '97', label: 'Pages — Knight Group' }]
+    stats: TRIO_STATS
   },
   'home-service-business-growth-systems': {
     context: {
       title: 'Property-facing trades live on urgent calls and repeat work',
       paragraphs: [
         'Home service businesses — handyman, cleaning, painting, screen repair — compete on speed. Customers call three competitors in ten minutes; slow sites, hidden phone numbers, and stale GBP profiles lose the visit before you quote.',
-        'Knight Group demonstrates the full home service stack: 97 indexable pages, Lighthouse 96/100/100, /booking estimate surface, LocalBusiness schema, and kg OutreachEngine campaigns that produced real booked jobs.',
-        'Repeat residential work needs review request timing and referral attribution — not just a launch-and-forget brochure site.'
+        'Screen Team demonstrates the residential growth stack at 36 pages — st OutreachEngine lane, quote-first CTAs, and Tampa Bay metro coverage for enclosure and screen repair.',
+        'Faith Works and Knight Group round out the proof set at 82 and 97 pages respectively — wide geography vs handyman depth — all on the same OutreachEngine and Email-Agent infrastructure.'
       ]
     },
     deliverables: [
@@ -424,8 +431,8 @@ const enrichments = {
       kicker: 'Residential focus',
       title: 'Call-first vs contractor portal work',
       text: 'Home service lane emphasizes repeat residential and call-first conversion; contractor lane adds heavier portal and excavation footprints.',
-      bullets: ['handyman-business-growth-systems for estimate-first crews', 'local-visibility-systems for map-pack readiness', 'review-request-systems for reputation growth', 'Knight Group as live 97-page benchmark'],
-      links: [['/handyman-business-growth-systems', 'Handyman Systems'], ['/local-visibility-systems', 'Local Visibility'], ['/case-study-knight-group', 'Knight Group Case Study']]
+      bullets: ['screen-enclosure-business-growth-systems for enclosure trades', 'handyman-business-growth-systems for estimate-first crews', 'local-visibility-systems for map-pack readiness', 'review-request-systems for reputation growth'],
+      links: [['/screen-enclosure-business-growth-systems', 'Screen Enclosure Systems'], ['/local-visibility-systems', 'Local Visibility'], ['/case-study-screen-team', 'Screen Team Case Study']]
     },
     outcomes: [
       { title: 'Faster first response', text: 'Leads route into tracked queues — not voicemail black holes.' },
@@ -433,7 +440,7 @@ const enrichments = {
       { title: 'Repeat work growth', text: 'Review and referral systems capture customers who would otherwise forget your name.' },
       { title: 'Outbound optionality', text: 'Property manager outreach scales when referral-only lead flow plateaus.' }
     ],
-    stats: KG_STATS
+    stats: ST_STATS
   },
   'performance-partner-program': {
     context: {
@@ -441,7 +448,7 @@ const enrichments = {
       paragraphs: [
         'Monthly agency retainers rarely tie fees to measurable outcomes. Performance partnerships need a base fee for systems work, a 90-day measurement window, baseline captured before launch, and written scope on what counts as a attributable lead or booking.',
         'Partnership fit assumes tracking infrastructure exists or will be built — CRM outreach, analytics, referral attribution, and owner dashboards from the business-growth-systems lane.',
-        'Knight Group\'s documented baseline — 97 pages, Lighthouse scores, kg outreach results — exemplifies the measurement foundation performance terms require.'
+        TRIO_PROOF + ' Documented baselines on all three clients exemplify the measurement foundation performance terms require.'
       ]
     },
     deliverables: [
@@ -607,7 +614,7 @@ const enrichments = {
     context: {
       title: 'Multi-inbox routing with brand discipline',
       paragraphs: [
-        'Email-Agent on port 5100 routes CRM outreach replies, manual conversations, and brand-mapped inboxes for Knight Logics, Knight Group, and Screen Team — separate from personal Gmail chaos.',
+        'Email-Agent on port 5100 routes CRM outreach replies, manual conversations, and brand-mapped inboxes for Knight Logics, Knight Group, Screen Team, and Faith Works — separate from personal Gmail chaos.',
         'crm_reply views surface OutreachEngine responses so operators triage outreach without mixing threads into everyday email. KG campaign replies stay in the kg lane.',
         'Email-Agent complements OutreachEngine: sends originate in CRM; replies return to tracked views embedded in Knight Command Email Agent tab.'
       ]
@@ -621,8 +628,8 @@ const enrichments = {
       kicker: 'Reply loop',
       title: 'OutreachEngine sends → Email-Agent receives',
       text: 'CRM outreach case study documents the full send-and-reply loop in production on KG and ST campaigns.',
-      bullets: ['crm-outreach-lead-generation for send configuration', 'case-study-crm-outreach-system for live workflow', 'Knight Group kg lane as campaign proof', 'workflow-automation for notification triggers'],
-      links: [['/crm-outreach-lead-generation', 'CRM Outreach'], ['/case-study-crm-outreach-system', 'CRM Case Study'], ['/case-study-knight-group', 'Knight Group Proof']]
+      bullets: ['crm-outreach-lead-generation for send configuration', 'case-study-crm-outreach-system for live workflow', 'Screen Team st and Faith Works faithworks lanes as live proof', 'workflow-automation for notification triggers'],
+      links: [['/crm-outreach-lead-generation', 'CRM Outreach'], ['/case-study-crm-outreach-system', 'CRM Case Study'], ['/case-study-screen-team', 'Screen Team Proof']]
     },
     outcomes: [
       { title: 'Reply discipline', text: 'Outreach responses reviewed daily from dedicated views — not buried in personal inbox.' },
@@ -723,7 +730,7 @@ const enrichments = {
       paragraphs: [
         'Screen enclosure and pool cage companies compete on local search by city and pool type — customers compare three Tampa Bay vendors with clearer service pages winning the quote request.',
         'Screen Team demonstrates deep service and city page architecture for pool enclosure quotes — the live contractor local SEO reference in this vertical.',
-        'Knight Group patterns apply to complementary handyman work; Screen Team proves enclosure-specific geography and proof at scale.'
+        'Screen Team proves enclosure-specific geography and proof at 36 pages with st lane outreach; Faith Works covers wide Central Florida footprint at 82 pages; Knight Group patterns apply when complementary handyman work is in scope.'
       ]
     },
     deliverables: [
@@ -735,7 +742,7 @@ const enrichments = {
       kicker: 'Live proof',
       title: 'Screen Team case study',
       text: 'Screen Team LLC site is the enclosure trade benchmark for local SEO depth and conversion clarity.',
-      bullets: ['case-study-screen-team for live client proof', 'contractor-growth-systems parent', 'local-visibility-systems for schema and GBP', 'Knight Group for complementary handyman patterns'],
+      bullets: ['case-study-screen-team for live client proof', 'case-study-faith-works for wide geography reference', 'contractor-growth-systems parent', 'local-visibility-systems for schema and GBP'],
       links: [['/case-study-screen-team', 'Screen Team Case Study'], ['/contractor-growth-systems', 'Contractor Systems'], ['/local-visibility-systems', 'Local Visibility']]
     },
     outcomes: [
@@ -807,7 +814,7 @@ const enrichments = {
       paragraphs: [
         'Startup and new business launches need credible web presence, clear offer, analytics baseline, and phased systems — not every automation lane on day one.',
         'Phased milestones typical path: foundation site and GBP, then CRM outreach or referrals when lead flow justifies, then ops automation when job volume demands it.',
-        'Knight Group started with strong web and local foundation before kg outreach produced booked work — the sequence matters more than feature count.'
+        'Faith Works, Screen Team, and Knight Group each started with strong web and local foundation before outreach lanes scaled — the sequence matters more than feature count.'
       ]
     },
     deliverables: [
@@ -819,7 +826,7 @@ const enrichments = {
       kicker: 'Phased growth',
       title: 'Maps to flagship lanes over time',
       text: 'Startups adopt business-growth-systems incrementally — website first, systems as revenue supports.',
-      bullets: ['website-growth-audit for launch baseline', 'business-growth-systems for full stack roadmap', 'Knight Group as phased benchmark', 'book-consultation for scope conversation'],
+      bullets: ['website-growth-audit for launch baseline', 'business-growth-systems for full stack roadmap', 'Faith Works, Screen Team, or Knight Group as trade-matched proof', 'book-consultation for scope conversation'],
       links: [['/website-growth-audit', 'Growth Audit'], ['/business-growth-systems', 'Growth Systems'], ['/book-consultation', 'Book Consultation']]
     },
     outcomes: [
@@ -891,7 +898,7 @@ const enrichments = {
       paragraphs: [
         'Review request systems trigger SMS or email asks at job completion — when customer satisfaction is highest — instead of hoping someone remembers to mention Google weeks later.',
         'Timing integrates with job workflow status changes or manual owner trigger. Links route to Google Business Profile review flow with UTM or tracking where useful.',
-        'Local visibility improves when review velocity matches real completed work — Knight Group and Screen Team patterns include reputation as part of geography strategy.'
+        'Local visibility improves when review velocity matches real completed work — Faith Works, Screen Team, and Knight Group each include reputation as part of geography strategy.'
       ]
     },
     deliverables: [
@@ -903,7 +910,7 @@ const enrichments = {
       kicker: 'Reputation loop',
       title: 'Closes the local visibility stack',
       text: 'Reviews amplify city pages and GBP work from local-visibility-systems.',
-      bullets: ['local-visibility-systems for schema and GBP', 'home-service-business-growth-systems for residential trades', 'workflow-automation for send timing', 'Knight Group GBP alignment as reference'],
+      bullets: ['local-visibility-systems for schema and GBP', 'home-service-business-growth-systems for residential trades', 'workflow-automation for send timing', 'Screen Team and Faith Works GBP alignment as references'],
       links: [['/local-visibility-systems', 'Local Visibility'], ['/home-service-business-growth-systems', 'Home Service Systems'], ['/workflow-automation', 'Workflow Automation']]
     },
     outcomes: [
@@ -918,7 +925,7 @@ const enrichments = {
       title: 'Hub and city architecture that matches crew radius',
       paragraphs: [
         'Service-area page strategy documents how hub pages, city landing pages, and service silos link together — scaled to how far crews actually travel, not national template city spam.',
-        'Knight Group deploys 30+ city handyman pages across Pinellas, Hillsborough, and Pasco with Safety Harbor hub positioning — 97 total indexable URLs in sitemap.xml.',
+        'Faith Works deploys 82 land-clearing pages across Polk County and Central Florida. Screen Team covers Tampa Bay enclosure metros at 36 pages. Knight Group adds 30+ handyman city pages across Pinellas, Hillsborough, and Pasco when the trade is repair-first.',
         'Screen Team proves the same pattern for pool enclosure quotes; excavation and roofing trades adapt radius and content depth accordingly.'
       ]
     },
@@ -931,8 +938,8 @@ const enrichments = {
       kicker: 'SEO depth',
       title: 'Foundation for local-visibility-systems',
       text: 'Strategy doc precedes build — audit identifies geography gaps before page production.',
-      bullets: ['local-visibility-systems for full discovery lane', 'Knight Group 97-page sitemap as scale reference', 'Screen Team for enclosure geography', 'website-growth-audit for baseline'],
-      links: [['/local-visibility-systems', 'Local Visibility'], ['/case-study-knight-group', 'Knight Group Case Study'], ['/case-study-screen-team', 'Screen Team Example']]
+      bullets: ['local-visibility-systems for full discovery lane', 'Faith Works 82-page footprint for wide geography', 'Screen Team 36-page metro depth', 'Knight Group 97-page handyman reference'],
+      links: [['/local-visibility-systems', 'Local Visibility'], ['/case-study-faith-works', 'Faith Works Case Study'], ['/case-study-screen-team', 'Screen Team Example']]
     },
     outcomes: [
       { title: 'Honest geography', text: 'Pages match crew mobilization — reducing wasted estimate trips.' },
@@ -976,30 +983,30 @@ const enrichments = {
       title: 'OutreachEngine in production on real campaigns',
       paragraphs: [
         'OutreachEngine — Flask app with SQLite storage — drives segmented lists, branded templates, scheduler jobs for first_touch and followup, bounce detection, and daily caps between 20 and 40 sends per brand.',
-        'Knight Group kg lane generated substantial booked work from one well-targeted outreach message. Screen Team st lane uses the same engine with separate caps and templates.',
+        'Screen Team st lane, Faith Works faithworks lane, and Knight Group kg lane each use OutreachEngine with separate caps and templates. KG generated substantial booked work from one well-targeted message; ST and FW run the same engine at enclosure and land-clearing scale.',
         'Replies route to Email-Agent crm_reply views on port 5100; Knight Command Outreach CRM tab embeds the queue UI for daily operator review.'
       ]
     },
     deliverables: [
-      { title: 'CRM engine', items: ['Flask + SQLite OutreachEngine deployment', 'Brand switcher for kl, kg, and st lanes', 'Queue preview and send window visibility', 'Bounce flags suppress bad addresses'] },
+      { title: 'CRM engine', items: ['Flask + SQLite OutreachEngine deployment', 'Brand switcher for kl, kg, st, and faithworks lanes', 'Queue preview and send window visibility', 'Bounce flags suppress bad addresses'] },
       { title: 'Scheduler & caps', items: ['first_touch and followup job configuration', '20–40 daily send limits per brand', 'Preview sends before production windows', 'Campaign logging for lead-source reporting'] },
       { title: 'Reply integration', items: ['Email-Agent crm_reply routing', 'Knight Command embed', 'Gmail/Zoho/Microsoft inbox mapping', 'Weekly operator review cadence'] }
     ],
     connections: {
       kicker: 'Live proof',
-      title: 'Knight Group kg campaign results',
-      text: 'KG-branded outreach produced real jobs — business proof behind the CRM engine, not a demo dataset.',
-      bullets: ['crm-outreach-lead-generation service page', 'email-agent-automation for reply path', 'Knight Group 97-page site as campaign proof link destination', 'Screen Team st lane as second brand reference'],
-      links: [['/crm-outreach-lead-generation', 'CRM Outreach Service'], ['/case-study-knight-group', 'Knight Group Proof'], ['/email-agent-automation', 'Email-Agent']]
+      title: 'Live client lane results — ST, FW, and KG',
+      text: 'OutreachEngine production proof spans Screen Team, Faith Works, and Knight Group — not a demo dataset.',
+      bullets: ['crm-outreach-lead-generation service page', 'email-agent-automation for reply path', 'Screen Team 36-page site as st lane proof destination', 'Faith Works 82-page site as faithworks lane reference'],
+      links: [['/crm-outreach-lead-generation', 'CRM Outreach Service'], ['/case-study-screen-team', 'Screen Team Proof'], ['/case-study-faith-works', 'Faith Works Proof']]
     },
     outcomes: [
-      { title: 'Real pipeline', text: 'KG campaign booked jobs — measurable reply and conversion signal.' },
-      { title: 'Brand-safe ops', text: 'Templates and senders isolated per kl/kg/st.' },
+      { title: 'Real pipeline', text: 'Live client lanes produce measurable reply and conversion signals across trades.' },
+      { title: 'Brand-safe ops', text: 'Templates and senders isolated per kl, kg, st, and faithworks lanes.' },
       { title: 'Enforced follow-up', text: 'Scheduler replaces manual inbox remembering.' },
       { title: 'Reputation protection', text: 'Caps and bounce rules visible before damage.' }
     ],
     scopeNote: 'OutreachEngine is Knight Logics production software configured per client brand — case study describes live internal workflow, not a third-party SaaS resale.',
-    proofGrid: [PROOF.kg, PROOF.knightCommand, PROOF.screenTeam]
+    proofGrid: [PROOF.screenTeam, PROOF.faithWorks, PROOF.kg]
   },
   'case-study-vendoroo-ticket-invoice-system': {
     context: {
@@ -1029,7 +1036,7 @@ const enrichments = {
       { title: 'Client scoping template', text: 'Internal reference accelerates similar vendor proposals.' }
     ],
     scopeNote: 'Vendoroo-style build is an active internal workflow reference — not a publicly deployed client product or open-source repo. Demonstrates capability for portal-driven vendors.',
-    proofGrid: [PROOF.jns, PROOF.kg, PROOF.vendoroo]
+    proofGrid: [PROOF.jns, PROOF.screenTeam, PROOF.vendoroo]
   },
   'case-study-whistle-stop': {
     context: {
@@ -1059,7 +1066,7 @@ const enrichments = {
       { title: 'Launch discipline', text: 'GBP and site aligned before public marketing push.' }
     ],
     scopeNote: 'Client preview — active build until ownership approves public launch marketing. Metrics and live URL promotion withheld until go-live sign-off.',
-    proofGrid: [PROOF.whistleStop, PROOF.kg, PROOF.screenTeam]
+    proofGrid: [PROOF.whistleStop, PROOF.screenTeam, PROOF.faithWorks]
   },
   'case-study-roof-monsters': {
     context: {
@@ -1089,7 +1096,7 @@ const enrichments = {
       { title: 'Vertical template', text: 'Roofing reference accelerates similar client scoping.' }
     ],
     scopeNote: 'Client preview — not publicly marketed as live until ownership approves launch. Case study describes build pattern and IA, not published performance metrics.',
-    proofGrid: [PROOF.roofMonsters, PROOF.kg, PROOF.jns]
+    proofGrid: [PROOF.roofMonsters, PROOF.faithWorks, PROOF.jns]
   },
   'case-study-social-poster': {
     context: {
@@ -1119,7 +1126,7 @@ const enrichments = {
       { title: 'GBP alignment', text: 'Scheduled posts match website campaign timing.' }
     ],
     scopeNote: 'Social Poster is Knight Logics internal production tooling on port 8501 — case study documents live workflow, not an off-the-shelf social SaaS product.',
-    proofGrid: [PROOF.knightCommand, PROOF.kg, PROOF.screenTeam]
+    proofGrid: [PROOF.knightCommand, PROOF.faithWorks, PROOF.screenTeam]
   },
   'case-study-referral-network-system': {
     context: {
@@ -1149,32 +1156,34 @@ const enrichments = {
       { title: 'Embedded support', text: 'Referral ops inside /admin — not orphan dashboard URLs.' }
     ],
     scopeNote: 'Referral infrastructure is production Knight Logics systems — partner program terms, fees, and payout rules are defined separately in program documentation.',
-    proofGrid: [PROOF.knightCommand, PROOF.kg, PROOF.crmOutreach]
+    proofGrid: [PROOF.knightCommand, PROOF.faithWorks, PROOF.crmOutreach]
   }
 };
 
 function enrichPage(page) {
   const e = enrichments[page.slug];
+  const applyClientMedia = (target) => {
+    if (CLIENT_MEDIA_SLUGS.includes(page.slug) && !hasAnyClientMediaBlock(target.mediaBlocks)) {
+      target.mediaBlocks = [...(target.mediaBlocks || []), clientMediaBlockForSlug(page.slug, 'right')];
+    }
+    if (!target.stats || !target.stats.length) {
+      target.stats = clientStatsForSlug(page.slug);
+    }
+    if (!target.proofGrid || !target.proofGrid.length) {
+      target.proofGrid = defaultProofGrid(page.slug);
+    }
+    return target;
+  };
+
   if (!e) {
-    const patched = applyKgReplacementsDeep(JSON.parse(JSON.stringify(page)));
-    if (KG_MEDIA_SLUGS.includes(page.slug) && !hasKgMediaBlock(patched.mediaBlocks)) {
-      patched.mediaBlocks = [...(patched.mediaBlocks || []), kgMediaBlock('right')];
-    }
-    if (!patched.proofGrid || !patched.proofGrid.length) {
-      patched.proofGrid = defaultProofGrid(page.slug);
-    }
-    return patched;
+    return applyClientMedia(applyKgReplacementsDeep(JSON.parse(JSON.stringify(page))));
   }
 
   const merged = deepMerge(page, e);
-
-  if (KG_MEDIA_SLUGS.includes(page.slug) && !hasKgMediaBlock(merged.mediaBlocks)) {
-    merged.mediaBlocks = [...(merged.mediaBlocks || []), kgMediaBlock('right')];
+  if (merged.stats && merged.stats === KG_STATS && primaryClientForSlug(page.slug) !== 'kg') {
+    merged.stats = clientStatsForSlug(page.slug);
   }
-  if (!merged.proofGrid || !merged.proofGrid.length) {
-    merged.proofGrid = defaultProofGrid(page.slug);
-  }
-  return merged;
+  return applyClientMedia(merged);
 }
 
-module.exports = { enrichments, enrichPage, KG_MEDIA_SLUGS, applyKgReplacementsDeep };
+module.exports = { enrichments, enrichPage, CLIENT_MEDIA_SLUGS, applyKgReplacementsDeep };

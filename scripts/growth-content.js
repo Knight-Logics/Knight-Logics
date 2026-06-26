@@ -46,9 +46,9 @@ const flagshipPages = [
       {
         kicker: 'Proof in market',
         title: 'Built on live Tampa Bay client work',
-        text: 'Knight Group runs 97 indexable pages with Lighthouse 96 performance and 100 SEO, booking flow, and schema. Screen Team, Faith Works, and JNS show how the same growth lanes scale across trades.',
+        text: 'Three live growth-system clients prove the stack: Faith Works at 82 land-clearing pages (faithworks lane), Screen Team at 36 enclosure pages (st lane), and Knight Group at 97 handyman pages (kg lane) — same OutreachEngine, Email-Agent, and local SEO infrastructure.',
         align: 'right',
-        media: images.kgHero
+        media: images.faithWorks
       }
     ],
     process: [
@@ -64,13 +64,13 @@ const flagshipPages = [
       'Businesses outgrowing spreadsheets and disconnected SaaS tools'
     ],
     proof: {
-      title: 'Knight Group: 97-page handyman local SEO architecture',
-      text: 'Lighthouse 96, booking integration, LocalBusiness schema, and CRM outreach that generated substantial work from a single targeted campaign.',
-      image: images.kgHero.src,
-      imageAlt: 'Knight Group handyman website',
+      title: 'Faith Works: 82-page land clearing growth system',
+      text: '82 indexable pages across Central Florida, faithworks OutreachEngine lane, schema, GA4/GSC, and GBP alignment — full growth stack alongside Screen Team and Knight Group.',
+      image: images.faithWorks.src,
+      imageAlt: 'Faith Works land clearing website',
       badge: 'Live client',
-      href: '/case-study-knight-group',
-      linkLabel: 'View Knight Group case study'
+      href: '/case-study-faith-works',
+      linkLabel: 'View Faith Works case study'
     },
     faq: [
       { q: 'Is this a website package or full operations build?', a: 'It is a connected growth system. The website is the foundation, but CRM outreach, automation, referrals, and reporting are scoped to what your business will actually use.' },
@@ -81,6 +81,8 @@ const flagshipPages = [
       ['/service-websites', 'Websites & Local SEO'],
       ['/crm-outreach-lead-generation', 'CRM Outreach'],
       ['/service-ai-automation', 'Automation & Tools'],
+      ['/case-study-faith-works', 'Faith Works Case Study'],
+      ['/case-study-screen-team', 'Screen Team Case Study'],
       ['/case-study-knight-group', 'Knight Group Case Study'],
       ['/pricing', 'Pricing']
     ],
@@ -93,11 +95,11 @@ const flagshipPages = [
     meta: 'CRM outreach and local lead generation for Tampa Bay service businesses — OutreachEngine, segmented lists, reply tracking, and follow-up queues.',
     eyebrow: 'Lead engine',
     h1: 'CRM Outreach & Lead Generation Systems',
-    lead: 'Production outreach built on OutreachEngine — Flask, SQLite, multi-brand campaigns for KL, KG, and ST with scheduler-driven first_touch and followup sequences.',
+    lead: 'Production outreach built on OutreachEngine — Flask, SQLite, multi-brand campaigns for kl, kg, st, and faithworks lanes with scheduler-driven first_touch and followup sequences.',
     heroIcon: 'fa-paper-plane',
     stats: [
       { value: '20–40', label: 'Daily send cap range' },
-      { value: '3', label: 'Brand lanes (kl/kg/st)' },
+      { value: '4', label: 'Brand lanes (kl/kg/st/fw)' },
       { value: 'Live', label: 'Reply routing' }
     ],
     problem: {
@@ -124,8 +126,8 @@ const flagshipPages = [
       {
         kicker: 'Live workflow',
         title: 'OutreachEngine dashboard',
-        text: 'Queue preview, send windows, brand switcher, and reply counts — the same interface used on Knight Group and Screen Team campaigns.',
-        bullets: ['Flask + SQLite backend with reliable scheduler', 'Brand mapping for Knight Logics, Knight Group, and Screen Team lanes', 'Failure and bounce visibility before the week is wasted'],
+        text: 'Queue preview, send windows, brand switcher, and reply counts — the same interface used on Screen Team, Faith Works, and Knight Group campaigns.',
+        bullets: ['Flask + SQLite backend with reliable scheduler', 'Brand mapping for kl, kg, st, and faithworks lanes', 'Failure and bounce visibility before the week is wasted'],
         media: { ...videos.crm, title: 'CRM outreach queue', text: 'Segmented sends with daily cap enforcement.' }
       }
     ],
@@ -331,7 +333,7 @@ const flagshipPages = [
     heroIcon: 'fa-map-marked-alt',
     heroImage: images.faithWorks,
     stats: [
-      { value: '81', label: 'Pages — Faith Works example' },
+      { value: '82', label: 'Pages — Faith Works example' },
       { value: 'GBP', label: 'Profile alignment' },
       { value: 'Schema', label: 'Structured data' }
     ],
@@ -351,13 +353,13 @@ const flagshipPages = [
       { icon: 'fa-search', label: 'Technical', title: 'Local SEO cleanup', text: 'Crawl fixes, metadata, schema, internal links, and sitemap hygiene tied to Search Console signals.' },
       { icon: 'fa-store', label: 'Maps', title: 'Google Business Profile', text: 'Categories, services, descriptions, reviews, Q&A, posts, photos, and website alignment.' },
       { icon: 'fa-star', label: 'Reputation', title: 'Review request flow', text: 'Timing rules and GBP-aligned links after completed jobs — without spamming customers.' },
-      { icon: 'fa-map', label: 'Geography', title: 'Service-area strategy', text: 'City and county pages that match real coverage — see Faith Works 81-page land clearing footprint.' },
+      { icon: 'fa-map', label: 'Geography', title: 'Service-area strategy', text: 'City and county pages that match real coverage — see Faith Works 82-page land clearing footprint.' },
       { icon: 'fa-chart-line', label: 'Measurement', title: 'Audit & reporting', text: 'Search Console, analytics, and next steps tied to calls and form fills.' }
     ],
     mediaBlocks: [
       {
         kicker: 'Deep local footprint',
-        title: 'Faith Works: 81 land-clearing pages',
+        title: 'Faith Works: 82 land-clearing pages',
         text: 'Wide service-area SEO for excavation and land clearing — useful geography pages, not doorway spam.',
         media: images.faithWorks
       },
@@ -383,15 +385,15 @@ const flagshipPages = [
     ],
     proof: {
       title: 'Faith Works outdoor services SEO footprint',
-      text: '81 pages of land clearing and site work geography — a reference for large service-area strategy done responsibly.',
+      text: '82 pages of land clearing and site work geography — a reference for large service-area strategy done responsibly.',
       image: images.faithWorks.src,
       imageAlt: 'Faith Works local SEO site',
-      badge: '81 pages',
+      badge: '82 pages',
       href: '/case-study-faith-works',
       linkLabel: 'Faith Works case study'
     },
     faq: [
-      { q: 'How many city pages do I need?', a: 'It depends on real coverage — Screen Team uses deep Tampa Bay metros; Faith Works uses 81 pages for wide land clearing. We scope to geography you actually serve.' },
+      { q: 'How many city pages do I need?', a: 'It depends on real coverage — Screen Team uses deep Tampa Bay metros; Faith Works uses 82 pages for wide land clearing. We scope to geography you actually serve.' },
       { q: 'Do you manage GBP posting?', a: 'GBP alignment, categories, and review strategy are in scope; ongoing post cadence can be added or handled via Social Poster where appropriate.' },
       { q: 'Is this separate from the website build?', a: 'Local visibility can start with an audit or run alongside a new site — the goal is one coherent local story across site and profile.' }
     ],
@@ -457,7 +459,7 @@ const flagshipPages = [
     ],
     proof: {
       title: 'Audits tied to live build standards',
-      text: 'Recommendations reference real Knight Logics client work — Knight Group Lighthouse 96, Screen Team geography depth, Faith Works 81-page SEO.',
+      text: 'Recommendations reference real Knight Logics client work — Knight Group Lighthouse 96, Screen Team geography depth, Faith Works 82-page SEO.',
       image: images.screenTeam.src,
       imageAlt: 'Screen Team local service site',
       badge: 'Live benchmarks',
@@ -1393,7 +1395,7 @@ const subPages = [
     meta: 'Screen enclosure and pool cage growth systems for Tampa Bay — deep service-area SEO, quotes, and lead flow.',
     eyebrow: 'Pool & screen trades',
     h1: 'Screen Enclosure Business Growth Systems',
-    lead: 'Pool enclosure trades live on quote forms and phone calls across Tampa Bay metros — Screen Team proves deep service and city page architecture works.',
+    lead: 'Pool enclosure trades live on quote forms and phone calls across Tampa Bay metros — Screen Team proves 36-page growth-system depth with st OutreachEngine lane and metro service architecture.',
     heroIcon: 'fa-water',
     heroImage: images.screenTeam,
     problem: {
@@ -1458,7 +1460,7 @@ const subPages = [
     meta: 'Excavation and site work growth systems — large service footprints, land clearing SEO, lead capture, and referral tracking.',
     eyebrow: 'Site work trades',
     h1: 'Excavation & Site Work Growth Systems',
-    lead: 'Land clearing, grading, and excavation need wide geography footprints and project proof — Faith Works 81-page SEO shows how large coverage builds local authority responsibly.',
+    lead: 'Land clearing, grading, and excavation need wide geography footprints and project proof — Faith Works 82-page SEO shows how large coverage builds local authority responsibly.',
     heroIcon: 'fa-tractor',
     heroImage: images.faithWorks,
     problem: {
@@ -1474,7 +1476,7 @@ const subPages = [
       media: images.faithWorks
     },
     features: [
-      { icon: 'fa-map', label: 'Footprint', title: 'Large service footprint', text: 'Service and geography pages for wide coverage — Faith Works 81-page reference.' },
+      { icon: 'fa-map', label: 'Footprint', title: 'Large service footprint', text: 'Service and geography pages for wide coverage — Faith Works 82-page reference.' },
       { icon: 'fa-images', label: 'Proof', title: 'Project proof', text: 'Before/after galleries and capability pages for heavy site work.' },
       { icon: 'fa-route', label: 'Routing', title: 'Lead routing', text: 'Forms and call CTAs tied to job type and geography.' },
       { icon: 'fa-people-arrows', label: 'Partners', title: 'Partner referrals', text: 'Track subcontractor and partner lead sources with QR paths.' }
@@ -1482,7 +1484,7 @@ const subPages = [
     mediaBlocks: [
       {
         kicker: 'SEO scale',
-        title: 'Faith Works — 81 land clearing pages',
+        title: 'Faith Works — 82 land clearing pages',
         text: 'Responsible large-footprint local SEO for outdoor and site work services.',
         media: images.faithWorks
       }
@@ -1500,16 +1502,16 @@ const subPages = [
       'Trades receiving partner leads needing attribution'
     ],
     proof: {
-      title: 'Faith Works 81-page land clearing SEO',
+      title: 'Faith Works 82-page land clearing SEO',
       text: 'Wide geography local SEO for outdoor services — the excavation footprint reference.',
       image: images.faithWorks.src,
       imageAlt: 'Faith Works land clearing SEO',
-      badge: '81 pages',
+      badge: '82 pages',
       href: '/case-study-faith-works',
       linkLabel: 'Faith Works case study'
     },
     faq: [
-      { q: 'Is 81 pages required?', a: 'No — Faith Works is the upper reference. Page count matches counties and services you truly cover.' },
+      { q: 'Is 82 pages required?', a: 'No — Faith Works is the upper reference. Page count matches counties and services you truly cover.' },
       { q: 'How do you avoid doorway page penalties?', a: 'Pages include unique local utility, proof, and internal linking — not copy-paste city swaps.' },
       { q: 'Can you integrate job photos from crews?', a: 'Yes — job workflow lane attaches field photos to records when ops system is added.' }
     ],
@@ -1869,7 +1871,7 @@ const subPages = [
     mediaBlocks: [
       {
         kicker: 'Deep geo',
-        title: 'Faith Works 81-page footprint',
+        title: 'Faith Works 82-page footprint',
         text: 'Land clearing geography at scale with unique utility per region.',
         media: images.faithWorks
       },
@@ -1895,10 +1897,10 @@ const subPages = [
     ],
     proof: {
       title: 'Faith Works service-area scale',
-      text: '81 pages of responsible land clearing geography — reference for large-footprint strategy.',
+      text: '82 pages of responsible land clearing geography — reference for large-footprint strategy.',
       image: images.faithWorks.src,
       imageAlt: 'Service area page strategy',
-      badge: '81 pages',
+      badge: '82 pages',
       href: '/case-study-faith-works',
       linkLabel: 'Faith Works case study'
     },
@@ -1981,7 +1983,7 @@ const caseStudies = [
     h1: 'CRM Outreach Queue & Reply Tracking',
     meta: 'OutreachEngine case study — Flask SQLite CRM with kl/kg/st brands, scheduler first_touch/followup, bounce detection, and daily caps 20–40.',
     lead: 'A live outreach engine for segmented local-service campaigns — OutreachEngine with scheduler jobs, bounce detection, and Email-Agent reply routing.',
-    subhead: 'Demonstrates the CRM Outreach & Lead Generation service in production on Knight Group and Screen Team lanes.',
+    subhead: 'Demonstrates the CRM Outreach & Lead Generation service in production on Screen Team, Faith Works, and Knight Group lanes.',
     heroImage: { src: images.kgHero.src, alt: 'CRM outreach dashboard' },
     tags: ['OutreachEngine', 'Flask SQLite', 'Reply tracking', 'Multi-brand'],
     metrics: [
@@ -2007,7 +2009,7 @@ const caseStudies = [
       },
       {
         title: 'Early signal',
-        paragraphs: ['Knight Group generated substantial booked work from one well-targeted outreach message. Screen Team st lane uses the same engine with separate caps and templates. Operators see queue health without spreadsheet tracking.'],
+        paragraphs: ['Screen Team st lane, Faith Works faithworks lane, and Knight Group kg lane each run on OutreachEngine with separate caps and templates. KG generated substantial booked work from one well-targeted message. Operators see queue health without spreadsheet tracking.'],
         bullets: ['Measurable reply rate per list', 'Follow-up cadence enforced by scheduler', 'Bounce rate visible before reputation damage']
       }
     ],
@@ -2333,4 +2335,4 @@ const caseStudies = [
 ];
 
 const allSlugs = [...flagshipPages, ...subPages, ...caseStudies].map((x) => x.slug);
-module.exports = { VER: '20260626growth4', flagshipPages, subPages, caseStudies, allSlugs };
+module.exports = { VER: '20260626growth5', flagshipPages, subPages, caseStudies, allSlugs };

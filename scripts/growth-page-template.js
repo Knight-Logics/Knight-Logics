@@ -1,4 +1,4 @@
-const VER = '20260626growth4';
+const VER = '20260626growth5';
 
 function esc(s) {
   return String(s)

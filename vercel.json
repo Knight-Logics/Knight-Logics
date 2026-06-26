@@ -177,6 +177,11 @@
       "permanent": true
     },
     {
+      "source": "/case-study-faith-works.html",
+      "destination": "/case-study-faith-works",
+      "permanent": true
+    },
+    {
       "source": "/display-control-plus.html",
       "destination": "/display-control-plus",
       "permanent": true
@@ -475,6 +480,10 @@
     {
       "source": "/case-study-screen-team",
       "destination": "/case-study-screen-team.html"
+    },
+    {
+      "source": "/case-study-faith-works",
+      "destination": "/case-study-faith-works.html"
     },
     {
       "source": "/display-control-plus",

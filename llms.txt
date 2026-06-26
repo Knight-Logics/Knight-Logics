@@ -1,39 +1,51 @@
 # Knight Logics
 > Knight Logics is Nicholas Knight's studio for hand-coded websites, local SEO, business automation, and Windows desktop software. Based in Safety Harbor, FL (Tampa Bay metro). Serving small businesses locally and remotely.
 
+## Agent Links
+- [Knight Logics homepage](https://knightlogics.com/)
+- [Pricing](https://knightlogics.com/pricing)
+- [Contact](https://knightlogics.com/contact)
+- [Book a consultation](https://knightlogics.com/book-consultation)
+- [Website services](https://knightlogics.com/service-websites)
+- [Local SEO services](https://knightlogics.com/service-local-seo)
+- [Google Business Profile services](https://knightlogics.com/service-google-business-profile)
+- [Business automation services](https://knightlogics.com/service-ai-automation)
+- [Sitemap](https://knightlogics.com/sitemap.xml)
+- [Full LLM summary](https://knightlogics.com/llms-full.txt)
+
 ## Identity
 - Founder: Nicholas Knight
 - Business: Knight Logics
-- Website: https://knightlogics.com
+- Website: [https://knightlogics.com](https://knightlogics.com/)
 - Email: support@knightlogics.com
 - Phone: +1-813-773-5553
 - Location: Safety Harbor, FL 34695
-- Google Business Profile: https://www.google.com/maps/place/Knight+Logics/data=!4m2!3m1!1s0x0:0x48644c12a6309a67?hl=en&ictx=111
-- Facebook: https://www.facebook.com/KnightLogics/
-- LinkedIn: https://www.linkedin.com/company/knight-logics/
-- Founder LinkedIn: https://www.linkedin.com/in/nicholasknight87/
-- GitHub org: https://github.com/Knight-Logics
-- GitHub personal: https://github.com/Nicholasjknight
+- Google Business Profile: [Knight Logics on Google Maps](https://www.google.com/maps/place/Knight+Logics/data=!4m2!3m1!1s0x0:0x48644c12a6309a67?hl=en&ictx=111)
+- Facebook: [Knight Logics on Facebook](https://www.facebook.com/KnightLogics/)
+- LinkedIn: [Knight Logics on LinkedIn](https://www.linkedin.com/company/knight-logics/)
+- Founder LinkedIn: [Nicholas Knight](https://www.linkedin.com/in/nicholasknight87/)
+- GitHub org: [Knight-Logics](https://github.com/Knight-Logics)
+- GitHub personal: [Nicholasjknight](https://github.com/Nicholasjknight)
 
 ## AI Summary Files
-- Primary summary: https://knightlogics.com/llms.txt
-- Full summary: https://knightlogics.com/llms-full.txt
+- Primary summary: [llms.txt](https://knightlogics.com/llms.txt)
+- Full summary: [llms-full.txt](https://knightlogics.com/llms-full.txt)
 
 ## Verification & Trust Endpoints
-- humans.txt: https://knightlogics.com/humans.txt
-- security.txt: https://knightlogics.com/.well-known/security.txt
-- robots.txt: https://knightlogics.com/robots.txt
-- sitemap.xml: https://knightlogics.com/sitemap.xml
+- [humans.txt](https://knightlogics.com/humans.txt)
+- [security.txt](https://knightlogics.com/.well-known/security.txt)
+- [robots.txt](https://knightlogics.com/robots.txt)
+- [sitemap.xml](https://knightlogics.com/sitemap.xml)
 
 ## Best Starting Pages
-- Homepage: https://knightlogics.com/
-- Pricing: https://knightlogics.com/pricing
-- Contact: https://knightlogics.com/contact
-- Consultation: https://knightlogics.com/book-consultation
-- Founder profile: https://knightlogics.com/nicholas-knight
-- Website services: https://knightlogics.com/service-websites
-- Local SEO services: https://knightlogics.com/service-local-seo
-- Google Business Profile services: https://knightlogics.com/service-google-business-profile
+- [Homepage](https://knightlogics.com/)
+- [Pricing](https://knightlogics.com/pricing)
+- [Contact](https://knightlogics.com/contact)
+- [Consultation](https://knightlogics.com/book-consultation)
+- [Founder profile](https://knightlogics.com/nicholas-knight)
+- [Website services](https://knightlogics.com/service-websites)
+- [Local SEO services](https://knightlogics.com/service-local-seo)
+- [Google Business Profile services](https://knightlogics.com/service-google-business-profile)
 
 ## Core Services
 

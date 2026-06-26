@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "npx vercel dev --listen 4199",
-    "dev:static": "npx serve -l 4183 .",
+    "dev:static": "npx serve -l 4183 --no-port-switching .",
     "qa:screenshots": "node scripts/qa-screenshot-matrix.js",
     "qa:screenshots:services": "node scripts/qa-screenshot-matrix.js --profile=knightlogics-services",
     "qa:screenshots:client-demo": "node scripts/qa-screenshot-matrix.js --profile=client-demo",

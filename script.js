@@ -127,6 +127,30 @@ function initAnchorNavigation() {
 }
 
 // Dynamic Header and Footer Loading — parallel fetches to minimise round-trips
+async function loadSocialIcons() {
+    const targets = document.querySelectorAll('[data-kl-social-icons]');
+    if (!targets.length) {
+        return;
+    }
+
+    try {
+        const res = await fetch(new URL('/partials/kl-social-icons.html?v=20260625social1', window.location.origin), { cache: 'default' });
+        if (!res.ok) {
+            console.warn('Social icons partial could not be loaded.');
+            return;
+        }
+
+        const markup = await res.text();
+        targets.forEach((target) => {
+            if (!target.innerHTML.trim()) {
+                target.innerHTML = markup;
+            }
+        });
+    } catch (error) {
+        console.warn('Social icons partial fetch failed:', error);
+    }
+}
+
 async function loadHeaderFooter() {
     try {
         const tryFetch = async (urls) => {
@@ -144,11 +168,11 @@ async function loadHeaderFooter() {
         };
 
         const headerCandidates = [
-            new URL('/header.html?v=20260604perf1', window.location.origin),
+            new URL('/header.html?v=20260625mobilemenu4', window.location.origin),
             new URL('/header', window.location.origin)
         ];
         const footerCandidates = [
-            new URL('/footer.html?v=20260613fb1', window.location.origin),
+            new URL('/footer.html?v=20260625mobilemenu4', window.location.origin),
             new URL('/footer', window.location.origin)
         ];
 
@@ -190,6 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fetch header/footer in parallel — initNavigation runs when ready, doesn't block paint
     loadHeaderFooter().then(() => {
+        loadSocialIcons();
         initNavigation();
         setupIntersectionObserver();
         // Defer Tidio until first real user interaction so Lighthouse's sandbox
@@ -834,23 +859,26 @@ function initLayeredParallax() {
 }
 
 function initLocalTrustParallax() {
-    const section = document.querySelector('#testimonials.kl-local-trust--parallax');
-    const layer = section?.querySelector('.kl-local-trust-parallax');
+    const bridge = document.querySelector('.kl-trust-bridge');
+    const section = bridge || document.querySelector('#testimonials.kl-local-trust--parallax');
+    const layer = bridge?.querySelector('.kl-local-trust-parallax')
+        || section?.querySelector('.kl-local-trust-parallax');
     if (!section || !layer) return;
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     let ticking = false;
+    const scrollTarget = bridge || section;
 
     const getRate = () => {
-        const raw = getComputedStyle(section).getPropertyValue('--kl-parallax-rate').trim();
+        const raw = getComputedStyle(scrollTarget).getPropertyValue('--kl-parallax-rate').trim();
         const parsed = parseFloat(raw);
         return Number.isFinite(parsed) ? parsed : 0.68;
     };
 
     const update = () => {
         ticking = false;
-        const rect = section.getBoundingClientRect();
+        const rect = scrollTarget.getBoundingClientRect();
         if (rect.bottom <= 0 || rect.top > window.innerHeight) return;
 
         const centerOffset = rect.top + rect.height * 0.5 - window.innerHeight * 0.5;
@@ -1197,6 +1225,7 @@ function initNavigation() {
         if (navMenu) navMenu.classList.remove('active');
         if (hamburger) hamburger.classList.remove('active');
         if (navMenuOverlay) navMenuOverlay.classList.remove('active');
+        document.body.classList.remove('nav-menu-open');
         document.body.style.overflow = '';
     }
 
@@ -1207,17 +1236,13 @@ function initNavigation() {
         const isActive = navMenu.classList.contains('active');
         
         if (isActive) {
-            // Close menu
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-            navMenuOverlay.classList.remove('active');
-            document.body.style.overflow = '';
+            closeNavigationUI();
         } else {
-            // Open menu
             navMenu.classList.add('active');
             hamburger.classList.add('active');
             navMenuOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background scroll
+            document.body.classList.add('nav-menu-open');
+            document.body.style.overflow = 'hidden';
         }
     }
 
@@ -1226,9 +1251,24 @@ function initNavigation() {
         hamburger.addEventListener('click', toggleMobileMenu);
     }
 
-    // Overlay click handler - close menu when clicking overlay
+    // Overlay click handler - close menu when tapping outside the drawer
     if (navMenuOverlay) {
-        navMenuOverlay.addEventListener('click', toggleMobileMenu);
+        navMenuOverlay.addEventListener('click', closeNavigationUI);
+    }
+
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    if (mobileMenuClose) {
+        mobileMenuClose.addEventListener('click', closeNavigationUI);
+    }
+
+    if (navMenu) {
+        navMenu.querySelectorAll('.mobile-upwork-row a, .site-footer-social-link, .mobile-menu-brand').forEach((el) => {
+            el.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    setTimeout(closeNavigationUI, 120);
+                }
+            });
+        });
     }
 
     // Dropdown menu handling
@@ -1274,10 +1314,7 @@ function initNavigation() {
                     // Close mobile menu if open
                     if (navMenu && hamburger && navMenuOverlay) {
                         setTimeout(() => {
-                            navMenu.classList.remove('active');
-                            hamburger.classList.remove('active');
-                            navMenuOverlay.classList.remove('active');
-                            document.body.style.overflow = '';
+                            closeNavigationUI();
                         }, 150);
                     }
                 });
@@ -1294,14 +1331,15 @@ function initNavigation() {
         }
     });
 
-    // Close menu when clicking on a link with smooth animation
+    // Close menu when clicking a nav link — only while the mobile drawer is open
     navLinks.forEach((link, index) => {
-        // Add staggered animation delay
         link.style.transitionDelay = `${index * 0.05}s`;
         
         link.addEventListener('click', (e) => {
-            // Dropdown toggles are handled separately — don't close the whole menu
             if (link.classList.contains('nav-dropdown-toggle')) return;
+
+            const menuIsOpen = navMenu && navMenu.classList.contains('active');
+            if (!menuIsOpen) return;
 
             const href = link.getAttribute('href') || '';
             const shouldForceNavigate = link.id !== 'nav-home'
@@ -1320,27 +1358,10 @@ function initNavigation() {
                 }
             }
 
-            // Add click ripple effect
             link.style.transform = 'translateX(4px) scale(0.95)';
             
-            if (navMenu && hamburger && navMenuOverlay) {
-                setTimeout(() => {
-                    navMenu.classList.remove('active');
-                    hamburger.classList.remove('active');
-                    navMenuOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                    
-                    // Reset link transform
-                    setTimeout(() => {
-                        link.style.transform = '';
-                    }, 200);
-
-                    if (navigationTarget) {
-                        window.location.assign(navigationTarget);
-                    }
-                }, 150);
-            } else {
-                // Reset link transform even if menu elements don't exist
+            setTimeout(() => {
+                closeNavigationUI();
                 setTimeout(() => {
                     link.style.transform = '';
                 }, 200);
@@ -1348,7 +1369,7 @@ function initNavigation() {
                 if (navigationTarget) {
                     window.location.assign(navigationTarget);
                 }
-            }
+            }, 150);
         });
     });
 

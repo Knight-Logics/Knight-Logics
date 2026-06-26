@@ -13065,3 +13065,19 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
     line-height: 1.6;
     margin: 0 0 20px;
 }
+
+.kl-case-study-page .cs-tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.kl-case-study-page .cs-tag {
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(100, 255, 218, 0.08);
+    border: 1px solid rgba(100, 255, 218, 0.22);
+    color: #64ffda;
+    font-size: 0.78rem;
+    font-weight: 600;
+}

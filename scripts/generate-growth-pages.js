@@ -125,7 +125,7 @@ const pages = [
       ['Growth opportunities', 'Referral flow, automation bottlenecks, and practical next-step recommendations.']
     ],
     links: [
-      ['/free-website-audit', 'Request Free Audit Form'],
+      ['/website-growth-audit', 'Free Growth Audit'],
       ['/book-consultation', 'Book Consultation'],
       ['/business-growth-systems', 'Growth Systems'],
       ['/local-visibility-systems', 'Local Visibility']

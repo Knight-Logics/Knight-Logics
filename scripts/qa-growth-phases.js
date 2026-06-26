@@ -28,6 +28,10 @@ const path = require('path');
   await shot('phase2-growth-systems.png', '/business-growth-systems', 1440, 900);
   await shot('phase2-crm-outreach.png', '/crm-outreach-lead-generation', 1440, 900);
   await shot('phase3-case-studies.png', '/case-studies', 1440, 900);
+  await shot('phase4-pricing-growth.png', '/pricing#growth', 1440, 900);
+  await shot('phase4-audit-landing.png', '/website-growth-audit', 1440, 900);
+  await shot('phase4-subpage-automation.png', '/ai-business-automation', 1440, 900);
+  await shot('phase4-case-study-crm.png', '/case-study-crm-outreach-system', 1440, 900);
 
   const checks = await page.evaluate(() => ({
     nav: [...document.querySelectorAll('.mobile-nav-links > .nav-link, .mobile-nav-links > .nav-dropdown > .nav-link')].map((el) => el.textContent.trim()),

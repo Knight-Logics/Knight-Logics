@@ -168,11 +168,11 @@ async function loadHeaderFooter() {
         };
 
         const headerCandidates = [
-            new URL('/header.html?v=20260626growth1', window.location.origin),
+            new URL('/header.html?v=20260626growth2', window.location.origin),
             new URL('/header', window.location.origin)
         ];
         const footerCandidates = [
-            new URL('/footer.html?v=20260626growth1', window.location.origin),
+            new URL('/footer.html?v=20260626growth2', window.location.origin),
             new URL('/footer', window.location.origin)
         ];
 

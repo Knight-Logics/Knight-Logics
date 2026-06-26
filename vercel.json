@@ -53,7 +53,7 @@
     },
     {
       "source": "/free-website-audit.html",
-      "destination": "/free-website-audit",
+      "destination": "/website-growth-audit",
       "permanent": true
     },
     {
@@ -400,6 +400,131 @@
       "source": "/performance-partner-program.html",
       "destination": "/performance-partner-program",
       "permanent": true
+    },
+    {
+      "source": "/ai-business-automation.html",
+      "destination": "/ai-business-automation",
+      "permanent": true
+    },
+    {
+      "source": "/internal-business-tools.html",
+      "destination": "/internal-business-tools",
+      "permanent": true
+    },
+    {
+      "source": "/api-integration-services.html",
+      "destination": "/api-integration-services",
+      "permanent": true
+    },
+    {
+      "source": "/workflow-automation.html",
+      "destination": "/workflow-automation",
+      "permanent": true
+    },
+    {
+      "source": "/business-dashboard-development.html",
+      "destination": "/business-dashboard-development",
+      "permanent": true
+    },
+    {
+      "source": "/email-agent-automation.html",
+      "destination": "/email-agent-automation",
+      "permanent": true
+    },
+    {
+      "source": "/social-media-automation-systems.html",
+      "destination": "/social-media-automation-systems",
+      "permanent": true
+    },
+    {
+      "source": "/handyman-business-growth-systems.html",
+      "destination": "/handyman-business-growth-systems",
+      "permanent": true
+    },
+    {
+      "source": "/roofing-business-growth-systems.html",
+      "destination": "/roofing-business-growth-systems",
+      "permanent": true
+    },
+    {
+      "source": "/screen-enclosure-business-growth-systems.html",
+      "destination": "/screen-enclosure-business-growth-systems",
+      "permanent": true
+    },
+    {
+      "source": "/excavation-business-growth-systems.html",
+      "destination": "/excavation-business-growth-systems",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-bar-growth-systems.html",
+      "destination": "/restaurant-bar-growth-systems",
+      "permanent": true
+    },
+    {
+      "source": "/startup-business-launch-systems.html",
+      "destination": "/startup-business-launch-systems",
+      "permanent": true
+    },
+    {
+      "source": "/stripe-invoice-automation.html",
+      "destination": "/stripe-invoice-automation",
+      "permanent": true
+    },
+    {
+      "source": "/job-photo-pdf-reports.html",
+      "destination": "/job-photo-pdf-reports",
+      "permanent": true
+    },
+    {
+      "source": "/review-request-systems.html",
+      "destination": "/review-request-systems",
+      "permanent": true
+    },
+    {
+      "source": "/service-area-page-strategy.html",
+      "destination": "/service-area-page-strategy",
+      "permanent": true
+    },
+    {
+      "source": "/case-study-knight-command.html",
+      "destination": "/case-study-knight-command",
+      "permanent": true
+    },
+    {
+      "source": "/case-study-crm-outreach-system.html",
+      "destination": "/case-study-crm-outreach-system",
+      "permanent": true
+    },
+    {
+      "source": "/case-study-vendoroo-ticket-invoice-system.html",
+      "destination": "/case-study-vendoroo-ticket-invoice-system",
+      "permanent": true
+    },
+    {
+      "source": "/case-study-whistle-stop.html",
+      "destination": "/case-study-whistle-stop",
+      "permanent": true
+    },
+    {
+      "source": "/case-study-roof-monsters.html",
+      "destination": "/case-study-roof-monsters",
+      "permanent": true
+    },
+    {
+      "source": "/case-study-social-poster.html",
+      "destination": "/case-study-social-poster",
+      "permanent": true
+    },
+    {
+      "source": "/case-study-referral-network-system.html",
+      "destination": "/case-study-referral-network-system",
+      "permanent": true
+    },
+    {
+      "source": "/free-website-audit",
+      "destination": "/website-growth-audit",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -450,10 +575,6 @@
     {
       "source": "/home-service-websites",
       "destination": "/home-service-websites.html"
-    },
-    {
-      "source": "/free-website-audit",
-      "destination": "/free-website-audit.html"
     },
     {
       "source": "/web-designer-st-petersburg",
@@ -626,6 +747,102 @@
     {
       "source": "/performance-partner-program",
       "destination": "/performance-partner-program.html"
+    },
+    {
+      "source": "/ai-business-automation",
+      "destination": "/ai-business-automation.html"
+    },
+    {
+      "source": "/internal-business-tools",
+      "destination": "/internal-business-tools.html"
+    },
+    {
+      "source": "/api-integration-services",
+      "destination": "/api-integration-services.html"
+    },
+    {
+      "source": "/workflow-automation",
+      "destination": "/workflow-automation.html"
+    },
+    {
+      "source": "/business-dashboard-development",
+      "destination": "/business-dashboard-development.html"
+    },
+    {
+      "source": "/email-agent-automation",
+      "destination": "/email-agent-automation.html"
+    },
+    {
+      "source": "/social-media-automation-systems",
+      "destination": "/social-media-automation-systems.html"
+    },
+    {
+      "source": "/handyman-business-growth-systems",
+      "destination": "/handyman-business-growth-systems.html"
+    },
+    {
+      "source": "/roofing-business-growth-systems",
+      "destination": "/roofing-business-growth-systems.html"
+    },
+    {
+      "source": "/screen-enclosure-business-growth-systems",
+      "destination": "/screen-enclosure-business-growth-systems.html"
+    },
+    {
+      "source": "/excavation-business-growth-systems",
+      "destination": "/excavation-business-growth-systems.html"
+    },
+    {
+      "source": "/restaurant-bar-growth-systems",
+      "destination": "/restaurant-bar-growth-systems.html"
+    },
+    {
+      "source": "/startup-business-launch-systems",
+      "destination": "/startup-business-launch-systems.html"
+    },
+    {
+      "source": "/stripe-invoice-automation",
+      "destination": "/stripe-invoice-automation.html"
+    },
+    {
+      "source": "/job-photo-pdf-reports",
+      "destination": "/job-photo-pdf-reports.html"
+    },
+    {
+      "source": "/review-request-systems",
+      "destination": "/review-request-systems.html"
+    },
+    {
+      "source": "/service-area-page-strategy",
+      "destination": "/service-area-page-strategy.html"
+    },
+    {
+      "source": "/case-study-knight-command",
+      "destination": "/case-study-knight-command.html"
+    },
+    {
+      "source": "/case-study-crm-outreach-system",
+      "destination": "/case-study-crm-outreach-system.html"
+    },
+    {
+      "source": "/case-study-vendoroo-ticket-invoice-system",
+      "destination": "/case-study-vendoroo-ticket-invoice-system.html"
+    },
+    {
+      "source": "/case-study-whistle-stop",
+      "destination": "/case-study-whistle-stop.html"
+    },
+    {
+      "source": "/case-study-roof-monsters",
+      "destination": "/case-study-roof-monsters.html"
+    },
+    {
+      "source": "/case-study-social-poster",
+      "destination": "/case-study-social-poster.html"
+    },
+    {
+      "source": "/case-study-referral-network-system",
+      "destination": "/case-study-referral-network-system.html"
     }
   ],
   "headers": [

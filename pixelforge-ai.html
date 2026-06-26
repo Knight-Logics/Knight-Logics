@@ -93,7 +93,7 @@
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#64ffda">
 
-    <link rel="stylesheet" href="style.css?v=20260626growth3">
+    <link rel="stylesheet" href="style.css?v=20260626growth4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script type="application/ld+json">
     {
@@ -409,7 +409,7 @@
     <script>
         async function loadHeaderFooter() {
             try {
-                const headerResponse = await fetch('/header.html?v=20260626growth3', { cache: 'no-store' });
+                const headerResponse = await fetch('/header.html?v=20260626growth4', { cache: 'no-store' });
                 if (headerResponse.ok) {
                     const headerContent = await headerResponse.text();
                     const headerContainer = document.getElementById('header-container');
@@ -418,7 +418,7 @@
                     }
                 }
 
-                const footerResponse = await fetch('/footer.html?v=20260626growth3', { cache: 'no-store' });
+                const footerResponse = await fetch('/footer.html?v=20260626growth4', { cache: 'no-store' });
                 if (footerResponse.ok) {
                     const footerContent = await footerResponse.text();
                     const footerContainer = document.getElementById('footer-container');
@@ -431,6 +431,6 @@
             }
         }
     </script>
-    <script src="projects-script.js?v=20260626growth3"></script>
+    <script src="projects-script.js?v=20260626growth4"></script>
 </body>
 </html>

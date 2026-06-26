@@ -46,7 +46,7 @@ const flagshipPages = [
       {
         kicker: 'Proof in market',
         title: 'Built on live Tampa Bay client work',
-        text: 'Knight Group runs 19 pages with Lighthouse 96, booking flow, and schema. Screen Team, Faith Works, and JNS show how the same growth lanes scale across trades.',
+        text: 'Knight Group runs 97 indexable pages with Lighthouse 96 performance and 100 SEO, booking flow, and schema. Screen Team, Faith Works, and JNS show how the same growth lanes scale across trades.',
         align: 'right',
         media: images.kgHero
       }
@@ -64,7 +64,7 @@ const flagshipPages = [
       'Businesses outgrowing spreadsheets and disconnected SaaS tools'
     ],
     proof: {
-      title: 'Knight Group: 19-page handyman growth system',
+      title: 'Knight Group: 97-page handyman local SEO architecture',
       text: 'Lighthouse 96, booking integration, LocalBusiness schema, and CRM outreach that generated substantial work from a single targeted campaign.',
       image: images.kgHero.src,
       imageAlt: 'Knight Group handyman website',
@@ -439,7 +439,7 @@ const flagshipPages = [
       {
         kicker: 'Benchmark example',
         title: 'What good looks like — Knight Group',
-        text: '19 pages, Lighthouse 96, booking flow, schema, and outreach-ready structure — used as a benchmark during audits.',
+        text: '97 indexable pages, Lighthouse 96/100/100, booking flow, schema, and outreach-ready structure — used as a benchmark during audits.',
         media: images.kgHero
       }
     ],
@@ -571,7 +571,7 @@ const flagshipPages = [
     heroImage: images.jns,
     stats: [
       { value: '11', label: 'Pages — JNS bundle' },
-      { value: '19', label: 'Pages — Knight Group' },
+      { value: '97', label: 'Indexable pages — KG sitemap' },
       { value: 'Trades', label: 'Live case studies' }
     ],
     problem: {
@@ -596,7 +596,7 @@ const flagshipPages = [
     mediaBlocks: [
       {
         kicker: 'Handyman benchmark',
-        title: 'Knight Group — 19 pages, Lighthouse 96',
+        title: 'Knight Group — 97 indexable pages, Lighthouse 96/100/100',
         text: 'Booking, schema, outreach-ready structure, and KG-branded CRM campaigns.',
         media: images.kgHero
       },
@@ -679,7 +679,7 @@ const flagshipPages = [
       {
         kicker: 'Handyman reference',
         title: 'Knight Group booking & outreach',
-        text: '19 pages, Lighthouse 96, booking integration, and KG outreach that produced real jobs.',
+        text: '97 indexable pages, Lighthouse 96/100/100, booking integration, and KG outreach that produced real jobs.',
         media: images.kgHero
       }
     ],
@@ -1287,14 +1287,14 @@ const subPages = [
     mediaBlocks: [
       {
         kicker: 'Live benchmark',
-        title: 'Knight Group — 19 pages, Lighthouse 96',
+        title: 'Knight Group — 97 indexable pages, Lighthouse 96/100/100',
         text: 'Handyman site with booking, schema, outreach, and performance-friendly build.',
         media: images.kgHero
       }
     ],
     process: [
       { title: 'Offer & area map', text: 'Services, metros, and call vs booking preference.' },
-      { title: 'Site & GBP launch', text: '19-page style architecture scaled to your crew size.' },
+      { title: 'Site & GBP launch', text: '97-page local SEO architecture scaled to your crew size.' },
       { title: 'Outreach optional', text: 'Property manager and HOA lists with KG outreach patterns.' },
       { title: 'Ops add-ons', text: 'Job tracking and invoicing when portal work appears.' }
     ],
@@ -1306,7 +1306,7 @@ const subPages = [
     ],
     proof: {
       title: 'Knight Group handyman system',
-      text: '19 pages, Lighthouse 96, booking, schema, and outreach that produced real booked jobs.',
+      text: '97 indexable pages, Lighthouse 96/100/100, booking, schema, and outreach that produced real booked jobs.',
       image: images.kgHero.src,
       imageAlt: 'Knight Group handyman site',
       badge: 'Lighthouse 96',
@@ -1314,7 +1314,7 @@ const subPages = [
       linkLabel: 'Knight Group case study'
     },
     faq: [
-      { q: 'Do I need all 19 pages?', a: 'Page count scales to services and metros — Knight Group is the benchmark, not a minimum package.' },
+      { q: 'Do I need 97 pages like Knight Group?', a: 'Page count should match real service coverage and geography — Knight Group shows deep local SEO at 97 URLs, not a copy-paste package size.' },
       { q: 'Can you run KG outreach for my handyman brand?', a: 'We configure OutreachEngine with your brand lane, caps, and lists — same engine, your territory.' },
       { q: 'Is booking required?', a: 'No — some crews are call-first only; booking is added when estimate flow supports it.' }
     ],
@@ -2333,4 +2333,4 @@ const caseStudies = [
 ];
 
 const allSlugs = [...flagshipPages, ...subPages, ...caseStudies].map((x) => x.slug);
-module.exports = { VER: '20260626growth3', flagshipPages, subPages, caseStudies, allSlugs };
+module.exports = { VER: '20260626growth4', flagshipPages, subPages, caseStudies, allSlugs };

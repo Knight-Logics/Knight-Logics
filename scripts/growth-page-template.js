@@ -1,4 +1,4 @@
-const VER = '20260626growth3';
+const VER = '20260626growth4';
 
 function esc(s) {
   return String(s)
@@ -233,6 +233,104 @@ function renderLinks(links, pricingNote) {
     </section>`;
 }
 
+function renderContext(ctx) {
+  if (!ctx) return '';
+  const paras = (ctx.paragraphs || []).map((p) => `<p>${p}</p>`).join('\n                ');
+  return `<section class="kl-growth-section kl-growth-section--compact">
+        <div class="container">
+            <div class="kl-growth-context fade-in">
+                ${ctx.title ? `<h2>${ctx.title}</h2>` : ''}
+                ${paras}
+                ${ctx.note ? `<p class="kl-growth-context-note">${ctx.note}</p>` : ''}
+            </div>
+        </div>
+    </section>`;
+}
+
+function renderDeliverables(items) {
+  if (!items || !items.length) return '';
+  return `<section class="kl-growth-section kl-growth-section--alt">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Typical deliverables</h2>
+                <p>Scoped to your trade, territory, and ops maturity — not a one-size package.</p>
+            </div>
+            <div class="kl-growth-deliverables">${items.map((d) => `
+                <article class="kl-growth-deliverable fade-in">
+                    <h3>${d.title}</h3>
+                    <ul class="kl-growth-list">${(d.items || []).map((i) => `<li>${i}</li>`).join('')}</ul>
+                </article>`).join('')}
+            </div>
+        </div>
+    </section>`;
+}
+
+function renderConnections(conn) {
+  if (!conn) return '';
+  return `<section class="kl-growth-section">
+        <div class="container">
+            <div class="kl-growth-connection fade-in">
+                <span class="kl-growth-kicker">${conn.kicker || 'How it connects'}</span>
+                <h2>${conn.title}</h2>
+                <p>${conn.text}</p>
+                ${conn.bullets ? `<ul class="kl-growth-list">${conn.bullets.map((b) => `<li>${b}</li>`).join('')}</ul>` : ''}
+                ${conn.links ? `<div class="kl-growth-links">${conn.links.map(([href, label]) => `<a href="${href}">${label}</a>`).join('')}</div>` : ''}
+            </div>
+        </div>
+    </section>`;
+}
+
+function renderOutcomes(outcomes) {
+  if (!outcomes || !outcomes.length) return '';
+  return `<section class="kl-growth-section kl-growth-section--alt">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Outcomes we design for</h2>
+                <p>Measurable operator results — not vanity dashboards.</p>
+            </div>
+            <div class="kl-growth-outcomes">${outcomes.map((o) => `
+                <article class="kl-growth-outcome fade-in">
+                    <h3>${o.title}</h3>
+                    <p>${o.text}</p>
+                </article>`).join('')}
+            </div>
+        </div>
+    </section>`;
+}
+
+function renderProofGrid(proofs) {
+  if (!proofs || !proofs.length) return '';
+  return `<section class="kl-growth-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Related proof &amp; examples</h2>
+                <p>Live builds and internal workflows behind this service lane.</p>
+            </div>
+            <div class="kl-growth-proof-grid">${proofs.map((proof) => `
+                <a class="kl-growth-proof-card fade-in" href="${proof.href}">
+                    <img src="${proof.image}" alt="${esc(proof.imageAlt || proof.title)}" loading="lazy" decoding="async">
+                    <div class="kl-growth-proof-card-copy">
+                        ${proof.badge ? `<span class="kl-growth-proof-badge">${proof.badge}</span>` : ''}
+                        <h3>${proof.title}</h3>
+                        <p>${proof.text}</p>
+                    </div>
+                </a>`).join('')}
+            </div>
+        </div>
+    </section>`;
+}
+
+function renderScopeNote(note) {
+  if (!note) return '';
+  return `<section class="kl-growth-section kl-growth-section--compact">
+        <div class="container">
+            <aside class="kl-growth-scope-note fade-in">
+                <strong>Scope clarity:</strong> ${note}
+            </aside>
+        </div>
+    </section>`;
+}
+
 function renderCta(cta) {
   const title = cta?.title || 'Ready to plan your build?';
   const text = cta?.text || 'Tell us what is broken, what you are trying to grow, and what systems you already use.';
@@ -280,12 +378,17 @@ function renderServicePage(p) {
         </div>
     </section>
 
+    ${renderContext(p.context)}
     ${renderSplit(p.problem)}
     ${renderFeatures(p.features)}
     ${renderMediaBlocks(p.mediaBlocks)}
+    ${renderDeliverables(p.deliverables)}
+    ${renderConnections(p.connections)}
     ${renderProcess(p.process)}
+    ${renderOutcomes(p.outcomes)}
     ${renderIdealFor(p.idealFor)}
     ${renderProof(p.proof)}
+    ${renderProofGrid(p.proofGrid)}
     ${renderFaq(p.faq)}
     ${renderLinks(p.links, p.pricingNote)}
     ${renderCta(p.cta)}
@@ -345,6 +448,7 @@ function renderCaseStudy(c) {
         </div>
     </section>
 
+    ${renderContext(c.context)}
     <section class="kl-growth-section">
         <div class="container">
             <div class="section-header fade-in">
@@ -358,7 +462,11 @@ function renderCaseStudy(c) {
 
     ${renderMediaBlocks(c.mediaBlocks)}
     ${c.timeline ? renderProcess(c.timeline, 'Workflow snapshot') : ''}
+    ${renderDeliverables(c.deliverables)}
+    ${renderConnections(c.connections)}
+    ${renderScopeNote(c.scopeNote)}
     ${renderProof(c.proof)}
+    ${renderProofGrid(c.proofGrid)}
     ${renderLinks(c.links)}
     ${renderCta({ title: 'Want a similar system?', text: c.cta })}
 

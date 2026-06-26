@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="preload" href="/header.html?v=20260626growth3" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="/footer.html?v=20260626growth3" as="fetch" crossorigin="anonymous">
-    <script defer src="/script.js?v=20260626growth3"></script>
+    <link rel="preload" href="/header.html?v=20260626growth4" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="/footer.html?v=20260626growth4" as="fetch" crossorigin="anonymous">
+    <script defer src="/script.js?v=20260626growth4"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Automated Stripe invoicing from completed jobs — payment links, status sync, and owner visibility for service businesses.">
@@ -19,7 +19,7 @@
     <meta name="twitter:description" content="Automated Stripe invoicing from completed jobs — payment links, status sync, and owner visibility for service businesses.">
     <title>Stripe Invoice Automation | Knight Logics</title>
     <link rel="canonical" href="https://knightlogics.com/stripe-invoice-automation">
-    <link rel="stylesheet" href="/style.css?v=20260626growth3">
+    <link rel="stylesheet" href="/style.css?v=20260626growth4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VX36QR7HJW');</script>
     
@@ -46,6 +46,17 @@
         </div>
     </section>
 
+    <section class="kl-growth-section kl-growth-section--compact">
+        <div class="container">
+            <div class="kl-growth-context fade-in">
+                <h2>Invoice triggers tied to job milestones</h2>
+                <p>Stripe invoice automation connects completed job status, ticket closeout, or portal milestones to payment link or invoice draft creation — with paid status syncing back to the job record.</p>
+                <p>Vendoroo-style active build uses this pattern: field completion triggers billing; webhook updates job screen when customer pays.</p>
+                <p>api-integration-services provides webhook receivers with retry logic and visible failures — not one-off scripts.</p>
+                
+            </div>
+        </div>
+    </section>
     <section class="kl-growth-section kl-growth-section--alt">
         <div class="container">
             <div class="kl-growth-split fade-in">
@@ -117,6 +128,39 @@
             </div>
         </div>
     </section>
+    <section class="kl-growth-section kl-growth-section--alt">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Typical deliverables</h2>
+                <p>Scoped to your trade, territory, and ops maturity — not a one-size package.</p>
+            </div>
+            <div class="kl-growth-deliverables">
+                <article class="kl-growth-deliverable fade-in">
+                    <h3>Billing triggers</h3>
+                    <ul class="kl-growth-list"><li>Completion status → invoice or payment link rules</li><li>Line item templates from job record fields</li><li>Customer email delivery via Stripe</li><li>Draft vs auto-send configuration per client</li></ul>
+                </article>
+                <article class="kl-growth-deliverable fade-in">
+                    <h3>Status sync</h3>
+                    <ul class="kl-growth-list"><li>Stripe webhook paid event → job record update</li><li>Failed payment visibility on owner dashboard</li><li>Idempotent webhook handling</li><li>Audit log for accounting review</li></ul>
+                </article>
+                <article class="kl-growth-deliverable fade-in">
+                    <h3>Integration scope</h3>
+                    <ul class="kl-growth-list"><li>ticketing-invoicing-job-workflows as parent lane</li><li>job-photo-pdf-reports before invoice send</li><li>Optional Email-Agent notify on invoice sent</li><li>Multi-job batch billing rules when needed</li></ul>
+                </article>
+            </div>
+        </div>
+    </section>
+    <section class="kl-growth-section">
+        <div class="container">
+            <div class="kl-growth-connection fade-in">
+                <span class="kl-growth-kicker">Billing lane</span>
+                <h2>Part of ticket-to-invoice path</h2>
+                <p>Stripe automation rarely stands alone — it closes the loop on field ops workflows.</p>
+                <ul class="kl-growth-list"><li>ticketing-invoicing-job-workflows flagship</li><li>case-study-vendoroo-ticket-invoice-system reference</li><li>api-integration-services for webhooks</li><li>business-dashboard-development for open vs paid view</li></ul>
+                <div class="kl-growth-links"><a href="/ticketing-invoicing-job-workflows">Job Workflows</a><a href="/case-study-vendoroo-ticket-invoice-system">Vendoroo Case Study</a><a href="/api-integration-services">API Integrations</a></div>
+            </div>
+        </div>
+    </section>
     <section class="kl-growth-section">
         <div class="container">
             <div class="section-header fade-in">
@@ -158,6 +202,32 @@
     <section class="kl-growth-section kl-growth-section--alt">
         <div class="container">
             <div class="section-header fade-in">
+                <h2>Outcomes we design for</h2>
+                <p>Measurable operator results — not vanity dashboards.</p>
+            </div>
+            <div class="kl-growth-outcomes">
+                <article class="kl-growth-outcome fade-in">
+                    <h3>Faster cash collection</h3>
+                    <p>Invoices generate at closeout — not days later from manual entry.</p>
+                </article>
+                <article class="kl-growth-outcome fade-in">
+                    <h3>Single job truth</h3>
+                    <p>Payment status visible on job screen alongside photos and notes.</p>
+                </article>
+                <article class="kl-growth-outcome fade-in">
+                    <h3>Fewer billing errors</h3>
+                    <p>Line items pull from job record — not retyped from portal PDFs.</p>
+                </article>
+                <article class="kl-growth-outcome fade-in">
+                    <h3>Webhook reliability</h3>
+                    <p>Paid events sync with retry and operator-visible failures.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+    <section class="kl-growth-section kl-growth-section--alt">
+        <div class="container">
+            <div class="section-header fade-in">
                 <h2>Best fit for</h2>
             </div>
             <div class="kl-growth-ideal-grid">
@@ -181,6 +251,40 @@
                     <p>Active build connecting ticket intake, mobile jobs, and Stripe invoicing — reference for this lane.</p>
                     <a href="/case-study-vendoroo-ticket-invoice-system" class="btn-secondary">Vendoroo case study</a>
                 </div>
+            </div>
+        </div>
+    </section>
+    <section class="kl-growth-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Related proof &amp; examples</h2>
+                <p>Live builds and internal workflows behind this service lane.</p>
+            </div>
+            <div class="kl-growth-proof-grid">
+                <a class="kl-growth-proof-card fade-in" href="/case-study-knight-group">
+                    <img src="/images/KGHero.webp" alt="Knight Group handyman website" loading="lazy" decoding="async">
+                    <div class="kl-growth-proof-card-copy">
+                        <span class="kl-growth-proof-badge">Live client</span>
+                        <h3>Knight Group — 97-page growth architecture</h3>
+                        <p>96/100/100 Lighthouse scores, booking flow, and kg OutreachEngine lane with real booked work.</p>
+                    </div>
+                </a>
+                <a class="kl-growth-proof-card fade-in" href="/case-study-knight-command">
+                    <img src="/images/KnightLogicsLogo2.webp" alt="Knight Command admin shell" loading="lazy" decoding="async">
+                    <div class="kl-growth-proof-card-copy">
+                        <span class="kl-growth-proof-badge">Internal system</span>
+                        <h3>Knight Command ops shell</h3>
+                        <p>Unified /admin tabs for CRM, email, social, referrals, and logs on ports 5050–8501.</p>
+                    </div>
+                </a>
+                <a class="kl-growth-proof-card fade-in" href="/case-study-screen-team">
+                    <img src="/images/screen-team-showcase-800.webp" alt="Screen Team pool enclosure website" loading="lazy" decoding="async">
+                    <div class="kl-growth-proof-card-copy">
+                        <span class="kl-growth-proof-badge">Live client</span>
+                        <h3>Screen Team — deep local SEO</h3>
+                        <p>36+ service and city pages for pool enclosure quotes across Tampa Bay metros.</p>
+                    </div>
+                </a>
             </div>
         </div>
     </section>

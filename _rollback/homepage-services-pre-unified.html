@@ -1,0 +1,20 @@
+<!--
+  ROLLBACK SNAPSHOT — Services section before unified 4-card grid (2026-06-06)
+  To revert: restore these two blocks in index.html and remove services--unified-v1 CSS/JS.
+  Git: git checkout HEAD -- index.html style.css script.js (if committed before this change)
+-->
+
+<!-- ORIGINAL #services opening (line ~2100) -->
+<section id="services" class="services">
+
+<!-- ORIGINAL first services-horizontal (2 cards: Websites + E-Commerce) — see git history / index.html before unified pass -->
+
+<!-- ORIGINAL second section (removed when unified) — was ~line 2583 -->
+<section class="services">
+    <div class="container">
+        <div class="services-section-break">...</div>
+        <div class="services-horizontal"><!-- Desktop Apps + Automation --></div>
+        <div class="services-showcase"><!-- Shipped Software --></div>
+        <div class="services-cta">...</div>
+    </div>
+</section>

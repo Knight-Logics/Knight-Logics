@@ -350,6 +350,56 @@
       "source": "/brochure",
       "destination": "/?utm_source=brochure&utm_medium=print&utm_campaign=kl_site_visit",
       "permanent": false
+    },
+    {
+      "source": "/business-growth-systems.html",
+      "destination": "/business-growth-systems",
+      "permanent": true
+    },
+    {
+      "source": "/crm-outreach-lead-generation.html",
+      "destination": "/crm-outreach-lead-generation",
+      "permanent": true
+    },
+    {
+      "source": "/ticketing-invoicing-job-workflows.html",
+      "destination": "/ticketing-invoicing-job-workflows",
+      "permanent": true
+    },
+    {
+      "source": "/referral-network-systems.html",
+      "destination": "/referral-network-systems",
+      "permanent": true
+    },
+    {
+      "source": "/local-visibility-systems.html",
+      "destination": "/local-visibility-systems",
+      "permanent": true
+    },
+    {
+      "source": "/website-growth-audit.html",
+      "destination": "/website-growth-audit",
+      "permanent": true
+    },
+    {
+      "source": "/online-ordering-systems.html",
+      "destination": "/online-ordering-systems",
+      "permanent": true
+    },
+    {
+      "source": "/contractor-growth-systems.html",
+      "destination": "/contractor-growth-systems",
+      "permanent": true
+    },
+    {
+      "source": "/home-service-business-growth-systems.html",
+      "destination": "/home-service-business-growth-systems",
+      "permanent": true
+    },
+    {
+      "source": "/performance-partner-program.html",
+      "destination": "/performance-partner-program",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -536,6 +586,46 @@
     {
       "source": "/referral-verify",
       "destination": "/referral-verify.html"
+    },
+    {
+      "source": "/business-growth-systems",
+      "destination": "/business-growth-systems.html"
+    },
+    {
+      "source": "/crm-outreach-lead-generation",
+      "destination": "/crm-outreach-lead-generation.html"
+    },
+    {
+      "source": "/ticketing-invoicing-job-workflows",
+      "destination": "/ticketing-invoicing-job-workflows.html"
+    },
+    {
+      "source": "/referral-network-systems",
+      "destination": "/referral-network-systems.html"
+    },
+    {
+      "source": "/local-visibility-systems",
+      "destination": "/local-visibility-systems.html"
+    },
+    {
+      "source": "/website-growth-audit",
+      "destination": "/website-growth-audit.html"
+    },
+    {
+      "source": "/online-ordering-systems",
+      "destination": "/online-ordering-systems.html"
+    },
+    {
+      "source": "/contractor-growth-systems",
+      "destination": "/contractor-growth-systems.html"
+    },
+    {
+      "source": "/home-service-business-growth-systems",
+      "destination": "/home-service-business-growth-systems.html"
+    },
+    {
+      "source": "/performance-partner-program",
+      "destination": "/performance-partner-program.html"
     }
   ],
   "headers": [

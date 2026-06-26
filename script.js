@@ -168,11 +168,11 @@ async function loadHeaderFooter() {
         };
 
         const headerCandidates = [
-            new URL('/header.html?v=20260625mobilemenu4', window.location.origin),
+            new URL('/header.html?v=20260626growth1', window.location.origin),
             new URL('/header', window.location.origin)
         ];
         const footerCandidates = [
-            new URL('/footer.html?v=20260625mobilemenu4', window.location.origin),
+            new URL('/footer.html?v=20260626growth1', window.location.origin),
             new URL('/footer', window.location.origin)
         ];
 
@@ -1300,8 +1300,11 @@ function initNavigation() {
 
             // Mouse click fallback for non-hover devices (e.g. keyboard navigation)
             toggle.addEventListener('click', (e) => {
+                const href = toggle.getAttribute('href') || '';
+                if (href === '#' || href.startsWith('#')) {
+                    e.preventDefault();
+                }
                 if (desktopHover.matches) return; // handled by hover
-                e.preventDefault();
                 e.stopPropagation();
                 dropdown.classList.toggle('active');
             });

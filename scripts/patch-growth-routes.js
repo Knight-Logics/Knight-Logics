@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { allSlugs, VER } = require('./generate-growth-expansion');
+const { VER, allSlugs } = require('./growth-content');
 
 const root = path.join(__dirname, '..');
 const existingSlugs = [

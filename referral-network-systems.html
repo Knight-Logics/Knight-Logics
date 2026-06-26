@@ -1,81 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="preload" href="/header.html?v=20260626growth2" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="/footer.html?v=20260626growth2" as="fetch" crossorigin="anonymous">
-    <script defer src="/script.js?v=20260626growth2"></script>
+    <link rel="preload" href="/header.html?v=20260626growth3" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="/footer.html?v=20260626growth3" as="fetch" crossorigin="anonymous">
+    <script defer src="/script.js?v=20260626growth3"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Referral tracking systems with QR brochures, partner landing pages, attribution, and payout visibility for Tampa Bay service businesses.">
+    <meta name="description" content="Referral tracking with QR brochures, /ref/:partner paths, Neon Postgres events, referral-dashboard payouts, and Stripe webhook settlement.">
     <meta name="author" content="Nicholas Knight">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Referral Network Systems | Knight Logics">
-    <meta property="og:description" content="Referral tracking systems with QR brochures, partner landing pages, attribution, and payout visibility for Tampa Bay service businesses.">
+    <meta property="og:description" content="Referral tracking with QR brochures, /ref/:partner paths, Neon Postgres events, referral-dashboard payouts, and Stripe webhook settlement.">
     <meta property="og:url" content="https://knightlogics.com/referral-network-systems">
     <meta property="og:site_name" content="Knight Logics">
     <meta property="og:image" content="https://knightlogics.com/images/KnightLogicsLogo2.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Referral Network Systems | Knight Logics">
-    <meta name="twitter:description" content="Referral tracking systems with QR brochures, partner landing pages, attribution, and payout visibility for Tampa Bay service businesses.">
+    <meta name="twitter:description" content="Referral tracking with QR brochures, /ref/:partner paths, Neon Postgres events, referral-dashboard payouts, and Stripe webhook settlement.">
     <title>Referral Network Systems | Knight Logics</title>
     <link rel="canonical" href="https://knightlogics.com/referral-network-systems">
-    <link rel="stylesheet" href="/style.css?v=20260626growth2">
+    <link rel="stylesheet" href="/style.css?v=20260626growth3">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-VX36QR7HJW');
-    </script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VX36QR7HJW');</script>
+    
 </head>
-<body class="kl-growth-page page-referral-network-systems">
+<body class="kl-growth-page kl-growth-page--pro page-referral-network-systems">
     <div id="header-container"></div>
 
     <section class="svc-hero">
         <div class="container">
-            <div class="svc-hero-inner fade-in">
-                <nav class="kl-breadcrumb" aria-label="Breadcrumb">
-                    <a href="/">Home</a>
-                    <span>/</span>
-                    <span>Referral Network Systems</span>
-                </nav>
-                <span class="svc-eyebrow"><i class="fas fa-layer-group"></i> Partner growth</span>
-                <h1>Referral Network & Tracking Systems</h1>
-                <p>Stronger than a simple referral page — QR brochures, referral codes, partner landing pages, tracked forms, lead-source dashboards, and payout visibility.</p>
-                <div class="svc-cta-row">
-                    <a href="/book-consultation" class="btn-primary">Book a Consultation</a>
-                    <a href="/website-growth-audit" class="btn-secondary">Free Growth Audit</a>
+            <div class="kl-growth-hero-grid">
+                <div class="svc-hero-inner fade-in">
+                    <nav class="kl-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span>Referral Network Systems</span></nav>
+                    <span class="svc-eyebrow"><i class="fas fa-handshake"></i> Partner growth</span>
+                    <h1>Referral Network & Tracking Systems</h1>
+                    <p>Stronger than a static referral page — partner codes, QR brochures, tracked landing paths, attribution dashboards, and payout visibility with Stripe webhook settlement.</p>
+                    <div class="kl-growth-stats fade-in">
+                <div class="kl-growth-stat">
+                    <span class="kl-growth-stat-value">/ref/:partner</span>
+                    <span class="kl-growth-stat-label">Tracked entry paths</span>
+                </div>
+                <div class="kl-growth-stat">
+                    <span class="kl-growth-stat-value">Neon</span>
+                    <span class="kl-growth-stat-label">Postgres event log</span>
+                </div>
+                <div class="kl-growth-stat">
+                    <span class="kl-growth-stat-value">QR</span>
+                    <span class="kl-growth-stat-label">Brochure-ready links</span>
+                </div>
+            </div>
+                    <div class="svc-cta-row">
+                        <a href="/book-consultation" class="btn-primary">Book a Consultation</a>
+                        <a href="/website-growth-audit" class="btn-secondary">Free Growth Audit</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section class="kl-growth-section kl-growth-section--alt">
+        <div class="container">
+            <div class="kl-growth-split fade-in">
+                <div class="kl-growth-split-copy">
+                    <span class="kl-growth-kicker">The problem</span>
+                    <h2>Partner referrals are impossible to attribute fairly</h2>
+                    <p>Brochure QR scans, word-of-mouth, and form fills all look the same in analytics. Partners dispute who sent the lead. Payout status lives in spreadsheets.</p>
+                    <ul class="kl-growth-list"><li>No unique path per partner or trade lane</li><li>Consult forms do not carry referral codes reliably</li><li>Payout earned vs paid is unclear to partners</li><li>Scaling a local trade network without attribution breaks trust</li></ul>
+                </div>
+                <div class="kl-growth-split-media">
+                    <div class="kl-growth-media kl-growth-media--solo">
+            <video autoplay muted loop playsinline preload="metadata" aria-label="Demo video">
+                <source src="/videos/automation/referral-system-dashboard.mp4" type="video/mp4">
+                <track kind="captions" srclang="en" label="English captions" src="/videos/automation/referral-system-dashboard.vtt" default>
+            </video>
+            
+        </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <section class="svc-features">
+    <section class="kl-growth-section">
         <div class="container">
             <div class="section-header fade-in">
                 <h2>What this includes</h2>
-                <p>Practical systems tied to real operations — not generic agency deliverables.</p>
+                <p>Built from live Knight Logics workflows — not generic agency checklists.</p>
             </div>
-            <div class="kl-growth-stack">
-                <div class="kl-growth-stack-item fade-in"><h3>Referral codes & QR</h3><p>Brochure-ready QR links and partner codes that attribute leads to the right source.</p></div>
-                <div class="kl-growth-stack-item fade-in"><h3>Partner landing pages</h3><p>Tracked forms and branded entry points for each partner or trade lane.</p></div>
-                <div class="kl-growth-stack-item fade-in"><h3>Attribution dashboard</h3><p>See which partners, campaigns, and QR scans are producing consults and jobs.</p></div>
-                <div class="kl-growth-stack-item fade-in"><h3>Payout visibility</h3><p>Status tracking for earned referral fees with clear rules on who owns the customer.</p></div>
-                <div class="kl-growth-stack-item fade-in"><h3>Network option</h3><p>Knight Local Partner Network concept for trusted Tampa Bay trade partners routing work responsibly.</p></div>
-            </div>
-            <div class="kl-growth-links fade-in">
-                <a href="/referral-program">Join Referral Program</a>
-                <a href="/automation">Automation Systems</a>
-                <a href="/business-growth-systems">Growth Systems</a>
+            <div class="kl-growth-features">
+                <article class="kl-growth-feature fade-in">
+                    <div class="kl-growth-feature-icon" aria-hidden="true"><i class="fas fa-qrcode"></i></div>
+                    <p class="kl-growth-feature-label">Entry</p>
+                    <h3>QR brochures & codes</h3>
+                    <p>Print-ready QR links and partner codes that attribute every consult to the right source.</p>
+                </article>
+                <article class="kl-growth-feature fade-in">
+                    <div class="kl-growth-feature-icon" aria-hidden="true"><i class="fas fa-link"></i></div>
+                    <p class="kl-growth-feature-label">Routing</p>
+                    <h3>/ref/:partner paths</h3>
+                    <p>Branded landing paths with tracked forms — not generic UTM hacks.</p>
+                </article>
+                <article class="kl-growth-feature fade-in">
+                    <div class="kl-growth-feature-icon" aria-hidden="true"><i class="fas fa-database"></i></div>
+                    <p class="kl-growth-feature-label">Events</p>
+                    <h3>Neon Postgres logging</h3>
+                    <p>Scan, form, and conversion events stored for reporting and dispute resolution.</p>
+                </article>
+                <article class="kl-growth-feature fade-in">
+                    <div class="kl-growth-feature-icon" aria-hidden="true"><i class="fas fa-tachometer-alt"></i></div>
+                    <p class="kl-growth-feature-label">Dashboard</p>
+                    <h3>Referral dashboard</h3>
+                    <p>/referral-dashboard with partner visibility into leads, status, and payout progress.</p>
+                </article>
+                <article class="kl-growth-feature fade-in">
+                    <div class="kl-growth-feature-icon" aria-hidden="true"><i class="fas fa-money-check-alt"></i></div>
+                    <p class="kl-growth-feature-label">Payouts</p>
+                    <h3>Stripe webhook payouts</h3>
+                    <p>Earned referral fees tracked with webhook-driven payout status.</p>
+                </article>
+                <article class="kl-growth-feature fade-in">
+                    <div class="kl-growth-feature-icon" aria-hidden="true"><i class="fas fa-network-wired"></i></div>
+                    <p class="kl-growth-feature-label">Network</p>
+                    <h3>Local partner network</h3>
+                    <p>Framework for trusted Tampa Bay trade partners routing work responsibly.</p>
+                </article>
             </div>
         </div>
     </section>
-
+    <section class="kl-growth-section">
+        <div class="container">
+            <div class="kl-growth-split fade-in">
+                <div class="kl-growth-split-copy">
+                    <span class="kl-growth-kicker">Live system</span>
+                    <h2>Referral dashboard & partner paths</h2>
+                    <p>The same referral infrastructure behind Knight Logics partner program — QR, codes, events, and payout visibility in production.</p>
+                    
+                </div>
+                <div class="kl-growth-split-media"><div class="kl-growth-media kl-growth-media--solo">
+            <video autoplay muted loop playsinline preload="metadata" aria-label="Partner attribution dashboard">
+                <source src="/videos/automation/referral-system-dashboard.mp4" type="video/mp4">
+                <track kind="captions" srclang="en" label="English captions" src="/videos/automation/referral-system-dashboard.vtt" default>
+            </video>
+            
+        </div></div>
+            </div>
+        </div>
+    </section>
+    <section class="kl-growth-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>How we build it</h2>
+                <p>A clear path from intake to launch — scoped to what your team will actually use.</p>
+            </div>
+            <div class="kl-growth-process">
+                <div class="kl-growth-step fade-in">
+                    <span class="kl-growth-step-num">1</span>
+                    <div>
+                        <h3>Partner rules & fees</h3>
+                        <p>Document attribution windows, fee structure, and who owns the customer relationship.</p>
+                    </div>
+                </div>
+                <div class="kl-growth-step fade-in">
+                    <span class="kl-growth-step-num">2</span>
+                    <div>
+                        <h3>Codes & landing paths</h3>
+                        <p>Deploy /ref/:partner routes and brochure QR assets per partner.</p>
+                    </div>
+                </div>
+                <div class="kl-growth-step fade-in">
+                    <span class="kl-growth-step-num">3</span>
+                    <div>
+                        <h3>Event logging & dashboard</h3>
+                        <p>Neon Postgres events and referral-dashboard views for partners and owners.</p>
+                    </div>
+                </div>
+                <div class="kl-growth-step fade-in">
+                    <span class="kl-growth-step-num">4</span>
+                    <div>
+                        <h3>Payout workflow</h3>
+                        <p>Stripe webhook settlement with clear earned vs paid reporting.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="kl-growth-section kl-growth-section--alt">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Best fit for</h2>
+            </div>
+            <div class="kl-growth-ideal-grid">
+                <div class="kl-growth-ideal-card fade-in"><i class="fas fa-check-circle" aria-hidden="true"></i><p>Trades with complementary partners who send real work</p></div>
+                <div class="kl-growth-ideal-card fade-in"><i class="fas fa-check-circle" aria-hidden="true"></i><p>Businesses printing brochures or yard signs with QR CTAs</p></div>
+                <div class="kl-growth-ideal-card fade-in"><i class="fas fa-check-circle" aria-hidden="true"></i><p>Owners scaling referral fees without spreadsheet disputes</p></div>
+                <div class="kl-growth-ideal-card fade-in"><i class="fas fa-check-circle" aria-hidden="true"></i><p>Networks testing Knight Local Partner Network concepts</p></div>
+            </div>
+        </div>
+    </section>
+    <section class="kl-growth-section">
+        <div class="container">
+            <div class="kl-growth-proof fade-in">
+                <div class="kl-growth-proof-media">
+                    <img src="/images/KnightLogicsLogo2.webp" alt="Knight Logics referral systems" loading="lazy" decoding="async">
+                    <span class="kl-growth-proof-badge">Live workflow</span>
+                </div>
+                <div class="kl-growth-proof-copy">
+                    <span class="kl-growth-kicker">Proof</span>
+                    <h2>Referral network system in production</h2>
+                    <p>QR brochures, partner codes, Neon event logging, and referral-dashboard payout visibility — live behind Knight Logics partner program.</p>
+                    <a href="/case-study-referral-network-system" class="btn-secondary">Referral system case study</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="kl-growth-section kl-growth-section--alt">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Common questions</h2>
+            </div>
+            <div class="kl-growth-faq">
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>How do partners check their referrals?</summary>
+                    <p>Partners use /referral-dashboard for lead status, attribution, and payout progress tied to their code or QR path.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>What counts as a attributed lead?</summary>
+                    <p>Rules are documented upfront — typically tracked form submits or booked consults within the agreed window from /ref/:partner entry.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>Can this work without Stripe payouts?</summary>
+                    <p>Yes — attribution and dashboard visibility can launch first; Stripe webhook payouts add automated settlement when you are ready.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do partners check their referrals?","acceptedAnswer":{"@type":"Answer","text":"Partners use /referral-dashboard for lead status, attribution, and payout progress tied to their code or QR path."}},{"@type":"Question","name":"What counts as a attributed lead?","acceptedAnswer":{"@type":"Answer","text":"Rules are documented upfront — typically tracked form submits or booked consults within the agreed window from /ref/:partner entry."}},{"@type":"Question","name":"Can this work without Stripe payouts?","acceptedAnswer":{"@type":"Answer","text":"Yes — attribution and dashboard visibility can launch first; Stripe webhook payouts add automated settlement when you are ready."}}]}</script>
+    <section class="kl-growth-section kl-growth-section--compact">
+        <div class="container">
+            
+            <div class="kl-growth-links fade-in"><a href="/referral-program">Join Referral Program</a>
+                <a href="/case-study-referral-network-system">Referral Case Study</a>
+                <a href="/business-growth-systems">Growth Systems</a>
+                <a href="/automation">Automation Systems</a></div>
+        </div>
+    </section>
     <section class="svc-cta-band">
         <div class="container">
             <div class="svc-cta-band-inner fade-in">
-                <h2>Ready to plan your build?</h2>
-                <p>Tell us what is broken, what you are trying to grow, and what systems you already use. We will recommend the leanest path forward.</p>
+                <h2>Building a partner referral network?</h2>
+                <p>We will scope codes, QR assets, dashboard access, and payout rules for your trade lane.</p>
                 <a href="/book-consultation" class="btn-primary">Book a Free Consultation</a>
             </div>
         </div>

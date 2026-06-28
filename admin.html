@@ -6,7 +6,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Knight Command — Admin</title>
     <link rel="icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/admin/admin.css?v=20260613admin5">
+    <link rel="stylesheet" href="/admin/admin.css?v=20260627admin1">
 </head>
 <body>
 
@@ -66,7 +66,7 @@
             <div class="kc-grid" id="overview-grid"></div>
             <div class="kc-card">
                 <h3>Quick open</h3>
-                <p style="margin-bottom:10px;">Opens cloud ops when configured, otherwise local ports on this PC:</p>
+                <p style="margin-bottom:10px;">Opens the secure cloud apps. Local ports are used only during local development:</p>
                 <div style="display:flex;gap:8px;flex-wrap:wrap;">
                     <button type="button" class="kc-btn kc-btn-ghost" data-open-module="outreach" data-open-local="http://127.0.0.1:5050/">Outreach</button>
                     <button type="button" class="kc-btn kc-btn-ghost" data-open-module="email" data-open-local="http://127.0.0.1:5100/">Email Agent</button>
@@ -87,8 +87,8 @@
         <div class="kc-embed-wrap">
             <div class="kc-embed-status" id="embed-status-outreach">
                 <strong data-embed-title>Outreach CRM</strong>
-                <p data-embed-detail>Loading local Knight Command…</p>
-                <button type="button" class="kc-btn kc-btn-primary" data-open-local="http://127.0.0.1:5050/">Open :5050 ↗</button>
+                <p data-embed-detail>Connecting to cloud Outreach CRM…</p>
+                <button type="button" class="kc-btn kc-btn-primary" data-open-local="http://127.0.0.1:5050/">Open Outreach CRM ↗</button>
             </div>
             <iframe id="outreach-frame" title="Outreach CRM" src="about:blank"></iframe>
         </div>
@@ -98,8 +98,8 @@
         <div class="kc-embed-wrap">
             <div class="kc-embed-status" id="embed-status-email">
                 <strong data-embed-title>Email Agent</strong>
-                <p data-embed-detail>Loading Email Agent…</p>
-                <button type="button" class="kc-btn kc-btn-primary" data-open-local="http://127.0.0.1:5100/">Open :5100 ↗</button>
+                <p data-embed-detail>Connecting to cloud Email Agent…</p>
+                <button type="button" class="kc-btn kc-btn-primary" data-open-local="http://127.0.0.1:5100/?embed=1">Open Email Agent ↗</button>
             </div>
             <iframe id="email-frame" title="Email Agent" src="about:blank"></iframe>
         </div>
@@ -121,7 +121,7 @@
             <div class="kc-embed-status" id="embed-status-social-poster">
                 <strong data-embed-title>Social Poster</strong>
                 <p data-embed-detail>Loading Social Poster…</p>
-                <button type="button" class="kc-btn kc-btn-primary" data-open-local="http://127.0.0.1:8501/">Open :8501 ↗</button>
+                <button type="button" class="kc-btn kc-btn-primary" data-open-local="http://127.0.0.1:8501/?embed=true">Open :8501 ↗</button>
             </div>
             <iframe id="social-poster-frame" title="Social Poster" src="about:blank"></iframe>
         </div>
@@ -161,6 +161,6 @@
     </section>
 </div>
 
-<script src="/admin/admin.js?v=20260613admin5" defer></script>
+<script src="/admin/admin.js?v=20260628cloud1" defer></script>
 </body>
 </html>

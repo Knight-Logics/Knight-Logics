@@ -272,6 +272,16 @@ body {
     text-align: center;
     background: rgba(5, 10, 20, 0.94);
     z-index: 2;
+    pointer-events: auto;
+}
+
+.kc-embed-status:not(.open) {
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.kc-embed-status.open {
+    display: flex;
 }
 
 .kc-referrals-fallback {

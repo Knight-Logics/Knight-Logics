@@ -63,6 +63,20 @@ async function main() {
     if (robots.includes('Disallow: /admin')) pass('robots.txt blocks /admin');
     else fail('robots.txt blocks /admin');
 
+    const adminApiSource = read('api/admin.js');
+    const adminClientSource = read('admin/admin.js');
+    if (
+        adminApiSource.includes("process.env.KL_OUTREACH_URL || 'https://ops.knightlogics.com'") &&
+        adminApiSource.includes("process.env.KL_EMAIL_AGENT_URL || 'https://mail.knightlogics.com'")
+    ) pass('cloud ops defaults are present');
+    else fail('cloud ops defaults are present');
+
+    if (
+        adminClientSource.includes('serviceName && isLocalTarget') &&
+        adminClientSource.includes("prefix === 'email' && isLocalTarget")
+    ) pass('remote embeds cannot invoke localhost service launchers');
+    else fail('remote embeds cannot invoke localhost service launchers');
+
     try {
         const adminPage = await fetch(`${base}/admin`);
         if (adminPage.ok) pass('GET /admin', String(adminPage.status));
@@ -72,11 +86,11 @@ async function main() {
         if (html.includes('Knight Command') && html.includes('admin/admin.js')) pass('/admin HTML shell markers');
         else fail('/admin HTML shell markers');
 
-        const css = await fetch(`${base}/admin/admin.css?v=20260613admin2`);
+        const css = await fetch(`${base}/admin/admin.css?v=20260627admin1`);
         if (css.ok) pass('GET /admin/admin.css');
         else fail('GET /admin/admin.css', String(css.status));
 
-        const js = await fetch(`${base}/admin/admin.js?v=20260613admin2`);
+        const js = await fetch(`${base}/admin/admin.js?v=20260628cloud1`);
         if (js.ok) pass('GET /admin/admin.js');
         else fail('GET /admin/admin.js', String(js.status));
 
@@ -120,6 +134,12 @@ async function main() {
                 });
                 if (health.res.status === 200 && health.data && health.data.ok) {
                     pass('POST /api/admin health with session token');
+                    const remote = health.data.remoteModules || {};
+                    if (
+                        remote.outreach?.base === 'https://ops.knightlogics.com' &&
+                        remote.email?.base === 'https://mail.knightlogics.com'
+                    ) pass('health exposes Outreach and Email cloud modules');
+                    else fail('health exposes Outreach and Email cloud modules', JSON.stringify(remote));
                 } else {
                     fail('POST /api/admin health with session token', JSON.stringify(health.data));
                 }

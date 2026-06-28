@@ -107,14 +107,14 @@ async function handleHealth(req, res, body) {
         {
             key: 'outreach',
             label: 'Outreach CRM',
-            envUrl: process.env.KL_OUTREACH_URL,
+            envUrl: process.env.KL_OUTREACH_URL || 'https://ops.knightlogics.com',
             embedPath: '/?embed=1&module=outreach',
             probePath: '/api/ops-health',
         },
         {
             key: 'email',
             label: 'Email Agent',
-            envUrl: process.env.KL_EMAIL_AGENT_URL,
+            envUrl: process.env.KL_EMAIL_AGENT_URL || 'https://mail.knightlogics.com',
             embedPath: '/?embed=1',
             probePath: '/api/health',
         },
@@ -134,22 +134,24 @@ async function handleHealth(req, res, body) {
         },
     ];
 
-    for (const cfg of remoteConfig) {
+    const probeRemoteModule = async (cfg) => {
         const base = String(cfg.envUrl || '').trim().replace(/\/+$/, '');
-        if (!base) continue;
+        if (!base) return null;
         let origin = base;
         try {
             origin = new URL(base).origin;
         } catch (error) {
-            remoteModules[cfg.key] = {
-                label: cfg.label,
-                base,
-                origin: null,
-                url: base + cfg.embedPath,
-                status: 'error',
-                detail: `Invalid KL URL: ${error.message}`,
+            return {
+                key: cfg.key,
+                module: {
+                    label: cfg.label,
+                    base,
+                    origin: null,
+                    url: base + cfg.embedPath,
+                    status: 'error',
+                    detail: `Invalid KL URL: ${error.message}`,
+                },
             };
-            continue;
         }
         let status = 'pending';
         let detail = 'Configured — browser will connect on tab open.';
@@ -157,7 +159,7 @@ async function handleHealth(req, res, body) {
             try {
                 const probeUrl = base + cfg.probePath;
                 const controller = new AbortController();
-                const timer = setTimeout(() => controller.abort(), 8000);
+                const timer = setTimeout(() => controller.abort(), 5000);
                 const response = await fetch(probeUrl, {
                     method: 'GET',
                     headers: { 'X-KL-Ops-Token': opsSecret },
@@ -168,24 +170,32 @@ async function handleHealth(req, res, body) {
                     status = 'ok';
                     detail = 'Cloud ops host reachable from Vercel.';
                 } else {
-                    status = 'error';
-                    detail = `Probe HTTP ${response.status} at ${probeUrl}`;
+                    status = 'warning';
+                    detail = `Cloud URL configured; preflight returned HTTP ${response.status}. The browser will connect directly.`;
                 }
             } catch (error) {
-                status = 'error';
-                detail = `Probe failed: ${error.message}`;
+                status = 'warning';
+                detail = 'Cloud URL configured; preflight timed out. The browser will connect directly.';
             }
         } else {
             detail = 'Set KL_ADMIN_SECRET to enable server-side ops probe.';
         }
-        remoteModules[cfg.key] = {
-            label: cfg.label,
-            base,
-            origin,
-            url: base + cfg.embedPath,
-            status,
-            detail,
+        return {
+            key: cfg.key,
+            module: {
+                label: cfg.label,
+                base,
+                origin,
+                url: base + cfg.embedPath,
+                status,
+                detail,
+            },
         };
+    };
+
+    const probeResults = await Promise.all(remoteConfig.map((cfg) => probeRemoteModule(cfg)));
+    for (const row of probeResults) {
+        if (row) remoteModules[row.key] = row.module;
     }
 
     const notes = [
@@ -193,7 +203,7 @@ async function handleHealth(req, res, body) {
     ];
     if (Object.keys(remoteModules).length) {
         notes.push(
-            'Outreach and Email can run on a cloud ops host when KL_OUTREACH_URL / KL_EMAIL_AGENT_URL are set on Vercel. Knight Command embeds that host from any device.',
+            'Outreach and Email use their secure cloud ops hosts. Knight Command embeds them from any device.',
         );
     } else {
         notes.push(

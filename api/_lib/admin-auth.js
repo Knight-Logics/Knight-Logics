@@ -1,5 +1,7 @@
 'use strict';
 
+require('./load-dev-env').loadDevEnv();
+
 const crypto = require('crypto');
 const { neon } = require('@neondatabase/serverless');
 
@@ -127,8 +129,12 @@ async function verifySecret(provided) {
     if (verifyMasterSecret(provided)) {
         return { ok: true, role: ROLES.MASTER };
     }
-    if (await verifyOwnerSecret(provided)) {
-        return { ok: true, role: ROLES.OWNER };
+    try {
+        if (await verifyOwnerSecret(provided)) {
+            return { ok: true, role: ROLES.OWNER };
+        }
+    } catch (error) {
+        console.error('[admin-auth] owner credential lookup failed', error.message);
     }
     return { ok: false, role: null };
 }

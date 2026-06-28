@@ -47,6 +47,13 @@
         'social-poster': 'social_poster',
     };
 
+    var LOCAL_OPS_ORIGINS = [
+        'http://127.0.0.1:5050',
+        'http://127.0.0.1:5100',
+        'http://127.0.0.1:8500',
+        'http://127.0.0.1:8501',
+    ];
+
     var state = {
         token: '',
         secret: '',
@@ -135,7 +142,13 @@
         try {
             data = await response.json();
         } catch (err) {
-            data = { error: 'Non-JSON response (' + response.status + ')' };
+            if (response.status === 404 && path.indexOf('/api/') === 0) {
+                data = {
+                    error: 'API route not found. Run `npm run dev:full` (Vercel dev on port 4199), not plain static serve.',
+                };
+            } else {
+                data = { error: 'Non-JSON response (' + response.status + ')' };
+            }
         }
         if (!response.ok) {
             log('error', path + ' failed', { status: response.status, data: data });
@@ -178,25 +191,57 @@
         updateQuickOpenLinks();
     }
 
+    var TUNNEL_FALLBACK = {
+        outreach: 'https://ops.knightlogics.com/?embed=1&module=outreach',
+        email: 'https://mail.knightlogics.com/?embed=1',
+        'social-ops': 'https://social.knightlogics.com/?embed=true',
+        'social-poster': 'https://poster.knightlogics.com/?embed=true',
+    };
+
+    function isMixedContentLocal(url) {
+        return window.location.protocol === 'https:' &&
+            /^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?/i.test(String(url || ''));
+    }
+
+    function isLocalServiceUrl(url) {
+        return /^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?(?:\/|$)/i.test(String(url || ''));
+    }
+
+    function isUsableRemote(remote) {
+        return !!(remote && remote.url && remote.status !== 'error');
+    }
+
     function resolveModuleUrl(moduleId) {
         var remoteKey = REMOTE_MODULE_MAP[moduleId];
         var remote = remoteKey && state.remoteModules[remoteKey];
-        if (remote && remote.url && remote.status === 'ok') return remote.url;
         var cfg = MODULES[moduleId];
-        return (cfg && cfg.localUrl) || (cfg && cfg.embed) || '';
+        var localUrl = (cfg && cfg.localUrl) || (cfg && cfg.embed) || '';
+        // HTTPS admin cannot iframe http://127.0.0.1 — use cloud tunnel when configured.
+        if (isUsableRemote(remote)) return remote.url;
+        if (window.location.protocol === 'https:' && TUNNEL_FALLBACK[moduleId]) {
+            return TUNNEL_FALLBACK[moduleId];
+        }
+        if (localUrl && !isMixedContentLocal(localUrl)) return localUrl;
+        if (remote && remote.url) return remote.url;
+        return localUrl;
     }
 
     function isRemoteModule(moduleId) {
         var remoteKey = REMOTE_MODULE_MAP[moduleId];
         var remote = remoteKey && state.remoteModules[remoteKey];
-        return !!(remote && remote.url && remote.status === 'ok');
+        if (isUsableRemote(remote)) return true;
+        var cfg = MODULES[moduleId];
+        var localUrl = (cfg && cfg.localUrl) || '';
+        if (window.location.protocol === 'https:' && (TUNNEL_FALLBACK[moduleId] || (remote && remote.url))) return true;
+        if (isMixedContentLocal(localUrl) && remote && remote.url) return true;
+        return false;
     }
 
     function updateOverviewIntro(health) {
         var intro = $('overview-intro');
         if (!intro) return;
         var hasRemote = Object.keys(state.remoteModules).some(function (key) {
-            return state.remoteModules[key] && state.remoteModules[key].status === 'ok';
+            return isUsableRemote(state.remoteModules[key]);
         });
         if (hasRemote) {
             intro.innerHTML = '<strong>Referrals</strong> runs in the cloud. ' +
@@ -341,7 +386,9 @@
         if (!event.data) return;
 
         if (event.data.type === 'kl-ops-auth-request') {
-            if (state.opsOrigins.indexOf(event.origin) < 0) return;
+            var opsAllowed = state.opsOrigins.indexOf(event.origin) >= 0
+                || LOCAL_OPS_ORIGINS.indexOf(event.origin) >= 0;
+            if (!opsAllowed) return;
             if (!state.secret && !state.token) return;
             if (event.source && event.source.postMessage) {
                 event.source.postMessage({
@@ -366,9 +413,21 @@
         }, window.location.origin);
     });
 
-    function pushOpsAuthToFrame(frame) {
+    function pushOpsAuthToFrame(frame, localUrl) {
         if (!frame || !frame.contentWindow) return;
-        state.opsOrigins.forEach(function (origin) {
+        var origins = state.opsOrigins.slice();
+        if (localUrl) {
+            try {
+                var localOrigin = new URL(localUrl).origin;
+                if (origins.indexOf(localOrigin) < 0) origins.push(localOrigin);
+            } catch (err) {
+                log('warn', 'Could not parse local ops URL', { url: localUrl });
+            }
+        }
+        LOCAL_OPS_ORIGINS.forEach(function (origin) {
+            if (origins.indexOf(origin) < 0) origins.push(origin);
+        });
+        origins.forEach(function (origin) {
             try {
                 frame.contentWindow.postMessage({
                     type: 'kl-ops-auth',
@@ -388,12 +447,16 @@
         if (!frame) return;
         if (wrap) {
             wrap.classList.add('open');
+            wrap.style.display = 'flex';
             wrap.querySelector('[data-embed-title]').textContent = 'Connecting to cloud ops…';
             wrap.querySelector('[data-embed-detail]').textContent = help || 'Loading remote Outreach stack.';
         }
         frame.onload = function () {
-            pushOpsAuthToFrame(frame);
-            if (wrap) wrap.classList.remove('open');
+            pushOpsAuthToFrame(frame, url);
+            if (wrap) {
+                wrap.classList.remove('open');
+                wrap.style.display = 'none';
+            }
             log('info', 'Cloud ops iframe loaded', { url: url });
         };
         frame.onerror = function () {
@@ -408,54 +471,145 @@
         if (frame.dataset.loaded !== url) {
             frame.src = url;
             frame.dataset.loaded = url;
+        } else {
+            pushOpsAuthToFrame(frame, url);
+            if (wrap) {
+                wrap.classList.remove('open');
+                wrap.style.display = 'none';
+            }
         }
-        setTimeout(function () { pushOpsAuthToFrame(frame); }, 1200);
+        setTimeout(function () { pushOpsAuthToFrame(frame, url); }, 800);
+    }
+
+    function withLocalOpsToken(url) {
+        if (!state.secret) return url;
+        try {
+            var parsed = new URL(url);
+            var port = parsed.port || (parsed.protocol === 'https:' ? '443' : '80');
+            if (parsed.hostname !== '127.0.0.1' && parsed.hostname !== 'localhost') return url;
+            if (port !== '5050' && port !== '5100') return url;
+            if (!parsed.searchParams.get('kl_ops_token')) {
+                parsed.searchParams.set('kl_ops_token', state.secret);
+            }
+            return parsed.toString();
+        } catch (err) {
+            return url;
+        }
     }
 
     async function mountLocalEmbed(prefix, url, help) {
         var wrap = $('embed-status-' + prefix);
         var frame = $(prefix + '-frame');
         if (!frame) return;
+        var embedUrl = withLocalOpsToken(url);
         var serviceMap = {
             email: 'email_agent',
             'social-ops': 'social_ops',
             'social-poster': 'social_poster',
         };
         var serviceName = serviceMap[prefix];
-        if (wrap) {
-            wrap.classList.add('open');
-            wrap.querySelector('[data-embed-title]').textContent = 'Connecting to local service…';
-            wrap.querySelector('[data-embed-detail]').textContent = help || 'Service must run on this PC.';
-        }
-        if (serviceName) {
-            try {
-                await fetch('http://127.0.0.1:5050/api/services/ensure', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ services: [serviceName] }),
-                });
-                log('info', 'Requested local service start', { service: serviceName });
-            } catch (err) {
-                log('warn', 'Could not reach OutreachEngine on :5050 to auto-start service', { service: serviceName });
-            }
-        }
-        frame.onload = function () {
-            if (wrap) wrap.classList.remove('open');
-            log('info', 'Local iframe loaded', { url: url });
-        };
-        frame.onerror = function () {
+        var needsLoad = frame.dataset.loaded !== embedUrl;
+        var isLocalTarget = isLocalServiceUrl(embedUrl);
+
+        if (isMixedContentLocal(url)) {
             if (wrap) {
                 wrap.classList.add('open');
-                wrap.querySelector('[data-embed-title]').textContent = 'Local service unreachable';
-                wrap.querySelector('[data-embed-detail]').textContent = (help || '') + ' Open the URL directly if the embed stays blank.';
+                wrap.style.display = 'flex';
+                wrap.querySelector('[data-embed-title]').textContent = 'Local-only on this tab';
+                wrap.querySelector('[data-embed-detail]').textContent =
+                    'Knight Command is HTTPS, so the browser blocks embedding http://127.0.0.1. ' +
+                    'Configure KL_SOCIAL_POSTER_URL on Vercel (poster.knightlogics.com) or open the app directly on this PC.';
             }
+            frame.style.display = 'none';
+            log('warn', 'Mixed content blocked local embed', { prefix: prefix, url: url });
+            return;
+        }
+
+        var hideOverlay = function () {
+            if (wrap) {
+                wrap.classList.remove('open');
+                wrap.style.display = 'none';
+            }
+        };
+        var showOverlay = function (title, detail) {
+            if (!wrap) return;
+            wrap.classList.add('open');
+            wrap.style.display = 'flex';
+            wrap.querySelector('[data-embed-title]').textContent = title;
+            wrap.querySelector('[data-embed-detail]').textContent = detail;
+        };
+
+        if (needsLoad) {
+            showOverlay('Connecting to local service…', help || 'Service must run on this PC.');
+        }
+        frame.style.display = 'block';
+
+        frame.onload = function () {
+            hideOverlay();
+            pushOpsAuthToFrame(frame, embedUrl);
+            log('info', 'Local iframe loaded', { url: embedUrl });
+        };
+        frame.onerror = function () {
+            showOverlay(
+                'Local service unreachable',
+                (help || '') + ' Open the URL directly if the embed stays blank.'
+            );
             log('warn', 'Local iframe error', { url: url });
         };
-        if (frame.dataset.loaded !== url) {
-            frame.src = url;
-            frame.dataset.loaded = url;
+
+        if (needsLoad) {
+            frame.src = embedUrl;
+            frame.dataset.loaded = embedUrl;
+            setTimeout(hideOverlay, 2500);
+        } else {
+            hideOverlay();
+            pushOpsAuthToFrame(frame, embedUrl);
+            log('info', 'Local iframe reused', { url: embedUrl });
         }
-        probeLocal(url, prefix);
+
+        setTimeout(function () { pushOpsAuthToFrame(frame, embedUrl); }, 300);
+        setTimeout(function () { pushOpsAuthToFrame(frame, embedUrl); }, 1200);
+        setTimeout(function () { pushOpsAuthToFrame(frame, embedUrl); }, 3000);
+
+        if (serviceName && isLocalTarget) {
+            fetch('http://127.0.0.1:5050/api/services/ensure', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ services: [serviceName], wait: false }),
+            }).then(function (response) {
+                return response.json().then(function (data) {
+                    if (data && data.all_ok) hideOverlay();
+                    log('info', 'Requested local service start (background)', { service: serviceName, data: data });
+                });
+            }).catch(function () {
+                log('warn', 'Could not reach OutreachEngine on :5050 to auto-start service', { service: serviceName });
+            });
+        }
+        if (prefix === 'outreach' && isLocalTarget) {
+            fetch('http://127.0.0.1:5050/api/health', { method: 'GET' })
+                .then(function (response) {
+                    if (response.ok) hideOverlay();
+                })
+                .catch(function () {
+                    showOverlay(
+                        'Outreach CRM is not running',
+                        'Start OutreachEngine: cd CRM\\OutreachEngine && python app.py'
+                    );
+                });
+        }
+        if (prefix === 'email' && isLocalTarget) {
+            fetch('http://127.0.0.1:5100/api/health', { method: 'GET' })
+                .then(function (response) {
+                    if (response.ok) hideOverlay();
+                })
+                .catch(function () {
+                    showOverlay(
+                        'Email Agent is not running',
+                        'Run Email-Agent\\web.py or npm run dev:stack from MainSite'
+                    );
+                });
+        }
+        if (isLocalTarget) probeLocal(embedUrl, prefix);
     }
 
     async function probeLocal(url, prefix) {
@@ -526,9 +680,10 @@
         (health.remoteModules ? Object.keys(health.remoteModules) : []).forEach(function (key) {
             var mod = health.remoteModules[key];
             if (!mod || !mod.url) return;
+            var remoteStatusClass = mod.status === 'ok' ? 'ok' : (mod.status === 'error' ? 'err' : 'warn');
             cards.push(
                 '<div class="kc-card">' +
-                '<span class="kc-status ' + (mod.status === 'ok' ? 'ok' : 'err') + '">' + (mod.status || 'cloud') + '</span>' +
+                '<span class="kc-status ' + remoteStatusClass + '">' + (mod.status || 'cloud') + '</span>' +
                 '<strong>' + mod.label + ' (cloud)</strong>' +
                 '<p>' + mod.detail + '</p>' +
                 '<a class="kc-btn kc-btn-ghost" href="' + mod.url + '" target="_blank" rel="noopener">Open ↗</a></div>'
@@ -538,7 +693,7 @@
         (health.localModules || []).forEach(function (mod) {
             var remoteKey = mod.moduleKey || mod.id;
             var remote = health.remoteModules && health.remoteModules[remoteKey];
-            if (remote && remote.status === 'ok') return;
+            if (isUsableRemote(remote)) return;
             var probe = state.localProbe[mod.id.replace(/_/g, '-')] || 'pending';
             var statusClass = probe === 'maybe' ? 'warn' : (probe === 'fail' ? 'err' : 'pending');
             cards.push(
@@ -559,7 +714,7 @@
         (health.localModules || []).forEach(function (mod) {
             var remoteKey = mod.moduleKey || mod.id;
             var remote = health.remoteModules && health.remoteModules[remoteKey];
-            if (remote && remote.status === 'ok') return;
+            if (isUsableRemote(remote)) return;
             probeLocal(mod.url, mod.id.replace(/_/g, '-'));
         });
     }

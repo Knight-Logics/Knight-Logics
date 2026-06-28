@@ -185,6 +185,13 @@ If those scripts are unavailable or dirty in the current worktree, use direct Pl
   - computed `.parallax-bg-far` and `.parallax-bg-near` URLs
   - live asset sizes and cache headers
 
+## Knight Command Cloud Ops
+
+- `/admin` uses `https://ops.knightlogics.com` for Outreach CRM and `https://mail.knightlogics.com` for Email Agent by default.
+- Vercel environment URL values can override those defaults, but blank values do not disable the known production hosts.
+- A server-side preflight timeout is informational; the browser still connects directly to a valid cloud URL. Invalid URLs are the only remote configuration treated as an error.
+- Local ports `5050` and `5100` are development fallbacks and must never be launched by a remote iframe route.
+
 ## Current Growth Priorities
 
 Technical cleanup is no longer the main bottleneck unless a fresh audit finds a regression.

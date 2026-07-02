@@ -310,6 +310,10 @@
         document.body.style.removeProperty('overflow');
     }
 
+    function ensureCanvasPassThrough() {
+        asteroidsCanvas.style.removeProperty('pointer-events');
+    }
+
     function syncParallaxMode() {
         const on = useProofParallax();
         document.body.classList.toggle('hero-experiment-parallax', on);
@@ -323,7 +327,6 @@
             parallaxShell.style.transform = '';
             parallaxShell.style.opacity = '';
             parallaxShell.style.visibility = '';
-            asteroidsCanvas.style.pointerEvents = 'auto';
             if (parallaxShell.parentElement !== layers) {
                 layers.insertBefore(parallaxShell, layers.firstChild);
             }
@@ -331,6 +334,7 @@
         ensurePageScroll();
         sizeCanvases();
         buildStars();
+        ensureCanvasPassThrough();
     }
 
     function getCanvasHostRect() {
@@ -350,7 +354,6 @@
         if (!useProofParallax() || !trustBridge) return;
 
         const bridgeRect = trustBridge.getBoundingClientRect();
-        const heroRect = hero.getBoundingClientRect();
         const scrollY = window.scrollY;
         const raw = getComputedStyle(hero).getPropertyValue('--kl-hero-parallax-rate').trim();
         const rate = Number.isFinite(parseFloat(raw)) ? parseFloat(raw) : 0.42;
@@ -365,8 +368,6 @@
             parallaxShell.style.visibility = 'visible';
         }
 
-        const heroPlayable = heroRect.bottom > 80 && heroRect.top < window.innerHeight - 40;
-        asteroidsCanvas.style.pointerEvents = heroPlayable ? 'auto' : 'none';
     }
 
     function initProofParallax() {
@@ -466,9 +467,19 @@
     }
 
     function onPlayfieldPointerDown(e) {
-        if (!isTouchPlay() || e.pointerType === 'mouse') return;
         if (document.body.classList.contains('nav-menu-open')) return;
         if (!pointerInHero(e.clientX, e.clientY) || isInteractiveTarget(e.target)) return;
+
+        if (e.pointerType === 'mouse') {
+            heroPoint(e);
+            mouse.down = true;
+            smoothMouse.x = mouse.x;
+            smoothMouse.y = mouse.y;
+            tryBreakAt(mouse.x, mouse.y, false);
+            return;
+        }
+
+        if (!isTouchPlay()) return;
 
         pointerDragging = true;
         heroPoint(e);
@@ -532,14 +543,6 @@
         mouse.x = -9999;
         mouse.y = -9999;
         hoveredRockId = null;
-    });
-    asteroidsCanvas.addEventListener('pointerdown', (e) => {
-        if (isTouchPlay() && e.pointerType !== 'mouse') return;
-        heroPoint(e);
-        mouse.down = true;
-        smoothMouse.x = mouse.x;
-        smoothMouse.y = mouse.y;
-        tryBreakAt(mouse.x, mouse.y, false);
     });
     window.addEventListener('resize', () => {
         syncParallaxMode();

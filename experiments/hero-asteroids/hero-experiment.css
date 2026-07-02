@@ -73,7 +73,8 @@ body:has(#hero.hero-experiment-active) #header-container {
 
 .hero-experiment-canvas--asteroids {
     z-index: 3;
-    pointer-events: auto;
+    /* Never capture clicks — fixed parallax canvas spans the viewport and would block the whole page. */
+    pointer-events: none !important;
 }
 
 .hero-experiment-canvas--stars {
@@ -730,6 +731,12 @@ body:has(#hero.hero-experiment-active) #header-container {
     body.hero-experiment-parallax .kl-proof-stack {
         position: relative;
         z-index: 4 !important;
+    }
+
+    body.hero-experiment-parallax .kl-proof-stack ~ section,
+    body.hero-experiment-parallax .kl-proof-stack ~ footer {
+        position: relative;
+        z-index: 5;
     }
 
     body.hero-experiment-parallax .kl-trust-bridge .kl-local-trust-parallax {

@@ -316,7 +316,7 @@
 
     function syncParallaxMode() {
         const on = useProofParallax();
-        document.body.classList.toggle('hero-experiment-parallax', on);
+        document.body.classList.toggle('hero-experiment-parallax-active', on);
         if (on) {
             if (parallaxShell.parentElement !== layers) {
                 layers.insertBefore(parallaxShell, layers.firstChild);

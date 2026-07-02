@@ -38,8 +38,13 @@ body:has(#hero.hero-experiment-active) #header-container {
     pointer-events: none;
 }
 
-.hero-experiment-parallax,
-.hero-experiment-foreground {
+/* Body flag for parallax mode — must NOT reuse .hero-experiment-parallax (that class is on the hero layer div). */
+body.hero-experiment-parallax-active {
+    pointer-events: auto;
+}
+
+#hero.hero-experiment-active .hero-experiment-parallax,
+#hero.hero-experiment-active .hero-experiment-foreground {
     position: absolute;
     inset: 0;
     pointer-events: none;
@@ -50,7 +55,7 @@ body:has(#hero.hero-experiment-active) #header-container {
     overflow: hidden;
 }
 
-.hero-experiment-parallax {
+#hero.hero-experiment-active .hero-experiment-parallax {
     z-index: 1;
     overflow: hidden;
 }
@@ -693,17 +698,17 @@ body:has(#hero.hero-experiment-active) #header-container {
 
 /* Desktop / tablet: fixed parallax backdrop under proof stack */
 @media (min-width: 769px) {
-    body.hero-experiment-parallax #hero.hero-experiment-active {
+    body.hero-experiment-parallax-active #hero.hero-experiment-active {
         position: relative;
         z-index: 2;
         isolation: isolate;
     }
 
-    body.hero-experiment-parallax:not(.landing-mode):not(.nav-menu-open) {
+    body.hero-experiment-parallax-active:not(.landing-mode):not(.nav-menu-open) {
         overflow-y: auto !important;
     }
 
-    body.hero-experiment-parallax #hero.hero-experiment-active .hero-experiment-parallax--fixed {
+    body.hero-experiment-parallax-active #hero.hero-experiment-active .hero-experiment-parallax--fixed {
         position: fixed;
         top: var(--kl-nav-height, 108px);
         left: 0;
@@ -717,48 +722,48 @@ body:has(#hero.hero-experiment-active) #header-container {
         overflow: hidden;
     }
 
-    body.hero-experiment-parallax #hero.hero-experiment-active .hero-experiment-foreground {
+    body.hero-experiment-parallax-active #hero.hero-experiment-active .hero-experiment-foreground {
         position: absolute;
         inset: 0;
         z-index: 5;
     }
 
-    body.hero-experiment-parallax #hero.hero-experiment-active .hero-content-wrapper {
+    body.hero-experiment-parallax-active #hero.hero-experiment-active .hero-content-wrapper {
         position: relative;
         z-index: 10;
     }
 
-    body.hero-experiment-parallax .kl-proof-stack {
+    body.hero-experiment-parallax-active .kl-proof-stack {
         position: relative;
         z-index: 4 !important;
     }
 
-    body.hero-experiment-parallax .kl-proof-stack ~ section,
-    body.hero-experiment-parallax .kl-proof-stack ~ footer {
+    body.hero-experiment-parallax-active .kl-proof-stack ~ section,
+    body.hero-experiment-parallax-active .kl-proof-stack ~ footer {
         position: relative;
         z-index: 5;
     }
 
-    body.hero-experiment-parallax .kl-trust-bridge .kl-local-trust-parallax {
+    body.hero-experiment-parallax-active .kl-trust-bridge .kl-local-trust-parallax {
         opacity: 0 !important;
         visibility: hidden !important;
     }
 
-    body.hero-experiment-parallax .kl-trust-bridge .kl-local-trust-parallax-overlay {
+    body.hero-experiment-parallax-active .kl-trust-bridge .kl-local-trust-parallax-overlay {
         background:
             linear-gradient(180deg, rgba(5, 8, 12, 0.28) 0%, rgba(5, 11, 17, 0.18) 48%, rgba(5, 8, 12, 0.32) 100%),
             radial-gradient(circle at 80% 12%, rgba(100, 255, 218, 0.04), transparent 24%),
             radial-gradient(circle at 18% 20%, rgba(100, 255, 218, 0.03), transparent 34%);
     }
 
-    body.hero-experiment-parallax .kl-trust-bridge #about .container,
-    body.hero-experiment-parallax .kl-trust-bridge .results-strip .container,
-    body.hero-experiment-parallax .kl-trust-bridge #testimonials .container {
+    body.hero-experiment-parallax-active .kl-trust-bridge #about .container,
+    body.hero-experiment-parallax-active .kl-trust-bridge .results-strip .container,
+    body.hero-experiment-parallax-active .kl-trust-bridge #testimonials .container {
         position: relative;
         z-index: 2;
     }
 
-    body.hero-experiment-parallax .kl-trust-bridge .kl-map-review-shell {
+    body.hero-experiment-parallax-active .kl-trust-bridge .kl-map-review-shell {
         background: rgba(5, 11, 17, 0.58);
     }
 }

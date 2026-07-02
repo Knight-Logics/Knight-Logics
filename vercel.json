@@ -503,7 +503,17 @@
     },
     {
       "source": "/case-study-whistle-stop.html",
-      "destination": "/case-study-whistle-stop",
+      "destination": "/case-study-hospitality-system-pattern",
+      "permanent": true
+    },
+    {
+      "source": "/case-study-whistle-stop",
+      "destination": "/case-study-hospitality-system-pattern",
+      "permanent": true
+    },
+    {
+      "source": "/case-study-hospitality-system-pattern.html",
+      "destination": "/case-study-hospitality-system-pattern",
       "permanent": true
     },
     {
@@ -524,6 +534,16 @@
     {
       "source": "/free-website-audit",
       "destination": "/website-growth-audit",
+      "permanent": true
+    },
+    {
+      "source": "/electrician-business-growth-systems.html",
+      "destination": "/electrician-business-growth-systems",
+      "permanent": true
+    },
+    {
+      "source": "/painter-business-growth-systems.html",
+      "destination": "/painter-business-growth-systems",
       "permanent": true
     }
   ],
@@ -829,8 +849,8 @@
       "destination": "/case-study-vendoroo-ticket-invoice-system.html"
     },
     {
-      "source": "/case-study-whistle-stop",
-      "destination": "/case-study-whistle-stop.html"
+      "source": "/case-study-hospitality-system-pattern",
+      "destination": "/case-study-hospitality-system-pattern.html"
     },
     {
       "source": "/case-study-roof-monsters",
@@ -843,6 +863,14 @@
     {
       "source": "/case-study-referral-network-system",
       "destination": "/case-study-referral-network-system.html"
+    },
+    {
+      "source": "/electrician-business-growth-systems",
+      "destination": "/electrician-business-growth-systems.html"
+    },
+    {
+      "source": "/painter-business-growth-systems",
+      "destination": "/painter-business-growth-systems.html"
     }
   ],
   "headers": [

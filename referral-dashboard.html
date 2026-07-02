@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Referral Dashboard — Knight Logics</title>
+    <title>Referral Dashboard � Knight Logics</title>
     <link rel="icon" href="/favicon.ico">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,7 +32,7 @@
             padding: 0 0 60px;
         }
 
-        /* ── Header ── */
+        /* -- Header -- */
         .dash-header {
             background: var(--bg2);
             border-bottom: 1px solid var(--border);
@@ -93,7 +93,7 @@
             font-size: 0.88rem;
         }
 
-        /* ── Auth gate ── */
+        /* -- Auth gate -- */
         #auth-gate {
             display: flex;
             flex-direction: column;
@@ -160,10 +160,10 @@
         }
         body.owner-mode .master-only { display: none !important; }
 
-        /* ── Main dashboard ── */
+        /* -- Main dashboard -- */
         #dashboard { display: none; padding: 32px; max-width: 1200px; margin: 0 auto; }
 
-        /* ── Filter bar ── */
+        /* -- Filter bar -- */
         .filter-bar {
             display: flex;
             gap: 10px;
@@ -191,7 +191,7 @@
         .filter-select option { background: #0a1628; }
         .refresh-btn { align-self: flex-end; padding: 9px 18px; font-size: 0.9rem; }
 
-        /* ── Summary cards ── */
+        /* -- Summary cards -- */
         .summary-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -219,7 +219,7 @@
             letter-spacing: 0.09em;
         }
 
-        /* ── Tables ── */
+        /* -- Tables -- */
         .section-title {
             font-size: 1.05rem;
             font-weight: 700;
@@ -285,7 +285,7 @@
         .badge-form     { background: rgba(100,255,218,0.12); color: var(--accent); }
         .badge-checkout { background: rgba(255,183,77,0.14);  color: var(--yellow); }
 
-        /* ── Partner link builder ── */
+        /* -- Partner link builder -- */
         .link-builder {
             background: var(--card);
             border: 1px solid var(--border);
@@ -329,7 +329,7 @@
         .copy-link-btn:hover { background: rgba(100,255,218,0.08); }
         .copy-link-btn.copied { color: #64ffda; }
 
-        /* ── QR code output ── */
+        /* -- QR code output -- */
         .qr-section {
             margin-top: 20px;
             display: none;
@@ -469,7 +469,7 @@
             color: var(--muted);
         }
 
-        /* ── Error / loading states ── */
+        /* -- Error / loading states -- */
         .state-msg {
             text-align: center;
             padding: 48px 24px;
@@ -486,7 +486,7 @@
             font-size: 0.9rem;
         }
 
-        /* ── Responsive ── */
+        /* -- Responsive -- */
         @media (max-width: 600px) {
             .dash-header { padding: 14px 16px; }
             #dashboard { padding: 16px; }
@@ -498,7 +498,7 @@
 <body>
 
 <div class="embed-back-bar" id="embedBackBar">
-    <a href="/admin" id="embedBackLink">← Knight Command</a>
+    <a href="/admin" id="embedBackLink">? Knight Command</a>
     <span style="color:var(--muted);font-size:0.82rem;">Referral CRM</span>
 </div>
 
@@ -508,7 +508,7 @@
         Knight Logics
         <span class="dash-header-tag">Referral CRM</span>
     </a>
-    <a href="/" class="dash-header-back">← Back to site</a>
+    <a href="/" class="dash-header-back">? Back to site</a>
 </header>
 
 <!-- Auth gate -->
@@ -559,15 +559,15 @@
     <!-- Summary -->
     <p class="section-title">Summary</p>
     <div class="summary-grid" id="summaryGrid">
-        <div class="stat-card"><div class="stat-card-value" id="sumPv">—</div><div class="stat-card-label">Page Views</div></div>
-        <div class="stat-card"><div class="stat-card-value" id="sumForm">—</div><div class="stat-card-label">Form Submits</div></div>
-        <div class="stat-card"><div class="stat-card-value" id="sumCo">—</div><div class="stat-card-label">Checkout Starts</div></div>
-        <div class="stat-card"><div class="stat-card-value" id="sumPaid">—</div><div class="stat-card-label">Payments Completed</div></div>
-        <div class="stat-card"><div class="stat-card-value" id="sumRevenue">—</div><div class="stat-card-label">Referred Revenue</div></div>
-        <div class="stat-card"><div class="stat-card-value" id="sumCommissionOwed">—</div><div class="stat-card-label">Bounty Pending</div></div>
-        <div class="stat-card"><div class="stat-card-value" id="sumCommissionPaid">—</div><div class="stat-card-label">Bounty Paid</div></div>
-        <div class="stat-card"><div class="stat-card-value" id="sumSessions">—</div><div class="stat-card-label">Unique Sessions</div></div>
-        <div class="stat-card"><div class="stat-card-value" id="sumPartners">—</div><div class="stat-card-label">Partners Active</div></div>
+        <div class="stat-card"><div class="stat-card-value" id="sumPv">�</div><div class="stat-card-label">Page Views</div></div>
+        <div class="stat-card"><div class="stat-card-value" id="sumForm">�</div><div class="stat-card-label">Form Submits</div></div>
+        <div class="stat-card"><div class="stat-card-value" id="sumCo">�</div><div class="stat-card-label">Checkout Starts</div></div>
+        <div class="stat-card"><div class="stat-card-value" id="sumPaid">�</div><div class="stat-card-label">Payments Completed</div></div>
+        <div class="stat-card"><div class="stat-card-value" id="sumRevenue">�</div><div class="stat-card-label">Referred Revenue</div></div>
+        <div class="stat-card"><div class="stat-card-value" id="sumCommissionOwed">�</div><div class="stat-card-label">Bounty Pending</div></div>
+        <div class="stat-card"><div class="stat-card-value" id="sumCommissionPaid">�</div><div class="stat-card-label">Bounty Paid</div></div>
+        <div class="stat-card"><div class="stat-card-value" id="sumSessions">�</div><div class="stat-card-label">Unique Sessions</div></div>
+        <div class="stat-card"><div class="stat-card-value" id="sumPartners">�</div><div class="stat-card-label">Partners Active</div></div>
     </div>
 
     <div class="admin-panel">
@@ -638,9 +638,9 @@
                     <button class="qr-size-btn" data-size="500">500px</button>
                     <button class="qr-size-btn" data-size="800">800px</button>
                 </div>
-                <a class="qr-dl-btn" id="qrDlBtn" href="#" download="referral-qr.png">⬇ Download PNG</a>
+                <a class="qr-dl-btn" id="qrDlBtn" href="#" download="referral-qr.png">? Download PNG</a>
                 <button class="qr-dl-btn" id="brochureDlBtn" type="button">Download brochure PNG</button>
-                <button class="qr-print-btn" id="qrPrintBtn">🖨 Print card</button>
+                <button class="qr-print-btn" id="qrPrintBtn">?? Print card</button>
             </div>
         </div>
     </div>
@@ -660,7 +660,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody id="partnerRosterBody"><tr><td colspan="6" class="state-msg">Loading…</td></tr></tbody>
+            <tbody id="partnerRosterBody"><tr><td colspan="6" class="state-msg">Loading�</td></tr></tbody>
         </table>
     </div>
     </div>
@@ -683,7 +683,7 @@
                     <th>Last Seen</th>
                 </tr>
             </thead>
-            <tbody id="partnerBody"><tr><td colspan="10" class="state-msg">Loading…</td></tr></tbody>
+            <tbody id="partnerBody"><tr><td colspan="10" class="state-msg">Loading�</td></tr></tbody>
         </table>
     </div>
 
@@ -701,7 +701,7 @@
                     <th>Revenue</th>
                 </tr>
             </thead>
-            <tbody id="offerBody"><tr><td colspan="6" class="state-msg">Loading…</td></tr></tbody>
+            <tbody id="offerBody"><tr><td colspan="6" class="state-msg">Loading�</td></tr></tbody>
         </table>
     </div>
 
@@ -723,7 +723,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody id="payoutBody"><tr><td colspan="10" class="state-msg">Loading…</td></tr></tbody>
+            <tbody id="payoutBody"><tr><td colspan="10" class="state-msg">Loading�</td></tr></tbody>
         </table>
     </div>
     </div>
@@ -743,7 +743,7 @@
                     <th>When</th>
                 </tr>
             </thead>
-            <tbody id="recentBody"><tr><td colspan="7" class="state-msg">Loading…</td></tr></tbody>
+            <tbody id="recentBody"><tr><td colspan="7" class="state-msg">Loading�</td></tr></tbody>
         </table>
     </div>
 
@@ -846,7 +846,7 @@
         }
     }).catch(function () {});
 
-    /* ── Auth ── */
+    /* -- Auth -- */
     document.getElementById('authForm').addEventListener('submit', function (e) {
         e.preventDefault();
         var password = document.getElementById('secretInput').value.trim();
@@ -877,7 +877,7 @@
         );
     });
 
-    /* ── Link builder ── */
+    /* -- Link builder -- */
     var currentQrUrl   = '';
     var currentQrSize  = 300;
     var currentPartnerLabel = '';
@@ -1184,7 +1184,7 @@
         var win = window.open('', '_blank');
         win.document.write([
             '<!DOCTYPE html><html><head><meta charset="UTF-8">',
-            '<title>Referral QR — ' + currentPartnerLabel + '</title>',
+            '<title>Referral QR � ' + currentPartnerLabel + '</title>',
             '<style>',
             'body{font-family:Arial,sans-serif;margin:0;padding:40px;text-align:center;background:#fff;color:#050a14;}',
             'h1{font-size:1.6rem;margin-bottom:6px;}',
@@ -1195,7 +1195,7 @@
             '@media print{body{padding:20px;}}',
             '</style></head><body>',
             '<h1>Knight Logics</h1>',
-            '<p>Custom websites · SEO · Local visibility</p>',
+            '<p>Custom websites � SEO � Local visibility</p>',
             '<img src="' + qrApiUrl + '" alt="QR Code">',
             '<div class="cta">Scan for a free website audit</div>',
             '<div class="url">' + currentQrUrl + '</div>',
@@ -1206,7 +1206,7 @@
         setTimeout(function () { win.print(); }, 600);
     });
 
-    /* ── Load stats ── */
+    /* -- Load stats -- */
     function loadStats() {
         var partner = document.getElementById('filterPartner').value.trim();
         var offer   = document.getElementById('filterOffer').value.trim();
@@ -1258,16 +1258,16 @@
         document.getElementById('errorBanner').style.display = 'none';
     }
 
-    function n(v) { return v == null ? '—' : Number(v).toLocaleString(); }
+    function n(v) { return v == null ? '�' : Number(v).toLocaleString(); }
     function money(cents) {
-        if (cents == null) return '—';
+        if (cents == null) return '�';
         return '$' + (Number(cents) / 100).toLocaleString(undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         });
     }
     function esc(s) {
-        if (!s) return '<span class="td-muted">—</span>';
+        if (!s) return '<span class="td-muted">�</span>';
         return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     }
     function escAttr(s) {
@@ -1278,11 +1278,11 @@
             .replace(/>/g, '&gt;');
     }
     function fmtDate(s) {
-        if (!s) return '—';
+        if (!s) return '�';
         try { return new Date(s).toLocaleDateString(); } catch(e) { return s; }
     }
     function fmtTs(s) {
-        if (!s) return '—';
+        if (!s) return '�';
         try {
             var d = new Date(s);
             return d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
@@ -1391,7 +1391,7 @@
                 ? '<span class="status-pill status-pill--paid">paid</span>'
                 : '<span class="status-pill status-pill--owed">' + (r.payout_status === 'pending_review' ? 'pending review' : 'owed') + '</span>';
             var action = r.payout_status === 'paid'
-                ? '<span class="td-muted">—</span>'
+                ? '<span class="td-muted">�</span>'
                 : '<button class="mini-btn mini-btn--paid" data-payout-id="' + escAttr(String(r.id)) + '" data-amount-cents="' + escAttr(String(r.commission_amount_cents || 0)) + '">Record paid</button>';
             return '<tr>' +
                 '<td class="td-mono">' + esc(r.partner_slug) + '</td>' +

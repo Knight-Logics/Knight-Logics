@@ -3,11 +3,17 @@ const path = require('path');
 const { renderServicePage, renderCaseStudy, VER } = require('./growth-page-template');
 const { flagshipPages, subPages, caseStudies } = require('./growth-content');
 const { enrichPage } = require('./growth-content-enrich');
+const { diversifyPageMedia } = require('./growth-page-media');
+const { applySeoKeywords } = require('./seo-keywords');
 
 const root = path.join(__dirname, '..');
 
+function preparePage(p) {
+  return diversifyPageMedia(applySeoKeywords(enrichPage(p)));
+}
+
 function writePage(p, render) {
-  fs.writeFileSync(path.join(root, `${p.slug}.html`), render(enrichPage(p)), 'utf8');
+  fs.writeFileSync(path.join(root, `${p.slug}.html`), render(preparePage(p)), 'utf8');
 }
 
 for (const p of flagshipPages) writePage(p, renderServicePage);

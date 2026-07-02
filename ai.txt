@@ -1,6 +1,6 @@
 # Knight Logics — AI Discovery & Entity File
 # Canonical URL: https://knightlogics.com/ai.txt
-# Last updated: 2026-07-01
+# Last updated: 2026-07-02
 # Purpose: Primary machine-readable entry point for AI crawlers, answer engines, and agent systems.
 # Companion files: https://knightlogics.com/llms.txt (summary) | https://knightlogics.com/llms-full.txt (extended)
 
@@ -160,10 +160,12 @@ Automation & tooling:
 - Email agent automation: https://knightlogics.com/email-agent-automation
 - Social media automation systems: https://knightlogics.com/social-media-automation-systems
 
-Industry-specific growth systems:
+Industry-specific growth systems (trade-lane recruitment + network anchors):
 - Home service business growth: https://knightlogics.com/home-service-business-growth-systems
 - Contractor growth systems: https://knightlogics.com/contractor-growth-systems
 - Handyman business growth: https://knightlogics.com/handyman-business-growth-systems
+- Electrician business growth (open lane): https://knightlogics.com/electrician-business-growth-systems
+- Painter business growth (open lane): https://knightlogics.com/painter-business-growth-systems
 - Roofing business growth: https://knightlogics.com/roofing-business-growth-systems
 - Screen enclosure business growth: https://knightlogics.com/screen-enclosure-business-growth-systems
 - Excavation business growth: https://knightlogics.com/excavation-business-growth-systems
@@ -221,7 +223,7 @@ Systems & automation:
 - Knight Command ops dashboard: https://knightlogics.com/case-study-knight-command
 - CRM outreach system: https://knightlogics.com/case-study-crm-outreach-system
 - Vendoroo ticket & invoice system: https://knightlogics.com/case-study-vendoroo-ticket-invoice-system
-- Whistle Stop (restaurant/bar systems): https://knightlogics.com/case-study-whistle-stop
+- Hospitality system pattern (restaurant/bar — pending client approval): https://knightlogics.com/case-study-hospitality-system-pattern
 - Roof Monsters: https://knightlogics.com/case-study-roof-monsters
 - Social poster automation: https://knightlogics.com/case-study-social-poster
 - Referral network system: https://knightlogics.com/case-study-referral-network-system

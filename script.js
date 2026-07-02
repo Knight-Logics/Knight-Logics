@@ -227,9 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initLocalTrustParallax();
     initProofCardVideos();
     initHeroEntranceAnimations();
-    upgradeLegacySubpageHeroes();
-    compactSubpageHeroContent();
-    initHeroPanels();
+    initSubpageStarsHeroes();
     initProofAboutEntrance();
     initServicesEntrance();
     initMobileReadMore();
@@ -1028,33 +1026,121 @@ function buildKlHeroPanelsMarkup(panels, primarySrc) {
     return `<div class="hero-panels" aria-hidden="true">${panelEls}</div><div class="svc-hero-overlay" aria-hidden="true"></div>`;
 }
 
-function compactSubpageHeroContent() {
-    document.querySelectorAll('.svc-hero--panels').forEach((hero) => {
-        if (hero.dataset.compacted === '1') return;
-        const inner = hero.querySelector('.svc-hero-inner');
-        if (!inner) return;
+const KL_SVC_HERO_STARS_VER = '20260701hero4';
 
-        const movable = [
-            inner.querySelector('.kl-growth-stats'),
-            inner.querySelector('.kl-growth-metrics'),
-            inner.querySelector('.cs-tech-stack'),
-            inner.querySelector('.svc-cta-row')
-        ].filter(Boolean);
+const KL_SUBPAGE_HERO_SELECTORS = [
+    '.svc-hero:not(.svc-hero--stars):not(.svc-hero--panels)',
+    '.pricing-hero:not(.svc-hero--stars)',
+    '.profile-hero:not(.svc-hero--stars)',
+    '.cs-hero:not(.svc-hero--stars)',
+    '.automation-hero:not(.svc-hero--stars)',
+    '.referral-hero:not(.svc-hero--stars)',
+    '.displayplus-hero:not(.svc-hero--stars)',
+    '.videoforge-hero:not(.svc-hero--stars)',
+    '.pixelforge-hero:not(.svc-hero--stars)',
+    '.contact-page-hero:not(.svc-hero--stars)',
+    '.ed-hero:not(.svc-hero--stars)',
+    '.svc-hero--panels',
+].join(', ');
+
+function ensureSvcHeroStarsReady(done) {
+    if (typeof window.klUpgradeHeroToStars === 'function') {
+        done();
+        return;
+    }
+    const existing = document.querySelector('script[data-kl-svc-hero-stars="1"]');
+    if (existing) {
+        existing.addEventListener('load', () => done(), { once: true });
+        existing.addEventListener('error', () => done(), { once: true });
+        return;
+    }
+    const script = document.createElement('script');
+    script.src = `/svc-hero-stars.js?v=${KL_SVC_HERO_STARS_VER}`;
+    script.defer = true;
+    script.dataset.klSvcHeroStars = '1';
+    script.onload = () => done();
+    script.onerror = () => done();
+    document.head.appendChild(script);
+}
+
+function initSubpageStarsHeroes() {
+    if (document.getElementById('hero')) return;
+
+    ensureSvcHeroStarsReady(() => {
+        upgradeLegacySubpageHeroes();
+        compactSubpageHeroContent();
+        if (typeof window.klInitSvcHeroStars === 'function') {
+            window.klInitSvcHeroStars();
+        }
+    });
+}
+
+function findSubpageHeroInner(hero) {
+    const selectors = [
+        '.svc-hero-inner',
+        '.cs-hero-inner',
+        '.profile-hero-inner',
+        '.contact-page-hero-inner',
+        '.videoforge-hero-copy',
+        '.pixelforge-hero-copy',
+        '.displayplus-hero-copy',
+        '.ed-hero-copy',
+        '.container',
+    ];
+    for (let i = 0; i < selectors.length; i++) {
+        const node = hero.querySelector(selectors[i]);
+        if (node) return node;
+    }
+    return null;
+}
+
+function compactSubpageHeroContent() {
+    document.querySelectorAll('.svc-hero--stars, .svc-hero--panels').forEach((hero) => {
+        if (hero.dataset.compacted === '1') return;
+
+        const inner = findSubpageHeroInner(hero);
+        if (!inner) return;
+        if (!inner.classList.contains('svc-hero-inner')) {
+            inner.classList.add('svc-hero-inner', 'fade-in');
+        }
+
+        const movable = [];
+        inner.querySelectorAll('p').forEach((p) => {
+            if (p.classList.contains('svc-eyebrow') || p.classList.contains('pricing-hero-kicker')) return;
+            if (p.closest('.svc-eyebrow')) return;
+            if (!p.classList.contains('svc-hero-lead')) p.classList.add('svc-hero-lead');
+            movable.push(p);
+        });
+
+        inner.querySelectorAll(
+            '.kl-growth-stats, .kl-growth-metrics, .cs-tech-stack, .svc-cta-row, .pricing-nav-pills, .cs-hero-sub, .cs-hero-actions, .contact-page-hero-actions'
+        ).forEach((node) => movable.push(node));
+
+        inner.querySelectorAll('div').forEach((div) => {
+            if (div.classList.contains('videoforge-hero-panel')
+                || div.classList.contains('pixelforge-hero-panel')
+                || div.classList.contains('displayplus-hero-panel')
+                || div.classList.contains('referral-hero-grid')) return;
+            if (div.querySelector('a.services-panel-link, .btn-primary, .btn-secondary')) {
+                if (!div.classList.contains('svc-cta-row')) div.classList.add('svc-cta-row');
+                movable.push(div);
+            }
+        });
 
         if (!movable.length) return;
 
-        const bar = document.createElement('section');
-        bar.className = 'kl-hero-actions-bar';
-        const container = document.createElement('div');
-        container.className = 'container fade-in';
-        movable.forEach((node) => container.appendChild(node));
-        bar.appendChild(container);
-        hero.insertAdjacentElement('afterend', bar);
-
-        const lead = inner.querySelector('p:not(.svc-eyebrow)');
-        if (lead && !lead.classList.contains('svc-hero-lead')) {
-            lead.classList.add('svc-hero-lead');
+        let bar = hero.nextElementSibling;
+        if (!bar || !bar.classList.contains('kl-hero-actions-bar')) {
+            bar = document.createElement('section');
+            bar.className = 'kl-hero-actions-bar';
+            const container = document.createElement('div');
+            container.className = 'container fade-in';
+            bar.appendChild(container);
+            hero.insertAdjacentElement('afterend', bar);
         }
+
+        const container = bar.querySelector('.container') || bar;
+        movable.forEach((node) => container.appendChild(node));
 
         hero.dataset.compacted = '1';
     });
@@ -1063,28 +1149,11 @@ function compactSubpageHeroContent() {
 function upgradeLegacySubpageHeroes() {
     if (document.getElementById('hero')) return;
 
-    const slug = (window.location.pathname || '')
-        .replace(/\.html$/, '')
-        .replace(/^\//, '')
-        .split('/')
-        .filter(Boolean)
-        .pop() || 'page';
-
-    document.querySelectorAll(
-        '.svc-hero:not(.svc-hero--panels), .pricing-hero:not(.svc-hero--panels), .profile-hero:not(.svc-hero--panels), .cs-hero:not(.svc-hero--panels)'
-    ).forEach((section) => {
-        if (section.dataset.panelsUpgraded === '1') return;
-        section.dataset.panelsUpgraded = '1';
-
-        const styleMatch = section.getAttribute('style') || '';
-        const cssVarMatch = styleMatch.match(/--kl-hero-image:\s*url\(['"]?([^'")]+)['"]?\)/i);
-        const primarySrc = cssVarMatch ? cssVarMatch[1] : '';
-        const panels = pickKlHeroPanels(slug, primarySrc);
-
-        section.classList.add('svc-hero', 'svc-hero--panels');
-        section.classList.remove('pricing-hero', 'profile-hero', 'cs-hero');
-        section.removeAttribute('style');
-        section.insertAdjacentHTML('afterbegin', buildKlHeroPanelsMarkup(panels, primarySrc));
+    document.querySelectorAll(KL_SUBPAGE_HERO_SELECTORS).forEach((section) => {
+        if (section.dataset.starsUpgraded === '1') return;
+        if (typeof window.klUpgradeHeroToStars === 'function') {
+            window.klUpgradeHeroToStars(section);
+        }
     });
 }
 
@@ -1505,7 +1574,10 @@ function initNavigation() {
 
         tabs.forEach((tab, index) => {
             tab.addEventListener('mouseenter', () => {
-                if (desktopMega.matches) activateMegaTab(mega, index);
+                if (!desktopMega.matches) return;
+                const parentDropdown = mega.closest('.nav-dropdown');
+                if (!parentDropdown || !parentDropdown.classList.contains('active')) return;
+                activateMegaTab(mega, index);
             });
             tab.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1516,7 +1588,8 @@ function initNavigation() {
 
         if (dropdown) {
             dropdown.addEventListener('mouseleave', () => {
-                if (desktopMega.matches) resetMegaNav(mega);
+                if (!desktopMega.matches) return;
+                if (!dropdown.classList.contains('active')) resetMegaNav(mega);
             });
         }
 
@@ -1535,14 +1608,23 @@ function initNavigation() {
         const menu = dropdown.querySelector('.nav-dropdown-menu');
         
         if (toggle && menu) {
-            const desktopHover = window.matchMedia('(hover: hover) and (pointer: fine)');
+            const desktopHover = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1025px)');
 
-            // Desktop mouse: open/close on hover only
-            dropdown.addEventListener('mouseenter', () => {
-                if (desktopHover.matches) dropdown.classList.add('active');
+            // Desktop: open only when hovering the nav link; stay open over link + menu
+            toggle.addEventListener('mouseenter', () => {
+                if (!desktopHover.matches) return;
+                navDropdowns.forEach((d) => {
+                    if (d !== dropdown) {
+                        d.classList.remove('active');
+                        resetMegaNav(d.querySelector('.nav-dropdown-mega'));
+                    }
+                });
+                dropdown.classList.add('active');
             });
             dropdown.addEventListener('mouseleave', () => {
-                if (desktopHover.matches) dropdown.classList.remove('active');
+                if (!desktopHover.matches) return;
+                dropdown.classList.remove('active');
+                resetMegaNav(dropdown.querySelector('.nav-dropdown-mega'));
             });
 
             // Touch: toggle open/closed (touchend only adds when closed — fixed to full toggle)

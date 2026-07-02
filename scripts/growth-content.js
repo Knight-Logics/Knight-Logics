@@ -7,7 +7,7 @@ const flagshipPages = [
     meta: 'Complete business growth systems for Tampa Bay small businesses — website, local SEO, CRM outreach, automation, referral tracking, and owner dashboards.',
     eyebrow: 'Flagship service',
     h1: 'Business Growth Systems for Small & Local Companies',
-    lead: 'For businesses that need more than a brochure site — a connected stack that brings in leads, tracks work, follows up, and shows what is actually driving revenue.',
+    lead: 'Build the online presence, then wire leads, outreach, referrals, and ops into one stack — and grow a roster of complementary service partners who send tracked work across Tampa Bay.',
     heroIcon: 'fa-layer-group',
     heroImage: { src: images.logo.src, alt: 'Knight Logics business growth systems' },
     stats: [
@@ -508,7 +508,7 @@ const flagshipPages = [
     },
     features: [
       { icon: 'fa-store', label: 'Retail', title: 'Custom storefronts', text: 'Hand-coded shops with Stripe, inventory logic, and conversion-focused product pages — see Mom\'s Resin Tables.' },
-      { icon: 'fa-utensils', label: 'Hospitality', title: 'Restaurant & bar systems', text: 'Events, menus, ordering flows, and admin content editing — Whistle Stop active build preview.' },
+      { icon: 'fa-utensils', label: 'Hospitality', title: 'Restaurant & bar systems', text: 'Events, menus, ordering flows, and admin content editing — hospitality system pattern in active development.' },
       { icon: 'fa-credit-card', label: 'Payments', title: 'Checkout & Stripe', text: 'Payment links, checkout flows, and order confirmation without platform transaction bloat.' },
       { icon: 'fa-pen-to-square', label: 'Control', title: 'Admin-editable content', text: 'Menus, events, and specials your team updates without touching code.' },
       { icon: 'fa-plug', label: 'Future', title: 'Integration-ready', text: 'Architecture leaves room for Toast or POS hooks as volume grows.' }
@@ -521,11 +521,11 @@ const flagshipPages = [
         media: images.moms
       },
       {
-        kicker: 'Active build',
-        title: 'Whistle Stop restaurant preview',
-        text: 'Events, admin-editable menus, and ordering-ready architecture for a Tampa Bay hospitality client.',
+        kicker: 'Hospitality lane',
+        title: 'Restaurant & bar ordering pattern',
+        text: 'Admin-editable menus, events calendar, and Stripe-ready pickup on an owned domain — scoped in restaurant-bar-growth-systems.',
         align: 'right',
-        media: images.logo
+        media: images.hospitalityMenus
       }
     ],
     process: [
@@ -551,13 +551,13 @@ const flagshipPages = [
     },
     faq: [
       { q: 'Do you build on Shopify or WooCommerce?', a: 'We hand-code lean storefronts with Stripe for owners who want speed, control, and lower platform fees — not plugin maintenance.' },
-      { q: 'Can staff update menus without calling you?', a: 'Yes — admin-editable content patterns are core to restaurant and bar builds like Whistle Stop.' },
+      { q: 'Can staff update menus without calling you?', a: 'Yes — admin-editable content patterns are core to restaurant and bar builds in the hospitality lane.' },
       { q: 'What about delivery apps?', a: 'We focus on owned ordering first; third-party app integrations can be scoped if they fit your volume.' }
     ],
     links: [
       ['/restaurant-bar-growth-systems', 'Restaurant & Bar Systems'],
       ['/service-ecommerce', 'E-Commerce Development'],
-      ['/case-study-whistle-stop', 'Whistle Stop Preview'],
+      ['/case-study-hospitality-system-pattern', 'Hospitality System Pattern'],
       ['/book-consultation', 'Plan Your Storefront']
     ],
     cta: { title: 'Planning ordering or a storefront?', text: 'Tell us your menu, product catalog, and how you want customers to check out.' }
@@ -567,8 +567,8 @@ const flagshipPages = [
     title: 'Contractor Growth Systems',
     meta: 'Contractor growth systems for Tampa Bay trades — websites, local SEO, lead capture, CRM outreach, and job workflow automation.',
     eyebrow: 'Trades & contractors',
-    h1: 'Contractor Business Growth Systems',
-    lead: 'Roofing, handyman, screen enclosure, excavation, and field trades need local visibility, estimate-first lead capture, and ops systems — not another generic contractor template.',
+    h1: 'Contractor & Field Trade Growth Systems',
+    lead: 'Trade playbooks for Tampa Bay contractors — launch your presence, publish a case study when ready, and join a referral network where complementary trades send attributed work.',
     heroIcon: 'fa-hard-hat',
     heroImage: images.jns,
     stats: [
@@ -637,8 +637,9 @@ const flagshipPages = [
       { q: 'Can you connect outreach to my trade?', a: 'Yes — OutreachEngine supports segmented lists for property managers, HOAs, and complementary trades with KG/KL/ST brand separation.' }
     ],
     links: [
-      ['/handyman-business-growth-systems', 'Handyman Systems'],
-      ['/roofing-business-growth-systems', 'Roofing Systems'],
+      ['/handyman-business-growth-systems', 'Handyman Lane'],
+      ['/electrician-business-growth-systems', 'Electrician Lane'],
+      ['/roofing-business-growth-systems', 'Roofing Lane'],
       ['/case-study-jns', 'JNS Case Study'],
       ['/business-growth-systems', 'Full Growth Systems']
     ],
@@ -649,10 +650,10 @@ const flagshipPages = [
     title: 'Home Service Business Growth Systems',
     meta: 'Home service growth systems for Tampa Bay — websites, local SEO, Google Business, CRM outreach, and automation for property-facing trades.',
     eyebrow: 'Home services',
-    h1: 'Home Service Business Growth Systems',
-    lead: 'Built for businesses that show up at the property — handyman, cleaning, painting, screen repair, and local trades that live on calls, estimates, and repeat customers.',
+    h1: 'Home Service Trade Growth Systems',
+    lead: 'For property-facing trades joining the network — fast sites, map visibility, and referral paths so electricians, painters, cleaners, and repair crews send each other tracked work.',
     heroIcon: 'fa-house-chimney',
-    heroImage: images.kgHero,
+    heroImage: images.screenTeam,
     stats: [
       { value: 'Call-first', label: 'Conversion model' },
       { value: 'GBP+SEO', label: 'Map & search' },
@@ -668,7 +669,7 @@ const flagshipPages = [
         'Reviews stall because nobody asks at job completion',
         'Referral partners send work with zero attribution'
       ],
-      media: images.kgHero
+      media: images.screenTeam
     },
     features: [
       { icon: 'fa-phone', label: 'Convert', title: 'Conversion-first websites', text: 'Fast hand-coded sites with clear services, trust signals, and prominent call or form CTAs.' },
@@ -679,10 +680,25 @@ const flagshipPages = [
     ],
     mediaBlocks: [
       {
+        kicker: 'Enclosure reference',
+        title: 'Screen Team quote-first local SEO',
+        text: '36 pages across Tampa Bay metros — st lane outreach and quote CTAs for property-facing enclosure work.',
+        align: 'left',
+        media: images.screenTeam
+      },
+      {
         kicker: 'Handyman reference',
         title: 'Knight Group booking & outreach',
         text: '97 indexable pages, Lighthouse 96/100/100, booking integration, and KG outreach that produced real jobs.',
+        align: 'right',
         media: images.kgHero
+      },
+      {
+        kicker: 'Land clearing reference',
+        title: 'Faith Works wide geography stack',
+        text: '82 pages with metro coverage, local SEO depth, and faithworks lane outreach for outdoor services.',
+        align: 'left',
+        media: images.faithWorks
       }
     ],
     process: [
@@ -1261,11 +1277,11 @@ const subPages = [
   {
     slug: 'handyman-business-growth-systems',
     parent: { href: '/contractor-growth-systems', label: 'Contractor Systems' },
-    title: 'Handyman Business Growth Systems',
-    meta: 'Handyman growth systems — website, local SEO, booking, CRM outreach, and job tracking for Tampa Bay estimate-first trades.',
-    eyebrow: 'Home services',
-    h1: 'Handyman Business Growth Systems',
-    lead: 'Estimate-first handyman companies need fast sites, booking paths, KG-style outreach, and job records — built around how small crews actually sell.',
+    title: 'Handyman Trade Growth Systems',
+    meta: 'Handyman growth playbook — website, local SEO, booking, CRM outreach, and referral network slot for Tampa Bay estimate-first repair trades.',
+    eyebrow: 'Network trade lane · Handyman',
+    h1: 'Growth Systems for Handyman Companies',
+    lead: 'The handyman trade lane uses Knight Group as the live reference — 97 pages, kg outreach lane, and referral-ready infrastructure. We onboard similar crews into the same stack and complementary trade network.',
     heroIcon: 'fa-hammer',
     heroImage: images.kgHero,
     problem: {
@@ -1307,8 +1323,8 @@ const subPages = [
       'Businesses wanting Knight Group-style technical quality'
     ],
     proof: {
-      title: 'Knight Group handyman system',
-      text: '97 indexable pages, Lighthouse 96/100/100, booking, schema, and outreach that produced real booked jobs.',
+      title: 'Reference build: Knight Group',
+      text: '97 indexable pages, Lighthouse 96/100/100, booking, schema, and outreach that produced real booked work — the handyman lane proof for the partner network.',
       image: images.kgHero.src,
       imageAlt: 'Knight Group handyman site',
       badge: 'Lighthouse 96',
@@ -1321,18 +1337,18 @@ const subPages = [
       { q: 'Is booking required?', a: 'No — some crews are call-first only; booking is added when estimate flow supports it.' }
     ],
     links: [['/case-study-knight-group', 'Knight Group Case Study'], ['/contractor-growth-systems', 'Contractor Systems'], ['/crm-outreach-lead-generation', 'CRM Outreach']],
-    cta: { title: 'Growing a handyman brand?', text: 'Share your services and how customers book you today.' }
+    cta: { title: 'Join the handyman trade lane?', text: 'Share your services, metros, and how customers book you — we will scope your stack and network slot.' }
   },
   {
     slug: 'roofing-business-growth-systems',
     parent: { href: '/contractor-growth-systems', label: 'Contractor Systems' },
-    title: 'Roofing Business Growth Systems',
-    meta: 'Roofing website design, local SEO, lead systems, and workflow automation for Tampa Bay roofers — storm-season ready.',
-    eyebrow: 'Roofing trades',
-    h1: 'Roofing Business Growth Systems',
-    lead: 'Roofing sells on trust before storm season — service pages, insurance-friendly messaging, estimate-first CTAs, and lead tracking tuned for Tampa Bay roofers.',
+    title: 'Roofing Trade Growth Systems',
+    meta: 'Roofing growth playbook — trust pages, local SEO, inspection leads, and referral network onboarding for Tampa Bay roofers.',
+    eyebrow: 'Network trade lane · Roofing',
+    h1: 'Growth Systems for Roofing Companies',
+    lead: 'Roofing trades join the same growth stack and referral network — Roof Monsters documents the vertical pattern; your launch becomes the next case study when storm-season visibility matters.',
     heroIcon: 'fa-house-chimney-crack',
-    heroImage: images.jns,
+    heroImage: images.caseStudyRoofing,
     problem: {
       kicker: 'Storm-season pressure',
       title: 'Roofing websites fail when trust and geography are thin',
@@ -1343,7 +1359,7 @@ const subPages = [
         'Inspection requests not tracked in CRM',
         'Referral partners unattributed after storms'
       ],
-      media: images.jns
+      media: images.caseStudyRoofing
     },
     features: [
       { icon: 'fa-shield-halved', label: 'Trust', title: 'Trust & proof pages', text: 'Projects, service areas, insurance messaging, and FAQs that match estimate-first roofing sales.' },
@@ -1372,10 +1388,10 @@ const subPages = [
       'Teams partnering with trades for referral attribution'
     ],
     proof: {
-      title: 'Roof Monsters preview',
-      text: 'Roofing brand site and lead system in development — local SEO, trust layout, and estimate-first paths.',
-      image: images.jns.src,
-      imageAlt: 'Roofing contractor website',
+      title: 'Reference pattern: Roof Monsters preview',
+      text: 'Roofing brand site and lead system in development — documents trust layout and estimate-first paths for the roofing lane in the partner network.',
+      image: images.caseStudyRoofing.src,
+      imageAlt: 'Roofing lead capture and trust pages',
       badge: 'Client preview',
       href: '/case-study-roof-monsters',
       linkLabel: 'Roof Monsters preview'
@@ -1386,16 +1402,16 @@ const subPages = [
       { q: 'Can outreach target property managers?', a: 'Yes — OutreachEngine supports segmented B2B lists with daily caps and reply tracking.' }
     ],
     links: [['/local-visibility-systems', 'Local Visibility'], ['/case-study-roof-monsters', 'Roof Monsters Preview'], ['/contractor-growth-systems', 'Contractor Systems']],
-    cta: { title: 'Launching or upgrading a roofing brand?', text: 'Tell us your service area and how inspection requests arrive today.' }
+    cta: { title: 'Join the roofing trade lane?', text: 'Tell us your service area and how inspection requests arrive today.' }
   },
   {
     slug: 'screen-enclosure-business-growth-systems',
     parent: { href: '/contractor-growth-systems', label: 'Contractor Systems' },
-    title: 'Screen Enclosure Growth Systems',
-    meta: 'Screen enclosure and pool cage growth systems for Tampa Bay — deep service-area SEO, quotes, and lead flow.',
-    eyebrow: 'Pool & screen trades',
-    h1: 'Screen Enclosure Business Growth Systems',
-    lead: 'Pool enclosure trades live on quote forms and phone calls across Tampa Bay metros — Screen Team proves 36-page growth-system depth with st OutreachEngine lane and metro service architecture.',
+    title: 'Screen Enclosure Trade Growth Systems',
+    meta: 'Screen enclosure growth playbook — service-area SEO, quote CTAs, and referral network slot for Tampa Bay pool cage trades.',
+    eyebrow: 'Network trade lane · Screen enclosure',
+    h1: 'Growth Systems for Screen Enclosure Companies',
+    lead: 'Screen Team is the live reference for this lane — 36 pages, st outreach, and quote-first local SEO. We onboard enclosure companies into the same infrastructure and complementary trade referrals.',
     heroIcon: 'fa-water',
     heroImage: images.screenTeam,
     problem: {
@@ -1418,9 +1434,9 @@ const subPages = [
     ],
     mediaBlocks: [
       {
-        kicker: 'Live client',
-        title: 'Screen Team LLC depth',
-        text: 'Deep service and city pages for pool enclosure trades — the reference build for this lane.',
+        kicker: 'Reference build',
+        title: 'Screen Team LLC — network anchor',
+        text: 'Deep service and city pages for pool enclosure trades — the checkable proof for this lane and a template for your launch.',
         media: images.screenTeam
       }
     ],
@@ -1437,8 +1453,8 @@ const subPages = [
       'Teams expanding from referrals into outbound prospecting'
     ],
     proof: {
-      title: 'Screen Team local service architecture',
-      text: 'Deep service and city pages for a live enclosure company — checkable proof for this trade lane.',
+      title: 'Reference build: Screen Team',
+      text: '36-page enclosure architecture with st OutreachEngine lane — live proof for the screen trade network slot.',
       image: images.screenTeam.src,
       imageAlt: 'Screen Team website',
       badge: 'Live client',
@@ -1451,16 +1467,16 @@ const subPages = [
       { q: 'Do you build aluminum vs screen differentiation?', a: 'Yes — service silos separate intents so customers land on the right quote path.' }
     ],
     links: [['/case-study-screen-team', 'Screen Team Case Study'], ['/contractor-growth-systems', 'Contractor Systems'], ['/service-area-page-strategy', 'Service Area Strategy']],
-    cta: { title: 'Growing a screen enclosure company?', text: 'Share your metros and quote process — we will map page depth and lead flow.' }
+    cta: { title: 'Join the screen enclosure lane?', text: 'Share your metros and quote process — we will map page depth, lead flow, and network onboarding.' }
   },
   {
     slug: 'excavation-business-growth-systems',
     parent: { href: '/contractor-growth-systems', label: 'Contractor Systems' },
-    title: 'Excavation Business Growth Systems',
-    meta: 'Excavation and site work growth systems — large service footprints, land clearing SEO, lead capture, and referral tracking.',
-    eyebrow: 'Site work trades',
-    h1: 'Excavation & Site Work Growth Systems',
-    lead: 'Land clearing, grading, and excavation need wide geography footprints and project proof — Faith Works 82-page SEO shows how large coverage builds local authority responsibly.',
+    title: 'Excavation Trade Growth Systems',
+    meta: 'Excavation and site-work growth playbook — wide geography SEO, project proof, and referral network slot for land clearing trades.',
+    eyebrow: 'Network trade lane · Excavation',
+    h1: 'Growth Systems for Excavation & Site Work',
+    lead: 'Faith Works anchors the excavation lane at 82 pages with faithworks outreach — we onboard land clearing and site-work companies into the same stack and builder referral network.',
     heroIcon: 'fa-tractor',
     heroImage: images.faithWorks,
     problem: {
@@ -1483,9 +1499,9 @@ const subPages = [
     ],
     mediaBlocks: [
       {
-        kicker: 'SEO scale',
-        title: 'Faith Works — 82 land clearing pages',
-        text: 'Responsible large-footprint local SEO for outdoor and site work services.',
+        kicker: 'Reference build',
+        title: 'Faith Works — excavation lane anchor',
+        text: '82-page land clearing footprint with faithworks outreach — template for your geography and proof at scale.',
         media: images.faithWorks
       }
     ],
@@ -1502,8 +1518,8 @@ const subPages = [
       'Trades receiving partner leads needing attribution'
     ],
     proof: {
-      title: 'Faith Works 82-page land clearing SEO',
-      text: 'Wide geography local SEO for outdoor services — the excavation footprint reference.',
+      title: 'Reference build: Faith Works',
+      text: '82-page land clearing SEO across Central Florida — live proof for the excavation trade network slot.',
       image: images.faithWorks.src,
       imageAlt: 'Faith Works land clearing SEO',
       badge: '82 pages',
@@ -1516,7 +1532,137 @@ const subPages = [
       { q: 'Can you integrate job photos from crews?', a: 'Yes — job workflow lane attaches field photos to records when ops system is added.' }
     ],
     links: [['/case-study-faith-works', 'Faith Works Case Study'], ['/home-service-business-growth-systems', 'Home Service Systems'], ['/service-area-page-strategy', 'Service Area Strategy']],
-    cta: { title: 'Scaling excavation visibility?', text: 'Describe your coverage map and job types — we will plan geography depth.' }
+    cta: { title: 'Join the excavation trade lane?', text: 'Describe your coverage map and job types — we will plan geography depth and network onboarding.' }
+  },
+  {
+    slug: 'electrician-business-growth-systems',
+    parent: { href: '/contractor-growth-systems', label: 'Contractor Systems' },
+    title: 'Electrician Growth Systems',
+    meta: 'Electrician growth playbook — starter and search-ready websites, local SEO, and referral network onboarding for Tampa Bay electrical contractors.',
+    eyebrow: 'Open trade lane · Electricians',
+    h1: 'Growth Systems for Electricians',
+    lead: 'We are actively building the electrician lane in the Tampa Bay partner network — Farrell Electric shows the starter launch pattern; your build becomes the next proof page and referral slot.',
+    heroIcon: 'fa-bolt',
+    heroImage: { type: 'image', src: '/images/farrell-hero.webp', alt: 'Farrell Electric website hero' },
+    problem: {
+      kicker: 'Open lane recruitment',
+      title: 'Electricians need credible web presence before referral scale',
+      text: 'Homeowners and GCs pick from the map pack and partner referrals. Thin sites, missing service pages, and no tracked referral path lose jobs to competitors with clearer offers.',
+      bullets: [
+        'Generic templates hide residential vs commercial services',
+        'No schema or Search Console baseline for local queries',
+        'Complementary trades cannot send attributed referral work',
+        'Follow-up on estimate requests lives in personal email'
+      ],
+      media: { type: 'image', src: '/images/added-media/gbp-reviews.webp', alt: 'Google Business reviews on electrician site' }
+    },
+    features: [
+      { icon: 'fa-globe', label: 'Web', title: 'Electrician-focused websites', text: 'Service pages, trust signals, and call-first CTAs tuned to electrical estimate flow.' },
+      { icon: 'fa-map-marker-alt', label: 'Local', title: 'Local SEO & GBP', text: 'Schema, service-area pages, and profile alignment for Tampa Bay metros.' },
+      { icon: 'fa-qrcode', label: 'Network', title: 'Referral network slot', text: '/ref/:partner paths and QR brochures when you join complementary trade referrals.' },
+      { icon: 'fa-paper-plane', label: 'Outreach', title: 'CRM outreach optional', text: 'OutreachEngine lanes for builders, property managers, and GC lists when volume justifies.' }
+    ],
+    mediaBlocks: [
+      {
+        kicker: 'Starter reference',
+        title: 'Farrell Electric preview launch',
+        text: 'Multi-page electrician site with essential SEO and working contact flow — the entry pattern for the electrician lane.',
+        media: images.farrellElectric
+      }
+    ],
+    process: [
+      { title: 'Offer & service map', text: 'Residential, commercial, and emergency offers documented per page.' },
+      { title: 'Launch site & GBP', text: 'Conversion paths, analytics, and Search Console baseline.' },
+      { title: 'Case study & lane', text: 'Publish proof on knightlogics.com when launch is ready; assign outreach and referral codes.' },
+      { title: 'Network co-marketing', text: 'Cross-referrals with handyman, HVAC, and contractor partners with attribution.' }
+    ],
+    idealFor: [
+      'Owner-operator electricians launching or upgrading web presence',
+      'Electrical contractors joining a complementary trade referral network',
+      'Businesses outgrowing Nextdoor-only lead flow',
+      'Teams ready for search-ready or full growth-system scope'
+    ],
+    proof: {
+      title: 'Reference build: Farrell Electric',
+      text: 'Starter electrician website with service structure and contact conversion — first case study in the open electrician lane.',
+      image: images.farrellElectric.src,
+      imageAlt: 'Farrell Electric website',
+      badge: 'Case study',
+      href: '/case-study-farrell-electric',
+      linkLabel: 'Farrell Electric case study'
+    },
+    faq: [
+      { q: 'Is this only for large electrical companies?', a: 'No — Farrell Electric shows the starter path; full growth systems scale with your metros and service depth.' },
+      { q: 'How does the referral network work?', a: 'Partners get tracked /ref/:partner paths and dashboard visibility — complementary trades send work with documented attribution.' },
+      { q: 'Do you compete with my existing marketing?', a: 'We build your owned presence and network slot — you keep your brand domain and customer relationships.' }
+    ],
+    links: [['/case-study-farrell-electric', 'Farrell Electric Case Study'], ['/contractor-growth-systems', 'Contractor Systems'], ['/referral-network-systems', 'Referral Network']],
+    cta: { title: 'Join the electrician trade lane?', text: 'Tell us your services and how jobs arrive today — we will scope your launch and network fit.' }
+  },
+  {
+    slug: 'painter-business-growth-systems',
+    parent: { href: '/home-service-business-growth-systems', label: 'Home Service Systems' },
+    title: 'Painter Growth Systems',
+    meta: 'Painter growth playbook — search-ready websites, local SEO, and referral network onboarding for Tampa Bay painting contractors.',
+    eyebrow: 'Open trade lane · Painting',
+    h1: 'Growth Systems for Painting Companies',
+    lead: 'The painting lane is open for new partners — Sal\'s Painting demonstrates search-ready launch; we build your presence and add you to the cross-trade referral roster.',
+    heroIcon: 'fa-paint-roller',
+    heroImage: { type: 'image', src: '/images/sals-hero.webp', alt: "Sal's Painting website hero" },
+    problem: {
+      kicker: 'Open lane recruitment',
+      title: 'Painters lose organic leads when service intent is vague',
+      text: 'Interior, exterior, and cabinet jobs rank differently. One generic page cannot capture "painter near me" and specialty finishes. Referral partners need a credible site before sending work.',
+      bullets: [
+        'Portfolio and service pages missing for distinct paint intents',
+        'No analytics or Search Console baseline after launch',
+        'GBP categories misaligned with website services',
+        'Referral work from handymen and remodelers goes untracked'
+      ],
+      media: { type: 'image', src: '/images/added-media/indexing.png', alt: 'Search Console indexing for painter launch' }
+    },
+    features: [
+      { icon: 'fa-palette', label: 'Web', title: 'Painter-focused sites', text: 'Gallery, service silos, and estimate CTAs for residential and commercial painting.' },
+      { icon: 'fa-magnifying-glass', label: 'SEO', title: 'Search-ready foundation', text: 'GA4, Clarity, GSC, and schema — the Sal\'s Painting starter pattern.' },
+      { icon: 'fa-qrcode', label: 'Network', title: 'Referral network slot', text: 'Tracked partner paths when you exchange work with handymen, drywall, and remodel trades.' },
+      { icon: 'fa-star', label: 'Reviews', title: 'Reputation lane', text: 'Review request timing tied to job completion when workflow volume justifies.' }
+    ],
+    mediaBlocks: [
+      {
+        kicker: 'Search-ready reference',
+        title: "Sal's Painting launch",
+        text: 'Search-optimized painter site with analytics, schema, and brand package — template for the painting lane.',
+        media: images.salsPainting
+      }
+    ],
+    process: [
+      { title: 'Service & gallery map', text: 'Interior, exterior, cabinet, and commercial offers per page.' },
+      { title: 'Search-ready launch', text: 'Technical SEO, analytics, and GBP alignment from day one.' },
+      { title: 'Case study publish', text: 'Proof page on knightlogics.com when you approve marketing.' },
+      { title: 'Referral onboarding', text: 'QR and /ref paths for complementary trades in the network.' }
+    ],
+    idealFor: [
+      'Painting contractors investing in organic visibility',
+      'Owner-operators joining a cross-trade referral network',
+      'Businesses graduating from social-only lead flow',
+      'Teams wanting search-ready scope before full CRM outreach'
+    ],
+    proof: {
+      title: "Reference build: Sal's Painting",
+      text: 'Search-ready painter website with analytics and technical SEO foundation — open lane case study.',
+      image: images.salsPainting.src,
+      imageAlt: "Sal's Painting website",
+      badge: 'Case study',
+      href: '/case-study-sals-painting',
+      linkLabel: "Sal's Painting case study"
+    },
+    faq: [
+      { q: 'Is this a full 97-page build like Knight Group?', a: 'Painting scope scales to your metros — Sal\'s shows search-ready starter; deep geography follows when justified.' },
+      { q: 'Can handyman partners refer painting work?', a: 'Yes — referral infrastructure attributes consults to the sending partner when both are in the network.' },
+      { q: 'Do you handle brand design?', a: 'Sal\'s included brand package in scope — we can bundle similar deliverables per project.' }
+    ],
+    links: [['/case-study-sals-painting', "Sal's Painting Case Study"], ['/home-service-business-growth-systems', 'Home Service Systems'], ['/referral-network-systems', 'Referral Network']],
+    cta: { title: 'Join the painting trade lane?', text: 'Share your services and markets — we will scope search-ready or full growth-system fit.' }
   },
   {
     slug: 'restaurant-bar-growth-systems',
@@ -1525,9 +1671,14 @@ const subPages = [
     meta: 'Restaurant and bar websites with events, menus, ordering flows, and admin-editable content for Tampa Bay hospitality.',
     eyebrow: 'Hospitality',
     h1: 'Restaurant & Bar Business Growth Systems',
-    lead: 'Hospitality needs events, admin-editable menus, ordering-ready architecture, and local visibility — Whistle Stop active build shows the pattern without bloated POS platforms.',
+    lead: 'Events, admin-editable menus, ordering-ready architecture, and local visibility on one fast mobile site — without enterprise POS lock-in or a developer ticket for every special.',
     heroIcon: 'fa-martini-glass-citrus',
-    heroImage: images.moms,
+    heroImage: images.hospitalityEvents,
+    stats: [
+      { value: 'Events', label: 'Calendar on owned domain' },
+      { value: 'Admin', label: 'Staff menu & hour edits' },
+      { value: 'Stripe', label: 'Order-ready checkout' }
+    ],
     problem: {
       kicker: 'Beyond PDF menus',
       title: 'Restaurants lose regulars when events and hours are hard to find',
@@ -1538,20 +1689,20 @@ const subPages = [
         'No owned ordering path — only third-party apps',
         'GBP hours and website specials out of sync'
       ],
-      media: images.moms
+      media: images.hospitalityEvents
     },
     features: [
-      { icon: 'fa-calendar-star', label: 'Events', title: 'Events & menus', text: 'Admin-editable specials, events, and hours — Whistle Stop pattern.' },
+      { icon: 'fa-calendar-star', label: 'Events', title: 'Events & menus', text: 'Admin-editable specials, events, and hours — staff-friendly hospitality UX.' },
       { icon: 'fa-bag-shopping', label: 'Order', title: 'Ordering flows', text: 'Pickup or order-ahead paths without enterprise POS lock-in.' },
       { icon: 'fa-map-marker-alt', label: 'Local', title: 'Local visibility', text: 'GBP alignment, schema, and map discovery support.' },
       { icon: 'fa-plug', label: 'POS', title: 'Future POS hooks', text: 'Room for Toast or POS integration as volume grows.' }
     ],
     mediaBlocks: [
       {
-        kicker: 'Active build',
-        title: 'Whistle Stop preview',
-        text: 'Restaurant and bar system with events, menus, and ordering infrastructure in progress.',
-        media: images.logo
+        kicker: 'Menus & ordering',
+        title: 'Staff-editable specials and owned checkout',
+        text: 'Kitchen and bar staff publish tonight\'s menu without an agency ticket. Stripe-ready pickup keeps orders on your domain — not only third-party marketplaces.',
+        media: images.hospitalityMenus
       }
     ],
     process: [
@@ -1567,20 +1718,20 @@ const subPages = [
       'Hospitality brands planning POS integration later'
     ],
     proof: {
-      title: 'Whistle Stop restaurant system preview',
-      text: 'Events, admin-editable menus, and ordering-ready site architecture — active hospitality build.',
-      image: images.moms.src,
-      imageAlt: 'Restaurant ordering system',
-      badge: 'Active build',
-      href: '/case-study-whistle-stop',
-      linkLabel: 'Whistle Stop preview'
+      title: 'Hospitality stack we deploy',
+      text: 'Hand-coded sites with admin menus, events calendar, Stripe-ready ordering, and local visibility — scoped to how your kitchen and bar actually run.',
+      image: images.hospitalityMenus.src,
+      imageAlt: images.hospitalityMenus.alt,
+      badge: 'System pattern',
+      href: '/case-study-hospitality-system-pattern',
+      linkLabel: 'View capability breakdown'
     },
     faq: [
-      { q: 'Is Whistle Stop live?', a: 'Active build — public preview marketing when client approves launch.' },
+      { q: 'Can you show a live restaurant example?', a: 'We walk prospects through the system pattern and admin workflows on a consult. Branded hospitality case studies go live only after a client approves public marketing — ask us what we can share for your vertical today.' },
       { q: 'Do you replace Toast?', a: 'We build owned web ordering first; POS integrations scoped when you are ready.' },
       { q: 'Can bartenders update specials?', a: 'Admin patterns target staff-friendly edits without code.' }
     ],
-    links: [['/online-ordering-systems', 'Ordering Systems'], ['/case-study-whistle-stop', 'Whistle Stop Preview'], ['/local-visibility-systems', 'Local Visibility']],
+    links: [['/online-ordering-systems', 'Ordering Systems'], ['/case-study-hospitality-system-pattern', 'Hospitality System Pattern'], ['/local-visibility-systems', 'Local Visibility']],
     cta: { title: 'Planning a restaurant or bar site?', text: 'Tell us about menus, events, and how you want orders to flow.' }
   },
   {
@@ -1923,7 +2074,7 @@ const caseStudies = [
     meta: 'Knight Command at /admin — unified tabs for Command Center, Referrals, Outreach CRM, Email Agent, Social Ops, Social Poster, and Logs with service embeds.',
     lead: 'The internal ops shell behind Knight Logics growth infrastructure — one authenticated place to run referrals, outreach, email, and social workflows without juggling URLs.',
     subhead: 'Built for operator speed with modular embeds on ports 5050, 5100, 8500, and 8501.',
-    heroImage: { src: images.logo.src, alt: 'Knight Command admin shell' },
+    heroImage: { src: images.caseStudyKnightCommand.src, alt: images.caseStudyKnightCommand.alt },
     tags: ['Internal build', 'Admin shell', 'Embeds', 'Ops tabs'],
     metrics: [
       { value: '7', label: 'Primary ops tabs' },
@@ -1958,7 +2109,7 @@ const caseStudies = [
         kicker: 'Ops embed',
         title: 'Multi-service tab layout',
         text: 'Referrals, CRM, email, and social queues reachable without leaving /admin.',
-        media: images.logo
+        media: images.caseStudyKnightCommand
       }
     ],
     timeline: [
@@ -1984,7 +2135,7 @@ const caseStudies = [
     meta: 'OutreachEngine case study — Flask SQLite CRM with kl/kg/st brands, scheduler first_touch/followup, bounce detection, and daily caps 20–40.',
     lead: 'A live outreach engine for segmented local-service campaigns — OutreachEngine with scheduler jobs, bounce detection, and Email-Agent reply routing.',
     subhead: 'Demonstrates the CRM Outreach & Lead Generation service in production on Screen Team, Faith Works, and Knight Group lanes.',
-    heroImage: { src: images.kgHero.src, alt: 'CRM outreach dashboard' },
+    heroImage: { src: images.caseStudyCrm.src, alt: images.caseStudyCrm.alt },
     tags: ['OutreachEngine', 'Flask SQLite', 'Reply tracking', 'Multi-brand'],
     metrics: [
       { value: '20–40', label: 'Daily send cap' },
@@ -2054,7 +2205,7 @@ const caseStudies = [
     meta: 'Vendoroo-style ticket intake, mobile job tracking, photos, PDF reports, and Stripe invoices — active build reference (not in public repo).',
     lead: 'Field-service workflow for portal tickets — intake queue, mobile status updates, photo proof, PDF packets, and Stripe invoice triggers in one system.',
     subhead: 'Represents the Ticketing, Invoicing & Job Workflows flagship offer.',
-    heroImage: { src: images.jns.src, alt: 'Vendor job workflow system' },
+    heroImage: { src: images.caseStudyVendoroo.src, alt: images.caseStudyVendoroo.alt },
     tags: ['Ticket intake', 'Mobile jobs', 'PDF proof', 'Stripe invoices'],
     metrics: [
       { value: '1', label: 'Ticket-to-invoice path' },
@@ -2089,7 +2240,7 @@ const caseStudies = [
         kicker: 'Field ops',
         title: 'Ticket queue to mobile proof',
         text: 'Representative workflow for portal-driven maintenance vendors.',
-        media: images.jns
+        media: images.caseStudyVendoroo
       }
     ],
     timeline: [
@@ -2108,40 +2259,40 @@ const caseStudies = [
     cta: 'Ideal for property maintenance vendors and portal-driven field work needing ticket-to-invoice discipline.'
   },
   {
-    slug: 'case-study-whistle-stop',
-    badge: 'Client Preview · Active Build',
-    title: 'Whistle Stop',
-    h1: 'Restaurant Events, Menu & Ordering System Preview',
-    meta: 'Whistle Stop hospitality build — events, admin-editable menus, ordering infrastructure, and local visibility in active development.',
-    lead: 'A Tampa Bay restaurant and bar build in progress — admin-editable menus and events, ordering-ready architecture, and hospitality UX without a bloated POS platform.',
-    subhead: 'Preview case study for restaurant & bar growth systems until public launch marketing is approved.',
-    heroImage: { src: images.moms.src, alt: 'Restaurant ordering and events site' },
+    slug: 'case-study-hospitality-system-pattern',
+    badge: 'Capability Pattern · Pending Client Approval',
+    title: 'Hospitality System Pattern',
+    h1: 'Restaurant Events, Menu & Ordering System Pattern',
+    meta: 'Hospitality growth system pattern — events, admin-editable menus, ordering infrastructure, and local visibility. Client case studies publish after approval and site transfer.',
+    lead: 'How Knight Logics builds restaurant and bar sites — admin-editable menus and events, ordering-ready architecture, and hospitality UX without a bloated POS platform. No client branding until ownership approves public marketing.',
+    subhead: 'Capability documentation until hospitality case studies are cleared for publication.',
+    heroImage: { src: images.hospitalityEvents.src, alt: images.hospitalityEvents.alt },
     tags: ['Restaurant', 'Events', 'Ordering', 'Admin editable'],
     metrics: [
-      { value: 'Active', label: 'Build status' },
+      { value: 'Pattern', label: 'Documented stack' },
       { value: 'Admin', label: 'Editable menus' },
       { value: 'Ordering', label: 'Flow ready' }
     ],
     sections: [
       {
         title: 'Problem',
-        paragraphs: ['Menu specials, events, and hours outgrew a basic brochure site. Social-only event posts fragmented the brand. Ownership needed staff-friendly content updates and a path to order-ahead without immediate Toast integration.'],
+        paragraphs: ['Menu specials, events, and hours outgrow a basic brochure site. Social-only event posts fragment the brand. Ownership needs staff-friendly content updates and a path to order-ahead without immediate Toast integration.'],
         bullets: ['PDF menus stale within days', 'Events not discoverable on owned website', 'No pickup or order-ahead on brand domain', 'GBP hours and specials misaligned']
       },
       {
-        title: 'What is being built',
-        paragraphs: ['Hand-coded hospitality site with admin-editable menus and events, mobile-first layout, ordering flow preparation, and local visibility alignment. Architecture leaves hooks for future POS integration when kitchen volume justifies it.'],
+        title: 'What we build',
+        paragraphs: ['Hand-coded hospitality sites with admin-editable menus and events, mobile-first layout, ordering flow preparation, and local visibility alignment. Architecture leaves hooks for future POS integration when kitchen volume justifies it.'],
         bullets: ['Content admin patterns for non-developer staff', 'Event calendar UX on owned domain', 'Stripe-ready ordering path scoped to ops']
       },
       {
         title: 'Tools used',
         paragraphs: ['Hand-coded site, admin content patterns, schema for local discovery, and ordering flow components shared with the online-ordering-systems lane.'],
-        bullets: ['Restaurant-bar-growth-systems service template', 'Local visibility and review strategy at launch', 'Whistle Stop branding and photography from client']
+        bullets: ['Restaurant-bar-growth-systems service template', 'Local visibility and review strategy at launch', 'Fictional UI mockups until client photography is approved']
       },
       {
-        title: 'Status',
-        paragraphs: ['Active build — public preview details and live URL marketing publish when client approves launch. This case study documents the system pattern, not final public metrics.'],
-        bullets: ['Preview label until go-live approval', 'Ordering flow tested in staging', 'GBP alignment scheduled pre-launch']
+        title: 'Publication status',
+        paragraphs: ['Hospitality client case studies — including live URLs, metrics, and branded photography — publish only after client approval and site hosting transfer. This page documents the reusable system pattern in the meantime.'],
+        bullets: ['No client names on public marketing until sign-off', 'Ordering flow tested in staging environments', 'GBP alignment scheduled pre-launch for approved clients']
       }
     ],
     stack: ['Hand-coded HTML/CSS/JS', 'Admin content patterns', 'Stripe-ready checkout', 'LocalBusiness schema'],
@@ -2162,7 +2313,7 @@ const caseStudies = [
     meta: 'Roof Monsters roofing brand website and local lead system in development — trust pages, service-area SEO, and estimate-first CTAs.',
     lead: 'Roofing growth system preview for Tampa Bay — local SEO structure, insurance-friendly trust pages, and estimate-first lead capture tuned for storm-season markets.',
     subhead: 'Labeled preview until public launch is approved by the client.',
-    heroImage: { src: images.jns.src, alt: 'Roofing contractor lead system' },
+    heroImage: { src: images.caseStudyRoofing.src, alt: images.caseStudyRoofing.alt },
     tags: ['Roofing', 'Local SEO', 'Lead capture', 'Preview'],
     metrics: [
       { value: 'Preview', label: 'Launch status' },
@@ -2209,7 +2360,7 @@ const caseStudies = [
     meta: 'Social Poster on Streamlit 8501 — queued content, X/Facebook API, GBP API, Playwright for Nextdoor/LinkedIn, failure reporting.',
     lead: 'Production social runners on port 8501 — Streamlit queue UI, API bridge for X and Facebook, GBP API posts, Playwright for Nextdoor and LinkedIn, with visible failures in Social Ops tabs.',
     subhead: 'Supports the Social Media Automation Systems service lane inside Knight Command.',
-    heroImage: { src: images.logo.src, alt: 'Social Poster automation dashboard' },
+    heroImage: { src: images.caseStudySocial.src, alt: images.caseStudySocial.alt },
     tags: ['Streamlit 8501', 'Playwright', 'API bridge', 'Multi-brand'],
     metrics: [
       { value: '8501', label: 'Social Poster port' },
@@ -2270,7 +2421,7 @@ const caseStudies = [
     meta: 'Referral tracking with /ref/:partner paths, Neon Postgres events, referral-dashboard QR/payouts, and Stripe webhook settlement.',
     lead: 'The referral infrastructure behind Knight Logics partner program — QR brochure links, partner codes, Neon Postgres event logging, dashboard visibility, and Stripe webhook payouts.',
     subhead: 'Supports Referral Network Systems and the public Referral Program.',
-    heroImage: { src: images.logo.src, alt: 'Referral network dashboard' },
+    heroImage: { src: images.caseStudyReferral.src, alt: images.caseStudyReferral.alt },
     tags: ['Referral codes', 'QR brochures', 'Neon Postgres', 'Stripe webhooks'],
     metrics: [
       { value: '/ref/:partner', label: 'Tracked paths' },
@@ -2335,4 +2486,4 @@ const caseStudies = [
 ];
 
 const allSlugs = [...flagshipPages, ...subPages, ...caseStudies].map((x) => x.slug);
-module.exports = { VER: '20260626growth5', flagshipPages, subPages, caseStudies, allSlugs };
+module.exports = { VER: '20260701hero4', flagshipPages, subPages, caseStudies, allSlugs };

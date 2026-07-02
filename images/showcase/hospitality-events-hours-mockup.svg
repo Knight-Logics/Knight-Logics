@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-label="Illustration of restaurant events calendar and business hours">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#08111f"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg)"/>
+  <rect x="48" y="48" width="1104" height="654" rx="20" fill="#0f1d33" stroke="#1e3a5f" stroke-width="2"/>
+
+  <rect x="48" y="48" width="1104" height="44" rx="20" fill="#13243d"/>
+  <circle cx="84" cy="70" r="7" fill="#ef4444"/>
+  <circle cx="108" cy="70" r="7" fill="#f59e0b"/>
+  <circle cx="132" cy="70" r="7" fill="#22c55e"/>
+  <rect x="420" y="58" width="360" height="24" rx="12" fill="#1a2f4d"/>
+  <text x="600" y="75" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="12">yourbar.com/events</text>
+
+  <rect x="80" y="108" width="1040" height="88" rx="12" fill="#152a45"/>
+  <text x="110" y="142" fill="#e2e8f0" font-family="Segoe UI, system-ui, sans-serif" font-size="28" font-weight="600">Events &amp; Hours</text>
+  <text x="110" y="172" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="14">Owned-domain calendar - not buried in social feeds</text>
+  <rect x="860" y="124" width="220" height="52" rx="10" fill="#14532d" stroke="#22c55e" stroke-width="1"/>
+  <circle cx="888" cy="150" r="6" fill="#4ade80"/>
+  <text x="908" y="146" fill="#bbf7d0" font-family="Segoe UI, system-ui, sans-serif" font-size="13" font-weight="700">Open now</text>
+  <text x="908" y="164" fill="#86efac" font-family="Segoe UI, system-ui, sans-serif" font-size="12">Closes 11:00 PM</text>
+
+  <rect x="80" y="216" width="320" height="420" rx="12" fill="#122238" stroke="#1e3a5f" stroke-width="1"/>
+  <text x="110" y="252" fill="#38bdf8" font-family="Segoe UI, system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="1">WEEKLY HOURS</text>
+  <text x="110" y="290" fill="#e2e8f0" font-family="Segoe UI, system-ui, sans-serif" font-size="15">Mon-Thu  11am - 10pm</text>
+  <text x="110" y="320" fill="#e2e8f0" font-family="Segoe UI, system-ui, sans-serif" font-size="15">Fri-Sat  11am - midnight</text>
+  <text x="110" y="350" fill="#e2e8f0" font-family="Segoe UI, system-ui, sans-serif" font-size="15">Sun  10am - 9pm</text>
+  <rect x="110" y="378" width="260" height="36" rx="6" fill="#1e3a5f"/>
+  <text x="240" y="401" text-anchor="middle" fill="#7dd3fc" font-family="Segoe UI, system-ui, sans-serif" font-size="12">Admin: update hours</text>
+  <text x="110" y="448" fill="#38bdf8" font-family="Segoe UI, system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="1">HOLIDAY OVERRIDE</text>
+  <text x="110" y="478" fill="#fbbf24" font-family="Segoe UI, system-ui, sans-serif" font-size="14">July 4 - close at 6pm</text>
+  <text x="110" y="508" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="13">Synced to Google Business Profile</text>
+
+  <rect x="430" y="216" width="690" height="420" rx="12" fill="#122238" stroke="#1e3a5f" stroke-width="1"/>
+  <text x="460" y="252" fill="#38bdf8" font-family="Segoe UI, system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="1">UPCOMING EVENTS</text>
+  <text x="460" y="288" fill="#f1f5f9" font-family="Segoe UI, system-ui, sans-serif" font-size="22" font-weight="600">This week at the bar</text>
+
+  <rect x="460" y="308" width="630" height="78" rx="8" fill="#1a2f4d"/>
+  <text x="480" y="338" fill="#fbbf24" font-family="Segoe UI, system-ui, sans-serif" font-size="12" font-weight="700">FRI 7:00 PM</text>
+  <text x="480" y="364" fill="#e2e8f0" font-family="Segoe UI, system-ui, sans-serif" font-size="17" font-weight="600">Live acoustic set - patio</text>
+  <text x="1020" y="364" text-anchor="end" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="13">Free entry</text>
+
+  <rect x="460" y="398" width="630" height="78" rx="8" fill="#1a2f4d"/>
+  <text x="480" y="428" fill="#fbbf24" font-family="Segoe UI, system-ui, sans-serif" font-size="12" font-weight="700">SAT 2:00 PM</text>
+  <text x="480" y="454" fill="#e2e8f0" font-family="Segoe UI, system-ui, sans-serif" font-size="17" font-weight="600">Brunch &amp; mimosa flight</text>
+  <text x="1020" y="454" text-anchor="end" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="13">RSVP optional</text>
+
+  <rect x="460" y="488" width="630" height="78" rx="8" fill="#1a2f4d"/>
+  <text x="480" y="518" fill="#fbbf24" font-family="Segoe UI, system-ui, sans-serif" font-size="12" font-weight="700">SUN 6:00 PM</text>
+  <text x="480" y="544" fill="#e2e8f0" font-family="Segoe UI, system-ui, sans-serif" font-size="17" font-weight="600">Trivia league - teams of 4</text>
+  <text x="1020" y="544" text-anchor="end" fill="#94a3b8" font-family="Segoe UI, system-ui, sans-serif" font-size="13">Prizes weekly</text>
+
+  <rect x="460" y="590" width="180" height="36" rx="18" fill="url(#accent)"/>
+  <text x="550" y="613" text-anchor="middle" fill="#08111f" font-family="Segoe UI, system-ui, sans-serif" font-size="13" font-weight="700">Add event</text>
+
+  <text x="600" y="720" text-anchor="middle" fill="#64748b" font-family="Segoe UI, system-ui, sans-serif" font-size="11">Sample events &amp; hours UI - fictional venue</text>
+</svg>

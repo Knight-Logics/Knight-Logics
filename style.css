@@ -537,6 +537,11 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
         margin-top: 0;
         flex-shrink: 0;
     }
+
+    /* Closed menus must not capture hover below the nav bar */
+    .mobile-nav-links .nav-dropdown:not(.active) .nav-dropdown-menu {
+        pointer-events: none !important;
+    }
 }
 
 /* Hide mobile-only elements on desktop */
@@ -691,20 +696,22 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
     border: 1px solid rgba(100, 255, 218, 0.3);
     border-radius: 8px;
     min-width: 220px;
-    margin-top: 12px;
-    padding: 8px 0;
+    margin-top: 0;
+    padding: 12px 0 8px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 3000;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
 }
 
 .nav-dropdown.active .nav-dropdown-menu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    pointer-events: auto;
 }
 
 .nav-dropdown-item {
@@ -744,13 +751,30 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
     user-select: none;
 }
 
+.nav-dropdown-item-note {
+    float: right;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.nav-dropdown-item--hub {
+    font-weight: 700;
+}
+
+.nav-dropdown-mega-panel .nav-dropdown-label:first-of-type {
+    margin-top: 4px;
+}
+
 .nav-dropdown-menu--wide {
     min-width: 300px;
 }
 
 /* Sectioned mega menu — section tabs on left, link panel on right */
 .nav-dropdown-menu--sectioned {
-    padding: 0;
+    padding: 12px 0 0;
     overflow: hidden;
 }
 
@@ -838,6 +862,7 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
 
 .nav-dropdown-mega-panel.is-active {
     display: flex;
+    justify-content: center;
 }
 
 .nav-dropdown-mega-panel .nav-dropdown-item {
@@ -867,6 +892,9 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
 
     .nav-dropdown-mega-panels {
         position: relative;
+        display: flex;
+        flex-direction: column;
+        align-self: stretch;
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
@@ -875,6 +903,12 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
         border: none;
         border-radius: 0;
         box-shadow: none;
+    }
+
+    .nav-dropdown-mega-panel.is-active {
+        flex: 1 1 auto;
+        justify-content: center;
+        min-height: 100%;
     }
 
     .nav-dropdown-mega-back {
@@ -12212,7 +12246,15 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
 /* Site-wide non-home hero identity. The home page uses its own full-screen parallax hero. */
 .profile-hero,
 .pricing-hero,
-.svc-hero:not(.svc-hero--panels),
+.svc-hero:not(.svc-hero--panels):not(.svc-hero--stars),
+.cs-hero:not(.svc-hero--stars),
+.automation-hero:not(.svc-hero--stars),
+.referral-hero:not(.svc-hero--stars),
+.displayplus-hero:not(.svc-hero--stars),
+.videoforge-hero:not(.svc-hero--stars),
+.pixelforge-hero:not(.svc-hero--stars),
+.contact-page-hero:not(.svc-hero--stars),
+.ed-hero:not(.svc-hero--stars),
 .automation-hero,
 .referral-hero,
 .displayplus-hero,
@@ -13231,6 +13273,10 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
         padding: 6px 4px;
     }
 
+    .mobile-nav-links .nav-dropdown-mega-panel.is-active {
+        justify-content: flex-start;
+    }
+
     .nav-dropdown-mega-panel .nav-dropdown-item {
         font-size: 0.82rem;
         padding: 10px 12px;
@@ -13542,6 +13588,176 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
 .kl-hero-actions-bar .svc-cta-row {
     margin: 0;
     gap: 10px;
+}
+
+/* Stars hero — slim inner-page header (replaces cramped photo panels) */
+.svc-hero--stars {
+    --kl-hero-nav-offset: 72px;
+    position: relative;
+    display: block !important;
+    padding: calc(var(--kl-hero-nav-offset) + 20px) 0 28px;
+    background: #05090c !important;
+    overflow: visible;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    align-items: stretch !important;
+}
+
+.svc-hero--stars + .kl-hero-actions-bar {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(5, 9, 12, 0.55) 0%, #07101d 55%, #0a0f1c 100%);
+    border-bottom-color: rgba(100, 255, 218, 0.14);
+}
+
+.svc-hero--stars.ed-hero::before,
+.contact-page-hero.svc-hero--stars::before,
+.automation-hero.svc-hero--stars::before {
+    display: none !important;
+    content: none !important;
+}
+
+.svc-hero-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.svc-hero-stars__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+        radial-gradient(ellipse 120% 80% at 50% -10%, rgba(100, 255, 218, 0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 90% 60% at 80% 20%, rgba(100, 255, 218, 0.04) 0%, transparent 50%),
+        linear-gradient(180deg, #05090c 0%, rgba(5, 9, 12, 0.92) 100%);
+}
+
+.svc-hero-stars__canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.svc-hero--stars > .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.page-service-local-seo .svc-hero.svc-hero--stars,
+.page-service-google-business-profile .svc-hero.svc-hero--stars {
+    background: #050a14 !important;
+}
+
+.page-service-local-seo .svc-hero.svc-hero--stars .svc-hero-inner,
+.page-service-google-business-profile .svc-hero.svc-hero--stars .svc-hero-inner {
+    max-width: 920px;
+    padding: 0;
+}
+
+.page-service-local-seo .svc-hero.svc-hero--stars h1,
+.page-service-google-business-profile .svc-hero.svc-hero--stars h1 {
+    font-size: clamp(1.55rem, 3.4vw, 2.4rem);
+    line-height: 1.18;
+    margin-bottom: 0;
+}
+
+.svc-hero--stars .svc-hero-inner {
+    max-width: 920px;
+}
+
+.svc-hero--stars .kl-breadcrumb,
+.svc-hero--stars .svc-breadcrumb {
+    margin-bottom: 10px;
+}
+
+.svc-hero--stars .svc-eyebrow {
+    display: inline-block;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #64ffda;
+}
+
+.svc-hero--stars .svc-eyebrow i {
+    margin-right: 6px;
+}
+
+.svc-hero--stars h1 {
+    font-size: clamp(1.55rem, 3.4vw, 2.4rem);
+    line-height: 1.18;
+    margin: 0;
+    max-width: 100%;
+}
+
+.svc-hero-lead--bar,
+.kl-hero-actions-bar .svc-hero-lead,
+.kl-hero-actions-bar .pricing-hero-sub,
+.kl-hero-actions-bar .pricing-hero-claim {
+    margin: 0 0 14px;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: rgba(168, 178, 200, 0.95);
+    max-width: 72ch;
+}
+
+.kl-hero-actions-bar .pricing-nav-pills {
+    margin: 0 0 10px;
+}
+
+@media (max-width: 768px) {
+    .svc-hero--stars {
+        --kl-hero-nav-offset: 56px;
+        padding: calc(var(--kl-hero-nav-offset) + 14px) 0 20px;
+    }
+
+    .svc-hero--stars h1 {
+        font-size: clamp(1.3rem, 5.2vw, 1.75rem);
+        max-width: none;
+    }
+}
+
+/* Sitewide: legacy photo / gradient heroes yield to stars when baked */
+.page-service-websites .svc-hero.svc-hero--stars,
+.page-service-ecommerce .svc-hero.svc-hero--stars,
+.page-service-desktop-apps .svc-hero.svc-hero--stars,
+.page-service-ai-automation .svc-hero.svc-hero--stars,
+.page-service-local-seo .svc-hero.svc-hero--stars,
+.page-service-google-business-profile .svc-hero.svc-hero--stars,
+[class*="page-service-"] .svc-hero.svc-hero--stars,
+.booking-page-hero.svc-hero--stars,
+.contact-page-hero.svc-hero--stars {
+    min-height: 0 !important;
+    display: block !important;
+    background: #05090c !important;
+    overflow: visible !important;
+    align-items: stretch !important;
+}
+
+.page-service-websites .svc-hero.svc-hero--stars::before,
+.page-service-ecommerce .svc-hero.svc-hero--stars::before,
+.page-service-desktop-apps .svc-hero.svc-hero--stars::before,
+.page-service-ai-automation .svc-hero.svc-hero--stars::before,
+.page-service-local-seo .svc-hero.svc-hero--stars:not(.svc-hero--panels)::before,
+.page-service-google-business-profile .svc-hero.svc-hero--stars:not(.svc-hero--panels)::before {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+}
+
+.svc-hero--stars .city-hero-layout {
+    position: relative;
+    z-index: 2;
 }
 
 @keyframes klHeroFromLeft {

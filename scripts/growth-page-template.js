@@ -1,5 +1,8 @@
-const VER = '20260701megamenu2';
+const VER = '20260701hero4';
 const { pickHeroPanels, getHeroFocus, pickMobileHeroImage } = require('./growth-content-media');
+const { tradeNetworkForSlug } = require('./growth-trade-network');
+const { renderStructuredDataScripts } = require('./growth-schema');
+const { trimMeta } = require('./seo-keywords');
 
 function esc(s) {
   return String(s)
@@ -21,23 +24,24 @@ function renderHead(p, opts = {}) {
     <script defer src="/script.js?v=${VER}"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="${esc(p.meta)}">
+    <meta name="description" content="${esc(trimMeta(p.meta))}">
+    ${p.seoTerms?.length ? `<meta name="keywords" content="${esc(p.seoTerms.join(', '))}">` : ''}
     <meta name="author" content="Nicholas Knight">
     <meta property="og:type" content="${opts.caseStudy ? 'article' : 'website'}">
     <meta property="og:title" content="${esc(title)}">
-    <meta property="og:description" content="${esc(p.meta)}">
+    <meta property="og:description" content="${esc(trimMeta(p.meta))}">
     <meta property="og:url" content="${canonical}">
     <meta property="og:site_name" content="Knight Logics">
     <meta property="og:image" content="${ogImage}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${esc(title)}">
-    <meta name="twitter:description" content="${esc(p.meta)}">
+    <meta name="twitter:description" content="${esc(trimMeta(p.meta))}">
     <title>${esc(title)}</title>
     <link rel="canonical" href="${canonical}">
     <link rel="stylesheet" href="/style.css?v=${VER}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VX36QR7HJW');</script>
-    ${p.faqSchema || ''}
+    ${renderStructuredDataScripts(p, opts)}
 </head>`;
 }
 
@@ -248,6 +252,37 @@ function renderContext(ctx) {
     </section>`;
 }
 
+function renderTradeNetwork(block) {
+  if (!block) return '';
+  const paras = (block.paragraphs || []).map((p) => `<p>${p}</p>`).join('\n                ');
+  const bullets = block.bullets && block.bullets.length
+    ? `<ul class="kl-growth-list">${block.bullets.map((b) => `<li>${b}</li>`).join('')}</ul>` : '';
+  const links = block.links && block.links.length
+    ? `<div class="kl-growth-links kl-growth-links--inline">${block.links.map(([href, label]) => `<a href="${href}">${label}</a>`).join('\n                    ')}</div>` : '';
+  return `<section class="kl-growth-section kl-growth-section--alt kl-growth-section--network">
+        <div class="container">
+            <div class="kl-growth-split fade-in">
+                <div class="kl-growth-split-copy">
+                    <span class="kl-growth-kicker">Trade network</span>
+                    <h2>${block.title}</h2>
+                    ${paras}
+                    ${bullets}
+                    ${links}
+                    <div class="svc-cta-row" style="margin-top:1.25rem;">
+                        <a href="${block.ctaHref || '/book-consultation'}" class="btn-primary">${block.ctaLabel || 'Plan your trade lane'}</a>
+                        <a href="/referral-network-systems" class="btn-secondary">How referrals work</a>
+                    </div>
+                </div>
+                <div class="kl-growth-split-media">
+                    <div class="kl-growth-media kl-growth-media--solo">
+                        <img src="/images/showcase/case-study-referral-network-mockup.webp" alt="Referral network dashboard with partner attribution" loading="lazy" decoding="async" width="1200" height="675">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>`;
+}
+
 function renderDeliverables(items) {
   if (!items || !items.length) return '';
   return `<section class="kl-growth-section kl-growth-section--alt">
@@ -336,6 +371,13 @@ function heroImgStyle(src, mobile = false) {
   return ` style="object-position: ${getHeroFocus(src, mobile)};"`;
 }
 
+function renderHeroStars() {
+  return `<div class="svc-hero-stars" aria-hidden="true">
+        <div class="svc-hero-stars__bg"></div>
+        <canvas class="svc-hero-stars__canvas"></canvas>
+    </div>`;
+}
+
 function renderHeroPanels(slug, primaryImage) {
   const panels = pickHeroPanels(slug, primaryImage?.src);
   const mobile = pickMobileHeroImage(panels, primaryImage?.src);
@@ -390,23 +432,24 @@ function renderServicePage(p) {
     <div id="header-container"></div>
 
     <section class="svc-hero svc-hero--panels" aria-label="${esc(p.title)}">
-        ${renderHeroPanels(p.slug, p.heroImage)}
+        ${renderHeroPanels(p)}
         <div class="container">
             <div class="svc-hero-inner fade-in">
                 ${renderBreadcrumb(crumbs)}
                 <span class="svc-eyebrow"><i class="fas ${p.heroIcon || 'fa-layer-group'}"></i> ${p.eyebrow}</span>
                 <h1>${p.h1}</h1>
                 <p class="svc-hero-lead">${p.lead}</p>
+                ${renderStats(p.stats)}
+                <div class="svc-cta-row">
+                    <a href="/book-consultation" class="btn-primary">Book a Consultation</a>
+                    <a href="/website-growth-audit" class="btn-secondary">Free Growth Audit</a>
+                </div>
             </div>
         </div>
     </section>
-    ${renderHeroActionsBar(`${renderStats(p.stats)}
-            <div class="svc-cta-row">
-                <a href="/book-consultation" class="btn-primary">Book a Consultation</a>
-                <a href="/website-growth-audit" class="btn-secondary">Free Growth Audit</a>
-            </div>`)}
 
     ${renderContext(p.context)}
+    ${renderTradeNetwork(p.tradeNetwork || tradeNetworkForSlug(p.slug))}
     ${renderSplit(p.problem)}
     ${renderFeatures(p.features)}
     ${renderMediaBlocks(p.mediaBlocks)}
@@ -457,23 +500,22 @@ function renderCaseStudy(c) {
 <body class="kl-growth-page kl-growth-page--pro kl-case-study-page page-${c.slug}">
     <div id="header-container"></div>
 
-    <section class="svc-hero svc-hero--panels svc-hero--case" aria-label="${esc(c.title)} case study">
-        ${renderHeroPanels(c.slug, c.heroImage)}
+    <section class="cs-hero" aria-label="${esc(c.title)} case study">
         <div class="container">
-            <div class="svc-hero-inner fade-in">
+            <div class="cs-hero-inner fade-in">
                 ${renderBreadcrumb(crumbs)}
-                <span class="svc-eyebrow"><i class="fas fa-clipboard-check"></i> ${c.badge}</span>
-                <h1>${c.h1}</h1>
-                <p class="svc-hero-lead">${c.lead}</p>
+                <div class="cs-type-badge"><i class="fas fa-clipboard-check"></i> ${c.badge}</div>
+                <h1><span>${c.h1}</span></h1>
+                <p class="cs-hero-sub">${c.lead}</p>
+                <div class="cs-tech-stack">${c.tags.map((t) => `<span class="cs-tag">${t}</span>`).join('\n                    ')}</div>
+                ${renderCaseStudyMetrics(c.metrics)}
+                <div class="cs-hero-actions">
+                    ${c.liveUrl ? `<a href="${c.liveUrl}" class="btn-primary" target="_blank" rel="noopener">View Live Project</a>` : ''}
+                    <a href="${c.serviceLink}" class="btn-secondary">${c.serviceLabel}</a>
+                </div>
             </div>
         </div>
     </section>
-    ${renderHeroActionsBar(`<div class="cs-tech-stack">${c.tags.map((t) => `<span class="cs-tag">${t}</span>`).join('\n                ')}</div>
-            ${renderCaseStudyMetrics(c.metrics)}
-            <div class="svc-cta-row">
-                ${c.liveUrl ? `<a href="${c.liveUrl}" class="btn-primary" target="_blank" rel="noopener">View Live Project</a>` : ''}
-                <a href="${c.serviceLink}" class="btn-secondary">${c.serviceLabel}</a>
-            </div>`)}
 
     ${renderContext(c.context)}
     <section class="kl-growth-section">

@@ -226,7 +226,7 @@ Systems and automation case studies:
 - Knight Command: https://knightlogics.com/case-study-knight-command
 - CRM outreach system: https://knightlogics.com/case-study-crm-outreach-system
 - Vendoroo ticket & invoice: https://knightlogics.com/case-study-vendoroo-ticket-invoice-system
-- Whistle Stop: https://knightlogics.com/case-study-whistle-stop
+- Hospitality system pattern: https://knightlogics.com/case-study-hospitality-system-pattern
 - Roof Monsters: https://knightlogics.com/case-study-roof-monsters
 - Social poster: https://knightlogics.com/case-study-social-poster
 - Referral network system: https://knightlogics.com/case-study-referral-network-system

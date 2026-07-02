@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="CRM outreach queue dashboard">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0a1628"/><stop offset="100%" stop-color="#08111f"/></linearGradient></defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect x="40" y="40" width="1120" height="595" rx="16" fill="#0f1d33" stroke="#1e3a5f"/>
+  <text x="70" y="88" fill="#38bdf8" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" letter-spacing="1.2">OUTREACH ENGINE</text>
+  <text x="70" y="124" fill="#f1f5f9" font-family="Segoe UI,system-ui,sans-serif" font-size="28" font-weight="600">Send queue</text>
+  <rect x="70" y="148" width="110" height="32" rx="16" fill="#1e3a5f"/><text x="125" y="169" text-anchor="middle" fill="#7dd3fc" font-size="12">kg lane</text>
+  <rect x="190" y="148" width="110" height="32" rx="16" fill="#2563eb"/><text x="245" y="169" text-anchor="middle" fill="#fff" font-size="12">st lane</text>
+  <rect x="310" y="148" width="140" height="32" rx="16" fill="#1e3a5f"/><text x="380" y="169" text-anchor="middle" fill="#7dd3fc" font-size="12">faithworks</text>
+  <rect x="860" y="138" width="260" height="44" rx="10" fill="#14532d" stroke="#22c55e"/><text x="990" y="166" text-anchor="middle" fill="#bbf7d0" font-size="14" font-weight="600">12 queued · 3 replies today</text>
+  <rect x="70" y="200" width="520" height="380" rx="12" fill="#122238" stroke="#1e3a5f"/>
+  <text x="100" y="240" fill="#94a3b8" font-size="13">SEGMENTED LIST</text>
+  <text x="100" y="272" fill="#e2e8f0" font-size="18" font-weight="600">Tampa property managers</text>
+  <rect x="100" y="292" width="460" height="56" rx="8" fill="#1a2f4d"/><text x="120" y="325" fill="#e2e8f0" font-size="15">Screen repair intro - batch 14</text>
+  <rect x="100" y="360" width="460" height="56" rx="8" fill="#1a2f4d"/><text x="120" y="393" fill="#e2e8f0" font-size="15">Handyman follow-up - day 3</text>
+  <rect x="100" y="428" width="460" height="56" rx="8" fill="#1a2f4d"/><text x="120" y="461" fill="#e2e8f0" font-size="15">Land clearing - Polk County</text>
+  <rect x="100" y="510" width="160" height="40" rx="20" fill="#3b82f6"/><text x="180" y="535" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Preview send</text>
+  <rect x="620" y="200" width="500" height="380" rx="12" fill="#122238" stroke="#1e3a5f"/>
+  <text x="650" y="240" fill="#94a3b8" font-size="13">REPLY ROUTING</text>
+  <text x="650" y="272" fill="#e2e8f0" font-size="18" font-weight="600">Inbox by brand</text>
+  <rect x="650" y="300" width="440" height="64" rx="8" fill="#1a2f4d"/><text x="670" y="328" fill="#4ade80" font-size="12">REPLY</text><text x="670" y="352" fill="#e2e8f0" font-size="15">Re: enclosure quote request</text>
+  <rect x="650" y="378" width="440" height="64" rx="8" fill="#1a2f4d"/><text x="670" y="406" fill="#fbbf24" font-size="12">QUEUED</text><text x="670" y="430" fill="#e2e8f0" font-size="15">Follow-up scheduled 9:00 AM</text>
+  <rect x="650" y="456" width="440" height="64" rx="8" fill="#1a2f4d"/><text x="670" y="484" fill="#94a3b8" font-size="12">SENT</text><text x="670" y="508" fill="#e2e8f0" font-size="15">Daily cap: 38 / 40</text>
+</svg>

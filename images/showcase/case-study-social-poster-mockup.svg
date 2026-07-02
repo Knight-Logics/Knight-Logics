@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Social posting queue dashboard">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0a1628"/><stop offset="100%" stop-color="#08111f"/></linearGradient></defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect x="40" y="40" width="1120" height="595" rx="16" fill="#0f1d33" stroke="#1e3a5f"/>
+  <text x="70" y="88" fill="#38bdf8" font-size="13" font-weight="700">SOCIAL POSTER · :8501</text>
+  <text x="70" y="124" fill="#f1f5f9" font-size="28" font-weight="600">Multi-brand queue</text>
+  <rect x="70" y="152" width="90" height="32" rx="16" fill="#2563eb"/><text x="115" y="173" text-anchor="middle" fill="#fff" font-size="12">KL</text>
+  <rect x="170" y="152" width="90" height="32" rx="16" fill="#1e3a5f"/><text x="215" y="173" text-anchor="middle" fill="#7dd3fc" font-size="12">KG</text>
+  <rect x="270" y="152" width="90" height="32" rx="16" fill="#1e3a5f"/><text x="315" y="173" text-anchor="middle" fill="#7dd3fc" font-size="12">ST</text>
+  <rect x="900" y="148" width="230" height="40" rx="8" fill="#7f1d1d" stroke="#ef4444"/><text x="1015" y="174" text-anchor="middle" fill="#fecaca" font-size="13" font-weight="600">1 runner failure visible</text>
+  <rect x="70" y="200" width="520" height="380" rx="12" fill="#122238" stroke="#1e3a5f"/>
+  <text x="100" y="240" fill="#94a3b8" font-size="13">SCHEDULED POSTS</text>
+  <rect x="100" y="260" width="460" height="56" rx="8" fill="#1a2f4d"/><text x="120" y="294" fill="#e2e8f0" font-size="15">Facebook · Today 10:00 AM · queued</text>
+  <rect x="100" y="328" width="460" height="56" rx="8" fill="#1a2f4d"/><text x="120" y="362" fill="#e2e8f0" font-size="15">GBP post · Today 2:00 PM · API</text>
+  <rect x="100" y="396" width="460" height="56" rx="8" fill="#1a2f4d"/><text x="120" y="430" fill="#e2e8f0" font-size="15">LinkedIn · Playwright runner</text>
+  <rect x="100" y="464" width="460" height="56" rx="8" fill="#1a2f4d"/><text x="120" y="498" fill="#e2e8f0" font-size="15">X · API bridge · window 9-5</text>
+  <rect x="620" y="200" width="510" height="380" rx="12" fill="#122238" stroke="#1e3a5f"/>
+  <text x="650" y="240" fill="#94a3b8" font-size="13">RUNNER STATUS</text>
+  <text x="650" y="280" fill="#4ade80" font-size="15">Facebook API · last success 2h ago</text>
+  <text x="650" y="320" fill="#4ade80" font-size="15">GBP API · last success 4h ago</text>
+  <text x="650" y="360" fill="#f87171" font-size="15">Nextdoor · auth expired - alert sent</text>
+  <text x="650" y="400" fill="#4ade80" font-size="15">LinkedIn Playwright · idle</text>
+  <text x="650" y="460" fill="#94a3b8" font-size="13">Posting windows enforced per brand</text>
+</svg>

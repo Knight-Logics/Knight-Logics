@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Referral Verification — Knight Logics</title>
+    <title>Referral Verification � Knight Logics</title>
     <link rel="icon" href="/favicon.ico">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,7 +32,7 @@
             padding: 0 0 60px;
         }
 
-        /* ── Header ── */
+        /* -- Header -- */
         .header {
             background: var(--bg2);
             border-bottom: 1px solid var(--border);
@@ -71,7 +71,7 @@
         }
         .header-back:hover { color: var(--text); }
 
-        /* ── Main content ── */
+        /* -- Main content -- */
         #content {
             display: none;
             padding: 32px;
@@ -88,7 +88,7 @@
             border-bottom: 1px solid var(--border);
         }
 
-        /* ── Stats grid ── */
+        /* -- Stats grid -- */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -116,7 +116,7 @@
             letter-spacing: 0.09em;
         }
 
-        /* ── Commission highlight ── */
+        /* -- Commission highlight -- */
         .commission-box {
             background: linear-gradient(135deg, rgba(100,255,218,0.1), rgba(255,183,77,0.1));
             border: 1px solid var(--border);
@@ -163,7 +163,7 @@
             color: var(--accent);
         }
 
-        /* ── Section title ── */
+        /* -- Section title -- */
         .section-title {
             font-size: 1rem;
             font-weight: 700;
@@ -181,7 +181,7 @@
             background: var(--border);
         }
 
-        /* ── Events table ── */
+        /* -- Events table -- */
         .table-wrap {
             overflow-x: auto;
             border-radius: 16px;
@@ -217,7 +217,7 @@
         .td-muted { color: var(--muted); }
         .td-mono { font-family: 'Courier New', monospace; font-size: 0.85rem; }
 
-        /* ── Error/Loading states ── */
+        /* -- Error/Loading states -- */
         #loading {
             display: flex;
             flex-direction: column;
@@ -256,7 +256,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* ── Responsive ── */
+        /* -- Responsive -- */
         @media (max-width: 600px) {
             .header { padding: 14px 16px; }
             #content { padding: 16px; }
@@ -274,13 +274,13 @@
         Knight Logics
         <span class="header-tag">Referral Verification</span>
     </a>
-    <a href="/" class="header-back">← Back to site</a>
+    <a href="/" class="header-back">? Back to site</a>
 </header>
 
 <!-- Loading state -->
 <div id="loading">
     <div class="spinner"></div>
-    <p style="color: var(--muted);">Loading referral data…</p>
+    <p style="color: var(--muted);">Loading referral data�</p>
 </div>
 
 <!-- Error state -->
@@ -296,7 +296,7 @@
     <!-- Commission highlight -->
     <div class="commission-box">
         <h3>Your Commission Owed</h3>
-        <div class="commission-amount" id="commissionAmount">—</div>
+        <div class="commission-amount" id="commissionAmount">�</div>
         <div class="commission-note" id="payoutMethod"></div>
         <div class="status-badge" id="statusBadge"></div>
     </div>
@@ -304,27 +304,27 @@
     <!-- Stats grid -->
     <div class="stats-grid">
         <div class="stat-card">
-            <div class="stat-value" id="statPageviews">—</div>
+            <div class="stat-value" id="statPageviews">�</div>
             <div class="stat-label">Page Views</div>
         </div>
         <div class="stat-card">
-            <div class="stat-value" id="statCheckouts">—</div>
+            <div class="stat-value" id="statCheckouts">�</div>
             <div class="stat-label">Checkouts Started</div>
         </div>
         <div class="stat-card">
-            <div class="stat-value" id="statPayments">—</div>
+            <div class="stat-value" id="statPayments">�</div>
             <div class="stat-label">Payments Completed</div>
         </div>
         <div class="stat-card">
-            <div class="stat-value" id="statRevenue">—</div>
+            <div class="stat-value" id="statRevenue">�</div>
             <div class="stat-label">Referred Revenue</div>
         </div>
         <div class="stat-card">
-            <div class="stat-value" id="statSessions">—</div>
+            <div class="stat-value" id="statSessions">�</div>
             <div class="stat-label">Unique Sessions</div>
         </div>
         <div class="stat-card">
-            <div class="stat-value" id="statSubmits">—</div>
+            <div class="stat-value" id="statSubmits">�</div>
             <div class="stat-label">Form Submissions</div>
         </div>
     </div>
@@ -383,7 +383,7 @@
     }
 
     function formatDate(iso) {
-        if (!iso) return '—';
+        if (!iso) return '�';
         try {
             const d = new Date(iso);
             return d.toLocaleString('en-US', {
@@ -463,9 +463,9 @@
                     <tr>
                         <td class="td-muted">${formatDate(e.timestamp)}</td>
                         <td>${formatEventType(e.type)}</td>
-                        <td class="td-mono">${e.offer || '—'}</td>
-                        <td>${e.amount || '—'}</td>
-                        <td class="td-muted" style="font-size:0.85rem;">${e.contact || '—'}</td>
+                        <td class="td-mono">${e.offer || '�'}</td>
+                        <td>${e.amount || '�'}</td>
+                        <td class="td-muted" style="font-size:0.85rem;">${e.contact || '�'}</td>
                     </tr>
                 `).join('');
             }

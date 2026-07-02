@@ -153,8 +153,7 @@ const SLUG_PRIMARY_CLIENT = {
   'social-media-automation-systems': 'kg',
   'business-growth-systems': 'fw',
   'performance-partner-program': 'fw',
-  'online-ordering-systems': 'st',
-  'restaurant-bar-growth-systems': 'st',
+  'online-ordering-systems': 'fw',
   'roofing-business-growth-systems': 'kg',
   'case-study-crm-outreach-system': 'st',
   'case-study-social-poster': 'kg'

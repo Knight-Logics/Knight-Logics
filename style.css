@@ -714,6 +714,27 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
     pointer-events: auto;
 }
 
+/* Closed submenus must not capture clicks — visibility/opacity alone is not enough */
+.nav-dropdown:not(.active) .nav-dropdown-menu,
+.nav-dropdown:not(.active) .nav-dropdown-menu * {
+    pointer-events: none !important;
+}
+
+.nav-dropdown.active .nav-dropdown-menu .nav-dropdown-label {
+    pointer-events: none;
+}
+
+.nav-dropdown.active .nav-dropdown-menu a.nav-dropdown-item,
+.nav-dropdown.active .nav-dropdown-menu button.nav-dropdown-mega-tab,
+.nav-dropdown.active .nav-dropdown-menu button.nav-dropdown-mega-back {
+    pointer-events: auto;
+}
+
+.nav-dropdown-mega-panel:not(.is-active) a,
+.nav-dropdown-mega-panel:not(.is-active) button {
+    pointer-events: none !important;
+}
+
 .nav-dropdown-item {
     display: block;
     padding: 12px 20px;
@@ -897,12 +918,16 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
         align-self: stretch;
         opacity: 1;
         visibility: visible;
-        pointer-events: auto;
+        pointer-events: none;
         transform: none;
         background: transparent;
         border: none;
         border-radius: 0;
         box-shadow: none;
+    }
+
+    .nav-dropdown.active .nav-dropdown-mega-panels {
+        pointer-events: auto;
     }
 
     .nav-dropdown-mega-panel.is-active {

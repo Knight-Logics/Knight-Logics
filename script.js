@@ -1561,12 +1561,42 @@ function initNavigation() {
         }
     }
 
-    function closeAllDropdowns() {
-        navDropdowns.forEach((dropdown) => {
-            dropdown.classList.remove('active');
-            resetMegaNav(dropdown.querySelector('.nav-dropdown-mega'));
+    function syncDropdownMenuState(dropdown) {
+        const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+        const menu = dropdown.querySelector('.nav-dropdown-menu');
+        const isActive = dropdown.classList.contains('active');
+        if (toggle) toggle.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+        if (!menu) return;
+        menu.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+        if ('inert' in menu) menu.inert = !isActive;
+        menu.querySelectorAll('a.nav-dropdown-item, button.nav-dropdown-mega-tab, button.nav-dropdown-mega-back').forEach((el) => {
+            if (!isActive) el.setAttribute('tabindex', '-1');
+            else el.removeAttribute('tabindex');
         });
     }
+
+    function setDropdownActive(dropdown, active) {
+        if (active) dropdown.classList.add('active');
+        else {
+            dropdown.classList.remove('active');
+            resetMegaNav(dropdown.querySelector('.nav-dropdown-mega'));
+        }
+        syncDropdownMenuState(dropdown);
+    }
+
+    function closeAllDropdowns() {
+        navDropdowns.forEach((dropdown) => setDropdownActive(dropdown, false));
+    }
+
+    navDropdowns.forEach((dropdown) => syncDropdownMenuState(dropdown));
+
+    document.addEventListener('click', (e) => {
+        const blocked = e.target.closest('.nav-dropdown-item, .nav-dropdown-mega-tab, .nav-dropdown-mega-back');
+        if (blocked && !blocked.closest('.nav-dropdown.active')) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    }, true);
 
     document.querySelectorAll('.nav-dropdown-mega').forEach((mega) => {
         const dropdown = mega.closest('.nav-dropdown');
@@ -1614,17 +1644,13 @@ function initNavigation() {
             toggle.addEventListener('mouseenter', () => {
                 if (!desktopHover.matches) return;
                 navDropdowns.forEach((d) => {
-                    if (d !== dropdown) {
-                        d.classList.remove('active');
-                        resetMegaNav(d.querySelector('.nav-dropdown-mega'));
-                    }
+                    if (d !== dropdown) setDropdownActive(d, false);
                 });
-                dropdown.classList.add('active');
+                setDropdownActive(dropdown, true);
             });
             dropdown.addEventListener('mouseleave', () => {
                 if (!desktopHover.matches) return;
-                dropdown.classList.remove('active');
-                resetMegaNav(dropdown.querySelector('.nav-dropdown-mega'));
+                setDropdownActive(dropdown, false);
             });
 
             // Touch: toggle open/closed (touchend only adds when closed — fixed to full toggle)
@@ -1634,15 +1660,9 @@ function initNavigation() {
                 e.stopPropagation();
                 toggleTouchedAt = Date.now();
                 navDropdowns.forEach((d) => {
-                    if (d !== dropdown) {
-                        d.classList.remove('active');
-                        resetMegaNav(d.querySelector('.nav-dropdown-mega'));
-                    }
+                    if (d !== dropdown) setDropdownActive(d, false);
                 });
-                dropdown.classList.toggle('active');
-                if (!dropdown.classList.contains('active')) {
-                    resetMegaNav(dropdown.querySelector('.nav-dropdown-mega'));
-                }
+                setDropdownActive(dropdown, !dropdown.classList.contains('active'));
             });
 
             // Mouse click fallback for non-hover devices (e.g. keyboard navigation)
@@ -1655,15 +1675,9 @@ function initNavigation() {
                 if (Date.now() - toggleTouchedAt < 450) return; // avoid double-toggle after touch
                 e.stopPropagation();
                 navDropdowns.forEach((d) => {
-                    if (d !== dropdown) {
-                        d.classList.remove('active');
-                        resetMegaNav(d.querySelector('.nav-dropdown-mega'));
-                    }
+                    if (d !== dropdown) setDropdownActive(d, false);
                 });
-                dropdown.classList.toggle('active');
-                if (!dropdown.classList.contains('active')) {
-                    resetMegaNav(dropdown.querySelector('.nav-dropdown-mega'));
-                }
+                setDropdownActive(dropdown, !dropdown.classList.contains('active'));
             });
             
             // Close dropdown when clicking a dropdown item

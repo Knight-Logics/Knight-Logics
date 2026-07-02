@@ -44,14 +44,19 @@
             return;
         }
 
-        const needed = layout.scrollHeight;
-        const available = innerH - 6;
-        if (needed > available) {
-            const scale = Math.max(0.76, available / needed);
-            hero.style.setProperty('--kl-layout-scale', String(scale));
-        } else {
-            hero.style.setProperty('--kl-layout-scale', '1');
+        const hudGutter = 168;
+        const availableH = innerH - 6;
+        const availableW = Math.max(320, wrapper.clientWidth - hudGutter);
+        const neededH = layout.scrollHeight;
+        const neededW = layout.scrollWidth;
+        let scale = 1;
+        if (neededH > availableH) {
+            scale = Math.max(0.76, availableH / neededH);
         }
+        if (neededW > availableW) {
+            scale = Math.min(scale, Math.max(0.76, availableW / neededW));
+        }
+        hero.style.setProperty('--kl-layout-scale', String(scale));
     }
 
     function syncNavHeight() {

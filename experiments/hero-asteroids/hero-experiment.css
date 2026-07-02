@@ -5,6 +5,7 @@
     --kl-nav-height: 108px;
     --kl-hero-inner-h: 640px;
     --kl-layout-scale: 1;
+    --kl-hud-gutter: clamp(168px, 10vw, 220px);
     --kl-hero-parallax-rate: 0.42;
     --kl-hero-cta-font-base: 0.96rem;
     --kl-hero-cta-pad-y: clamp(8px, 0.9vh, 12px);
@@ -295,12 +296,13 @@ body.hero-experiment-parallax-active {
     max-height: 100%;
     min-height: 0 !important;
     width: 100%;
-    padding: 12px clamp(16px, 3vw, 32px) 12px;
-    overflow: hidden;
+    padding: 12px max(12px, var(--kl-hud-gutter)) 12px clamp(16px, 3vw, 32px);
+    overflow-x: visible;
+    overflow-y: hidden;
 }
 
 #hero.hero-experiment-active .hero-layout {
-    width: min(860px, calc(100% - 32px));
+    width: min(860px, calc(100% - 16px));
     max-width: 860px;
     max-height: var(--kl-hero-inner-h);
     margin: 0 auto;
@@ -308,7 +310,7 @@ body.hero-experiment-parallax-active {
     min-height: 0 !important;
     align-items: center;
     justify-content: center;
-    grid-template-columns: minmax(0, 420px) 340px;
+    grid-template-columns: minmax(0, 1fr) 340px;
     gap: clamp(24px, 2vw, 32px);
     transform: scale(var(--kl-layout-scale));
     transform-origin: center center;
@@ -318,10 +320,23 @@ body.hero-experiment-parallax-active {
 #hero.hero-experiment-active .hero-content {
     max-height: var(--kl-hero-inner-h);
     min-height: 0;
+    min-width: 0;
     align-self: center;
-    overflow: hidden;
+    overflow-x: visible;
+    overflow-y: hidden;
     position: relative;
     z-index: 2;
+    container-type: inline-size;
+    container-name: hero-copy;
+}
+
+#hero.hero-experiment-active .title-line.company-name {
+    display: block;
+    max-width: 100%;
+    white-space: nowrap;
+    /* Scale with copy column width so “Knight Logics” never clips (Playfair is wide). */
+    font-size: min(3.45rem, calc(100cqw * 0.0405));
+    overflow: visible;
 }
 
 #hero.hero-experiment-active .hero-form-shell {
@@ -402,20 +417,22 @@ body.hero-experiment-parallax-active {
     }
 
     #hero.hero-experiment-active .hero-layout {
-        width: min(980px, calc(100% - 80px));
-        gap: clamp(48px, 5vw, 88px);
-        grid-template-columns: minmax(0, 460px) 340px;
+        width: min(980px, calc(100% - 32px));
+        max-width: 980px;
+        gap: clamp(32px, 3vw, 64px);
+        grid-template-columns: minmax(0, 1fr) 340px;
     }
 
     #hero.hero-experiment-active .hero-content {
-        max-width: 460px;
+        max-width: none;
     }
 }
 
 @media (min-width: 1800px) {
     #hero.hero-experiment-active .hero-layout {
-        width: min(1040px, calc(100% - 120px));
-        gap: clamp(56px, 4vw, 96px);
+        width: min(1080px, calc(100% - 48px));
+        max-width: 1080px;
+        gap: clamp(40px, 3vw, 72px);
     }
 }
 

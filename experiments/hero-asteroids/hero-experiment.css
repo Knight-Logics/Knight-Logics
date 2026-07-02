@@ -100,22 +100,35 @@ body:has(#hero.hero-experiment-active) #header-container {
     filter: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.4));
 }
 
-.hero-experiment-score {
+.hero-experiment-hud {
     position: absolute;
-    top: clamp(80px, 11vh, 108px);
-    right: 24px;
-    z-index: 12;
+    top: 10px;
+    right: 16px;
+    z-index: 4;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 2px;
-    padding: 10px 14px;
+    gap: 6px;
+    padding: 8px 12px;
     border: 1px solid rgba(100, 255, 218, 0.35);
     border-radius: 8px;
-    background: rgba(5, 9, 12, 0.72);
+    background: rgba(5, 9, 12, 0.78);
     backdrop-filter: blur(8px);
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
     pointer-events: none;
+}
+
+.hero-experiment-hud--editing {
+    pointer-events: auto;
+}
+
+.hero-experiment-score-row,
+.hero-experiment-hiscore-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+    gap: 8px;
+    width: 100%;
 }
 
 .hero-experiment-score-label {
@@ -124,13 +137,79 @@ body:has(#hero.hero-experiment-active) #header-container {
     color: rgba(100, 255, 218, 0.7);
 }
 
-.hero-experiment-score-value {
-    font-size: 1.35rem;
+.hero-experiment-score-value,
+.hero-experiment-hiscore-value {
+    font-size: 1.2rem;
     font-weight: 700;
     color: #64ffda;
     text-shadow: 0 0 12px rgba(100, 255, 218, 0.5);
     min-width: 3ch;
     text-align: right;
+    line-height: 1;
+}
+
+.hero-experiment-hiscore-value {
+    font-size: 1rem;
+    color: rgba(100, 255, 218, 0.92);
+}
+
+.hero-experiment-hiscore-initials {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(100, 255, 218, 0.14);
+    border: 1px solid rgba(100, 255, 218, 0.28);
+}
+
+.hero-experiment-initials-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    width: 100%;
+    margin-top: 2px;
+    pointer-events: auto;
+}
+
+.hero-experiment-initials-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(100, 255, 218, 0.75);
+}
+
+.hero-experiment-initials-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(100, 255, 218, 0.45);
+    background: rgba(5, 9, 12, 0.92);
+    color: #64ffda;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.hero-experiment-initials-input:focus {
+    outline: none;
+    border-color: #64ffda;
+    box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.2);
+}
+
+/* Legacy class alias if referenced elsewhere */
+.hero-experiment-score {
+    display: contents;
+}
+
+.hero-experiment-score-value {
+    font-size: 1.2rem;
 }
 
 /* Content stays centered like the original hero */
@@ -194,17 +273,17 @@ body:has(#hero.hero-experiment-active) #header-container {
     overscroll-behavior: contain;
 }
 
-#hero.hero-experiment-active .hero-content,
-#hero.hero-experiment-active .hero-form-shell,
-#hero.hero-experiment-active .hero-form-card,
-#hero.hero-experiment-active .hero-cta-buttons,
-#hero.hero-experiment-active .hero-scroll-area,
+#hero.hero-experiment-active .hero-form-card {
+    pointer-events: none;
+}
+
 #hero.hero-experiment-active .hero-content-wrapper a,
 #hero.hero-experiment-active .hero-content-wrapper button,
 #hero.hero-experiment-active .hero-content-wrapper input,
 #hero.hero-experiment-active .hero-content-wrapper select,
 #hero.hero-experiment-active .hero-content-wrapper textarea,
-#hero.hero-experiment-active .hero-content-wrapper label {
+#hero.hero-experiment-active .hero-content-wrapper label,
+#hero.hero-experiment-active .hero-cta-buttons .cta-button {
     pointer-events: auto;
 }
 
@@ -407,14 +486,16 @@ body:has(#hero.hero-experiment-active) #header-container {
         display: none !important;
     }
 
-    .hero-experiment-score {
-        top: 10px;
-        right: 12px;
-        padding: 8px 10px;
+    .hero-experiment-hud {
+        top: 8px;
+        right: 10px;
+        padding: 7px 9px;
+        gap: 4px;
     }
 
-    .hero-experiment-score-value {
-        font-size: 1.1rem;
+    .hero-experiment-score-value,
+    .hero-experiment-hiscore-value {
+        font-size: 1rem;
     }
 }
 

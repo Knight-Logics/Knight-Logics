@@ -85,13 +85,24 @@
             <div class="hero-experiment-bg"></div>
             <canvas class="hero-experiment-canvas hero-experiment-canvas--stars" id="klHeroStars" aria-hidden="true"></canvas>
             <canvas class="hero-experiment-canvas hero-experiment-canvas--asteroids" id="klHeroAsteroids" aria-hidden="true"></canvas>
+            <div class="hero-experiment-hud" id="klHeroHud" aria-live="polite">
+                <div class="hero-experiment-score-row">
+                    <span class="hero-experiment-score-label">SCORE</span>
+                    <span class="hero-experiment-score-value" id="klHeroScoreValue">100</span>
+                </div>
+                <div class="hero-experiment-hiscore-row">
+                    <span class="hero-experiment-score-label">HIGH</span>
+                    <span class="hero-experiment-hiscore-value" id="klHeroHiscoreValue">100</span>
+                    <span class="hero-experiment-hiscore-initials" id="klHeroHiscoreInitials" hidden></span>
+                </div>
+                <div class="hero-experiment-initials-prompt" id="klHeroInitialsPrompt" hidden>
+                    <label class="hero-experiment-initials-label" for="klHeroInitialsInput">New high — initials</label>
+                    <input class="hero-experiment-initials-input" id="klHeroInitialsInput" type="text" maxlength="3" autocomplete="off" spellcheck="false" inputmode="text" aria-label="High score initials">
+                </div>
+            </div>
         </div>
         <div class="hero-experiment-foreground" aria-hidden="true">
             <img class="hero-experiment-cutout" id="klHeroCutout" src="${CUTOUT_SRC}" alt="" width="1920" height="1050" decoding="async" fetchpriority="high">
-            <div class="hero-experiment-score" id="klHeroScore" aria-live="polite">
-                <span class="hero-experiment-score-label">SCORE</span>
-                <span class="hero-experiment-score-value">100</span>
-            </div>
         </div>
     `;
     const wrapper = hero.querySelector('.hero-content-wrapper');
@@ -101,8 +112,104 @@
     const starsCanvas = document.getElementById('klHeroStars');
     const asteroidsCanvas = document.getElementById('klHeroAsteroids');
     const cutoutImg = document.getElementById('klHeroCutout');
-    const scoreEl = document.querySelector('#klHeroScore .hero-experiment-score-value');
+    const scoreEl = document.getElementById('klHeroScoreValue');
+    const hiScoreEl = document.getElementById('klHeroHiscoreValue');
+    const hiInitialsEl = document.getElementById('klHeroHiscoreInitials');
+    const initialsPrompt = document.getElementById('klHeroInitialsPrompt');
+    const initialsInput = document.getElementById('klHeroInitialsInput');
+    const hudEl = document.getElementById('klHeroHud');
     const trustBridge = document.querySelector('.kl-trust-bridge');
+
+    const HI_KEY = 'kl-hero-asteroids-hiscore';
+    let hiScore = 100;
+    let hiInitials = '';
+    let initialsPromptOpen = false;
+
+    function loadHiScore() {
+        try {
+            const raw = localStorage.getItem(HI_KEY);
+            if (!raw) return;
+            const data = JSON.parse(raw);
+            if (Number.isFinite(data.score)) hiScore = data.score;
+            hiInitials = String(data.initials || '').slice(0, 3).toUpperCase();
+        } catch (_) { /* ignore */ }
+        updateHiDisplay();
+    }
+
+    function updateHiDisplay() {
+        if (hiScoreEl) hiScoreEl.textContent = String(hiScore);
+        if (hiInitialsEl) {
+            if (hiInitials) {
+                hiInitialsEl.textContent = hiInitials;
+                hiInitialsEl.hidden = false;
+            } else {
+                hiInitialsEl.textContent = '';
+                hiInitialsEl.hidden = true;
+            }
+        }
+    }
+
+    function saveHiScore(scoreValue, initials) {
+        hiScore = scoreValue;
+        hiInitials = String(initials || '').slice(0, 3).toUpperCase();
+        try {
+            localStorage.setItem(HI_KEY, JSON.stringify({
+                score: hiScore,
+                initials: hiInitials,
+                at: Date.now(),
+            }));
+        } catch (_) { /* ignore */ }
+        updateHiDisplay();
+    }
+
+    function hideInitialsPrompt() {
+        initialsPromptOpen = false;
+        if (initialsPrompt) initialsPrompt.hidden = true;
+        if (hudEl) hudEl.classList.remove('hero-experiment-hud--editing');
+    }
+
+    function showInitialsPrompt() {
+        if (initialsPromptOpen || !initialsPrompt || !initialsInput) return;
+        initialsPromptOpen = true;
+        initialsPrompt.hidden = false;
+        if (hudEl) hudEl.classList.add('hero-experiment-hud--editing');
+        initialsInput.value = hiInitials || '';
+        requestAnimationFrame(() => initialsInput.focus());
+    }
+
+    function commitInitials() {
+        if (!initialsInput) return;
+        const val = initialsInput.value.trim().toUpperCase().slice(0, 3);
+        if (score > hiScore) {
+            saveHiScore(score, val);
+        }
+        hideInitialsPrompt();
+    }
+
+    function maybePromptForInitials() {
+        if (score > hiScore) showInitialsPrompt();
+    }
+
+    if (initialsInput) {
+        initialsInput.addEventListener('keydown', (e) => {
+            e.stopPropagation();
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                commitInitials();
+            } else if (e.key === 'Escape') {
+                e.preventDefault();
+                hideInitialsPrompt();
+            }
+        });
+        initialsInput.addEventListener('blur', () => {
+            if (initialsPromptOpen && initialsInput.value.trim()) commitInitials();
+            else hideInitialsPrompt();
+        });
+        initialsInput.addEventListener('pointerdown', (e) => e.stopPropagation());
+        initialsInput.addEventListener('click', (e) => e.stopPropagation());
+    }
+
+    loadHiScore();
 
     const DPR = Math.min(window.devicePixelRatio || 1, 2);
     let W = 0;
@@ -219,16 +326,31 @@
         mouse.y = e.clientY - r.top;
     }
 
-    hero.addEventListener('pointermove', heroPoint, { passive: true });
-    if (!isCoarsePointer) {
-        asteroidsCanvas.addEventListener('pointermove', (e) => {
-            heroPoint(e);
-            tryBreakAt(mouse.x, mouse.y, true);
-        }, { passive: true });
+    function pointerInHero(clientX, clientY) {
+        const r = hero.getBoundingClientRect();
+        return clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom;
     }
+
+    function onPlayfieldPointerMove(e) {
+        if (!pointerInHero(e.clientX, e.clientY)) {
+            if (mouse.x >= 0) {
+                mouse.x = -9999;
+                mouse.y = -9999;
+                hoveredRockId = null;
+            }
+            return;
+        }
+        heroPoint(e);
+        if (!isCoarsePointer) {
+            tryBreakAt(mouse.x, mouse.y, true);
+        }
+    }
+
+    document.addEventListener('pointermove', onPlayfieldPointerMove, { passive: true });
     hero.addEventListener('pointerleave', () => {
         mouse.x = -9999;
         mouse.y = -9999;
+        hoveredRockId = null;
     });
     asteroidsCanvas.addEventListener('pointerdown', (e) => {
         heroPoint(e);
@@ -477,6 +599,7 @@
     function setScore(v) {
         score = v;
         if (scoreEl) scoreEl.textContent = String(score);
+        maybePromptForInitials();
     }
 
     function makeRock(x, y, r, vx, vy, generation) {

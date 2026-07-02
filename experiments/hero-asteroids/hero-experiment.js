@@ -124,6 +124,7 @@
     let hiScore = 100;
     let hiInitials = '';
     let initialsPromptOpen = false;
+    let beatAchievedThisRun = false;
 
     function loadHiScore() {
         try {
@@ -182,12 +183,22 @@
         const val = initialsInput.value.trim().toUpperCase().slice(0, 3);
         if (score > hiScore) {
             saveHiScore(score, val);
+            beatAchievedThisRun = false;
         }
         hideInitialsPrompt();
     }
 
-    function maybePromptForInitials() {
-        if (score > hiScore) showInitialsPrompt();
+    function maybePromptForInitials(prevScore) {
+        if (score <= hiScore) {
+            if (initialsPromptOpen) hideInitialsPrompt();
+            beatAchievedThisRun = false;
+            return;
+        }
+        if (beatAchievedThisRun || initialsPromptOpen) return;
+        if (score > hiScore && prevScore <= hiScore) {
+            beatAchievedThisRun = true;
+            showInitialsPrompt();
+        }
     }
 
     if (initialsInput) {
@@ -597,9 +608,10 @@
     let spawnTimer = 0;
 
     function setScore(v) {
+        const prev = score;
         score = v;
         if (scoreEl) scoreEl.textContent = String(score);
-        maybePromptForInitials();
+        maybePromptForInitials(prev);
     }
 
     function makeRock(x, y, r, vx, vy, generation) {

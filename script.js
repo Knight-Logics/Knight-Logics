@@ -230,6 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initSubpageStarsHeroes();
     initProofAboutEntrance();
     initServicesEntrance();
+    initShowcaseCardReveal();
     initMobileReadMore();
 
     // Push non-critical effects after first paint / idle time.
@@ -1341,6 +1342,41 @@ function initServicesEntrance() {
 
     startSectionAnimation();
     showcaseBlocks.forEach(startShowcaseAnimation);
+}
+
+function initShowcaseCardReveal() {
+    const cards = document.querySelectorAll('.services--unified-v1 .services-showcase-card--slide');
+    if (!cards.length) return;
+
+    const desktopMq = window.matchMedia('(min-width: 769px)');
+    const coarseMq = window.matchMedia('(pointer: coarse)');
+
+    function clearReveal(except) {
+        cards.forEach((card) => {
+            if (card !== except) card.classList.remove('is-showcase-reveal');
+        });
+    }
+
+    cards.forEach((card) => {
+        card.addEventListener('click', (e) => {
+            if (!desktopMq.matches || !coarseMq.matches) return;
+            if (card.classList.contains('is-showcase-reveal')) return;
+            e.preventDefault();
+            clearReveal(card);
+            card.classList.add('is-showcase-reveal');
+        }, true);
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!desktopMq.matches) return;
+        const open = document.querySelector('.services-showcase-card--slide.is-showcase-reveal');
+        if (!open || open.contains(e.target)) return;
+        clearReveal(null);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') clearReveal(null);
+    });
 }
 
 // Counter Animation

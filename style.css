@@ -3479,7 +3479,7 @@ section::before {
     transition: all 0.28s ease;
 }
 
-.services-showcase-card:hover {
+.services-showcase-card:not(.services-showcase-card--slide):hover {
     transform: translateY(-6px);
     border-color: rgba(100, 255, 218, 0.28);
     box-shadow: 0 20px 44px rgba(0, 0, 0, 0.24);
@@ -12702,60 +12702,86 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
 }
 
-@media (hover: hover) and (min-width: 769px) {
+@media (min-width: 769px) {
+    .services--unified-v1 .services-showcase-card--slide {
+        cursor: pointer;
+    }
+
     .services--unified-v1 .services-showcase-card--slide:hover,
-    .services--unified-v1 .services-showcase-card--slide:focus-visible {
+    .services--unified-v1 .services-showcase-card--slide:focus-within,
+    .services--unified-v1 .services-showcase-card--slide.is-showcase-reveal {
         transform: none;
         border-color: transparent;
         box-shadow: none;
     }
 
     .services--unified-v1 .services-showcase-card--slide:hover .services-showcase-card__bg,
-    .services--unified-v1 .services-showcase-card--slide:focus-visible .services-showcase-card__bg {
+    .services--unified-v1 .services-showcase-card--slide:focus-within .services-showcase-card__bg,
+    .services--unified-v1 .services-showcase-card--slide.is-showcase-reveal .services-showcase-card__bg {
         transform: scale(1.04);
         filter: saturate(1.06) contrast(1.03);
     }
 
     .services--unified-v1 .services-showcase-card--slide:hover .services-showcase-card__overlay,
-    .services--unified-v1 .services-showcase-card--slide:focus-visible .services-showcase-card__overlay {
+    .services--unified-v1 .services-showcase-card--slide:focus-within .services-showcase-card__overlay,
+    .services--unified-v1 .services-showcase-card--slide.is-showcase-reveal .services-showcase-card__overlay {
         background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.64) 50%, rgba(0, 0, 0, 0.8) 100%);
     }
 
     .services--unified-v1 .services-showcase-card--slide:hover .services-showcase-card__panel--front,
-    .services--unified-v1 .services-showcase-card--slide:focus-visible .services-showcase-card__panel--front {
+    .services--unified-v1 .services-showcase-card--slide:focus-within .services-showcase-card__panel--front,
+    .services--unified-v1 .services-showcase-card--slide.is-showcase-reveal .services-showcase-card__panel--front {
         opacity: 0;
         transform: translate3d(0, -14%, 0);
         pointer-events: none;
     }
 
     .services--unified-v1 .services-showcase-card--slide.kl-services-enter--left:hover .services-showcase-card__panel--front,
-    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--left:focus-visible .services-showcase-card__panel--front {
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--left:focus-within .services-showcase-card__panel--front,
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--left.is-showcase-reveal .services-showcase-card__panel--front {
         transform: translate3d(-14%, 0, 0);
     }
 
     .services--unified-v1 .services-showcase-card--slide.kl-services-enter--right:hover .services-showcase-card__panel--front,
-    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--right:focus-visible .services-showcase-card__panel--front {
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--right:focus-within .services-showcase-card__panel--front,
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--right.is-showcase-reveal .services-showcase-card__panel--front {
         transform: translate3d(14%, 0, 0);
     }
 
     .services--unified-v1 .services-showcase-card--slide.kl-services-enter--up:hover .services-showcase-card__panel--front,
-    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--up:focus-visible .services-showcase-card__panel--front {
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--up:focus-within .services-showcase-card__panel--front,
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--up.is-showcase-reveal .services-showcase-card__panel--front {
         transform: translate3d(0, -14%, 0);
     }
 
     .services--unified-v1 .services-showcase-card--slide.kl-services-enter--down:hover .services-showcase-card__panel--front,
-    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--down:focus-visible .services-showcase-card__panel--front {
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--down:focus-within .services-showcase-card__panel--front,
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--down.is-showcase-reveal .services-showcase-card__panel--front {
         transform: translate3d(0, 14%, 0);
     }
 
     .services--unified-v1 .services-showcase-card--slide:hover .services-showcase-card__icon,
-    .services--unified-v1 .services-showcase-card--slide:focus-visible .services-showcase-card__icon {
+    .services--unified-v1 .services-showcase-card--slide:focus-within .services-showcase-card__icon,
+    .services--unified-v1 .services-showcase-card--slide.is-showcase-reveal .services-showcase-card__icon {
         opacity: 0;
         transform: translateY(-6px);
     }
 
     .services--unified-v1 .services-showcase-card--slide:hover .services-showcase-card__panel--hover,
-    .services--unified-v1 .services-showcase-card--slide:focus-visible .services-showcase-card__panel--hover {
+    .services--unified-v1 .services-showcase-card--slide:focus-within .services-showcase-card__panel--hover,
+    .services--unified-v1 .services-showcase-card--slide.is-showcase-reveal .services-showcase-card__panel--hover,
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--left:hover .services-showcase-card__panel--hover,
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--left:focus-within .services-showcase-card__panel--hover,
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--left.is-showcase-reveal .services-showcase-card__panel--hover,
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--right:hover .services-showcase-card__panel--hover,
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--right:focus-within .services-showcase-card__panel--hover,
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--right.is-showcase-reveal .services-showcase-card__panel--hover,
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--up:hover .services-showcase-card__panel--hover,
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--up:focus-within .services-showcase-card__panel--hover,
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--up.is-showcase-reveal .services-showcase-card__panel--hover,
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--down:hover .services-showcase-card__panel--hover,
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--down:focus-within .services-showcase-card__panel--hover,
+    .services--unified-v1 .services-showcase-card--slide.kl-services-enter--down.is-showcase-reveal .services-showcase-card__panel--hover {
         opacity: 1;
         transform: translate3d(0, 0, 0);
         pointer-events: auto;

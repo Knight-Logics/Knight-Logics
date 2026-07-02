@@ -137,7 +137,7 @@
     let hiScore = 100;
     let hiInitials = '';
     let pendingClaimScore = 0;
-    let claimFormVisible = false;
+    let claimPromptOpen = false;
 
     function applyHiScore(scoreValue, initials) {
         if (Number.isFinite(scoreValue)) hiScore = scoreValue;
@@ -155,22 +155,27 @@
     }
 
     function syncClaimForm() {
-        const canClaim = score > hiScore;
-        if (!canClaim) {
-            pendingClaimScore = 0;
-            claimFormVisible = false;
+        if (score > hiScore) {
+            pendingClaimScore = Math.max(pendingClaimScore, score);
+        }
+
+        const needsClaim = pendingClaimScore > hiScore;
+        if (!needsClaim) {
+            claimPromptOpen = false;
             if (claimEl) claimEl.hidden = true;
             if (hiDisplayEl) hiDisplayEl.hidden = false;
             return;
         }
-        pendingClaimScore = Math.max(pendingClaimScore, score);
-        if (claimFormVisible) return;
-        claimFormVisible = true;
+
         if (claimEl) claimEl.hidden = false;
         if (hiDisplayEl) hiDisplayEl.hidden = true;
-        if (initialsInput) {
-            initialsInput.value = '';
-            requestAnimationFrame(() => initialsInput.focus({ preventScroll: true }));
+
+        if (!claimPromptOpen) {
+            claimPromptOpen = true;
+            if (initialsInput) {
+                initialsInput.value = '';
+                requestAnimationFrame(() => initialsInput.focus({ preventScroll: true }));
+            }
         }
     }
 
@@ -208,26 +213,35 @@
             initialsInput.focus({ preventScroll: true });
             return;
         }
+
+        pendingClaimScore = 0;
+        claimPromptOpen = false;
+
         if (initialsSubmit) initialsSubmit.disabled = true;
         const saved = await persistGlobalHiScore(claimScore, val);
         if (initialsSubmit) initialsSubmit.disabled = false;
+
         if (saved) {
-            claimFormVisible = false;
-            pendingClaimScore = 0;
             if (claimEl) claimEl.hidden = true;
             if (hiDisplayEl) hiDisplayEl.hidden = false;
-            initialsInput.value = '';
-        } else {
-            await fetchGlobalHiScore();
+            if (initialsInput) initialsInput.value = '';
+            syncClaimForm();
+            return;
         }
+
+        await fetchGlobalHiScore();
+        if (claimScore > hiScore) {
+            pendingClaimScore = claimScore;
+            claimPromptOpen = false;
+        }
+        syncClaimForm();
     }
 
     function blockHudPointer(e) {
         e.stopPropagation();
-        if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
     }
 
-    [hudMount, hudEl, claimEl, initialsInput, initialsSubmit].forEach((el) => {
+    [hudMount, hudEl, claimEl].forEach((el) => {
         if (!el) return;
         ['pointerdown', 'mousedown', 'click', 'touchstart'].forEach((type) => {
             el.addEventListener(type, blockHudPointer);
@@ -250,6 +264,7 @@
     if (initialsSubmit) {
         initialsSubmit.addEventListener('click', (e) => {
             e.preventDefault();
+            e.stopPropagation();
             submitClaim();
         });
     }

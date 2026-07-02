@@ -601,10 +601,28 @@
             margin-top: clamp(84px, 13vh, 110px);
             min-height: clamp(360px, 52vh, 520px);
         }
+        @media (min-width: 1400px) {
+            .hero-layout {
+                width: min(980px, calc(100vw - 320px));
+                gap: clamp(48px, 5vw, 88px);
+                grid-template-columns: minmax(0, 460px) minmax(300px, 340px);
+            }
+            .hero-content {
+                max-width: 460px;
+            }
+        }
+        @media (min-width: 1800px) {
+            .hero-layout {
+                width: min(1040px, calc(100vw - 360px));
+                gap: clamp(56px, 4vw, 96px);
+            }
+        }
         .hero-content {
             width: 100%;
             max-width: 420px;
             text-align: left;
+            position: relative;
+            z-index: 2;
         }
         .hero-byline {
             display: inline-block;
@@ -692,6 +710,8 @@
             width: 100%;
             display: flex;
             justify-content: flex-end;
+            position: relative;
+            z-index: 3;
         }
         .hero-form-card {
             width: 340px;
@@ -1975,10 +1995,10 @@
             }
         }
     </style>
-    <link rel="preload" href="style.css?v=20260701hero4" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="style.css?v=20260701hero4"></noscript>
+    <link rel="preload" href="style.css?v=20260702hero5" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.css?v=20260702hero5"></noscript>
     <!-- HERO ASTEROIDS EXPERIMENT — remove this block + script below to revert (see experiments/hero-asteroids/REVERT.md) -->
-    <link rel="stylesheet" href="./experiments/hero-asteroids/hero-experiment.css?v=20260701exp15">
+    <link rel="stylesheet" href="./experiments/hero-asteroids/hero-experiment.css?v=20260702exp16">
     <title>Business Growth Systems Tampa Bay | Knight Logics</title>
     <!-- Microsoft Clarity (deferred until after load to protect first paint) -->
     <script type="text/javascript">
@@ -4909,7 +4929,7 @@
     </script>
     <script src="attribution.js" defer></script>
     <!-- HERO ASTEROIDS EXPERIMENT — remove to revert -->
-    <script src="./experiments/hero-asteroids/hero-experiment.js?v=20260701exp15" defer></script>
+    <script src="./experiments/hero-asteroids/hero-experiment.js?v=20260702exp16" defer></script>
     <script src="script.js?v=20260701hero4" defer></script>
     <script>
         // Google Ads conversion tracking  hero consultation form

@@ -120,20 +120,15 @@
     const hudEl = document.getElementById('klHeroHud');
     const trustBridge = document.querySelector('.kl-trust-bridge');
 
-    const HI_KEY = 'kl-hero-asteroids-hiscore';
+    const HI_API = '/api/hero-asteroids-hiscore';
     let hiScore = 100;
     let hiInitials = '';
     let initialsPromptOpen = false;
     let beatAchievedThisRun = false;
 
-    function loadHiScore() {
-        try {
-            const raw = localStorage.getItem(HI_KEY);
-            if (!raw) return;
-            const data = JSON.parse(raw);
-            if (Number.isFinite(data.score)) hiScore = data.score;
-            hiInitials = String(data.initials || '').slice(0, 3).toUpperCase();
-        } catch (_) { /* ignore */ }
+    function applyHiScore(scoreValue, initials) {
+        if (Number.isFinite(scoreValue)) hiScore = scoreValue;
+        hiInitials = String(initials || '').slice(0, 3).toUpperCase();
         updateHiDisplay();
     }
 
@@ -150,17 +145,30 @@
         }
     }
 
-    function saveHiScore(scoreValue, initials) {
-        hiScore = scoreValue;
-        hiInitials = String(initials || '').slice(0, 3).toUpperCase();
+    async function fetchGlobalHiScore() {
         try {
-            localStorage.setItem(HI_KEY, JSON.stringify({
-                score: hiScore,
-                initials: hiInitials,
-                at: Date.now(),
-            }));
-        } catch (_) { /* ignore */ }
-        updateHiDisplay();
+            const res = await fetch(HI_API, { cache: 'no-store' });
+            if (!res.ok) return;
+            const data = await res.json();
+            applyHiScore(Number(data.score), data.initials || '');
+        } catch (_) { /* keep defaults until next fetch */ }
+    }
+
+    async function persistGlobalHiScore(scoreValue, initials) {
+        try {
+            const res = await fetch(HI_API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ score: scoreValue, initials }),
+            });
+            const data = await res.json().catch(() => ({}));
+            if (data && Number.isFinite(data.score)) {
+                applyHiScore(Number(data.score), data.initials || '');
+            }
+            return res.ok && data.ok === true;
+        } catch (_) {
+            return false;
+        }
     }
 
     function hideInitialsPrompt() {
@@ -174,16 +182,16 @@
         initialsPromptOpen = true;
         initialsPrompt.hidden = false;
         if (hudEl) hudEl.classList.add('hero-experiment-hud--editing');
-        initialsInput.value = hiInitials || '';
+        initialsInput.value = '';
         requestAnimationFrame(() => initialsInput.focus());
     }
 
-    function commitInitials() {
+    async function commitInitials() {
         if (!initialsInput) return;
-        const val = initialsInput.value.trim().toUpperCase().slice(0, 3);
-        if (score > hiScore) {
-            saveHiScore(score, val);
-            beatAchievedThisRun = false;
+        const val = initialsInput.value.trim().toUpperCase().replace(/[^A-Z]/g, '').slice(0, 3);
+        if (val && score > hiScore) {
+            const saved = await persistGlobalHiScore(score, val);
+            if (saved) beatAchievedThisRun = false;
         }
         hideInitialsPrompt();
     }
@@ -199,6 +207,12 @@
             beatAchievedThisRun = true;
             showInitialsPrompt();
         }
+    }
+
+    if (hudEl) {
+        hudEl.addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+        });
     }
 
     if (initialsInput) {
@@ -220,7 +234,8 @@
         initialsInput.addEventListener('click', (e) => e.stopPropagation());
     }
 
-    loadHiScore();
+    fetchGlobalHiScore();
+    window.setInterval(fetchGlobalHiScore, 120000);
 
     const DPR = Math.min(window.devicePixelRatio || 1, 2);
     let W = 0;

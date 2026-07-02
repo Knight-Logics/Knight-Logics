@@ -85,23 +85,6 @@
             <div class="hero-experiment-bg"></div>
             <canvas class="hero-experiment-canvas hero-experiment-canvas--stars" id="klHeroStars" aria-hidden="true"></canvas>
             <canvas class="hero-experiment-canvas hero-experiment-canvas--asteroids" id="klHeroAsteroids" aria-hidden="true"></canvas>
-            <div class="hero-experiment-hud" id="klHeroHud" aria-live="polite">
-                <div class="hero-experiment-score-row">
-                    <span class="hero-experiment-score-label">SCORE</span>
-                    <span class="hero-experiment-score-value" id="klHeroScoreValue">100</span>
-                </div>
-                <div class="hero-experiment-hiscore-block">
-                    <span class="hero-experiment-score-label hero-experiment-hiscore-heading">HIGHSCORE</span>
-                    <div class="hero-experiment-hiscore-detail">
-                        <span class="hero-experiment-hiscore-initials" id="klHeroHiscoreInitials" aria-label="High score initials">—</span>
-                        <span class="hero-experiment-hiscore-value" id="klHeroHiscoreValue">100</span>
-                    </div>
-                    <div class="hero-experiment-initials-prompt" id="klHeroInitialsPrompt" hidden>
-                        <label class="hero-experiment-initials-label" for="klHeroInitialsInput">Your initials</label>
-                        <input class="hero-experiment-initials-input" id="klHeroInitialsInput" type="text" maxlength="3" autocomplete="off" spellcheck="false" inputmode="text" aria-label="Enter your initials for the high score">
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="hero-experiment-foreground" aria-hidden="true">
             <img class="hero-experiment-cutout" id="klHeroCutout" src="${CUTOUT_SRC}" alt="" width="1920" height="1050" decoding="async" fetchpriority="high">
@@ -110,6 +93,32 @@
     const wrapper = hero.querySelector('.hero-content-wrapper');
     hero.insertBefore(layers, wrapper);
 
+    const hudMount = document.createElement('div');
+    hudMount.className = 'hero-experiment-hud-mount';
+    hudMount.innerHTML = `
+        <div class="hero-experiment-hud" id="klHeroHud" aria-live="polite">
+            <div class="hero-experiment-score-row">
+                <span class="hero-experiment-score-label">SCORE</span>
+                <span class="hero-experiment-score-value" id="klHeroScoreValue">100</span>
+            </div>
+            <div class="hero-experiment-hiscore-block">
+                <span class="hero-experiment-score-label hero-experiment-hiscore-heading">HIGH SCORE</span>
+                <div class="hero-experiment-hiscore-display" id="klHeroHiscoreDisplay">
+                    <span class="hero-experiment-hiscore-initials" id="klHeroHiscoreInitials">—</span>
+                    <span class="hero-experiment-hiscore-value" id="klHeroHiscoreValue">100</span>
+                </div>
+                <div class="hero-experiment-hiscore-claim" id="klHeroHiscoreClaim" hidden>
+                    <p class="hero-experiment-claim-note">New record — enter initials</p>
+                    <div class="hero-experiment-claim-row">
+                        <input class="hero-experiment-initials-input" id="klHeroInitialsInput" type="text" maxlength="3" autocomplete="off" spellcheck="false" inputmode="text" placeholder="ABC" aria-label="Your initials">
+                        <button type="button" class="hero-experiment-claim-btn" id="klHeroInitialsSubmit">Enter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    hero.appendChild(hudMount);
+
     const parallaxShell = document.getElementById('klHeroParallax');
     const starsCanvas = document.getElementById('klHeroStars');
     const asteroidsCanvas = document.getElementById('klHeroAsteroids');
@@ -117,21 +126,24 @@
     const scoreEl = document.getElementById('klHeroScoreValue');
     const hiScoreEl = document.getElementById('klHeroHiscoreValue');
     const hiInitialsEl = document.getElementById('klHeroHiscoreInitials');
-    const initialsPrompt = document.getElementById('klHeroInitialsPrompt');
+    const hiDisplayEl = document.getElementById('klHeroHiscoreDisplay');
+    const claimEl = document.getElementById('klHeroHiscoreClaim');
     const initialsInput = document.getElementById('klHeroInitialsInput');
+    const initialsSubmit = document.getElementById('klHeroInitialsSubmit');
     const hudEl = document.getElementById('klHeroHud');
     const trustBridge = document.querySelector('.kl-trust-bridge');
 
     const HI_API = '/api/hero-asteroids-hiscore';
     let hiScore = 100;
     let hiInitials = '';
-    let initialsPromptOpen = false;
-    let beatAchievedThisRun = false;
+    let pendingClaimScore = 0;
+    let claimFormVisible = false;
 
     function applyHiScore(scoreValue, initials) {
         if (Number.isFinite(scoreValue)) hiScore = scoreValue;
         hiInitials = String(initials || '').slice(0, 3).toUpperCase();
         updateHiDisplay();
+        syncClaimForm();
     }
 
     function updateHiDisplay() {
@@ -139,6 +151,26 @@
         if (hiInitialsEl) {
             hiInitialsEl.textContent = hiInitials || '—';
             hiInitialsEl.dataset.empty = hiInitials ? 'false' : 'true';
+        }
+    }
+
+    function syncClaimForm() {
+        const canClaim = score > hiScore;
+        if (!canClaim) {
+            pendingClaimScore = 0;
+            claimFormVisible = false;
+            if (claimEl) claimEl.hidden = true;
+            if (hiDisplayEl) hiDisplayEl.hidden = false;
+            return;
+        }
+        pendingClaimScore = Math.max(pendingClaimScore, score);
+        if (claimFormVisible) return;
+        claimFormVisible = true;
+        if (claimEl) claimEl.hidden = false;
+        if (hiDisplayEl) hiDisplayEl.hidden = true;
+        if (initialsInput) {
+            initialsInput.value = '';
+            requestAnimationFrame(() => initialsInput.focus({ preventScroll: true }));
         }
     }
 
@@ -168,65 +200,58 @@
         }
     }
 
-    function hideInitialsPrompt() {
-        initialsPromptOpen = false;
-        if (initialsPrompt) initialsPrompt.hidden = true;
-        if (hudEl) hudEl.classList.remove('hero-experiment-hud--editing');
-    }
-
-    function showInitialsPrompt() {
-        if (initialsPromptOpen || !initialsPrompt || !initialsInput) return;
-        initialsPromptOpen = true;
-        initialsPrompt.hidden = false;
-        if (hudEl) hudEl.classList.add('hero-experiment-hud--editing');
-        initialsInput.value = '';
-        requestAnimationFrame(() => initialsInput.focus());
-    }
-
-    async function commitInitials() {
+    async function submitClaim() {
         if (!initialsInput) return;
         const val = initialsInput.value.trim().toUpperCase().replace(/[^A-Z]/g, '').slice(0, 3);
-        if (val && score > hiScore) {
-            const saved = await persistGlobalHiScore(score, val);
-            if (saved) beatAchievedThisRun = false;
-        }
-        hideInitialsPrompt();
-    }
-
-    function maybePromptForInitials() {
-        if (score <= hiScore) {
-            if (initialsPromptOpen) hideInitialsPrompt();
-            beatAchievedThisRun = false;
+        const claimScore = pendingClaimScore || score;
+        if (!val || claimScore <= hiScore) {
+            initialsInput.focus({ preventScroll: true });
             return;
         }
-        if (beatAchievedThisRun || initialsPromptOpen) return;
-        beatAchievedThisRun = true;
-        showInitialsPrompt();
+        if (initialsSubmit) initialsSubmit.disabled = true;
+        const saved = await persistGlobalHiScore(claimScore, val);
+        if (initialsSubmit) initialsSubmit.disabled = false;
+        if (saved) {
+            claimFormVisible = false;
+            pendingClaimScore = 0;
+            if (claimEl) claimEl.hidden = true;
+            if (hiDisplayEl) hiDisplayEl.hidden = false;
+            initialsInput.value = '';
+        } else {
+            await fetchGlobalHiScore();
+        }
     }
 
-    if (hudEl) {
-        hudEl.addEventListener('pointerdown', (e) => {
-            e.stopPropagation();
-        });
+    function blockHudPointer(e) {
+        e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
     }
+
+    [hudMount, hudEl, claimEl, initialsInput, initialsSubmit].forEach((el) => {
+        if (!el) return;
+        ['pointerdown', 'mousedown', 'click', 'touchstart'].forEach((type) => {
+            el.addEventListener(type, blockHudPointer);
+        });
+    });
 
     if (initialsInput) {
         initialsInput.addEventListener('keydown', (e) => {
             e.stopPropagation();
             if (e.key === 'Enter') {
                 e.preventDefault();
-                commitInitials();
-            } else if (e.key === 'Escape') {
-                e.preventDefault();
-                hideInitialsPrompt();
+                submitClaim();
             }
         });
-        initialsInput.addEventListener('blur', () => {
-            if (initialsPromptOpen && initialsInput.value.trim()) commitInitials();
-            else hideInitialsPrompt();
+        initialsInput.addEventListener('input', () => {
+            initialsInput.value = initialsInput.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 3);
         });
-        initialsInput.addEventListener('pointerdown', (e) => e.stopPropagation());
-        initialsInput.addEventListener('click', (e) => e.stopPropagation());
+    }
+
+    if (initialsSubmit) {
+        initialsSubmit.addEventListener('click', (e) => {
+            e.preventDefault();
+            submitClaim();
+        });
     }
 
     fetchGlobalHiScore();
@@ -359,7 +384,7 @@
 
     function isInteractiveTarget(el) {
         if (!el || !el.closest) return false;
-        return !!el.closest('input, textarea, select, button, a, label, .hero-experiment-hud--editing');
+        return !!el.closest('.hero-experiment-hud-mount, input, textarea, select, button, a, label');
     }
 
     function pushTrailPoint(x, y) {
@@ -715,7 +740,7 @@
     function setScore(v) {
         score = v;
         if (scoreEl) scoreEl.textContent = String(score);
-        maybePromptForInitials();
+        syncClaimForm();
     }
 
     function makeRock(x, y, r, vx, vy, generation) {

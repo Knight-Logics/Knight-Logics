@@ -100,11 +100,16 @@ body:has(#hero.hero-experiment-active) #header-container {
     filter: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.4));
 }
 
-.hero-experiment-hud {
+.hero-experiment-hud-mount {
     position: absolute;
-    top: 10px;
+    top: calc(var(--kl-nav-height, 108px) + 10px);
     right: 16px;
-    z-index: 4;
+    z-index: 3100;
+    pointer-events: auto;
+    isolation: isolate;
+}
+
+.hero-experiment-hud {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -112,12 +117,14 @@ body:has(#hero.hero-experiment-active) #header-container {
     padding: 8px 12px;
     border: 1px solid rgba(100, 255, 218, 0.35);
     border-radius: 8px;
-    background: rgba(5, 9, 12, 0.78);
+    background: rgba(5, 9, 12, 0.92);
     backdrop-filter: blur(8px);
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
     pointer-events: auto;
     cursor: default;
     user-select: none;
+    min-width: 148px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
 }
 
 .hero-experiment-hud--editing {
@@ -125,7 +132,8 @@ body:has(#hero.hero-experiment-active) #header-container {
 }
 
 .hero-experiment-score-row,
-.hero-experiment-hiscore-detail {
+.hero-experiment-hiscore-display,
+.hero-experiment-claim-row {
     display: flex;
     align-items: baseline;
     justify-content: flex-end;
@@ -143,9 +151,11 @@ body:has(#hero.hero-experiment-active) #header-container {
 
 .hero-experiment-hiscore-heading {
     letter-spacing: 0.14em;
+    width: 100%;
+    text-align: right;
 }
 
-.hero-experiment-hiscore-detail {
+.hero-experiment-hiscore-display {
     gap: 10px;
 }
 
@@ -156,18 +166,57 @@ body:has(#hero.hero-experiment-active) #header-container {
     color: #fff;
     min-width: 2.5ch;
     text-align: center;
-    padding: 2px 6px;
-    border-radius: 4px;
-    background: rgba(100, 255, 218, 0.14);
-    border: 1px solid rgba(100, 255, 218, 0.28);
-}
-
-.hero-experiment-hiscore-initials:not(:empty):not([data-empty="true"]) {
-    color: #fff;
 }
 
 .hero-experiment-hiscore-initials[data-empty="true"] {
     color: rgba(255, 255, 255, 0.35);
+}
+
+.hero-experiment-hiscore-claim {
+    width: 100%;
+    pointer-events: auto;
+}
+
+.hero-experiment-hiscore-claim[hidden] {
+    display: none !important;
+}
+
+.hero-experiment-claim-note {
+    margin: 0 0 4px;
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(100, 255, 218, 0.85);
+    text-align: right;
+}
+
+.hero-experiment-claim-row {
+    align-items: center;
+    gap: 6px;
+}
+
+.hero-experiment-claim-btn {
+    flex: 0 0 auto;
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(100, 255, 218, 0.55);
+    background: rgba(100, 255, 218, 0.16);
+    color: #64ffda;
+    font-family: inherit;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.hero-experiment-claim-btn:hover:not(:disabled) {
+    background: rgba(100, 255, 218, 0.28);
+}
+
+.hero-experiment-claim-btn:disabled {
+    opacity: 0.55;
+    cursor: wait;
 }
 
 .hero-experiment-score-label {
@@ -192,29 +241,9 @@ body:has(#hero.hero-experiment-active) #header-container {
     color: rgba(100, 255, 218, 0.92);
 }
 
-.hero-experiment-initials-prompt:not([hidden]) {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 4px;
-    width: 100%;
-    margin-top: 2px;
-    pointer-events: auto;
-}
-
-.hero-experiment-initials-prompt[hidden] {
-    display: none !important;
-}
-
-.hero-experiment-initials-label {
-    font-size: 0.58rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(100, 255, 218, 0.75);
-}
-
 .hero-experiment-initials-input {
-    width: 100%;
+    flex: 1 1 auto;
+    min-width: 0;
     box-sizing: border-box;
     padding: 5px 8px;
     border-radius: 6px;
@@ -227,6 +256,8 @@ body:has(#hero.hero-experiment-active) #header-container {
     letter-spacing: 0.2em;
     text-transform: uppercase;
     text-align: center;
+    pointer-events: auto;
+    cursor: text;
 }
 
 .hero-experiment-initials-input:focus {
@@ -546,9 +577,13 @@ body:has(#hero.hero-experiment-active) #header-container {
         display: none !important;
     }
 
-    .hero-experiment-hud {
-        top: 8px;
+    .hero-experiment-hud-mount {
+        position: fixed;
+        top: calc(var(--kl-nav-height, 108px) + 8px);
         right: 10px;
+    }
+
+    .hero-experiment-hud {
         padding: 7px 9px;
         gap: 4px;
     }

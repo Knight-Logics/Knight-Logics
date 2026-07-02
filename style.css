@@ -495,7 +495,7 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        gap: 40px;
+        gap: clamp(18px, 1.6vw, 28px);
         flex: 1 1 auto;
         min-width: 0;
         padding: 0;
@@ -505,6 +505,7 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
     .nav-menu .mobile-nav-links .nav-link {
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         width: auto;
         margin: 0;
         padding: 0;
@@ -514,15 +515,27 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
         box-shadow: none;
         transform: none;
         white-space: nowrap;
-        font-size: 15px;
+        font-size: clamp(15px, 0.95vw, 17px);
+        line-height: 1.2;
+        letter-spacing: 0.35px;
+    }
+
+    .nav-menu .mobile-nav-links .nav-link:hover {
+        transform: none;
     }
 
     .mobile-nav-links .nav-dropdown {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
     }
 
     .mobile-nav-links .nav-dropdown-menu {
         min-width: 260px;
+    }
+
+    .mobile-nav-links .nav-dropdown-toggle::before {
+        margin-top: 0;
+        flex-shrink: 0;
     }
 }
 
@@ -717,6 +730,28 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
     height: 1px;
     background: rgba(100, 255, 218, 0.15);
     margin: 8px 0;
+}
+
+.nav-dropdown-label {
+    display: block;
+    padding: 10px 20px 4px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(100, 255, 218, 0.62);
+    pointer-events: none;
+    user-select: none;
+}
+
+.nav-dropdown-menu--wide {
+    min-width: 300px;
+}
+
+@media (min-width: 1025px) {
+    .mobile-nav-links .nav-dropdown-menu--wide {
+        min-width: 300px;
+    }
 }
 
 .hamburger {
@@ -5196,8 +5231,8 @@ body.reduced-motion .hero + .kl-proof-stack {
     }
     
     .nav-link {
-        font-size: 14px;
-        letter-spacing: 0.2px;
+        font-size: clamp(15px, 0.9vw, 16px);
+        letter-spacing: 0.3px;
     }
 
     .nav-actions {
@@ -5219,8 +5254,8 @@ body.reduced-motion .hero + .kl-proof-stack {
     }
     
     .nav-link {
-        font-size: 16px; /* Reduced from 18px */
-        letter-spacing: 0.3px; /* Reduced from 0.5px */
+        font-size: clamp(16px, 0.85vw, 17px);
+        letter-spacing: 0.35px;
     }
     
     .navbar {
@@ -6010,7 +6045,11 @@ body.reduced-motion .hero + .kl-proof-stack {
         }
 
         .nav-dropdown.active .nav-dropdown-menu {
-            max-height: 500px;
+            max-height: min(62dvh, 680px);
+            overflow-y: auto;
+            overflow-x: hidden;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* Mobile Dropdown Items */
@@ -10204,6 +10243,12 @@ body.kl-pwa-banner-visible #kl-chat-launcher {
     background: #111;
 }
 
+.svc-work-thumb picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
 .svc-work-price {
     position: absolute;
     top: 16px;
@@ -12028,7 +12073,7 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
 /* Site-wide non-home hero identity. The home page uses its own full-screen parallax hero. */
 .profile-hero,
 .pricing-hero,
-.svc-hero,
+.svc-hero:not(.svc-hero--panels),
 .automation-hero,
 .referral-hero,
 .displayplus-hero,
@@ -12951,7 +12996,11 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
     }
 
     .mobile-nav-links .nav-dropdown.active .nav-dropdown-menu {
-        max-height: 520px;
+        max-height: min(62dvh, 680px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
         margin-bottom: 8px !important;
     }
 
@@ -12989,7 +13038,7 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
 }
 
 /* Growth system service pages — shared layout */
-.kl-growth-page .svc-hero h1 {
+.kl-growth-page .svc-hero:not(.svc-hero--panels) h1 {
     max-width: 18ch;
 }
 
@@ -13083,7 +13132,319 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
 }
 
 /* Growth pro pages — rich layout */
-.kl-growth-page--pro .svc-hero {
+.svc-hero--panels {
+    --kl-hero-band: 200px;
+    --kl-hero-nav-offset: 72px;
+    position: relative;
+    height: calc(var(--kl-hero-nav-offset) + var(--kl-hero-band)) !important;
+    max-height: calc(var(--kl-hero-nav-offset) + var(--kl-hero-band)) !important;
+    min-height: 0 !important;
+    display: block !important;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    background-color: #050a14 !important;
+    background-image: none !important;
+    border-bottom: none;
+}
+
+.svc-hero--panels .hero-panels {
+    position: absolute;
+    top: var(--kl-hero-nav-offset);
+    left: 0;
+    right: 0;
+    height: var(--kl-hero-band);
+    z-index: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+}
+
+.svc-hero--panels .hero-panel {
+    position: relative;
+    overflow: hidden;
+    min-height: 100%;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+.svc-hero--panels .hero-panel--photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 42%;
+    transform: scale(1.04);
+    transition: transform 8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.svc-hero--panels.hero-panels-ready .hero-panel--photo img {
+    transform: scale(1);
+}
+
+.svc-hero--panels .hero-panel-img--mobile {
+    display: none;
+}
+
+.svc-hero--panels .hero-panel--left {
+    transform: translateX(-105%);
+    animation: klHeroFromLeft 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.08s forwards;
+}
+
+.svc-hero--panels .hero-panel--top {
+    transform: translateY(-105%);
+    animation: klHeroFromTop 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.32s forwards;
+}
+
+.svc-hero--panels .hero-panel--bottom {
+    transform: translateY(105%);
+    animation: klHeroFromBottom 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+}
+
+.svc-hero--panels .hero-panel--right {
+    transform: translateX(105%);
+    animation: klHeroFromRight 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.44s forwards;
+}
+
+.svc-hero--panels .svc-hero-overlay {
+    position: absolute;
+    top: var(--kl-hero-nav-offset);
+    left: 0;
+    right: 0;
+    height: var(--kl-hero-band);
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+        108deg,
+        rgba(4, 9, 20, 0.94) 0%,
+        rgba(4, 9, 20, 0.78) 40%,
+        rgba(4, 9, 20, 0.42) 100%
+    );
+}
+
+.svc-hero--panels > .container {
+    position: absolute;
+    top: var(--kl-hero-nav-offset);
+    left: 0;
+    right: 0;
+    height: var(--kl-hero-band);
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 0 12px;
+    min-height: 0;
+    pointer-events: none;
+}
+
+.svc-hero--panels .svc-hero-inner {
+    max-width: 760px;
+    padding: 0;
+    width: 100%;
+    pointer-events: auto;
+}
+
+.svc-hero--panels .kl-breadcrumb {
+    margin-bottom: 6px;
+    font-size: 0.78rem;
+}
+
+.svc-hero--panels .svc-eyebrow {
+    margin-bottom: 6px;
+    font-size: 0.78rem;
+}
+
+.svc-hero--panels h1 {
+    font-size: clamp(1.35rem, 2.8vw, 2rem);
+    line-height: 1.12;
+    margin: 0;
+    max-width: 22ch;
+}
+
+.svc-hero--panels .svc-hero-lead {
+    margin: 8px 0 0;
+    font-size: clamp(0.88rem, 1.1vw, 0.98rem);
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 48ch;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.kl-hero-actions-bar {
+    background: linear-gradient(180deg, #07101d 0%, #0a0f1c 100%);
+    border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+    padding: 14px 0 16px;
+}
+
+.kl-hero-actions-bar .kl-growth-stats {
+    margin: 0 0 12px;
+    gap: 10px;
+}
+
+.kl-hero-actions-bar .kl-growth-stat {
+    padding: 8px 12px;
+    min-width: 96px;
+}
+
+.kl-hero-actions-bar .kl-growth-stat-value {
+    font-size: 1.05rem;
+}
+
+.kl-hero-actions-bar .kl-growth-stat-label {
+    font-size: 0.72rem;
+}
+
+.kl-hero-actions-bar .kl-growth-metrics {
+    margin: 0 0 12px;
+}
+
+.kl-hero-actions-bar .cs-tech-stack {
+    margin: 0 0 12px;
+}
+
+.kl-hero-actions-bar .svc-cta-row {
+    margin: 0;
+    gap: 10px;
+}
+
+@keyframes klHeroFromLeft {
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes klHeroFromBottom {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes klHeroFromTop {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes klHeroFromRight {
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@media (max-width: 768px) {
+    .svc-hero--panels {
+        --kl-hero-band: 148px;
+        --kl-hero-nav-offset: 56px;
+    }
+
+    .svc-hero--panels h1 {
+        font-size: clamp(1.15rem, 5vw, 1.35rem);
+        max-width: 16ch;
+    }
+
+    .svc-hero--panels .kl-breadcrumb,
+    .svc-hero--panels .svc-eyebrow {
+        display: none;
+    }
+
+    .svc-hero--panels .svc-hero-lead {
+        display: none;
+    }
+
+    .svc-hero--panels .hero-panels {
+        display: block;
+    }
+
+    .svc-hero--panels .hero-panel {
+        opacity: 1;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    .svc-hero--panels .hero-panel--left,
+    .svc-hero--panels .hero-panel--top,
+    .svc-hero--panels .hero-panel--right {
+        display: none !important;
+    }
+
+    .svc-hero--panels .hero-panel--bottom {
+        display: block !important;
+        position: absolute;
+        inset: 0;
+    }
+
+    .svc-hero--panels .hero-panel-img--desktop {
+        display: none;
+    }
+
+    .svc-hero--panels .hero-panel-img--mobile {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .svc-hero--panels .svc-hero-overlay {
+        background: linear-gradient(
+            108deg,
+            rgba(4, 9, 20, 0.92) 0%,
+            rgba(4, 9, 20, 0.72) 55%,
+            rgba(4, 9, 20, 0.35) 100%
+        );
+    }
+
+    .kl-hero-actions-bar {
+        padding: 10px 0 12px;
+    }
+
+    .kl-hero-actions-bar .kl-growth-stats {
+        margin-bottom: 10px;
+    }
+
+    .kl-hero-actions-bar .kl-growth-stat {
+        padding: 6px 10px;
+        min-width: 0;
+        flex: 1 1 calc(50% - 8px);
+    }
+
+    .kl-hero-actions-bar .svc-cta-row {
+        flex-wrap: wrap;
+    }
+
+    .kl-hero-actions-bar .svc-cta-row .btn-primary,
+    .kl-hero-actions-bar .svc-cta-row .btn-secondary {
+        flex: 1 1 auto;
+        min-width: 0;
+        padding: 10px 14px;
+        font-size: 0.82rem;
+        text-align: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .svc-hero--panels .hero-panel {
+        opacity: 1;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    .svc-hero--panels .hero-panel--photo img {
+        transform: none !important;
+        transition: none !important;
+    }
+}
+
+/* Legacy subpage heroes — compact height (landing #hero unchanged) */
+body:not(:has(#hero)) .svc-hero:not(.svc-hero--panels),
+body:not(:has(#hero)) .pricing-hero,
+body:not(:has(#hero)) .profile-hero,
+body:not(:has(#hero)) .cs-hero {
+    padding: clamp(48px, 5vw, 64px) 0 clamp(36px, 4vw, 48px) !important;
+    min-height: auto;
+}
+
+body:not(:has(#hero)) .svc-hero:not(.svc-hero--panels) .svc-hero-inner,
+body:not(:has(#hero)) .profile-hero-inner {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.kl-growth-page--pro .svc-hero:not(.svc-hero--panels) {
     padding: clamp(72px, 8vw, 110px) 0 clamp(56px, 6vw, 80px);
     background:
         radial-gradient(circle at 12% 8%, rgba(100, 255, 218, 0.12), transparent 34%),
@@ -13091,13 +13452,13 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
     border-bottom: 1px solid rgba(100, 255, 218, 0.1);
 }
 
-.kl-growth-page--pro .svc-hero--media {
+.kl-growth-page--pro .svc-hero--media:not(.svc-hero--panels) {
     background:
         linear-gradient(135deg, rgba(5, 10, 20, 0.92), rgba(5, 10, 20, 0.78)),
         var(--kl-hero-image, none) center/cover no-repeat;
 }
 
-.kl-growth-page--pro .svc-hero--case {
+.kl-growth-page--pro .svc-hero--case:not(.svc-hero--panels) {
     min-height: 420px;
     display: flex;
     align-items: center;

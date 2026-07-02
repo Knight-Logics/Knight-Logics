@@ -1,0 +1,581 @@
+/* Hero Asteroids Experiment — revert via experiments/hero-asteroids/REVERT.md */
+
+#hero.hero-experiment-active {
+    background: #05090c;
+    --kl-nav-height: 108px;
+    --kl-hero-inner-h: 640px;
+    --kl-layout-scale: 1;
+    --kl-hero-parallax-rate: 0.42;
+    --kl-hero-cta-font-base: 0.96rem;
+    --kl-hero-cta-pad-y: clamp(8px, 0.9vh, 12px);
+    --kl-hero-cta-pad-x: clamp(12px, 1.4vw, 20px);
+    --kl-hero-cta-radius: clamp(8px, 0.8vw, 11px);
+    height: calc(100svh - var(--kl-nav-height)) !important;
+    max-height: calc(100svh - var(--kl-nav-height)) !important;
+    min-height: calc(100svh - var(--kl-nav-height)) !important;
+    overflow: hidden;
+}
+
+/* Spacer matches fixed navbar so hero + header = exactly one viewport */
+body:has(#hero.hero-experiment-active) #header-container {
+    min-height: var(--kl-nav-height, 108px);
+    height: var(--kl-nav-height, 108px);
+}
+
+#hero.hero-experiment-active .parallax-bg-far,
+#hero.hero-experiment-active .parallax-bg-mid,
+#hero.hero-experiment-active .parallax-bg-near {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+.hero-experiment-layers {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.hero-experiment-parallax,
+.hero-experiment-foreground {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.hero-experiment-foreground {
+    z-index: 5;
+    overflow: hidden;
+}
+
+.hero-experiment-parallax {
+    z-index: 1;
+    overflow: hidden;
+}
+
+.hero-experiment-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 55% 45% at 8% 100%, rgba(100, 255, 218, 0.06), transparent 68%),
+        linear-gradient(180deg, #05090c 0%, #0a1218 55%, #05090c 100%);
+}
+
+.hero-experiment-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.hero-experiment-canvas--asteroids {
+    z-index: 3;
+    pointer-events: auto;
+}
+
+.hero-experiment-canvas--stars {
+    z-index: 2;
+}
+
+/* Corner accent only — not a center obstacle */
+.hero-experiment-cutout {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    height: auto;
+    max-height: 30%;
+    max-width: 220px;
+    object-fit: contain;
+    object-position: bottom left;
+    z-index: 5;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    filter: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.4));
+}
+
+.hero-experiment-score {
+    position: absolute;
+    top: clamp(80px, 11vh, 108px);
+    right: 24px;
+    z-index: 12;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    padding: 10px 14px;
+    border: 1px solid rgba(100, 255, 218, 0.35);
+    border-radius: 8px;
+    background: rgba(5, 9, 12, 0.72);
+    backdrop-filter: blur(8px);
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    pointer-events: none;
+}
+
+.hero-experiment-score-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: rgba(100, 255, 218, 0.7);
+}
+
+.hero-experiment-score-value {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #64ffda;
+    text-shadow: 0 0 12px rgba(100, 255, 218, 0.5);
+    min-width: 3ch;
+    text-align: right;
+}
+
+/* Content stays centered like the original hero */
+#hero.hero-experiment-active .hero-content-wrapper {
+    position: relative;
+    z-index: 10;
+    pointer-events: none;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    max-height: 100%;
+    min-height: 0 !important;
+    width: 100%;
+    padding: 12px clamp(16px, 3vw, 32px) 12px;
+    overflow: hidden;
+}
+
+#hero.hero-experiment-active .hero-layout {
+    width: min(860px, calc(100% - 32px));
+    max-width: 860px;
+    max-height: var(--kl-hero-inner-h);
+    margin: 0 auto;
+    margin-top: clamp(-12px, -1vh, 0px);
+    min-height: 0 !important;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: minmax(0, 420px) 340px;
+    gap: clamp(24px, 2vw, 32px);
+    transform: scale(var(--kl-layout-scale));
+    transform-origin: center center;
+    will-change: transform;
+}
+
+#hero.hero-experiment-active .hero-content {
+    max-height: var(--kl-hero-inner-h);
+    min-height: 0;
+    align-self: center;
+    overflow: hidden;
+}
+
+#hero.hero-experiment-active .hero-form-shell {
+    width: 340px;
+    flex: 0 0 340px;
+    display: flex;
+    justify-content: flex-end;
+    align-self: center;
+    max-height: var(--kl-hero-inner-h);
+}
+
+#hero.hero-experiment-active .hero-form-card {
+    width: 340px;
+    min-width: 340px;
+    max-width: 340px;
+    min-height: min(420px, var(--kl-hero-inner-h));
+    max-height: var(--kl-hero-inner-h);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+#hero.hero-experiment-active .hero-content,
+#hero.hero-experiment-active .hero-form-shell,
+#hero.hero-experiment-active .hero-form-card,
+#hero.hero-experiment-active .hero-cta-buttons,
+#hero.hero-experiment-active .hero-scroll-area,
+#hero.hero-experiment-active .hero-content-wrapper a,
+#hero.hero-experiment-active .hero-content-wrapper button,
+#hero.hero-experiment-active .hero-content-wrapper input,
+#hero.hero-experiment-active .hero-content-wrapper select,
+#hero.hero-experiment-active .hero-content-wrapper textarea,
+#hero.hero-experiment-active .hero-content-wrapper label {
+    pointer-events: auto;
+}
+
+#hero.hero-experiment-active .hero-scroll-area {
+    display: none;
+}
+
+/* Hero CTAs: compact, equal sizing, fluid type tied to layout scale */
+#hero.hero-experiment-active .hero-cta-buttons {
+    gap: clamp(8px, 1.2vw, 14px);
+    margin-top: clamp(0.45rem, 1vh, 0.85rem);
+    flex-wrap: wrap;
+}
+
+#hero.hero-experiment-active .hero-cta-buttons .cta-button {
+    min-width: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    padding: var(--kl-hero-cta-pad-y) var(--kl-hero-cta-pad-x) !important;
+    font-size: max(0.72rem, calc(var(--kl-hero-cta-font-base) * var(--kl-layout-scale, 1))) !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    border-radius: var(--kl-hero-cta-radius) !important;
+    text-wrap: balance;
+    box-sizing: border-box;
+}
+
+#hero.hero-experiment-active .hero-cta-buttons .cta-button.secondary {
+    border-width: 1.5px;
+}
+
+@media (min-width: 1400px) {
+    .hero-experiment-cutout {
+        max-width: 260px;
+        max-height: 34%;
+    }
+}
+
+@media (min-width: 769px) {
+    #hero.hero-experiment-active .hero-form-shell {
+        display: flex !important;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hero-experiment-cutout {
+        max-width: 220px;
+        max-height: 34%;
+    }
+
+    #hero.hero-experiment-active .hero-content-wrapper {
+        min-height: 0 !important;
+        height: 100% !important;
+        padding: 12px clamp(16px, 3vw, 24px) 12px !important;
+    }
+
+    #hero.hero-experiment-active .hero-layout {
+        width: min(100%, 800px);
+        gap: 24px;
+        grid-template-columns: minmax(0, 1fr) 340px;
+    }
+}
+
+/* Compact form/copy on shorter vertical viewports (tablet landscape, small laptops) */
+@media (max-height: 820px) and (min-width: 769px) {
+    #hero.hero-experiment-active {
+        --kl-hero-cta-font-base: 0.88rem;
+        --kl-hero-cta-pad-y: clamp(7px, 0.8vh, 10px);
+        --kl-hero-cta-pad-x: clamp(10px, 1.2vw, 16px);
+    }
+
+    #hero.hero-experiment-active .hero-form-card {
+        padding: 0.7rem 1.15rem 0.65rem;
+    }
+
+    #hero.hero-experiment-active .hero-form-header {
+        margin-bottom: 0.4rem;
+    }
+
+    #hero.hero-experiment-active .hero-form-header h2 {
+        font-size: 1.02rem;
+        margin-top: 0.55rem;
+    }
+
+    #hero.hero-experiment-active .hero-form-header p {
+        font-size: 0.84rem;
+        line-height: 1.28;
+    }
+
+    #hero.hero-experiment-active .hero-form-grid {
+        gap: 0.48rem;
+    }
+
+    #hero.hero-experiment-active .hero-consultation-form textarea {
+        min-height: 56px;
+    }
+
+    #hero.hero-experiment-active .hero-title {
+        font-size: clamp(1.45rem, 2.6vw, 2.6rem);
+    }
+
+    #hero.hero-experiment-active .title-line.company-name {
+        font-size: clamp(1.85rem, 3.2vw, 3rem);
+    }
+
+    #hero.hero-experiment-active .hero-subtitle {
+        font-size: 0.92rem;
+        line-height: 1.45;
+    }
+}
+
+/* ── Mobile / narrow: stack content, hide inline form, use bottom sheet CTA ── */
+@media (max-width: 768px) {
+    #hero.hero-experiment-active {
+        --kl-hero-cta-font-base: 0.78rem;
+        --kl-hero-cta-pad-y: clamp(7px, 1.5vw, 9px);
+        --kl-hero-cta-pad-x: clamp(8px, 2vw, 11px);
+        --kl-hero-cta-radius: clamp(7px, 1.6vw, 9px);
+        --kl-mobile-hero-lift: clamp(26px, 5.5svh, 48px);
+        --kl-mobile-cutout-scale: 1.2;
+        --kl-mobile-cutout-max: clamp(150px, 36vw, 190px);
+        --kl-mobile-cutout-height: clamp(28%, 32svh, 36%);
+    }
+
+    .hero-experiment-cutout {
+        left: 0;
+        right: auto;
+        max-width: var(--kl-mobile-cutout-max);
+        max-height: var(--kl-mobile-cutout-height);
+        bottom: calc(54px + env(safe-area-inset-bottom, 0px));
+        transform: scale(var(--kl-mobile-cutout-scale));
+        transform-origin: bottom left;
+    }
+
+    #hero.hero-experiment-active .hero-experiment-foreground {
+        transform: translateY(calc(-1 * var(--kl-mobile-hero-lift)));
+    }
+
+    #hero.hero-experiment-active .hero-content-wrapper {
+        min-height: 0 !important;
+        height: 100% !important;
+        box-sizing: border-box !important;
+        padding:
+            clamp(10px, 2.2vh, 18px)
+            18px
+            calc(58px + env(safe-area-inset-bottom, 0px)) !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    #hero.hero-experiment-active .hero-layout {
+        width: min(100%, 520px);
+        max-height: none;
+        margin-top: 0 !important;
+        transform: translateY(calc(-1 * var(--kl-mobile-hero-lift))) !important;
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+        justify-items: center;
+    }
+
+    #hero.hero-experiment-active .hero-content {
+        width: 100%;
+        max-width: min(100%, 520px);
+        text-align: center;
+        max-height: none;
+    }
+
+    #hero.hero-experiment-active .hero-subtitle {
+        display: block;
+        max-width: min(100%, 520px);
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    #hero.hero-experiment-active .hero-cta-buttons {
+        flex-direction: row !important;
+        flex-wrap: nowrap;
+        align-items: stretch !important;
+        justify-content: center !important;
+        width: 100%;
+        max-width: min(100%, 340px);
+        margin-left: auto;
+        margin-right: auto;
+        gap: clamp(7px, 2vw, 10px) !important;
+        margin-top: clamp(0.35rem, 1vh, 0.6rem) !important;
+    }
+
+    #hero.hero-experiment-active .hero-cta-buttons .cta-button {
+        flex: 1 1 0 !important;
+        min-height: 0;
+        align-self: stretch;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    #hero.hero-experiment-active .hero-form-shell {
+        display: none !important;
+    }
+
+    .hero-experiment-score {
+        top: 10px;
+        right: 12px;
+        padding: 8px 10px;
+    }
+
+    .hero-experiment-score-value {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    #hero.hero-experiment-active {
+        --kl-hero-cta-font-base: 0.7rem;
+        --kl-hero-cta-pad-y: clamp(6px, 1.4vw, 8px);
+        --kl-hero-cta-pad-x: clamp(7px, 1.8vw, 10px);
+        --kl-mobile-hero-lift: clamp(30px, 6svh, 54px);
+        --kl-mobile-cutout-scale: 1.28;
+        --kl-mobile-cutout-max: clamp(158px, 38vw, 200px);
+        --kl-mobile-cutout-height: clamp(30%, 34svh, 38%);
+    }
+
+    #hero.hero-experiment-active .hero-content-wrapper {
+        padding:
+            clamp(8px, 1.8vh, 14px)
+            18px
+            calc(56px + env(safe-area-inset-bottom, 0px)) !important;
+    }
+
+    #hero.hero-experiment-active .hero-layout {
+        width: min(100%, 320px) !important;
+        transform: translateY(calc(-1 * var(--kl-mobile-hero-lift))) !important;
+    }
+
+    #hero.hero-experiment-active .hero-byline {
+        display: none;
+    }
+
+    #hero.hero-experiment-active .hero-subtitle {
+        display: none;
+    }
+
+    #hero.hero-experiment-active .hero-title {
+        max-width: min(100%, 310px);
+        margin-left: auto;
+        margin-right: auto;
+        font-size: clamp(1.35rem, 7vw, 1.72rem);
+        line-height: 1.14;
+    }
+
+    #hero.hero-experiment-active .title-line.company-name {
+        font-size: clamp(2rem, 9vw, 2.35rem);
+        white-space: normal;
+    }
+}
+
+@media (max-width: 420px) {
+    #hero.hero-experiment-active {
+        --kl-hero-cta-font-base: 0.64rem;
+        --kl-hero-cta-pad-y: 6px;
+        --kl-hero-cta-pad-x: 7px;
+        --kl-mobile-hero-lift: clamp(34px, 6.5svh, 58px);
+        --kl-mobile-cutout-scale: 1.34;
+        --kl-mobile-cutout-max: clamp(164px, 42vw, 210px);
+        --kl-mobile-cutout-height: clamp(32%, 36svh, 40%);
+    }
+
+    #hero.hero-experiment-active .hero-cta-buttons {
+        max-width: min(100%, 300px);
+        gap: 6px !important;
+    }
+
+    .hero-experiment-cutout {
+        left: auto;
+        right: 0;
+        object-position: bottom right;
+        transform: scale(var(--kl-mobile-cutout-scale));
+        transform-origin: bottom right;
+    }
+
+    .hero-experiment-bg {
+        background:
+            radial-gradient(ellipse 50% 40% at 92% 100%, rgba(100, 255, 218, 0.06), transparent 68%),
+            linear-gradient(180deg, #05090c 0%, #0a1218 55%, #05090c 100%);
+    }
+}
+
+@media (max-width: 768px) and (min-height: 740px) {
+    #hero.hero-experiment-active {
+        --kl-mobile-hero-lift: clamp(34px, 6.5svh, 58px);
+        --kl-mobile-cutout-scale: 1.26;
+    }
+}
+@media (max-height: 700px) and (min-width: 769px) {
+    .hero-experiment-cutout {
+        max-height: 28%;
+        max-width: 180px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-experiment-canvas--asteroids,
+    .hero-experiment-canvas--stars {
+        display: none;
+    }
+}
+
+/* Desktop / tablet: fixed parallax backdrop under proof stack */
+@media (min-width: 769px) {
+    body.hero-experiment-parallax #hero.hero-experiment-active {
+        position: relative;
+        z-index: 2;
+        isolation: isolate;
+    }
+
+    body.hero-experiment-parallax:not(.landing-mode):not(.nav-menu-open) {
+        overflow-y: auto !important;
+    }
+
+    body.hero-experiment-parallax #hero.hero-experiment-active .hero-experiment-parallax--fixed {
+        position: fixed;
+        top: var(--kl-nav-height, 108px);
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: calc(100svh - var(--kl-nav-height, 108px));
+        z-index: 0;
+        transform: translate3d(0, 0, 0);
+        will-change: transform, opacity;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    body.hero-experiment-parallax #hero.hero-experiment-active .hero-experiment-foreground {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+    }
+
+    body.hero-experiment-parallax #hero.hero-experiment-active .hero-content-wrapper {
+        position: relative;
+        z-index: 10;
+    }
+
+    body.hero-experiment-parallax .kl-proof-stack {
+        position: relative;
+        z-index: 4 !important;
+    }
+
+    body.hero-experiment-parallax .kl-trust-bridge .kl-local-trust-parallax {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+
+    body.hero-experiment-parallax .kl-trust-bridge .kl-local-trust-parallax-overlay {
+        background:
+            linear-gradient(180deg, rgba(5, 8, 12, 0.28) 0%, rgba(5, 11, 17, 0.18) 48%, rgba(5, 8, 12, 0.32) 100%),
+            radial-gradient(circle at 80% 12%, rgba(100, 255, 218, 0.04), transparent 24%),
+            radial-gradient(circle at 18% 20%, rgba(100, 255, 218, 0.03), transparent 34%);
+    }
+
+    body.hero-experiment-parallax .kl-trust-bridge #about .container,
+    body.hero-experiment-parallax .kl-trust-bridge .results-strip .container,
+    body.hero-experiment-parallax .kl-trust-bridge #testimonials .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    body.hero-experiment-parallax .kl-trust-bridge .kl-map-review-shell {
+        background: rgba(5, 11, 17, 0.58);
+    }
+}

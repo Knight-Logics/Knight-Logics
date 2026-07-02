@@ -1,4 +1,5 @@
-const VER = '20260626growth5';
+const VER = '20260701navfix1';
+const { pickHeroPanels, getHeroFocus, pickMobileHeroImage } = require('./growth-content-media');
 
 function esc(s) {
   return String(s)
@@ -331,6 +332,40 @@ function renderScopeNote(note) {
     </section>`;
 }
 
+function heroImgStyle(src, mobile = false) {
+  return ` style="object-position: ${getHeroFocus(src, mobile)};"`;
+}
+
+function renderHeroPanels(slug, primaryImage) {
+  const panels = pickHeroPanels(slug, primaryImage?.src);
+  const mobile = pickMobileHeroImage(panels, primaryImage?.src);
+  const positions = ['left', 'top', 'bottom', 'right'];
+
+  const panelEls = positions.map((pos, i) => {
+    const src = panels[i];
+    const loading = i < 2 ? 'eager' : 'lazy';
+    if (pos === 'bottom') {
+      return `<div class="hero-panel hero-panel--${pos} hero-panel--photo">
+            <img class="hero-panel-img--desktop" src="${src}" alt="" width="800" height="600" decoding="async" loading="${loading}"${heroImgStyle(src)}>
+            <img class="hero-panel-img--mobile" src="${mobile}" alt="" width="800" height="600" decoding="async" loading="eager"${heroImgStyle(mobile, true)}>
+        </div>`;
+    }
+    return `<div class="hero-panel hero-panel--${pos} hero-panel--photo"><img src="${src}" alt="" width="800" height="600" decoding="async" loading="${loading}"${heroImgStyle(src)}></div>`;
+  }).join('\n        ');
+
+  return `<div class="hero-panels" aria-hidden="true">
+        ${panelEls}
+    </div>
+    <div class="svc-hero-overlay" aria-hidden="true"></div>`;
+}
+
+function renderHeroActionsBar(content) {
+  if (!content || !content.trim()) return '';
+  return `<section class="kl-hero-actions-bar">
+        <div class="container fade-in">${content}</div>
+    </section>`;
+}
+
 function renderCta(cta) {
   const title = cta?.title || 'Ready to plan your build?';
   const text = cta?.text || 'Tell us what is broken, what you are trying to grow, and what systems you already use.';
@@ -349,34 +384,27 @@ function renderServicePage(p) {
   const crumbs = [{ href: '/', label: 'Home' }];
   if (p.parent) crumbs.push({ href: p.parent.href, label: p.parent.label });
   crumbs.push({ label: p.title });
-  const heroClass = p.heroImage ? ' svc-hero--media' : '';
-  const heroStyle = p.heroImage ? ` style="--kl-hero-image: url('${p.heroImage.src}');"` : '';
-  const heroMedia = p.heroImage
-    ? `<div class="kl-growth-hero-media fade-in"><img src="${p.heroImage.src}" alt="${esc(p.heroImage.alt)}" loading="eager" decoding="async"></div>`
-    : '';
 
   return `${renderHead(p)}
 <body class="kl-growth-page kl-growth-page--pro page-${p.slug}">
     <div id="header-container"></div>
 
-    <section class="svc-hero${heroClass}"${heroStyle}>
+    <section class="svc-hero svc-hero--panels" aria-label="${esc(p.title)}">
+        ${renderHeroPanels(p.slug, p.heroImage)}
         <div class="container">
-            <div class="kl-growth-hero-grid">
-                <div class="svc-hero-inner fade-in">
-                    ${renderBreadcrumb(crumbs)}
-                    <span class="svc-eyebrow"><i class="fas ${p.heroIcon || 'fa-layer-group'}"></i> ${p.eyebrow}</span>
-                    <h1>${p.h1}</h1>
-                    <p>${p.lead}</p>
-                    ${renderStats(p.stats)}
-                    <div class="svc-cta-row">
-                        <a href="/book-consultation" class="btn-primary">Book a Consultation</a>
-                        <a href="/website-growth-audit" class="btn-secondary">Free Growth Audit</a>
-                    </div>
-                </div>
-                ${heroMedia}
+            <div class="svc-hero-inner fade-in">
+                ${renderBreadcrumb(crumbs)}
+                <span class="svc-eyebrow"><i class="fas ${p.heroIcon || 'fa-layer-group'}"></i> ${p.eyebrow}</span>
+                <h1>${p.h1}</h1>
+                <p class="svc-hero-lead">${p.lead}</p>
             </div>
         </div>
     </section>
+    ${renderHeroActionsBar(`${renderStats(p.stats)}
+            <div class="svc-cta-row">
+                <a href="/book-consultation" class="btn-primary">Book a Consultation</a>
+                <a href="/website-growth-audit" class="btn-secondary">Free Growth Audit</a>
+            </div>`)}
 
     ${renderContext(p.context)}
     ${renderSplit(p.problem)}
@@ -425,28 +453,27 @@ function renderCaseStudy(c) {
     { href: '/case-studies', label: 'Case Studies' },
     { label: c.title }
   ];
-  const heroStyle = c.heroImage ? ` style="--kl-hero-image: url('${c.heroImage.src}');"` : '';
-
   return `${renderHead(c, { caseStudy: true })}
 <body class="kl-growth-page kl-growth-page--pro kl-case-study-page page-${c.slug}">
     <div id="header-container"></div>
 
-    <section class="svc-hero svc-hero--media svc-hero--case"${heroStyle}>
+    <section class="svc-hero svc-hero--panels svc-hero--case" aria-label="${esc(c.title)} case study">
+        ${renderHeroPanels(c.slug, c.heroImage)}
         <div class="container">
             <div class="svc-hero-inner fade-in">
                 ${renderBreadcrumb(crumbs)}
                 <span class="svc-eyebrow"><i class="fas fa-clipboard-check"></i> ${c.badge}</span>
                 <h1>${c.h1}</h1>
-                <p>${c.lead}</p>
-                <div class="cs-tech-stack">${c.tags.map((t) => `<span class="cs-tag">${t}</span>`).join('\n                        ')}</div>
-                ${renderCaseStudyMetrics(c.metrics)}
-                <div class="svc-cta-row">
-                    ${c.liveUrl ? `<a href="${c.liveUrl}" class="btn-primary" target="_blank" rel="noopener">View Live Project</a>` : ''}
-                    <a href="${c.serviceLink}" class="btn-secondary">${c.serviceLabel}</a>
-                </div>
+                <p class="svc-hero-lead">${c.lead}</p>
             </div>
         </div>
     </section>
+    ${renderHeroActionsBar(`<div class="cs-tech-stack">${c.tags.map((t) => `<span class="cs-tag">${t}</span>`).join('\n                ')}</div>
+            ${renderCaseStudyMetrics(c.metrics)}
+            <div class="svc-cta-row">
+                ${c.liveUrl ? `<a href="${c.liveUrl}" class="btn-primary" target="_blank" rel="noopener">View Live Project</a>` : ''}
+                <a href="${c.serviceLink}" class="btn-secondary">${c.serviceLabel}</a>
+            </div>`)}
 
     ${renderContext(c.context)}
     <section class="kl-growth-section">

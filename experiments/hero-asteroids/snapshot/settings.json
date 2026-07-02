@@ -1,0 +1,18 @@
+{
+  "captured": "2026-07-01",
+  "heroImages": {
+    "default": "./images/websitehero-1920.webp?v=20260604perf1",
+    "1600": "./images/websitehero.webp?v=20260604perf1",
+    "2560": "./images/websitehero-hd.webp?v=20260604perf1",
+    "mobile": "./images/website-hero-mobile-optimized.webp"
+  },
+  "cssVars": {
+    "--hero-bg-position": "top center",
+    "--hero-parallax-rate": "0.45",
+    "--landing-viewport-height": "100svh"
+  },
+  "parallaxFilter": "brightness(0.82) contrast(1.05)",
+  "parallaxOpacity": 0.82,
+  "cutoutSource": "websitehero-1920.webp",
+  "cutoutOutput": "../hero-cutout.webp"
+}

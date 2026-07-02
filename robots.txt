@@ -3,6 +3,7 @@ Allow: /
 Allow: /manifest.json
 Allow: /llms.txt
 Allow: /llms-full.txt
+Allow: /ai.txt
 Allow: /humans.txt
 Allow: /.well-known/security.txt
 
@@ -13,6 +14,7 @@ Sitemap: https://knightlogics.com/video-sitemap.xml
 # AI / LLM summary files (kept as comments here to avoid validator issues with non-standard directives)
 # Summary: https://knightlogics.com/llms.txt
 # Full summary: https://knightlogics.com/llms-full.txt
+# AI pointer: https://knightlogics.com/ai.txt
 
 # Disallow APIs, internal tooling, scratch files, and raw source assets
 Disallow: /api/

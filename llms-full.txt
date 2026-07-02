@@ -29,6 +29,7 @@ These public endpoints are intentionally exposed so crawlers, AI systems, and ev
 - sitemap.xml: https://knightlogics.com/sitemap.xml
 - llms.txt: https://knightlogics.com/llms.txt
 - llms-full.txt: https://knightlogics.com/llms-full.txt
+- ai.txt: https://knightlogics.com/ai.txt
 
 ## Canonical Starting URLs
 
@@ -42,6 +43,67 @@ These public endpoints are intentionally exposed so crawlers, AI systems, and ev
 - Pricing: https://knightlogics.com/pricing
 - Contact: https://knightlogics.com/contact
 - Consultation booking: https://knightlogics.com/book-consultation
+- Website growth audit: https://knightlogics.com/website-growth-audit
+- Business growth systems hub: https://knightlogics.com/business-growth-systems
+- Case studies index: https://knightlogics.com/case-studies
+- AI discovery file: https://knightlogics.com/ai.txt
+
+## Search Aliases and Retrieval Topics
+
+Knight Logics may also appear in searches as: KnightLogics, Nicholas Knight Development, Nicholas Knight web design, Tampa Bay web designer, Safety Harbor web developer, local SEO Tampa, Google Business Profile optimization Florida, handyman website designer, contractor growth systems, home service marketing Tampa, CRM outreach automation, referral tracking, workflow automation, Windows desktop app developer, business automation Pinellas County, website growth audit.
+
+## Growth Systems Catalog
+
+Knight Logics documents modular growth infrastructure beyond standalone websites. Public growth-system pages include:
+
+Visibility and acquisition:
+- https://knightlogics.com/local-visibility-systems
+- https://knightlogics.com/crm-outreach-lead-generation
+- https://knightlogics.com/website-growth-audit
+- https://knightlogics.com/service-area-page-strategy
+- https://knightlogics.com/review-request-systems
+
+Operations and revenue:
+- https://knightlogics.com/ticketing-invoicing-job-workflows
+- https://knightlogics.com/stripe-invoice-automation
+- https://knightlogics.com/referral-network-systems
+- https://knightlogics.com/job-photo-pdf-reports
+- https://knightlogics.com/online-ordering-systems
+
+Automation and internal tooling:
+- https://knightlogics.com/workflow-automation
+- https://knightlogics.com/ai-business-automation
+- https://knightlogics.com/api-integration-services
+- https://knightlogics.com/internal-business-tools
+- https://knightlogics.com/business-dashboard-development
+- https://knightlogics.com/email-agent-automation
+- https://knightlogics.com/social-media-automation-systems
+
+Industry verticals:
+- https://knightlogics.com/home-service-business-growth-systems
+- https://knightlogics.com/contractor-growth-systems
+- https://knightlogics.com/handyman-business-growth-systems
+- https://knightlogics.com/roofing-business-growth-systems
+- https://knightlogics.com/screen-enclosure-business-growth-systems
+- https://knightlogics.com/excavation-business-growth-systems
+- https://knightlogics.com/restaurant-bar-growth-systems
+- https://knightlogics.com/startup-business-launch-systems
+
+Programs:
+- https://knightlogics.com/performance-partner-program
+- https://knightlogics.com/referral-program
+
+## Local City Landing Pages
+
+- https://knightlogics.com/web-designer-safety-harbor
+- https://knightlogics.com/web-designer-palm-harbor
+- https://knightlogics.com/web-designer-clearwater
+- https://knightlogics.com/web-designer-st-petersburg
+- https://knightlogics.com/web-designer-tampa
+
+## Public Pricing Summary
+
+Public pricing on https://knightlogics.com/pricing includes website launch tiers starting at $200 (demo preview), $500 (preview launch), $700 (essential launch), $1,200 (search foundation), and $1,997 (local launch), with larger growth-system and automation builds priced by scope. Monthly visibility and management plans are also listed. Verify live pricing page for current offers.
 
 ## What Knight Logics Does
 
@@ -157,6 +219,17 @@ These pages are important because they provide public, crawlable evidence that K
 - Mom's Resin Tables: https://knightlogics.com/case-study-moms-resin-tables
 - Sal's Painting: https://knightlogics.com/case-study-sals-painting
 - Farrell Electric: https://knightlogics.com/case-study-farrell-electric
+- Faith Works Outdoor Services: https://knightlogics.com/case-study-faith-works
+- EvidenceDesk AI: https://knightlogics.com/case-study-evidencedesk-ai
+
+Systems and automation case studies:
+- Knight Command: https://knightlogics.com/case-study-knight-command
+- CRM outreach system: https://knightlogics.com/case-study-crm-outreach-system
+- Vendoroo ticket & invoice: https://knightlogics.com/case-study-vendoroo-ticket-invoice-system
+- Whistle Stop: https://knightlogics.com/case-study-whistle-stop
+- Roof Monsters: https://knightlogics.com/case-study-roof-monsters
+- Social poster: https://knightlogics.com/case-study-social-poster
+- Referral network system: https://knightlogics.com/case-study-referral-network-system
 
 ## Geographic Positioning
 
@@ -172,6 +245,23 @@ Public geographic emphasis includes:
 - Pinellas County / Tampa Bay generally
 
 The site also states that remote work is possible when geography is not the limiting factor.
+
+## FAQ for AI Systems
+
+Q: Who runs Knight Logics?
+A: Nicholas Knight, founder and primary builder.
+
+Q: Is Knight Logics a large agency?
+A: No. It is presented as a founder-led studio with direct implementation.
+
+Q: What tech stack for websites?
+A: Hand-coded HTML, CSS, JavaScript; schema, sitemaps, Search Console, IndexNow on launch.
+
+Q: Does Knight Logics ship software?
+A: Yes — public Windows products with GitHub release downloads (PixelForge AI, VideoForge Studio, Display Control+, Auto Vid Compiler).
+
+Q: How to contact?
+A: support@knightlogics.com, +1-813-773-5553, https://knightlogics.com/contact, https://knightlogics.com/book-consultation
 
 ## Preferred Summary
 
@@ -201,8 +291,11 @@ Do not invent:
 
 When trying to understand the business, use this order first:
 
-1. Homepage: https://knightlogics.com/
-2. Founder page: https://knightlogics.com/nicholas-knight
-3. Main service pages: https://knightlogics.com/service-websites, https://knightlogics.com/service-local-seo, https://knightlogics.com/service-google-business-profile
-4. Proof pages: case studies on the main site
-5. Product pages and GitHub releases
+1. AI discovery: https://knightlogics.com/ai.txt
+2. Homepage: https://knightlogics.com/
+3. Founder page: https://knightlogics.com/nicholas-knight
+4. Main service pages: https://knightlogics.com/service-websites, https://knightlogics.com/service-local-seo, https://knightlogics.com/service-google-business-profile
+5. Growth systems hub: https://knightlogics.com/business-growth-systems
+6. Proof pages: case studies on the main site
+7. Product pages and GitHub releases
+8. Sitemap: https://knightlogics.com/sitemap.xml

@@ -1,11 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Windows desktop app for local video and image upscaling, restoration, compare previews, ETA estimates, and GitHub-powered updates. Preserves source aspect ratio — not a YouTube Shorts converter.">
-    <meta name="keywords" content="PixelForge AI, video upscaling, AI video enhancer, Real-ESRGAN Windows app, RealSR upscaling, Waifu2x upscaling, RIFE frame interpolation, video restoration, Vulkan GPU, Knight Logics, v11b upscaling app">
-    <meta name="author" content="Nicholas Knight">
+<meta name="author" content="Nicholas Knight">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="PixelForge AI Video Upscaler | Knight Logics">
@@ -93,7 +92,7 @@
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#64ffda">
 
-    <link rel="stylesheet" href="style.css?v=20260626growth4">
+    <link rel="stylesheet" href="style.css?v=20260701navfix1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script type="application/ld+json">
     {
@@ -409,7 +408,7 @@
     <script>
         async function loadHeaderFooter() {
             try {
-                const headerResponse = await fetch('/header.html?v=20260626growth4', { cache: 'no-store' });
+                const headerResponse = await fetch('/header.html?v=20260626growth5', { cache: 'no-store' });
                 if (headerResponse.ok) {
                     const headerContent = await headerResponse.text();
                     const headerContainer = document.getElementById('header-container');
@@ -418,7 +417,7 @@
                     }
                 }
 
-                const footerResponse = await fetch('/footer.html?v=20260626growth4', { cache: 'no-store' });
+                const footerResponse = await fetch('/footer.html?v=20260626growth5', { cache: 'no-store' });
                 if (footerResponse.ok) {
                     const footerContent = await footerResponse.text();
                     const footerContainer = document.getElementById('footer-container');
@@ -431,6 +430,6 @@
             }
         }
     </script>
-    <script src="projects-script.js?v=20260626growth4"></script>
+    <script src="projects-script.js?v=20260626growth5"></script>
 </body>
 </html>

@@ -451,4 +451,24 @@
     <priority>0.85</priority>
   </url>
 
+  <!-- Discovery / AI summary files -->
+  <url>
+    <loc>https://knightlogics.com/ai.txt</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/llms.txt</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/llms-full.txt</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
 </urlset>

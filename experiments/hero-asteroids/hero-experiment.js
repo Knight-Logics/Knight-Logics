@@ -138,6 +138,12 @@
     let hiInitials = '';
     let pendingClaimScore = 0;
     let claimPromptOpen = false;
+    let claimLockedUntilBeat = false;
+
+    function setClaimUiVisible(visible) {
+        if (claimEl) claimEl.hidden = !visible;
+        if (hiDisplayEl) hiDisplayEl.hidden = visible;
+    }
 
     function applyHiScore(scoreValue, initials) {
         if (Number.isFinite(scoreValue)) hiScore = scoreValue;
@@ -155,6 +161,16 @@
     }
 
     function syncClaimForm() {
+        if (claimLockedUntilBeat) {
+            if (score > hiScore) {
+                claimLockedUntilBeat = false;
+                pendingClaimScore = Math.max(pendingClaimScore, score);
+            } else {
+                setClaimUiVisible(false);
+                return;
+            }
+        }
+
         if (score > hiScore) {
             pendingClaimScore = Math.max(pendingClaimScore, score);
         }
@@ -162,13 +178,11 @@
         const needsClaim = pendingClaimScore > hiScore;
         if (!needsClaim) {
             claimPromptOpen = false;
-            if (claimEl) claimEl.hidden = true;
-            if (hiDisplayEl) hiDisplayEl.hidden = false;
+            setClaimUiVisible(false);
             return;
         }
 
-        if (claimEl) claimEl.hidden = false;
-        if (hiDisplayEl) hiDisplayEl.hidden = true;
+        setClaimUiVisible(true);
 
         if (!claimPromptOpen) {
             claimPromptOpen = true;
@@ -196,10 +210,13 @@
                 body: JSON.stringify({ score: scoreValue, initials }),
             });
             const data = await res.json().catch(() => ({}));
-            if (data && Number.isFinite(data.score)) {
-                applyHiScore(Number(data.score), data.initials || '');
+            const ok = res.ok && data.ok === true;
+            if (ok && Number.isFinite(data.score)) {
+                hiScore = Number(data.score);
+                hiInitials = String(data.initials || '').slice(0, 3).toUpperCase();
+                updateHiDisplay();
             }
-            return res.ok && data.ok === true;
+            return ok;
         } catch (_) {
             return false;
         }
@@ -208,31 +225,31 @@
     async function submitClaim() {
         if (!initialsInput) return;
         const val = initialsInput.value.trim().toUpperCase().replace(/[^A-Z]/g, '').slice(0, 3);
-        const claimScore = pendingClaimScore || score;
+        const claimScore = score > hiScore ? score : pendingClaimScore;
         if (!val || claimScore <= hiScore) {
             initialsInput.focus({ preventScroll: true });
             return;
         }
 
+        hiScore = claimScore;
+        hiInitials = val;
+        updateHiDisplay();
         pendingClaimScore = 0;
         claimPromptOpen = false;
-
+        claimLockedUntilBeat = true;
+        setClaimUiVisible(false);
+        if (initialsInput) initialsInput.value = '';
         if (initialsSubmit) initialsSubmit.disabled = true;
+
         const saved = await persistGlobalHiScore(claimScore, val);
         if (initialsSubmit) initialsSubmit.disabled = false;
 
-        if (saved) {
-            if (claimEl) claimEl.hidden = true;
-            if (hiDisplayEl) hiDisplayEl.hidden = false;
-            if (initialsInput) initialsInput.value = '';
-            syncClaimForm();
-            return;
-        }
+        if (saved) return;
 
+        claimLockedUntilBeat = false;
         await fetchGlobalHiScore();
-        if (claimScore > hiScore) {
-            pendingClaimScore = claimScore;
-            claimPromptOpen = false;
+        if (score > hiScore) {
+            pendingClaimScore = Math.max(pendingClaimScore, score);
         }
         syncClaimForm();
     }
@@ -241,12 +258,11 @@
         e.stopPropagation();
     }
 
-    [hudMount, hudEl, claimEl].forEach((el) => {
-        if (!el) return;
+    if (hudMount) {
         ['pointerdown', 'mousedown', 'click', 'touchstart'].forEach((type) => {
-            el.addEventListener(type, blockHudPointer);
+            hudMount.addEventListener(type, blockHudPointer);
         });
-    });
+    }
 
     if (initialsInput) {
         initialsInput.addEventListener('keydown', (e) => {

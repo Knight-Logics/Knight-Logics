@@ -557,6 +557,10 @@
       "destination": "/api/admin"
     },
     {
+      "source": "/api/hero-asteroids-hiscore",
+      "destination": "/api/referral-event?route=hero-asteroids-hiscore"
+    },
+    {
       "source": "/api/whistle-stop-social",
       "destination": "/api/whistle-stop-social?route=health"
     },

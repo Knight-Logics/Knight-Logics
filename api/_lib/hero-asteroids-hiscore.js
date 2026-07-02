@@ -1,8 +1,6 @@
 /**
  * Global hero asteroids high score (single leaderboard row for knightlogics.com).
- *
- * GET  /api/hero-asteroids-hiscore  -> { score, initials, updatedAt }
- * POST /api/hero-asteroids-hiscore  -> { score, initials } (only if score beats current)
+ * Routed via /api/hero-asteroids-hiscore -> /api/referral-event?route=hero-asteroids-hiscore
  */
 'use strict';
 
@@ -77,7 +75,7 @@ async function readBoard(sql) {
     };
 }
 
-module.exports = async function handler(req, res) {
+async function handleHeroAsteroidsHiscore(req, res) {
     const headers = corsHeaders(req.headers.origin || '');
 
     if (req.method === 'OPTIONS') {
@@ -162,4 +160,6 @@ module.exports = async function handler(req, res) {
         res.writeHead(500, headers);
         return res.end(JSON.stringify({ error: 'Server error.' }));
     }
-};
+}
+
+module.exports = { handleHeroAsteroidsHiscore };

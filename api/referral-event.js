@@ -149,6 +149,14 @@ async function readRawBody(req) {
 }
 
 module.exports = async function handler(req, res) {
+    const routeParams = new URLSearchParams(
+        (req.url || '').includes('?') ? req.url.split('?')[1] : ''
+    );
+    if (routeParams.get('route') === 'hero-asteroids-hiscore') {
+        const { handleHeroAsteroidsHiscore } = require('./_lib/hero-asteroids-hiscore');
+        return handleHeroAsteroidsHiscore(req, res);
+    }
+
     const origin = req.headers.origin || '';
     const corsHeaders = getCorsHeaders(origin);
 

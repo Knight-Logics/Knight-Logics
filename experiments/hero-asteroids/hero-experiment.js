@@ -228,6 +228,11 @@
     const mouse = { x: -9999, y: -9999, down: false };
     const smoothMouse = { x: -9999, y: -9999 };
     const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    const isTouchPlay = () => isCoarsePointer || window.matchMedia('(any-pointer: coarse)').matches;
+    let pointerDragging = false;
+    let dragTrail = [];
+    let lastDragX = -9999;
+    let lastDragY = -9999;
     const isMobileViewport = () => window.innerWidth <= 768;
     const useLiteStars = () => isCoarsePointer || isMobileViewport();
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -342,6 +347,77 @@
         return clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom;
     }
 
+    function isInteractiveTarget(el) {
+        if (!el || !el.closest) return false;
+        return !!el.closest('input, textarea, select, button, a, label, .hero-experiment-hud--editing');
+    }
+
+    function pushTrailPoint(x, y) {
+        const last = dragTrail[dragTrail.length - 1];
+        if (last && Math.hypot(last.x - x, last.y - y) < 3) return;
+        dragTrail.push({ x, y, life: 1 });
+        if (dragTrail.length > 28) dragTrail.shift();
+    }
+
+    function tryBreakAlongSegment(x0, y0, x1, y1) {
+        const dist = Math.hypot(x1 - x0, y1 - y0);
+        const steps = Math.max(1, Math.ceil(dist / 14));
+        for (let i = 0; i <= steps; i++) {
+            const t = i / steps;
+            tryBreakAt(x0 + (x1 - x0) * t, y0 + (y1 - y0) * t, false);
+        }
+    }
+
+    function drawDragTrail(ctx) {
+        if (dragTrail.length < 2) return;
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(dragTrail[0].x, dragTrail[0].y);
+        for (let i = 1; i < dragTrail.length; i++) {
+            const p = dragTrail[i];
+            ctx.lineTo(p.x, p.y);
+        }
+        ctx.strokeStyle = `rgba(${GREEN_RGB}, 0.62)`;
+        ctx.lineWidth = 2.5;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = GREEN;
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        dragTrail.forEach((p) => {
+            ctx.fillStyle = `rgba(${GREEN_RGB}, ${0.35 * p.life})`;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 2 + p.life * 2, 0, Math.PI * 2);
+            ctx.fill();
+        });
+        ctx.restore();
+
+        dragTrail = dragTrail
+            .map((p) => ({ ...p, life: p.life - 0.06 }))
+            .filter((p) => p.life > 0.08);
+    }
+
+    function onPlayfieldPointerDown(e) {
+        if (!isTouchPlay() || e.pointerType === 'mouse') return;
+        if (document.body.classList.contains('nav-menu-open')) return;
+        if (!pointerInHero(e.clientX, e.clientY) || isInteractiveTarget(e.target)) return;
+
+        pointerDragging = true;
+        heroPoint(e);
+        smoothMouse.x = mouse.x;
+        smoothMouse.y = mouse.y;
+        lastDragX = mouse.x;
+        lastDragY = mouse.y;
+        pushTrailPoint(mouse.x, mouse.y);
+        tryBreakAt(mouse.x, mouse.y, false);
+
+        if (hero.setPointerCapture && e.pointerId != null) {
+            try { hero.setPointerCapture(e.pointerId); } catch (_) { /* ignore */ }
+        }
+    }
+
     function onPlayfieldPointerMove(e) {
         if (!pointerInHero(e.clientX, e.clientY)) {
             if (mouse.x >= 0) {
@@ -352,34 +428,53 @@
             return;
         }
         heroPoint(e);
+
+        if (isTouchPlay() && pointerDragging && e.pointerType !== 'mouse') {
+            pushTrailPoint(mouse.x, mouse.y);
+            if (lastDragX >= 0) {
+                tryBreakAlongSegment(lastDragX, lastDragY, mouse.x, mouse.y);
+            } else {
+                tryBreakAt(mouse.x, mouse.y, false);
+            }
+            lastDragX = mouse.x;
+            lastDragY = mouse.y;
+            smoothMouse.x = mouse.x;
+            smoothMouse.y = mouse.y;
+            return;
+        }
+
         if (!isCoarsePointer) {
             tryBreakAt(mouse.x, mouse.y, true);
         }
     }
 
+    function onPlayfieldPointerUp(e) {
+        if (!pointerDragging) return;
+        pointerDragging = false;
+        lastDragX = -9999;
+        lastDragY = -9999;
+        if (hero.releasePointerCapture && e.pointerId != null) {
+            try { hero.releasePointerCapture(e.pointerId); } catch (_) { /* ignore */ }
+        }
+    }
+
+    document.addEventListener('pointerdown', onPlayfieldPointerDown);
     document.addEventListener('pointermove', onPlayfieldPointerMove, { passive: true });
+    document.addEventListener('pointerup', onPlayfieldPointerUp);
+    document.addEventListener('pointercancel', onPlayfieldPointerUp);
     hero.addEventListener('pointerleave', () => {
         mouse.x = -9999;
         mouse.y = -9999;
         hoveredRockId = null;
     });
     asteroidsCanvas.addEventListener('pointerdown', (e) => {
+        if (isTouchPlay() && e.pointerType !== 'mouse') return;
         heroPoint(e);
         mouse.down = true;
         smoothMouse.x = mouse.x;
         smoothMouse.y = mouse.y;
         tryBreakAt(mouse.x, mouse.y, false);
     });
-    if (isCoarsePointer) {
-        asteroidsCanvas.addEventListener('touchstart', (e) => {
-            if (!e.changedTouches[0]) return;
-            const t = e.changedTouches[0];
-            heroPoint(t);
-            smoothMouse.x = mouse.x;
-            smoothMouse.y = mouse.y;
-            tryBreakAt(mouse.x, mouse.y, false);
-        }, { passive: true });
-    }
     window.addEventListener('resize', () => {
         syncParallaxMode();
         sizeCanvases();
@@ -742,6 +837,10 @@
             tryBreakAt(mouse.x, mouse.y, false);
         }
         mouse.down = false;
+
+        if (isTouchPlay() && dragTrail.length) {
+            drawDragTrail(ctx);
+        }
 
         rocks.forEach((rock) => drawRock(ctx, rock));
     }

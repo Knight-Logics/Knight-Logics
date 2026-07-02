@@ -1,4 +1,4 @@
-const VER = '20260701megamenu1';
+const VER = '20260701megamenu2';
 const { pickHeroPanels, getHeroFocus, pickMobileHeroImage } = require('./growth-content-media');
 
 function esc(s) {

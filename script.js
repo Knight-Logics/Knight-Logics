@@ -1545,19 +1545,22 @@ function initNavigation() {
                 if (desktopHover.matches) dropdown.classList.remove('active');
             });
 
-            // Touch: instant toggle on touchend — preventDefault stops the ghost click that follows
+            // Touch: toggle open/closed (touchend only adds when closed — fixed to full toggle)
+            let toggleTouchedAt = 0;
             toggle.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                const isOpen = dropdown.classList.contains('active');
-                // Close all other open dropdowns first
+                toggleTouchedAt = Date.now();
                 navDropdowns.forEach((d) => {
                     if (d !== dropdown) {
                         d.classList.remove('active');
                         resetMegaNav(d.querySelector('.nav-dropdown-mega'));
                     }
                 });
-                if (!isOpen) dropdown.classList.add('active');
+                dropdown.classList.toggle('active');
+                if (!dropdown.classList.contains('active')) {
+                    resetMegaNav(dropdown.querySelector('.nav-dropdown-mega'));
+                }
             });
 
             // Mouse click fallback for non-hover devices (e.g. keyboard navigation)
@@ -1567,8 +1570,18 @@ function initNavigation() {
                     e.preventDefault();
                 }
                 if (desktopHover.matches) return; // handled by hover
+                if (Date.now() - toggleTouchedAt < 450) return; // avoid double-toggle after touch
                 e.stopPropagation();
+                navDropdowns.forEach((d) => {
+                    if (d !== dropdown) {
+                        d.classList.remove('active');
+                        resetMegaNav(d.querySelector('.nav-dropdown-mega'));
+                    }
+                });
                 dropdown.classList.toggle('active');
+                if (!dropdown.classList.contains('active')) {
+                    resetMegaNav(dropdown.querySelector('.nav-dropdown-mega'));
+                }
             });
             
             // Close dropdown when clicking a dropdown item

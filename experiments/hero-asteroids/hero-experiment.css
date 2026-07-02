@@ -125,12 +125,49 @@ body:has(#hero.hero-experiment-active) #header-container {
 }
 
 .hero-experiment-score-row,
-.hero-experiment-hiscore-row {
+.hero-experiment-hiscore-detail {
     display: flex;
     align-items: baseline;
     justify-content: flex-end;
     gap: 8px;
     width: 100%;
+}
+
+.hero-experiment-hiscore-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    width: 100%;
+}
+
+.hero-experiment-hiscore-heading {
+    letter-spacing: 0.14em;
+}
+
+.hero-experiment-hiscore-detail {
+    gap: 10px;
+}
+
+.hero-experiment-hiscore-initials {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #fff;
+    min-width: 2.5ch;
+    text-align: center;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(100, 255, 218, 0.14);
+    border: 1px solid rgba(100, 255, 218, 0.28);
+}
+
+.hero-experiment-hiscore-initials:not(:empty):not([data-empty="true"]) {
+    color: #fff;
+}
+
+.hero-experiment-hiscore-initials[data-empty="true"] {
+    color: rgba(255, 255, 255, 0.35);
 }
 
 .hero-experiment-score-label {
@@ -153,17 +190,6 @@ body:has(#hero.hero-experiment-active) #header-container {
 .hero-experiment-hiscore-value {
     font-size: 1rem;
     color: rgba(100, 255, 218, 0.92);
-}
-
-.hero-experiment-hiscore-initials {
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: #fff;
-    padding: 2px 6px;
-    border-radius: 4px;
-    background: rgba(100, 255, 218, 0.14);
-    border: 1px solid rgba(100, 255, 218, 0.28);
 }
 
 .hero-experiment-initials-prompt:not([hidden]) {

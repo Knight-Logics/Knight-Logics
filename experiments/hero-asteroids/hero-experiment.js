@@ -90,14 +90,16 @@
                     <span class="hero-experiment-score-label">SCORE</span>
                     <span class="hero-experiment-score-value" id="klHeroScoreValue">100</span>
                 </div>
-                <div class="hero-experiment-hiscore-row">
-                    <span class="hero-experiment-score-label">HIGH</span>
-                    <span class="hero-experiment-hiscore-value" id="klHeroHiscoreValue">100</span>
-                    <span class="hero-experiment-hiscore-initials" id="klHeroHiscoreInitials" hidden></span>
-                </div>
-                <div class="hero-experiment-initials-prompt" id="klHeroInitialsPrompt" hidden>
-                    <label class="hero-experiment-initials-label" for="klHeroInitialsInput">New high — initials</label>
-                    <input class="hero-experiment-initials-input" id="klHeroInitialsInput" type="text" maxlength="3" autocomplete="off" spellcheck="false" inputmode="text" aria-label="High score initials">
+                <div class="hero-experiment-hiscore-block">
+                    <span class="hero-experiment-score-label hero-experiment-hiscore-heading">HIGHSCORE</span>
+                    <div class="hero-experiment-hiscore-detail">
+                        <span class="hero-experiment-hiscore-initials" id="klHeroHiscoreInitials" aria-label="High score initials">—</span>
+                        <span class="hero-experiment-hiscore-value" id="klHeroHiscoreValue">100</span>
+                    </div>
+                    <div class="hero-experiment-initials-prompt" id="klHeroInitialsPrompt" hidden>
+                        <label class="hero-experiment-initials-label" for="klHeroInitialsInput">Your initials</label>
+                        <input class="hero-experiment-initials-input" id="klHeroInitialsInput" type="text" maxlength="3" autocomplete="off" spellcheck="false" inputmode="text" aria-label="Enter your initials for the high score">
+                    </div>
                 </div>
             </div>
         </div>
@@ -135,13 +137,8 @@
     function updateHiDisplay() {
         if (hiScoreEl) hiScoreEl.textContent = String(hiScore);
         if (hiInitialsEl) {
-            if (hiInitials) {
-                hiInitialsEl.textContent = hiInitials;
-                hiInitialsEl.hidden = false;
-            } else {
-                hiInitialsEl.textContent = '';
-                hiInitialsEl.hidden = true;
-            }
+            hiInitialsEl.textContent = hiInitials || '—';
+            hiInitialsEl.dataset.empty = hiInitials ? 'false' : 'true';
         }
     }
 
@@ -196,17 +193,15 @@
         hideInitialsPrompt();
     }
 
-    function maybePromptForInitials(prevScore) {
+    function maybePromptForInitials() {
         if (score <= hiScore) {
             if (initialsPromptOpen) hideInitialsPrompt();
             beatAchievedThisRun = false;
             return;
         }
         if (beatAchievedThisRun || initialsPromptOpen) return;
-        if (score > hiScore && prevScore <= hiScore) {
-            beatAchievedThisRun = true;
-            showInitialsPrompt();
-        }
+        beatAchievedThisRun = true;
+        showInitialsPrompt();
     }
 
     if (hudEl) {
@@ -718,10 +713,9 @@
     let spawnTimer = 0;
 
     function setScore(v) {
-        const prev = score;
         score = v;
         if (scoreEl) scoreEl.textContent = String(score);
-        maybePromptForInitials(prev);
+        maybePromptForInitials();
     }
 
     function makeRock(x, y, r, vx, vy, generation) {

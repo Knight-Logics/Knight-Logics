@@ -1189,7 +1189,7 @@ function initHeroEntranceAnimations() {
     };
 
     const finishEntrance = () => {
-        hero.classList.add('hero-animate-done');
+        hero.classList.add('hero-animate-done', 'hero-animate-fallback');
     };
 
     if (prefersReducedMotion) {

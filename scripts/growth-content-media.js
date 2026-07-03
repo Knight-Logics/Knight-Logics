@@ -117,7 +117,7 @@ module.exports = {
     faithWorks: { type: 'image', src: '/images/showcase/faith-works-og-card.jpg', alt: 'Faith Works Outdoor Services local SEO site', width: 1200, height: 630 },
     jns: { type: 'image', src: '/images/JNS-HomeImage.webp', alt: 'JNS Construction contractor website' },
     farrellElectric: { type: 'image', src: 'https://farrell-electric.github.io/farrell-electric-website/HeroImage.png', alt: 'Farrell Electric website hero', width: 1200, height: 630 },
-    salsPainting: { type: 'image', src: 'https://salspaintingrenovation.com/SalsHeroImage.png', alt: "Sal's Painting website hero", width: 1200, height: 630 },
+    salsPainting: { type: 'image', src: '/images/sals-hero.webp', alt: "Sal's Painting website hero", width: 1200, height: 630 },
     moms: { type: 'image', src: '/images/momhero.webp', alt: "Mom's Resin Tables e-commerce storefront" },
     hospitality: {
       type: 'image',

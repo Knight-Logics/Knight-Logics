@@ -535,15 +535,16 @@
             --hero-bg-position: top center;
             --hero-parallax-rate: 0.45;
         }
-        .parallax-bg-far,
-        .parallax-bg-mid,
-        .parallax-bg-near {
+        /* Legacy parallax — only when asteroids experiment is off */
+        #hero:not(.hero-experiment-active) .parallax-bg-far,
+        #hero:not(.hero-experiment-active) .parallax-bg-mid,
+        #hero:not(.hero-experiment-active) .parallax-bg-near {
             position: absolute;
             inset: 0;
             background-repeat: no-repeat;
             background-size: cover;
         }
-        .parallax-bg-far {
+        #hero:not(.hero-experiment-active) .parallax-bg-far {
             background-image: url('./images/websitehero-1920.webp?v=20260604perf1');
             z-index: 1;
             opacity: 0.82;
@@ -552,28 +553,38 @@
             background-position: var(--hero-bg-position);
         }
         @media (min-width: 1600px) {
-            .parallax-bg-far {
+            #hero:not(.hero-experiment-active) .parallax-bg-far {
                 background-image: url('./images/websitehero.webp?v=20260604perf1');
                 background-size: cover;
                 background-position: top center;
             }
         }
         @media (min-width: 2560px) {
-            .parallax-bg-far {
+            #hero:not(.hero-experiment-active) .parallax-bg-far {
                 background-image: url('./images/websitehero-hd.webp?v=20260604perf1');
                 background-size: cover;
                 background-position: top center;
             }
         }
         @media (min-width: 3200px) {
-            .parallax-bg-far {
+            #hero:not(.hero-experiment-active) .parallax-bg-far {
                 background-image: url('./images/websitehero-hd.webp?v=20260604perf1');
                 background-size: cover;
                 background-position: top center;
             }
         }
-        .parallax-bg-mid { display: none; }
-        .parallax-bg-near { display: none !important; opacity: 0 !important; }
+        #hero:not(.hero-experiment-active) .parallax-bg-mid { display: none; }
+        #hero:not(.hero-experiment-active) .parallax-bg-near { display: none !important; opacity: 0 !important; }
+        /* Asteroids hero default — never paint or fetch legacy parallax layers */
+        #hero.hero-experiment-active .parallax-bg-far,
+        #hero.hero-experiment-active .parallax-bg-mid,
+        #hero.hero-experiment-active .parallax-bg-near {
+            display: none !important;
+            background-image: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
         .hero + section,
         .hero + .kl-proof-stack {
             position: relative;
@@ -633,7 +644,10 @@
             letter-spacing: 0.14em;
             text-transform: uppercase;
         }
-        body.hero-js-ready #hero:not(.hero-animate) .hero-enter { opacity: 0; }
+        @media (prefers-reduced-motion: no-preference) {
+            body.hero-js-ready #hero:not(.hero-animate) .hero-enter { opacity: 0; }
+        }
+        #hero.hero-animate-done .hero-enter,
         #hero.hero-animate-fallback .hero-enter {
             opacity: 1 !important;
             transform: none !important;
@@ -828,15 +842,15 @@
             }
             .hero-cta-buttons { justify-content: center; }
             .hero-form-shell { display: none; }
-            .parallax-bg-far {
+            #hero:not(.hero-experiment-active) .parallax-bg-far {
                 display: block;
                 background-image: url('./images/website-hero-mobile-optimized.webp?v=20260530hero1');
                 background-attachment: scroll;
                 opacity: 0.82;
                 filter: brightness(0.82) contrast(1.05);
             }
-            .parallax-bg-mid { display: none; }
-            .parallax-bg-near { display: none !important; opacity: 0 !important; }
+            #hero:not(.hero-experiment-active) .parallax-bg-mid { display: none; }
+            #hero:not(.hero-experiment-active) .parallax-bg-near { display: none !important; opacity: 0 !important; }
         }
         @media (max-width: 600px) {
             .hero-content-wrapper {
@@ -1995,10 +2009,11 @@
             }
         }
     </style>
-    <link rel="preload" href="style.css?v=20260702showcase1" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="style.css?v=20260702showcase1"></noscript>
+    <link rel="preload" href="style.css?v=20260703perf2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.css?v=20260703perf2"></noscript>
+    <link rel="preload" as="image" type="image/webp" href="./experiments/hero-asteroids/hero-cutout-480.webp?v=20260703perf2" imagesrcset="./experiments/hero-asteroids/hero-cutout-480.webp?v=20260703perf2 480w, ./experiments/hero-asteroids/hero-cutout-800.webp?v=20260703perf2 800w, ./experiments/hero-asteroids/hero-cutout.webp?v=20260703perf2 1135w" imagesizes="(max-width: 768px) min(42vw, 220px), (max-width: 1200px) 400px, 600px" fetchpriority="high">
     <!-- HERO ASTEROIDS EXPERIMENT — remove this block + script below to revert (see experiments/hero-asteroids/REVERT.md) -->
-    <link rel="stylesheet" href="./experiments/hero-asteroids/hero-experiment.css?v=20260702exp28">
+    <link rel="stylesheet" href="./experiments/hero-asteroids/hero-experiment.css?v=20260703perf2">
     <title>Business Growth Systems Tampa Bay | Knight Logics</title>
     <!-- Microsoft Clarity (deferred until after load to protect first paint) -->
     <script type="text/javascript">
@@ -2225,10 +2240,10 @@
     </div>
 
     <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <div class="parallax-bg-far"></div>
-        <div class="parallax-bg-mid"></div>
-        <div class="parallax-bg-near"></div>
+    <section id="hero" class="hero hero-experiment-active">
+        <div class="parallax-bg-far" hidden></div>
+        <div class="parallax-bg-mid" hidden></div>
+        <div class="parallax-bg-near" hidden></div>
         <div class="hero-content-wrapper">
             <div class="hero-layout">
                 <div class="hero-content">
@@ -2333,7 +2348,7 @@
                         <h2 class="about-headline kl-proof-enter kl-proof-enter--left kl-proof-enter--d2">Websites engineered to <em>outrank</em> &amp; outsell the competition.</h2>
                         <a href="/" class="kl-proof-brand-mark" aria-label="Knight Logics home">
                             <span class="kl-proof-brand-logo-scene" aria-hidden="true">
-                                <img src="./images/KnightLogicsLogo2.png" srcset="./images/KnightLogicsLogo2.webp 128w, ./images/KnightLogicsLogo2.png 1024w" sizes="(max-width: 768px) 160px, 256px" alt="" class="nav-logo kl-proof-brand-logo" width="1024" height="1024" decoding="async">
+                                <img src="./images/KnightLogicsLogo2.webp" srcset="./images/KnightLogicsLogo2.webp 128w" sizes="(max-width: 768px) 160px, 256px" alt="" class="nav-logo kl-proof-brand-logo" width="128" height="128" decoding="async" loading="lazy">
                             </span>
                         </a>
                     </div>
@@ -2356,7 +2371,7 @@
                             <img src="./images/showcase/knight-group-showcase.webp" alt="Knight Group website" width="400" height="210" loading="lazy" decoding="async">
                         </a>
                         <a href="/case-study-sals-painting" class="kl-proof-thumb kl-proof-enter kl-proof-enter--up kl-proof-enter--d4">
-                            <img src="https://salspaintingrenovation.com/SalsHeroImage.png" alt="Sal's Painting website" width="400" height="210" loading="lazy" decoding="async">
+                            <img src="./images/sals-hero.webp" alt="Sal's Painting website" width="400" height="210" loading="lazy" decoding="async">
                         </a>
                     </div>
                     <div class="about-ctas">
@@ -2420,8 +2435,8 @@
                             </span>
                         </span>
                     </a>
-                    <a href="/case-study-sals-painting" class="kl-proof-card kl-proof-card--video kl-proof-enter kl-proof-enter--up kl-proof-enter--d4" style="--kl-proof-video-poster: url('https://salspaintingrenovation.com/SalsHeroImage.png');">
-                        <video class="kl-proof-card-video" autoplay muted loop playsinline preload="metadata" poster="https://salspaintingrenovation.com/SalsHeroImage.png" aria-hidden="true" tabindex="-1">
+                    <a href="/case-study-sals-painting" class="kl-proof-card kl-proof-card--video kl-proof-enter kl-proof-enter--up kl-proof-enter--d4" style="--kl-proof-video-poster: url('./images/sals-hero.webp');">
+                        <video class="kl-proof-card-video" autoplay muted loop playsinline preload="metadata" poster="./images/sals-hero.webp" aria-hidden="true" tabindex="-1">
                             <source src="./images/salspainting-upgrade.mp4" type="video/mp4">
                         </video>
                         <span class="kl-proof-card-media-overlay" aria-hidden="true"></span>
@@ -4929,8 +4944,8 @@
     </script>
     <script src="attribution.js" defer></script>
     <!-- HERO ASTEROIDS EXPERIMENT — remove to revert -->
-    <script src="./experiments/hero-asteroids/hero-experiment.js?v=20260702exp28" defer></script>
-    <script src="script.js?v=20260702showcase1" defer></script>
+    <script src="./experiments/hero-asteroids/hero-experiment.js?v=20260703perf2" defer></script>
+    <script src="script.js?v=20260703perf2" defer></script>
     <script>
         // Google Ads conversion tracking  hero consultation form
         (function() {

@@ -1167,6 +1167,17 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
     }
 }
 
+/* Homepage asteroids experiment — suppress legacy parallax when active */
+#hero.hero-experiment-active .parallax-bg-far,
+#hero.hero-experiment-active .parallax-bg-mid,
+#hero.hero-experiment-active .parallax-bg-near {
+    display: none !important;
+    background-image: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
 /* Middle texture layer disabled; CircuitBrush3 remains the intentional parallax layer. */
 .parallax-bg-mid {
     display: none;
@@ -2333,6 +2344,9 @@ section::before {
     #hero.hero-animate .hero-enter--d-phase2b { animation-delay: 1.14s; }
 
     #hero.hero-animate-done .hero-enter {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
         will-change: auto;
     }
 

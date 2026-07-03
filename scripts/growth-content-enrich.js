@@ -114,7 +114,7 @@ const PROOF = {
   },
   salsPainting: {
     href: '/case-study-sals-painting',
-    image: 'https://salspaintingrenovation.com/SalsHeroImage.png',
+    image: '/images/sals-hero.webp',
     imageAlt: "Sal's Painting website",
     title: "Sal's Painting search-ready site",
     text: 'Search-optimized painter launch with analytics, schema, and brand foundation.',

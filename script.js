@@ -1193,7 +1193,7 @@ function initHeroEntranceAnimations() {
     };
 
     if (prefersReducedMotion) {
-        hero.classList.add('hero-animate', 'hero-animate-done');
+        hero.classList.add('hero-animate', 'hero-animate-done', 'hero-animate-fallback');
         runTextRevealFlash();
         return;
     }
@@ -1201,16 +1201,16 @@ function initHeroEntranceAnimations() {
     requestAnimationFrame(() => {
         hero.classList.add('hero-animate');
         window.setTimeout(runTextRevealFlash, 1180);
-        window.setTimeout(finishEntrance, 2200);
+        window.setTimeout(finishEntrance, 1400);
     });
 
-    // Safety net if animation class fails to apply
+    // Safety net if animation class fails to apply or stalls
     window.setTimeout(() => {
-        if (!hero.classList.contains('hero-animate')) {
+        if (!hero.classList.contains('hero-animate-done')) {
             hero.classList.add('hero-animate', 'hero-animate-fallback', 'hero-animate-done');
             runTextRevealFlash();
         }
-    }, 2500);
+    }, 1600);
 }
 
 function initProofAboutEntrance() {

@@ -8,7 +8,7 @@
 
     const GREEN = '#64ffda';
     const GREEN_RGB = '100, 255, 218';
-    const CUTOUT_VER = '20260703perf2';
+    const CUTOUT_VER = '20260703perf3';
     const CUTOUT_BASE = './experiments/hero-asteroids';
     const CUTOUT_SRC = `${CUTOUT_BASE}/hero-cutout-480.webp?v=${CUTOUT_VER}`;
 

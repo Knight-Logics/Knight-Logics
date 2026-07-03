@@ -653,6 +653,20 @@
             transform: none !important;
             animation: none !important;
         }
+        /* Hero titles: always solid — gradient clip + shimmer fail on some mobile/in-app browsers */
+        #hero .title-line {
+            color: #ffffff;
+            -webkit-text-fill-color: #ffffff;
+            background: none !important;
+            animation: none !important;
+        }
+        #hero .title-line:not(.company-name) {
+            color: #64ffda;
+            -webkit-text-fill-color: #64ffda;
+        }
+        #hero .text-reveal::before {
+            display: none !important;
+        }
         .hero-title {
             font-size: clamp(1.65rem, 3.2vw, 3.35rem);
             font-weight: 700;
@@ -2009,11 +2023,11 @@
             }
         }
     </style>
-    <link rel="preload" href="style.css?v=20260703perf2" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="style.css?v=20260703perf2"></noscript>
-    <link rel="preload" as="image" type="image/webp" href="./experiments/hero-asteroids/hero-cutout-480.webp?v=20260703perf2" imagesrcset="./experiments/hero-asteroids/hero-cutout-480.webp?v=20260703perf2 480w, ./experiments/hero-asteroids/hero-cutout-800.webp?v=20260703perf2 800w, ./experiments/hero-asteroids/hero-cutout.webp?v=20260703perf2 1135w" imagesizes="(max-width: 768px) min(42vw, 220px), (max-width: 1200px) 400px, 600px" fetchpriority="high">
+    <link rel="preload" href="style.css?v=20260703perf3" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.css?v=20260703perf3"></noscript>
+    <link rel="preload" as="image" type="image/webp" href="./experiments/hero-asteroids/hero-cutout-480.webp?v=20260703perf3" imagesrcset="./experiments/hero-asteroids/hero-cutout-480.webp?v=20260703perf3 480w, ./experiments/hero-asteroids/hero-cutout-800.webp?v=20260703perf3 800w, ./experiments/hero-asteroids/hero-cutout.webp?v=20260703perf3 1135w" imagesizes="(max-width: 768px) min(42vw, 220px), (max-width: 1200px) 400px, 600px" fetchpriority="high">
     <!-- HERO ASTEROIDS EXPERIMENT — remove this block + script below to revert (see experiments/hero-asteroids/REVERT.md) -->
-    <link rel="stylesheet" href="./experiments/hero-asteroids/hero-experiment.css?v=20260703perf2">
+    <link rel="stylesheet" href="./experiments/hero-asteroids/hero-experiment.css?v=20260703perf3">
     <title>Business Growth Systems Tampa Bay | Knight Logics</title>
     <!-- Microsoft Clarity (deferred until after load to protect first paint) -->
     <script type="text/javascript">
@@ -4944,8 +4958,26 @@
     </script>
     <script src="attribution.js" defer></script>
     <!-- HERO ASTEROIDS EXPERIMENT — remove to revert -->
-    <script src="./experiments/hero-asteroids/hero-experiment.js?v=20260703perf2" defer></script>
-    <script src="script.js?v=20260703perf2" defer></script>
+    <script src="./experiments/hero-asteroids/hero-experiment.js?v=20260703perf3" defer></script>
+    <script>
+    (function () {
+        function stabilizeHero() {
+            var hero = document.getElementById('hero');
+            if (!hero || hero.dataset.klHeroStable === '1') return;
+            hero.dataset.klHeroStable = '1';
+            document.body.classList.add('hero-js-ready');
+            hero.classList.add('hero-animate', 'hero-animate-done', 'hero-animate-fallback');
+            hero.querySelectorAll('.text-reveal').forEach(function (el) {
+                el.classList.add('animate');
+            });
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            window.setTimeout(stabilizeHero, 1200);
+        });
+        window.setTimeout(stabilizeHero, 2200);
+    })();
+    </script>
+    <script src="script.js?v=20260703perf3" defer></script>
     <script>
         // Google Ads conversion tracking  hero consultation form
         (function() {

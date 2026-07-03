@@ -8,7 +8,7 @@
 
     const GREEN = '#64ffda';
     const GREEN_RGB = '100, 255, 218';
-    const CUTOUT_VER = '20260703perf3';
+    const CUTOUT_VER = '20260703perf4';
     const CUTOUT_BASE = './experiments/hero-asteroids';
     const CUTOUT_SRC = `${CUTOUT_BASE}/hero-cutout-480.webp?v=${CUTOUT_VER}`;
 
@@ -348,8 +348,8 @@
     }
 
     function getCanvasHostRect() {
+        const navH = parseFloat(getComputedStyle(hero).getPropertyValue('--kl-nav-height')) || 108;
         if (useProofParallax()) {
-            const navH = parseFloat(getComputedStyle(hero).getPropertyValue('--kl-nav-height')) || 108;
             return {
                 width: window.innerWidth,
                 height: Math.max(320, window.innerHeight - navH),
@@ -357,7 +357,15 @@
                 top: navH,
             };
         }
-        return hero.getBoundingClientRect();
+        const rect = hero.getBoundingClientRect();
+        const width = rect.width > 0 ? rect.width : window.innerWidth;
+        const height = rect.height > 0 ? rect.height : Math.max(320, window.innerHeight - navH);
+        return {
+            width,
+            height,
+            left: rect.left,
+            top: rect.top,
+        };
     }
 
     function updateProofParallax() {
@@ -402,8 +410,8 @@
 
     function sizeCanvases() {
         const rect = getCanvasHostRect();
-        W = rect.width;
-        H = rect.height;
+        W = Math.max(1, Math.floor(rect.width));
+        H = Math.max(1, Math.floor(rect.height));
         [starsCanvas, asteroidsCanvas].forEach((c) => {
             c.width = W * DPR;
             c.height = H * DPR;
@@ -931,6 +939,7 @@
         last = now;
 
         if (W < 1 || H < 1) {
+            sizeCanvases();
             requestAnimationFrame(loop);
             return;
         }
@@ -947,6 +956,8 @@
 
         requestAnimationFrame(loop);
     }
+
+    window.__klHeroExperimentReady = true;
 
     syncParallaxMode();
     initProofParallax();

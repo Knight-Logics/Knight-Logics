@@ -117,6 +117,44 @@ async function collectHeroMetrics(page) {
 
     const stars = document.getElementById('klHeroStars');
     const asteroids = document.getElementById('klHeroAsteroids');
+    const cutout = document.getElementById('klHeroCutout');
+    const hud = document.getElementById('klHeroHud');
+    const layers = hero ? hero.querySelector('.hero-experiment-layers') : null;
+    const ctas = hero ? hero.querySelector('.hero-cta-buttons') : null;
+
+    const sampleCanvas = (canvas) => {
+      if (!canvas) return { state: 'missing' };
+      const style = getComputedStyle(canvas);
+      if (style.display === 'none' || style.visibility === 'hidden') {
+        return { state: 'hidden', display: style.display };
+      }
+      if (canvas.width < 1 || canvas.height < 1) {
+        return { state: 'empty-size', cssW: canvas.clientWidth, cssH: canvas.clientHeight };
+      }
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return { state: 'no-context' };
+      let litCount = 0;
+      const probes = 36;
+      try {
+        for (let i = 0; i < probes; i++) {
+          const x = Math.floor((canvas.width * ((i % 6) + 0.5)) / 6);
+          const y = Math.floor((canvas.height * (Math.floor(i / 6) + 0.5)) / 6);
+          const px = ctx.getImageData(x, y, 1, 1).data;
+          if (px[3] > 0 && px[0] + px[1] + px[2] > 18) litCount++;
+        }
+        return {
+          state: litCount > 0 ? 'lit' : 'blank',
+          litCount,
+          size: { w: canvas.width, h: canvas.height },
+        };
+      } catch (err) {
+        return {
+          state: 'unreadable',
+          reason: String(err && err.message ? err.message : err),
+          size: { w: canvas.width, h: canvas.height },
+        };
+      }
+    };
 
     return {
       bodyClasses: document.body.className,
@@ -140,6 +178,15 @@ async function collectHeroMetrics(page) {
         .join(','),
       starsCanvasDisplay: stars ? getComputedStyle(stars).display : 'missing',
       asteroidsCanvasDisplay: asteroids ? getComputedStyle(asteroids).display : 'missing',
+      starsSample: sampleCanvas(stars),
+      asteroidsSample: sampleCanvas(asteroids),
+      layersPresent: !!layers,
+      cutoutPresent: !!cutout,
+      cutoutLoaded: !!(cutout && cutout.complete && cutout.naturalWidth > 0),
+      cutoutVisible: visible(cutout),
+      hudVisible: visible(hud),
+      ctaVisible: visible(ctas),
+      experimentReady: !!window.__klHeroExperimentReady,
       prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
       pageErrors: window.__klQaPageErrors || [],
     };
@@ -162,6 +209,18 @@ function evaluateChecks(metrics, phase, titleSample) {
   }
 
   if (phase === 'after-entrance') {
+    if (!metrics.layersPresent) {
+      failures.push('Hero experiment layers not injected (hero-experiment.js may have failed)');
+    } else if (!metrics.prefersReducedMotion && !metrics.experimentReady) {
+      warnings.push('Hero experiment ready flag not set (JS may not have booted)');
+    }
+    if (!metrics.cutoutPresent) {
+      failures.push('Hero cutout image element missing');
+    } else if (!metrics.cutoutLoaded) {
+      failures.push('Hero cutout image did not finish loading');
+    } else if (!metrics.cutoutVisible) {
+      failures.push('Hero cutout image not visible in viewport');
+    }
     if (!metrics.titleVisible) {
       failures.push(`Hero title not visible (opacity ${metrics.titleOpacity.toFixed(2)})`);
     }
@@ -173,7 +232,31 @@ function evaluateChecks(metrics, phase, titleSample) {
         `Hero enter elements still too transparent (avg opacity ${metrics.avgEnterOpacity.toFixed(2)})`
       );
     }
-    if (titleSample?.found && !titleSample.inViewport) {
+    if (!metrics.ctaVisible) {
+      failures.push('Hero CTA buttons not visible');
+    }
+    if (!metrics.hudVisible) {
+      failures.push('Asteroids score HUD not visible');
+    }
+    if (!metrics.prefersReducedMotion) {
+      const starsOk = metrics.starsSample?.size?.w > 0 && metrics.starsCanvasDisplay !== 'none';
+      const asteroidsOk = metrics.asteroidsSample?.size?.w > 0 && metrics.asteroidsCanvasDisplay !== 'none';
+      if (!starsOk) {
+        failures.push(`Stars canvas missing or zero-size (${metrics.starsSample?.state || 'unknown'})`);
+      } else if (metrics.starsSample?.cssH === 0 || metrics.starsSample?.size?.h < 1) {
+        failures.push(`Stars canvas has zero height (${metrics.starsSample?.cssH ?? metrics.starsSample?.size?.h})`);
+      } else if (metrics.starsSample?.state === 'blank' || metrics.starsSample?.state === 'unreadable') {
+        warnings.push(`Stars canvas pixel probe inconclusive (${metrics.starsSample?.state}) — verify screenshot`);
+      }
+      if (!asteroidsOk) {
+        failures.push(`Asteroids canvas missing or zero-size (${metrics.asteroidsSample?.state || 'unknown'})`);
+      } else if (metrics.asteroidsSample?.state === 'blank' || metrics.asteroidsSample?.state === 'unreadable') {
+        warnings.push(`Asteroids canvas pixel probe inconclusive (${metrics.asteroidsSample?.state}) — verify screenshot`);
+      }
+    } else if (metrics.starsSample?.state === 'lit' || metrics.asteroidsSample?.state === 'lit') {
+      warnings.push('Canvas animating despite prefers-reduced-motion');
+    }
+    if (titleSample?.found && !titleSample.inViewport && !metrics.titleVisible) {
       failures.push('Hero title is outside the viewport');
     }
     if (!metrics.navVisible) {
@@ -216,7 +299,8 @@ async function runScenario(playwright, scenario, baseUrl, runDir, headless) {
   const results = [];
 
   try {
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+    await page.goto(url, { waitUntil: 'load', timeout: 60000 });
+    await page.waitForSelector('#hero.hero-experiment-active', { timeout: 15000 });
     await page.waitForTimeout(400);
     let metrics = await collectHeroMetrics(page);
     metrics.pageErrors = pageErrors.slice();
@@ -228,7 +312,11 @@ async function runScenario(playwright, scenario, baseUrl, runDir, headless) {
     });
     results.push({ phase: 'immediate', metrics, ...checks });
 
-    await page.waitForTimeout(2600);
+    await page.waitForSelector('.hero-experiment-layers', { timeout: 10000 }).catch(() => {});
+    await page.waitForTimeout(2000);
+    metrics = await collectHeroMetrics(page);
+    metrics.pageErrors = pageErrors.slice();
+    await page.waitForTimeout(1200);
     metrics = await collectHeroMetrics(page);
     metrics.pageErrors = pageErrors.slice();
     const titleSample = await sampleTitleLuminance(page);
@@ -351,7 +439,7 @@ function writeReport(runDir, report) {
           ? result.failures.join('; ')
           : result.warnings.length > 0
             ? result.warnings.join('; ')
-            : `title="${result.metrics?.titleText || ''}" avgOpacity=${result.metrics?.avgEnterOpacity?.toFixed(2) ?? 'n/a'}`;
+            : `title="${result.metrics?.titleText || ''}" cutout=${result.metrics?.cutoutVisible ? 'yes' : 'no'} stars=${result.metrics?.starsSample?.state || 'n/a'} hud=${result.metrics?.hudVisible ? 'yes' : 'no'}`;
       lines.push(`| ${scenario.name} | ${result.phase} | ${status} | ${details} |`);
     }
   }

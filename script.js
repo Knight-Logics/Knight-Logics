@@ -151,6 +151,8 @@ async function loadSocialIcons() {
     }
 }
 
+const HEADER_FOOTER_VER = '20260703nav1';
+
 async function loadHeaderFooter() {
     try {
         const tryFetch = async (urls) => {
@@ -168,11 +170,11 @@ async function loadHeaderFooter() {
         };
 
         const headerCandidates = [
-            new URL('/header.html?v=20260626growth4', window.location.origin),
+            new URL(`/header.html?v=${HEADER_FOOTER_VER}`, window.location.origin),
             new URL('/header', window.location.origin)
         ];
         const footerCandidates = [
-            new URL('/footer.html?v=20260626growth4', window.location.origin),
+            new URL(`/footer.html?v=${HEADER_FOOTER_VER}`, window.location.origin),
             new URL('/footer', window.location.origin)
         ];
 
@@ -182,9 +184,7 @@ async function loadHeaderFooter() {
         ]);
 
         const headerContainer = document.getElementById('header-container');
-        if (headerContainer && headerContainer.querySelector('.navbar')) {
-            // Homepage and other pages with an inlined header skip the network round-trip.
-        } else if (headerContainer && headerContent) {
+        if (headerContainer && headerContent) {
             headerContainer.innerHTML = headerContent;
         } else if (headerContainer) {
             console.warn('Header partial could not be loaded from known routes.');

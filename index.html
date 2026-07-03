@@ -2023,6 +2023,7 @@
             }
         }
     </style>
+    <link rel="preload" href="/header.html?v=20260703nav1" as="fetch" crossorigin="anonymous">
     <link rel="preload" href="style.css?v=20260703perf3" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="style.css?v=20260703perf3"></noscript>
     <link rel="preload" as="image" type="image/webp" href="./experiments/hero-asteroids/hero-cutout-480.webp?v=20260703perf3" imagesrcset="./experiments/hero-asteroids/hero-cutout-480.webp?v=20260703perf3 480w, ./experiments/hero-asteroids/hero-cutout-800.webp?v=20260703perf3 800w, ./experiments/hero-asteroids/hero-cutout.webp?v=20260703perf3 1135w" imagesizes="(max-width: 768px) min(42vw, 220px), (max-width: 1200px) 400px, 600px" fetchpriority="high">
@@ -2075,183 +2076,7 @@
   <symbol id="fi-map-location-dot" viewBox="0 0 576 512"><path d="M408 120c0 54.6-73.1 151.9-105.2 192c-7.7 9.6-22 9.6-29.6 0C241.1 271.9 168 174.6 168 120C168 53.7 221.7 0 288 0s120 53.7 120 120zm8 80.4c3.5-6.9 6.7-13.8 9.6-20.6c.5-1.2 1-2.5 1.5-3.7l116-46.4C558.9 123.4 576 135 576 152V422.8c0 9.8-6 18.6-15.1 22.3L416 503V200.4zM137.6 138.3c2.4 14.1 7.2 28.3 12.8 41.5c2.9 6.8 6.1 13.7 9.6 20.6V451.8L32.9 502.7C17.1 509 0 497.4 0 480.4V209.6c0-9.8 6-18.6 15.1-22.3l122.6-49zM327.8 332c13.9-17.4 35.7-45.7 56.2-77V504.3L192 449.4V255c20.5 31.3 42.3 59.6 56.2 77c20.5 25.6 59.1 25.6 79.6 0zM288 152a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></symbol>
   <symbol id="fi-phone" viewBox="0 0 512 512"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></symbol>
 </svg>
-    <!-- Header inlined on homepage to avoid layout shift from async fetch -->
-    <div id="header-container">
-<!-- Navigation -->
-<nav class="navbar">
-    <div class="nav-brand">
-        <a href="/" class="nav-brand-link" id="logo-home" aria-label="Knight Logics home">
-            <img src="/images/KnightLogicsLogo2.webp" alt="Knight Logics Logo" class="nav-logo" width="80" height="80" decoding="async" fetchpriority="high">
-        </a>
-        <div class="brand-text-wrap">
-            <a href="/" class="nav-brand-title-link">
-                <span class="nav-brand-text">Knight Logics</span>
-            </a>
-            <span class="nav-tagline">Business Growth Systems &amp; Local SEO</span>
-            <div class="nav-brand-ctas" aria-label="Quick actions">
-                <a href="/website-growth-audit" class="nav-upwork-btn nav-upwork-btn--brand" aria-label="Get a free website and growth audit">Free Audit</a>
-                <a href="tel:+18137735553" class="about-phone-link about-phone-link--brand">
-                    <span class="about-phone-icon-wrap"><svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#64ffda" aria-hidden="true"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg></span>
-                    <span class="about-phone-text">
-                        <span class="about-phone-label">Call or Text</span>
-                        <span class="about-phone-number">(813) 773-5553</span>
-                    </span>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="nav-menu" id="nav-menu">
-        <div class="mobile-menu-header">
-            <a href="/" class="mobile-menu-brand" id="mobile-logo-home" style="text-decoration:none;color:inherit;" aria-label="Knight Logics home">
-                <img src="/images/KnightLogicsLogo2.webp" alt="Knight Logics" class="mobile-menu-logo" width="36" height="36" decoding="async">
-                <span class="mobile-menu-brand-name">Knight Logics</span>
-            </a>
-            <button type="button" class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">&times;</button>
-        </div>
-        <nav class="mobile-nav-links" aria-label="Main navigation">
-            <div class="nav-dropdown">
-                <a href="#" class="nav-link nav-dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Solutions</a>
-                <div class="nav-dropdown-menu nav-dropdown-menu--sectioned nav-dropdown-menu--wide">
-                    <div class="nav-dropdown-mega">
-                        <div class="nav-dropdown-mega-nav" role="tablist" aria-label="Solutions sections">
-                            <button type="button" class="nav-dropdown-mega-tab is-active" role="tab" id="solutions-tab-0" aria-selected="true" aria-controls="solutions-panel-0">Start here</button>
-                            <button type="button" class="nav-dropdown-mega-tab" role="tab" id="solutions-tab-1" aria-selected="false" aria-controls="solutions-panel-1">Website &amp; local discovery</button>
-                            <button type="button" class="nav-dropdown-mega-tab" role="tab" id="solutions-tab-2" aria-selected="false" aria-controls="solutions-panel-2">Leads &amp; partners</button>
-                            <button type="button" class="nav-dropdown-mega-tab" role="tab" id="solutions-tab-3" aria-selected="false" aria-controls="solutions-panel-3">Ops, apps &amp; automation</button>
-                            <button type="button" class="nav-dropdown-mega-tab" role="tab" id="solutions-tab-4" aria-selected="false" aria-controls="solutions-panel-4">Commerce</button>
-                        </div>
-                        <div class="nav-dropdown-mega-panels">
-                            <button type="button" class="nav-dropdown-mega-back" aria-label="Back to sections">← Sections</button>
-                            <div class="nav-dropdown-mega-panel is-active" role="tabpanel" id="solutions-panel-0" aria-labelledby="solutions-tab-0">
-                                <a href="/business-growth-systems" class="nav-dropdown-item">Business Growth Systems</a>
-                                <a href="/website-growth-audit" class="nav-dropdown-item">Free Website &amp; Growth Audit</a>
-                            </div>
-                            <div class="nav-dropdown-mega-panel" role="tabpanel" id="solutions-panel-1" aria-labelledby="solutions-tab-1" hidden>
-                                <a href="/service-websites" class="nav-dropdown-item">Websites &amp; Local SEO</a>
-                                <a href="/local-visibility-systems" class="nav-dropdown-item">Local Visibility Systems</a>
-                                <a href="/service-google-business-profile" class="nav-dropdown-item">Google Business Profile</a>
-                            </div>
-                            <div class="nav-dropdown-mega-panel" role="tabpanel" id="solutions-panel-2" aria-labelledby="solutions-tab-2" hidden>
-                                <a href="/crm-outreach-lead-generation" class="nav-dropdown-item">CRM Outreach &amp; Lead Generation</a>
-                                <a href="/referral-network-systems" class="nav-dropdown-item">Referral Network Systems</a>
-                            </div>
-                            <div class="nav-dropdown-mega-panel" role="tabpanel" id="solutions-panel-3" aria-labelledby="solutions-tab-3" hidden>
-                                <a href="/ticketing-invoicing-job-workflows" class="nav-dropdown-item">Ticketing, Invoicing &amp; Job Workflows</a>
-                                <a href="/service-ai-automation" class="nav-dropdown-item">AI Automation &amp; Internal Tools</a>
-                                <a href="/service-desktop-apps" class="nav-dropdown-item">Custom Apps &amp; Desktop Software</a>
-                            </div>
-                            <div class="nav-dropdown-mega-panel" role="tabpanel" id="solutions-panel-4" aria-labelledby="solutions-tab-4" hidden>
-                                <a href="/online-ordering-systems" class="nav-dropdown-item">E-Commerce &amp; Ordering Systems</a>
-                                <a href="/service-ecommerce" class="nav-dropdown-item">Online Store Builds</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="nav-dropdown">
-                <a href="#" class="nav-link nav-dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Industries</a>
-                <div class="nav-dropdown-menu nav-dropdown-menu--sectioned">
-                    <div class="nav-dropdown-mega">
-                        <div class="nav-dropdown-mega-nav" role="tablist" aria-label="Industries sections">
-                            <button type="button" class="nav-dropdown-mega-tab is-active" role="tab" id="industries-tab-0" aria-selected="true" aria-controls="industries-panel-0">Contractors &amp; field trades</button>
-                            <button type="button" class="nav-dropdown-mega-tab" role="tab" id="industries-tab-1" aria-selected="false" aria-controls="industries-panel-1">Home &amp; local service</button>
-                            <button type="button" class="nav-dropdown-mega-tab" role="tab" id="industries-tab-2" aria-selected="false" aria-controls="industries-panel-2">Hospitality &amp; launch</button>
-                        </div>
-                        <div class="nav-dropdown-mega-panels">
-                            <button type="button" class="nav-dropdown-mega-back" aria-label="Back to sections">← Sections</button>
-                            <div class="nav-dropdown-mega-panel is-active" role="tabpanel" id="industries-panel-0" aria-labelledby="industries-tab-0">
-                                <a href="/contractor-growth-systems" class="nav-dropdown-item">Contractor Growth Systems</a>
-                                <a href="/handyman-business-growth-systems" class="nav-dropdown-item">Handyman</a>
-                                <a href="/roofing-business-growth-systems" class="nav-dropdown-item">Roofing</a>
-                                <a href="/screen-enclosure-business-growth-systems" class="nav-dropdown-item">Screen Enclosure</a>
-                                <a href="/excavation-business-growth-systems" class="nav-dropdown-item">Excavation &amp; Site Work</a>
-                            </div>
-                            <div class="nav-dropdown-mega-panel" role="tabpanel" id="industries-panel-1" aria-labelledby="industries-tab-1" hidden>
-                                <a href="/home-service-business-growth-systems" class="nav-dropdown-item">Home Service Growth Systems</a>
-                                <a href="/home-service-websites" class="nav-dropdown-item">Home Service Websites</a>
-                            </div>
-                            <div class="nav-dropdown-mega-panel" role="tabpanel" id="industries-panel-2" aria-labelledby="industries-tab-2" hidden>
-                                <a href="/restaurant-bar-growth-systems" class="nav-dropdown-item">Restaurant &amp; Bar Systems</a>
-                                <a href="/startup-business-launch-systems" class="nav-dropdown-item">Startup Launch Systems</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a href="/case-studies" class="nav-link">Case Studies</a>
-            <a href="/pricing" class="nav-link">Pricing</a>
-            <div class="nav-dropdown">
-                <a href="#" class="nav-link nav-dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Service Areas</a>
-                <div class="nav-dropdown-menu nav-dropdown-menu--sectioned">
-                    <div class="nav-dropdown-mega">
-                        <div class="nav-dropdown-mega-nav" role="tablist" aria-label="Service area sections">
-                            <button type="button" class="nav-dropdown-mega-tab is-active" role="tab" id="areas-tab-0" aria-selected="true" aria-controls="areas-panel-0">Tampa Bay</button>
-                            <button type="button" class="nav-dropdown-mega-tab" role="tab" id="areas-tab-1" aria-selected="false" aria-controls="areas-panel-1">Get started</button>
-                        </div>
-                        <div class="nav-dropdown-mega-panels">
-                            <button type="button" class="nav-dropdown-mega-back" aria-label="Back to sections">← Sections</button>
-                            <div class="nav-dropdown-mega-panel is-active" role="tabpanel" id="areas-panel-0" aria-labelledby="areas-tab-0">
-                                <a href="/service-local-seo" class="nav-dropdown-item">Tampa Bay Local SEO</a>
-                                <a href="/web-designer-tampa" class="nav-dropdown-item">Tampa</a>
-                                <a href="/web-designer-st-petersburg" class="nav-dropdown-item">St. Petersburg</a>
-                                <a href="/web-designer-clearwater" class="nav-dropdown-item">Clearwater</a>
-                                <a href="/web-designer-safety-harbor" class="nav-dropdown-item">Safety Harbor</a>
-                                <a href="/web-designer-palm-harbor" class="nav-dropdown-item">Palm Harbor</a>
-                            </div>
-                            <div class="nav-dropdown-mega-panel" role="tabpanel" id="areas-panel-1" aria-labelledby="areas-tab-1" hidden>
-                                <a href="/book-consultation" class="nav-dropdown-item">Book a Consultation</a>
-                                <a href="/contact" class="nav-dropdown-item">Contact</a>
-                                <a href="/website-growth-audit" class="nav-dropdown-item">Free Website &amp; Growth Audit</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <div class="mobile-upwork-row">
-            <a href="/website-growth-audit" class="nav-upwork-btn" aria-label="Get a free website and growth audit">Free Audit</a>
-            <a href="tel:+18137735553" class="about-phone-link">
-                <span class="about-phone-icon-wrap"><svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#64ffda" aria-hidden="true"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg></span>
-                <span class="about-phone-text">
-                    <span class="about-phone-label">Call or Text</span>
-                    <span class="about-phone-number">(813) 773-5553</span>
-                </span>
-            </a>
-        </div>
-        <div class="mobile-menu-bottom">
-            <div class="mobile-menu-social">
-                <p class="mobile-menu-visit-label">Visit us:</p>
-                <div class="site-footer-social" data-kl-social-icons aria-label="Knight Logics social profiles"></div>
-            </div>
-            <div class="mobile-menu-utility">
-                <a href="/referral-program">Referral Program</a>
-                <a href="/pay-invoice">Pay Invoice</a>
-            </div>
-            <div class="mobile-menu-footer">
-                <p>&copy; 2026 Knight Logics</p>
-            </div>
-        </div>
-    </div>
-    <div class="nav-actions">
-        <a href="/website-growth-audit" class="nav-upwork-btn">Free Audit</a>
-        <a href="tel:+18137735553" class="about-phone-link">
-            <span class="about-phone-icon-wrap"><svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#64ffda" aria-hidden="true"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg></span>
-            <span class="about-phone-text">
-                <span class="about-phone-label">Call or Text</span>
-                <span class="about-phone-number">(813) 773-5553</span>
-            </span>
-        </a>
-    </div>
-    <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</nav>
-
-<!-- Mobile Menu Overlay -->
-<div class="nav-menu-overlay" id="nav-menu-overlay"></div>
-    </div>
+    <div id="header-container"></div>
 
     <!-- Hero Section -->
     <section id="hero" class="hero hero-experiment-active">
@@ -4977,7 +4802,7 @@
         window.setTimeout(stabilizeHero, 2200);
     })();
     </script>
-    <script src="script.js?v=20260703perf3" defer></script>
+    <script src="script.js?v=20260703nav1" defer></script>
     <script>
         // Google Ads conversion tracking  hero consultation form
         (function() {

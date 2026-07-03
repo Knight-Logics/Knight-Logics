@@ -1346,7 +1346,7 @@ const subPages = [
     meta: 'Roofing growth playbook — trust pages, local SEO, inspection leads, and referral network onboarding for Tampa Bay roofers.',
     eyebrow: 'Network trade lane · Roofing',
     h1: 'Growth Systems for Roofing Companies',
-    lead: 'Roofing trades join the same growth stack and referral network — Roof Monsters documents the vertical pattern; your launch becomes the next case study when storm-season visibility matters.',
+    lead: 'Roofing trades join the same growth stack and referral network — this open lane is coming soon; your launch becomes the reference when storm-season visibility matters.',
     heroIcon: 'fa-house-chimney-crack',
     heroImage: images.caseStudyRoofing,
     problem: {
@@ -1363,14 +1363,14 @@ const subPages = [
     },
     features: [
       { icon: 'fa-shield-halved', label: 'Trust', title: 'Trust & proof pages', text: 'Projects, service areas, insurance messaging, and FAQs that match estimate-first roofing sales.' },
-      { icon: 'fa-map-location-dot', label: 'SEO', title: 'Local SEO architecture', text: 'Service and city pages aligned to how roofers sell — Roof Monsters preview pattern.' },
+      { icon: 'fa-map-location-dot', label: 'SEO', title: 'Local SEO architecture', text: 'Service and city pages aligned to how roofers sell — roofing vertical preview pattern.' },
       { icon: 'fa-clipboard-list', label: 'Leads', title: 'Lead capture & CRM', text: 'Forms, call tracking, and outreach intake for inspection requests.' },
       { icon: 'fa-handshake', label: 'Referrals', title: 'Partner referral flow', text: 'Track complementary trades and storm partner lead sources.' }
     ],
     mediaBlocks: [
       {
-        kicker: 'Preview build',
-        title: 'Roof Monsters brand system',
+        kicker: 'Coming soon',
+        title: 'Roofing brand system',
         text: 'Roofing growth preview with local SEO structure, trust pages, and estimate-first conversion paths.',
         media: images.jns
       }
@@ -1388,20 +1388,20 @@ const subPages = [
       'Teams partnering with trades for referral attribution'
     ],
     proof: {
-      title: 'Reference pattern: Roof Monsters preview',
+      title: 'Reference pattern: roofing vertical (coming soon)',
       text: 'Roofing brand site and lead system in development — documents trust layout and estimate-first paths for the roofing lane in the partner network.',
       image: images.caseStudyRoofing.src,
       imageAlt: 'Roofing lead capture and trust pages',
-      badge: 'Client preview',
+      badge: 'Coming soon',
       href: '/case-study-roof-monsters',
-      linkLabel: 'Roof Monsters preview'
+      linkLabel: 'Roofing system preview'
     },
     faq: [
-      { q: 'Is Roof Monsters live?', a: 'It is a client preview case study — public marketing details publish when launch is approved.' },
+      { q: 'Is the roofing anchor live?', a: 'This lane is coming soon — preview work documents the vertical pattern until a partner brand launches publicly.' },
       { q: 'Do you handle storm chasing SEO?', a: 'We build durable local structure — not short-term spam. Geography matches real service coverage.' },
       { q: 'Can outreach target property managers?', a: 'Yes — OutreachEngine supports segmented B2B lists with daily caps and reply tracking.' }
     ],
-    links: [['/local-visibility-systems', 'Local Visibility'], ['/case-study-roof-monsters', 'Roof Monsters Preview'], ['/contractor-growth-systems', 'Contractor Systems']],
+    links: [['/local-visibility-systems', 'Local Visibility'], ['/case-study-roof-monsters', 'Roofing System Preview'], ['/contractor-growth-systems', 'Contractor Systems']],
     cta: { title: 'Join the roofing trade lane?', text: 'Tell us your service area and how inspection requests arrive today.' }
   },
   {

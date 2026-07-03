@@ -84,9 +84,9 @@ const PROOF = {
     href: '/case-study-roof-monsters',
     image: '/images/showcase/case-study-roofing-lead-mockup.webp',
     imageAlt: 'Roofing lead capture form with trust pages and local SEO silos',
-    title: 'Roof Monsters roofing preview',
+    title: 'Roofing vertical preview',
     text: 'Trust pages, city geography, and estimate-first inspection lead paths.',
-    badge: 'Client preview'
+    badge: 'Coming soon'
   },
   faithWorks: {
     href: '/case-study-faith-works',
@@ -776,7 +776,7 @@ const enrichments = {
       title: 'Storm-season trust before the rush',
       paragraphs: [
         'Roofing sells on trust, geography, and speed when storms hit Tampa Bay. Thin proof, missing city pages, and slow inspection follow-up cost jobs when homeowners pick from the map pack.',
-        'Roof Monsters preview documents the roofing vertical pattern — trust pages, insurance-friendly FAQs, city geography, and estimate-first inspection CTAs wired for future CRM intake.',
+        'A roofing vertical preview documents the pattern — trust pages, insurance-friendly FAQs, city geography, and estimate-first inspection CTAs wired for future CRM intake.',
         'OutreachEngine supports property manager and complementary trade lists when launch stabilizes — same kg/kl/st separation as other trades.'
       ]
     },
@@ -786,11 +786,11 @@ const enrichments = {
       { title: 'Lead systems', items: ['CRM-ready form intake rules', 'Optional OutreachEngine for B2B lists', 'Referral partner QR paths', 'review-request-systems post-job'] }
     ],
     connections: {
-      kicker: 'Roofing reference',
-      title: 'Roof Monsters preview case study',
-      text: 'Preview labeled until client approves public launch — documents IA and lead patterns for roofing vertical.',
+      kicker: 'Roofing lane',
+      title: 'Roofing vertical preview (coming soon)',
+      text: 'Internal preview until a partner brand launches publicly — documents IA and lead patterns for the roofing trade lane.',
       bullets: ['case-study-roof-monsters for preview detail', 'contractor-growth-systems parent lane', 'local-visibility-systems for map-pack readiness', 'crm-outreach-lead-generation when outbound starts'],
-      links: [['/case-study-roof-monsters', 'Roof Monsters Preview'], ['/contractor-growth-systems', 'Contractor Systems'], ['/local-visibility-systems', 'Local Visibility']]
+      links: [['/case-study-roof-monsters', 'Roofing System Preview'], ['/contractor-growth-systems', 'Contractor Systems'], ['/local-visibility-systems', 'Local Visibility']]
     },
     outcomes: [
       { title: 'Pre-storm credibility', text: 'Trust content live before ad spend spikes.' },

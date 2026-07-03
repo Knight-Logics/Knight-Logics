@@ -61,7 +61,7 @@ const SLUG_NETWORK = {
   },
   'roofing-business-growth-systems': {
     trade: 'roofing and storm-season field trades',
-    reference: 'the Roof Monsters preview pattern',
+    reference: 'the roofing vertical preview (coming soon)',
     complementary: 'screen enclosure, handyman, and insurance-adjacent trades',
   },
   'electrician-business-growth-systems': {

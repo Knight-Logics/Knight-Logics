@@ -77,3 +77,14 @@ Verified live after deploy:
 - Do not add new standalone strategy Markdown files in the MainSite root.
 - Generated audit outputs belong under `_sf_audit`, `_seo_audit`, `.qa-matrix`, or `test-results`, not in root docs.
 - Dependency Markdown under `node_modules` or `.venv` is not project context.
+
+## Cursor Cloud specific instructions
+
+Cloud agents run on Linux with the repo at `/workspace` (the Windows paths above are the author's local machine; ignore them for pathing here). Dependencies are refreshed automatically by the startup update script (`npm install`), so you normally don't need to install anything.
+
+Product: this repo is the KnightLogics.com marketing site — a static HTML/CSS/JS site plus Vercel serverless functions under `api/`.
+
+- Static site (primary): `npm run dev` serves the site at `http://localhost:4183` and honors clean URLs via `serve.json` (test `/pricing`, not `/pricing.html`). It uses `npx serve`; the update script pre-warms the `serve` package so this starts non-interactively. If it ever prompts `Ok to proceed?`, the cache is cold — run `npx --yes serve --version` once, then retry.
+- Full stack with API functions: `npm run dev:full` runs `npx vercel dev` (port 4199). This needs Vercel login plus Stripe/Neon/admin secrets and reaches external services (Stripe, Neon, Formspree), so it is not needed for static content/marketing work. Serverless handlers live in `api/` and `api/_lib/`.
+- Tests: `npm run test:whistle-stop-content` (Node assert smoke test). There is no lint config; validate JS with `node --check <file>.js` (e.g. `node --check script.js`) per the Development Protocol.
+- Forms on the site (contact/consultation) POST to external Formspree; do not submit them during testing to avoid sending real emails.

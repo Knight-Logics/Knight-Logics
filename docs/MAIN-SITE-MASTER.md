@@ -1,6 +1,6 @@
 # KnightLogics.com Main Site Master
 
-Last updated: 2026-05-30
+Last updated: 2026-07-10
 
 This is the single current operating document for `E:\KnightLogics-Growth-System\MainSite`.
 
@@ -188,13 +188,26 @@ If those scripts are unavailable or dirty in the current worktree, use direct Pl
 ## Knight Command Cloud Ops
 
 - `/admin` uses `https://ops.knightlogics.com` for Outreach CRM and `https://mail.knightlogics.com` for Email Agent by default.
-- Vercel environment URL values can override those defaults, but blank values do not disable the known production hosts.
+- Social Ops and Social Poster use `https://social.knightlogics.com` and `https://poster.knightlogics.com` when Knight Command runs on HTTPS (`MainSite/admin/admin.js` → `TUNNEL_FALLBACK`), or when `KL_SOCIAL_OPS_URL` / `KL_SOCIAL_POSTER_URL` are set on Vercel.
+- Vercel environment URL values can override those defaults, but blank values do not disable the known production tunnel hostnames on HTTPS.
 - A server-side preflight timeout is informational; the browser still connects directly to a valid cloud URL. Invalid URLs are the only remote configuration treated as an error.
-- Local ports `5050` and `5100` are development fallbacks and must never be launched by a remote iframe route.
+- Local ports `5050`, `5100`, `8500`, and `8501` are development fallbacks. On **HTTPS** live admin, the shell prefers cloud tunnel URLs — you may briefly see `127.0.0.1:5050` in the Overview health cards while local probes run; that is not the embed target when tunnels are up.
+- **What runs where:** Referrals (Neon + Vercel APIs) work from any device with no PC dependency. Outreach, Email, Social Ops, and Social Poster run on **this computer** and are exposed through Cloudflare Tunnel — remote tabs work when the PC is on and tunnel + services are running. See `CRM/OutreachEngine/deploy/cloudflare-tunnel/README.md`.
+- **Social Poster restore reference:** `Social/Social-Media-Manager/docs/social-poster-master.md`
+- **Social Ops restore reference:** `Social/Social-Media-Manager/docs/social-ops-master.md`
 
 ## Current Growth Priorities
 
 Technical cleanup is no longer the main bottleneck unless a fresh audit finds a regression.
+
+**GSC baseline (2026-07-10 audit):** 34,207 impressions / 139 clicks / 0.41% CTR / avg position 38.8. Synced under `gsc-audit/2026-07-10/` and `E:\GSC Auditer\runs\2026-07-10\knightlogics.com\`.
+
+**Shipped 2026-07-10 SEO pass (local; deploy when committed/pushed):**
+
+1. CTR title/meta rewrites on GBP, VideoForge, Knight Group case study, contact, Nicholas Knight, service-websites, pricing, home.
+2. GBP Tampa / Clearwater / Safety Harbor query coverage (on-page + FAQ schema).
+3. City-page depth (St. Pete first) + Tampa/Clearwater/Safety Harbor/Palm Harbor/home-service title-meta refresh; sitemap lastmod bumped; video `uploadDate` / `publication_date` timezones fixed.
+4. PixelForge secondary: PixForge variant capture, FAQ, soft bridge to `/service-desktop-apps` and consultation (not a competing product funnel).
 
 Highest-value next work:
 
@@ -204,6 +217,7 @@ Highest-value next work:
 4. Conversion tracking for calls, forms, audits, booking, pricing starts, and checkout starts.
 5. Off-site authority and citation work through high-trust local and B2B profiles.
 6. Speed protection during visual upgrades.
+7. After deploy: `node E:\GSC Auditer\tools\submit-indexing.mjs --failed` (quota ~10/day) and cache-bust live title checks.
 
 ## Authority Plan
 

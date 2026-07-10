@@ -7,7 +7,7 @@ const path = require('path');
 const { allSlugs } = require('./growth-content');
 
 const root = path.join(__dirname, '..');
-const LASTMOD = '2026-07-02';
+const LASTMOD = '2026-07-10';
 
 const CORE = [
   { loc: '', priority: '1.0', changefreq: 'weekly' },

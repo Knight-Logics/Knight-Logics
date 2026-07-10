@@ -6,13 +6,13 @@
 module.exports = {
   'index.html': {
     description:
-      'Knight Logics builds business growth systems for Tampa Bay — hand-coded websites, local SEO, Google Business Profile, CRM outreach, automation, referral tracking, and custom tools.',
+      'Knight Logics — Tampa Bay websites, local SEO & Google Business Profile systems that rank and convert. Free growth audit for service businesses.',
     keywords:
       'Tampa Bay business growth systems, local SEO Tampa, web design Safety Harbor, small business automation Florida, Google Business Profile optimization',
   },
   'service-websites.html': {
     description:
-      'Hand-coded websites and local SEO for Tampa Bay small businesses — fast pages, schema markup, Google Business alignment, service-area structure, and conversion paths built to rank.',
+      'Custom website design & local SEO for Tampa Bay — hand-coded sites, schema, Google Business alignment, and conversion paths built to rank and book jobs.',
     keywords:
       'Tampa Bay web design, small business website designer, hand-coded websites Florida, local SEO website, Google Business Profile website alignment',
   },
@@ -24,9 +24,9 @@ module.exports = {
   },
   'service-google-business-profile.html': {
     description:
-      'Google Business Profile optimization for Tampa Bay — categories, services, reviews, Q&A, posts, and website alignment for stronger local map visibility.',
+      'Google Business Profile optimization Tampa — categories, reviews, Q&A, posts & website alignment for map pack. Clearwater & Safety Harbor too. Free GBP audit.',
     keywords:
-      'Google Business Profile optimization Tampa, GBP SEO Florida, local map pack, Google reviews strategy, small business GBP',
+      'Google Business Profile optimization Tampa, GBP optimization services Tampa, google business profile optimization tampa bay, google business profile optimization clearwater, google business profile optimization safety harbor, GBP SEO Florida, local map pack',
   },
   'service-ai-automation.html': {
     description:
@@ -42,13 +42,13 @@ module.exports = {
   },
   'home-service-websites.html': {
     description:
-      'Home service websites for Tampa Bay trades — call-first conversion, service silos, city pages, schema, and Google Business alignment for map-pack searches.',
+      'Home service website design for Tampa Bay contractors — call-first conversion, service silos, city pages, schema, and GBP alignment for map pack.',
     keywords:
       'home service website Tampa, contractor website design, local SEO home services, handyman website Tampa Bay',
   },
   'contact.html': {
     description:
-      'Contact Knight Logics in Safety Harbor, FL — Tampa Bay websites, local SEO, growth systems, automation, and desktop software. Call (813) 773-5553 or email support@knightlogics.com.',
+      'Contact Knight Logics in Safety Harbor — Tampa Bay web design, local SEO & GBP help. Call (813) 773-5553 or book a free consultation. Reply within 24 hours.',
     keywords:
       'contact Knight Logics, Tampa web developer contact, Safety Harbor web design, business growth systems Florida',
   },
@@ -78,49 +78,49 @@ module.exports = {
   },
   'pricing.html': {
     description:
-      'Knight Logics pricing for websites, local SEO, growth systems, and automation — transparent ranges for Tampa Bay small businesses with phased milestones.',
+      'Tampa Bay web design, local SEO & automation pricing — starter sites from $500, local launch packages from $1,997. Transparent ranges with phased milestones.',
     keywords:
       'web design pricing Tampa, local SEO cost Florida, small business website price, growth systems pricing',
   },
   'pricing/index.html': {
     description:
-      'Knight Logics pricing for websites, local SEO, growth systems, and automation — transparent ranges for Tampa Bay small businesses with phased milestones.',
+      'Tampa Bay web design, local SEO & automation pricing — starter sites from $500, local launch packages from $1,997. Transparent ranges with phased milestones.',
     keywords:
       'web design pricing Tampa, local SEO cost Florida, small business website price, growth systems pricing',
   },
   'web-designer-tampa.html': {
     description:
-      'Tampa web designer for service businesses — hand-coded sites, local SEO, Google Business alignment, service-page architecture, and Tampa Bay case studies. Free growth audit.',
+      'Web design Tampa FL for service businesses — hand-coded sites, local SEO, Google Business alignment, and Tampa Bay case studies. Free growth audit.',
     keywords:
       'Tampa web designer, web design Tampa FL, Tampa Bay website designer, local SEO Tampa, Hillsborough County web design',
   },
   'web-designer-st-petersburg.html': {
     description:
-      'St. Petersburg web designer — hand-coded websites, Pinellas local SEO, Google Business alignment, and service-area pages for St. Pete and Gulfport service businesses.',
+      'Web design St. Petersburg & St. Pete — hand-coded sites, Pinellas local SEO, Google Business alignment, and service pages for contractors. Free audit.',
     keywords:
-      'St Petersburg web designer, web design St Pete FL, Pinellas web design, local SEO St Petersburg',
+      'web design St Petersburg, St Petersburg web design, St Pete web design, website design St Pete, website developer St Petersburg, Pinellas web design',
   },
   'web-designer-clearwater.html': {
     description:
-      'Clearwater web designer — fast hand-coded sites, Pinellas local SEO, schema, and Google Business Profile alignment for Clearwater and beach-market service businesses.',
+      'Web design Clearwater FL — fast hand-coded sites, Pinellas local SEO, schema, and Google Business Profile alignment for beach-market trades. Free audit.',
     keywords:
       'Clearwater web designer, web design Clearwater FL, Pinellas local SEO, Clearwater small business website',
   },
   'web-designer-safety-harbor.html': {
     description:
-      'Safety Harbor web designer and Knight Logics home base — local SEO, hand-coded websites, and growth systems for Pinellas County small businesses.',
+      'Web design Safety Harbor FL — Knight Logics home base. Hand-coded websites, local SEO, and Google Business alignment for Pinellas small businesses. Free audit.',
     keywords:
       'Safety Harbor web designer, web design Safety Harbor FL, Pinellas web developer, local SEO Safety Harbor',
   },
   'web-designer-palm-harbor.html': {
     description:
-      'Palm Harbor web designer — hand-coded websites, local SEO, and Google Business optimization for North Pinellas service businesses and contractors.',
+      'Web design Palm Harbor FL — hand-coded websites, local SEO, and Google Business optimization for North Pinellas contractors and service businesses. Free audit.',
     keywords:
       'Palm Harbor web designer, web design Palm Harbor FL, North Pinellas SEO, contractor website Palm Harbor',
   },
   'nicholas-knight.html': {
     description:
-      'Nicholas Knight — founder of Knight Logics in Safety Harbor, FL. Builder of hand-coded websites, local SEO systems, automation, and shipped Windows software for Tampa Bay businesses.',
+      'Nicholas Knight, Knight Logics founder in Safety Harbor — hand-coded websites, local SEO, GBP work, automation, and shipped Windows apps for Tampa Bay.',
     keywords:
       'Nicholas Knight web developer, Knight Logics founder, Tampa Bay web designer, Safety Harbor developer',
   },

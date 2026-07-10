@@ -1,12 +1,14 @@
 # Google Reviews Dynamic Sync (GBP -> JSON)
 
-Last updated: 2026-05-30
+Last updated: 2026-07-09
 
 This document defines the reusable workflow for dynamic Google review ingestion on static sites in this workspace.
 
 ## What This Powers
 
-- Frontend review rendering from `data/google-reviews.json`.
+- Frontend review carousel from `data/google-reviews.json` (Knight Logics GBP).
+- Homepage map rating above the embed (`[data-gbp-map-rating]`).
+- Case-study GBP proof rows (`[data-gbp-stars]` + `data-gbp-key`) from `data/gbp-ratings.json`.
 - Filterable states like `All`, `Replied`, `Unreplied` already supported by `script.js`.
 - No hard-coded manual review edits in page HTML once sync is active.
 
@@ -18,9 +20,34 @@ From `E:/KnightLogics-Growth-System/MainSite`:
 npm run reviews:sync-google
 ```
 
+Optional flags:
+
+```powershell
+node scripts/sync-google-reviews.js --dry-run
+node scripts/sync-google-reviews.js --ratings-only
+```
+
 The command writes:
 
-- `data/google-reviews.json`
+- `data/google-reviews.json` — full Knight Logics review feed
+- `data/gbp-ratings.json` — rating/count map for homepage map + case studies
+
+## Case-study markup contract
+
+```html
+<div class="cs-gbp-inline" data-gbp-key="sals-painting">
+  ...
+  <div class="cs-gbp-stars" data-gbp-stars>★★★★★ <span>5.0 — 14 Google reviews</span></div>
+</div>
+```
+
+Homepage map:
+
+```html
+<span class="kl-map-rating" data-gbp-key="knight-logics" data-gbp-map-rating>...</span>
+```
+
+Known keys: `knight-logics`, `knight-group`, `screen-team`, `sals-painting`, `moms-resin-tables`, `jns-construction`, `faith-works`.
 
 ## Required Secret Variables
 
@@ -35,6 +62,15 @@ Recommended selector variables:
 - `GBP_ACCOUNT_NAME` (format: `accounts/123456...`) or `GBP_ACCOUNT_ID`
 - `GBP_LOCATION_NAME` (format: `locations/123456...`) or `GBP_LOCATION_ID`
 - `GBP_LOCATION_TITLE` (fallback name match, defaults to `Knight Logics`)
+
+Per-client location IDs (public, also documented in Credential Registry):
+
+- `KG_GBP_LOCATION_ID`
+- `ST_GBP_LOCATION_ID`
+- `SALS_GBP_LOCATION_ID`
+- `MRT_GBP_LOCATION_ID`
+- `JNS_GBP_LOCATION_ID`
+- `FW_GBP_LOCATION_ID` (optional until Faith Works GBP is live)
 
 Direct mode variables (best when account discovery API is quota-blocked):
 
@@ -54,8 +90,8 @@ node scripts/sync-google-reviews.js --dry-run
 ## Validation Steps
 
 1. Run sync command.
-2. Confirm JSON updated in `data/google-reviews.json`.
-3. Load local site and verify carousel content/filter counts.
+2. Confirm JSON updated in `data/google-reviews.json` and `data/gbp-ratings.json`.
+3. Load local site and verify carousel, homepage map rating, and case-study GBP rows.
 4. If publishing, deploy and check live with cache-busting query strings.
 
 ## Quota-Blocked Discovery (Important)

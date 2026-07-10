@@ -1,101 +1,107 @@
 {
   "ratingValue": 5,
   "reviewCount": 9,
+  "fetchedAt": "2026-07-09T23:37:35.204Z",
+  "source": {
+    "account": "accounts/114830235101160247472",
+    "location": "locations/1248159491432428151",
+    "locationTitle": "Knight Logics"
+  },
   "reviews": [
     {
       "name": "Krikor Kochayan",
-      "meta": "13 reviews - 2 photos",
-      "date": "20 hours ago",
-      "text": "Absolutely outstanding experience with Knight Logic from start to finish. Their ecommerce store was seamless to...",
+      "meta": "Google review",
+      "date": "2026-05-30",
+      "text": "Absolutely outstanding experience with Knight Logic from start to finish. Their ecommerce store was seamless to navigate, professional, and made the entire purchasing process incredibly smooth. Everything was clearly laid out, communication was excellent, and delivery exceeded expectations.\n\nWhat truly impressed me was their automated video compiler for YouTube. The system saved an incredible amount of time while producing polished, high-quality content with minimal effort. It streamlined our workflow and made scaling content creation far easier than we anticipated.\n\nKnight Logic combines top-tier customer service with innovative technology that actually delivers real results. Highly recommend to anyone looking for efficient tools and a company that genuinely cares about the user experience!!",
       "stars": 5,
-      "avatarColor": "#156f43",
+      "avatarColor": "#274690",
       "replied": true,
       "ownerReply": {
         "name": "Knight Logics",
-        "date": "14 hours ago",
+        "date": "2026-05-30",
         "text": "You're the best! Thanks!"
       }
     },
     {
       "name": "Charles McRaven",
-      "meta": "4 reviews - 0 photos",
-      "date": "Yesterday",
+      "meta": "Google review",
+      "date": "2026-05-29",
       "text": "Great Experience",
       "stars": 5,
-      "avatarColor": "#b42318",
+      "avatarColor": "#1d4ed8",
       "replied": false
     },
     {
       "name": "Rafael Naschpitz Muller",
-      "meta": "0 reviews - 0 photos",
-      "date": "Yesterday",
+      "meta": "Google review",
+      "date": "2026-05-29",
       "text": "Great experience with Knight Logics. Professional, reliable, and easy to work with from start to finish. They delivered high-quality work and exceeded my expectations. Highly recommended!",
-      "stars": 5,
-      "avatarColor": "#1d4ed8",
-      "replied": false
-    },
-    {
-      "name": "Connor McCollum",
-      "meta": "1 review - 0 photos",
-      "date": "1 week ago",
-      "text": "Phenomenal service! Knight Logics was by far the best solution for building our website and online business marketing....",
-      "stars": 5,
-      "avatarColor": "#186a3b",
-      "replied": true,
-      "ownerReply": {
-        "name": "Knight Logics",
-        "date": "1 week ago",
-        "text": "Thanks a lot!"
-      }
-    },
-    {
-      "name": "Chris Westcott",
-      "meta": "5 reviews - 0 photos",
-      "date": "3 weeks ago",
-      "text": "Absolutely great business! Went above and beyond to help with my website and business marketing. I highly recommend...",
       "stars": 5,
       "avatarColor": "#b42318",
       "replied": false
     },
     {
-      "name": "JEANNE Knight",
-      "meta": "3 reviews - 1 photo",
-      "date": "3 weeks ago",
-      "text": "He put together a nice e-commerce site showing all the cool tables that I made. Also has the ability to request a...",
+      "name": "Connor McCollum",
+      "meta": "Google review",
+      "date": "2026-05-20",
+      "text": "Phenomenal service! Knight Logics was by far the best solution for building our website and online business marketing. From clean website design to optimizing client accessibility Knight Logics made the process simple. Thank you again Knight Logics!",
       "stars": 5,
-      "avatarColor": "#8a5a00",
+      "avatarColor": "#156f43",
+      "replied": true,
+      "ownerReply": {
+        "name": "Knight Logics",
+        "date": "2026-05-20",
+        "text": "Thanks a lot! "
+      }
+    },
+    {
+      "name": "Chris Westcott",
+      "meta": "Google review",
+      "date": "2026-05-09",
+      "text": "Absolutely great business! Went above and beyond to help with my website and business marketing. I highly recommend Knight Logics. If you need any marketing or business advertising Knight Logics is definitely the place to go! ⭐️⭐️⭐️⭐️⭐️",
+      "stars": 5,
+      "avatarColor": "#0f766e",
       "replied": false
     },
     {
       "name": "Azusa Okamoto",
-      "meta": "Local Guide - 246 reviews - 355 photos",
-      "date": "3 weeks ago",
-      "text": "Thank you so much for the professional and prompt support! From the start to the final delivery, he...",
+      "meta": "Google review",
+      "date": "2026-05-07",
+      "text": "Thank you so much for the professional and prompt support!\nFrom the start to the final delivery, he truly understood my ideas and requirements. On top of that, he provided excellent suggestions and improvements from a user-perspective. Even though I don’t have much technical knowledge, everything was explained in a way that was very easy to understand. I was especially impressed by his specific UI and automated design suggestions based on real-world cases.  I feel very confident leaving my future projects in his hands!",
       "stars": 5,
-      "avatarColor": "#1d4ed8",
+      "avatarColor": "#156f43",
       "replied": true,
       "ownerReply": {
         "name": "Knight Logics",
-        "date": "3 weeks ago",
+        "date": "2026-05-07",
         "text": "You're the best =D"
       }
     },
     {
-      "name": "Jay Fuse",
-      "meta": "Local Guide - 20 reviews - 2 photos",
-      "date": "3 weeks ago",
-      "text": "He built a website, did the seo, optimized GBP, automated a CRM system and my media manager, crazy! 10/10",
+      "name": "JEANNE Knight",
+      "meta": "Google review",
+      "date": "2026-05-06",
+      "text": "He put together a nice e-commerce site showing  all the cool tables that I made. Also has the ability to request a custom Tables and custom design. What I like about it is it automatically emails 10 leads a day or something like that so hopefully it’ll work out pretty good.",
       "stars": 5,
       "avatarColor": "#17623b",
       "replied": false
     },
     {
-      "name": "Decyfer Down",
-      "meta": "4 reviews - 0 photos",
-      "date": "5 weeks ago",
-      "text": "This is a 10/10, and I would recommend for everybody. Hands-down, the best video compiler app I've ever used.",
+      "name": "Jay Fuse",
+      "meta": "Google review",
+      "date": "2026-05-06",
+      "text": "He built a website, did the seo, optimized GBP, automated a CRM system and my media manager, crazy! 10/10",
       "stars": 5,
       "avatarColor": "#1d4ed8",
+      "replied": false
+    },
+    {
+      "name": "Decyfer Down",
+      "meta": "Google review",
+      "date": "2026-04-26",
+      "text": "This is a 10/10, and I would recommend for everybody. Hands-down, the best video compiler app I’ve  ever used.",
+      "stars": 5,
+      "avatarColor": "#7c3aed",
       "replied": false
     }
   ]

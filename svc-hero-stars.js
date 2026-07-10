@@ -11,9 +11,12 @@
     const MOUSE_REPEL_R = 114;
 
     function starCount(w, h) {
-        const byArea = Math.round((w * Math.max(h, 220)) / 8500);
-        const byWidth = Math.round(w / 9);
-        return Math.max(72, Math.min(200, Math.max(byArea, byWidth)));
+        const area = w * Math.max(h, 220);
+        const byArea = Math.round(area / 5200);
+        const byWidth = Math.round(w / 7);
+        // Ultrawide hero+actions bands need denser nodes so the lower half
+        // still reads as the same constellation field.
+        return Math.max(96, Math.min(360, Math.max(byArea, byWidth)));
     }
 
     function heroWidth(hero) {
@@ -23,8 +26,40 @@
         return Math.round(document.documentElement.clientWidth || window.innerWidth || 1);
     }
 
-    function mountStars(wrap, hero) {
-        if (!wrap || wrap.dataset.starsInit === '1') return;
+    function resolveActionsBar(hero) {
+        const next = hero.nextElementSibling;
+        return next && next.classList.contains('kl-hero-actions-bar') ? next : null;
+    }
+
+    function ensureStarsZone(hero) {
+        if (!hero) return null;
+        let zone = hero.closest('.kl-stars-hero-zone');
+        if (zone) return zone;
+
+        const actionsBar = resolveActionsBar(hero);
+        zone = document.createElement('div');
+        zone.className = 'kl-stars-hero-zone';
+        hero.parentNode.insertBefore(zone, hero);
+        zone.appendChild(hero);
+        if (actionsBar) zone.appendChild(actionsBar);
+        return zone;
+    }
+
+    function injectStarsMarkup(host) {
+        if (!host || host.querySelector(':scope > .svc-hero-stars')) return;
+        host.insertAdjacentHTML('afterbegin', `
+            <div class="svc-hero-stars" aria-hidden="true">
+                <div class="svc-hero-stars__bg"></div>
+                <canvas class="svc-hero-stars__canvas"></canvas>
+            </div>`);
+    }
+
+    function mountStars(wrap, zone, hero) {
+        if (!wrap || !zone || !hero) return;
+        if (wrap.dataset.starsInit === '1') {
+            if (typeof wrap._klStarsResize === 'function') wrap._klStarsResize();
+            return;
+        }
         const canvas = wrap.querySelector('.svc-hero-stars__canvas');
         if (!canvas) return;
 
@@ -39,24 +74,18 @@
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const mouse = { x: -1, y: -1 };
         const smoothMouse = { x: -1, y: -1 };
-        const actionsBar = hero.nextElementSibling?.classList?.contains('kl-hero-actions-bar')
-            ? hero.nextElementSibling
-            : null;
+        let actionsBar = resolveActionsBar(hero);
+        let observedBar = null;
 
         wrap.dataset.starsInit = '1';
 
-        function zoneHeight() {
-            return hero.offsetHeight + (actionsBar ? actionsBar.offsetHeight : 0);
-        }
-
         function getZoneRect() {
-            const heroRect = hero.getBoundingClientRect();
-            const barH = actionsBar ? actionsBar.offsetHeight : 0;
+            const rect = zone.getBoundingClientRect();
             return {
-                left: heroRect.left,
-                top: heroRect.top,
-                width: heroRect.width,
-                height: heroRect.height + barH,
+                left: rect.left,
+                top: rect.top,
+                width: rect.width,
+                height: rect.height,
             };
         }
 
@@ -76,14 +105,47 @@
             };
         }
 
+        function onPointerLeave() {
+            mouse.x = -1;
+            mouse.y = -1;
+        }
+
+        const ro = typeof ResizeObserver !== 'undefined'
+            ? new ResizeObserver(() => resize())
+            : null;
+
+        function bindActionsBar() {
+            // Prefer the bar already inside the zone (after wrap), then sibling.
+            actionsBar = zone.querySelector('.kl-hero-actions-bar') || resolveActionsBar(hero);
+            if (actionsBar && actionsBar.parentElement !== zone) {
+                zone.appendChild(actionsBar);
+            }
+            if (actionsBar === observedBar) return;
+            if (observedBar) {
+                observedBar.removeEventListener('mouseleave', onPointerLeave);
+                if (ro) {
+                    try { ro.unobserve(observedBar); } catch (_) { /* ignore */ }
+                }
+            }
+            observedBar = actionsBar;
+            if (actionsBar) {
+                actionsBar.addEventListener('mouseleave', onPointerLeave);
+                if (ro) ro.observe(actionsBar);
+            }
+        }
+
         function resize() {
-            const w = heroWidth(hero);
-            const h = zoneHeight();
+            bindActionsBar();
+            const w = Math.max(1, Math.round(zone.getBoundingClientRect().width || heroWidth(hero)));
+            const h = Math.max(
+                1,
+                Math.round(zone.getBoundingClientRect().height || (hero.offsetHeight + (actionsBar ? actionsBar.offsetHeight : 0)))
+            );
             const dpr = Math.min(window.devicePixelRatio || 1, 2);
-            W = Math.max(1, w);
-            H = Math.max(1, Math.round(h));
+            W = w;
+            H = h;
             wrap.style.width = '100%';
-            wrap.style.height = `${H}px`;
+            wrap.style.height = '100%';
             canvas.width = Math.round(W * dpr);
             canvas.height = Math.round(H * dpr);
             canvas.style.width = `${W}px`;
@@ -242,26 +304,18 @@
             mouse.y = pos.y;
         }
 
-        function onPointerLeave() {
-            mouse.x = -1;
-            mouse.y = -1;
-        }
-
         document.addEventListener('pointermove', onPointerMove, { passive: true });
         window.addEventListener('blur', onPointerLeave);
         hero.addEventListener('mouseleave', onPointerLeave);
-        if (actionsBar) actionsBar.addEventListener('mouseleave', onPointerLeave);
 
         resize();
         if (!reduced) raf = requestAnimationFrame(draw);
         else drawStatic();
 
-        const ro = typeof ResizeObserver !== 'undefined'
-            ? new ResizeObserver(() => resize())
-            : null;
         if (ro) {
+            ro.observe(zone);
             ro.observe(hero);
-            if (actionsBar) ro.observe(actionsBar);
+            bindActionsBar();
         } else {
             window.addEventListener('resize', resize);
         }
@@ -281,15 +335,6 @@
         wrap._klStarsResize = resize;
     }
 
-    function injectStarsMarkup(hero) {
-        if (hero.querySelector('.svc-hero-stars')) return;
-        hero.insertAdjacentHTML('afterbegin', `
-            <div class="svc-hero-stars" aria-hidden="true">
-                <div class="svc-hero-stars__bg"></div>
-                <canvas class="svc-hero-stars__canvas"></canvas>
-            </div>`);
-    }
-
     function findHeroInner(section) {
         const selectors = [
             '.svc-hero-inner',
@@ -307,6 +352,18 @@
             if (node) return node;
         }
         return section.querySelector('.container');
+    }
+
+    function setupHeroStars(hero) {
+        if (!hero) return;
+        const zone = ensureStarsZone(hero);
+        // Move any legacy in-hero stars layer up into the shared zone.
+        const legacy = hero.querySelector(':scope > .svc-hero-stars');
+        if (legacy && legacy.parentElement !== zone) {
+            zone.insertBefore(legacy, zone.firstChild);
+        }
+        injectStarsMarkup(zone);
+        mountStars(zone.querySelector(':scope > .svc-hero-stars'), zone, hero);
     }
 
     function upgradeToStarsHero(section) {
@@ -334,19 +391,25 @@
             inner.classList.add('svc-hero-inner', 'fade-in');
         }
 
-        injectStarsMarkup(section);
-        mountStars(section.querySelector('.svc-hero-stars'), section);
+        setupHeroStars(section);
     }
 
     function initAll() {
+        document.querySelectorAll('.svc-hero--stars').forEach((hero) => setupHeroStars(hero));
+    }
+
+    function refreshAll() {
         document.querySelectorAll('.svc-hero--stars').forEach((hero) => {
-            injectStarsMarkup(hero);
-            mountStars(hero.querySelector('.svc-hero-stars'), hero);
+            const zone = hero.closest('.kl-stars-hero-zone') || ensureStarsZone(hero);
+            const wrap = zone.querySelector(':scope > .svc-hero-stars');
+            if (wrap && typeof wrap._klStarsResize === 'function') wrap._klStarsResize();
+            else setupHeroStars(hero);
         });
     }
 
     window.klUpgradeHeroToStars = upgradeToStarsHero;
     window.klInitSvcHeroStars = initAll;
+    window.klRefreshSvcHeroStars = refreshAll;
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => requestAnimationFrame(initAll));

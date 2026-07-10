@@ -1,0 +1,191 @@
+{
+  "fetchedAt": "2026-07-09T23:37:43.863Z",
+  "locations": [
+    {
+      "key": "knight-logics",
+      "title": "Knight Logics",
+      "status": "live",
+      "ratingValue": 5,
+      "reviewCount": 9,
+      "locationId": "1248159491432428151",
+      "locationName": "locations/1248159491432428151",
+      "caseStudy": "case-study-knight-logics",
+      "homepageMap": true,
+      "fetchedAt": "2026-07-09T23:37:35.605Z"
+    },
+    {
+      "key": "knight-group",
+      "title": "Knight Group",
+      "status": "live",
+      "ratingValue": 5,
+      "reviewCount": 9,
+      "locationId": "15551195498878135337",
+      "locationName": "locations/15551195498878135337",
+      "caseStudy": "case-study-knight-group",
+      "homepageMap": false,
+      "fetchedAt": "2026-07-09T23:37:36.085Z"
+    },
+    {
+      "key": "screen-team",
+      "title": "Screen Team LLC",
+      "status": "live",
+      "ratingValue": 5,
+      "reviewCount": 2,
+      "locationId": "4667456483992971896",
+      "locationName": "locations/4667456483992971896",
+      "caseStudy": "case-study-screen-team",
+      "homepageMap": false,
+      "fetchedAt": "2026-07-09T23:37:36.372Z"
+    },
+    {
+      "key": "sals-painting",
+      "title": "Sal's Painting",
+      "status": "live",
+      "ratingValue": 5,
+      "reviewCount": 14,
+      "locationId": "6578775761523740862",
+      "locationName": "locations/6578775761523740862",
+      "caseStudy": "case-study-sals-painting",
+      "homepageMap": false,
+      "fetchedAt": "2026-07-09T23:37:36.838Z"
+    },
+    {
+      "key": "moms-resin-tables",
+      "title": "Mom's Resin Tables",
+      "status": "empty",
+      "ratingValue": 0,
+      "reviewCount": 0,
+      "locationId": "7574920725988430136",
+      "locationName": "locations/7574920725988430136",
+      "caseStudy": "case-study-moms-resin-tables",
+      "homepageMap": false,
+      "fetchedAt": "2026-07-09T23:37:37.098Z"
+    },
+    {
+      "key": "jns-construction",
+      "title": "JNS Construction Services LLC",
+      "status": "empty",
+      "ratingValue": 0,
+      "reviewCount": 0,
+      "locationId": "9312896125475130558",
+      "locationName": "locations/9312896125475130558",
+      "caseStudy": "case-study-jns",
+      "homepageMap": false,
+      "fetchedAt": "2026-07-09T23:37:37.350Z"
+    },
+    {
+      "key": "clearwater-dentist",
+      "title": "Clearwater Dentist",
+      "status": "live",
+      "ratingValue": 4.9,
+      "reviewCount": 620,
+      "locationId": "10173427097989168585",
+      "locationName": "locations/10173427097989168585",
+      "caseStudy": null,
+      "homepageMap": false,
+      "fetchedAt": "2026-07-09T23:37:43.862Z"
+    },
+    {
+      "key": "faith-works",
+      "title": "Faith Works Outdoor Services",
+      "status": "missing-location-id",
+      "ratingValue": null,
+      "reviewCount": null,
+      "error": "No location id configured"
+    }
+  ],
+  "byKey": {
+    "knight-logics": {
+      "key": "knight-logics",
+      "title": "Knight Logics",
+      "status": "live",
+      "ratingValue": 5,
+      "reviewCount": 9,
+      "locationId": "1248159491432428151",
+      "locationName": "locations/1248159491432428151",
+      "caseStudy": "case-study-knight-logics",
+      "homepageMap": true,
+      "fetchedAt": "2026-07-09T23:37:35.605Z"
+    },
+    "knight-group": {
+      "key": "knight-group",
+      "title": "Knight Group",
+      "status": "live",
+      "ratingValue": 5,
+      "reviewCount": 9,
+      "locationId": "15551195498878135337",
+      "locationName": "locations/15551195498878135337",
+      "caseStudy": "case-study-knight-group",
+      "homepageMap": false,
+      "fetchedAt": "2026-07-09T23:37:36.085Z"
+    },
+    "screen-team": {
+      "key": "screen-team",
+      "title": "Screen Team LLC",
+      "status": "live",
+      "ratingValue": 5,
+      "reviewCount": 2,
+      "locationId": "4667456483992971896",
+      "locationName": "locations/4667456483992971896",
+      "caseStudy": "case-study-screen-team",
+      "homepageMap": false,
+      "fetchedAt": "2026-07-09T23:37:36.372Z"
+    },
+    "sals-painting": {
+      "key": "sals-painting",
+      "title": "Sal's Painting",
+      "status": "live",
+      "ratingValue": 5,
+      "reviewCount": 14,
+      "locationId": "6578775761523740862",
+      "locationName": "locations/6578775761523740862",
+      "caseStudy": "case-study-sals-painting",
+      "homepageMap": false,
+      "fetchedAt": "2026-07-09T23:37:36.838Z"
+    },
+    "moms-resin-tables": {
+      "key": "moms-resin-tables",
+      "title": "Mom's Resin Tables",
+      "status": "empty",
+      "ratingValue": 0,
+      "reviewCount": 0,
+      "locationId": "7574920725988430136",
+      "locationName": "locations/7574920725988430136",
+      "caseStudy": "case-study-moms-resin-tables",
+      "homepageMap": false,
+      "fetchedAt": "2026-07-09T23:37:37.098Z"
+    },
+    "jns-construction": {
+      "key": "jns-construction",
+      "title": "JNS Construction Services LLC",
+      "status": "empty",
+      "ratingValue": 0,
+      "reviewCount": 0,
+      "locationId": "9312896125475130558",
+      "locationName": "locations/9312896125475130558",
+      "caseStudy": "case-study-jns",
+      "homepageMap": false,
+      "fetchedAt": "2026-07-09T23:37:37.350Z"
+    },
+    "clearwater-dentist": {
+      "key": "clearwater-dentist",
+      "title": "Clearwater Dentist",
+      "status": "live",
+      "ratingValue": 4.9,
+      "reviewCount": 620,
+      "locationId": "10173427097989168585",
+      "locationName": "locations/10173427097989168585",
+      "caseStudy": null,
+      "homepageMap": false,
+      "fetchedAt": "2026-07-09T23:37:43.862Z"
+    },
+    "faith-works": {
+      "key": "faith-works",
+      "title": "Faith Works Outdoor Services",
+      "status": "missing-location-id",
+      "ratingValue": null,
+      "reviewCount": null,
+      "error": "No location id configured"
+    }
+  }
+}

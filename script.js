@@ -239,6 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
     scheduleNonCriticalInit(initProjectFilters, 220);
     scheduleNonCriticalInit(initVideoPlayer, 220);
     scheduleNonCriticalInit(initGoogleReviewsCarousel, 240);
+    scheduleNonCriticalInit(initGbpDynamicRatings, 260);
     scheduleNonCriticalInit(initSkillBars, 280);
     scheduleNonCriticalInit(initCaseStudyLightbox, 280);
     scheduleNonCriticalInit(initAdvancedParallax, 380);
@@ -1027,7 +1028,7 @@ function buildKlHeroPanelsMarkup(panels, primarySrc) {
     return `<div class="hero-panels" aria-hidden="true">${panelEls}</div><div class="svc-hero-overlay" aria-hidden="true"></div>`;
 }
 
-const KL_SVC_HERO_STARS_VER = '20260701hero4';
+const KL_SVC_HERO_STARS_VER = '20260709gbp1';
 
 const KL_SUBPAGE_HERO_SELECTORS = [
     '.svc-hero:not(.svc-hero--stars):not(.svc-hero--panels)',
@@ -1070,9 +1071,18 @@ function initSubpageStarsHeroes() {
     ensureSvcHeroStarsReady(() => {
         upgradeLegacySubpageHeroes();
         compactSubpageHeroContent();
-        if (typeof window.klInitSvcHeroStars === 'function') {
+        // Compact creates the actions bar after the first stars mount — refresh so
+        // the canvas/bg cover both the title band and the actions band.
+        if (typeof window.klRefreshSvcHeroStars === 'function') {
+            window.klRefreshSvcHeroStars();
+        } else if (typeof window.klInitSvcHeroStars === 'function') {
             window.klInitSvcHeroStars();
         }
+        requestAnimationFrame(() => {
+            if (typeof window.klRefreshSvcHeroStars === 'function') {
+                window.klRefreshSvcHeroStars();
+            }
+        });
     });
 }
 
@@ -1132,12 +1142,18 @@ function compactSubpageHeroContent() {
 
         let bar = hero.nextElementSibling;
         if (!bar || !bar.classList.contains('kl-hero-actions-bar')) {
+            const zone = hero.closest('.kl-stars-hero-zone');
+            bar = zone ? zone.querySelector('.kl-hero-actions-bar') : null;
+        }
+        if (!bar || !bar.classList.contains('kl-hero-actions-bar')) {
             bar = document.createElement('section');
             bar.className = 'kl-hero-actions-bar';
             const container = document.createElement('div');
             container.className = 'container fade-in';
             bar.appendChild(container);
-            hero.insertAdjacentElement('afterend', bar);
+            const zone = hero.closest('.kl-stars-hero-zone');
+            if (zone) zone.appendChild(bar);
+            else hero.insertAdjacentElement('afterend', bar);
         }
 
         const container = bar.querySelector('.container') || bar;
@@ -1292,22 +1308,40 @@ function initServicesEntrance() {
     const startSectionAnimation = () => {
         if (services.classList.contains('kl-services-animate')) return;
         services.classList.add('kl-services-animate');
-        window.setTimeout(() => services.classList.add('kl-services-animate-done'), 3200);
+        window.setTimeout(() => services.classList.add('kl-services-animate-done'), 900);
     };
 
     const startShowcaseAnimation = (showcase) => {
         if (showcase.classList.contains('kl-services-showcase-animate')) return;
         showcase.classList.add('kl-services-showcase-animate');
-        window.setTimeout(() => showcase.classList.add('kl-services-showcase-animate-done'), 2800);
+        window.setTimeout(() => showcase.classList.add('kl-services-showcase-animate-done'), 700);
     };
 
     const showcaseBlocks = services.querySelectorAll('.kl-services-showcase');
+
+    const isNearViewport = (el, leadPx = 280) => {
+        const rect = el.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        return rect.top < vh + leadPx && rect.bottom > -leadPx;
+    };
 
     if (prefersReducedMotion) {
         startSectionAnimation();
         showcaseBlocks.forEach(startShowcaseAnimation);
         return;
     }
+
+    // Immediate reveal if the user lands mid-page or scrolls past before observers fire.
+    if (isNearViewport(services, 120)) startSectionAnimation();
+    showcaseBlocks.forEach((showcase) => {
+        if (isNearViewport(showcase, 320)) startShowcaseAnimation(showcase);
+    });
+
+    // Hard failsafe: never leave services content blank for more than a beat.
+    window.setTimeout(() => {
+        startSectionAnimation();
+        showcaseBlocks.forEach(startShowcaseAnimation);
+    }, 1200);
 
     if ('IntersectionObserver' in window) {
         const sectionObserver = new IntersectionObserver((entries) => {
@@ -1318,12 +1352,13 @@ function initServicesEntrance() {
                 }
             });
         }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -6% 0px'
+            threshold: 0.01,
+            rootMargin: '120px 0px 80px 0px'
         });
         sectionObserver.observe(services);
 
         showcaseBlocks.forEach((showcase) => {
+            if (showcase.classList.contains('kl-services-showcase-animate')) return;
             const showcaseObserver = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
@@ -1332,8 +1367,8 @@ function initServicesEntrance() {
                     }
                 });
             }, {
-                threshold: 0.12,
-                rootMargin: '0px 0px -8% 0px'
+                threshold: 0.01,
+                rootMargin: '220px 0px 120px 0px'
             });
             showcaseObserver.observe(showcase);
         });
@@ -2175,6 +2210,13 @@ function initGoogleReviewsCarousel() {
             const rating = Number(payload.ratingValue || 5).toFixed(1);
             const count = Number(payload.reviewCount || allReviews.length || 0);
             summaryEl.textContent = `${rating} · ${count} reviews`;
+            if (typeof window.klApplyGbpRatingPayload === 'function') {
+                window.klApplyGbpRatingPayload({
+                    ratingValue: Number(rating),
+                    reviewCount: count,
+                    key: 'knight-logics'
+                });
+            }
         };
 
         const reviewFilterPanel = showcase.querySelector('#review-filter-panel');
@@ -2293,7 +2335,7 @@ function initGoogleReviewsCarousel() {
         const loadReviews = async () => {
             let payload = null;
             try {
-                const response = await fetch(`./data/google-reviews.json?v=20260530a`, { cache: 'no-store' });
+                const response = await fetch(`./data/google-reviews.json?v=20260709gbp1`, { cache: 'no-store' });
                 if (response.ok) {
                     payload = await response.json();
                 }
@@ -2388,6 +2430,92 @@ function initGoogleReviewsCarousel() {
         });
 
         loadReviews();
+    });
+}
+
+function formatGbpStars(ratingValue) {
+    const rating = Math.max(0, Math.min(5, Number(ratingValue) || 0));
+    const filled = Math.max(0, Math.min(5, Math.round(rating)));
+    return `${'★'.repeat(filled)}${'☆'.repeat(5 - filled)}`;
+}
+
+function applyGbpRatingToNode(node, ratingValue, reviewCount) {
+    if (!node) return;
+    const rating = Number(ratingValue);
+    const count = Number(reviewCount);
+    if (!Number.isFinite(rating) || !Number.isFinite(count) || count < 0) return;
+
+    const ratingText = rating.toFixed(1);
+    const reviewLabel = count === 1 ? '1 Google review' : `${count} Google reviews`;
+    const stars = formatGbpStars(rating);
+    const label = `${ratingText} out of 5 stars, ${reviewLabel}`;
+
+    if (node.hasAttribute('data-gbp-map-rating') || node.classList.contains('kl-map-rating')) {
+        node.textContent = `${stars} ${ratingText} · ${reviewLabel}`;
+        node.setAttribute('aria-label', label);
+        return;
+    }
+
+    node.innerHTML = `${stars} <span>${ratingText} — ${reviewLabel}</span>`;
+    node.setAttribute('aria-label', label);
+    node.style.color = '#fbbc04';
+}
+
+window.klApplyGbpRatingPayload = function klApplyGbpRatingPayload(payload) {
+    if (!payload) return;
+    const ratingValue = payload.ratingValue;
+    const reviewCount = payload.reviewCount;
+    const key = payload.key || 'knight-logics';
+
+    document.querySelectorAll(`[data-gbp-map-rating][data-gbp-key="${key}"], .kl-map-rating[data-gbp-key="${key}"]`).forEach((node) => {
+        applyGbpRatingToNode(node, ratingValue, reviewCount);
+    });
+
+    document.querySelectorAll(`.cs-gbp-inline[data-gbp-key="${key}"] [data-gbp-stars]`).forEach((node) => {
+        applyGbpRatingToNode(node, ratingValue, reviewCount);
+    });
+};
+
+async function initGbpDynamicRatings() {
+    const targets = document.querySelectorAll('[data-gbp-stars], [data-gbp-map-rating], .kl-map-rating[data-gbp-key]');
+    if (!targets.length) return;
+
+    let payload = null;
+    try {
+        const response = await fetch(`/data/gbp-ratings.json?v=${Date.now()}`, { cache: 'no-store' });
+        if (response.ok) payload = await response.json();
+    } catch (error) {
+        console.warn('GBP ratings feed fetch failed:', error);
+    }
+
+    if (!payload || !payload.byKey) {
+        // Homepage map can still hydrate from the Knight Logics reviews feed.
+        try {
+            const response = await fetch(`/data/google-reviews.json?v=${Date.now()}`, { cache: 'no-store' });
+            if (response.ok) {
+                const reviewsPayload = await response.json();
+                window.klApplyGbpRatingPayload({
+                    key: 'knight-logics',
+                    ratingValue: reviewsPayload.ratingValue,
+                    reviewCount: reviewsPayload.reviewCount
+                });
+            }
+        } catch (error) {
+            console.warn('GBP fallback reviews feed fetch failed:', error);
+        }
+        return;
+    }
+
+    Object.keys(payload.byKey).forEach((key) => {
+        const entry = payload.byKey[key];
+        if (!entry || entry.status === 'error' || entry.status === 'missing-location-id') return;
+        if (entry.ratingValue == null || entry.reviewCount == null) return;
+        if (Number(entry.reviewCount) <= 0 && entry.status !== 'live') return;
+        window.klApplyGbpRatingPayload({
+            key,
+            ratingValue: entry.ratingValue,
+            reviewCount: entry.reviewCount
+        });
     });
 }
 

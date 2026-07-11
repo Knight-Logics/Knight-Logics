@@ -14,6 +14,7 @@ const {
   primaryClientForSlug,
   CLIENT_MEDIA_SLUGS
 } = require('./growth-content-client-facts');
+const { videos, images } = require('./growth-content-media');
 
 const PROOF = {
   kg: {
@@ -82,11 +83,27 @@ const PROOF = {
   },
   roofMonsters: {
     href: '/case-study-roof-monsters',
-    image: '/images/showcase/case-study-roofing-lead-mockup.webp',
-    imageAlt: 'Roofing lead capture form with trust pages and local SEO silos',
-    title: 'Roofing vertical preview',
-    text: 'Trust pages, city geography, and estimate-first inspection lead paths.',
-    badge: 'Coming soon'
+    image: '/images/showcase/roof-monsters-og-card.webp',
+    imageAlt: 'Roof Monsters live roofing website on roofmonsters.co',
+    title: 'Roof Monsters — live roofing growth system',
+    text: 'Live Tampa Bay roofing site with 79+ pages, estimate-first lead capture, 97 Lighthouse performance, and local SEO depth on roofmonsters.co.',
+    badge: 'Live client'
+  },
+  roofMonstersAudit: {
+    href: '/case-study-roof-monsters',
+    image: '/images/showcase/roof-monsters-lighthouse-97.webp',
+    imageAlt: 'Roof Monsters Lighthouse report — 97 performance and 100 accessibility SEO',
+    title: 'Audit-backed technical scores',
+    text: 'Desktop Lighthouse 97/100/100/100 with Semrush 99% and Ahrefs 100 health on the live roofmonsters.co launch.',
+    badge: 'Live proof'
+  },
+  roofMonstersProject: {
+    href: '/case-study-roof-monsters',
+    image: '/images/showcase/roof-monsters-project.webp',
+    imageAlt: 'Roof Monsters completed Tampa Bay roofing project',
+    title: 'Project proof + estimate-first CTAs',
+    text: 'Gallery-ready project proof paired with storm-season estimate capture — the visual language of the live roofing build.',
+    badge: 'Live client'
   },
   faithWorks: {
     href: '/case-study-faith-works',
@@ -188,7 +205,7 @@ function defaultProofGrid(slug) {
     'handyman-business-growth-systems': [PROOF.kg, PROOF.crmOutreach, PROOF.screenTeam],
     'electrician-business-growth-systems': [PROOF.farrellElectric, PROOF.kg, PROOF.screenTeam],
     'painter-business-growth-systems': [PROOF.salsPainting, PROOF.kg, PROOF.screenTeam],
-    'roofing-business-growth-systems': [PROOF.roofMonsters, PROOF.faithWorks, PROOF.jns],
+    'roofing-business-growth-systems': [PROOF.roofMonsters, PROOF.roofMonstersAudit, PROOF.roofMonstersProject],
     'screen-enclosure-business-growth-systems': [PROOF.screenTeam, PROOF.faithWorks, PROOF.kg],
     'excavation-business-growth-systems': [PROOF.faithWorks, PROOF.screenTeam, PROOF.kg],
     'restaurant-bar-growth-systems': [PROOF.hospitalityPattern, PROOF.screenTeam, PROOF.faithWorks],
@@ -421,7 +438,7 @@ const enrichments = {
       title: 'Network anchors + open recruitment lanes',
       text: 'Sub-pages document each vertical playbook. Anchors have live reference builds; open lanes actively recruit electricians, painters, and adjacent trades.',
       bullets: ['screen-enclosure — Screen Team reference (36 pages)', 'excavation — Faith Works reference (82 pages)', 'handyman — Knight Group reference (97 pages)', 'electrician & painter — open lanes with case study starters'],
-      links: [['/electrician-business-growth-systems', 'Electrician Lane'], ['/painter-business-growth-systems', 'Painter Lane'], ['/referral-network-systems', 'Referral Network']]
+      links: [['/screen-enclosure-business-growth-systems', 'Screen Enclosure'], ['/excavation-business-growth-systems', 'Excavation Lane'], ['/electrician-business-growth-systems', 'Electrician Lane'], ['/painter-business-growth-systems', 'Painter Lane'], ['/referral-network-systems', 'Referral Network']]
     },
     outcomes: [
       { title: 'Geography that converts', text: 'City pages match metros crews actually serve — reducing unqualified estimate requests.' },
@@ -450,7 +467,7 @@ const enrichments = {
       title: 'Call-first vs contractor portal work',
       text: 'Home service lane emphasizes repeat residential and call-first conversion; contractor lane adds heavier portal and excavation footprints.',
       bullets: ['screen-enclosure-business-growth-systems for enclosure trades', 'handyman-business-growth-systems for estimate-first crews', 'local-visibility-systems for map-pack readiness', 'review-request-systems for reputation growth'],
-      links: [['/screen-enclosure-business-growth-systems', 'Screen Enclosure Systems'], ['/local-visibility-systems', 'Local Visibility'], ['/case-study-screen-team', 'Screen Team Case Study']]
+      links: [['/screen-enclosure-business-growth-systems', 'Screen Enclosure Systems'], ['/excavation-business-growth-systems', 'Excavation Systems'], ['/electrician-business-growth-systems', 'Electrician Lane'], ['/painter-business-growth-systems', 'Painter Lane'], ['/local-visibility-systems', 'Local Visibility'], ['/case-study-screen-team', 'Screen Team Case Study']]
     },
     outcomes: [
       { title: 'Faster first response', text: 'Leads route into tracked queues — not voicemail black holes.' },
@@ -774,30 +791,85 @@ const enrichments = {
   'roofing-business-growth-systems': {
     context: {
       title: 'Storm-season trust before the rush',
+      kicker: 'Roofing lane',
+      media: videos.roofMonsters,
       paragraphs: [
-        'Roofing sells on trust, geography, and speed when storms hit Tampa Bay. Thin proof, missing city pages, and slow inspection follow-up cost jobs when homeowners pick from the map pack.',
-        'A roofing vertical preview documents the pattern — trust pages, insurance-friendly FAQs, city geography, and estimate-first inspection CTAs wired for future CRM intake.',
-        'OutreachEngine supports property manager and complementary trade lists when launch stabilizes — same kg/kl/st separation as other trades.'
+        'Roofing sells on trust, geography, and speed when storms hit Tampa Bay. Homeowners compare three local options on a phone while water is still on the ceiling — thin proof, missing city pages, or a slow estimate path costs the job before your crew can quote.',
+        'Roof Monsters on roofmonsters.co is the live reference for this lane: hand-coded service and location depth, gallery proof, estimate-first CTAs, schema, Search Console launch, and audit-backed technical scores (Lighthouse 97, Semrush 99%, Ahrefs 100, 79 GSC-discovered pages).',
+        'The public positioning stays honest to how referral-driven roofers actually win work — clear written estimates, licensed and insured operations, warranty language, and storm response framed as private-pay emergency help rather than insurance-claim marketing.',
+        'Email-Agent routing is live for info@roofmonsters.co so estimate traffic has an ops path. OutreachEngine stays optional and brand-isolated until cold outreach is explicitly enabled — the same discipline used across kg, st, and faithworks lanes.',
+        'Joining the roofing trade lane means your brand domain, local SEO architecture, estimate intake, and a knightlogics.com proof page when launch is ready — plus complementary referrals from screen enclosure, handyman, and excavation partners in the Tampa Bay roster.'
       ]
     },
     deliverables: [
-      { title: 'Trust & content', items: ['Project proof and service definitions', 'Insurance-adjacent FAQ content homeowners expect', 'Inspection request forms above the fold on mobile', 'Schema for LocalBusiness and FAQ'] },
-      { title: 'Geography', items: ['City pages for storm-season metros you serve', 'Internal linking between service and area hubs', 'GBP alignment with website messaging', 'service-area-page-strategy for expansion'] },
-      { title: 'Lead systems', items: ['CRM-ready form intake rules', 'Optional OutreachEngine for B2B lists', 'Referral partner QR paths', 'review-request-systems post-job'] }
+      {
+        title: 'Trust & content',
+        items: [
+          'Project proof and service definitions for repairs, installs, inspections, and storm response',
+          'Insurance-adjacent FAQ content homeowners expect — without claim-chasing spam',
+          'Estimate request forms and click-to-call above the fold on mobile',
+          'Schema for LocalBusiness, FAQ, BreadcrumbList, and Organization'
+        ]
+      },
+      {
+        title: 'Geography',
+        items: [
+          'City and service-area pages for storm-season metros you actually serve',
+          'Internal linking between service hubs and local pages for crawl depth',
+          'Google Business Profile alignment with website messaging and services',
+          'service-area-page-strategy patterns for expansion without doorway pages'
+        ]
+      },
+      {
+        title: 'Lead systems',
+        items: [
+          'CRM-ready form intake rules and Email-Agent mailbox routing',
+          'Optional OutreachEngine for property manager and B2B lists with daily caps',
+          'Referral partner QR paths and /ref/:partner attribution',
+          'review-request-systems timing after job completion when volume justifies'
+        ]
+      }
     ],
     connections: {
       kicker: 'Roofing lane',
-      title: 'Roofing vertical preview (coming soon)',
-      text: 'Internal preview until a partner brand launches publicly — documents IA and lead patterns for the roofing trade lane.',
-      bullets: ['case-study-roof-monsters for preview detail', 'contractor-growth-systems parent lane', 'local-visibility-systems for map-pack readiness', 'crm-outreach-lead-generation when outbound starts'],
-      links: [['/case-study-roof-monsters', 'Roofing System Preview'], ['/contractor-growth-systems', 'Contractor Systems'], ['/local-visibility-systems', 'Local Visibility']]
+      title: 'Roofing vertical — Roof Monsters live',
+      text: 'Official roofing lane reference: live site on roofmonsters.co, published case study, and growth-system playbook for storm-season contractors who need trust pages, local SEO, and estimate-first conversion — not another template rebuild.',
+      bullets: [
+        'case-study-roof-monsters for the live build and re-testable audit scores',
+        'contractor-growth-systems parent lane for trade network context',
+        'local-visibility-systems for map-pack, schema, and GBP readiness',
+        'crm-outreach-lead-generation when outbound is explicitly enabled'
+      ],
+      links: [
+        ['/case-study-roof-monsters', 'Roof Monsters Case Study'],
+        ['/contractor-growth-systems', 'Contractor Systems'],
+        ['/local-visibility-systems', 'Local Visibility']
+      ]
     },
     outcomes: [
-      { title: 'Pre-storm credibility', text: 'Trust content live before ad spend spikes.' },
-      { title: 'Geo-qualified leads', text: 'City pages reduce out-of-area inspection requests.' },
-      { title: 'Tracked inspections', text: 'Form fills route to CRM — not unmanaged voicemail.' },
-      { title: 'Partner attribution', text: 'Referral paths document complementary trade sources.' }
-    ]
+      {
+        title: 'Pre-storm credibility',
+        text: 'Trust pages, FAQs, and project proof are indexed before ad spend and storm-season search spikes — so traffic lands on pages that can convert.'
+      },
+      {
+        title: 'Geo-qualified leads',
+        text: 'City and service-area pages reduce out-of-area estimate requests and match how homeowners search by metro plus roofing intent.'
+      },
+      {
+        title: 'Tracked estimates',
+        text: 'Form fills and calls route into Email-Agent and CRM-ready queues instead of unmanaged voicemail during the first tropical wave.'
+      },
+      {
+        title: 'Partner attribution',
+        text: 'Referral paths document complementary trade sources so screen, handyman, and excavation partners can send work without spreadsheet disputes.'
+      }
+    ],
+    stats: [
+      { value: '97', label: 'Lighthouse performance — RM' },
+      { value: '79', label: 'GSC discovered pages — RM' },
+      { value: '99%', label: 'Semrush site health — RM' }
+    ],
+    proofGrid: [PROOF.roofMonsters, PROOF.roofMonstersAudit, PROOF.roofMonstersProject]
   },
   'screen-enclosure-business-growth-systems': {
     context: {
@@ -1026,12 +1098,37 @@ const enrichments = {
   'case-study-knight-command': {
     context: {
       title: 'One shell for daily growth operations',
+      kicker: 'Ops hub',
+      media: images.caseStudyKnightCommand,
       paragraphs: [
         'Knight Command at /admin consolidates tabs for Command Center, Referrals, Outreach CRM, Email Agent, Social Ops, Social Poster, and Logs — each embedding live services on ports 5050, 5100, 8500, and 8501.',
         'Before the shell, operators juggled orphan localhost URLs for referral dashboard, OutreachEngine, Email-Agent, and Social Poster — context switching slowed outreach review and failure triage.',
-        'Modular tab architecture lets individual services upgrade without rebuilding the entire admin — new lanes slot in instead of requiring bookmark updates across the team.'
+        'Modular tab architecture lets individual services upgrade without rebuilding the entire admin — new lanes slot in instead of requiring bookmark updates across the team.',
+        'If you want an owner dashboard that feels like one product instead of a bookmark folder of tools, this is the pattern: authenticated shell, tab embeds, shared logs, and a documented port map your team can actually onboard to.'
       ]
     },
+    walkthrough: {
+      title: 'Ops shell walkthrough &amp; proof',
+      intro: 'One admin surface for the growth stack — Command shell plus the CRM, referral, and social UIs it embeds every morning.',
+      primary: { ...images.caseStudyKnightCommand, title: 'Knight Command admin shell' },
+      proofs: [
+        { src: images.caseStudyCrm.src, alt: images.caseStudyCrm.alt, caption: 'Outreach CRM tab — queue preview and brand lanes without leaving /admin.', width: 1200, height: 675 },
+        { src: images.caseStudyReferral.src, alt: images.caseStudyReferral.alt, caption: 'Referrals tab — partner attribution and payout visibility in the same shell.', width: 1200, height: 675 }
+      ],
+      audits: [
+        { src: images.caseStudySocial.src, alt: images.caseStudySocial.alt, title: 'Social Poster embed', text: 'Streamlit 8501 queue and runner status inside Social Poster / Social Ops tabs.' }
+      ],
+      ctaHref: '/book-consultation',
+      ctaLabel: 'Plan a similar ops shell',
+      ctaSecondaryHref: '/business-dashboard-development',
+      ctaSecondaryLabel: 'Dashboard development'
+    },
+    faq: [
+      { q: 'Is Knight Command a product I can buy off the shelf?', a: 'No — it is Knight Logics internal ops infrastructure. The case study documents the embed-shell pattern we reuse when building owner dashboards and internal tools for clients.' },
+      { q: 'What services live inside the tabs?', a: 'Referrals (5050 family), OutreachEngine CRM, Email-Agent (5100), Social Poster (8501), Social Ops (8500), plus Command Center and Logs for orientation and failure triage.' },
+      { q: 'Can you build something like this for my company?', a: 'Yes. We scope authenticated admin shells that embed your CRM, job board, invoicing, or marketing tools so operators stop juggling bookmarks.' },
+      { q: 'How does this relate to client-facing dashboards?', a: 'The same modular tab + embed approach powers business-dashboard-development and internal-business-tools engagements — with role gates and only the lanes each role needs.' }
+    ],
     deliverables: [
       { title: 'Admin shell', items: ['Authenticated /admin entry with role gate', 'Tab navigation to seven primary ops views', 'Command Center orientation summary', 'Logs tab for cross-system failure review'] },
       { title: 'Service embeds', items: ['Referrals → referral infrastructure on 5050 family', 'Outreach CRM → OutreachEngine queue UI', 'Email Agent → port 5100 views', 'Social Poster → Streamlit 8501'] },
@@ -1056,12 +1153,39 @@ const enrichments = {
   'case-study-crm-outreach-system': {
     context: {
       title: 'OutreachEngine in production on real campaigns',
+      kicker: 'Live CRM',
+      media: images.caseStudyCrm,
       paragraphs: [
         'OutreachEngine — Flask app with SQLite storage — drives segmented lists, branded templates, scheduler jobs for first_touch and followup, bounce detection, and daily caps between 20 and 40 sends per brand.',
         'Screen Team st lane, Faith Works faithworks lane, and Knight Group kg lane each use OutreachEngine with separate caps and templates. KG generated substantial booked work from one well-targeted message; ST and FW run the same engine at enclosure and land-clearing scale.',
-        'Replies route to Email-Agent crm_reply views on port 5100; Knight Command Outreach CRM tab embeds the queue UI for daily operator review.'
+        'Replies route to Email-Agent crm_reply views on port 5100; Knight Command Outreach CRM tab embeds the queue UI for daily operator review.',
+        'If you are tired of spreadsheet lists, mixed brand templates, and “did anyone follow up?” — this is the production pattern: queue preview, enforced caps, bounce suppression, and reply routing into one operator workflow.'
       ]
     },
+    walkthrough: {
+      title: 'CRM walkthrough &amp; live lane proof',
+      intro: 'Watch the outreach dashboard, then see the client brands that actually run on it — not a demo dataset.',
+      primary: { ...videos.crm, controls: true, title: 'CRM outreach dashboard walkthrough' },
+      proofs: [
+        { src: images.caseStudyCrm.src, alt: images.caseStudyCrm.alt, caption: 'Queue UI with segmented lists, brand switcher, and send-window visibility.', width: 1200, height: 675 },
+        { src: images.kgHero.src, alt: images.kgHero.alt, caption: 'Knight Group kg lane — real booked work from targeted outreach.', width: 1200, height: 675 }
+      ],
+      audits: [
+        { src: images.screenTeam.src, alt: images.screenTeam.alt, title: 'Screen Team st lane', text: 'Enclosure trade campaigns with separate caps and templates.' },
+        { src: images.faithWorks.src, alt: images.faithWorks.alt, title: 'Faith Works faithworks lane', text: 'Land-clearing scale lists on the same OutreachEngine.' },
+        { src: images.caseStudyKnightCommand.src, alt: 'Knight Command CRM embed', title: 'Knight Command embed', text: 'Daily queue review inside /admin Outreach CRM tab.' }
+      ],
+      ctaHref: '/book-consultation',
+      ctaLabel: 'Adapt OutreachEngine for your trade',
+      ctaSecondaryHref: '/crm-outreach-lead-generation',
+      ctaSecondaryLabel: 'CRM outreach service'
+    },
+    faq: [
+      { q: 'Is this a third-party CRM we resell?', a: 'No. OutreachEngine is Knight Logics production software configured per client brand. The case study describes the live workflow we operate and can adapt for your trade and territory.' },
+      { q: 'How do you keep brands from mixing templates?', a: 'Each lane (kl, kg, st, faithworks, and others) has isolated templates, senders, and daily caps. Operators switch brands explicitly before preview or send.' },
+      { q: 'What happens when someone replies?', a: 'Replies route into Email-Agent crm_reply views on port 5100 so follow-up is not trapped in a personal Gmail inbox.' },
+      { q: 'Can you run this for my company without building a full admin shell?', a: 'Yes. We can deploy OutreachEngine for your lists and caps first, then embed it in Knight Command–style admin later if your team needs a unified ops hub.' }
+    ],
     deliverables: [
       { title: 'CRM engine', items: ['Flask + SQLite OutreachEngine deployment', 'Brand switcher for kl, kg, st, and faithworks lanes', 'Queue preview and send window visibility', 'Bounce flags suppress bad addresses'] },
       { title: 'Scheduler & caps', items: ['first_touch and followup job configuration', '20–40 daily send limits per brand', 'Preview sends before production windows', 'Campaign logging for lead-source reporting'] },
@@ -1086,12 +1210,35 @@ const enrichments = {
   'case-study-vendoroo-ticket-invoice-system': {
     context: {
       title: 'Portal ticket to Stripe invoice in one workflow',
+      kicker: 'Field ops',
+      media: images.caseStudyVendoroo,
       paragraphs: [
         'Property maintenance vendors receive portal tickets, complete field work, then manually rebuild proof and invoices. The Vendoroo-style active build unifies intake queue, mobile updates, photo attachments, PDF packets, and Stripe triggers.',
         'Implementation is an internal reference build — code is not in the public repository. Patterns inform ticketing-invoicing-job-workflows, job-photo-pdf-reports, and stripe-invoice-automation client scoping.',
-        'Office staff reviews photo proof before invoice send; field crews follow consistent closeout path with required capture steps.'
+        'Office staff reviews photo proof before invoice send; field crews follow consistent closeout path with required capture steps.',
+        'If your crews finish jobs on phones while the office retypes everything into Stripe, this is the showpiece: one job record from portal intake through paid status.'
       ]
     },
+    walkthrough: {
+      title: 'Ticket-to-invoice walkthrough',
+      intro: 'UI mockups of the active Vendoroo-style build — intake, field proof, and billing in one path. Real screen recordings ship when the internal build is cleared for public demo.',
+      primary: { ...images.caseStudyVendoroo, title: 'Vendor ticket and invoice workflow' },
+      proofs: [
+        { src: images.jns.src, alt: images.jns.alt, caption: 'Contractor web reference — JNS Construction as a related trade-site proof.', width: 1200, height: 675 },
+        { src: images.screenTeam.src, alt: images.screenTeam.alt, caption: 'Field-service site pattern that pairs with job workflow systems.', width: 800, height: 450 }
+      ],
+      audits: [],
+      ctaHref: '/book-consultation',
+      ctaLabel: 'Scope a ticket-to-invoice system',
+      ctaSecondaryHref: '/ticketing-invoicing-job-workflows',
+      ctaSecondaryLabel: 'Job workflow service'
+    },
+    faq: [
+      { q: 'Is Vendoroo a live public product?', a: 'It is an active internal workflow reference — not a publicly deployed client product or open-source repo. We use it to scope similar portal-driven vendor builds.' },
+      { q: 'What does a typical client engagement include?', a: 'Ticket intake, mobile job status, photo proof, branded PDF packets, and Stripe invoice or payment-link triggers with paid status sync — scoped to your portal and crew process.' },
+      { q: 'Do you integrate with existing vendor portals?', a: 'Yes. We design export and upload formats managers already require, then keep the job record as the source of truth through billing.' },
+      { q: 'Can this connect to Email-Agent or an owner dashboard?', a: 'Optional status notifications via Email-Agent and owner views for open vs billed jobs are part of the same lane family.' }
+    ],
     deliverables: [
       { title: 'Ticket workflow', items: ['Portal and manual intake into one queue', 'Assignment and status steps for crews', 'Mobile-friendly job screen', 'Owner view for open vs billed'] },
       { title: 'Proof & PDF', items: ['Photo attach per job ID', 'Branded PDF completion reports', 'Portal upload format compliance', 'Missing-proof alerts'] },
@@ -1116,12 +1263,38 @@ const enrichments = {
   'case-study-hospitality-system-pattern': {
     context: {
       title: 'Hospitality capability without premature client marketing',
+      kicker: 'Hospitality lane',
+      media: { type: 'image', src: '/images/showcase/hospitality-events-hours-mockup.webp', alt: 'Hospitality events and hours admin pattern', width: 1200, height: 675 },
       paragraphs: [
         'Restaurant and bar builds add admin-editable menus and events, ordering-ready Stripe architecture, and local visibility alignment — replacing PDF menus and social-only event posts.',
         'Hand-coded mobile layout targets peak traffic performance without page builder bloat. Architecture leaves POS integration hooks for when kitchen volume justifies deeper checkout integration.',
-        'Client names, live URLs, and branded photography stay off public marketing until ownership approves publication and site hosting transfer.'
+        'Client names, live URLs, and branded photography stay off public marketing until ownership approves publication and site hosting transfer.',
+        'If you want events, specials, and order-ahead on your own domain — without waiting on a bloated POS website — this is the stack we document and build.'
       ]
     },
+    walkthrough: {
+      title: 'Hospitality system walkthrough',
+      intro: 'Capability mockups for events, hours, menus, and ordering — plus the Whistle Stop preview asset used on the case-studies grid until client branding is cleared.',
+      primary: { type: 'image', src: '/images/whistle-stop-pitch.jpg', alt: 'Whistle Stop restaurant system preview', width: 1200, height: 800 },
+      proofs: [
+        { src: '/images/showcase/hospitality-events-hours-mockup.webp', alt: 'Events and hours admin pattern', caption: 'Events calendar and business hours on the owned domain — not only on social.', width: 1200, height: 750 },
+        { src: '/images/showcase/hospitality-menus-ordering-mockup.webp', alt: 'Menus and ordering mockup', caption: 'Admin-editable menu specials with Stripe order-ahead architecture.', width: 1200, height: 750 }
+      ],
+      audits: [
+        { src: images.caseStudyKnightLogics.src, alt: 'Platform patterns', title: 'Ordering-ready', text: 'Checkout scoped to kitchen ops before POS lock-in.' },
+        { src: images.moms.src, alt: "Mom's Resin Tables storefront", title: 'Related commerce UX', text: 'Hand-coded storefront patterns from other consumer brands.' }
+      ],
+      ctaHref: '/book-consultation',
+      ctaLabel: 'Plan a restaurant or bar system',
+      ctaSecondaryHref: '/restaurant-bar-growth-systems',
+      ctaSecondaryLabel: 'Restaurant systems'
+    },
+    faq: [
+      { q: 'Why is there no named restaurant case study yet?', a: 'Hospitality client case studies publish only after ownership approves public marketing and site hosting transfer. This page documents the reusable system pattern in the meantime.' },
+      { q: 'What is Whistle Stop on the case-studies grid?', a: 'A client preview card that routes here — the hospitality capability pattern — until branded photography and live URL marketing are cleared.' },
+      { q: 'Do you replace Toast or another POS?', a: 'Not by default. We build owned-domain menus, events, and Stripe-ready order-ahead with hooks for deeper POS integration when kitchen volume justifies it.' },
+      { q: 'Can staff edit menus without calling a developer?', a: 'Yes. Admin-editable menu and event patterns are a core deliverable so specials and hours stay accurate during busy weeks.' }
+    ],
     deliverables: [
       { title: 'Site & content', items: ['Admin-editable menu patterns', 'Events calendar on owned domain', 'Mobile-first hospitality UX', 'Approved client branding when cleared'] },
       { title: 'Ordering prep', items: ['Stripe-ready checkout scoping', 'Pickup flow staging tests', 'Kitchen ops consultation', 'POS hook documentation'] },
@@ -1145,7 +1318,9 @@ const enrichments = {
   },
   'case-study-roof-monsters': {
     context: {
-      title: 'Roofing brand preview for storm-season markets',
+      title: 'A roofing brand site built for referrals and local search',
+      kicker: 'Live client',
+      media: videos.roofMonsters,
       paragraphs: [
         'Roof Monsters needed credible web presence and inspection lead paths before storm season push. Prior digital footprint lacked service areas, project proof, and insurance-adjacent FAQs homeowners expect.',
         'Build includes service pages, city geography, trust layout, estimate-first CTAs, and CRM-ready forms. Lead paths wire for future OutreachEngine intake with daily caps and reply routing.',
@@ -1171,17 +1346,44 @@ const enrichments = {
       { title: 'Vertical template', text: 'Roofing reference accelerates similar client scoping.' }
     ],
     scopeNote: 'Client preview — not publicly marketed as live until ownership approves launch. Case study describes build pattern and IA, not published performance metrics.',
-    proofGrid: [PROOF.roofMonsters, PROOF.faithWorks, PROOF.jns]
+    proofGrid: [PROOF.roofMonsters, PROOF.roofMonstersAudit, PROOF.roofMonstersProject]
   },
   'case-study-social-poster': {
     context: {
       title: 'Hybrid API and Playwright social runners',
+      kicker: 'Social ops',
+      media: images.caseStudySocial,
       paragraphs: [
         'Social Poster on Streamlit port 8501 manages per-brand queues, posting windows, X and Facebook API bridge, GBP API posts, and Playwright runners for Nextdoor and LinkedIn.',
         'Silent failures previously left brand accounts quiet for days. Failure counters and Logs cross-reference give operators same-day visibility when runners break.',
-        'Embedded in Knight Command Social Poster and Social Ops tabs — complements local-visibility-systems GBP strategy with scheduled post cadence.'
+        'Embedded in Knight Command Social Poster and Social Ops tabs — complements local-visibility-systems GBP strategy with scheduled post cadence.',
+        'If your “automation” still dies quietly overnight, this is the production answer: isolated brand queues, hybrid API + browser runners, and failures you can see before the week is gone.'
       ]
     },
+    walkthrough: {
+      title: 'Social Poster walkthrough &amp; proof',
+      intro: 'Live queue UI on port 8501 — then the mockup and related ops surfaces that keep multi-brand posting honest.',
+      primary: { ...videos.social, controls: true, title: 'Social media manager walkthrough' },
+      proofs: [
+        { src: images.caseStudySocial.src, alt: images.caseStudySocial.alt, caption: 'Multi-brand scheduling with posting windows and runner status.', width: 1200, height: 675 },
+        { src: images.caseStudyKnightCommand.src, alt: images.caseStudyKnightCommand.alt, caption: 'Embedded in Knight Command Social Poster and Social Ops tabs.', width: 1200, height: 675 }
+      ],
+      audits: [
+        { src: images.screenTeam.src, alt: images.screenTeam.alt, title: 'ST brand queue', text: 'Screen Team posts stay isolated from KL and KG credentials.' },
+        { src: images.faithWorks.src, alt: images.faithWorks.alt, title: 'Client cadence', text: 'GBP and social posts align with website campaign timing.' },
+        { src: images.caseStudyCrm.src, alt: 'Growth stack', title: 'Growth stack fit', text: 'Pairs with CRM and local visibility lanes for full demand gen.' }
+      ],
+      ctaHref: '/book-consultation',
+      ctaLabel: 'Automate your brand posting',
+      ctaSecondaryHref: '/social-media-automation-systems',
+      ctaSecondaryLabel: 'Social automation'
+    },
+    faq: [
+      { q: 'Why not just use a generic social scheduler?', a: 'Many platforms still need browser automation, GBP posts belong with the same queue, and silent failures are unacceptable for multi-brand ops. Social Poster is built for that hybrid reality.' },
+      { q: 'Which platforms use API vs Playwright?', a: 'X and Facebook go through API clients where stable; Nextdoor and LinkedIn use Playwright runners when the network requires browser automation. GBP posts use the GBP API.' },
+      { q: 'Can you run this for one company brand only?', a: 'Yes. Multi-brand isolation is how we operate today, but a single-brand queue with posting windows and failure alerts is a common first scope.' },
+      { q: 'How do operators see failures?', a: 'Failure counters in the Streamlit UI plus Knight Command Logs / Social Ops tabs so broken runners are visible the same day.' }
+    ],
     deliverables: [
       { title: 'Queue infrastructure', items: ['Streamlit UI on port 8501', 'Isolated KL, KG, ST brand queues', 'Posting window enforcement', 'Last success timestamp per platform'] },
       { title: 'Runner layer', items: ['X and Facebook API clients', 'Playwright workers for Nextdoor and LinkedIn', 'GBP API integration', 'Credential vault per brand'] },
@@ -1206,12 +1408,39 @@ const enrichments = {
   'case-study-referral-network-system': {
     context: {
       title: 'Partner attribution with payout visibility',
+      kicker: 'Referral network',
+      media: images.caseStudyReferral,
       paragraphs: [
         'Referral network infrastructure deploys /ref/:partner entry paths, QR brochure assets, Neon Postgres event logging, referral-dashboard partner views, and Stripe webhook payout settlement.',
         'Partners previously disputed credit when payout status lived in spreadsheets. Dashboard self-service reduced email disputes and accelerated Tampa Bay trade network onboarding.',
-        'Knight Command Referrals tab embeds referral ops on port 5050 family alongside CRM and email — single operator shell for partner support.'
+        'Knight Command Referrals tab embeds referral ops on port 5050 family alongside CRM and email — single operator shell for partner support.',
+        'If you want partners to trust the program — and you want to know which QR codes actually produce consults — this is the live attribution and payout stack.'
       ]
     },
+    walkthrough: {
+      title: 'Referral network walkthrough &amp; proof',
+      intro: 'Dashboard walkthrough plus the attribution UI and Command embed partners and operators actually use.',
+      primary: { ...videos.referral, controls: true, title: 'Referral system dashboard walkthrough' },
+      proofs: [
+        { src: images.caseStudyReferral.src, alt: images.caseStudyReferral.alt, caption: 'Partner attribution dashboard with earned vs paid visibility.', width: 1200, height: 675 },
+        { src: images.caseStudyKnightCommand.src, alt: images.caseStudyKnightCommand.alt, caption: 'Referrals tab inside Knight Command — no orphan dashboard URLs.', width: 1200, height: 675 }
+      ],
+      audits: [
+        { src: images.faithWorks.src, alt: 'Trade network', title: 'Trade network fit', text: 'Built to scale local partner onboarding with clear credit.' },
+        { src: images.caseStudyCrm.src, alt: 'Consult capture', title: 'Consult capture', text: 'Form submits keep referral context into Neon events.' },
+        { src: images.caseStudyKnightCommand.src, alt: 'Operator support', title: 'Operator support', text: 'Partner questions answered from the same /admin shell.' }
+      ],
+      ctaHref: '/book-consultation',
+      ctaLabel: 'Build referral tracking for your network',
+      ctaSecondaryHref: '/referral-network-systems',
+      ctaSecondaryLabel: 'Referral systems'
+    },
+    faq: [
+      { q: 'Is this the same as the public Referral Program page?', a: 'The public Referral Program is the join path and terms. This case study documents the production infrastructure — codes, QR, Neon events, dashboard, and Stripe payout sync — behind that program.' },
+      { q: 'Can partners see what they earned?', a: 'Yes. referral-dashboard gives partners earned vs paid visibility within program data boundaries so disputes do not live in email threads.' },
+      { q: 'Do you support print QR brochures?', a: 'Yes. QR brochure assets and /ref/:partner routes are part of the attribution path so print and digital share the same event log.' },
+      { q: 'Can this run for my company brand, not just Knight Logics?', a: 'Yes. We scope partner codes, attribution windows, and payout rules to your program — then wire Stripe webhooks and a partner-facing dashboard.' }
+    ],
     deliverables: [
       { title: 'Attribution paths', items: ['/ref/:partner landing routes', 'QR brochure generation', 'Consult form referral context capture', 'Neon Postgres event store'] },
       { title: 'Partner dashboard', items: ['referral-dashboard earned vs paid view', 'Attribution window per program terms', 'Partner onboarding with unique codes', 'Data boundaries for partner privacy'] },

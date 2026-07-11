@@ -8,6 +8,11 @@ const { applySeoKeywords } = require('./seo-keywords');
 
 const root = path.join(__dirname, '..');
 
+/** Hand-maintained case studies — do not overwrite with the growth template. */
+const HAND_CRAFTED_CASE_STUDIES = new Set([
+  'case-study-roof-monsters',
+]);
+
 function preparePage(p) {
   return diversifyPageMedia(applySeoKeywords(enrichPage(p)));
 }
@@ -18,9 +23,14 @@ function writePage(p, render) {
 
 for (const p of flagshipPages) writePage(p, renderServicePage);
 for (const p of subPages) writePage(p, renderServicePage);
-for (const c of caseStudies) writePage(c, renderCaseStudy);
+const generatedCaseStudies = caseStudies.filter((c) => !HAND_CRAFTED_CASE_STUDIES.has(c.slug));
+const skippedCaseStudies = caseStudies.filter((c) => HAND_CRAFTED_CASE_STUDIES.has(c.slug)).map((c) => c.slug);
+for (const c of generatedCaseStudies) writePage(c, renderCaseStudy);
 
 const allSlugs = [...flagshipPages, ...subPages, ...caseStudies].map((x) => x.slug);
-console.log(`Generated ${flagshipPages.length} flagship, ${subPages.length} sub, ${caseStudies.length} case studies (${allSlugs.length} total). VER=${VER}`);
+console.log(`Generated ${flagshipPages.length} flagship, ${subPages.length} sub, ${generatedCaseStudies.length} case studies (${allSlugs.length} total). VER=${VER}`);
+if (skippedCaseStudies.length) {
+  console.log(`Skipped hand-crafted case studies: ${skippedCaseStudies.join(', ')}`);
+}
 
-module.exports = { VER, allSlugs, flagshipPages, subPages, caseStudies };
+module.exports = { VER, allSlugs, flagshipPages, subPages, caseStudies, HAND_CRAFTED_CASE_STUDIES };

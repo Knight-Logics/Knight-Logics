@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="preload" href="/header.html?v=20260701hero4" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="/footer.html?v=20260701hero4" as="fetch" crossorigin="anonymous">
-    <script defer src="/script.js?v=20260709gbp1"></script>
+    <link rel="preload" href="/header.html?v=20260711cs6" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="/footer.html?v=20260711cs6" as="fetch" crossorigin="anonymous">
+    <script defer src="/script.js?v=20260711cs6"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Knight Command case study — unified /admin ops shell for CRM, email, social, referrals, and logs across Knight Logics production ports.">
@@ -14,13 +14,13 @@
     <meta property="og:description" content="Knight Command case study — unified /admin ops shell for CRM, email, social, referrals, and logs across Knight Logics production ports.">
     <meta property="og:url" content="https://knightlogics.com/case-study-knight-command">
     <meta property="og:site_name" content="Knight Logics">
-    <meta property="og:image" content="https://knightlogics.com/images/KnightLogicsLogo2.png">
+    <meta property="og:image" content="https://knightlogics.com/images/showcase/case-study-knight-command-mockup.webp">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Knight Command Case Study | Knight Logics">
     <meta name="twitter:description" content="Knight Command case study — unified /admin ops shell for CRM, email, social, referrals, and logs across Knight Logics production ports.">
     <title>Knight Command Case Study | Knight Logics</title>
     <link rel="canonical" href="https://knightlogics.com/case-study-knight-command">
-    <link rel="stylesheet" href="/style.css?v=20260709center1">
+    <link rel="stylesheet" href="/style.css?v=20260711cs6">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VX36QR7HJW');</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","@id":"https://knightlogics.com/case-study-knight-command#webpage","url":"https://knightlogics.com/case-study-knight-command","name":"Knight Command Case Study","description":"Knight Command case study — unified /admin ops shell for CRM, email, social, referrals, and logs across Knight Logics production ports.","isPartOf":{"@id":"https://knightlogics.com/#website"},"about":{"@id":"https://knightlogics.com/#organization"},"publisher":{"@id":"https://knightlogics.com/#organization"},"inLanguage":"en-US"}</script>
@@ -47,13 +47,46 @@
                     <div class="kl-growth-metric"><strong>/admin</strong><span>Operator entry path</span></div>
                 </div>
                 <div class="cs-hero-actions">
-                    
+                    <a href="/book-consultation" class="btn-primary"><i class="fas fa-calendar-check"></i> Book a Free Consultation</a>
                     <a href="/business-growth-systems" class="btn-secondary">Explore Growth Systems</a>
+                    <a href="/case-studies" class="cs-btn-back"><i class="fas fa-arrow-left"></i> All Case Studies</a>
                 </div>
             </div>
         </div>
     </section>
 
+    <section class="kl-growth-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Ops shell walkthrough &amp; proof</h2>
+                <p>One admin surface for the growth stack — Command shell plus the CRM, referral, and social UIs it embeds every morning.</p>
+            </div>
+            <div class="cs-media-grid cs-media-grid--stills fade-in">
+                <figure class="cs-proof-card">
+                    <img src="/images/showcase/case-study-knight-command-mockup.webp" alt="Knight Command admin shell" loading="eager" decoding="async" width="1200" height="675">
+                    <figcaption>Primary build proof from the client workspace.</figcaption>
+                </figure>
+                <figure class="cs-proof-card">
+                    <img src="/images/showcase/case-study-crm-outreach-mockup.webp" alt="CRM outreach queue dashboard" loading="lazy" decoding="async" width="1200" height="675">
+                    <figcaption>Outreach CRM tab — queue preview and brand lanes without leaving /admin.</figcaption>
+                </figure>
+                <figure class="cs-proof-card">
+                    <img src="/images/showcase/case-study-referral-network-mockup.webp" alt="Referral network attribution dashboard" loading="lazy" decoding="async" width="1200" height="675">
+                    <figcaption>Referrals tab — partner attribution and payout visibility in the same shell.</figcaption>
+                </figure>
+            </div>
+            <div class="cs-audit-grid fade-in">
+                <article class="cs-audit-card">
+                    <img src="/images/showcase/case-study-social-poster-mockup.webp" alt="Social posting queue dashboard" loading="lazy" decoding="async">
+                    <div><strong>Social Poster embed</strong><span>Streamlit 8501 queue and runner status inside Social Poster / Social Ops tabs.</span></div>
+                </article>
+            </div>
+            <div class="svc-cta-row" style="margin-top:1.5rem;justify-content:center;">
+                <a href="/book-consultation" class="btn-primary">Plan a similar ops shell</a>
+                <a href="/business-dashboard-development" class="btn-secondary">Dashboard development</a>
+            </div>
+        </div>
+    </section>
     <section class="kl-growth-section kl-growth-section--compact">
         <div class="container">
             <div class="kl-growth-context fade-in">
@@ -61,6 +94,7 @@
                 <p>Knight Command at /admin consolidates tabs for Command Center, Referrals, Outreach CRM, Email Agent, Social Ops, Social Poster, and Logs — each embedding live services on ports 5050, 5100, 8500, and 8501.</p>
                 <p>Before the shell, operators juggled orphan localhost URLs for referral dashboard, OutreachEngine, Email-Agent, and Social Poster — context switching slowed outreach review and failure triage.</p>
                 <p>Modular tab architecture lets individual services upgrade without rebuilding the entire admin — new lanes slot in instead of requiring bookmark updates across the team.</p>
+                <p>If you want an owner dashboard that feels like one product instead of a bookmark folder of tools, this is the pattern: authenticated shell, tab embeds, shared logs, and a documented port map your team can actually onboard to.</p>
                 <p>Operators should not need six localhost ports bookmarked to run a growth stack — Knight Command consolidates tabs with shared auth and logging.</p>
                 
             </div>
@@ -76,21 +110,25 @@
                 <article class="kl-growth-story-block fade-in">
                     <h3>Problem</h3>
                     <p>Daily growth operations sprawled across separate URLs for referral tracking, OutreachEngine CRM, Email-Agent, and Social Poster. Context switching slowed outreach review, partner support, and failure triage.</p>
+                    <p>When a runner failed overnight, nobody had a single place to see it. New hires inherited a bookmark folder instead of an ops product.</p>
                     <ul class="kl-growth-list"><li>Referral dashboard on one port, CRM on another</li><li>Email-Agent and social runners opened in orphan tabs</li><li>No unified log view when automations failed</li></ul>
                 </article>
                 <article class="kl-growth-story-block fade-in">
                     <h3>What was built</h3>
                     <p>Knight Command at /admin provides a tabbed shell: Command Center, Referrals, Outreach CRM, Email Agent, Social Ops, Social Poster, and Logs. Each tab embeds the live service — referral infrastructure on 5050, Email-Agent on 5100, and Streamlit Social Poster on 8501 alongside related ops views on 8500.</p>
+                    <p>The shell is intentionally modular: services upgrade independently, and new lanes slot into tabs instead of forcing the whole team to relearn URLs.</p>
                     <ul class="kl-growth-list"><li>Secure auth before any embed loads</li><li>Modular tabs so services upgrade independently</li><li>Logs tab for cross-system failure review</li></ul>
                 </article>
                 <article class="kl-growth-story-block fade-in">
                     <h3>Tools & architecture</h3>
                     <p>Web-first admin shell with iframe or proxy embeds to Flask OutreachEngine, Email-Agent, and Streamlit runners. Designed for operator workflows documented in the Business Growth Systems and Business Dashboard Development lanes.</p>
+                    <p>This is the same pattern we reuse when a client needs an owner dashboard that feels like one product — not five SaaS logins.</p>
                     <ul class="kl-growth-list"><li>Command Center summary orientation</li><li>Referrals tab → referral-dashboard and /ref/:partner tooling</li><li>Outreach CRM tab → OutreachEngine queue UI</li></ul>
                 </article>
                 <article class="kl-growth-story-block fade-in">
                     <h3>Early signal</h3>
                     <p>Operators spend less time hunting localhost ports during daily review. New services slot into tabs instead of requiring bookmark updates across the team.</p>
+                    <p>Morning queue review — referrals, CRM, email, social — happens in one authenticated session with shared failure visibility.</p>
                     <ul class="kl-growth-list"><li>Faster morning queue review</li><li>Single login for growth ops</li><li>Foundation for client-facing admin patterns</li></ul>
                 </article></div>
             <div class="fade-in"><h3 class="kl-growth-inline-heading">Tools &amp; stack</h3><div class="cs-tech-stack kl-growth-stack-tags"><span class="cs-tag">Custom admin shell</span>
@@ -101,22 +139,7 @@
         </div>
     </section>
 
-    <section class="kl-growth-section">
-        <div class="container">
-            <div class="kl-growth-split fade-in">
-                <div class="kl-growth-split-copy">
-                    <span class="kl-growth-kicker">Ops embed</span>
-                    <h2>Multi-service tab layout</h2>
-                    <p>Referrals, CRM, email, and social queues reachable without leaving /admin.</p>
-                    
-                </div>
-                <div class="kl-growth-split-media"><div class="kl-growth-media kl-growth-media--solo">
-            <img src="/images/showcase/case-study-knight-command-mockup.webp" alt="Knight Command admin shell" loading="lazy" decoding="async" width="1200" height="675">
-            
-        </div></div>
-            </div>
-        </div>
-    </section>
+    
     <section class="kl-growth-section">
         <div class="container">
             <div class="section-header fade-in">
@@ -177,6 +200,32 @@
             </div>
         </div>
     </section>
+    <section class="kl-growth-section kl-growth-section--alt">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Outcomes we design for</h2>
+                <p>Measurable operator results — not vanity dashboards.</p>
+            </div>
+            <div class="kl-growth-outcomes">
+                <article class="kl-growth-outcome fade-in">
+                    <h3>Less context switching</h3>
+                    <p>Operators review referrals, CRM, email, and social without leaving /admin.</p>
+                </article>
+                <article class="kl-growth-outcome fade-in">
+                    <h3>Faster failure triage</h3>
+                    <p>Logs tab centralizes cross-runner errors.</p>
+                </article>
+                <article class="kl-growth-outcome fade-in">
+                    <h3>Modular upgrades</h3>
+                    <p>Services deploy independently into tab slots.</p>
+                </article>
+                <article class="kl-growth-outcome fade-in">
+                    <h3>Client pattern reference</h3>
+                    <p>Embed architecture reusable for owner dashboards on client builds.</p>
+                </article>
+            </div>
+        </div>
+    </section>
     <section class="kl-growth-section">
         <div class="container">
             <div class="kl-growth-connection fade-in">
@@ -188,6 +237,32 @@
             </div>
         </div>
     </section>
+    <section class="kl-growth-section kl-growth-section--alt">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Common questions</h2>
+            </div>
+            <div class="kl-growth-faq">
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>Is Knight Command a product I can buy off the shelf?</summary>
+                    <p>No — it is Knight Logics internal ops infrastructure. The case study documents the embed-shell pattern we reuse when building owner dashboards and internal tools for clients.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>What services live inside the tabs?</summary>
+                    <p>Referrals (5050 family), OutreachEngine CRM, Email-Agent (5100), Social Poster (8501), Social Ops (8500), plus Command Center and Logs for orientation and failure triage.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>Can you build something like this for my company?</summary>
+                    <p>Yes. We scope authenticated admin shells that embed your CRM, job board, invoicing, or marketing tools so operators stop juggling bookmarks.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>How does this relate to client-facing dashboards?</summary>
+                    <p>The same modular tab + embed approach powers business-dashboard-development and internal-business-tools engagements — with role gates and only the lanes each role needs.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Knight Command a product I can buy off the shelf?","acceptedAnswer":{"@type":"Answer","text":"No — it is Knight Logics internal ops infrastructure. The case study documents the embed-shell pattern we reuse when building owner dashboards and internal tools for clients."}},{"@type":"Question","name":"What services live inside the tabs?","acceptedAnswer":{"@type":"Answer","text":"Referrals (5050 family), OutreachEngine CRM, Email-Agent (5100), Social Poster (8501), Social Ops (8500), plus Command Center and Logs for orientation and failure triage."}},{"@type":"Question","name":"Can you build something like this for my company?","acceptedAnswer":{"@type":"Answer","text":"Yes. We scope authenticated admin shells that embed your CRM, job board, invoicing, or marketing tools so operators stop juggling bookmarks."}},{"@type":"Question","name":"How does this relate to client-facing dashboards?","acceptedAnswer":{"@type":"Answer","text":"The same modular tab + embed approach powers business-dashboard-development and internal-business-tools engagements — with role gates and only the lanes each role needs."}}]}</script>
     <section class="kl-growth-section kl-growth-section--compact">
         <div class="container">
             <aside class="kl-growth-scope-note fade-in">
@@ -196,40 +271,7 @@
         </div>
     </section>
     
-    <section class="kl-growth-section">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2>Related proof &amp; examples</h2>
-                <p>Live builds and internal workflows behind this service lane.</p>
-            </div>
-            <div class="kl-growth-proof-grid">
-                <a class="kl-growth-proof-card fade-in" href="/case-study-crm-outreach-system">
-                    <img src="/images/showcase/case-study-crm-outreach-mockup.webp" alt="CRM outreach queue dashboard with segmented lists and reply routing" loading="lazy" decoding="async">
-                    <div class="kl-growth-proof-card-copy">
-                        <span class="kl-growth-proof-badge">Live workflow</span>
-                        <h3>OutreachEngine in production</h3>
-                        <p>Flask SQLite CRM with kl, kg, st, and faithworks brand lanes — scheduler cadence and Email-Agent reply routing on live client campaigns.</p>
-                    </div>
-                </a>
-                <a class="kl-growth-proof-card fade-in" href="/case-study-referral-network-system">
-                    <img src="/images/showcase/case-study-referral-network-mockup.webp" alt="Referral network dashboard with QR attribution and payout visibility" loading="lazy" decoding="async">
-                    <div class="kl-growth-proof-card-copy">
-                        <span class="kl-growth-proof-badge">Live workflow</span>
-                        <h3>Referral network infrastructure</h3>
-                        <p>/ref/:partner paths, Neon Postgres events, QR brochures, and Stripe webhook payouts.</p>
-                    </div>
-                </a>
-                <a class="kl-growth-proof-card fade-in" href="/case-study-social-poster">
-                    <img src="/images/showcase/case-study-social-poster-mockup.webp" alt="Multi-brand social posting queue with API and Playwright runners" loading="lazy" decoding="async">
-                    <div class="kl-growth-proof-card-copy">
-                        <span class="kl-growth-proof-badge">Live workflow</span>
-                        <h3>Social Poster on port 8501</h3>
-                        <p>Multi-brand queues with API and Playwright runners plus GBP post integration.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
+    
     <section class="kl-growth-section kl-growth-section--compact">
         <div class="container">
             

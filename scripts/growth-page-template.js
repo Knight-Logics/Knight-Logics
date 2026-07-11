@@ -1,4 +1,4 @@
-const VER = '20260701hero4';
+const VER = '20260711cs6';
 const { pickHeroPanels, getHeroFocus, pickMobileHeroImage } = require('./growth-content-media');
 const { tradeNetworkForSlug } = require('./growth-trade-network');
 const { renderStructuredDataScripts } = require('./growth-schema');
@@ -13,7 +13,10 @@ function esc(s) {
 }
 
 function renderHead(p, opts = {}) {
-  const ogImage = p.ogImage || 'https://knightlogics.com/images/KnightLogicsLogo2.png';
+  const ogImage = p.ogImage
+    || (p.heroImage?.src
+      ? (p.heroImage.src.startsWith('http') ? p.heroImage.src : `https://knightlogics.com${p.heroImage.src}`)
+      : 'https://knightlogics.com/images/KnightLogicsLogo2.png');
   const canonical = `https://knightlogics.com/${p.slug}`;
   const title = opts.caseStudy ? `${p.title} Case Study | Knight Logics` : `${p.title} | Knight Logics`;
   return `<!DOCTYPE html>
@@ -92,13 +95,16 @@ function renderSplit(block) {
   if (!block) return '';
   const bullets = block.bullets && block.bullets.length
     ? `<ul class="kl-growth-list">${block.bullets.map((b) => `<li>${b}</li>`).join('')}</ul>` : '';
+  const paras = Array.isArray(block.paragraphs) && block.paragraphs.length
+    ? block.paragraphs.map((p) => `<p>${p}</p>`).join('\n                    ')
+    : `<p>${block.text || ''}</p>`;
   return `<section class="kl-growth-section kl-growth-section--alt">
         <div class="container">
             <div class="kl-growth-split fade-in">
                 <div class="kl-growth-split-copy">
                     <span class="kl-growth-kicker">${block.kicker || 'The problem'}</span>
                     <h2>${block.title}</h2>
-                    <p>${block.text}</p>
+                    ${paras}
                     ${bullets}
                 </div>
                 <div class="kl-growth-split-media">
@@ -112,8 +118,11 @@ function renderSplit(block) {
 function renderMediaItem(m, single = false) {
   if (!m) return '';
   if (m.type === 'video') {
+    const label = esc(m.title || m.alt || 'Demo video');
+    const poster = m.poster ? ` poster="${m.poster}"` : '';
+    const controls = m.controls ? ' controls' : ' autoplay muted loop';
     return `<div class="kl-growth-media${single ? ' kl-growth-media--solo' : ''}">
-            <video autoplay muted loop playsinline preload="metadata" aria-label="${esc(m.title || 'Demo video')}">
+            <video${controls} playsinline preload="metadata"${poster} aria-label="${label}">
                 <source src="${m.src}" type="video/mp4">
                 ${m.vtt ? `<track kind="captions" srclang="en" label="English captions" src="${m.vtt}" default>` : ''}
             </video>
@@ -124,6 +133,183 @@ function renderMediaItem(m, single = false) {
             <img src="${m.src}" alt="${esc(m.alt || m.title || '')}" loading="lazy" decoding="async"${m.width ? ` width="${m.width}"` : ''}${m.height ? ` height="${m.height}"` : ''}>
             ${m.title && !single ? `<div class="kl-growth-media-caption"><h3>${m.title}</h3><p>${m.text || ''}</p></div>` : ''}
         </div>`;
+}
+
+function mediaSrc(m) {
+  return m && m.src ? String(m.src).split('?')[0] : '';
+}
+
+/** Every media src already claimed by the walkthrough (primary, proofs, audits). */
+function collectWalkthroughSrcs(w) {
+  const used = new Set();
+  if (!w) return used;
+  if (w.primary) used.add(mediaSrc(w.primary));
+  for (const p of w.proofs || []) {
+    const src = mediaSrc(p);
+    if (src) used.add(src);
+  }
+  for (const a of w.audits || []) {
+    const src = mediaSrc(a);
+    if (src) used.add(src);
+  }
+  return used;
+}
+
+/** Drop mediaBlocks that repeat any earlier page media. Mutates `used`. */
+function dedupeMediaBlocks(blocks, used) {
+  if (!blocks || !blocks.length) return [];
+  return blocks.filter((b) => {
+    const src = mediaSrc(b.media);
+    if (!src) return true;
+    if (used.has(src)) return false;
+    used.add(src);
+    return true;
+  });
+}
+
+/** Drop proof-grid cards whose image already appeared earlier. Mutates `used`. */
+function dedupeProofGrid(proofs, used) {
+  if (!proofs || !proofs.length) return [];
+  return proofs.filter((p) => {
+    const src = p && p.image ? String(p.image).split('?')[0] : '';
+    if (!src) return true;
+    if (used.has(src)) return false;
+    used.add(src);
+    return true;
+  });
+}
+
+/** Context without a media src that already appeared in the walkthrough. */
+function dedupeContext(ctx, used) {
+  if (!ctx) return ctx;
+  if (!ctx.media) return ctx;
+  const src = mediaSrc(ctx.media);
+  if (src && used.has(src)) {
+    const { media, ...rest } = ctx;
+    return rest;
+  }
+  if (src) used.add(src);
+  return ctx;
+}
+
+/** Single proof band — omit if its image already appeared. */
+function dedupeProof(proof, used) {
+  if (!proof || !proof.image) return proof;
+  const src = String(proof.image).split('?')[0];
+  if (used.has(src)) return null;
+  used.add(src);
+  return proof;
+}
+
+function uniqueBySrc(items, used) {
+  if (!items || !items.length) return [];
+  const out = [];
+  for (const item of items) {
+    const src = mediaSrc(item);
+    if (!src || used.has(src)) continue;
+    used.add(src);
+    out.push(item);
+  }
+  return out;
+}
+
+function renderWalkthrough(w) {
+  if (!w || !w.primary) return '';
+  const title = w.title || 'Walkthrough &amp; proof';
+  const intro = w.intro || 'See the system in motion — then the stills that show how operators and customers experience it.';
+  const primary = w.primary;
+  const used = new Set([mediaSrc(primary)]);
+  const proofs = uniqueBySrc(w.proofs || [], used);
+  const audits = uniqueBySrc(w.audits || [], used);
+  const isVideo = primary.type === 'video';
+  const featureLayout = w.layout === 'feature' || (!isVideo && proofs.length <= 1 && (w.stats || []).length);
+
+  let mediaGrid;
+  if (featureLayout || w.layout === 'feature') {
+    const stats = w.stats || [];
+    const side = proofs[0];
+    mediaGrid = `<div class="cs-feature-media fade-in">
+                <figure class="cs-feature-hero">
+                    <img src="${primary.src}" alt="${esc(primary.alt || primary.title || '')}" loading="eager" decoding="async"${primary.width ? ` width="${primary.width}"` : ''}${primary.height ? ` height="${primary.height}"` : ''}>
+                    ${primary.caption || w.primaryCaption ? `<figcaption>${primary.caption || w.primaryCaption}</figcaption>` : ''}
+                </figure>
+                <aside class="cs-feature-aside">
+                    ${side ? `<figure class="cs-proof-card">
+                        <img src="${side.src}" alt="${esc(side.alt || '')}" loading="lazy" decoding="async"${side.width ? ` width="${side.width}"` : ''}${side.height ? ` height="${side.height}"` : ''}>
+                        ${side.caption ? `<figcaption>${side.caption}</figcaption>` : ''}
+                    </figure>` : ''}
+                    ${stats.length ? `<div class="cs-feature-stats">${stats.map((s) => `
+                        <div><strong>${s.value}</strong><span>${s.label}</span></div>`).join('')}
+                    </div>` : ''}
+                </aside>
+            </div>`;
+  } else if (isVideo) {
+    const proofStack = proofs.length
+      ? `<div class="cs-proof-stack">${proofs.map((p) => `
+                    <figure class="cs-proof-card">
+                        <img src="${p.src}" alt="${esc(p.alt || '')}" loading="lazy" decoding="async"${p.width ? ` width="${p.width}"` : ''}${p.height ? ` height="${p.height}"` : ''}>
+                        ${p.caption ? `<figcaption>${p.caption}</figcaption>` : ''}
+                    </figure>`).join('')}
+                </div>`
+      : '';
+    const label = esc(primary.title || primary.alt || 'Walkthrough video');
+    const poster = primary.poster ? ` poster="${primary.poster}"` : '';
+    const controls = primary.controls === false ? ' autoplay muted loop' : ' controls';
+    mediaGrid = `<div class="cs-media-grid fade-in">
+                <figure class="cs-video-shell">
+                    <video${controls} playsinline preload="metadata"${poster} aria-label="${label}">
+                        <source src="${primary.src}" type="video/mp4">
+                        ${primary.vtt ? `<track kind="captions" srclang="en" label="English captions" src="${primary.vtt}" default>` : ''}
+                    </video>
+                </figure>
+                ${proofStack}
+            </div>`;
+  } else {
+    const cards = [
+      {
+        src: primary.src,
+        alt: primary.alt || primary.title || '',
+        caption: primary.caption || w.primaryCaption || 'Primary build proof from the client workspace.',
+        width: primary.width,
+        height: primary.height
+      },
+      ...proofs
+    ];
+    mediaGrid = `<div class="cs-media-grid cs-media-grid--stills fade-in">${cards.map((p, i) => `
+                <figure class="cs-proof-card">
+                    <img src="${p.src}" alt="${esc(p.alt || '')}" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async"${p.width ? ` width="${p.width}"` : ''}${p.height ? ` height="${p.height}"` : ''}>
+                    ${p.caption ? `<figcaption>${p.caption}</figcaption>` : ''}
+                </figure>`).join('')}
+            </div>`;
+  }
+
+  const auditGrid = audits.length
+    ? `<div class="cs-audit-grid fade-in">${audits.map((a) => `
+                <article class="cs-audit-card">
+                    <img src="${a.src}" alt="${esc(a.alt || a.title || '')}" loading="lazy" decoding="async">
+                    <div><strong>${a.title}</strong><span>${a.text || ''}</span></div>
+                </article>`).join('')}
+            </div>`
+    : '';
+
+  const cta = w.ctaHref
+    ? `<div class="svc-cta-row" style="margin-top:1.5rem;justify-content:center;">
+                <a href="${w.ctaHref}" class="btn-primary">${w.ctaLabel || 'Book a Free Consultation'}</a>
+                ${w.ctaSecondaryHref ? `<a href="${w.ctaSecondaryHref}" class="btn-secondary">${w.ctaSecondaryLabel || 'Related service'}</a>` : ''}
+            </div>`
+    : '';
+
+  return `<section class="kl-growth-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>${title}</h2>
+                <p>${intro}</p>
+            </div>
+            ${mediaGrid}
+            ${auditGrid}
+            ${cta}
+        </div>
+    </section>`;
 }
 
 function renderMediaBlocks(blocks) {
@@ -241,12 +427,33 @@ function renderLinks(links, pricingNote) {
 function renderContext(ctx) {
   if (!ctx) return '';
   const paras = (ctx.paragraphs || []).map((p) => `<p>${p}</p>`).join('\n                ');
+  const note = ctx.note ? `<p class="kl-growth-context-note">${ctx.note}</p>` : '';
+  const title = ctx.title ? `<h2>${ctx.title}</h2>` : '';
+
+  if (ctx.media) {
+    return `<section class="kl-growth-section kl-growth-section--alt">
+        <div class="container">
+            <div class="kl-growth-split fade-in">
+                <div class="kl-growth-split-copy">
+                    ${ctx.kicker ? `<span class="kl-growth-kicker">${ctx.kicker}</span>` : ''}
+                    ${title}
+                    ${paras}
+                    ${note}
+                </div>
+                <div class="kl-growth-split-media">
+                    ${renderMediaItem(ctx.media, true)}
+                </div>
+            </div>
+        </div>
+    </section>`;
+  }
+
   return `<section class="kl-growth-section kl-growth-section--compact">
         <div class="container">
             <div class="kl-growth-context fade-in">
-                ${ctx.title ? `<h2>${ctx.title}</h2>` : ''}
+                ${title}
                 ${paras}
-                ${ctx.note ? `<p class="kl-growth-context-note">${ctx.note}</p>` : ''}
+                ${note}
             </div>
         </div>
     </section>`;
@@ -259,6 +466,14 @@ function renderTradeNetwork(block) {
     ? `<ul class="kl-growth-list">${block.bullets.map((b) => `<li>${b}</li>`).join('')}</ul>` : '';
   const links = block.links && block.links.length
     ? `<div class="kl-growth-links kl-growth-links--inline">${block.links.map(([href, label]) => `<a href="${href}">${label}</a>`).join('\n                    ')}</div>` : '';
+  const netImg = block.networkImage || {
+    src: '/images/showcase/case-study-referral-network-mockup.webp',
+    alt: 'Referral network dashboard with partner attribution',
+    width: 1200,
+    height: 675,
+  };
+  const w = netImg.width ? ` width="${netImg.width}"` : '';
+  const h = netImg.height ? ` height="${netImg.height}"` : '';
   return `<section class="kl-growth-section kl-growth-section--alt kl-growth-section--network">
         <div class="container">
             <div class="kl-growth-split fade-in">
@@ -275,7 +490,7 @@ function renderTradeNetwork(block) {
                 </div>
                 <div class="kl-growth-split-media">
                     <div class="kl-growth-media kl-growth-media--solo">
-                        <img src="/images/showcase/case-study-referral-network-mockup.webp" alt="Referral network dashboard with partner attribution" loading="lazy" decoding="async" width="1200" height="675">
+                        <img src="${netImg.src}" alt="${netImg.alt || ''}" loading="lazy" decoding="async"${w}${h}>
                     </div>
                 </div>
             </div>
@@ -378,9 +593,9 @@ function renderHeroStars() {
     </div>`;
 }
 
-function renderHeroPanels(slug, primaryImage) {
-  const panels = pickHeroPanels(slug, primaryImage?.src);
-  const mobile = pickMobileHeroImage(panels, primaryImage?.src);
+function renderHeroPanels(p) {
+  const panels = pickHeroPanels(p.slug, p.heroImage?.src);
+  const mobile = pickMobileHeroImage(panels, p.heroImage?.src);
   const positions = ['left', 'top', 'bottom', 'right'];
 
   const panelEls = positions.map((pos, i) => {
@@ -496,6 +711,16 @@ function renderCaseStudy(c) {
     { href: '/case-studies', label: 'Case Studies' },
     { label: c.title }
   ];
+  // One asset, one job — walkthrough claims first, then context / mediaBlocks / proof / proofGrid.
+  const used = collectWalkthroughSrcs(c.walkthrough);
+  const context = dedupeContext(c.context, used);
+  const mediaBlocks = dedupeMediaBlocks(c.mediaBlocks, used);
+  const proof = dedupeProof(c.proof, used);
+  const proofGrid = dedupeProofGrid(c.proofGrid, used);
+  const heroPrimary = `<a href="/book-consultation" class="btn-primary"><i class="fas fa-calendar-check"></i> Book a Free Consultation</a>`;
+  const heroLive = c.liveUrl
+    ? `<a href="${c.liveUrl}" class="btn-secondary" target="_blank" rel="noopener">View Live Project</a>`
+    : `<a href="${c.serviceLink}" class="btn-secondary">${c.serviceLabel}</a>`;
   return `${renderHead(c, { caseStudy: true })}
 <body class="kl-growth-page kl-growth-page--pro kl-case-study-page page-${c.slug}">
     <div id="header-container"></div>
@@ -510,14 +735,16 @@ function renderCaseStudy(c) {
                 <div class="cs-tech-stack">${c.tags.map((t) => `<span class="cs-tag">${t}</span>`).join('\n                    ')}</div>
                 ${renderCaseStudyMetrics(c.metrics)}
                 <div class="cs-hero-actions">
-                    ${c.liveUrl ? `<a href="${c.liveUrl}" class="btn-primary" target="_blank" rel="noopener">View Live Project</a>` : ''}
-                    <a href="${c.serviceLink}" class="btn-secondary">${c.serviceLabel}</a>
+                    ${heroPrimary}
+                    ${heroLive}
+                    <a href="/case-studies" class="cs-btn-back"><i class="fas fa-arrow-left"></i> All Case Studies</a>
                 </div>
             </div>
         </div>
     </section>
 
-    ${renderContext(c.context)}
+    ${renderWalkthrough(c.walkthrough)}
+    ${renderContext(context)}
     <section class="kl-growth-section">
         <div class="container">
             <div class="section-header fade-in">
@@ -529,13 +756,15 @@ function renderCaseStudy(c) {
         </div>
     </section>
 
-    ${renderMediaBlocks(c.mediaBlocks)}
+    ${renderMediaBlocks(mediaBlocks)}
     ${c.timeline ? renderProcess(c.timeline, 'Workflow snapshot') : ''}
     ${renderDeliverables(c.deliverables)}
+    ${renderOutcomes(c.outcomes)}
     ${renderConnections(c.connections)}
+    ${renderFaq(c.faq)}
     ${renderScopeNote(c.scopeNote)}
-    ${renderProof(c.proof)}
-    ${renderProofGrid(c.proofGrid)}
+    ${renderProof(proof)}
+    ${renderProofGrid(proofGrid)}
     ${renderLinks(c.links)}
     ${renderCta({ title: 'Want a similar system?', text: c.cta })}
 
@@ -547,5 +776,8 @@ function renderCaseStudy(c) {
 module.exports = {
   VER,
   renderServicePage,
-  renderCaseStudy
+  renderCaseStudy,
+  renderWalkthrough,
+  renderFaq,
+  esc
 };

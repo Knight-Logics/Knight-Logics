@@ -9,6 +9,15 @@ const heroPanelPool = [
   '/images/websitehero.webp?v=20260604perf1'
 ];
 
+const SLUG_HERO_PANELS = {
+  'roofing-business-growth-systems': [
+    '/images/showcase/roof-monsters-og-card.webp',
+    '/images/showcase/roof-monsters-homepage-wave.png',
+    '/images/showcase/roof-monsters-project.webp',
+    '/images/showcase/roof-monsters-showcase-800.webp'
+  ]
+};
+
 /** object-position for cover crops — tuned so people stay in frame */
 const heroImageFocus = {
   '/images/showcase/faith-works-og-card.jpg': { desktop: '42% 38%', mobile: '44% 36%' },
@@ -19,7 +28,11 @@ const heroImageFocus = {
   '/images/showcase/hospitality-menus-ordering-mockup.webp': { desktop: '50% 42%', mobile: '50% 40%' },
   '/images/momhero.webp': { desktop: '50% 32%', mobile: '50% 28%' },
   '/images/websitehero.webp': { desktop: '38% 36%', mobile: '42% 38%' },
-  '/images/websitehero.webp?v=20260604perf1': { desktop: '38% 36%', mobile: '42% 38%' }
+  '/images/websitehero.webp?v=20260604perf1': { desktop: '38% 36%', mobile: '42% 38%' },
+  '/images/showcase/roof-monsters-og-card.webp': { desktop: '50% 40%', mobile: '50% 38%' },
+  '/images/showcase/roof-monsters-homepage-wave.png': { desktop: '48% 42%', mobile: '50% 40%' },
+  '/images/showcase/roof-monsters-project.webp': { desktop: '50% 45%', mobile: '52% 48%' },
+  '/images/showcase/roof-monsters-showcase-800.webp': { desktop: '50% 42%', mobile: '50% 40%' }
 };
 
 const heroMobilePriority = [
@@ -65,6 +78,11 @@ function isLogoHero(src) {
 }
 
 function pickHeroPanels(slug, primarySrc) {
+  const slugPanels = SLUG_HERO_PANELS[slug];
+  if (slugPanels && slugPanels.length >= 4) {
+    return slugPanels.slice(0, 4);
+  }
+
   const panels = [];
   if (!isLogoHero(primarySrc)) {
     panels.push(primarySrc);
@@ -106,17 +124,52 @@ module.exports = {
   isLogoHero,
   pickHeroPanels,
   videos: {
-    crm: { type: 'video', src: '/videos/automation/crm-outreach-dashboard.mp4', vtt: '/videos/automation/crm-outreach-dashboard.vtt' },
-    email: { type: 'video', src: '/videos/automation/email-agent-routing.mp4', vtt: '/videos/automation/email-agent-routing.vtt' },
-    social: { type: 'video', src: '/videos/automation/social-media-manager.mp4', vtt: '/videos/automation/social-media-manager.vtt' },
-    referral: { type: 'video', src: '/videos/automation/referral-system-dashboard.mp4', vtt: '/videos/automation/referral-system-dashboard.vtt' }
+    crm: { type: 'video', src: '/videos/automation/crm-outreach-dashboard.mp4', vtt: '/videos/automation/crm-outreach-dashboard.vtt', title: 'CRM outreach dashboard' },
+    email: { type: 'video', src: '/videos/automation/email-agent-routing.mp4', vtt: '/videos/automation/email-agent-routing.vtt', title: 'Email-Agent routing' },
+    social: { type: 'video', src: '/videos/automation/social-media-manager.mp4', vtt: '/videos/automation/social-media-manager.vtt', title: 'Social media manager' },
+    referral: { type: 'video', src: '/videos/automation/referral-system-dashboard.mp4', vtt: '/videos/automation/referral-system-dashboard.vtt', title: 'Referral system dashboard' },
+    roofMonsters: {
+      type: 'video',
+      src: '/images/roof-monsters-rebuild.mp4',
+      poster: '/images/showcase/roof-monsters-showcase-800.webp',
+      title: 'Roof Monsters website rebuild walkthrough',
+      controls: true
+    },
+    screenTeam: {
+      type: 'video',
+      src: '/images/ST-Update.mp4',
+      poster: '/images/screen-team/banner.webp',
+      title: 'Screen Team website walkthrough',
+      controls: true
+    },
+    knightGroup: {
+      type: 'video',
+      src: '/images/Knight-Group-Website-Update.mp4',
+      poster: '/images/showcase/knight-group-showcase.webp',
+      title: 'Knight Group website walkthrough',
+      controls: true
+    },
+    salsPainting: {
+      type: 'video',
+      src: '/images/salspainting-upgrade.mp4',
+      poster: '/images/sals-hero.webp',
+      title: "Sal's Painting website walkthrough",
+      controls: true
+    },
+    momsResin: {
+      type: 'video',
+      src: '/images/momsresintables-site.mp4',
+      poster: '/images/momhero.webp',
+      title: "Mom's Resin Tables website walkthrough",
+      controls: true
+    }
   },
   images: {
     kgHero: { type: 'image', src: '/images/KGHero.webp', alt: 'Knight Group handyman website hero' },
     screenTeam: { type: 'image', src: '/images/screen-team-showcase-800.webp', alt: 'Screen Team LLC local service website', width: 800, height: 450 },
     faithWorks: { type: 'image', src: '/images/showcase/faith-works-og-card.jpg', alt: 'Faith Works Outdoor Services local SEO site', width: 1200, height: 630 },
     jns: { type: 'image', src: '/images/JNS-HomeImage.webp', alt: 'JNS Construction contractor website' },
-    farrellElectric: { type: 'image', src: 'https://farrell-electric.github.io/farrell-electric-website/HeroImage.png', alt: 'Farrell Electric website hero', width: 1200, height: 630 },
+    farrellElectric: { type: 'image', src: '/images/farrell/hero.png', alt: 'Farrell Electric website hero', width: 1200, height: 630 },
     salsPainting: { type: 'image', src: '/images/sals-hero.webp', alt: "Sal's Painting website hero", width: 1200, height: 630 },
     moms: { type: 'image', src: '/images/momhero.webp', alt: "Mom's Resin Tables e-commerce storefront" },
     hospitality: {
@@ -146,7 +199,13 @@ module.exports = {
     caseStudyKnightCommand: { type: 'image', src: '/images/showcase/case-study-knight-command-mockup.webp', alt: 'Knight Command admin shell', width: 1200, height: 675 },
     caseStudyReferral: { type: 'image', src: '/images/showcase/case-study-referral-network-mockup.webp', alt: 'Referral network attribution dashboard', width: 1200, height: 675 },
     caseStudySocial: { type: 'image', src: '/images/showcase/case-study-social-poster-mockup.webp', alt: 'Social posting queue dashboard', width: 1200, height: 675 },
-    caseStudyRoofing: { type: 'image', src: '/images/showcase/case-study-roofing-lead-mockup.webp', alt: 'Roofing lead capture and trust pages', width: 1200, height: 675 },
+    caseStudyRoofing: { type: 'image', src: '/images/showcase/roof-monsters-og-card.webp', alt: 'Roof Monsters live roofing website on roofmonsters.co', width: 1200, height: 630 },
+    roofMonstersHome: { type: 'image', src: '/images/showcase/roof-monsters-homepage-wave.png', alt: 'Roof Monsters homepage — Your Roof Is Our Proof', width: 1920, height: 1080 },
+    roofMonstersProject: { type: 'image', src: '/images/showcase/roof-monsters-project.webp', alt: 'Roof Monsters completed Tampa Bay roofing project', width: 1200, height: 800 },
+    roofMonstersLighthouse: { type: 'image', src: '/images/showcase/roof-monsters-lighthouse-97.webp', alt: 'Roof Monsters Lighthouse scores — 97 performance, 100 accessibility SEO', width: 1200, height: 800 },
+    roofMonstersSemrush: { type: 'image', src: '/images/showcase/roof-monsters-semrush-99.webp', alt: 'Roof Monsters Semrush site health 99 percent', width: 1200, height: 800 },
+    roofMonstersGsc: { type: 'image', src: '/images/showcase/roof-monsters-gsc-sitemap.webp', alt: 'Google Search Console sitemap success — 79 discovered pages', width: 1200, height: 800 },
+    roofMonstersShowcase: { type: 'image', src: '/images/showcase/roof-monsters-showcase-800.webp', alt: 'Roof Monsters website showcase card', width: 800, height: 500 },
     caseStudyKnightLogics: { type: 'image', src: '/images/showcase/case-study-knightlogics-platform-mockup.webp', alt: 'Knight Logics marketing and ops platform', width: 1200, height: 675 }
   }
 };

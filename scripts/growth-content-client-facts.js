@@ -78,7 +78,33 @@ const ST = {
   }
 };
 
-const CLIENTS = { kg: KG, fw: FW, st: ST };
+const RM = {
+  key: 'rm',
+  name: 'Roof Monsters',
+  pageCount: 79,
+  sitemapCount: 79,
+  sitemapUrl: 'https://roofmonsters.co/sitemap.xml',
+  liveUrl: 'https://roofmonsters.co/',
+  trade: 'roofing',
+  lighthouse: { performance: 97, accessibility: 100, seo: 100 },
+  summary:
+    '79+ indexable URLs on roofmonsters.co — estimate-first lead capture, service and area depth, gallery proof, and storm-season local SEO for Tampa Bay roofing.',
+  shortProof:
+    'Live roofing growth system with Lighthouse 97/100/100/100, Semrush 99% site health, Ahrefs 100, and GSC sitemap success with 79 discovered pages.',
+  outreachNote:
+    'Roof Monsters Email-Agent routing is live for info@roofmonsters.co; cold outreach stays off unless explicitly enabled for the brand.',
+  geography: 'Tampa Bay roofing coverage with service and city pages built for storm-season search.',
+  schema: 'LocalBusiness, FAQ, BreadcrumbList, and Organization schema on the public site.',
+  growthSystem:
+    'Official roofing network anchor — live site, case study, and roofing-business-growth-systems playbook.',
+  media: {
+    type: 'image',
+    src: '/images/showcase/roof-monsters-og-card.webp',
+    alt: 'Roof Monsters live roofing website on roofmonsters.co'
+  }
+};
+
+const CLIENTS = { kg: KG, fw: FW, st: ST, rm: RM };
 
 const KG_STATS = [
   { value: '97', label: 'Indexable pages — Knight Group' },
@@ -98,6 +124,12 @@ const ST_STATS = [
   { value: 'st', label: 'OutreachEngine st brand lane' }
 ];
 
+const RM_STATS = [
+  { value: '97', label: 'Lighthouse performance — RM' },
+  { value: '79', label: 'GSC discovered pages — RM' },
+  { value: '99%', label: 'Semrush site health — RM' }
+];
+
 const TRIO_PROOF =
   'Three live Tampa Bay growth-system clients prove the stack at different scales: Knight Group (97 handyman pages, kg lane), Faith Works (82 land-clearing pages, faithworks lane), and Screen Team (36 enclosure pages, st lane).';
 
@@ -114,7 +146,9 @@ function clientMediaBlock(clientKey, align = 'right') {
       ? `${c.pageCount}-page handyman growth site`
       : clientKey === 'fw'
         ? `${c.pageCount}-page land clearing growth site`
-        : `${c.pageCount}-page enclosure growth site`;
+        : clientKey === 'rm'
+          ? `${c.pageCount}+-page roofing growth site`
+          : `${c.pageCount}-page enclosure growth site`;
   return {
     kicker: 'Live client architecture',
     title: `${c.name} — ${titleSuffix}`,
@@ -154,7 +188,7 @@ const SLUG_PRIMARY_CLIENT = {
   'business-growth-systems': 'fw',
   'performance-partner-program': 'fw',
   'online-ordering-systems': 'fw',
-  'roofing-business-growth-systems': 'kg',
+  'roofing-business-growth-systems': 'rm',
   'case-study-crm-outreach-system': 'st',
   'case-study-social-poster': 'kg'
 };
@@ -167,6 +201,7 @@ function clientStatsForSlug(slug) {
   const key = primaryClientForSlug(slug);
   if (key === 'kg') return KG_STATS;
   if (key === 'st') return ST_STATS;
+  if (key === 'rm') return RM_STATS;
   return FW_STATS;
 }
 
@@ -199,10 +234,12 @@ module.exports = {
   KG,
   FW,
   ST,
+  RM,
   CLIENTS,
   KG_STATS,
   FW_STATS,
   ST_STATS,
+  RM_STATS,
   TRIO_PROOF,
   TRIO_STATS,
   kgMediaBlock,

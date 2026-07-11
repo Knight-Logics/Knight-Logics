@@ -27,10 +27,14 @@ const PAGE_GALLERIES = {
   ],
   'roofing-business-growth-systems': [
     images.caseStudyRoofing,
-    img('/images/jns-hero.webp', 'Contractor website hero example'),
-    images.jns,
-    img('/images/JNS-HomeImage.webp', 'JNS Construction homepage'),
-    img('/images/added-media/jns-site.webp', 'JNS Construction site showcase'),
+    images.roofMonstersHome,
+    images.roofMonstersProject,
+    images.roofMonstersLighthouse,
+    images.roofMonstersSemrush,
+    images.roofMonstersGsc,
+    images.roofMonstersShowcase,
+    img('/images/showcase/Roof-monsters-fb-banner-image.png', 'Roof Monsters Facebook banner and brand mark'),
+    img('/images/showcase/RM-MonsterHouseLogo.png', 'Roof Monsters logo mark'),
   ],
   'screen-enclosure-business-growth-systems': [
     images.screenTeam,
@@ -137,7 +141,9 @@ function diversifyPageMedia(page) {
   const heroSrc = page.heroImage?.src;
   if (heroSrc) used.add(normalizeSrc(heroSrc));
   if (tradeNetworkForSlug(page.slug)) {
-    used.add(normalizeSrc(TRADE_NETWORK_IMAGE));
+    const net = tradeNetworkForSlug(page.slug);
+    const netSrc = net?.networkImage?.src || TRADE_NETWORK_IMAGE;
+    used.add(normalizeSrc(netSrc));
   }
 
   if (page.problem?.media?.type === 'image') {

@@ -22,7 +22,7 @@
 
     <meta property="og:site_name" content="Knight Logics">
 
-    <meta property="og:image" content="https://knightlogics.com/images/KnightLogicsLogo2.png">
+    <meta property="og:image" content="https://knightlogics.com/images/showcase/knight-group-og-card.jpg">
 
     <meta property="og:image:width" content="1024">
 
@@ -32,18 +32,16 @@
 
     <meta name="twitter:title" content="Knight Group Case Study | Local SEO & Website Proof">
 
-    <meta name="twitter:image" content="https://knightlogics.com/images/KnightLogicsLogo2.png">
+    <meta name="twitter:image" content="https://knightlogics.com/images/showcase/knight-group-og-card.jpg">
 
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 
     <link rel="canonical" href="https://knightlogics.com/case-study-knight-group">
 
 
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VX36QR7HJW"></script>
 
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VX36QR7HJW');gtag('config','AW-18138273413');</script>
-
 
 
     <script type="application/ld+json">
@@ -67,7 +65,6 @@
     }
 
     </script>
-
 
 
     <script type="application/ld+json">
@@ -172,14 +169,12 @@
 
     <meta name="theme-color" content="#6de1ff">
 
-    <link rel="stylesheet" href="style.css?v=20260709center1">
+    <link rel="stylesheet" href="style.css?v=20260711cs6">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 
-
     <title>Knight Group Case Study | Local SEO & Website Proof</title>
-
 
 
     <style>
@@ -387,7 +382,6 @@
         .cs-btn-back:hover { border-color: rgba(100,255,218,0.4); color: #64ffda; }
 
 
-
         .cs-scores {
 
             background: rgba(10,15,10,0.98);
@@ -451,7 +445,6 @@
         }
 
 
-
         .cs-overview {
 
             padding: 80px 0;
@@ -461,15 +454,43 @@
         }
 
         .cs-overview-grid {
-
             display: grid;
-
-            grid-template-columns: 1fr 1.6fr;
-
-            gap: 64px;
-
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 28px 40px;
             align-items: start;
-
+        }
+        .cs-overview-grid > :first-child {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        .cs-overview-grid > :nth-child(2) {
+            display: contents;
+        }
+        .cs-overview-media {
+            grid-column: 2;
+            grid-row: 1;
+            align-self: start;
+            margin-bottom: 0 !important;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(148,163,184,.22);
+            background: #0b1524;
+        }
+        .cs-overview-media img,
+        .cs-overview-media video {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+        }
+        .cs-overview-grid .cs-section-label,
+        .cs-overview-grid ul.cs-deliverables,
+        .cs-overview-grid > :nth-child(2) > p {
+            grid-column: 1 / -1;
+        }
+        .cs-overview-grid .cs-section-label {
+            margin-top: 8px;
         }
 
         .cs-section-label {
@@ -545,35 +566,25 @@
         }
 
         .cs-deliverables {
-
             list-style: none;
-
             padding: 0;
-
             margin: 0;
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 12px;
-
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 18px;
         }
-
-        .cs-deliverables li {
-
+                .cs-deliverables li {
             display: flex;
-
             align-items: flex-start;
-
             gap: 10px;
-
+            margin: 0;
             font-size: 0.92rem;
-
-            color: rgba(255,255,255,0.78);
-
             line-height: 1.5;
-
+            color: rgba(255,255,255,0.78);
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(148,163,184,0.12);
+            background: rgba(255,255,255,0.02);
         }
 
         .cs-deliverables li i {
@@ -587,7 +598,6 @@
             flex-shrink: 0;
 
         }
-
 
 
             .cs-preview {
@@ -663,7 +673,6 @@
                 display: block;
 
             }
-
 
 
         .cs-performance {
@@ -749,7 +758,6 @@
         .cs-perf-card img { width: 100%; display: block; }
 
 
-
         .cs-search {
 
             padding: 80px 0;
@@ -771,7 +779,6 @@
         }
 
         .cs-search-img img { width: 100%; display: block; }
-
 
 
         .cs-rich {
@@ -891,7 +898,6 @@
         .cs-rich-card img { width: 100%; display: block; }
 
 
-
         .cs-gbp-inline {
 
             display: flex; align-items: center; gap: 14px;
@@ -951,7 +957,6 @@
         .cs-gbp-link:hover { background: rgba(100,255,218,0.08); border-color: rgba(100,255,218,0.6); }
 
 
-
         .cs-cta {
 
             padding: 72px 0;
@@ -1003,7 +1008,6 @@
             flex-wrap: wrap;
 
         }
-
 
 
         .cs-gbp { padding: 72px 0; background: #0d0d0d; }
@@ -1085,13 +1089,12 @@
         })(window, document, "clarity", "script", "wgj5b5rrss");
 
     </script>
-    <script defer src="/script.js?v=20260709gbp1"></script>
+    <script defer src="/script.js?v=20260711cs6"></script>
 </head>
 
 <body>
 
     <div id="header-container"></div>
-
 
 
     <!-- -- HERO -- -->
@@ -1193,6 +1196,7 @@
 
             </div>
 
+
             <div style="display:flex; justify-content:center; padding-top:24px;">
 
                 <a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fknightgroup.com" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; background:#64ffda; color:#000; padding:12px 24px; border-radius:4px; font-weight:700; text-decoration:none;"><i class="fas fa-gauge-high"></i> Test This Page's Lighthouse Scores</a>
@@ -1202,6 +1206,56 @@
         </div>
 
     </div>
+
+<section class="kl-growth-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Site walkthrough &amp; proof</h2>
+                <p>Knight Group website walkthrough plus the hero and architecture stills behind the 97-page growth system.</p>
+            </div>
+            <div class="cs-media-grid fade-in">
+                <figure class="cs-video-shell">
+                    <video controls playsinline preload="metadata" poster="/images/showcase/knight-group-showcase.webp" aria-label="Knight Group website walkthrough">
+                        <source src="/images/Knight-Group-Website-Update.mp4" type="video/mp4">
+                        
+                    </video>
+                </figure>
+                <div class="cs-proof-stack">
+                    <figure class="cs-proof-card">
+                        <img src="/images/KGHero.webp" alt="Knight Group handyman website hero" loading="lazy" decoding="async" width="1200" height="675">
+                        <figcaption>Live hero with booking-oriented conversion paths.</figcaption>
+                    </figure>
+                    <figure class="cs-proof-card">
+                        <img src="/images/showcase/knight-group-showcase.webp" alt="Knight Group showcase" loading="lazy" decoding="async" width="1200" height="675">
+                        <figcaption>Showcase card used across Knight Logics proof grids.</figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div class="cs-audit-grid fade-in">
+                <article class="cs-audit-card">
+                    <img src="/images/showcase/knight-group-og-card.jpg" alt="OG card" loading="lazy" decoding="async">
+                    <div><strong>97-page architecture</strong><span>Service and area depth built for handyman search demand.</span></div>
+                </article>
+                <article class="cs-audit-card">
+                    <img src="/images/showcase/case-study-crm-outreach-mockup.webp" alt="CRM" loading="lazy" decoding="async">
+                    <div><strong>kg OutreachEngine lane</strong><span>Real booked work from targeted outreach campaigns.</span></div>
+                </article>
+                <article class="cs-audit-card">
+                    <img src="/images/screen-team-showcase-800.webp" alt="Network" loading="lazy" decoding="async">
+                    <div><strong>Same growth stack</strong><span>Pairs with Screen Team and Faith Works in the network.</span></div>
+                </article>
+                <article class="cs-audit-card">
+                    <img src="/images/showcase/case-study-referral-network-mockup.webp" alt="Referrals" loading="lazy" decoding="async">
+                    <div><strong>Referral-ready</strong><span>Built to plug into partner attribution when the network expands.</span></div>
+                </article>
+            </div>
+            <div class="svc-cta-row" style="margin-top:1.5rem;justify-content:center;">
+                <a href="/book-consultation" class="btn-primary">Plan a handyman growth system</a>
+                <a href="/home-service-business-growth-systems" class="btn-secondary">Home service systems</a>
+            </div>
+        </div>
+    </section>
+
 
 
 
@@ -1232,7 +1286,6 @@
         </div>
 
     </div>
-
 
 
     <!-- -- OVERVIEW / THE BUILD -- -->
@@ -1335,7 +1388,6 @@
     </section>
 
 
-
     <!-- -- OPERATIONAL STACK -- -->
 
     <section class="cs-overview" style="border-top: 1px solid rgba(100,255,218,0.1);">
@@ -1403,7 +1455,6 @@
             </div>
 
 
-
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-top: 40px;">
 
                 <div>
@@ -1457,7 +1508,6 @@
             </div>
 
 
-
             <div style="background: rgba(100,255,218,0.05); border: 1px solid rgba(100,255,218,0.15); padding: 20px; border-radius: 6px; margin-top: 40px;">
 
                 <h3 style="color: #fff; margin-top: 0; margin-bottom: 12px;"><i class="fas fa-comments"></i> Sample Email Sequence Quality</h3>
@@ -1469,7 +1519,6 @@
         </div>
 
     </section>
-
 
 
     <!-- -- TIER COMPARISON -- -->
@@ -1571,7 +1620,6 @@
     </section>
 
 
-
     <!-- -- SEARCH CONSOLE -- -->
 
     <section class="cs-search">
@@ -1621,12 +1669,11 @@
     </section>
 
 
-
     <!-- -- RICH RESULTS -- -->
 
     <section class="cs-rich">
 
-        <div class="container">
+        <div class="container cs-rich-results">
 
             <div class="cs-rich-header fade-in">
 
@@ -1674,7 +1721,7 @@
 
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px;">
+                <div class="cs-rich-results-cards">
 
                     <div style="background: rgba(100,255,218,0.04); border: 1px solid rgba(100,255,218,0.10); border-radius: 10px; padding: 16px 18px;"><div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px;"><span style="font-weight: 800; color: #fff;">Breadcrumbs (1 valid item)</span><span style="color: #64ffda; font-size: 0.8rem; font-weight: 700;">Live</span></div><div style="font-size: 0.86rem; color: rgba(255,255,255,0.78);">Supports cleaner SERP path display and reinforces page hierarchy understanding.</div></div>
 
@@ -1697,10 +1744,36 @@
     </section>
 
 
-
     <!-- -- CTA -- -->
 
-    <section class="cs-cta">
+    
+<section class="kl-growth-section kl-growth-section--alt">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Common questions</h2>
+            </div>
+            <div class="kl-growth-faq">
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>What makes Knight Group different from a template site?</summary>
+                    <p>Hand-coded IA with deep service/area coverage, booking-oriented CTAs, and a live kg OutreachEngine lane that produced real booked work — not a theme demo.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>Can you build this for another handyman brand?</summary>
+                    <p>Yes. We adapt the architecture to your services, cities, and booking flow, then optionally wire CRM outreach and Email-Agent.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>Is outreach included by default?</summary>
+                    <p>The site is CRM-ready. Outreach campaigns are scoped separately with brand templates and daily caps.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>How does this connect to Knight Logics systems?</summary>
+                    <p>Knight Group is a live client proof for home-service growth systems, CRM outreach, and the broader Tampa Bay trade network.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What makes Knight Group different from a template site?","acceptedAnswer":{"@type":"Answer","text":"Hand-coded IA with deep service/area coverage, booking-oriented CTAs, and a live kg OutreachEngine lane that produced real booked work — not a theme demo."}},{"@type":"Question","name":"Can you build this for another handyman brand?","acceptedAnswer":{"@type":"Answer","text":"Yes. We adapt the architecture to your services, cities, and booking flow, then optionally wire CRM outreach and Email-Agent."}},{"@type":"Question","name":"Is outreach included by default?","acceptedAnswer":{"@type":"Answer","text":"The site is CRM-ready. Outreach campaigns are scoped separately with brand templates and daily caps."}},{"@type":"Question","name":"How does this connect to Knight Logics systems?","acceptedAnswer":{"@type":"Answer","text":"Knight Group is a live client proof for home-service growth systems, CRM outreach, and the broader Tampa Bay trade network."}}]}</script>
+<section class="cs-cta">
 
         <div class="container">
 
@@ -1719,7 +1792,6 @@
         </div>
 
     </section>
-
 
 
     <div id="footer-container">
@@ -1748,6 +1820,5 @@
 </body>
 
 </html>
-
 
 

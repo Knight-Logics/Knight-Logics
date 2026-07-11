@@ -39,11 +39,9 @@
     <link rel="canonical" href="https://knightlogics.com/case-study-faith-works">
 
 
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VX36QR7HJW"></script>
 
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VX36QR7HJW');gtag('config','AW-18138273413');</script>
-
 
 
     <script type="application/ld+json">
@@ -67,7 +65,6 @@
     }
 
     </script>
-
 
 
     <script type="application/ld+json">
@@ -163,7 +160,6 @@
     </script>
 
 
-
     <link rel="shortcut icon" href="/favicon.ico">
 
     <link rel="icon" type="image/png" href="/images/KnightLogicsLogo2.png" sizes="1024x1024">
@@ -174,14 +170,12 @@
 
     <meta name="theme-color" content="#6de1ff">
 
-    <link rel="stylesheet" href="style.css?v=20260709center1">
+    <link rel="stylesheet" href="style.css?v=20260711cs6">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 
-
     <title>Faith Works Outdoor Services Case Study | Knight Logics</title>
-
 
 
     <style>
@@ -380,21 +374,56 @@
         }
 
         .cs-overview-grid {
-
             display: grid;
-
-            grid-template-columns: 1fr 1fr;
-
-            gap: 50px;
-
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 28px 40px;
             align-items: start;
-
+        }
+        .cs-overview-grid > :first-child {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        .cs-overview-grid > :nth-child(2) {
+            display: contents;
+        }
+        .cs-overview-media {
+            grid-column: 2;
+            grid-row: 1;
+            align-self: start;
+            margin-bottom: 0 !important;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(148,163,184,.22);
+            background: #0b1524;
+        }
+        .cs-overview-media img,
+        .cs-overview-media video {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+        }
+        .cs-overview-grid .cs-section-label,
+        .cs-overview-grid ul.cs-deliverables,
+        .cs-overview-grid > :nth-child(2) > p {
+            grid-column: 1 / -1;
+        }
+        .cs-overview-grid .cs-section-label {
+            margin-top: 8px;
         }
 
         @media (max-width: 900px) {
-
-            .cs-overview-grid { grid-template-columns: 1fr; gap: 40px; }
-
+            .cs-overview-grid { grid-template-columns: 1fr; gap: 28px; }
+            .cs-overview-grid > :first-child,
+            .cs-overview-media,
+            .cs-overview-grid .cs-section-label,
+            .cs-overview-grid ul.cs-deliverables,
+            .cs-overview-grid > :nth-child(2) > p {
+                grid-column: 1;
+                grid-row: auto;
+            }
+            .cs-deliverables { grid-template-columns: 1fr; }
         }
 
         .cs-overview h2 {
@@ -478,31 +507,25 @@
         }
 
         .cs-deliverables {
-
             list-style: none;
-
             padding: 0;
-
             margin: 0;
-
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 18px;
         }
-
-        .cs-deliverables li {
-
+                .cs-deliverables li {
             display: flex;
-
             align-items: flex-start;
-
-            gap: 12px;
-
-            margin-bottom: 12px;
-
-            font-size: 0.95rem;
-
-            line-height: 1.6;
-
-            color: rgba(255,255,255,0.75);
-
+            gap: 10px;
+            margin: 0;
+            font-size: 0.92rem;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.78);
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(148,163,184,0.12);
+            background: rgba(255,255,255,0.02);
         }
 
         .cs-deliverables i {
@@ -674,13 +697,12 @@
         }
 
     </style>
-    <script defer src="/script.js?v=20260709gbp1"></script>
+    <script defer src="/script.js?v=20260711cs6"></script>
 </head>
 
 <body>
 
     <div id="header-container"></div>
-
 
 
     <!-- -- HERO -- -->
@@ -782,6 +804,7 @@
 
             </div>
 
+
             <div style="display:flex; justify-content:center; padding-top:24px;">
 
                 <a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Ffaithworksclearing.com" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; background:#64ffda; color:#000; padding:12px 24px; border-radius:4px; font-weight:700; text-decoration:none;"><i class="fas fa-gauge-high"></i> Test This Page's Lighthouse Scores</a>
@@ -791,6 +814,48 @@
         </div>
 
     </div>
+
+<section class="kl-growth-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Site proof &amp; local SEO depth</h2>
+                <p>Faith Works Outdoor Services assets from the client workspace — clearing banner, equipment, and stump before/after. No repeated brand cards, no other trade sites in this walkthrough.</p>
+            </div>
+            <div class="cs-media-grid cs-media-grid--stills fade-in">
+                <figure class="cs-proof-card">
+                    <img src="/images/faith-works/clearing-banner.png" alt="Faith Works land clearing banner" loading="eager" decoding="async" width="1920" height="1080">
+                    <figcaption>Clearing banner from the Faith Works client workspace — outdoor services brand at work.</figcaption>
+                </figure>
+                <figure class="cs-proof-card">
+                    <img src="/images/faith-works/equipment.webp" alt="Faith Works equipment fleet" loading="lazy" decoding="async" width="1200" height="800">
+                    <figcaption>Equipment gallery still — the fleet homeowners see when they evaluate land-clearing capacity.</figcaption>
+                </figure>
+                <figure class="cs-proof-card">
+                    <img src="/images/faith-works/tractor-grapple.webp" alt="Faith Works tractor with grapple" loading="lazy" decoding="async" width="1200" height="800">
+                    <figcaption>Field equipment in use — proof imagery that belongs on service and gallery pages.</figcaption>
+                </figure>
+            </div>
+            <div class="cs-audit-grid fade-in">
+                <article class="cs-audit-card">
+                    <img src="/images/faith-works/stump-before.webp" alt="Stump before removal" loading="lazy" decoding="async">
+                    <div><strong>Before — stump removal</strong><span>Before still from the Faith Works stump-removal gallery.</span></div>
+                </article>
+                <article class="cs-audit-card">
+                    <img src="/images/faith-works/stump-after.webp" alt="Stump after removal" loading="lazy" decoding="async">
+                    <div><strong>After — leveled ground</strong><span>After still — the transformation homeowners hire for.</span></div>
+                </article>
+                <article class="cs-audit-card">
+                    <img src="/images/showcase/faith-works-og-card.jpg" alt="Faith Works site card" loading="lazy" decoding="async">
+                    <div><strong>Live site card</strong><span>OG card for the 82-page local SEO build — used once here.</span></div>
+                </article>
+            </div>
+            <div class="svc-cta-row" style="margin-top:1.5rem;justify-content:center;">
+                <a href="/book-consultation" class="btn-primary">Build outdoor-services growth systems</a>
+                <a href="/excavation-business-growth-systems" class="btn-secondary">Excavation lane</a>
+            </div>
+        </div>
+    </section>
+
 
 
 
@@ -817,7 +882,6 @@
         </div>
 
     </div>
-
 
 
     <!-- -- OVERVIEW / THE BUILD -- -->
@@ -913,7 +977,6 @@
     </section>
 
 
-
     <!-- -- LOCAL SEO + VISIBILITY STACK -- -->
 
     <section class="cs-overview" style="border-top: 1px solid rgba(100,255,218,0.1);">
@@ -981,7 +1044,6 @@
             </div>
 
 
-
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-top: 40px;">
 
                 <div>
@@ -1035,7 +1097,6 @@
             </div>
 
 
-
             <div style="background: rgba(100,255,218,0.05); border: 1px solid rgba(100,255,218,0.15); padding: 20px; border-radius: 6px; margin-top: 40px;">
 
                 <h3 style="color: #fff; margin-top: 0; margin-bottom: 12px;"><i class="fas fa-tree"></i> Service Area &amp; Local Coverage</h3>
@@ -1047,7 +1108,6 @@
         </div>
 
     </section>
-
 
 
     <!-- -- TIER COMPARISON -- -->
@@ -1147,12 +1207,11 @@
     </section>
 
 
-
     <!-- -- RICH RESULTS -- -->
 
     <section class="cs-overview" style="background: linear-gradient(135deg, #0a0a0a 0%, #0f1724 100%); border-top: 1px solid rgba(100,255,218,0.1);">
 
-        <div class="container">
+        <div class="container cs-rich-results">
 
             <p class="cs-section-label"><i class="fas fa-code"></i> Structured Data</p>
 
@@ -1162,7 +1221,7 @@
 
             <p style="margin: 10px 0 0; color: rgba(255,255,255,0.78); font-size: 0.88rem;">Live run status (2026-06-25): schema deployed across homepage, service pages, and area pages on faithworksclearing.com.</p>
 
-            <div style="display: flex; flex-wrap: wrap; gap: 14px; margin: 28px 0 22px;">
+            <div class="cs-rich-results-stats" style="display:flex;flex-wrap:wrap;gap:14px;margin:28px 0 22px;">
 
                 <div style="background: rgba(100,255,218,0.04); border: 1px solid rgba(100,255,218,0.10); border-radius: 10px; padding: 16px 18px; min-width: 220px;"><div style="font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.78); margin-bottom: 8px;">Schema Types Deployed</div><div style="font-size: 1.05rem; font-weight: 800; color: #fff;">8+ types</div></div>
 
@@ -1170,13 +1229,13 @@
 
             </div>
 
-            <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px;">
+            <div class="cs-rich-results-actions" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;">
 
                 <a href="https://search.google.com/test/rich-results?url=https%3A%2F%2Ffaithworksclearing.com%2F" target="_blank" rel="noopener" class="cs-btn-live" style="padding: 12px 22px;"><i class="fas fa-arrow-up-right-from-square"></i> Run Live Rich Results Test</a>
 
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px;">
+            <div class="cs-rich-results-cards">
 
                 <div style="background: rgba(100,255,218,0.04); border: 1px solid rgba(100,255,218,0.10); border-radius: 10px; padding: 16px 18px;"><div style="font-weight: 800; color: #fff; margin-bottom: 8px;">Breadcrumbs</div><div style="font-size: 0.86rem; color: rgba(255,255,255,0.78);">Reinforces page hierarchy across the 82-page network and improves path clarity in search results.</div></div>
 
@@ -1195,10 +1254,36 @@
     </section>
 
 
-
     <!-- -- CTA SECTION -- -->
 
-    <section class="cs-cta-section">
+    
+<section class="kl-growth-section kl-growth-section--alt">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Common questions</h2>
+            </div>
+            <div class="kl-growth-faq">
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>Why is Faith Works a flagship proof?</summary>
+                    <p>It demonstrates deep local SEO page architecture for outdoor services — not a thin five-page brochure — with live CRM lane support.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>Can excavation or land-clearing companies get this?</summary>
+                    <p>Yes. We scope service pages, city coverage, trust content, and optional outreach for outdoor and heavy-equipment trades.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>Is there a walkthrough video?</summary>
+                    <p>This page leads with still proof and architecture. Video assets are added when a dedicated capture is available; the live site remains the primary demo.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>How does it connect to Screen Team and Knight Group?</summary>
+                    <p>All three run on the same Knight Logics growth stack patterns — sites, CRM lanes, and Email-Agent mapping.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is Faith Works a flagship proof?","acceptedAnswer":{"@type":"Answer","text":"It demonstrates deep local SEO page architecture for outdoor services — not a thin five-page brochure — with live CRM lane support."}},{"@type":"Question","name":"Can excavation or land-clearing companies get this?","acceptedAnswer":{"@type":"Answer","text":"Yes. We scope service pages, city coverage, trust content, and optional outreach for outdoor and heavy-equipment trades."}},{"@type":"Question","name":"Is there a walkthrough video?","acceptedAnswer":{"@type":"Answer","text":"This page leads with still proof and architecture. Video assets are added when a dedicated capture is available; the live site remains the primary demo."}},{"@type":"Question","name":"How does it connect to Screen Team and Knight Group?","acceptedAnswer":{"@type":"Answer","text":"All three run on the same Knight Logics growth stack patterns — sites, CRM lanes, and Email-Agent mapping."}}]}</script>
+<section class="cs-cta-section">
 
         <div class="container">
 
@@ -1211,7 +1296,6 @@
         </div>
 
     </section>
-
 
 
     <div id="footer-container">
@@ -1240,6 +1324,5 @@
 </body>
 
 </html>
-
 
 

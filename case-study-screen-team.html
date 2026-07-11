@@ -22,7 +22,7 @@
 
     <meta property="og:site_name" content="Knight Logics">
 
-    <meta property="og:image" content="https://screenteamllc.com/Images/ScreenTeamBanner.png">
+    <meta property="og:image" content="https://knightlogics.com/images/showcase/screen-team-og-card.png">
 
     <meta property="og:image:width" content="1200">
 
@@ -32,18 +32,16 @@
 
     <meta name="twitter:title" content="Performance + Local SEO Case Study: Screen Team LLC | Knight Logics">
 
-    <meta name="twitter:image" content="https://screenteamllc.com/Images/ScreenTeamBanner.png">
+    <meta name="twitter:image" content="https://knightlogics.com/images/showcase/screen-team-og-card.png">
 
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 
     <link rel="canonical" href="https://knightlogics.com/case-study-screen-team">
 
 
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VX36QR7HJW"></script>
 
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VX36QR7HJW');gtag('config','AW-18138273413');</script>
-
 
 
     <script type="application/ld+json">
@@ -67,7 +65,6 @@
     }
 
     </script>
-
 
 
     <script type="application/ld+json">
@@ -147,7 +144,6 @@
     </script>
 
 
-
     <link rel="shortcut icon" href="/favicon.ico">
 
     <link rel="icon" type="image/png" href="/images/KnightLogicsLogo2.png" sizes="1024x1024">
@@ -158,14 +154,12 @@
 
     <meta name="theme-color" content="#6de1ff">
 
-    <link rel="stylesheet" href="style.css?v=20260709center1">
+    <link rel="stylesheet" href="style.css?v=20260711cs6">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 
-
     <title>Screen Team LLC Case Study | Knight Logics</title>
-
 
 
     <style>
@@ -364,21 +358,56 @@
         }
 
         .cs-overview-grid {
-
             display: grid;
-
-            grid-template-columns: 1fr 1fr;
-
-            gap: 50px;
-
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 28px 40px;
             align-items: start;
-
+        }
+        .cs-overview-grid > :first-child {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        .cs-overview-grid > :nth-child(2) {
+            display: contents;
+        }
+        .cs-overview-media {
+            grid-column: 2;
+            grid-row: 1;
+            align-self: start;
+            margin-bottom: 0 !important;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(148,163,184,.22);
+            background: #0b1524;
+        }
+        .cs-overview-media img,
+        .cs-overview-media video {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+        }
+        .cs-overview-grid .cs-section-label,
+        .cs-overview-grid ul.cs-deliverables,
+        .cs-overview-grid > :nth-child(2) > p {
+            grid-column: 1 / -1;
+        }
+        .cs-overview-grid .cs-section-label {
+            margin-top: 8px;
         }
 
         @media (max-width: 900px) {
-
-            .cs-overview-grid { grid-template-columns: 1fr; gap: 40px; }
-
+            .cs-overview-grid { grid-template-columns: 1fr; gap: 28px; }
+            .cs-overview-grid > :first-child,
+            .cs-overview-media,
+            .cs-overview-grid .cs-section-label,
+            .cs-overview-grid ul.cs-deliverables,
+            .cs-overview-grid > :nth-child(2) > p {
+                grid-column: 1;
+                grid-row: auto;
+            }
+            .cs-deliverables { grid-template-columns: 1fr; }
         }
 
         .cs-overview h2 {
@@ -462,31 +491,25 @@
         }
 
         .cs-deliverables {
-
             list-style: none;
-
             padding: 0;
-
             margin: 0;
-
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 18px;
         }
-
-        .cs-deliverables li {
-
+                .cs-deliverables li {
             display: flex;
-
             align-items: flex-start;
-
-            gap: 12px;
-
-            margin-bottom: 12px;
-
-            font-size: 0.95rem;
-
-            line-height: 1.6;
-
-            color: rgba(255,255,255,0.75);
-
+            gap: 10px;
+            margin: 0;
+            font-size: 0.92rem;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.78);
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(148,163,184,0.12);
+            background: rgba(255,255,255,0.02);
         }
 
         .cs-deliverables i {
@@ -658,13 +681,12 @@
         }
 
     </style>
-    <script defer src="/script.js?v=20260709gbp1"></script>
+    <script defer src="/script.js?v=20260711cs6"></script>
 </head>
 
 <body>
 
     <div id="header-container"></div>
-
 
 
     <!-- -- HERO -- -->
@@ -766,6 +788,7 @@
 
             </div>
 
+
             <div style="display:flex; justify-content:center; padding-top:24px;">
 
                 <a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fscreenteamllc.com" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; background:#64ffda; color:#000; padding:12px 24px; border-radius:4px; font-weight:700; text-decoration:none;"><i class="fas fa-gauge-high"></i> Test This Page's Lighthouse Scores</a>
@@ -775,6 +798,56 @@
         </div>
 
     </div>
+
+<section class="kl-growth-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Site walkthrough &amp; proof</h2>
+                <p>Watch the Screen Team rebuild, then real workspace stills — banner, job photos, and service previews from the Screen Team site.</p>
+            </div>
+            <div class="cs-media-grid fade-in">
+                <figure class="cs-video-shell">
+                    <video controls playsinline preload="metadata" poster="/images/screen-team/banner.webp" aria-label="Screen Team website walkthrough">
+                        <source src="/images/ST-Update.mp4" type="video/mp4">
+                        
+                    </video>
+                </figure>
+                <div class="cs-proof-stack">
+                    <figure class="cs-proof-card">
+                        <img src="/images/screen-team/banner.webp" alt="Screen Team LLC homepage banner" loading="lazy" decoding="async" width="1920" height="1080">
+                        <figcaption>Live homepage banner from the Screen Team workspace — quote-first enclosure brand.</figcaption>
+                    </figure>
+                    <figure class="cs-proof-card">
+                        <img src="/images/screen-team/job-pool-enclosure.jpg" alt="Screen Team pool enclosure job photo" loading="lazy" decoding="async" width="1200" height="800">
+                        <figcaption>Real job photography from Screen Team’s gallery — pool enclosure work in Tampa Bay.</figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div class="cs-audit-grid fade-in">
+                <article class="cs-audit-card">
+                    <img src="/images/screen-team/services/pool-enclosures.jpg" alt="Pool enclosure service preview" loading="lazy" decoding="async">
+                    <div><strong>Pool enclosures</strong><span>Service-page preview art from the Screen Team site build.</span></div>
+                </article>
+                <article class="cs-audit-card">
+                    <img src="/images/screen-team/services/rescreens.jpg" alt="Rescreen service preview" loading="lazy" decoding="async">
+                    <div><strong>Rescreens</strong><span>High-intent service coverage for repair and replacement work.</span></div>
+                </article>
+                <article class="cs-audit-card">
+                    <img src="/images/screen-team/services/screen-lanais.jpg" alt="Screen lanai service preview" loading="lazy" decoding="async">
+                    <div><strong>Screen lanais</strong><span>Lanai and patio screening depth on the live site.</span></div>
+                </article>
+                <article class="cs-audit-card">
+                    <img src="/images/screen-team/services/window-screens.jpg" alt="Window screen service preview" loading="lazy" decoding="async">
+                    <div><strong>Window screens</strong><span>Window and garage screen lanes with matching CTAs.</span></div>
+                </article>
+            </div>
+            <div class="svc-cta-row" style="margin-top:1.5rem;justify-content:center;">
+                <a href="/book-consultation" class="btn-primary">Build a similar local growth site</a>
+                <a href="/home-service-business-growth-systems" class="btn-secondary">Home service systems</a>
+            </div>
+        </div>
+    </section>
+
 
 
 
@@ -801,7 +874,6 @@
         </div>
 
     </div>
-
 
 
     <!-- -- OVERVIEW / THE BUILD -- -->
@@ -903,7 +975,6 @@
     </section>
 
 
-
     <!-- -- OPERATIONAL STACK -- -->
 
     <section class="cs-overview" style="border-top: 1px solid rgba(100,255,218,0.1);">
@@ -971,7 +1042,6 @@
             </div>
 
 
-
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-top: 40px;">
 
                 <div>
@@ -1025,7 +1095,6 @@
             </div>
 
 
-
             <div style="background: rgba(100,255,218,0.05); border: 1px solid rgba(100,255,218,0.15); padding: 20px; border-radius: 6px; margin-top: 40px;">
 
                 <h3 style="color: #fff; margin-top: 0; margin-bottom: 12px;"><i class="fas fa-comments"></i> Service Area & Proof of Work</h3>
@@ -1037,7 +1106,6 @@
         </div>
 
     </section>
-
 
 
     <!-- -- TIER COMPARISON -- -->
@@ -1139,12 +1207,11 @@
     </section>
 
 
-
     <!-- -- RICH RESULTS -- -->
 
     <section class="cs-overview" style="background: linear-gradient(135deg, #0a0a0a 0%, #0f1724 100%); border-top: 1px solid rgba(100,255,218,0.1);">
 
-        <div class="container">
+        <div class="container cs-rich-results">
 
             <p class="cs-section-label"><i class="fas fa-code"></i> Structured Data</p>
 
@@ -1154,7 +1221,7 @@
 
             <p style="margin: 10px 0 0; color: rgba(255,255,255,0.78); font-size: 0.88rem;">Live run status (2026-05-09): synced to a live Rich Results run from the authenticated shared browser session.</p>
 
-            <div style="display: flex; flex-wrap: wrap; gap: 14px; margin: 28px 0 22px;">
+            <div class="cs-rich-results-stats" style="display:flex;flex-wrap:wrap;gap:14px;margin:28px 0 22px;">
 
                 <div style="background: rgba(100,255,218,0.04); border: 1px solid rgba(100,255,218,0.10); border-radius: 10px; padding: 16px 18px; min-width: 220px;"><div style="font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.78); margin-bottom: 8px;">Valid Items (Live Test)</div><div style="font-size: 1.05rem; font-weight: 800; color: #fff;">4 detected</div></div>
 
@@ -1162,13 +1229,13 @@
 
             </div>
 
-            <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px;">
+            <div class="cs-rich-results-actions" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;">
 
                 <a href="https://search.google.com/test/rich-results?url=https%3A%2F%2Fscreenteamllc.com%2F" target="_blank" rel="noopener" class="cs-btn-live" style="padding: 12px 22px;"><i class="fas fa-arrow-up-right-from-square"></i> Run Live Rich Results Test</a>
 
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px;">
+            <div class="cs-rich-results-cards">
 
                 <div style="background: rgba(100,255,218,0.04); border: 1px solid rgba(100,255,218,0.10); border-radius: 10px; padding: 16px 18px;"><div style="font-weight: 800; color: #fff; margin-bottom: 8px;">Breadcrumbs (1 valid item)</div><div style="font-size: 0.86rem; color: rgba(255,255,255,0.78);">Improves path clarity in search and reinforces page hierarchy interpretation.</div></div>
 
@@ -1187,10 +1254,36 @@
     </section>
 
 
-
     <!-- -- CTA SECTION -- -->
 
-    <section class="cs-cta-section">
+    
+<section class="kl-growth-section kl-growth-section--alt">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Common questions</h2>
+            </div>
+            <div class="kl-growth-faq">
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>Is Screen Team a one-off brochure site?</summary>
+                    <p>No. It is a 36-page growth system with quote-first CTAs, local SEO depth, and live OutreachEngine / Email-Agent lanes — the same stack pattern used on Faith Works and Knight Group.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>Can you rebuild my trade site like this?</summary>
+                    <p>Yes. We scope service pages, city coverage, conversion CTAs, and optional CRM outreach for your trade and territory.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>What scores should I expect?</summary>
+                    <p>Screen Team ships with strong Lighthouse performance and SEO scores. Exact numbers depend on imagery and third-party scripts — we optimize for re-testable results, not vanity screenshots.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>Does this include ongoing outreach?</summary>
+                    <p>Screen Team runs on the st OutreachEngine lane. Outreach is optional per client and configured with brand-safe caps and templates.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Screen Team a one-off brochure site?","acceptedAnswer":{"@type":"Answer","text":"No. It is a 36-page growth system with quote-first CTAs, local SEO depth, and live OutreachEngine / Email-Agent lanes — the same stack pattern used on Faith Works and Knight Group."}},{"@type":"Question","name":"Can you rebuild my trade site like this?","acceptedAnswer":{"@type":"Answer","text":"Yes. We scope service pages, city coverage, conversion CTAs, and optional CRM outreach for your trade and territory."}},{"@type":"Question","name":"What scores should I expect?","acceptedAnswer":{"@type":"Answer","text":"Screen Team ships with strong Lighthouse performance and SEO scores. Exact numbers depend on imagery and third-party scripts — we optimize for re-testable results, not vanity screenshots."}},{"@type":"Question","name":"Does this include ongoing outreach?","acceptedAnswer":{"@type":"Answer","text":"Screen Team runs on the st OutreachEngine lane. Outreach is optional per client and configured with brand-safe caps and templates."}}]}</script>
+<section class="cs-cta-section">
 
         <div class="container">
 
@@ -1203,7 +1296,6 @@
         </div>
 
     </section>
-
 
 
     <div id="footer-container">
@@ -1232,8 +1324,5 @@
 </body>
 
 </html>
-
-
-
 
 

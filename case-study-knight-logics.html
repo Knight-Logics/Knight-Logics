@@ -22,7 +22,7 @@
 
     <meta property="og:site_name" content="Knight Logics">
 
-    <meta property="og:image" content="https://knightlogics.com/images/KnightLogicsLogo2.png">
+    <meta property="og:image" content="https://knightlogics.com/images/showcase/case-study-knightlogics-platform-mockup.webp">
 
     <meta property="og:image:width" content="1024">
 
@@ -32,7 +32,7 @@
 
     <meta name="twitter:title" content="Case Study: KnightLogics.com | Knight Logics">
 
-    <meta name="twitter:image" content="https://knightlogics.com/images/KnightLogicsLogo2.png">
+    <meta name="twitter:image" content="https://knightlogics.com/images/showcase/case-study-knightlogics-platform-mockup.webp">
 
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 
@@ -174,7 +174,7 @@
 
     <meta name="theme-color" content="#6de1ff">
 
-    <link rel="stylesheet" href="style.css?v=20260709center1">
+    <link rel="stylesheet" href="style.css?v=20260711cs6">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -457,15 +457,43 @@
         }
 
         .cs-overview-grid {
-
             display: grid;
-
-            grid-template-columns: 1fr 1.6fr;
-
-            gap: 64px;
-
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 28px 40px;
             align-items: start;
-
+        }
+        .cs-overview-grid > :first-child {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        .cs-overview-grid > :nth-child(2) {
+            display: contents;
+        }
+        .cs-overview-media {
+            grid-column: 2;
+            grid-row: 1;
+            align-self: start;
+            margin-bottom: 0 !important;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(148,163,184,.22);
+            background: #0b1524;
+        }
+        .cs-overview-media img,
+        .cs-overview-media video {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+        }
+        .cs-overview-grid .cs-section-label,
+        .cs-overview-grid ul.cs-deliverables,
+        .cs-overview-grid > :nth-child(2) > p {
+            grid-column: 1 / -1;
+        }
+        .cs-overview-grid .cs-section-label {
+            margin-top: 8px;
         }
 
         .cs-section-label {
@@ -541,35 +569,25 @@
         }
 
         .cs-deliverables {
-
             list-style: none;
-
             padding: 0;
-
             margin: 0;
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 12px;
-
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 18px;
         }
-
-        .cs-deliverables li {
-
+                .cs-deliverables li {
             display: flex;
-
             align-items: flex-start;
-
             gap: 10px;
-
+            margin: 0;
             font-size: 0.92rem;
-
-            color: rgba(255,255,255,0.78);
-
             line-height: 1.5;
-
+            color: rgba(255,255,255,0.78);
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(148,163,184,0.12);
+            background: rgba(255,255,255,0.02);
         }
 
         .cs-deliverables li i {
@@ -1089,7 +1107,7 @@
         })(window, document, "clarity", "script", "wgj5b5rrss");
 
     </script>
-    <script defer src="/script.js?v=20260709gbp1"></script>
+    <script defer src="/script.js?v=20260711cs6"></script>
 </head>
 
 <body>
@@ -1125,6 +1143,8 @@
                 <h1><span>Portfolio & Local SEO &mdash; KnightLogics.com</span></h1>
 
                 <p class="cs-hero-sub">This site is itself a demonstration of what I build. Knight Logics is a multi-page portfolio and service hub built with custom HTML, CSS, and JavaScript &mdash; no frameworks, no CMS. 95 Desktop Performance. 100 Accessibility. 100 SEO. Indexed, schema-verified, and GA4-tracked from day one.</p>
+                <p>Knight Logics is a living demonstration of the growth stack: marketing pages, schema, indexing discipline, and the internal systems (Knight Command, CRM, referrals, Social Poster) that run the business behind the site.</p>
+                <p>Prospects who want “something like this for themselves” are not buying a theme — they are buying a coherent platform where the website, ops shell, and automation lanes share one operator workflow.</p>
 
                 <div class="cs-hero-actions">
 
@@ -1197,6 +1217,8 @@
 
             </div>
 
+
+
             <div style="display:flex; justify-content:center; padding-top:24px;">
 
                 <a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fknightlogics.com" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; background:#64ffda; color:#000; padding:12px 24px; border-radius:4px; font-weight:700; text-decoration:none;"><i class="fas fa-gauge-high"></i> Test This Page's Lighthouse Scores</a>
@@ -1206,6 +1228,53 @@
         </div>
 
     </div>
+
+<section class="kl-growth-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Platform walkthrough &amp; proof</h2>
+                <p>Knight Logics is the marketing and ops platform behind the growth system — mockups and live-site proof of the hand-coded hub.</p>
+            </div>
+            <div class="cs-media-grid cs-media-grid--stills fade-in">
+                <figure class="cs-proof-card">
+                    <img src="/images/showcase/case-study-knightlogics-platform-mockup.webp" alt="Knight Logics marketing and ops platform" loading="eager" decoding="async" width="1200" height="675">
+                    <figcaption>Primary build proof from the client workspace.</figcaption>
+                </figure>
+                <figure class="cs-proof-card">
+                    <img src="/images/websitehero.webp" alt="Knight Logics website hero" loading="lazy" decoding="async" width="1200" height="675">
+                    <figcaption>Live knightlogics.com hero and service hub.</figcaption>
+                </figure>
+                <figure class="cs-proof-card">
+                    <img src="/images/showcase/case-study-knight-command-mockup.webp" alt="Knight Command" loading="lazy" decoding="async" width="1200" height="675">
+                    <figcaption>Internal ops shell that powers daily growth operations.</figcaption>
+                </figure>
+            </div>
+            <div class="cs-audit-grid fade-in">
+                <article class="cs-audit-card">
+                    <img src="/images/showcase/case-study-crm-outreach-mockup.webp" alt="CRM" loading="lazy" decoding="async">
+                    <div><strong>CRM outreach</strong><span>Production OutreachEngine for multi-brand campaigns.</span></div>
+                </article>
+                <article class="cs-audit-card">
+                    <img src="/images/showcase/case-study-referral-network-mockup.webp" alt="Referrals" loading="lazy" decoding="async">
+                    <div><strong>Referral network</strong><span>Partner attribution and payout visibility.</span></div>
+                </article>
+                <article class="cs-audit-card">
+                    <img src="/images/showcase/case-study-social-poster-mockup.webp" alt="Social" loading="lazy" decoding="async">
+                    <div><strong>Social Poster</strong><span>Multi-brand posting runners with failure visibility.</span></div>
+                </article>
+                <article class="cs-audit-card">
+                    <img src="/images/showcase/case-study-vendoroo-ticket-mockup.webp" alt="Field ops" loading="lazy" decoding="async">
+                    <div><strong>Field workflows</strong><span>Ticket-to-invoice patterns for vendor ops.</span></div>
+                </article>
+            </div>
+            <div class="svc-cta-row" style="margin-top:1.5rem;justify-content:center;">
+                <a href="/book-consultation" class="btn-primary">Build your growth platform</a>
+                <a href="/business-growth-systems" class="btn-secondary">Growth systems</a>
+            </div>
+        </div>
+    </section>
+
+
 
 
 
@@ -1355,7 +1424,7 @@
 
     <section class="cs-rich">
 
-        <div class="container">
+        <div class="container cs-rich-results">
 
             <div class="cs-rich-header fade-in">
 
@@ -1391,7 +1460,7 @@
 
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px;">
+                <div class="cs-rich-results-cards">
 
                     <div style="background: rgba(100,255,218,0.04); border: 1px solid rgba(100,255,218,0.10); border-radius: 10px; padding: 16px 18px;"><div style="font-weight: 800; color: #fff; margin-bottom: 8px;">Breadcrumbs (1 valid item)</div><div style="font-size: 0.86rem; color: rgba(255,255,255,0.78);">Improves displayed result paths and helps Google read page structure clearly.</div></div>
 
@@ -1451,7 +1520,34 @@
 
     <!-- -- CTA -- -->
 
-    <section class="cs-cta">
+    
+<section class="kl-growth-section kl-growth-section--alt">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Common questions</h2>
+            </div>
+            <div class="kl-growth-faq">
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>Why is Knight Logics a case study on its own site?</summary>
+                    <p>The site is a living demonstration — hand-coded HTML/CSS/JS, schema, indexing, and the same performance discipline we apply to client builds.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>Is this a CMS?</summary>
+                    <p>No. It is a custom multi-page portfolio and service hub. Internal ops tools (Knight Command, CRM, Social Poster) sit alongside it as production systems.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>Can you build a similar hub for my company?</summary>
+                    <p>Yes. We scope marketing sites, owner dashboards, and automation embeds so your brand and ops share one coherent system.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>Where do client proofs live?</summary>
+                    <p>On dedicated case study pages — Roof Monsters, Screen Team, Knight Group, Faith Works, and the system case studies for CRM, referrals, and social.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is Knight Logics a case study on its own site?","acceptedAnswer":{"@type":"Answer","text":"The site is a living demonstration — hand-coded HTML/CSS/JS, schema, indexing, and the same performance discipline we apply to client builds."}},{"@type":"Question","name":"Is this a CMS?","acceptedAnswer":{"@type":"Answer","text":"No. It is a custom multi-page portfolio and service hub. Internal ops tools (Knight Command, CRM, Social Poster) sit alongside it as production systems."}},{"@type":"Question","name":"Can you build a similar hub for my company?","acceptedAnswer":{"@type":"Answer","text":"Yes. We scope marketing sites, owner dashboards, and automation embeds so your brand and ops share one coherent system."}},{"@type":"Question","name":"Where do client proofs live?","acceptedAnswer":{"@type":"Answer","text":"On dedicated case study pages — Roof Monsters, Screen Team, Knight Group, Faith Works, and the system case studies for CRM, referrals, and social."}}]}</script>
+<section class="cs-cta">
 
         <div class="container">
 

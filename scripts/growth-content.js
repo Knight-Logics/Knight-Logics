@@ -81,6 +81,8 @@ const flagshipPages = [
       ['/service-websites', 'Websites & Local SEO'],
       ['/crm-outreach-lead-generation', 'CRM Outreach'],
       ['/service-ai-automation', 'Automation & Tools'],
+      ['/ai-business-automation', 'AI Business Automation'],
+      ['/startup-business-launch-systems', 'Startup Launch Systems'],
       ['/case-study-faith-works', 'Faith Works Case Study'],
       ['/case-study-screen-team', 'Screen Team Case Study'],
       ['/case-study-knight-group', 'Knight Group Case Study'],
@@ -639,6 +641,9 @@ const flagshipPages = [
     links: [
       ['/handyman-business-growth-systems', 'Handyman Lane'],
       ['/electrician-business-growth-systems', 'Electrician Lane'],
+      ['/painter-business-growth-systems', 'Painter Lane'],
+      ['/screen-enclosure-business-growth-systems', 'Screen Enclosure'],
+      ['/excavation-business-growth-systems', 'Excavation Lane'],
       ['/roofing-business-growth-systems', 'Roofing Lane'],
       ['/case-study-jns', 'JNS Case Study'],
       ['/business-growth-systems', 'Full Growth Systems']
@@ -731,6 +736,10 @@ const flagshipPages = [
       ['/home-service-websites', 'Home Service Websites'],
       ['/local-visibility-systems', 'Local Visibility'],
       ['/handyman-business-growth-systems', 'Handyman Systems'],
+      ['/electrician-business-growth-systems', 'Electrician Lane'],
+      ['/painter-business-growth-systems', 'Painter Lane'],
+      ['/screen-enclosure-business-growth-systems', 'Screen Enclosure'],
+      ['/excavation-business-growth-systems', 'Excavation Systems'],
       ['/website-growth-audit', 'Free Growth Audit']
     ],
     cta: { title: 'Growing a home service company?', text: 'Tell us your services, service area, and how customers find you today.' }
@@ -1343,66 +1352,141 @@ const subPages = [
     slug: 'roofing-business-growth-systems',
     parent: { href: '/contractor-growth-systems', label: 'Contractor Systems' },
     title: 'Roofing Trade Growth Systems',
-    meta: 'Roofing growth playbook — trust pages, local SEO, inspection leads, and referral network onboarding for Tampa Bay roofers.',
+    meta: 'Roofing growth systems for Tampa Bay — trust pages, local SEO, estimate-first lead capture, and referral network onboarding with Roof Monsters as the live reference.',
     eyebrow: 'Network trade lane · Roofing',
     h1: 'Growth Systems for Roofing Companies',
-    lead: 'Roofing trades join the same growth stack and referral network — this open lane is coming soon; your launch becomes the reference when storm-season visibility matters.',
+    lead: 'Roofing trades join the same growth stack and referral network used across Tampa Bay — with Roof Monsters on roofmonsters.co as the live reference when storm-season visibility, estimate capture, and local trust pages have to work together.',
     heroIcon: 'fa-house-chimney-crack',
     heroImage: images.caseStudyRoofing,
     problem: {
       kicker: 'Storm-season pressure',
       title: 'Roofing websites fail when trust and geography are thin',
-      text: 'Homeowners pick roofers from map pack and referrals. Thin proof, missing city pages, and slow follow-up on inspection requests cost jobs when storms hit.',
-      bullets: [
-        'No project proof or insurance-friendly FAQ content',
-        'City pages missing for metros you actually serve',
-        'Inspection requests not tracked in CRM',
-        'Referral partners unattributed after storms'
+      text: 'Homeowners pick roofers from map pack and referrals. Thin proof, missing city pages, and slow follow-up on estimate requests cost jobs when storms hit.',
+      paragraphs: [
+        'Homeowners pick roofers from the map pack, neighbor referrals, and a short list of sites that look trustworthy on a phone. When storms hit Tampa Bay, that decision compresses into minutes — and thin proof, missing city pages, or a buried estimate form costs the job before your crew can quote.',
+        'Most roofing sites fail the same way: generic contractor templates, stock photos, no service-area depth for the metros you actually serve, and inspection or estimate requests that die in voicemail. Insurance-adjacent FAQ content is missing, warranty language is vague, and complementary trades have no tracked path to send you work after a storm.',
+        'A roofing growth system fixes the foundation first — trust pages, geography, estimate-first CTAs, schema, and Search Console — then wires CRM and referral attribution when volume justifies it. Roof Monsters is the live proof that pattern ships.'
       ],
-      media: images.caseStudyRoofing
+      bullets: [
+        'No project proof or clear estimate-first FAQ content homeowners expect before they call',
+        'City and service-area pages missing for Tampa Bay metros you actually cover',
+        'Estimate and inspection requests not tracked in CRM — leads die in unmanaged voicemail',
+        'Referral partners and complementary trades unattributed after storm-season spikes',
+        'Page-builder weight and weak technical SEO that fail when traffic finally arrives'
+      ],
+      media: images.roofMonstersProject
     },
     features: [
-      { icon: 'fa-shield-halved', label: 'Trust', title: 'Trust & proof pages', text: 'Projects, service areas, insurance messaging, and FAQs that match estimate-first roofing sales.' },
-      { icon: 'fa-map-location-dot', label: 'SEO', title: 'Local SEO architecture', text: 'Service and city pages aligned to how roofers sell — roofing vertical preview pattern.' },
-      { icon: 'fa-clipboard-list', label: 'Leads', title: 'Lead capture & CRM', text: 'Forms, call tracking, and outreach intake for inspection requests.' },
-      { icon: 'fa-handshake', label: 'Referrals', title: 'Partner referral flow', text: 'Track complementary trades and storm partner lead sources.' }
+      {
+        icon: 'fa-shield-halved',
+        label: 'Trust',
+        title: 'Trust & proof pages',
+        text: 'Project galleries, service definitions, warranty language, about/FAQ pages, and soft trust copy that matches estimate-first roofing sales — without insurance-claim spam that misrepresents how the company actually wins work.'
+      },
+      {
+        icon: 'fa-map-location-dot',
+        label: 'SEO',
+        title: 'Local SEO architecture',
+        text: 'Service silos and city pages aligned to how roofers sell across Tampa Bay. Schema, internal linking, sitemap hygiene, and Search Console launch — with Roof Monsters as the live vertical reference at 79+ discovered pages.'
+      },
+      {
+        icon: 'fa-clipboard-list',
+        label: 'Leads',
+        title: 'Lead capture & CRM',
+        text: 'Hero estimate forms, click-to-call, and intake rules ready for Email-Agent routing and OutreachEngine when outbound is enabled. Storm-season spikes need tracked queues — not a shared inbox free-for-all.'
+      },
+      {
+        icon: 'fa-handshake',
+        label: 'Referrals',
+        title: 'Partner referral flow',
+        text: 'Tracked /ref/:partner paths and network onboarding so screen enclosure, handyman, and insurance-adjacent partners can send attributed work — the same flywheel used across Knight Logics trade lanes.'
+      }
     ],
     mediaBlocks: [
       {
-        kicker: 'Coming soon',
-        title: 'Roofing brand system',
-        text: 'Roofing growth preview with local SEO structure, trust pages, and estimate-first conversion paths.',
-        media: images.jns
+        kicker: 'Live reference',
+        title: 'Roof Monsters on roofmonsters.co',
+        text: 'Live Tampa Bay roofing growth system with estimate-first lead capture, service and location depth, gallery proof, and a dark brand system built for mobile. The public site stays honest to referral-driven sales — clear written estimates, licensed operations, and storm response framed as private-pay emergency help.',
+        media: { type: 'image', src: '/images/showcase/roof-monsters-homepage-wave.png', alt: 'Roof Monsters homepage — Your Roof Is Our Proof' }
+      },
+      {
+        kicker: 'Technical proof',
+        title: '97 Lighthouse · 99% Semrush · 79 GSC pages',
+        text: 'Launch audits and Search Console discovery back the live roofing reference — desktop Lighthouse 97/100/100/100, Semrush Site Health 99% with zero errors, Ahrefs health 100, and 79 pages discovered from the submitted sitemap. These are re-testable scores, not padded case-study claims.',
+        media: { type: 'image', src: '/images/showcase/roof-monsters-lighthouse-97.webp', alt: 'Roof Monsters Lighthouse scores' }
       }
     ],
+    stats: [
+      { value: '97', label: 'Lighthouse performance — RM' },
+      { value: '79', label: 'GSC discovered pages — RM' },
+      { value: '99%', label: 'Semrush site health — RM' }
+    ],
     process: [
-      { title: 'Trust content map', text: 'Proof, insurance FAQs, and service definitions before city expansion.' },
-      { title: 'Geo & GBP', text: 'City pages and profile alignment for storm-season metros.' },
-      { title: 'Lead paths', text: 'Inspection forms, call CTAs, and CRM intake rules.' },
-      { title: 'Referral & outreach', text: 'Partner QR and optional property manager outreach.' }
+      {
+        title: 'Trust content map',
+        text: 'Document services, warranty language, FAQ themes, and project proof before city expansion. Roofing buyers need clarity on repairs vs installs vs inspections before they trust an estimate form.'
+      },
+      {
+        title: 'Geo & GBP',
+        text: 'Build city and service-area pages for storm-season metros you actually serve, align Google Business messaging to the site, and wire internal links so crawlers and customers can move from service hubs to local pages.'
+      },
+      {
+        title: 'Lead paths',
+        text: 'Ship estimate forms and click-to-call above the fold on mobile, define CRM intake rules, and connect Email-Agent routing so requests do not die in a shared inbox during the first tropical wave.'
+      },
+      {
+        title: 'Referral & outreach',
+        text: 'Add partner QR and /ref paths for complementary trades. Optional OutreachEngine for property managers and B2B lists stays capped and brand-isolated until you explicitly enable outbound.'
+      }
     ],
     idealFor: [
-      'Tampa Bay roofers preparing for storm season visibility',
-      'Roofing brands launching credibly before heavy ad spend',
-      'Companies needing inspection lead tracking beyond voicemail',
-      'Teams partnering with trades for referral attribution'
+      'Tampa Bay roofers preparing for storm-season visibility before ad spend spikes',
+      'Roofing brands that win on referrals and need a site that matches real-world reputation',
+      'Companies whose estimate requests still die in voicemail or unmanaged email',
+      'Teams joining a complementary trade network with tracked partner attribution',
+      'Owners who want hand-coded performance and technical SEO — not another page-builder rebuild'
     ],
     proof: {
-      title: 'Reference pattern: roofing vertical (coming soon)',
-      text: 'Roofing brand site and lead system in development — documents trust layout and estimate-first paths for the roofing lane in the partner network.',
-      image: images.caseStudyRoofing.src,
-      imageAlt: 'Roofing lead capture and trust pages',
-      badge: 'Coming soon',
+      title: 'Reference build: Roof Monsters',
+      text: 'Live Tampa Bay roofing growth system on roofmonsters.co — estimate-first lead capture, local SEO depth, gallery proof, and audit-backed technical scores. Family-owned positioning, Dunedin HQ, and a public site built for referrals rather than insurance-claim marketing.',
+      image: '/images/showcase/roof-monsters-og-card.webp',
+      imageAlt: 'Roof Monsters live roofing website',
+      badge: 'Live client',
       href: '/case-study-roof-monsters',
-      linkLabel: 'Roofing system preview'
+      linkLabel: 'View Roof Monsters case study'
     },
     faq: [
-      { q: 'Is the roofing anchor live?', a: 'This lane is coming soon — preview work documents the vertical pattern until a partner brand launches publicly.' },
-      { q: 'Do you handle storm chasing SEO?', a: 'We build durable local structure — not short-term spam. Geography matches real service coverage.' },
-      { q: 'Can outreach target property managers?', a: 'Yes — OutreachEngine supports segmented B2B lists with daily caps and reply tracking.' }
+      {
+        q: 'Is the roofing anchor live?',
+        a: 'Yes — Roof Monsters is live on roofmonsters.co and is the official roofing network reference under Industries → Roofing. The case study, growth-systems playbook, and nav slot all point at the same live build.'
+      },
+      {
+        q: 'Do you handle storm chasing SEO?',
+        a: 'We build durable local structure — service silos, real service-area pages, schema, and Search Console hygiene — not short-term spam or doorway pages. Geography matches where crews actually work so storm-season traffic lands on pages that can convert.'
+      },
+      {
+        q: 'Can outreach target property managers?',
+        a: 'Yes — OutreachEngine supports segmented B2B lists with daily caps, reply tracking, and brand-isolated lanes. For Roof Monsters, cold outreach stays off unless explicitly enabled; Email-Agent routing for info@roofmonsters.co is already in place.'
+      },
+      {
+        q: 'What does a roofing growth system include vs a basic website?',
+        a: 'A basic site is pages and a form. A growth system adds local SEO architecture, trust/FAQ depth, estimate-first conversion paths, technical launch (schema, sitemap, GSC), mailbox routing, and optional CRM/referral lanes that plug into the same stack used across Knight Logics trade partners.'
+      },
+      {
+        q: 'How does this connect to the referral network?',
+        a: 'Roofing partners can receive and send attributed work through /ref/:partner paths alongside screen enclosure, handyman, and excavation anchors. Your brand gets its own lane, caps, and proof page when launch is ready — not a shared spreadsheet of “who sent what.”'
+      }
     ],
-    links: [['/local-visibility-systems', 'Local Visibility'], ['/case-study-roof-monsters', 'Roofing System Preview'], ['/contractor-growth-systems', 'Contractor Systems']],
-    cta: { title: 'Join the roofing trade lane?', text: 'Tell us your service area and how inspection requests arrive today.' }
+    links: [
+      ['/local-visibility-systems', 'Local Visibility'],
+      ['/case-study-roof-monsters', 'Roof Monsters Case Study'],
+      ['/contractor-growth-systems', 'Contractor Systems'],
+      ['/referral-network-systems', 'Referral Network']
+    ],
+    cta: {
+      title: 'Join the roofing trade lane?',
+      text: 'Tell us your service area, how estimate requests arrive today, and whether you need foundation SEO, CRM intake, or full network onboarding. We will map the leanest path that still ships before storm season.'
+    }
   },
   {
     slug: 'screen-enclosure-business-growth-systems',
@@ -2084,22 +2168,34 @@ const caseStudies = [
     sections: [
       {
         title: 'Problem',
-        paragraphs: ['Daily growth operations sprawled across separate URLs for referral tracking, OutreachEngine CRM, Email-Agent, and Social Poster. Context switching slowed outreach review, partner support, and failure triage.'],
+        paragraphs: [
+          'Daily growth operations sprawled across separate URLs for referral tracking, OutreachEngine CRM, Email-Agent, and Social Poster. Context switching slowed outreach review, partner support, and failure triage.',
+          'When a runner failed overnight, nobody had a single place to see it. New hires inherited a bookmark folder instead of an ops product.'
+        ],
         bullets: ['Referral dashboard on one port, CRM on another', 'Email-Agent and social runners opened in orphan tabs', 'No unified log view when automations failed']
       },
       {
         title: 'What was built',
-        paragraphs: ['Knight Command at /admin provides a tabbed shell: Command Center, Referrals, Outreach CRM, Email Agent, Social Ops, Social Poster, and Logs. Each tab embeds the live service — referral infrastructure on 5050, Email-Agent on 5100, and Streamlit Social Poster on 8501 alongside related ops views on 8500.'],
+        paragraphs: [
+          'Knight Command at /admin provides a tabbed shell: Command Center, Referrals, Outreach CRM, Email Agent, Social Ops, Social Poster, and Logs. Each tab embeds the live service — referral infrastructure on 5050, Email-Agent on 5100, and Streamlit Social Poster on 8501 alongside related ops views on 8500.',
+          'The shell is intentionally modular: services upgrade independently, and new lanes slot into tabs instead of forcing the whole team to relearn URLs.'
+        ],
         bullets: ['Secure auth before any embed loads', 'Modular tabs so services upgrade independently', 'Logs tab for cross-system failure review']
       },
       {
         title: 'Tools & architecture',
-        paragraphs: ['Web-first admin shell with iframe or proxy embeds to Flask OutreachEngine, Email-Agent, and Streamlit runners. Designed for operator workflows documented in the Business Growth Systems and Business Dashboard Development lanes.'],
+        paragraphs: [
+          'Web-first admin shell with iframe or proxy embeds to Flask OutreachEngine, Email-Agent, and Streamlit runners. Designed for operator workflows documented in the Business Growth Systems and Business Dashboard Development lanes.',
+          'This is the same pattern we reuse when a client needs an owner dashboard that feels like one product — not five SaaS logins.'
+        ],
         bullets: ['Command Center summary orientation', 'Referrals tab → referral-dashboard and /ref/:partner tooling', 'Outreach CRM tab → OutreachEngine queue UI']
       },
       {
         title: 'Early signal',
-        paragraphs: ['Operators spend less time hunting localhost ports during daily review. New services slot into tabs instead of requiring bookmark updates across the team.'],
+        paragraphs: [
+          'Operators spend less time hunting localhost ports during daily review. New services slot into tabs instead of requiring bookmark updates across the team.',
+          'Morning queue review — referrals, CRM, email, social — happens in one authenticated session with shared failure visibility.'
+        ],
         bullets: ['Faster morning queue review', 'Single login for growth ops', 'Foundation for client-facing admin patterns']
       }
     ],
@@ -2145,22 +2241,34 @@ const caseStudies = [
     sections: [
       {
         title: 'Problem',
-        paragraphs: ['Manual outreach mixed templates, lists, and sender reputations across Knight Logics client brands. Replies scattered in personal Gmail. Follow-up timing was inconsistent and bounces poisoned future sends.'],
+        paragraphs: [
+          'Manual outreach mixed templates, lists, and sender reputations across Knight Logics client brands. Replies scattered in personal Gmail. Follow-up timing was inconsistent and bounces poisoned future sends.',
+          'Without queue preview and brand isolation, a good campaign for one trade could accidentally burn another brand’s sender reputation.'
+        ],
         bullets: ['No queue preview before sends', 'KG and ST campaigns risked cross-brand template mistakes', 'Follow-up depended on someone remembering inbox checks']
       },
       {
         title: 'What was built',
-        paragraphs: ['OutreachEngine — Flask app with SQLite storage — drives segmented lists, branded templates, scheduler jobs for first_touch and followup, bounce detection, and daily caps between 20 and 40 sends per brand. Replies route to Email-Agent crm_reply views on port 5100.'],
+        paragraphs: [
+          'OutreachEngine — Flask app with SQLite storage — drives segmented lists, branded templates, scheduler jobs for first_touch and followup, bounce detection, and daily caps between 20 and 40 sends per brand. Replies route to Email-Agent crm_reply views on port 5100.',
+          'Operators preview depth and caps before the scheduler fires, then review replies in a dedicated CRM path instead of personal inboxes.'
+        ],
         bullets: ['Brand switcher for kl, kg, and st lanes', 'Preview and queue depth before scheduler fires', 'Bounce flags suppress bad addresses']
       },
       {
         title: 'Tools used',
-        paragraphs: ['Flask + SQLite backend, custom CRM UI, scheduler integration, Email-Agent multi-inbox routing with KL/KG/ST mapping, and Knight Command Outreach CRM tab embed.'],
+        paragraphs: [
+          'Flask + SQLite backend, custom CRM UI, scheduler integration, Email-Agent multi-inbox routing with KL/KG/ST mapping, and Knight Command Outreach CRM tab embed.',
+          'Campaign logging ties list → send → reply → booked work so lead-source reporting is not a spreadsheet reconstruction.'
+        ],
         bullets: ['Gmail/Zoho/Microsoft inboxes via Email-Agent', 'Campaign logging for lead-source reporting', 'Embeds on port 5050 family alongside referral tooling where co-deployed']
       },
       {
         title: 'Early signal',
-        paragraphs: ['Screen Team st lane, Faith Works faithworks lane, and Knight Group kg lane each run on OutreachEngine with separate caps and templates. KG generated substantial booked work from one well-targeted message. Operators see queue health without spreadsheet tracking.'],
+        paragraphs: [
+          'Screen Team st lane, Faith Works faithworks lane, and Knight Group kg lane each run on OutreachEngine with separate caps and templates. KG generated substantial booked work from one well-targeted message. Operators see queue health without spreadsheet tracking.',
+          'If you want the same discipline for your trade lists — caps, bounce rules, and reply routing — this is the production reference.'
+        ],
         bullets: ['Measurable reply rate per list', 'Follow-up cadence enforced by scheduler', 'Bounce rate visible before reputation damage']
       }
     ],
@@ -2307,42 +2415,42 @@ const caseStudies = [
   },
   {
     slug: 'case-study-roof-monsters',
-    badge: 'Client Preview',
+    badge: 'Live Client · Network Anchor',
     title: 'Roof Monsters',
-    h1: 'Roofing Brand Site & Lead System Preview',
-    meta: 'Roof Monsters roofing brand website and local lead system in development — trust pages, service-area SEO, and estimate-first CTAs.',
-    lead: 'Roofing growth system preview for Tampa Bay — local SEO structure, insurance-friendly trust pages, and estimate-first lead capture tuned for storm-season markets.',
-    subhead: 'Labeled preview until public launch is approved by the client.',
-    heroImage: { src: images.caseStudyRoofing.src, alt: images.caseStudyRoofing.alt },
-    tags: ['Roofing', 'Local SEO', 'Lead capture', 'Preview'],
+    h1: 'Roof Monsters — Tampa Bay Roofing Growth System',
+    meta: 'Roof Monsters live roofing growth system on roofmonsters.co — 79+ pages, estimate-first lead capture, local SEO, and audit-backed technical scores.',
+    lead: 'Live Tampa Bay roofing growth site with estimate-first CTAs, service and area depth, gallery proof, and technical SEO built for storm-season search.',
+    subhead: 'Official roofing network anchor — live on roofmonsters.co.',
+    heroImage: { src: '/images/showcase/roof-monsters-og-card.webp', alt: 'Roof Monsters live roofing website' },
+    tags: ['Roofing', 'Local SEO', 'Lead capture', 'Live'],
     metrics: [
-      { value: 'Preview', label: 'Launch status' },
-      { value: 'SEO', label: 'City + service silos' },
-      { value: 'CRM-ready', label: 'Lead intake' }
+      { value: '97', label: 'Lighthouse Performance' },
+      { value: '100', label: 'Accessibility / SEO' },
+      { value: '79+', label: 'GSC discovered pages' }
     ],
     sections: [
       {
         title: 'Problem',
-        paragraphs: ['Roof Monsters needed credible web presence and inspection lead paths before storm season push. Prior digital footprint did not communicate service areas, project proof, or insurance-adjacent FAQs homeowners expect.'],
-        bullets: ['Thin trust content for estimate-first roofing sales', 'Missing city pages for target metros', 'Inspection requests not tracked in CRM', 'GBP and website messaging misaligned']
+        paragraphs: ['Roof Monsters needed a credible web presence that matched their real-world referral reputation — clear services, local coverage, project proof, and a fast estimate path.'],
+        bullets: ['Thin trust content for estimate-first roofing sales', 'Missing city / service-area structure', 'Lead requests not structured for CRM or email routing', 'Technical SEO not at launch-ready standards']
       },
       {
-        title: 'What is being built',
-        paragraphs: ['Service pages, project proof layout, insurance-friendly FAQ content, city geography pages, and estimate-first conversion paths. Lead forms wired for future OutreachEngine intake with daily caps and reply routing.'],
-        bullets: ['Schema and internal linking for local discovery', 'Call and form CTAs above the fold on mobile', 'Referral partner paths planned for complementary trades']
+        title: 'What we built',
+        paragraphs: ['Hand-coded site on roofmonsters.co with services, locations, gallery, offers, FAQs, trust pages, and estimate-first conversion paths. Email Agent mailbox ready; OutreachEngine lane reserved as rm.'],
+        bullets: ['79+ indexable URLs with GSC sitemap success', 'Hero estimate form + click-to-call', 'Schema, internal linking, and AI-search-friendly public files', 'WAVE-clean accessibility on the homepage']
       },
       {
         title: 'Tools used',
-        paragraphs: ['Hand-coded site, LocalBusiness and FAQ schema, GBP-aligned structure, and roofing-business-growth-systems service patterns.'],
-        bullets: ['roofing-business-growth-systems sub-page alignment', 'Optional CRM outreach when launch stabilizes', 'Review request timing post-job completion']
+        paragraphs: ['Hand-coded site, LocalBusiness and FAQ schema, Search Console launch, and roofing-business-growth-systems service patterns.'],
+        bullets: ['roofing-business-growth-systems lane reference', 'Email Agent for info@roofmonsters.co', 'Optional CRM outreach when explicitly enabled']
       },
       {
-        title: 'Status',
-        paragraphs: ['Client preview — detailed metrics and live URL marketing publish when launch is approved. Serves as the roofing vertical reference for contractor growth systems.'],
-        bullets: ['Preview badge on case study until go-live', 'Content review with ownership ongoing', 'Storm-season readiness prioritized in IA']
+        title: 'Results',
+        paragraphs: ['Live and indexed. Desktop Lighthouse 97/100/100/100, Semrush Site Health 99%, Ahrefs Health 100, GSC sitemap success with 79 discovered pages.'],
+        bullets: ['Public scores are re-testable', 'Network anchor in Industries → Roofing', 'Cold outreach not enabled unless turned on']
       }
     ],
-    stack: ['Hand-coded site', 'Schema.org', 'GBP alignment', 'Form intake'],
+    stack: ['Hand-coded site', 'Schema.org', 'Google Search Console', 'Form intake'],
     links: [
       ['/roofing-business-growth-systems', 'Roofing Systems'],
       ['/contractor-growth-systems', 'Contractor Systems'],
@@ -2468,7 +2576,7 @@ const caseStudies = [
     proof: {
       title: 'Knight Command Referrals tab',
       text: 'Referral ops embedded at /admin alongside CRM and email — single operator shell for partner support.',
-      image: images.logo.src,
+      image: images.caseStudyKnightCommand.src,
       imageAlt: 'Knight Command referrals embed',
       badge: 'Embedded ops',
       href: '/case-study-knight-command',

@@ -40,6 +40,7 @@ function tradeNetworkBlock(opts = {}) {
     links: NETWORK_LINKS,
     ctaLabel: 'Plan your trade lane',
     ctaHref: '/book-consultation',
+    networkImage: opts.networkImage || null,
   };
 }
 
@@ -61,8 +62,14 @@ const SLUG_NETWORK = {
   },
   'roofing-business-growth-systems': {
     trade: 'roofing and storm-season field trades',
-    reference: 'the roofing vertical preview (coming soon)',
+    reference: 'Roof Monsters on roofmonsters.co (live network anchor)',
     complementary: 'screen enclosure, handyman, and insurance-adjacent trades',
+    networkImage: {
+      src: '/images/showcase/roof-monsters-homepage-wave.png',
+      alt: 'Roof Monsters homepage — Your Roof Is Our Proof',
+      width: 1920,
+      height: 1080,
+    },
   },
   'electrician-business-growth-systems': {
     trade: 'electrical contracting',

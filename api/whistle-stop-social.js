@@ -29,7 +29,7 @@ function routeSegment(req, service) {
   const prefix = service === 'content'
     ? /^\/api\/whistle-stop-content\/?/
     : service === 'campaigns'
-      ? /^\/api\/whistle-stop-campaigns\/?/
+      ? /^\/api\/(?:whistle-stop-campaigns|whistle-stop-social)\/?/
       : /^\/api\/whistle-stop-social\/?/;
   try {
     const url = new URL(req.url || '/', 'http://localhost');

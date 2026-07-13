@@ -1,54 +1,375 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/projects", "destination": "/service-websites", "type": 301 },
-    { "source": "/projects.html", "destination": "/service-websites", "type": 301 },
-    { "source": "/home-service-websites.html", "destination": "/home-service-websites", "type": 301 },
-    { "source": "/free-website-audit.html", "destination": "/website-growth-audit", "type": 301 },
-    { "source": "/free-website-audit", "destination": "/website-growth-audit", "type": 301 },
-    { "source": "/web-designer-st-petersburg.html", "destination": "/web-designer-st-petersburg", "type": 301 },
-    { "source": "/web-designer-tampa.html", "destination": "/web-designer-tampa", "type": 301 },
-    { "source": "/web-designer-clearwater.html", "destination": "/web-designer-clearwater", "type": 301 },
-    { "source": "/web-designer-palm-harbor.html", "destination": "/web-designer-palm-harbor", "type": 301 },
-    { "source": "/web-designer-safety-harbor.html", "destination": "/web-designer-safety-harbor", "type": 301 },
-    { "source": "/pricing.html", "destination": "/pricing", "type": 301 },
-    { "source": "/pricing/index.html", "destination": "/pricing", "type": 301 }
+    {
+      "source": "/projects",
+      "destination": "/service-websites",
+      "type": 301
+    },
+    {
+      "source": "/projects.html",
+      "destination": "/service-websites",
+      "type": 301
+    },
+    {
+      "source": "/home-service-websites.html",
+      "destination": "/home-service-websites",
+      "type": 301
+    },
+    {
+      "source": "/free-website-audit.html",
+      "destination": "/website-growth-audit",
+      "type": 301
+    },
+    {
+      "source": "/free-website-audit",
+      "destination": "/website-growth-audit",
+      "type": 301
+    },
+    {
+      "source": "/web-designer-st-petersburg.html",
+      "destination": "/web-designer-st-petersburg",
+      "type": 301
+    },
+    {
+      "source": "/web-designer-tampa.html",
+      "destination": "/web-designer-tampa",
+      "type": 301
+    },
+    {
+      "source": "/web-designer-clearwater.html",
+      "destination": "/web-designer-clearwater",
+      "type": 301
+    },
+    {
+      "source": "/web-designer-palm-harbor.html",
+      "destination": "/web-designer-palm-harbor",
+      "type": 301
+    },
+    {
+      "source": "/web-designer-safety-harbor.html",
+      "destination": "/web-designer-safety-harbor",
+      "type": 301
+    },
+    {
+      "source": "/pricing.html",
+      "destination": "/pricing",
+      "type": 301
+    },
+    {
+      "source": "/pricing/index.html",
+      "destination": "/pricing",
+      "type": 301
+    }
   ],
   "rewrites": [
-    { "source": "/pricing", "destination": "/pricing.html" },
-    { "source": "/contact", "destination": "/contact.html" },
-    { "source": "/book-consultation", "destination": "/book-consultation.html" },
-    { "source": "/nicholas-knight", "destination": "/nicholas-knight.html" },
-    { "source": "/home-service-websites", "destination": "/home-service-websites.html" },
-    { "source": "/web-designer-st-petersburg", "destination": "/web-designer-st-petersburg.html" },
-    { "source": "/web-designer-tampa", "destination": "/web-designer-tampa.html" },
-    { "source": "/web-designer-clearwater", "destination": "/web-designer-clearwater.html" },
-    { "source": "/web-designer-palm-harbor", "destination": "/web-designer-palm-harbor.html" },
-    { "source": "/web-designer-safety-harbor", "destination": "/web-designer-safety-harbor.html" },
-    { "source": "/service-local-seo", "destination": "/service-local-seo.html" },
-    { "source": "/service-google-business-profile", "destination": "/service-google-business-profile.html" },
-    { "source": "/service-websites", "destination": "/service-websites.html" },
-    { "source": "/service-ecommerce", "destination": "/service-ecommerce.html" },
-    { "source": "/service-ai-automation", "destination": "/service-ai-automation.html" },
-    { "source": "/service-desktop-apps", "destination": "/service-desktop-apps.html" },
-    { "source": "/case-study-jns", "destination": "/case-study-jns.html" },
-    { "source": "/case-study-knight-group", "destination": "/case-study-knight-group.html" },
-    { "source": "/case-study-knight-logics", "destination": "/case-study-knight-logics.html" },
-    { "source": "/case-study-evidencedesk-ai", "destination": "/case-study-evidencedesk-ai.html" },
-    { "source": "/case-study-farrell-electric", "destination": "/case-study-farrell-electric.html" },
-    { "source": "/case-study-sals-painting", "destination": "/case-study-sals-painting.html" },
-    { "source": "/case-study-moms-resin-tables", "destination": "/case-study-moms-resin-tables.html" },
-    { "source": "/case-study-screen-team", "destination": "/case-study-screen-team.html" },
-    { "source": "/display-control-plus", "destination": "/display-control-plus.html" },
-    { "source": "/videoforge", "destination": "/videoforge.html" },
-    { "source": "/pixelforge-ai", "destination": "/pixelforge-ai.html" },
-    { "source": "/auto-vid-compiler", "destination": "/auto-vid-compiler.html" },
-    { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
-    { "source": "/terms-of-service", "destination": "/terms-of-service.html" },
-    { "source": "/cookie-policy", "destination": "/cookie-policy.html" },
-    { "source": "/refund-policy", "destination": "/refund-policy.html" },
-    { "source": "/disclaimer", "destination": "/disclaimer.html" },
-    { "source": "/admin", "destination": "/admin.html" },
-    { "source": "/referral-dashboard", "destination": "/referral-dashboard.html" }
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    },
+    {
+      "source": "/ai-business-automation",
+      "destination": "/ai-business-automation.html"
+    },
+    {
+      "source": "/api-integration-services",
+      "destination": "/api-integration-services.html"
+    },
+    {
+      "source": "/auto-vid-compiler",
+      "destination": "/auto-vid-compiler.html"
+    },
+    {
+      "source": "/automation",
+      "destination": "/automation.html"
+    },
+    {
+      "source": "/book-consultation",
+      "destination": "/book-consultation.html"
+    },
+    {
+      "source": "/business-dashboard-development",
+      "destination": "/business-dashboard-development.html"
+    },
+    {
+      "source": "/business-growth-systems",
+      "destination": "/business-growth-systems.html"
+    },
+    {
+      "source": "/case-studies",
+      "destination": "/case-studies.html"
+    },
+    {
+      "source": "/case-study-crm-outreach-system",
+      "destination": "/case-study-crm-outreach-system.html"
+    },
+    {
+      "source": "/case-study-faith-works",
+      "destination": "/case-study-faith-works.html"
+    },
+    {
+      "source": "/case-study-farrell-electric",
+      "destination": "/case-study-farrell-electric.html"
+    },
+    {
+      "source": "/case-study-hospitality-system-pattern",
+      "destination": "/case-study-hospitality-system-pattern.html"
+    },
+    {
+      "source": "/case-study-jns",
+      "destination": "/case-study-jns.html"
+    },
+    {
+      "source": "/case-study-knight-command",
+      "destination": "/case-study-knight-command.html"
+    },
+    {
+      "source": "/case-study-knight-group",
+      "destination": "/case-study-knight-group.html"
+    },
+    {
+      "source": "/case-study-knight-logics",
+      "destination": "/case-study-knight-logics.html"
+    },
+    {
+      "source": "/case-study-moms-resin-tables",
+      "destination": "/case-study-moms-resin-tables.html"
+    },
+    {
+      "source": "/case-study-referral-network-system",
+      "destination": "/case-study-referral-network-system.html"
+    },
+    {
+      "source": "/case-study-roof-monsters",
+      "destination": "/case-study-roof-monsters.html"
+    },
+    {
+      "source": "/case-study-sals-painting",
+      "destination": "/case-study-sals-painting.html"
+    },
+    {
+      "source": "/case-study-screen-team",
+      "destination": "/case-study-screen-team.html"
+    },
+    {
+      "source": "/case-study-social-poster",
+      "destination": "/case-study-social-poster.html"
+    },
+    {
+      "source": "/case-study-vendoroo-ticket-invoice-system",
+      "destination": "/case-study-vendoroo-ticket-invoice-system.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/contractor-growth-systems",
+      "destination": "/contractor-growth-systems.html"
+    },
+    {
+      "source": "/cookie-policy",
+      "destination": "/cookie-policy.html"
+    },
+    {
+      "source": "/crm-outreach-lead-generation",
+      "destination": "/crm-outreach-lead-generation.html"
+    },
+    {
+      "source": "/disclaimer",
+      "destination": "/disclaimer.html"
+    },
+    {
+      "source": "/display-control-plus",
+      "destination": "/display-control-plus.html"
+    },
+    {
+      "source": "/electrician-business-growth-systems",
+      "destination": "/electrician-business-growth-systems.html"
+    },
+    {
+      "source": "/email-agent-automation",
+      "destination": "/email-agent-automation.html"
+    },
+    {
+      "source": "/excavation-business-growth-systems",
+      "destination": "/excavation-business-growth-systems.html"
+    },
+    {
+      "source": "/handyman-business-growth-systems",
+      "destination": "/handyman-business-growth-systems.html"
+    },
+    {
+      "source": "/home-service-business-growth-systems",
+      "destination": "/home-service-business-growth-systems.html"
+    },
+    {
+      "source": "/home-service-websites",
+      "destination": "/home-service-websites.html"
+    },
+    {
+      "source": "/internal-business-tools",
+      "destination": "/internal-business-tools.html"
+    },
+    {
+      "source": "/job-photo-pdf-reports",
+      "destination": "/job-photo-pdf-reports.html"
+    },
+    {
+      "source": "/local-visibility-systems",
+      "destination": "/local-visibility-systems.html"
+    },
+    {
+      "source": "/nicholas-knight",
+      "destination": "/nicholas-knight.html"
+    },
+    {
+      "source": "/online-ordering-systems",
+      "destination": "/online-ordering-systems.html"
+    },
+    {
+      "source": "/painter-business-growth-systems",
+      "destination": "/painter-business-growth-systems.html"
+    },
+    {
+      "source": "/pay-invoice",
+      "destination": "/pay-invoice.html"
+    },
+    {
+      "source": "/performance-partner-program",
+      "destination": "/performance-partner-program.html"
+    },
+    {
+      "source": "/pixelforge-ai",
+      "destination": "/pixelforge-ai.html"
+    },
+    {
+      "source": "/pricing",
+      "destination": "/pricing.html"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy-policy.html"
+    },
+    {
+      "source": "/referral-dashboard",
+      "destination": "/referral-dashboard.html"
+    },
+    {
+      "source": "/referral-network-systems",
+      "destination": "/referral-network-systems.html"
+    },
+    {
+      "source": "/referral-program",
+      "destination": "/referral-program.html"
+    },
+    {
+      "source": "/referral-verify",
+      "destination": "/referral-verify.html"
+    },
+    {
+      "source": "/refund-policy",
+      "destination": "/refund-policy.html"
+    },
+    {
+      "source": "/remote-us-services",
+      "destination": "/remote-us-services.html"
+    },
+    {
+      "source": "/restaurant-bar-growth-systems",
+      "destination": "/restaurant-bar-growth-systems.html"
+    },
+    {
+      "source": "/review-request-systems",
+      "destination": "/review-request-systems.html"
+    },
+    {
+      "source": "/roofing-business-growth-systems",
+      "destination": "/roofing-business-growth-systems.html"
+    },
+    {
+      "source": "/screen-enclosure-business-growth-systems",
+      "destination": "/screen-enclosure-business-growth-systems.html"
+    },
+    {
+      "source": "/service-ai-automation",
+      "destination": "/service-ai-automation.html"
+    },
+    {
+      "source": "/service-area-page-strategy",
+      "destination": "/service-area-page-strategy.html"
+    },
+    {
+      "source": "/service-desktop-apps",
+      "destination": "/service-desktop-apps.html"
+    },
+    {
+      "source": "/service-ecommerce",
+      "destination": "/service-ecommerce.html"
+    },
+    {
+      "source": "/service-google-business-profile",
+      "destination": "/service-google-business-profile.html"
+    },
+    {
+      "source": "/service-local-seo",
+      "destination": "/service-local-seo.html"
+    },
+    {
+      "source": "/service-websites",
+      "destination": "/service-websites.html"
+    },
+    {
+      "source": "/social-media-automation-systems",
+      "destination": "/social-media-automation-systems.html"
+    },
+    {
+      "source": "/startup-business-launch-systems",
+      "destination": "/startup-business-launch-systems.html"
+    },
+    {
+      "source": "/stripe-invoice-automation",
+      "destination": "/stripe-invoice-automation.html"
+    },
+    {
+      "source": "/terms-of-service",
+      "destination": "/terms-of-service.html"
+    },
+    {
+      "source": "/ticketing-invoicing-job-workflows",
+      "destination": "/ticketing-invoicing-job-workflows.html"
+    },
+    {
+      "source": "/videoforge",
+      "destination": "/videoforge.html"
+    },
+    {
+      "source": "/web-designer-clearwater",
+      "destination": "/web-designer-clearwater.html"
+    },
+    {
+      "source": "/web-designer-palm-harbor",
+      "destination": "/web-designer-palm-harbor.html"
+    },
+    {
+      "source": "/web-designer-safety-harbor",
+      "destination": "/web-designer-safety-harbor.html"
+    },
+    {
+      "source": "/web-designer-st-petersburg",
+      "destination": "/web-designer-st-petersburg.html"
+    },
+    {
+      "source": "/web-designer-tampa",
+      "destination": "/web-designer-tampa.html"
+    },
+    {
+      "source": "/website-growth-audit",
+      "destination": "/website-growth-audit.html"
+    },
+    {
+      "source": "/workflow-automation",
+      "destination": "/workflow-automation.html"
+    }
   ]
 }

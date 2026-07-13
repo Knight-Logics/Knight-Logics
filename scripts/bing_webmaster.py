@@ -44,7 +44,49 @@ def _load_env_file(path: Path) -> None:
             os.environ[key] = value
 
 
+def _load_accounts_env(path: Path) -> None:
+    """Parse ~/.copilot-secrets/accounts.env (KEY=VAL, KEY:, and Bing labeled lines)."""
+    if not path.exists():
+        return
+    lines = path.read_text(encoding="utf-8").splitlines()
+    i = 0
+    while i < len(lines):
+        raw = lines[i]
+        line = raw.strip()
+        i += 1
+        if not line or line.startswith("#"):
+            continue
+        if "=" in line and not line.lower().startswith(("client id", "client secret", "api key")):
+            key, _, value = line.partition("=")
+            key, value = key.strip(), value.strip().strip('"').strip("'")
+            if key and key not in os.environ:
+                os.environ[key] = value
+            continue
+        labeled = re.match(r"^(Client ID|Client Secret|API Key)\s*:\s*(.+)$", line, re.I)
+        if labeled:
+            label, value = labeled.group(1).lower(), labeled.group(2).strip()
+            env_key = {
+                "client id": "BING_WEBMASTER_OAUTH_CLIENT_ID",
+                "client secret": "BING_WEBMASTER_OAUTH_CLIENT_SECRET",
+                "api key": "BING_WEBMASTER_API_KEY",
+            }.get(label)
+            if env_key and env_key not in os.environ:
+                os.environ[env_key] = value
+            continue
+        colon = re.match(r"^([A-Z0-9_]+)\s*:\s*(.*)$", line)
+        if colon:
+            key, value = colon.group(1), colon.group(2).strip()
+            if not value and i < len(lines):
+                nxt = lines[i].strip()
+                if nxt and ":" not in nxt and "=" not in nxt:
+                    value, i = nxt, i + 1
+            if value and key not in os.environ:
+                os.environ[key] = value.strip('"').strip("'")
+
+
 def _config() -> dict[str, str]:
+    accounts = Path(os.environ.get("COPILOT_SECRETS_DIR", Path.home() / ".copilot-secrets")) / "accounts.env"
+    _load_accounts_env(accounts)
     _load_env_file(ROOT / ".env.bing.local")
     _load_env_file(ROOT / ".env.local")
     _load_env_file(ROOT / ".env")

@@ -242,6 +242,9 @@ document.addEventListener('DOMContentLoaded', function() {
     scheduleNonCriticalInit(initGbpDynamicRatings, 260);
     scheduleNonCriticalInit(initSkillBars, 280);
     scheduleNonCriticalInit(initCaseStudyLightbox, 280);
+    scheduleNonCriticalInit(initPricingStickyNav, 300);
+    scheduleNonCriticalInit(initServiceSidebarForms, 320);
+    scheduleNonCriticalInit(initPageFeatureScripts, 340);
     scheduleNonCriticalInit(initAdvancedParallax, 380);
     scheduleNonCriticalInit(initMagneticButtons, 450);
     scheduleNonCriticalInit(initCursorTrail, 550);
@@ -1314,7 +1317,7 @@ function initServicesEntrance() {
     const startShowcaseAnimation = (showcase) => {
         if (showcase.classList.contains('kl-services-showcase-animate')) return;
         showcase.classList.add('kl-services-showcase-animate');
-        window.setTimeout(() => showcase.classList.add('kl-services-showcase-animate-done'), 700);
+        window.setTimeout(() => showcase.classList.add('kl-services-showcase-animate-done'), 900);
     };
 
     const showcaseBlocks = services.querySelectorAll('.kl-services-showcase');
@@ -3816,3 +3819,148 @@ document.addEventListener('keydown', function(event) {
 
     // iOS does not fire beforeinstallprompt - skip (Safari handles its own sheet)
 }());
+
+const KL_PAGE_SCRIPTS_VER = '20260712proof1';
+
+function loadPageScript(src, testFn) {
+    if (typeof testFn === 'function' && testFn()) return Promise.resolve();
+    return new Promise((resolve) => {
+        const existing = document.querySelector(`script[data-kl-page-script="${src}"]`);
+        if (existing) {
+            existing.addEventListener('load', () => resolve(), { once: true });
+            existing.addEventListener('error', () => resolve(), { once: true });
+            return;
+        }
+        const script = document.createElement('script');
+        script.src = `${src}?v=${KL_PAGE_SCRIPTS_VER}`;
+        script.defer = true;
+        script.dataset.klPageScript = src;
+        script.onload = () => resolve();
+        script.onerror = () => resolve();
+        document.head.appendChild(script);
+    });
+}
+
+function initPageFeatureScripts() {
+    const jobs = [];
+    if (document.querySelector('[data-gbp-showcase]')) {
+        jobs.push(loadPageScript('/gbp-showcase.js', () => typeof window.klInitGbpShowcase === 'function').then(() => {
+            if (typeof window.klInitGbpShowcase === 'function') window.klInitGbpShowcase();
+        }));
+    }
+    if (document.querySelector('[data-referral-demo]')) {
+        jobs.push(loadPageScript('/referral-demo.js'));
+    }
+    if (document.querySelector('[data-crm-outreach-demo]')) {
+        jobs.push(loadPageScript('/crm-outreach-demo.js'));
+    }
+    return Promise.all(jobs);
+}
+
+function initPricingStickyNav() {
+    const hero = document.querySelector('.pricing-hero, .pricing-hero-inner');
+    const pillsWrap = document.querySelector('.pricing-hero .pricing-nav-pills');
+    if (!pillsWrap || document.querySelector('.pricing-sticky-nav')) return;
+
+    const sticky = document.createElement('div');
+    sticky.className = 'pricing-sticky-nav';
+    const inner = document.createElement('div');
+    inner.className = 'container';
+    const clone = pillsWrap.cloneNode(true);
+    inner.appendChild(clone);
+    sticky.appendChild(inner);
+    pillsWrap.parentNode.insertBefore(sticky, pillsWrap.parentNode.children[pillsWrap.parentNode.children.length > 1 ? 1 : 0]?.nextSibling || null);
+
+    const chips = document.createElement('div');
+    chips.className = 'pricing-package-selector';
+    chips.setAttribute('role', 'tablist');
+    chips.setAttribute('aria-label', 'Package category');
+    const categories = [
+        { id: 'all', label: 'All packages' },
+        { id: 'websites', label: 'Website', anchor: '#websites' },
+        { id: 'local', label: 'Local visibility', anchor: '#local-visibility' },
+        { id: 'growth', label: 'Growth systems', anchor: '#growth' },
+        { id: 'automation', label: 'Automation', anchor: '#automation-systems' },
+        { id: 'monthly', label: 'Monthly', anchor: '#monthly' },
+        { id: 'addons', label: 'Add-ons', anchor: '#addons' }
+    ];
+    const sectionMap = {
+        websites: ['#websites'],
+        local: ['#local-visibility'],
+        growth: ['#growth', '#referral-systems', '#performance-partner'],
+        automation: ['#automation-systems'],
+        monthly: ['#monthly'],
+        addons: ['#addons', '#search-addons']
+    };
+
+    categories.forEach((cat, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'pricing-package-chip' + (i === 0 ? ' is-active' : '');
+        btn.textContent = cat.label;
+        btn.dataset.pricingFilter = cat.id;
+        if (cat.anchor) btn.dataset.pricingAnchor = cat.anchor;
+        chips.appendChild(btn);
+    });
+    inner.appendChild(chips);
+
+    function applyFilter(id) {
+        chips.querySelectorAll('.pricing-package-chip').forEach((b) => {
+            b.classList.toggle('is-active', b.dataset.pricingFilter === id);
+        });
+        const allowed = sectionMap[id];
+        document.querySelectorAll('.pricing-section[id]').forEach((sec) => {
+            if (id === 'all') {
+                sec.classList.remove('is-filtered-out');
+                return;
+            }
+            const hash = '#' + sec.id;
+            sec.classList.toggle('is-filtered-out', !allowed || !allowed.includes(hash));
+        });
+    }
+
+    chips.addEventListener('click', (e) => {
+        const btn = e.target.closest('.pricing-package-chip');
+        if (!btn) return;
+        const id = btn.dataset.pricingFilter || 'all';
+        applyFilter(id);
+        if (btn.dataset.pricingAnchor) {
+            const target = document.querySelector(btn.dataset.pricingAnchor);
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+
+    clone.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href^="#"]');
+        if (!link) return;
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+}
+
+function initServiceSidebarForms() {
+    document.querySelectorAll('[data-svc-sidebar-form]').forEach((mount) => {
+        if (mount.dataset.sidebarInit === '1') return;
+        mount.dataset.sidebarInit = '1';
+
+        const service = mount.dataset.serviceLabel || 'Website / SEO';
+        const market = mount.dataset.marketLabel || 'Tampa Bay';
+        const form = document.createElement('form');
+        form.className = 'svc-sidebar-form-inner';
+        form.action = 'https://formspree.io/f/xpwzgkqr';
+        form.method = 'POST';
+        form.innerHTML = `
+            <h3>Request a free audit</h3>
+            <p>Short form — we reply within 24 hours with next steps for ${service} in ${market}.</p>
+            <div class="form-group"><label for="sb-name">Business name</label><input id="sb-name" name="businessName" required></div>
+            <div class="form-group"><label for="sb-url">Website or GBP URL</label><input id="sb-url" name="websiteUrl" type="url" placeholder="https://"></div>
+            <div class="form-group"><label for="sb-email">Email</label><input id="sb-email" name="email" type="email" required></div>
+            <div class="form-group"><label for="sb-problem">Primary problem</label><textarea id="sb-problem" name="primaryProblem" placeholder="Rankings, leads, GBP, site redesign…"></textarea></div>
+            <input type="hidden" name="leadSource" value="Service page sidebar">
+            <input type="hidden" name="requestedService" value="${service}">
+            <input type="hidden" name="market" value="${market}">
+            <button type="submit" class="btn-primary">Send audit request</button>`;
+        mount.appendChild(form);
+    });
+}

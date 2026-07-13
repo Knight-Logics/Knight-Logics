@@ -542,6 +542,11 @@
       "permanent": true
     },
     {
+      "source": "/remote-us-services.html",
+      "destination": "/remote-us-services",
+      "permanent": true
+    },
+    {
       "source": "/painter-business-growth-systems.html",
       "destination": "/painter-business-growth-systems",
       "permanent": true
@@ -591,6 +596,10 @@
     {
       "source": "/book-consultation",
       "destination": "/book-consultation.html"
+    },
+    {
+      "source": "/remote-us-services",
+      "destination": "/remote-us-services.html"
     },
     {
       "source": "/nicholas-knight",

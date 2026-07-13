@@ -3,7 +3,8 @@
 <head>
     <link rel="preload" href="/header.html?v=20260701hero4" as="fetch" crossorigin="anonymous">
     <link rel="preload" href="/footer.html?v=20260701hero4" as="fetch" crossorigin="anonymous">
-    <script defer src="/script.js?v=20260709gbp1"></script>
+    <script defer src="/script.js?v=20260712proof1"></script>
+    <script defer src="/crm-outreach-demo.js?v=20260712proof1"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="CRM outreach &amp; lead generation systems — segmented outbound, daily caps, reply routing, and pipeline visibility for Tampa Bay service businesses.">
@@ -46,19 +47,19 @@
                 <nav class="kl-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span>CRM Outreach & Lead Generation</span></nav>
                 <span class="svc-eyebrow"><i class="fas fa-paper-plane"></i> Lead engine</span>
                 <h1>CRM Outreach & Lead Generation Systems</h1>
-                <p class="svc-hero-lead">Production outreach built on OutreachEngine — Flask, SQLite, multi-brand campaigns for kl, kg, st, and faithworks lanes with scheduler-driven first_touch and followup sequences.</p>
+                <p class="svc-hero-lead">Discover local businesses, qualify by trade and geography, enrich contact data, and run controlled outbound — with replies routed into a tracked queue instead of personal Gmail.</p>
                 <div class="kl-growth-stats fade-in">
                 <div class="kl-growth-stat">
-                    <span class="kl-growth-stat-value">20–40</span>
-                    <span class="kl-growth-stat-label">Daily send cap range</span>
+                    <span class="kl-growth-stat-value">24</span>
+                    <span class="kl-growth-stat-label">Sample leads discovered / day</span>
                 </div>
                 <div class="kl-growth-stat">
-                    <span class="kl-growth-stat-value">4</span>
-                    <span class="kl-growth-stat-label">Brand lanes (kl/kg/st/fw)</span>
+                    <span class="kl-growth-stat-value">A/B</span>
+                    <span class="kl-growth-stat-label">Fit tiers before send</span>
                 </div>
                 <div class="kl-growth-stat">
                     <span class="kl-growth-stat-value">Live</span>
-                    <span class="kl-growth-stat-label">Reply routing</span>
+                    <span class="kl-growth-stat-label">Reply routing queue</span>
                 </div>
             </div>
                 <div class="svc-cta-row">
@@ -75,11 +76,25 @@
                 <h2>Production outreach, not spreadsheet Gmail</h2>
                 <p>CRM outreach for local service businesses needs brand separation, send caps, bounce discipline, and reply routing — not copy-paste from a shared spreadsheet. OutreachEngine is the live engine behind kl, kg, st, and faithworks brand lanes.</p>
                 <p>Screen Team (st lane), Faith Works (faithworks lane), and Knight Group (kg lane) each run isolated templates, caps, and sender identity. KG produced substantial booked work from one well-targeted campaign; ST and FW use the same engine at enclosure and land-clearing scale.</p>
-                <p>Replies surface in Email-Agent crm_reply views on port 5100 so operators review outreach responses without mixing them into personal Gmail threads.</p>
+                <p>Replies surface in the Email Agent CRM reply queue so operators review outreach responses without mixing them into personal Gmail threads.</p>
                 <p>Outbound works when lists are segmented, sends are capped, and replies route into a tracked queue — not when a blast tool dumps responses back into personal Gmail.</p>
                 <p>Production OutreachEngine lanes separate brands (kl, kg, st, faithworks) so property manager and complementary trade outreach scales without cross-contaminating templates.</p>
                 
             </div>
+        </div>
+    </section>
+
+    <section class="kl-growth-section kl-growth-section--alt">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>How leads move from discovery to booked work</h2>
+                <p>Sanitized dashboard view — the same pipeline running on live Knight Group, Screen Team, and Faith Works campaigns.</p>
+            </div>
+            <div data-crm-outreach-demo class="fade-in"></div>
+            <details class="kl-growth-details fade-in" style="margin-top: 24px;">
+                <summary>Technical implementation (for operators)</summary>
+                <p>OutreachEngine uses Flask, SQLite, scheduler-driven first-touch and follow-up sequences, and brand-isolated lanes (KL / KG / ST / FW). Email Agent routes CRM replies into a dedicated queue. See the <a href="/case-study-crm-outreach-system">CRM Outreach case study</a> for architecture detail.</p>
+            </details>
         </div>
     </section>
     
@@ -186,7 +201,7 @@
                 </article>
                 <article class="kl-growth-deliverable fade-in">
                     <h3>Reply & reporting</h3>
-                    <ul class="kl-growth-list"><li>Email-Agent crm_reply routing on port 5100</li><li>Queue depth and send window visibility in CRM UI</li><li>Lead-source reporting by list and message variant</li><li>Knight Command Outreach CRM tab embed when co-deployed</li></ul>
+                    <ul class="kl-growth-list"><li>Email-Agent crm_reply routing on Email Agent dashboard</li><li>Queue depth and send window visibility in CRM UI</li><li>Lead-source reporting by list and message variant</li><li>Knight Command Outreach CRM tab embed when co-deployed</li></ul>
                 </article>
             </div>
         </div>
@@ -341,7 +356,7 @@
                 </details>
                 <details class="kl-growth-faq-item fade-in">
                     <summary>Can this connect to my existing inbox?</summary>
-                    <p>Yes — Email-Agent on port 5100 routes CRM replies into crm_reply views separate from manual conversations.</p>
+                    <p>Yes — Email-Agent on Email Agent dashboard routes CRM replies into crm_reply views separate from manual conversations.</p>
                 </details>
                 <details class="kl-growth-faq-item fade-in">
                     <summary>Is OutreachEngine included or custom?</summary>
@@ -350,7 +365,7 @@
             </div>
         </div>
     </section>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What daily send volume do you recommend?","acceptedAnswer":{"@type":"Answer","text":"We typically cap between 20 and 40 sends per day per brand while warming domains and monitoring bounce rates."}},{"@type":"Question","name":"Can this connect to my existing inbox?","acceptedAnswer":{"@type":"Answer","text":"Yes — Email-Agent on port 5100 routes CRM replies into crm_reply views separate from manual conversations."}},{"@type":"Question","name":"Is OutreachEngine included or custom?","acceptedAnswer":{"@type":"Answer","text":"We deploy and configure OutreachEngine for your brands, lists, and follow-up rules — adapted from our live KL/KG/ST workflows."}}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What daily send volume do you recommend?","acceptedAnswer":{"@type":"Answer","text":"We typically cap between 20 and 40 sends per day per brand while warming domains and monitoring bounce rates."}},{"@type":"Question","name":"Can this connect to my existing inbox?","acceptedAnswer":{"@type":"Answer","text":"Yes — Email-Agent on Email Agent dashboard routes CRM replies into crm_reply views separate from manual conversations."}},{"@type":"Question","name":"Is OutreachEngine included or custom?","acceptedAnswer":{"@type":"Answer","text":"We deploy and configure OutreachEngine for your brands, lists, and follow-up rules — adapted from our live KL/KG/ST workflows."}}]}</script>
     <section class="kl-growth-section kl-growth-section--compact">
         <div class="container">
             

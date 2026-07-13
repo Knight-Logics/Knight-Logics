@@ -3,7 +3,8 @@
 <head>
     <link rel="preload" href="/header.html?v=20260701hero4" as="fetch" crossorigin="anonymous">
     <link rel="preload" href="/footer.html?v=20260701hero4" as="fetch" crossorigin="anonymous">
-    <script defer src="/script.js?v=20260709gbp1"></script>
+    <script defer src="/script.js?v=20260712proof1"></script>
+    <script defer src="/referral-demo.js?v=20260712proof1"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Referral network systems — partner tracking, /ref attribution paths, QR brochures, and payout visibility for Tampa Bay trade and service businesses.">
@@ -69,13 +70,64 @@
         </div>
     </section>
 
+    <section class="kl-growth-section" id="referral-live-demo">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Try the referral path in 20 seconds</h2>
+                <p>Generate a demo partner QR, see the tracked landing path, and preview a print-ready brochure — restricted to Knight Logics-owned destinations.</p>
+            </div>
+            <div class="referral-demo-grid fade-in" data-referral-demo>
+                <div class="referral-demo-panel">
+                    <h3><i class="fas fa-qrcode"></i> QR &amp; attribution</h3>
+                    <div class="referral-demo-field">
+                        <label for="ref-demo-partner">Partner name</label>
+                        <input id="ref-demo-partner" data-referral-demo-partner type="text" value="Demo Partner" maxlength="48">
+                    </div>
+                    <div class="referral-demo-field">
+                        <label for="ref-demo-campaign">Campaign name</label>
+                        <input id="ref-demo-campaign" data-referral-demo-campaign type="text" value="spring-2026" maxlength="48">
+                    </div>
+                    <div class="referral-demo-field">
+                        <label for="ref-demo-dest">Destination page</label>
+                        <select id="ref-demo-dest" data-referral-demo-dest></select>
+                    </div>
+                    <p class="referral-demo-ref-url" data-referral-demo-ref-url>/ref/demo-partner</p>
+                    <img class="referral-demo-qr" data-referral-demo-qr width="220" height="220" alt="Generated referral QR code">
+                    <div data-referral-demo-steps style="margin-top: 16px;"></div>
+                </div>
+                <div class="referral-demo-panel">
+                    <h3><i class="fas fa-file-image"></i> Brochure preview</h3>
+                    <div class="referral-demo-field">
+                        <label for="brochure-partner">Partner name on brochure</label>
+                        <input id="brochure-partner" data-brochure-partner type="text" value="Demo Partner">
+                    </div>
+                    <div class="referral-demo-field">
+                        <label for="brochure-offer">Offer line</label>
+                        <input id="brochure-offer" data-brochure-offer type="text" value="Free website &amp; growth audit for referred businesses">
+                    </div>
+                    <div class="referral-demo-field">
+                        <label for="brochure-phone">Phone</label>
+                        <input id="brochure-phone" data-brochure-phone type="text" value="(813) 773-5553">
+                    </div>
+                    <div class="referral-brochure-preview" data-referral-demo-brochure>
+                        <div class="referral-brochure-preview__logo">KNIGHT LOGICS</div>
+                        <h4 data-brochure-name>Demo Partner</h4>
+                        <p data-brochure-offer-text>Free website &amp; growth audit for referred businesses</p>
+                        <p data-brochure-phone-text>(813) 773-5553</p>
+                        <img data-brochure-qr width="140" height="140" alt="Brochure QR code">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="kl-growth-section kl-growth-section--compact">
         <div class="container">
             <div class="kl-growth-context fade-in">
                 <h2>Partner attribution that scales trust</h2>
                 <p>Referral partners send work through brochures, word of mouth, and complementary trades — but generic analytics cannot tell you which partner earned credit. Disputes slow network growth when payout status lives in spreadsheets.</p>
                 <p>The referral infrastructure uses /ref/:partner entry paths, QR brochure assets, Neon Postgres event logging, referral-dashboard partner visibility, and Stripe webhook-driven payout settlement.</p>
-                <p>Knight Command embeds referral ops on the 5050 family inside the Referrals tab — partners self-serve status checks instead of email disputes with ownership.</p>
+                <p>Knight Command embeds referral ops inside the Referrals tab — partners self-serve status checks instead of email disputes with ownership.</p>
                 <p>Referral disputes usually mean attribution was verbal. Tracked /ref/:partner paths, QR scans, and dashboard visibility document which partner sent the consult or job.</p>
                 <p>As the Tampa Bay trade roster grows, co-marketing and complementary referrals scale when each partner has a credible site and a defined lane in the network.</p>
                 

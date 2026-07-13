@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Referral Verification — Knight Logics</title>
+    <title>Referral Verification â€” Knight Logics</title>
     <link rel="icon" href="/favicon.ico">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -280,7 +280,7 @@
 <!-- Loading state -->
 <div id="loading">
     <div class="spinner"></div>
-    <p style="color: var(--muted);">Loading referral data…</p>
+    <p style="color: var(--muted);">Loading referral dataâ€”</p>
 </div>
 
 <!-- Error state -->
@@ -296,7 +296,7 @@
     <!-- Commission highlight -->
     <div class="commission-box">
         <h3>Your Commission Owed</h3>
-        <div class="commission-amount" id="commissionAmount">—</div>
+        <div class="commission-amount" id="commissionAmount">â€”</div>
         <div class="commission-note" id="payoutMethod"></div>
         <div class="status-badge" id="statusBadge"></div>
     </div>
@@ -304,27 +304,27 @@
     <!-- Stats grid -->
     <div class="stats-grid">
         <div class="stat-card">
-            <div class="stat-value" id="statPageviews">—</div>
+            <div class="stat-value" id="statPageviews">â€”</div>
             <div class="stat-label">Page Views</div>
         </div>
         <div class="stat-card">
-            <div class="stat-value" id="statCheckouts">—</div>
+            <div class="stat-value" id="statCheckouts">â€”</div>
             <div class="stat-label">Checkouts Started</div>
         </div>
         <div class="stat-card">
-            <div class="stat-value" id="statPayments">—</div>
+            <div class="stat-value" id="statPayments">â€”</div>
             <div class="stat-label">Payments Completed</div>
         </div>
         <div class="stat-card">
-            <div class="stat-value" id="statRevenue">—</div>
+            <div class="stat-value" id="statRevenue">â€”</div>
             <div class="stat-label">Referred Revenue</div>
         </div>
         <div class="stat-card">
-            <div class="stat-value" id="statSessions">—</div>
+            <div class="stat-value" id="statSessions">â€”</div>
             <div class="stat-label">Unique Sessions</div>
         </div>
         <div class="stat-card">
-            <div class="stat-value" id="statSubmits">—</div>
+            <div class="stat-value" id="statSubmits">â€”</div>
             <div class="stat-label">Form Submissions</div>
         </div>
     </div>
@@ -383,7 +383,7 @@
     }
 
     function formatDate(iso) {
-        if (!iso) return '—';
+        if (!iso) return 'â€”';
         try {
             const d = new Date(iso);
             return d.toLocaleString('en-US', {
@@ -463,9 +463,9 @@
                     <tr>
                         <td class="td-muted">${formatDate(e.timestamp)}</td>
                         <td>${formatEventType(e.type)}</td>
-                        <td class="td-mono">${e.offer || '—'}</td>
-                        <td>${e.amount || '—'}</td>
-                        <td class="td-muted" style="font-size:0.85rem;">${e.contact || '—'}</td>
+                        <td class="td-mono">${e.offer || 'â€”'}</td>
+                        <td>${e.amount || 'â€”'}</td>
+                        <td class="td-muted" style="font-size:0.85rem;">${e.contact || 'â€”'}</td>
                     </tr>
                 `).join('');
             }

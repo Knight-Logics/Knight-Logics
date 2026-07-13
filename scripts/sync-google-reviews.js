@@ -88,6 +88,13 @@ const GBP_LOCATIONS = [
         caseStudy: null
     },
     {
+        key: 'roof-monsters',
+        title: 'Roof Monsters',
+        envKeys: ['RM_GBP_LOCATION_ID', 'RM_GBP_LOCATION_NAME'],
+        fallbackId: null,
+        caseStudy: 'case-study-roof-monsters'
+    },
+    {
         key: 'faith-works',
         title: 'Faith Works Outdoor Services',
         envKeys: ['FW_GBP_LOCATION_ID', 'FW_GBP_LOCATION_NAME'],

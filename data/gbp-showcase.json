@@ -1,0 +1,116 @@
+{
+  "updatedAt": "2026-07-12",
+  "groups": [
+    {
+      "id": "established",
+      "title": "Established profiles",
+      "subtitle": "Ordered by total Google reviews on managed locations",
+      "sortBy": "reviewCountDesc"
+    },
+    {
+      "id": "growing",
+      "title": "Recently launched & growing",
+      "subtitle": "Newer profiles we manage — launch date and activity matter more than volume early on",
+      "sortBy": "launchDateDesc"
+    }
+  ],
+  "profiles": [
+    {
+      "key": "sals-painting",
+      "group": "established",
+      "title": "Sal's Painting",
+      "category": "Painting contractor",
+      "relationshipStatus": "active-client",
+      "permissionToPublish": true,
+      "publicShowcase": true,
+      "profileLaunchDate": "2025-08-01",
+      "caseStudy": "/case-study-sals-painting",
+      "website": null,
+      "note": null
+    },
+    {
+      "key": "knight-logics",
+      "group": "established",
+      "title": "Knight Logics",
+      "category": "Website designer",
+      "relationshipStatus": "internal",
+      "permissionToPublish": true,
+      "publicShowcase": true,
+      "profileLaunchDate": "2024-01-01",
+      "caseStudy": "/case-study-knight-logics",
+      "website": "https://knightlogics.com",
+      "note": null
+    },
+    {
+      "key": "knight-group",
+      "group": "established",
+      "title": "Knight Group",
+      "category": "Handyman",
+      "relationshipStatus": "active-client",
+      "permissionToPublish": true,
+      "publicShowcase": true,
+      "profileLaunchDate": "2024-06-01",
+      "caseStudy": "/case-study-knight-group",
+      "website": "https://knightgroup.com",
+      "note": null
+    },
+    {
+      "key": "roof-monsters",
+      "group": "growing",
+      "title": "Roof Monsters",
+      "category": "Roofing contractor",
+      "relationshipStatus": "active-client",
+      "permissionToPublish": true,
+      "publicShowcase": true,
+      "profileLaunchDate": "2026-05-01",
+      "caseStudy": "/case-study-roof-monsters",
+      "website": "https://roofmonsters.com",
+      "note": "Recently launched — review growth tracked from onboarding baseline"
+    },
+    {
+      "key": "screen-team",
+      "group": "growing",
+      "title": "Screen Team LLC",
+      "category": "Screen repair & enclosure",
+      "relationshipStatus": "active-client",
+      "permissionToPublish": true,
+      "publicShowcase": true,
+      "profileLaunchDate": "2025-11-01",
+      "caseStudy": "/case-study-screen-team",
+      "website": "https://screenteamllc.com",
+      "note": null
+    },
+    {
+      "key": "faith-works",
+      "group": "growing",
+      "title": "Faith Works Outdoor Services",
+      "category": "Land clearing & forestry mulching",
+      "relationshipStatus": "active-client",
+      "permissionToPublish": true,
+      "publicShowcase": true,
+      "profileLaunchDate": "2026-04-01",
+      "caseStudy": "/case-study-faith-works",
+      "website": "https://faithworksoutdoorservices.com",
+      "note": "Profile sync pending location ID configuration"
+    },
+    {
+      "key": "jns-construction",
+      "group": "growing",
+      "title": "JNS Construction Services",
+      "category": "General contractor",
+      "relationshipStatus": "active-client",
+      "permissionToPublish": true,
+      "publicShowcase": true,
+      "profileLaunchDate": "2026-03-01",
+      "caseStudy": "/case-study-jns",
+      "website": null,
+      "note": "New profile — building review momentum"
+    }
+  ],
+  "excluded": [
+    {
+      "key": "clearwater-dentist",
+      "reason": "No active client agreement — excluded from public showcase"
+    }
+  ]
+}

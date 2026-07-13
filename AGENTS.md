@@ -77,3 +77,18 @@ Verified live after deploy:
 - Do not add new standalone strategy Markdown files in the MainSite root.
 - Generated audit outputs belong under `_sf_audit`, `_seo_audit`, `.qa-matrix`, or `test-results`, not in root docs.
 - Dependency Markdown under `node_modules` or `.venv` is not project context.
+
+## Website Audit / GSC
+
+Visibility tooling umbrella: `E:\Website Audit` (see `E:\Website Audit\AGENTS.md`).  
+GSC module: `E:\Website Audit\GSC` — config `sites\knightlogics.com.json`.
+
+```powershell
+node E:\Website Audit\tools\run-visibility-audit.mjs --site knightlogics.com --pack full-api
+node E:\Website Audit\GSC\tools\audit.mjs --full
+node E:\Website Audit\GSC\tools\submit-indexing.mjs --failed
+```
+
+Trigger phrases (same as every site): "GSC audit", "full GSC audit", "Full Website Audit via API", "Full Website Audit with Playwright", SEO/AEO/GEO/a11y/perf/visibility.
+
+Outputs: `website-audit\<date>\`, `gsc-audit\<date>\`, and latest JSON pointers in this folder.

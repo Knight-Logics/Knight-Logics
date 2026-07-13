@@ -105,7 +105,7 @@
                 <h2>OutreachEngine in production on real campaigns</h2>
                 <p>OutreachEngine — Flask app with SQLite storage — drives segmented lists, branded templates, scheduler jobs for first_touch and followup, bounce detection, and daily caps between 20 and 40 sends per brand.</p>
                 <p>Screen Team st lane, Faith Works faithworks lane, and Knight Group kg lane each use OutreachEngine with separate caps and templates. KG generated substantial booked work from one well-targeted message; ST and FW run the same engine at enclosure and land-clearing scale.</p>
-                <p>Replies route to Email-Agent crm_reply views on port 5100; Knight Command Outreach CRM tab embeds the queue UI for daily operator review.</p>
+                <p>Replies route to Email-Agent crm_reply views on Email Agent dashboard; Knight Command Outreach CRM tab embeds the queue UI for daily operator review.</p>
                 <p>If you are tired of spreadsheet lists, mixed brand templates, and “did anyone follow up?” — this is the production pattern: queue preview, enforced caps, bounce suppression, and reply routing into one operator workflow.</p>
                 <p>Live outreach proof matters more than feature lists — segmented lists, cap enforcement, and reply discipline appear in production client lanes.</p>
                 
@@ -127,7 +127,7 @@
                 </article>
                 <article class="kl-growth-story-block fade-in">
                     <h3>What was built</h3>
-                    <p>OutreachEngine — Flask app with SQLite storage — drives segmented lists, branded templates, scheduler jobs for first_touch and followup, bounce detection, and daily caps between 20 and 40 sends per brand. Replies route to Email-Agent crm_reply views on port 5100.</p>
+                    <p>OutreachEngine — Flask app with SQLite storage — drives segmented lists, branded templates, scheduler jobs for first_touch and followup, bounce detection, and daily caps between 20 and 40 sends per brand. Replies route to Email-Agent crm_reply views on Email Agent dashboard.</p>
                     <p>Operators preview depth and caps before the scheduler fires, then review replies in a dedicated CRM path instead of personal inboxes.</p>
                     <ul class="kl-growth-list"><li>Brand switcher for kl, kg, and st lanes</li><li>Preview and queue depth before scheduler fires</li><li>Bounce flags suppress bad addresses</li></ul>
                 </article>
@@ -135,7 +135,7 @@
                     <h3>Tools used</h3>
                     <p>Flask + SQLite backend, custom CRM UI, scheduler integration, Email-Agent multi-inbox routing with KL/KG/ST mapping, and Knight Command Outreach CRM tab embed.</p>
                     <p>Campaign logging ties list → send → reply → booked work so lead-source reporting is not a spreadsheet reconstruction.</p>
-                    <ul class="kl-growth-list"><li>Gmail/Zoho/Microsoft inboxes via Email-Agent</li><li>Campaign logging for lead-source reporting</li><li>Embeds on port 5050 family alongside referral tooling where co-deployed</li></ul>
+                    <ul class="kl-growth-list"><li>Gmail/Zoho/Microsoft inboxes via Email-Agent</li><li>Campaign logging for lead-source reporting</li><li>Embeds on Knight Command admin alongside referral tooling where co-deployed</li></ul>
                 </article>
                 <article class="kl-growth-story-block fade-in">
                     <h3>Early signal</h3>
@@ -266,7 +266,7 @@
                 </details>
                 <details class="kl-growth-faq-item fade-in">
                     <summary>What happens when someone replies?</summary>
-                    <p>Replies route into Email-Agent crm_reply views on port 5100 so follow-up is not trapped in a personal Gmail inbox.</p>
+                    <p>Replies route into Email-Agent crm_reply views on Email Agent dashboard so follow-up is not trapped in a personal Gmail inbox.</p>
                 </details>
                 <details class="kl-growth-faq-item fade-in">
                     <summary>Can you run this for my company without building a full admin shell?</summary>
@@ -275,7 +275,7 @@
             </div>
         </div>
     </section>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this a third-party CRM we resell?","acceptedAnswer":{"@type":"Answer","text":"No. OutreachEngine is Knight Logics production software configured per client brand. The case study describes the live workflow we operate and can adapt for your trade and territory."}},{"@type":"Question","name":"How do you keep brands from mixing templates?","acceptedAnswer":{"@type":"Answer","text":"Each lane (kl, kg, st, faithworks, and others) has isolated templates, senders, and daily caps. Operators switch brands explicitly before preview or send."}},{"@type":"Question","name":"What happens when someone replies?","acceptedAnswer":{"@type":"Answer","text":"Replies route into Email-Agent crm_reply views on port 5100 so follow-up is not trapped in a personal Gmail inbox."}},{"@type":"Question","name":"Can you run this for my company without building a full admin shell?","acceptedAnswer":{"@type":"Answer","text":"Yes. We can deploy OutreachEngine for your lists and caps first, then embed it in Knight Command–style admin later if your team needs a unified ops hub."}}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this a third-party CRM we resell?","acceptedAnswer":{"@type":"Answer","text":"No. OutreachEngine is Knight Logics production software configured per client brand. The case study describes the live workflow we operate and can adapt for your trade and territory."}},{"@type":"Question","name":"How do you keep brands from mixing templates?","acceptedAnswer":{"@type":"Answer","text":"Each lane (kl, kg, st, faithworks, and others) has isolated templates, senders, and daily caps. Operators switch brands explicitly before preview or send."}},{"@type":"Question","name":"What happens when someone replies?","acceptedAnswer":{"@type":"Answer","text":"Replies route into Email-Agent crm_reply views on Email Agent dashboard so follow-up is not trapped in a personal Gmail inbox."}},{"@type":"Question","name":"Can you run this for my company without building a full admin shell?","acceptedAnswer":{"@type":"Answer","text":"Yes. We can deploy OutreachEngine for your lists and caps first, then embed it in Knight Command–style admin later if your team needs a unified ops hub."}}]}</script>
     <section class="kl-growth-section kl-growth-section--compact">
         <div class="container">
             <aside class="kl-growth-scope-note fade-in">

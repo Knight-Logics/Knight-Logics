@@ -167,18 +167,13 @@
     <style>
         .svc-hero {
             position: relative;
-            min-height: 520px;
-            display: flex;
-            align-items: center;
-            background: url('./images/websitehero.webp?v=20260530hero3') center/cover no-repeat;
-            overflow: hidden;
+            min-height: 0;
+            display: block;
+            background: transparent;
+            overflow: visible;
         }
         .svc-hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.58) 100%);
-            z-index: 1;
+            display: none;
         }
         .svc-hero-inner { position: relative; z-index: 2; max-width: 760px; padding: 120px 0 90px; }
         .svc-eyebrow {
@@ -334,7 +329,7 @@
     </script>
     <script defer src="/script.js?v=20260709gbp1"></script>
 </head>
-<body>
+<body class="page-service-desktop-apps">
     <div id="header-container"></div>
 
     <!-- -- HERO -- -->
@@ -385,7 +380,7 @@
         <div class="container">
             <div class="section-header fade-in">
                 <h2>Shipped Products</h2>
-                <p>These aren't concept projects � they're live applications with GitHub releases, versioned builds, and real users.</p>
+                <p>These aren't concept projects — they're live applications with GitHub releases, versioned builds, and real users.</p>
             </div>
             <div class="svc-products-grid">
                 <a href="/pixelforge-ai" class="svc-product-card fade-in">
@@ -412,18 +407,25 @@
                     </div>
                 </a>
 
-                <a href="/videoforge" class="svc-product-card fade-in">
+                <a href="/auto-vid-compiler" class="svc-product-card fade-in">
                     <div class="svc-product-thumb">
-                        <img src="./images/videoforge-app-icon.webp" alt="VideoForge Studio logo" width="590" height="400" loading="lazy">
+                        <img src="./images/B-Magic%27s%20Auto%20Vid%20Compiler.webp" alt="Auto Vid Compiler logo" width="590" height="400" loading="lazy">
                     </div>
                     <div class="svc-product-copy">
-                        <p class="svc-product-label">Video Production Tool</p>
-                        <h3>VideoForge Studio</h3>
-                        <p>Desktop-first video narration and production app. Script-to-video pipeline with AI narration, clip compilation, and export workflows.</p>
+                        <p class="svc-product-label">Batch Video Tool</p>
+                        <h3>Auto Vid Compiler</h3>
+                        <p>Batch clip selection, FFmpeg processing, and export automation — hours of manual editing collapsed into a single run.</p>
                         <span class="svc-product-link"><i class="fas fa-arrow-right"></i> View Product Page</span>
                     </div>
                 </a>
             </div>
+        </div>
+    </section>
+
+    <section class="svc-section svc-section--gradient">
+        <div class="container fade-in">
+            <h2>Automation inside shipped applications</h2>
+            <p>Desktop tools can include workflow automation — batch pipelines, AI processing stages, scheduled operations, and API orchestration — without moving product UX to the generic automation services page.</p>
         </div>
     </section>
 
@@ -432,7 +434,7 @@
         <div class="container">
             <div class="section-header fade-in">
                 <h2>What's Included</h2>
-                <p>From first prototype to distributable release � the full software development lifecycle handled in one engagement.</p>
+                <p>From first prototype to distributable release — the full software development lifecycle handled in one engagement.</p>
             </div>
             <div class="svc-features-grid">
                 <article class="svc-feature-card fade-in">
@@ -443,7 +445,7 @@
                 <article class="svc-feature-card fade-in">
                     <div class="svc-card-icon"><i class="fas fa-box-open"></i></div>
                     <h3>PyInstaller Packaging</h3>
-                    <p>Self-contained EXE builds with PyInstaller � no Python install required on the end user's machine. Single-file or folder builds depending on app architecture.</p>
+                    <p>Self-contained EXE builds with PyInstaller — no Python install required on the end user's machine. Single-file or folder builds depending on app architecture.</p>
                 </article>
                 <article class="svc-feature-card fade-in">
                     <div class="svc-card-icon"><i class="fab fa-github"></i></div>
@@ -453,7 +455,7 @@
                 <article class="svc-feature-card fade-in">
                     <div class="svc-card-icon"><i class="fas fa-compact-disc"></i></div>
                     <h3>Installer (Inno Setup)</h3>
-                    <p>Professional Windows installer with Inno Setup � Start Menu shortcuts, APPDATA config storage, uninstaller, and optional silent install mode for enterprise deployment.</p>
+                    <p>Professional Windows installer with Inno Setup — Start Menu shortcuts, APPDATA config storage, uninstaller, and optional silent install mode for enterprise deployment.</p>
                 </article>
                 <article class="svc-feature-card fade-in">
                     <div class="svc-card-icon"><i class="fas fa-arrows-rotate"></i></div>
@@ -463,7 +465,7 @@
                 <article class="svc-feature-card fade-in">
                     <div class="svc-card-icon"><i class="fas fa-file-code"></i></div>
                     <h3>Documentation &amp; Spec</h3>
-                    <p>README, CHANGELOG, build commands, and architecture notes � so you understand the project and can hand it to another developer if needed without starting over.</p>
+                    <p>README, CHANGELOG, build commands, and architecture notes — so you understand the project and can hand it to another developer if needed without starting over.</p>
                 </article>
             </div>
         </div>
@@ -480,7 +482,7 @@
                 <div class="svc-step">
                     <div class="svc-step-num">1</div>
                     <h3>Speccing</h3>
-                    <p>Define what the app does, what it doesn't do, and what "shipped" means � before a prototype is built.</p>
+                    <p>Define what the app does, what it doesn't do, and what "shipped" means — before a prototype is built.</p>
                 </div>
                 <div class="svc-step">
                     <div class="svc-step-num">2</div>
@@ -515,11 +517,11 @@
             <div class="svc-faq-grid">
                 <article class="svc-faq-item fade-in">
                     <h3>How much does a custom desktop app cost?</h3>
-                    <p>Simple single-purpose Windows tools start in the mid four figures. Applications with databases, multi-user access, installer packaging, and auto-update systems run higher. A scoped quote is provided after a discovery call � no surprises.</p>
+                    <p>Simple single-purpose Windows tools start in the mid four figures. Applications with databases, multi-user access, installer packaging, and auto-update systems run higher. A scoped quote is provided after a discovery call — no surprises.</p>
                 </article>
                 <article class="svc-faq-item fade-in">
                     <h3>What technology do you use to build desktop apps?</h3>
-                    <p>Python with PyInstaller for Windows executables, Flask or Electron for hybrid desktop-web apps, and PowerShell for system-level automation tools. The stack is chosen for reliability and maintainability � not trend chasing.</p>
+                    <p>Python with PyInstaller for Windows executables, Flask or Electron for hybrid desktop-web apps, and PowerShell for system-level automation tools. The stack is chosen for reliability and maintainability — not trend chasing.</p>
                 </article>
                 <article class="svc-faq-item fade-in">
                     <h3>Will the app run without an internet connection?</h3>
@@ -538,7 +540,7 @@
         <div class="container">
             <div class="svc-cta-box fade-in">
                 <h2>Have a Software Idea?</h2>
-                <p>If you have a workflow that needs a real Windows application � not a web app, not a browser extension, but actual desktop software � let's talk scope. I've shipped real products and know what it takes to get from idea to installer.</p>
+                <p>If you have a workflow that needs a real Windows application — not a web app, not a browser extension, but actual desktop software — let's talk scope. I've shipped real products and know what it takes to get from idea to installer.</p>
                 <div class="svc-cta-row" style="justify-content:center;">
                     <a href="/contact" class="btn-primary">Start the Conversation</a>
                     <a href="/#services" class="btn-secondary">All Services</a>

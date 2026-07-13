@@ -139,6 +139,17 @@ Exclude these from broad searches:
 
 The workspace file and local `.vscode/settings.json` should keep these hidden from normal search.
 
+
+## Current Case Study / Network Priority (2026-07-10)
+
+Roof Monsters is live on `https://roofmonsters.co` and is now an official network anchor:
+
+- Nav: Industries ? Roofing shows `RM reference` (alongside KG / ST / FW)
+- Homepage proof strip + mosaic lead with Roof Monsters
+- Hand-crafted case study: `case-study-roof-monsters.html` (skipped by `scripts/generate-growth-all.js`)
+- Media: `images/roof-monsters-rebuild.mp4`, `images/showcase/roof-monsters-*`, copies also in `images/added-media/` for social proof pipeline
+
+Service-company proof order preference: Roof Monsters ? Screen Team ? Knight Group ? Faith Works, then starter/e-commerce examples.
 ## Development Protocol
 
 1. Run `git status -sb`.
@@ -200,7 +211,7 @@ If those scripts are unavailable or dirty in the current worktree, use direct Pl
 
 Technical cleanup is no longer the main bottleneck unless a fresh audit finds a regression.
 
-**GSC baseline (2026-07-10 audit):** 34,207 impressions / 139 clicks / 0.41% CTR / avg position 38.8. Synced under `gsc-audit/2026-07-10/` and `E:\GSC Auditer\runs\2026-07-10\knightlogics.com\`.
+**GSC baseline (2026-07-10 audit):** 34,207 impressions / 139 clicks / 0.41% CTR / avg position 38.8. Synced under `gsc-audit/2026-07-10/` and `E:\Website Audit\GSC\runs\2026-07-10\knightlogics.com\` (legacy junction `E:\GSC Auditer` also resolves here).
 
 **Shipped 2026-07-10 SEO pass (local; deploy when committed/pushed):**
 
@@ -217,7 +228,7 @@ Highest-value next work:
 4. Conversion tracking for calls, forms, audits, booking, pricing starts, and checkout starts.
 5. Off-site authority and citation work through high-trust local and B2B profiles.
 6. Speed protection during visual upgrades.
-7. After deploy: `node E:\GSC Auditer\tools\submit-indexing.mjs --failed` (quota ~10/day) and cache-bust live title checks.
+7. After deploy: `node E:\Website Audit\GSC\tools\submit-indexing.mjs --failed` (quota ~10/day) and cache-bust live title checks. Visibility umbrella: `E:\Website Audit`.
 
 ## Authority Plan
 

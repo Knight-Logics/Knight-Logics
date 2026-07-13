@@ -14365,9 +14365,7 @@ body:not(:has(#hero)) .profile-hero-inner {
 }
 
 .kl-growth-proof-badge {
-    position: absolute;
-    top: 12px;
-    left: 12px;
+    display: inline-block;
     padding: 6px 10px;
     border-radius: 999px;
     background: rgba(5, 10, 20, 0.82);
@@ -14377,6 +14375,16 @@ body:not(:has(#hero)) .profile-hero-inner {
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+}
+
+.kl-growth-proof-media .kl-growth-proof-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+}
+
+.kl-growth-proof-card-copy .kl-growth-proof-badge {
+    margin-bottom: 8px;
 }
 
 .kl-growth-proof-copy h2 {
@@ -14599,7 +14607,9 @@ body:not(:has(#hero)) .profile-hero-inner {
 }
 
 .kl-growth-proof-card {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     text-decoration: none;
     color: inherit;
     border-radius: 16px;
@@ -14619,11 +14629,15 @@ body:not(:has(#hero)) .profile-hero-inner {
     display: block;
     width: 100%;
     aspect-ratio: 16 / 10;
+    height: auto;
     object-fit: cover;
+    object-position: top center;
+    flex-shrink: 0;
     background: #050a14;
 }
 
 .kl-growth-proof-card-copy {
+    flex: 1;
     padding: 18px 20px;
 }
 
@@ -15076,5 +15090,472 @@ body:not(:has(#hero)) .profile-hero-inner {
     .kl-growth-split--reverse .kl-growth-split-copy,
     .kl-growth-split--reverse .kl-growth-split-media {
         order: unset;
+    }
+}
+
+/* ============================================================
+   GBP SHOWCASE — service-google-business-profile
+   ============================================================ */
+.gbp-showcase-loading,
+.gbp-showcase-error {
+    color: rgba(255, 255, 255, 0.75);
+    text-align: center;
+    padding: 24px;
+}
+
+.gbp-showcase-group {
+    margin-bottom: 40px;
+}
+
+.gbp-showcase-group__head h3 {
+    font-size: 1.35rem;
+    margin: 0 0 6px;
+    color: #fff;
+}
+
+.gbp-showcase-group__head p {
+    margin: 0 0 20px;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.95rem;
+}
+
+.gbp-showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+}
+
+.gbp-showcase-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(100, 255, 218, 0.14);
+    border-radius: 16px;
+    padding: 20px;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.gbp-showcase-card:hover {
+    border-color: rgba(100, 255, 218, 0.35);
+    transform: translateY(-3px);
+}
+
+.gbp-showcase-card__title {
+    margin: 0 0 4px;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.gbp-showcase-card__category {
+    font-size: 0.78rem;
+    color: #64ffda;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.gbp-showcase-card__stars {
+    color: #fbbc04;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin: 12px 0 6px;
+}
+
+.gbp-showcase-card__stars--pending {
+    opacity: 0.35;
+}
+
+.gbp-showcase-card__rating {
+    margin: 0 0 10px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.92rem;
+}
+
+.gbp-showcase-card__note {
+    margin: 0 0 10px;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.5;
+}
+
+.gbp-showcase-card__links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.gbp-showcase-card__link {
+    font-size: 0.82rem;
+    color: #64ffda;
+    text-decoration: none;
+}
+
+.gbp-showcase-card__link:hover {
+    text-decoration: underline;
+}
+
+/* ============================================================
+   REFERRAL LIVE DEMO
+   ============================================================ */
+.referral-demo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: start;
+}
+
+.referral-demo-panel {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(100, 255, 218, 0.12);
+    border-radius: 18px;
+    padding: 24px;
+}
+
+.referral-demo-panel h3 {
+    margin: 0 0 16px;
+    font-size: 1.15rem;
+}
+
+.referral-demo-field {
+    margin-bottom: 14px;
+}
+
+.referral-demo-field label {
+    display: block;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 6px;
+}
+
+.referral-demo-field input,
+.referral-demo-field select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+}
+
+.referral-demo-ref-url {
+    font-family: ui-monospace, monospace;
+    font-size: 0.85rem;
+    color: #64ffda;
+    word-break: break-all;
+    margin: 12px 0;
+}
+
+.referral-demo-qr {
+    display: block;
+    margin: 0 auto;
+    border-radius: 12px;
+    background: #fff;
+    padding: 8px;
+}
+
+.referral-demo-step {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.referral-demo-step__n {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(100, 255, 218, 0.15);
+    color: #64ffda;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.referral-demo-step strong {
+    display: block;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.referral-demo-step span {
+    display: block;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.62);
+}
+
+.referral-brochure-preview {
+    background: linear-gradient(160deg, #0d1a2e, #071018);
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    border-radius: 14px;
+    padding: 24px;
+    text-align: center;
+    min-height: 280px;
+}
+
+.referral-brochure-preview__logo {
+    font-weight: 700;
+    color: #64ffda;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    margin-bottom: 12px;
+}
+
+.referral-brochure-preview h4 {
+    margin: 0 0 8px;
+    font-size: 1.25rem;
+}
+
+.referral-brochure-preview p {
+    margin: 0 0 16px;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* ============================================================
+   CRM OUTREACH DEMO
+   ============================================================ */
+.crm-demo-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 24px;
+}
+
+.crm-demo-panel {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(100, 255, 218, 0.12);
+    border-radius: 18px;
+    padding: 22px;
+}
+
+.crm-demo-panel h3 {
+    margin: 0 0 8px;
+}
+
+.crm-demo-disclaimer {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 16px;
+}
+
+.crm-demo-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.crm-demo-metric {
+    padding: 12px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.crm-demo-metric__v {
+    display: block;
+    font-weight: 700;
+    color: #64ffda;
+    font-size: 0.95rem;
+}
+
+.crm-demo-metric__l {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.crm-demo-lead {
+    display: grid;
+    gap: 8px;
+    margin: 0 0 16px;
+}
+
+.crm-demo-lead div {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 8px;
+    font-size: 0.88rem;
+}
+
+.crm-demo-lead dt {
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+.crm-demo-lead dd {
+    margin: 0;
+    color: #fff;
+}
+
+.crm-demo-pipeline {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+}
+
+.crm-demo-step {
+    display: flex;
+    gap: 12px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    opacity: 0.45;
+    transition: opacity 0.2s, background 0.2s;
+}
+
+.crm-demo-step.is-active {
+    opacity: 1;
+    background: rgba(100, 255, 218, 0.08);
+    border: 1px solid rgba(100, 255, 218, 0.2);
+}
+
+.crm-demo-step__icon {
+    color: #64ffda;
+    width: 24px;
+    text-align: center;
+}
+
+.crm-demo-step strong {
+    display: block;
+    font-size: 0.88rem;
+}
+
+.crm-demo-step span {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ============================================================
+   SERVICE PAGE STICKY AUDIT SIDEBAR
+   ============================================================ */
+.svc-with-sidebar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 32px;
+    align-items: start;
+}
+
+.svc-sidebar-form {
+    position: sticky;
+    top: 96px;
+    background: rgba(10, 15, 28, 0.95);
+    border: 1px solid rgba(100, 255, 218, 0.18);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.svc-sidebar-form h3 {
+    margin: 0 0 6px;
+    font-size: 1.05rem;
+}
+
+.svc-sidebar-form > p {
+    margin: 0 0 16px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.5;
+}
+
+.svc-sidebar-form .form-group {
+    margin-bottom: 12px;
+}
+
+.svc-sidebar-form label {
+    display: block;
+    font-size: 0.78rem;
+    margin-bottom: 4px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.svc-sidebar-form input,
+.svc-sidebar-form select,
+.svc-sidebar-form textarea {
+    width: 100%;
+    padding: 9px 11px;
+    border-radius: 8px;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    font-size: 0.88rem;
+}
+
+.svc-sidebar-form textarea {
+    min-height: 72px;
+    resize: vertical;
+}
+
+.svc-sidebar-form .btn-primary {
+    width: 100%;
+    margin-top: 8px;
+}
+
+/* ============================================================
+   PRICING STICKY SECTION NAV
+   ============================================================ */
+.pricing-sticky-nav {
+    position: sticky;
+    top: 72px;
+    z-index: 40;
+    background: rgba(5, 9, 12, 0.94);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(100, 255, 218, 0.12);
+    padding: 10px 0;
+    margin-bottom: 0;
+}
+
+.pricing-sticky-nav .pricing-nav-pills {
+    margin-top: 0;
+}
+
+.pricing-package-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 16px 0 0;
+}
+
+.pricing-package-chip {
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(100, 255, 218, 0.25);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.pricing-package-chip.is-active,
+.pricing-package-chip:hover {
+    background: rgba(100, 255, 218, 0.12);
+    border-color: #64ffda;
+    color: #64ffda;
+}
+
+.pricing-section.is-filtered-out {
+    display: none !important;
+}
+
+/* Hero stars — clear legacy photo/gradient backgrounds after upgrade */
+.svc-hero.svc-hero--stars,
+.contact-page-hero.svc-hero--stars,
+.booking-page-hero.svc-hero--stars {
+    background: transparent !important;
+    background-image: none !important;
+}
+
+@media (max-width: 960px) {
+    .referral-demo-grid,
+    .crm-demo-grid,
+    .svc-with-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .svc-sidebar-form {
+        position: static;
+    }
+
+    .crm-demo-metrics {
+        grid-template-columns: 1fr;
     }
 }

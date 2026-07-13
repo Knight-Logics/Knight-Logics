@@ -2,7 +2,7 @@
   "name": "knightlogics-site",
   "private": true,
   "scripts": {
-    "dev": "npx serve -l 4183 --no-port-switching .",
+    "dev": "node scripts/sync-serve-json.js && npx serve -l 4183 --no-port-switching .",
     "dev:full": "npx vercel dev --listen 4199 --yes",
     "dev:stack": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-knight-command-stack.ps1",
     "dev:static": "npx serve -l 4183 --no-port-switching .",

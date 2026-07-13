@@ -63,6 +63,16 @@ function sendJson(res, status, body, cors) {
 
 async function readJsonBody(req) {
   if (req.body && typeof req.body === 'object' && !Buffer.isBuffer(req.body)) return req.body;
+  const preloaded = req.rawBody ?? req.body;
+  if (typeof preloaded === 'string' || Buffer.isBuffer(preloaded) || preloaded instanceof Uint8Array) {
+    const text = Buffer.from(preloaded).toString('utf8');
+    if (!text) return {};
+    try {
+      return JSON.parse(text);
+    } catch (_) {
+      throw new Error('Invalid JSON request body.');
+    }
+  }
   const chunks = [];
   let size = 0;
   for await (const chunk of req) {

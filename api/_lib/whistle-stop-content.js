@@ -421,6 +421,7 @@ module.exports = {
   checkLiveStatus,
   healthPayload,
   buildContentFiles,
+  publishFilesToGitHub,
   rewriteUploadRefs,
   sha256,
 };

@@ -2,6 +2,7 @@
 
 const socialLib = require('./_lib/whistle-stop-social');
 const contentLib = require('./_lib/whistle-stop-content');
+const campaignLib = require('./_lib/whistle-stop-campaigns');
 
 function queryParam(req, name) {
   try {
@@ -18,9 +19,18 @@ function isContentRequest(req) {
   return queryParam(req, 'service') === 'content';
 }
 
+function isCampaignRequest(req) {
+  const url = String(req.url || '');
+  if (url.includes('whistle-stop-campaigns')) return true;
+  return queryParam(req, 'service') === 'campaigns';
+}
+
 function routeSegment(req, service) {
-  const prefix =
-    service === 'content' ? /^\/api\/whistle-stop-content\/?/ : /^\/api\/whistle-stop-social\/?/;
+  const prefix = service === 'content'
+    ? /^\/api\/whistle-stop-content\/?/
+    : service === 'campaigns'
+      ? /^\/api\/whistle-stop-campaigns\/?/
+      : /^\/api\/whistle-stop-social\/?/;
   try {
     const url = new URL(req.url || '/', 'http://localhost');
     const parts = url.pathname.replace(prefix, '').split('/').filter(Boolean);
@@ -90,6 +100,9 @@ async function handleContent(req, res) {
 module.exports = async function handler(req, res) {
   if (isContentRequest(req)) {
     return handleContent(req, res);
+  }
+  if (isCampaignRequest(req)) {
+    return campaignLib.handle(req, res, routeSegment(req, 'campaigns'), contentLib);
   }
 
   try {

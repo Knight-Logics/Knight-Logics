@@ -3,7 +3,7 @@
 const crypto = require('crypto');
 let neonFactory = null;
 
-const MODEL = process.env.WS_CAMPAIGN_OPENAI_MODEL || 'gpt-5.6-luna';
+const MODEL = process.env.WS_CAMPAIGN_OPENAI_MODEL || 'gpt-5.4-nano';
 const PUBLIC_SITE = process.env.WS_CAMPAIGN_PUBLIC_SITE || 'https://knight-logics.github.io/Whistle-Stop/';
 const CAMPAIGNS_URL = `${PUBLIC_SITE.replace(/\/$/, '')}/data/campaigns.json`;
 const ADDRESS = 'Whistle Stop Grill & Bar · 915 Main Street · Safety Harbor, FL 34695';
@@ -742,7 +742,9 @@ function healthPayload() {
     ),
     ai: Boolean(process.env.OPENAI_API_KEY),
     model: MODEL,
-    scheduler: Boolean(process.env.CRON_SECRET || process.env.WS_CAMPAIGN_RUNNER_KEY || process.env.WS_SOCIAL_API_KEY),
+    aiStatus: process.env.OPENAI_API_KEY ? 'configured-not-probed' : 'not-configured',
+    runnerAuthConfigured: Boolean(process.env.CRON_SECRET || process.env.WS_CAMPAIGN_RUNNER_KEY || process.env.WS_SOCIAL_API_KEY),
+    scheduler: process.env.WS_CAMPAIGN_SCHEDULE_ACTIVE === '1',
     privacy: 'private-neon-with-public-aggregate-counts',
     compliance: ['verified-source-leads', 'suppression-before-send', 'unsubscribe-link', 'postal-address', 'delivery-error-logging'],
   };

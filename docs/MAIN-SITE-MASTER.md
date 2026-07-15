@@ -207,6 +207,16 @@ If those scripts are unavailable or dirty in the current worktree, use direct Pl
 - **Social Poster restore reference:** `Social/Social-Media-Manager/docs/social-poster-master.md`
 - **Social Ops restore reference:** `Social/Social-Media-Manager/docs/social-ops-master.md`
 
+## PixelForge Production Billing
+
+- Public desktop builds use `POST /api/pixelforge-license`; Stripe and database secrets remain in Vercel only.
+- `api/_lib/pixelforge-billing.js` owns the server plans, 20-credit device trial, account balance, render reservations, idempotent Stripe session crediting, and privacy-limited event records.
+- Render billing is reservation-based: `reserve` deducts atomically, `commit` finalizes a valid output, and `release` returns the exact trial/paid split after cancellation or failure.
+- Stripe package metadata uses `app=pixelforge_ai`; `api/stripe-webhook.js` credits completed sessions even when the desktop app closes before confirmation.
+- Current server-authoritative packages are 32 credits / $5, 68 / $10, and 144 / $20. The desktop app cannot override those amounts.
+- Anonymous diagnostics exclude media, file paths, computer names, raw machine identifiers, and email. The app sends an app-scoped device hash plus coarse render/profile outcomes and supports `V11B_DISABLE_ANONYMOUS_DIAGNOSTICS=1`.
+- Main smoke check: `npm run test:pixelforge-billing`.
+
 ## Current Growth Priorities
 
 Technical cleanup is no longer the main bottleneck unless a fresh audit finds a regression.

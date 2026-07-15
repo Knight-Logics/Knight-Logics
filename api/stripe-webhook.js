@@ -7,6 +7,7 @@ const {
     normalizeOffer,
     normalizeSlug
 } = require('./_lib/referral-roster');
+const { creditPaidSession: creditPixelForgeSession } = require('./_lib/pixelforge-billing');
 
 const HANDLED_EVENT_TYPES = new Set([
     'checkout.session.completed',
@@ -375,6 +376,21 @@ module.exports = async function handler(req, res) {
         } catch (error) {
             console.error('[stripe-webhook] Auto Vid credit failed:', error && error.message);
             return sendJson(res, 500, { error: 'Failed to record Auto Vid credit.' });
+        }
+    }
+
+    if (metadata.app === 'pixelforge_ai') {
+        try {
+            const sql = neon(databaseUrl);
+            const result = await creditPixelForgeSession(sql, session);
+            if (!result.ok) {
+                console.error('[stripe-webhook] PixelForge session rejected:', result.error || 'unknown error');
+                return sendJson(res, 400, { error: result.error || 'PixelForge session was rejected.' });
+            }
+            return sendJson(res, 200, { received: true, pixelforge: true, ...result });
+        } catch (error) {
+            console.error('[stripe-webhook] PixelForge credit failed:', error && error.message);
+            return sendJson(res, 500, { error: 'Failed to record PixelForge credit.' });
         }
     }
 

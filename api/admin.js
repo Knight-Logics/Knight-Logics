@@ -14,6 +14,7 @@ const {
     setOwnerPasswordHash,
     ownerPasswordConfigured,
 } = require('./_lib/admin-auth');
+const pixelforgeLicenseHandler = require('./_lib/pixelforge-license');
 
 function sendJson(res, status, payload) {
     res.statusCode = status;
@@ -227,6 +228,11 @@ async function handleHealth(req, res, body) {
 }
 
 module.exports = async function handler(req, res) {
+    const route = String((req.query && req.query.route) || '').trim().toLowerCase();
+    if (route === 'pixelforge-license') {
+        return pixelforgeLicenseHandler(req, res);
+    }
+
     if (req.method !== 'POST') {
         res.setHeader('Allow', 'POST');
         return sendJson(res, 405, { ok: false, error: 'Method not allowed.' });

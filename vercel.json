@@ -562,6 +562,10 @@
       "destination": "/api/admin"
     },
     {
+      "source": "/api/pixelforge-license",
+      "destination": "/api/admin?route=pixelforge-license"
+    },
+    {
       "source": "/api/hero-asteroids-hiscore",
       "destination": "/api/referral-event?route=hero-asteroids-hiscore"
     },

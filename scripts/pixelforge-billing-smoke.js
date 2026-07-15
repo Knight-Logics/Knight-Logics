@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const billing = require('../api/_lib/pixelforge-billing');
-const handler = require('../api/pixelforge-license');
+const handler = require('../api/_lib/pixelforge-license');
 
 assert.strictEqual(billing.FREE_TRIAL_CREDITS, 20);
 assert.deepStrictEqual(

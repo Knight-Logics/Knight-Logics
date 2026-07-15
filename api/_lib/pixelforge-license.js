@@ -15,7 +15,7 @@ const {
     recordEvent,
     releaseReservation,
     reserveCredits
-} = require('./_lib/pixelforge-billing');
+} = require('./pixelforge-billing');
 
 const MAX_JSON_BODY_BYTES = 16 * 1024;
 const VALID_ACTIONS = new Set([

@@ -689,7 +689,9 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
 
 .nav-dropdown-menu {
     position: absolute;
-    top: 100%;
+    /* Visual offset below the toggle — hover bridge (::before) fills the gap so the
+       menu does not close while the pointer travels from the link into the panel. */
+    top: calc(100% + 10px);
     left: 0;
     background: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(10px);
@@ -697,14 +699,25 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
     border-radius: 8px;
     min-width: 220px;
     margin-top: 0;
-    padding: 12px 0 8px;
+    padding: 16px 0 12px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
-    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(-6px);
+    transition: opacity 0.18s ease, visibility 0.18s ease, transform 0.18s ease;
     z-index: 3000;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     pointer-events: none;
+}
+
+/* Invisible hit-area bridging toggle → menu (covers the visual gap + a little side room
+   for diagonal mouse travel into the panel). */
+.nav-dropdown-menu::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    right: -12px;
+    top: -16px;
+    height: 16px;
 }
 
 .nav-dropdown.active .nav-dropdown-menu {
@@ -737,11 +750,12 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
 
 .nav-dropdown-item {
     display: block;
-    padding: 12px 20px;
+    padding: 14px 22px;
     color: #ffffff;
     text-decoration: none;
     font-weight: 600;
     font-size: 16px;
+    line-height: 1.45;
     transition: all 0.3s ease;
     position: relative;
     border-left: 3px solid transparent;
@@ -762,7 +776,8 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
 
 .nav-dropdown-label {
     display: block;
-    padding: 10px 20px 4px;
+    padding: 14px 22px 8px;
+    margin-top: 6px;
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -786,7 +801,7 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
 }
 
 .nav-dropdown-mega-panel .nav-dropdown-label:first-of-type {
-    margin-top: 4px;
+    margin-top: 2px;
 }
 
 .nav-dropdown-menu--wide {
@@ -795,7 +810,7 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
 
 /* Sectioned mega menu — section tabs on left, link panel on right */
 .nav-dropdown-menu--sectioned {
-    padding: 12px 0 0;
+    padding: 16px 0 8px;
     overflow: hidden;
 }
 
@@ -808,7 +823,8 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
-    padding: 8px 0;
+    gap: 6px;
+    padding: 10px 0 12px;
     border-right: 1px solid rgba(100, 255, 218, 0.18);
     min-width: 240px;
     max-width: 280px;
@@ -826,7 +842,7 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
     justify-content: space-between;
     gap: 10px;
     width: 100%;
-    padding: 13px 16px;
+    padding: 16px 18px;
     margin: 0;
     border: none;
     border-left: 3px solid transparent;
@@ -835,7 +851,7 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
     font-family: inherit;
     font-size: 0.92rem;
     font-weight: 600;
-    line-height: 1.4;
+    line-height: 1.5;
     text-align: left;
     text-wrap: balance;
     white-space: normal;
@@ -844,7 +860,7 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
 }
 
 .nav-dropdown-mega-tab + .nav-dropdown-mega-tab {
-    border-top: 1px solid rgba(100, 255, 218, 0.08);
+    border-top: none;
 }
 
 .nav-dropdown-mega-tab::after {
@@ -877,7 +893,8 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
 .nav-dropdown-mega-panel {
     display: none;
     flex-direction: column;
-    padding: 6px 0;
+    gap: 8px;
+    padding: 10px 0 12px;
     min-height: 100%;
 }
 
@@ -908,7 +925,7 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
 
     .nav-dropdown-mega-panel .nav-dropdown-item {
         font-size: 0.95rem;
-        padding: 12px 18px;
+        padding: 14px 20px;
     }
 
     .nav-dropdown-mega-panels {
@@ -6318,8 +6335,8 @@ body.reduced-motion .hero + .kl-proof-stack {
 
         /* Mobile Dropdown Items */
         .nav-dropdown-item {
-            padding: 12px 18px;
-            margin: 4px 0;
+            padding: 14px 18px;
+            margin: 6px 0;
             font-size: 14px;
             background: rgba(100, 255, 218, 0.04);
             border: 1px solid rgba(100, 255, 218, 0.15);
@@ -13078,7 +13095,7 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
     .mobile-nav-links {
         display: flex;
         flex-direction: column;
-        gap: 2px;
+        gap: 8px;
         padding: 12px;
         margin: 0;
         flex: 0 0 auto;
@@ -13228,8 +13245,8 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
         display: flex !important;
         align-items: center;
         width: calc(100% - 24px) !important;
-        margin: 0 12px 4px !important;
-        padding: 12px 14px !important;
+        margin: 0 12px 8px !important;
+        padding: 14px 16px !important;
         border-radius: 10px !important;
         background: rgba(255, 255, 255, 0.05) !important;
         border: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -13240,8 +13257,8 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
         display: flex !important;
         align-items: center;
         width: calc(100% - 24px) !important;
-        margin: 0 12px 4px !important;
-        padding: 12px 14px !important;
+        margin: 0 12px 8px !important;
+        padding: 14px 16px !important;
         border-radius: 10px !important;
         box-sizing: border-box;
     }
@@ -13252,7 +13269,7 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
         backdrop-filter: none;
         border: none;
         min-width: auto;
-        margin: 0 12px 6px 24px !important;
+        margin: 0 12px 10px 24px !important;
         padding: 0;
         opacity: 1 !important;
         visibility: visible !important;
@@ -13289,7 +13306,8 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
         width: 100%;
         min-width: 0;
         max-width: none;
-        padding: 4px 0;
+        gap: 8px;
+        padding: 8px 0 10px;
         transition: transform 0.25s ease, opacity 0.25s ease;
     }
 
@@ -13300,9 +13318,9 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
     }
 
     .nav-dropdown-mega-tab {
-        padding: 12px 14px;
+        padding: 14px 16px;
         font-size: 0.88rem;
-        line-height: 1.38;
+        line-height: 1.48;
         border-radius: 0;
         background: transparent !important;
         border-top: none !important;
@@ -13357,7 +13375,8 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
     }
 
     .nav-dropdown-mega-panel {
-        padding: 6px 4px;
+        gap: 10px;
+        padding: 8px 4px 10px;
     }
 
     .mobile-nav-links .nav-dropdown-mega-panel.is-active {
@@ -13366,8 +13385,8 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
 
     .nav-dropdown-mega-panel .nav-dropdown-item {
         font-size: 0.82rem;
-        padding: 10px 12px;
-        margin: 3px 6px;
+        padding: 12px 14px;
+        margin: 0 6px;
         border-radius: 8px;
         border: 1px solid rgba(100, 255, 218, 0.12);
         border-left: 2px solid rgba(100, 255, 218, 0.25);
@@ -13375,12 +13394,12 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
 
     .mobile-nav-links .nav-dropdown-item {
         display: block;
-        padding: 10px 12px;
+        padding: 12px 14px;
         font-size: 0.88rem;
         font-weight: 600;
         color: rgba(255, 255, 255, 0.88);
         border-left: 2px solid rgba(100, 255, 218, 0.25);
-        margin-bottom: 2px;
+        margin-bottom: 6px;
     }
 
     .mobile-nav-links .nav-dropdown-item:hover {
@@ -13788,7 +13807,7 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
 
 .page-service-local-seo .svc-hero.svc-hero--stars,
 .page-service-google-business-profile .svc-hero.svc-hero--stars {
-    background: #050a14 !important;
+    background: transparent !important;
 }
 
 .page-service-local-seo .svc-hero.svc-hero--stars .svc-hero-inner,
@@ -13890,6 +13909,14 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
     background: #05090c !important;
     overflow: visible !important;
     align-items: stretch !important;
+}
+
+.kl-stars-hero-zone > .svc-hero.svc-hero--stars,
+.page-service-local-seo .kl-stars-hero-zone > .svc-hero.svc-hero--stars,
+.page-service-google-business-profile .kl-stars-hero-zone > .svc-hero.svc-hero--stars,
+[class*="page-service-"] .kl-stars-hero-zone > .svc-hero.svc-hero--stars {
+    background: transparent !important;
+    background-image: none !important;
 }
 
 .page-service-websites .svc-hero.svc-hero--stars::before,
@@ -15557,5 +15584,53 @@ body:not(:has(#hero)) .profile-hero-inner {
 
     .crm-demo-metrics {
         grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================================
+   CITY LANDING PAGES — sticky article sidebar form
+   ============================================================ */
+.city-hero-layout--solo {
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: start;
+}
+
+.city-article-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) min(360px, 34%);
+    gap: clamp(28px, 3vw, 44px);
+    align-items: start;
+    max-width: min(1240px, calc(100% - 24px));
+    margin: 0 auto;
+    padding-right: clamp(12px, 2vw, 28px);
+    box-sizing: border-box;
+}
+
+.city-article-main {
+    min-width: 0;
+}
+
+.city-article-sidebar {
+    position: sticky;
+    top: 96px;
+    align-self: start;
+    width: 100%;
+}
+
+.city-article-sidebar .city-hero-form-shell {
+    display: block;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .city-article-layout {
+        grid-template-columns: 1fr;
+        max-width: 1040px;
+        padding-right: 0;
+    }
+
+    .city-article-sidebar {
+        position: static;
+        order: 2;
     }
 }

@@ -228,6 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initProofCardVideos();
     initHeroEntranceAnimations();
     initSubpageStarsHeroes();
+    initCityLandingFormSidebar();
     initProofAboutEntrance();
     initServicesEntrance();
     initShowcaseCardReveal();
@@ -1713,19 +1714,55 @@ function initNavigation() {
         
         if (toggle && menu) {
             const desktopHover = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1025px)');
+            let closeTimer = null;
 
-            // Desktop: open only when hovering the nav link; stay open over link + menu
-            toggle.addEventListener('mouseenter', () => {
+            function clearCloseTimer() {
+                if (closeTimer) {
+                    clearTimeout(closeTimer);
+                    closeTimer = null;
+                }
+            }
+
+            function openDesktopDropdown() {
                 if (!desktopHover.matches) return;
+                clearCloseTimer();
                 navDropdowns.forEach((d) => {
-                    if (d !== dropdown) setDropdownActive(d, false);
+                    if (d !== dropdown) {
+                        if (d._klNavCloseTimer) {
+                            clearTimeout(d._klNavCloseTimer);
+                            d._klNavCloseTimer = null;
+                        }
+                        setDropdownActive(d, false);
+                    }
                 });
                 setDropdownActive(dropdown, true);
-            });
-            dropdown.addEventListener('mouseleave', () => {
+            }
+
+            function scheduleCloseDesktopDropdown() {
                 if (!desktopHover.matches) return;
-                setDropdownActive(dropdown, false);
+                clearCloseTimer();
+                // Grace period so diagonal travel from toggle → submenu does not kill the menu.
+                closeTimer = setTimeout(() => {
+                    closeTimer = null;
+                    if (!dropdown.matches(':hover')) {
+                        setDropdownActive(dropdown, false);
+                    }
+                }, 220);
+                dropdown._klNavCloseTimer = closeTimer;
+            }
+
+            // Desktop: open on toggle hover; stay open over toggle + menu (incl. gap bridge)
+            toggle.addEventListener('mouseenter', openDesktopDropdown);
+            menu.addEventListener('mouseenter', () => {
+                if (!desktopHover.matches) return;
+                clearCloseTimer();
+                setDropdownActive(dropdown, true);
             });
+            dropdown.addEventListener('mouseenter', () => {
+                if (!desktopHover.matches) return;
+                clearCloseTimer();
+            });
+            dropdown.addEventListener('mouseleave', scheduleCloseDesktopDropdown);
 
             // Touch: toggle open/closed (touchend only adds when closed — fixed to full toggle)
             let toggleTouchedAt = 0;
@@ -1733,6 +1770,7 @@ function initNavigation() {
                 e.preventDefault();
                 e.stopPropagation();
                 toggleTouchedAt = Date.now();
+                clearCloseTimer();
                 navDropdowns.forEach((d) => {
                     if (d !== dropdown) setDropdownActive(d, false);
                 });
@@ -1748,6 +1786,7 @@ function initNavigation() {
                 if (desktopHover.matches) return; // handled by hover
                 if (Date.now() - toggleTouchedAt < 450) return; // avoid double-toggle after touch
                 e.stopPropagation();
+                clearCloseTimer();
                 navDropdowns.forEach((d) => {
                     if (d !== dropdown) setDropdownActive(d, false);
                 });
@@ -1758,6 +1797,7 @@ function initNavigation() {
             const items = dropdown.querySelectorAll('.nav-dropdown-item');
             items.forEach(item => {
                 item.addEventListener('click', () => {
+                    clearCloseTimer();
                     closeAllDropdowns();
                     // Close mobile menu if open
                     if (navMenu && hamburger && navMenuOverlay) {
@@ -3963,4 +4003,30 @@ function initServiceSidebarForms() {
             <button type="submit" class="btn-primary">Send audit request</button>`;
         mount.appendChild(form);
     });
+}
+
+function initCityLandingFormSidebar() {
+    const formShell = document.querySelector('.city-hero-layout .city-hero-form-shell');
+    const articleContainer = document.querySelector('article .container');
+    if (!formShell || !articleContainer || articleContainer.dataset.citySidebarInit === '1') return;
+
+    articleContainer.dataset.citySidebarInit = '1';
+
+    const heroLayout = document.querySelector('.city-hero-layout');
+    if (heroLayout) heroLayout.classList.add('city-hero-layout--solo');
+
+    const main = document.createElement('div');
+    main.className = 'city-article-main';
+    while (articleContainer.firstChild) {
+        main.appendChild(articleContainer.firstChild);
+    }
+
+    const sidebar = document.createElement('aside');
+    sidebar.className = 'city-article-sidebar';
+    sidebar.setAttribute('aria-label', formShell.getAttribute('aria-label') || 'Contact Knight Logics');
+    sidebar.appendChild(formShell);
+
+    articleContainer.classList.add('city-article-layout');
+    articleContainer.appendChild(main);
+    articleContainer.appendChild(sidebar);
 }

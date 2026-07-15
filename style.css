@@ -12614,16 +12614,23 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
     transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
 }
 
-.services--unified-v1 a.services-showcase-card[href="/case-study-jns"] .services-showcase-card__bg {
-    object-position: 72% center;
-    transform-origin: 72% center;
-}
-
 .services--unified-v1 .services-showcase-card--slide.services-showcase-card--logo .services-showcase-card__bg {
     object-fit: contain;
     object-position: center center;
-    padding: 18%;
-    background: radial-gradient(circle at 50% 38%, rgba(100, 255, 218, 0.08), rgba(5, 11, 17, 0.96) 68%);
+    padding: 16% 16% 28%;
+    background:
+        radial-gradient(circle at 50% 36%, rgba(100, 255, 218, 0.12), transparent 58%),
+        linear-gradient(180deg, #0a1520 0%, #071018 100%);
+    transform: none;
+}
+
+.services--unified-v1 .services-showcase-card--slide.services-showcase-card--logo .services-showcase-card__overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.18) 42%, rgba(0, 0, 0, 0.72) 100%);
+}
+
+.services--unified-v1 a.services-showcase-card[href="/case-study-jns"] .services-showcase-card__bg {
+    object-position: center center;
+    transform-origin: center center;
 }
 
 .services--unified-v1 .services-showcase-card--slide .services-showcase-card__overlay {
@@ -12769,6 +12776,19 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
     .services--unified-v1 .services-showcase-card--slide.is-showcase-reveal .services-showcase-card__bg {
         transform: scale(1.04);
         filter: saturate(1.06) contrast(1.03);
+    }
+
+    .services--unified-v1 .services-showcase-card--slide.services-showcase-card--logo:hover .services-showcase-card__bg,
+    .services--unified-v1 .services-showcase-card--slide.services-showcase-card--logo:focus-within .services-showcase-card__bg,
+    .services--unified-v1 .services-showcase-card--slide.services-showcase-card--logo.is-showcase-reveal .services-showcase-card__bg {
+        transform: scale(1.03);
+        filter: none;
+    }
+
+    .services--unified-v1 .services-showcase-card--slide.services-showcase-card--logo:hover .services-showcase-card__overlay,
+    .services--unified-v1 .services-showcase-card--slide.services-showcase-card--logo:focus-within .services-showcase-card__overlay,
+    .services--unified-v1 .services-showcase-card--slide.services-showcase-card--logo.is-showcase-reveal .services-showcase-card__overlay {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.55) 48%, rgba(0, 0, 0, 0.82) 100%);
     }
 
     .services--unified-v1 .services-showcase-card--slide:hover .services-showcase-card__overlay,
@@ -12958,19 +12978,19 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
         will-change: transform, opacity;
     }
 
-    .services--unified-v1 .kl-services-showcase.kl-services-showcase-animate .services-showcase-card.kl-services-enter--left {
+    .services--unified-v1 .kl-services-showcase.kl-services-showcase-animate .kl-services-enter--left {
         animation: kl-proof-slide-left 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
-    .services--unified-v1 .kl-services-showcase.kl-services-showcase-animate .services-showcase-card.kl-services-enter--right {
+    .services--unified-v1 .kl-services-showcase.kl-services-showcase-animate .kl-services-enter--right {
         animation: kl-proof-slide-right 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
-    .services--unified-v1 .kl-services-showcase.kl-services-showcase-animate .services-showcase-card.kl-services-enter--up {
+    .services--unified-v1 .kl-services-showcase.kl-services-showcase-animate .kl-services-enter--up {
         animation: kl-proof-slide-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
-    .services--unified-v1 .kl-services-showcase.kl-services-showcase-animate .services-showcase-card.kl-services-enter--down {
+    .services--unified-v1 .kl-services-showcase.kl-services-showcase-animate .kl-services-enter--down {
         animation: kl-proof-slide-down 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 

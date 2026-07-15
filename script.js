@@ -1318,7 +1318,9 @@ function initServicesEntrance() {
     const startShowcaseAnimation = (showcase) => {
         if (showcase.classList.contains('kl-services-showcase-animate')) return;
         showcase.classList.add('kl-services-showcase-animate');
-        window.setTimeout(() => showcase.classList.add('kl-services-showcase-animate-done'), 900);
+        const cardCount = showcase.querySelectorAll('.services-showcase-card.kl-services-enter').length;
+        const doneMs = Math.min(1400, 650 + cardCount * 60);
+        window.setTimeout(() => showcase.classList.add('kl-services-showcase-animate-done'), doneMs);
     };
 
     const showcaseBlocks = services.querySelectorAll('.kl-services-showcase');

@@ -1032,7 +1032,7 @@ function buildKlHeroPanelsMarkup(panels, primarySrc) {
     return `<div class="hero-panels" aria-hidden="true">${panelEls}</div><div class="svc-hero-overlay" aria-hidden="true"></div>`;
 }
 
-const KL_SVC_HERO_STARS_VER = '20260709gbp1';
+const KL_SVC_HERO_STARS_VER = '20260715cta1';
 
 const KL_SUBPAGE_HERO_SELECTORS = [
     '.svc-hero:not(.svc-hero--stars):not(.svc-hero--panels)',

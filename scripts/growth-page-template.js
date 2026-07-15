@@ -498,13 +498,14 @@ function renderTradeNetwork(block) {
     </section>`;
 }
 
-function renderDeliverables(items) {
+function renderDeliverables(items, intro) {
   if (!items || !items.length) return '';
+  const subtitle = intro || 'What ships in this lane — configured for how your team sells and delivers work.';
   return `<section class="kl-growth-section kl-growth-section--alt">
         <div class="container">
             <div class="section-header fade-in">
                 <h2>Typical deliverables</h2>
-                <p>Scoped to your trade, territory, and ops maturity — not a one-size package.</p>
+                <p>${subtitle}</p>
             </div>
             <div class="kl-growth-deliverables">${items.map((d) => `
                 <article class="kl-growth-deliverable fade-in">
@@ -531,13 +532,14 @@ function renderConnections(conn) {
     </section>`;
 }
 
-function renderOutcomes(outcomes) {
+function renderOutcomes(outcomes, intro) {
   if (!outcomes || !outcomes.length) return '';
+  const subtitle = intro || 'Results operators can check in the tools they already open — not vanity traffic charts.';
   return `<section class="kl-growth-section kl-growth-section--alt">
         <div class="container">
             <div class="section-header fade-in">
                 <h2>Outcomes we design for</h2>
-                <p>Measurable operator results — not vanity dashboards.</p>
+                <p>${subtitle}</p>
             </div>
             <div class="kl-growth-outcomes">${outcomes.map((o) => `
                 <article class="kl-growth-outcome fade-in">
@@ -549,13 +551,14 @@ function renderOutcomes(outcomes) {
     </section>`;
 }
 
-function renderProofGrid(proofs) {
+function renderProofGrid(proofs, intro) {
   if (!proofs || !proofs.length) return '';
+  const subtitle = intro || 'Examples that belong to this lane — selected for relevance, not repeated across every page.';
   return `<section class="kl-growth-section">
         <div class="container">
             <div class="section-header fade-in">
                 <h2>Related proof &amp; examples</h2>
-                <p>Live builds and internal workflows behind this service lane.</p>
+                <p>${subtitle}</p>
             </div>
             <div class="kl-growth-proof-grid">${proofs.map((proof) => `
                 <a class="kl-growth-proof-card fade-in" href="${proof.href}">
@@ -668,13 +671,13 @@ function renderServicePage(p) {
     ${renderSplit(p.problem)}
     ${renderFeatures(p.features)}
     ${renderMediaBlocks(p.mediaBlocks)}
-    ${renderDeliverables(p.deliverables)}
+    ${renderDeliverables(p.deliverables, p.deliverablesIntro)}
     ${renderConnections(p.connections)}
     ${renderProcess(p.process)}
-    ${renderOutcomes(p.outcomes)}
+    ${renderOutcomes(p.outcomes, p.outcomesIntro)}
     ${renderIdealFor(p.idealFor)}
     ${renderProof(p.proof)}
-    ${renderProofGrid(p.proofGrid)}
+    ${renderProofGrid(p.proofGrid, p.proofsIntro)}
     ${renderFaq(p.faq)}
     ${renderLinks(p.links, p.pricingNote)}
     ${renderCta(p.cta)}
@@ -758,13 +761,13 @@ function renderCaseStudy(c) {
 
     ${renderMediaBlocks(mediaBlocks)}
     ${c.timeline ? renderProcess(c.timeline, 'Workflow snapshot') : ''}
-    ${renderDeliverables(c.deliverables)}
-    ${renderOutcomes(c.outcomes)}
+    ${renderDeliverables(c.deliverables, c.deliverablesIntro)}
+    ${renderOutcomes(c.outcomes, c.outcomesIntro)}
     ${renderConnections(c.connections)}
     ${renderFaq(c.faq)}
     ${renderScopeNote(c.scopeNote)}
     ${renderProof(proof)}
-    ${renderProofGrid(proofGrid)}
+    ${renderProofGrid(proofGrid, c.proofsIntro)}
     ${renderLinks(c.links)}
     ${renderCta({ title: 'Want a similar system?', text: c.cta })}
 

@@ -90,15 +90,15 @@ const GBP_LOCATIONS = [
     {
         key: 'roof-monsters',
         title: 'Roof Monsters',
-        envKeys: ['RM_GBP_LOCATION_ID', 'RM_GBP_LOCATION_NAME'],
-        fallbackId: null,
+        envKeys: ['ROOFMONSTERS_GBP_LOCATION_ID', 'ROOFMONSTERS_GBP_LOCATION_NAME', 'RM_GBP_LOCATION_ID', 'RM_GBP_LOCATION_NAME'],
+        fallbackId: '10965227831136317523',
         caseStudy: 'case-study-roof-monsters'
     },
     {
         key: 'faith-works',
         title: 'Faith Works Outdoor Services',
-        envKeys: ['FW_GBP_LOCATION_ID', 'FW_GBP_LOCATION_NAME'],
-        fallbackId: null,
+        envKeys: ['FAITHWORKS_GBP_LOCATION_ID', 'FAITHWORKS_GBP_LOCATION_NAME', 'FW_GBP_LOCATION_ID', 'FW_GBP_LOCATION_NAME'],
+        fallbackId: '11714542974358350290',
         caseStudy: 'case-study-faith-works'
     }
 ];

@@ -58,19 +58,19 @@ const PAGE_SEO = {
     ),
   },
   'crm-outreach-lead-generation': {
-    terms: ['CRM outreach small business', 'lead generation automation Tampa', 'B2B outreach CRM'],
-    meta: 'CRM outreach & lead generation systems — segmented outbound, daily caps, reply routing, and pipeline visibility for Tampa Bay service businesses.',
+    terms: ['CRM outreach', 'outbound lead generation', 'contractor email outreach', 'property manager outreach', 'send caps reply routing'],
+    meta: 'CRM outreach & outbound lead generation — contractor email outreach, property manager lists, send caps, and Email-Agent reply routing for Tampa Bay trades.',
     contextLines: lines(
-      'Outbound works when lists are segmented, sends are capped, and replies route into a tracked queue — not when a blast tool dumps responses back into personal Gmail.',
-      'Production OutreachEngine lanes separate brands (kl, kg, st, faithworks) so property manager and complementary trade outreach scales without cross-contaminating templates.'
+      'Outbound lead generation works when lists are segmented, daily send caps protect reputation, and replies route into Email-Agent crm_reply — not personal Gmail.',
+      'OutreachEngine brand lanes (kl, kg, st, faithworks) keep contractor email outreach and property manager campaigns isolated with bounce discipline before the next window.'
     ),
   },
   'referral-network-systems': {
-    terms: ['referral tracking small business', 'partner referral network', 'referral attribution QR'],
-    meta: 'Referral network systems — partner tracking, /ref attribution paths, QR brochures, and payout visibility for Tampa Bay trade and service businesses.',
+    terms: ['referral tracking', 'partner attribution', 'QR referral', 'referral payout dashboard'],
+    meta: 'Referral tracking & partner attribution — /ref/:partner paths, QR referral brochures, Neon events, and earned vs paid dashboards for Tampa Bay trade networks.',
     contextLines: lines(
-      'Referral disputes usually mean attribution was verbal. Tracked /ref/:partner paths, QR scans, and dashboard visibility document which partner sent the consult or job.',
-      'As the Tampa Bay trade roster grows, co-marketing and complementary referrals scale when each partner has a credible site and a defined lane in the network.'
+      'Partner attribution fails when credit is verbal. Tracked /ref/:partner paths, QR referral scans, and Neon events document which partner earned the consult.',
+      'Stripe webhook payouts and referral-dashboard earned vs paid views reduce disputes as the Tampa Bay trade roster grows.'
     ),
   },
   'ticketing-invoicing-job-workflows': {
@@ -98,35 +98,41 @@ const PAGE_SEO = {
     ),
   },
   'ai-business-automation': {
-    terms: ['AI business automation Tampa', 'workflow automation small business', 'custom AI tools'],
-    meta: 'AI business automation — workflow triggers, internal tools, and ops-aware automations tied to live CRM and queue data for Tampa Bay businesses.',
+    terms: ['AI automation small business', 'safe AI automation boundaries', 'ops AI vs rules engine'],
+    meta: 'AI business automation for small business — assistive drafts and triage with safe boundaries; send caps and brand maps stay rule-backed for Tampa Bay operators.',
     contextLines: lines(
-      'Useful automation connects to real business data — outreach queues, email routing, referral events — not disconnected chat widgets with no audit trail.',
-      'Knight Logics builds automations your team can inspect, pause, and extend as volume grows.'
+      'AI automation small business buyers need boundaries: AI can draft and sort, while OutreachEngine caps and Email-Agent brand maps remain deterministic.',
+      'Useful automations connect to live queues and Logs tabs — not unsupervised chatbots with no audit trail.'
     ),
   },
   'workflow-automation': {
-    terms: ['business workflow automation', 'webhook automation', 'small business ops automation'],
-    meta: 'Workflow automation — webhooks, routing rules, notifications, and internal tools that connect website, CRM, email, and billing for small businesses.',
+    terms: ['business process automation', 'form-to-CRM', 'review-request automation', 'stale lead follow-up'],
+    meta: 'Business process automation — form-to-CRM routing, review-request automation, stale-lead follow-up, and failure-visible jobs for small service businesses.',
     contextLines: lines(
-      'Workflow automation should eliminate repeatable copy-paste between systems — form fills, status changes, payout notifications, and owner alerts.',
-      'Phased rollout keeps automations reliable before scaling volume.'
+      'Workflow automation should eliminate weekly copy-paste: form submit to CRM, job complete to review ask, stale quote to follow-up — with monitoring when steps fail.',
+      'Phased rollout keeps automations reliable before scaling volume across Tampa Bay ops.',
+      'Concrete business process automation examples include form-to-CRM folder creation, review-request automation after closeout, and stale-lead nudges that skip anyone already booked.',
+      'Operators should see failed jobs the same day in Logs — silent Zapier-style breakage is how quote follow-up dies during vacation weeks.'
     ),
   },
   'email-agent-automation': {
-    terms: ['email automation small business', 'multi-inbox CRM email', 'email routing automation'],
-    meta: 'Email-Agent automation — multi-inbox routing, CRM reply discipline, and event notifications for Tampa Bay outreach and support teams.',
+    terms: ['multi-inbox routing', 'CRM reply management', 'Formspree lead routing', 'business email ops'],
+    meta: 'Email-Agent multi-inbox routing — CRM reply management, Formspree lead routing, Gmail/Zoho/Microsoft brand maps, and bounce loops to OutreachEngine.',
     contextLines: lines(
-      'Shared inboxes break when outreach, support, and billing replies land in one undifferentiated queue. Brand-isolated routing preserves context per lane.',
-      'Email-Agent maps production inboxes used by OutreachEngine and ops notifications on live client workflows.'
+      'Business email ops break when outreach, Formspree leads, and manual threads share one inbox. crm_reply vs formspree_lead views keep triage fast.',
+      'Brand maps for KL/KG/ST/FW and bounce feedback to OutreachEngine protect reputation across providers.',
+      'Morning review should open Email-Agent first: unread crm_reply count, then formspree_lead intake, then manual owner threads — never one undifferentiated Gmail search.',
+      'Provider wiring covers Gmail, Zoho, and Microsoft so multi-brand Tampa Bay operators keep CRM reply management separate from personal mail.'
     ),
   },
   'social-media-automation-systems': {
-    terms: ['social media automation business', 'multi-brand social posting', 'social queue dashboard'],
-    meta: 'Social media automation — multi-brand posting queues, approval flows, and showcase content for Tampa Bay service businesses.',
+    terms: ['social scheduling multi-brand', 'GBP posting', 'LinkedIn Nextdoor automation', 'social queue failure reporting'],
+    meta: 'Social scheduling multi-brand — API vs Playwright platforms, GBP posting tied to site campaigns, LinkedIn/Nextdoor automation, and failure reporting on port 8501.',
     contextLines: lines(
-      'Consistency beats viral luck for local service brands — queued posts with project proof outperform sporadic manual posting.',
-      'Social automation integrates with growth proof — galleries, case studies, and referral campaigns — without replacing authentic owner voice.'
+      'Multi-brand social scheduling needs isolated queues and hybrid runners — API where stable, Playwright for LinkedIn and Nextdoor.',
+      'GBP posting should match owned website campaigns so map-pack messaging stays coherent with local SEO pages.',
+      'LinkedIn/Nextdoor automation fails quietly on pure API tools — Playwright runners plus last-success timestamps keep Social Ops honest.',
+      'Brand isolation means KG project photos never post from ST credentials, and KL company news stays on the KL queue.'
     ),
   },
   'internal-business-tools': {
@@ -222,7 +228,11 @@ const PAGE_SEO = {
     meta: 'Stripe invoice automation — payment links, webhook routing, and owner notifications tied to job closeout for service businesses.',
     contextLines: lines(
       'Manual invoicing delays cash flow. Automated Stripe paths with webhook confirmation give owners same-day visibility when jobs complete.',
-      'Invoice automation pairs with ticketing lanes when portal vendors need proof attachments before payment.'
+      'Invoice automation pairs with ticketing lanes when portal vendors need proof attachments before payment.',
+      'Contractor Stripe billing should pull line items from the job record — retyping portal tickets into Stripe is where billing lag and typos start.',
+      'Paid and overdue states belong on the same screen as photos and notes so office staff stop checking a separate Stripe tab every afternoon.',
+      'Webhook retries and operator-visible failures keep online payment workflows trustworthy when a customer pays after hours.',
+      'Typical closeout posture: proof attached, invoice or payment link sent same day, paid status synced before the next portal ticket lands.'
     ),
   },
   'job-photo-pdf-reports': {
@@ -230,7 +240,12 @@ const PAGE_SEO = {
     meta: 'Job photo PDF reports — field images, notes, and branded proof documents attached to job records for contractors and vendors.',
     contextLines: lines(
       'Before/after photo PDFs support premium positioning and reduce payment disputes on visual trades.',
-      'Photo workflows attach to job tickets when crews already capture images on phones.'
+      'Photo workflows attach to job tickets when crews already capture images on phones.',
+      'Field photo documentation fails when proof lives in camera rolls — required capture on the job page before closeout fixes that habit.',
+      'Contractor proof PDF layouts should match property-manager upload formats so portal rejections stop eating office time.',
+      'Office review of branded packets before Stripe invoice send is the cleanest dispute prevention for portal-heavy vendors.',
+      'Mobile browser capture keeps crews off yet another app store install while timestamps and captions stay tied to the job ID permanently.',
+      'When managers require before/after sections, templates encode that once — crews stop rebuilding Word docs after every ticket.'
     ),
   },
   'review-request-systems': {
@@ -238,7 +253,11 @@ const PAGE_SEO = {
     meta: 'Review request systems — timed asks at job completion, GBP review growth, and reputation workflows for Tampa Bay service businesses.',
     contextLines: lines(
       'Reviews compound map-pack visibility when requests fire at the right moment — job complete, customer satisfied, link one tap away.',
-      'Reputation lanes integrate with CRM or job workflow when volume justifies automation.'
+      'Reputation lanes integrate with CRM or job workflow when volume justifies automation.',
+      'Google review request automation for Tampa Bay trades should throttle duplicates and use the correct GBP review URL per location.',
+      'Reputation management for small business is timing and logging — not buying reviews or blasting every contact in a CRM export.',
+      'Staff-triggered asks still beat forgotten sticky notes when crews finish screens, roofs, or handyman jobs on site.',
+      'Monthly velocity vs job volume tells owners whether reputation is keeping pace with completed work.'
     ),
   },
   'service-area-page-strategy': {
@@ -246,7 +265,11 @@ const PAGE_SEO = {
     meta: 'Service-area page strategy — city and county pages with internal linking, schema, and crawl depth for wide-radius Tampa Bay trades.',
     contextLines: lines(
       'Service-area pages succeed when each URL answers a real local query with unique proof — not doorway swaps with swapped city names.',
-      'Hub-and-spoke internal linking between services and metros helps crawlers and AI summaries understand your true mobilization radius.'
+      'Hub-and-spoke internal linking between services and metros helps crawlers and AI summaries understand your true mobilization radius.',
+      'City landing pages for contractors should include coverage honesty, project proof, FAQs, and estimate CTAs — not a paragraph of spun filler.',
+      'Local SEO geography strategy ties website metros to GBP service areas so Pinellas and Hillsborough claims do not contradict the profile.',
+      'Search Console indexing checks after launch catch soft 404s and orphan city pages before you scale the next county.',
+      'Expand metros only when crews actually travel there — responsible scale beats a hundred thin city URLs.'
     ),
   },
   'case-study-knight-command': {

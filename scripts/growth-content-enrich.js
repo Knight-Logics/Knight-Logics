@@ -189,34 +189,72 @@ function deepMerge(page, enrichment) {
   return merged;
 }
 
+function hashSlug(slug) {
+  return [...String(slug || '')].reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+}
+
+/** One primary + system-specific secondary — avoid stacking identical FW/ST/KG captions on every page. */
 function defaultProofGrid(slug) {
-  const trio = [PROOF.faithWorks, PROOF.screenTeam, PROOF.kg];
+  const pool = [
+    PROOF.kg,
+    PROOF.screenTeam,
+    PROOF.faithWorks,
+    PROOF.crmOutreach,
+    PROOF.referral,
+    PROOF.socialPoster,
+    PROOF.knightCommand,
+    PROOF.jns,
+    PROOF.vendoroo
+  ];
   const map = {
     'business-growth-systems': [PROOF.faithWorks, PROOF.screenTeam, PROOF.kg],
-    'crm-outreach-lead-generation': [PROOF.crmOutreach, PROOF.screenTeam, PROOF.faithWorks],
-    'ticketing-invoicing-job-workflows': [PROOF.vendoroo, PROOF.jns, PROOF.screenTeam],
-    'referral-network-systems': [PROOF.referral, PROOF.knightCommand, PROOF.faithWorks],
-    'local-visibility-systems': [PROOF.faithWorks, PROOF.screenTeam, PROOF.kg],
-    'website-growth-audit': [PROOF.faithWorks, PROOF.screenTeam, PROOF.kg],
-    'online-ordering-systems': [PROOF.hospitalityPattern, PROOF.screenTeam, PROOF.faithWorks],
-    'contractor-growth-systems': [PROOF.screenTeam, PROOF.faithWorks, PROOF.kg],
-    'home-service-business-growth-systems': [PROOF.screenTeam, PROOF.faithWorks, PROOF.kg],
-    'performance-partner-program': [PROOF.faithWorks, PROOF.knightCommand, PROOF.crmOutreach],
-    'handyman-business-growth-systems': [PROOF.kg, PROOF.crmOutreach, PROOF.screenTeam],
-    'electrician-business-growth-systems': [PROOF.farrellElectric, PROOF.kg, PROOF.screenTeam],
-    'painter-business-growth-systems': [PROOF.salsPainting, PROOF.kg, PROOF.screenTeam],
+    'crm-outreach-lead-generation': [PROOF.crmOutreach, PROOF.kg],
+    'ticketing-invoicing-job-workflows': [PROOF.vendoroo, PROOF.jns],
+    'referral-network-systems': [PROOF.referral, PROOF.knightCommand],
+    'local-visibility-systems': [PROOF.faithWorks, PROOF.screenTeam],
+    'website-growth-audit': [PROOF.roofMonstersAudit, PROOF.kg],
+    'online-ordering-systems': [PROOF.hospitalityPattern, PROOF.jns],
+    'contractor-growth-systems': [PROOF.screenTeam, PROOF.jns],
+    'home-service-business-growth-systems': [PROOF.kg, PROOF.screenTeam],
+    'performance-partner-program': [PROOF.knightCommand, PROOF.crmOutreach],
+    'handyman-business-growth-systems': [PROOF.kg, PROOF.crmOutreach],
+    'electrician-business-growth-systems': [PROOF.farrellElectric, PROOF.kg],
+    'painter-business-growth-systems': [PROOF.salsPainting, PROOF.kg],
     'roofing-business-growth-systems': [PROOF.roofMonsters, PROOF.roofMonstersAudit, PROOF.roofMonstersProject],
-    'screen-enclosure-business-growth-systems': [PROOF.screenTeam, PROOF.faithWorks, PROOF.kg],
-    'excavation-business-growth-systems': [PROOF.faithWorks, PROOF.screenTeam, PROOF.kg],
-    'restaurant-bar-growth-systems': [PROOF.hospitalityPattern, PROOF.screenTeam, PROOF.faithWorks],
+    'screen-enclosure-business-growth-systems': [PROOF.screenTeam, PROOF.socialPoster],
+    'excavation-business-growth-systems': [PROOF.faithWorks, PROOF.jns],
+    'restaurant-bar-growth-systems': [PROOF.hospitalityPattern, PROOF.socialPoster],
+    'ai-business-automation': [PROOF.knightCommand, PROOF.socialPoster],
+    'workflow-automation': [PROOF.knightCommand, PROOF.crmOutreach],
+    'email-agent-automation': [PROOF.crmOutreach, PROOF.knightCommand],
+    'social-media-automation-systems': [PROOF.socialPoster, PROOF.screenTeam],
+    'stripe-invoice-automation': [PROOF.vendoroo, PROOF.jns],
+    'job-photo-pdf-reports': [PROOF.vendoroo, PROOF.jns],
+    'review-request-systems': [PROOF.screenTeam, PROOF.roofMonsters],
+    'service-area-page-strategy': [PROOF.faithWorks, PROOF.screenTeam],
+    'business-dashboard-development': [PROOF.knightCommand, PROOF.referral],
+    'internal-business-tools': [PROOF.knightCommand, PROOF.crmOutreach],
+    'api-integration-services': [PROOF.referral, PROOF.vendoroo],
     'case-study-knight-command': [PROOF.crmOutreach, PROOF.referral, PROOF.socialPoster],
-    'case-study-crm-outreach-system': [PROOF.screenTeam, PROOF.faithWorks, PROOF.kg],
-    'case-study-vendoroo-ticket-invoice-system': [PROOF.jns, PROOF.vendoroo, PROOF.screenTeam],
-    'case-study-referral-network-system': [PROOF.knightCommand, PROOF.faithWorks, PROOF.crmOutreach]
+    'case-study-crm-outreach-system': [PROOF.kg, PROOF.crmOutreach],
+    'case-study-vendoroo-ticket-invoice-system': [PROOF.vendoroo, PROOF.jns],
+    'case-study-referral-network-system': [PROOF.referral, PROOF.knightCommand],
+    'case-study-social-poster': [PROOF.socialPoster, PROOF.knightCommand],
+    'case-study-hospitality-system-pattern': [PROOF.hospitalityPattern, PROOF.socialPoster]
   };
   if (map[slug]) return map[slug];
-  if (slug.startsWith('case-study-')) return [PROOF.knightCommand, PROOF.faithWorks, PROOF.screenTeam];
-  return trio;
+  if (slug.startsWith('case-study-')) return [PROOF.knightCommand, PROOF.crmOutreach];
+  const h = hashSlug(slug);
+  return [pool[h % pool.length], pool[(h + 3) % pool.length]];
+}
+
+function defaultSectionIntros(page) {
+  const name = page.title || page.h1 || String(page.slug || 'this lane').replace(/-/g, ' ');
+  return {
+    deliverablesIntro: `What ships when we scope ${name} for your trade, territory, and operator workflow.`,
+    outcomesIntro: `Results ${name} is designed to produce for owners who review queues weekly — not vanity dashboards.`,
+    proofsIntro: `Examples that belong to ${name}. Primary proof first; secondary only when it shares the same system pattern.`
+  };
 }
 
 const enrichments = {
@@ -250,11 +288,15 @@ const enrichments = {
     stats: TRIO_STATS
   },
   'crm-outreach-lead-generation': {
+    deliverablesIntro: 'OutreachEngine configuration for contractor email outreach — lists, caps, brand lanes, and reply routing.',
+    outcomesIntro: 'Outbound lead generation outcomes operators can check after each send window.',
+    proofsIntro: 'CRM outreach proof — OutreachEngine case study first, then a brand lane that booked real work.',
+    proofGrid: [PROOF.crmOutreach, PROOF.kg],
     context: {
       title: 'Production outreach, not spreadsheet Gmail',
       paragraphs: [
         'CRM outreach for local service businesses needs brand separation, send caps, bounce discipline, and reply routing — not copy-paste from a shared spreadsheet. OutreachEngine is the live engine behind kl, kg, st, and faithworks brand lanes.',
-        'Screen Team (st lane), Faith Works (faithworks lane), and Knight Group (kg lane) each run isolated templates, caps, and sender identity. KG produced substantial booked work from one well-targeted campaign; ST and FW use the same engine at enclosure and land-clearing scale.',
+        'Property manager outreach and complementary-trade lists run under daily send caps so domain reputation stays intact while the pipeline compounds. Knight Group’s kg lane produced substantial booked work from one well-targeted campaign using the same scheduler pattern.',
         'Replies surface in Email-Agent crm_reply views on port 5100 so operators review outreach responses without mixing them into personal Gmail threads.'
       ]
     },
@@ -267,8 +309,8 @@ const enrichments = {
       kicker: 'Reply path',
       title: 'OutreachEngine → Email-Agent → operator review',
       text: 'Outreach sends from OutreachEngine; replies land in Email-Agent views mapped to the correct brand lane; operators triage from Knight Command or dedicated CRM tabs.',
-      bullets: ['Flask + SQLite backend with reliable scheduler', 'Brand switcher prevents cross-template mistakes', 'Failure and bounce visibility before the week is wasted', 'Live proof on Screen Team, Faith Works, and Knight Group lanes'],
-      links: [['/email-agent-automation', 'Email-Agent'], ['/case-study-crm-outreach-system', 'CRM Case Study'], ['/case-study-screen-team', 'Screen Team Proof']]
+      bullets: ['Flask + SQLite backend with reliable scheduler', 'Brand switcher prevents cross-template mistakes', 'Failure and bounce visibility before the week is wasted', 'Crawlable how-it-works prose sits next to the muted demo video'],
+      links: [['/email-agent-automation', 'Email-Agent'], ['/case-study-crm-outreach-system', 'CRM Case Study'], ['/case-study-knight-group', 'Knight Group Proof']]
     },
     outcomes: [
       { title: 'Predictable pipeline', text: 'Follow-up cadence enforced by scheduler instead of depending on someone remembering inbox checks.' },
@@ -306,6 +348,10 @@ const enrichments = {
     ]
   },
   'referral-network-systems': {
+    deliverablesIntro: 'Referral tracking infrastructure — /ref paths, Neon events, partner dashboards, and payout sync.',
+    outcomesIntro: 'Partner attribution outcomes that reduce payout disputes and speed network onboarding.',
+    proofsIntro: 'Referral network proof — tracked partner paths and Knight Command embed, not a generic CRM grid.',
+    proofGrid: [PROOF.referral, PROOF.knightCommand],
     context: {
       title: 'Partner attribution that scales trust',
       paragraphs: [
@@ -506,6 +552,10 @@ const enrichments = {
     ]
   },
   'ai-business-automation': {
+    deliverablesIntro: 'Safe AI automation boundaries — routing, drafts, and rules engines your team will maintain.',
+    outcomesIntro: 'Business process outcomes where AI assists and deterministic rules still own high-risk sends.',
+    proofsIntro: 'Automation proof from Knight Command embeds and Social Poster runners — not chatbot demos.',
+    proofGrid: [PROOF.knightCommand, PROOF.socialPoster],
     context: {
       title: 'Automation that matches daily ops — not demo chatbots',
       paragraphs: [
@@ -590,11 +640,15 @@ const enrichments = {
     ]
   },
   'workflow-automation': {
+    deliverablesIntro: 'Business process automation triggers — form-to-CRM, review requests, and failure-visible jobs.',
+    outcomesIntro: 'Cadence and monitoring results when background jobs replace spreadsheet reminders.',
+    proofsIntro: 'Workflow proof from scheduler-backed CRM and Knight Command ops — concrete triggers, not vague RPA claims.',
+    proofGrid: [PROOF.knightCommand, PROOF.crmOutreach],
     context: {
       title: 'Background jobs that respect caps and failures',
       paragraphs: [
         'Workflow automation connects scheduler jobs, email triggers, social posting windows, invoice milestones, and internal notifications — with daily caps, bounce rules, and failure reporting built in.',
-        'OutreachEngine first_touch and followup jobs, Social Poster posting windows, and Stripe completion triggers exemplify production workflow patterns already running on Knight Logics infrastructure.',
+        'Concrete triggers include form-to-CRM folder routing, job-complete → review-request sends, and stale-lead → follow-up jobs. OutreachEngine first_touch/followup and Social Poster windows exemplify production patterns already running.',
         'Automations fail visibly: Logs tabs and dashboard alerts replace silent breakage that leaves brand accounts quiet for days.'
       ]
     },
@@ -646,25 +700,29 @@ const enrichments = {
     ]
   },
   'email-agent-automation': {
+    deliverablesIntro: 'Multi-inbox routing deliverables — brand maps, view types, and provider wiring.',
+    outcomesIntro: 'Business email ops outcomes when CRM replies and form leads stop living in personal Gmail.',
+    proofsIntro: 'Email-Agent proof via the OutreachEngine reply loop and Knight Command embed.',
+    proofGrid: [PROOF.crmOutreach, PROOF.knightCommand],
     context: {
       title: 'Multi-inbox routing with brand discipline',
       paragraphs: [
-        'Email-Agent on port 5100 routes CRM outreach replies, manual conversations, and brand-mapped inboxes for Knight Logics, Knight Group, Screen Team, and Faith Works — separate from personal Gmail chaos.',
-        'crm_reply views surface OutreachEngine responses so operators triage outreach without mixing threads into everyday email. KG campaign replies stay in the kg lane.',
-        'Email-Agent complements OutreachEngine: sends originate in CRM; replies return to tracked views embedded in Knight Command Email Agent tab.'
+        'Email-Agent on port 5100 routes CRM outreach replies, Formspree lead routing, manual conversations, and brand-mapped inboxes for Knight Logics, Knight Group, Screen Team, and Faith Works — separate from personal Gmail chaos.',
+        'Views differ by intent: crm_reply surfaces OutreachEngine responses; formspree_lead isolates website intake; manual threads stay operator-owned. Brand maps keep KL/KG/ST/FW credentials and templates isolated.',
+        'Provider notes cover Gmail, Zoho, and Microsoft connections. Bounce signals loop back to OutreachEngine so bad addresses stop before the next send window. Email-Agent embeds in the Knight Command Email Agent tab.'
       ]
     },
     deliverables: [
-      { title: 'Inbox wiring', items: ['Gmail, Zoho, or Microsoft inbox connections', 'Brand mapping for kl, kg, and st lanes', 'crm_reply views separate from manual mail', 'Thread tagging for lead-source attribution'] },
-      { title: 'Routing rules', items: ['Outreach reply detection and queue surfacing', 'Auto-acknowledge templates for after-hours intake', 'Forward rules for escalation paths', 'Bounce and failure notifications to operators'] },
+      { title: 'Inbox wiring', items: ['Gmail, Zoho, or Microsoft inbox connections', 'Brand mapping for kl, kg, st, and faithworks lanes', 'crm_reply views separate from formspree_lead and manual mail', 'Thread tagging for lead-source attribution'] },
+      { title: 'Routing rules', items: ['Outreach reply detection and queue surfacing', 'Formspree and website lead isolation', 'Auto-acknowledge templates for after-hours intake', 'Bounce and failure notifications to operators'] },
       { title: 'Operator embed', items: ['Knight Command Email Agent tab on port 5100', 'Mobile-readable reply triage layout', 'Integration with OutreachEngine campaign logging', 'Runbook for daily morning review'] }
     ],
     connections: {
       kicker: 'Reply loop',
       title: 'OutreachEngine sends → Email-Agent receives',
-      text: 'CRM outreach case study documents the full send-and-reply loop in production on KG and ST campaigns.',
-      bullets: ['crm-outreach-lead-generation for send configuration', 'case-study-crm-outreach-system for live workflow', 'Screen Team st and Faith Works faithworks lanes as live proof', 'workflow-automation for notification triggers'],
-      links: [['/crm-outreach-lead-generation', 'CRM Outreach'], ['/case-study-crm-outreach-system', 'CRM Case Study'], ['/case-study-screen-team', 'Screen Team Proof']]
+      text: 'CRM outreach case study documents the full send-and-reply loop in production — bounce signals return to the CRM before the next capped window.',
+      bullets: ['crm-outreach-lead-generation for send configuration', 'case-study-crm-outreach-system for live workflow', 'Brand maps prevent cross-lane reply mixups', 'workflow-automation for notification triggers'],
+      links: [['/crm-outreach-lead-generation', 'CRM Outreach'], ['/case-study-crm-outreach-system', 'CRM Case Study'], ['/case-study-knight-command', 'Knight Command']]
     },
     outcomes: [
       { title: 'Reply discipline', text: 'Outreach responses reviewed daily from dedicated views — not buried in personal inbox.' },
@@ -674,12 +732,16 @@ const enrichments = {
     ]
   },
   'social-media-automation-systems': {
+    deliverablesIntro: 'Social scheduling multi-brand deliverables — queues, API vs Playwright platforms, GBP posts.',
+    outcomesIntro: 'Cadence and isolation results when runners fail loudly instead of going quiet for days.',
+    proofsIntro: 'Social Poster proof on port 8501 — queue UI and brand isolation, not recycled website page counts.',
+    proofGrid: [PROOF.socialPoster, PROOF.screenTeam],
     context: {
       title: 'Multi-brand queues with failure reporting',
       paragraphs: [
         'Social Poster on Streamlit port 8501 manages per-brand content queues, posting windows, API bridge for X and Facebook, GBP API posts, and Playwright runners for Nextdoor and LinkedIn.',
         'Pure API tools cannot post everywhere — Nextdoor and LinkedIn often need browser automation. Hybrid runners with visible failures replaced silent gaps that left accounts quiet for days.',
-        'Social Ops and Social Poster tabs in Knight Command embed the queue UI with Logs cross-reference when runners break.'
+        'GBP local posts tie to site campaigns so map-pack messaging matches owned pages. Social Ops and Social Poster tabs in Knight Command embed the queue UI with Logs cross-reference when runners break.'
       ]
     },
     deliverables: [
@@ -984,6 +1046,10 @@ const enrichments = {
     ]
   },
   'stripe-invoice-automation': {
+    deliverablesIntro: 'Invoice automation scoped to job milestones — triggers, webhooks, and paid-status sync.',
+    outcomesIntro: 'Cash-collection outcomes when billing fires at closeout instead of days later.',
+    proofsIntro: 'Stripe invoice proof from the Vendoroo ticket-to-invoice pattern — not website SEO stats.',
+    proofGrid: [PROOF.vendoroo, PROOF.jns],
     context: {
       title: 'Invoice triggers tied to job milestones',
       paragraphs: [
@@ -1012,6 +1078,10 @@ const enrichments = {
     ]
   },
   'job-photo-pdf-reports': {
+    deliverablesIntro: 'Field photo and PDF packet deliverables — capture rules, branded layouts, portal exports.',
+    outcomesIntro: 'Proof outcomes property managers accept before invoice send.',
+    proofsIntro: 'Photo/PDF proof from portal vendor closeout — distinct from outreach or referral grids.',
+    proofGrid: [PROOF.vendoroo, PROOF.jns],
     context: {
       title: 'Completion proof property managers accept',
       paragraphs: [
@@ -1040,12 +1110,16 @@ const enrichments = {
     ]
   },
   'review-request-systems': {
+    deliverablesIntro: 'Review-request automation — completion triggers, GBP links, throttle rules.',
+    outcomesIntro: 'Reputation velocity outcomes timed to finished jobs, not calendar reminders.',
+    proofsIntro: 'Review-system proof from enclosure and roofing GBP lanes — timing tied to completed work.',
+    proofGrid: [PROOF.screenTeam, PROOF.roofMonsters],
     context: {
       title: 'Reviews asked at the right moment',
       paragraphs: [
         'Review request systems trigger SMS or email asks at job completion — when customer satisfaction is highest — instead of hoping someone remembers to mention Google weeks later.',
         'Timing integrates with job workflow status changes or manual owner trigger. Links route to Google Business Profile review flow with UTM or tracking where useful.',
-        'Local visibility improves when review velocity matches real completed work — Faith Works, Screen Team, and Knight Group each include reputation as part of geography strategy.'
+        'Local visibility improves when review velocity matches real completed work — Screen Team enclosure jobs and Roof Monsters roofing closeouts exemplify reputation tied to geography strategy.'
       ]
     },
     deliverables: [
@@ -1068,12 +1142,16 @@ const enrichments = {
     ]
   },
   'service-area-page-strategy': {
+    deliverablesIntro: 'Service-area architecture deliverables — hubs, city pages, and internal linking by crew radius.',
+    outcomesIntro: 'Geography outcomes when city pages match real travel distance, not doorway spam.',
+    proofsIntro: 'Service-area proof from land-clearing and enclosure footprints — page counts tied to this strategy page only.',
+    proofGrid: [PROOF.faithWorks, PROOF.screenTeam],
     context: {
       title: 'Hub and city architecture that matches crew radius',
       paragraphs: [
         'Service-area page strategy documents how hub pages, city landing pages, and service silos link together — scaled to how far crews actually travel, not national template city spam.',
         'Faith Works deploys 82 land-clearing pages across Polk County and Central Florida. Screen Team covers Tampa Bay enclosure metros at 36 pages. Knight Group adds 30+ handyman city pages across Pinellas, Hillsborough, and Pasco when the trade is repair-first.',
-        'Screen Team proves the same pattern for pool enclosure quotes; excavation and roofing trades adapt radius and content depth accordingly.'
+        'Excavation and roofing trades adapt radius and content depth accordingly — the architecture is the product, not a recycled proof paragraph on every growth URL.'
       ]
     },
     deliverables: [
@@ -1314,7 +1392,7 @@ const enrichments = {
       { title: 'Ethical launch discipline', text: 'No client branding on knightlogics.com until sign-off.' }
     ],
     scopeNote: 'Capability documentation — hospitality client case studies publish only after approval and site transfer. Fictional UI mockups illustrate the stack until then.',
-    proofGrid: [PROOF.hospitalityPattern, PROOF.screenTeam, PROOF.faithWorks]
+    proofGrid: [PROOF.hospitalityPattern, PROOF.socialPoster]
   },
   'case-study-roof-monsters': {
     context: {
@@ -1403,7 +1481,7 @@ const enrichments = {
       { title: 'GBP alignment', text: 'Scheduled posts match website campaign timing.' }
     ],
     scopeNote: 'Social Poster is Knight Logics internal production tooling on port 8501 — case study documents live workflow, not an off-the-shelf social SaaS product.',
-    proofGrid: [PROOF.knightCommand, PROOF.faithWorks, PROOF.screenTeam]
+    proofGrid: [PROOF.socialPoster, PROOF.knightCommand]
   },
   'case-study-referral-network-system': {
     context: {
@@ -1460,7 +1538,7 @@ const enrichments = {
       { title: 'Embedded support', text: 'Referral ops inside /admin — not orphan dashboard URLs.' }
     ],
     scopeNote: 'Referral infrastructure is production Knight Logics systems — partner program terms, fees, and payout rules are defined separately in program documentation.',
-    proofGrid: [PROOF.knightCommand, PROOF.faithWorks, PROOF.crmOutreach]
+    proofGrid: [PROOF.referral, PROOF.knightCommand]
   }
 };
 
@@ -1476,6 +1554,10 @@ function enrichPage(page) {
     if (!target.proofGrid || !target.proofGrid.length) {
       target.proofGrid = defaultProofGrid(page.slug);
     }
+    const intros = defaultSectionIntros(target);
+    if (!target.deliverablesIntro) target.deliverablesIntro = intros.deliverablesIntro;
+    if (!target.outcomesIntro) target.outcomesIntro = intros.outcomesIntro;
+    if (!target.proofsIntro) target.proofsIntro = intros.proofsIntro;
     return target;
   };
 

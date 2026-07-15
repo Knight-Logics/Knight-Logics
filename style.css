@@ -2641,6 +2641,23 @@ section::before {
     transition: all 0.3s ease;
 }
 
+/* Native select lists follow site dark theme (Windows/Chrome option popup) */
+select {
+    color-scheme: dark;
+}
+
+select option {
+    background-color: #0a1628;
+    color: #e6f1ff;
+}
+
+select option:checked,
+select option:hover,
+select option:focus {
+    background-color: #143041;
+    color: #64ffda;
+}
+
 /* Specific select dropdown styling */
 .form-group select {
     cursor: pointer;
@@ -2656,8 +2673,8 @@ section::before {
 
 /* Select option styling */
 .form-group select option {
-    background: #1a1a1a;
-    color: #ffffff;
+    background-color: #0a1628;
+    color: #e6f1ff;
     padding: 8px 12px;
     border: none;
 }
@@ -2665,14 +2682,14 @@ section::before {
 .form-group select option:hover,
 .form-group select option:focus,
 .form-group select option:checked {
-    background: #64ffda;
-    color: #0a0a0a;
+    background-color: #143041;
+    color: #64ffda;
 }
 
 /* Placeholder option styling */
 .form-group select option[value=""] {
-    color: rgba(255, 255, 255, 0.9);
-    background: #1a1a1a;
+    color: rgba(255, 255, 255, 0.72);
+    background-color: #0a1628;
 }
 
 /* Additional browser-specific styling */
@@ -13902,6 +13919,77 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
     margin-bottom: 10px;
 }
 
+/* Subpage heroes — center title band + actions container (homepage #hero unchanged) */
+body:not(:has(#hero)) .kl-stars-hero-zone > .svc-hero--stars > .container,
+body:not(:has(#hero)) .kl-stars-hero-zone > .kl-hero-actions-bar > .container,
+body:not(:has(#hero)) .svc-hero--stars > .container,
+body:not(:has(#hero)) .pricing-hero > .container,
+body:not(:has(#hero)) .profile-hero > .container,
+body:not(:has(#hero)) .cs-hero > .container,
+body:not(:has(#hero)) .contact-page-hero > .container,
+body:not(:has(#hero)) .svc-hero:not(.svc-hero--panels) > .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+body:not(:has(#hero)) .svc-hero--stars .svc-hero-inner,
+body:not(:has(#hero)) .cs-hero .cs-hero-inner,
+body:not(:has(#hero)) .profile-hero-inner,
+body:not(:has(#hero)) .contact-page-hero-inner {
+    margin-inline: auto;
+    text-align: center;
+    width: 100%;
+}
+
+body:not(:has(#hero)) .svc-hero--stars .kl-breadcrumb,
+body:not(:has(#hero)) .svc-hero--stars .svc-breadcrumb,
+body:not(:has(#hero)) .svc-hero--stars .cs-breadcrumb,
+body:not(:has(#hero)) .cs-hero .cs-breadcrumb {
+    justify-content: center;
+}
+
+body:not(:has(#hero)) .svc-hero--stars h1,
+body:not(:has(#hero)) .cs-hero h1,
+body:not(:has(#hero)) .pricing-hero h1,
+body:not(:has(#hero)) .profile-hero h1 {
+    margin-inline: auto;
+}
+
+body:not(:has(#hero)) .svc-hero--stars .cs-hero-sub,
+body:not(:has(#hero)) .cs-hero .cs-hero-sub,
+body:not(:has(#hero)) .pricing-hero-sub,
+body:not(:has(#hero)) .pricing-hero-claim {
+    margin-inline: auto;
+}
+
+body:not(:has(#hero)) .svc-hero--stars .cs-hero-actions,
+body:not(:has(#hero)) .cs-hero .cs-hero-actions,
+body:not(:has(#hero)) .svc-hero--stars .svc-cta-row {
+    justify-content: center;
+}
+
+body:not(:has(#hero)) .svc-hero--stars .city-hero-layout--solo {
+    margin-inline: auto;
+    text-align: center;
+    width: 100%;
+    max-width: 920px;
+}
+
+body:not(:has(#hero)) .svc-hero--stars .city-hero-layout--solo > div:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body:not(:has(#hero)) .svc-hero--stars .city-hero-layout--solo > div:first-child > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
 @media (max-width: 768px) {
     .svc-hero--stars {
         --kl-hero-nav-offset: 56px;
@@ -15279,6 +15367,40 @@ body:not(:has(#hero)) .profile-hero-inner {
     border: 1px solid rgba(100, 255, 218, 0.2);
     background: rgba(0, 0, 0, 0.35);
     color: #fff;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.referral-demo-field input:focus,
+.referral-demo-field select:focus {
+    outline: none;
+    border-color: #64ffda;
+    box-shadow: 0 0 15px rgba(100, 255, 218, 0.2);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.referral-demo-field select {
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    color-scheme: dark;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364ffda' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+.referral-demo-field select option {
+    background-color: #0a1628;
+    color: #e6f1ff;
+}
+
+.referral-demo-field select option:checked {
+    background-color: #143041;
+    color: #64ffda;
 }
 
 .referral-demo-ref-url {
@@ -15523,6 +15645,35 @@ body:not(:has(#hero)) .profile-hero-inner {
     background: rgba(0, 0, 0, 0.35);
     color: #fff;
     font-size: 0.88rem;
+    font-family: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.svc-sidebar-form input:focus,
+.svc-sidebar-form select:focus,
+.svc-sidebar-form textarea:focus {
+    outline: none;
+    border-color: #64ffda;
+    box-shadow: 0 0 12px rgba(100, 255, 218, 0.18);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.svc-sidebar-form select {
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    color-scheme: dark;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364ffda' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 14px;
+    padding-right: 34px;
+}
+
+.svc-sidebar-form select option {
+    background-color: #0a1628;
+    color: #e6f1ff;
 }
 
 .svc-sidebar-form textarea {
@@ -15589,6 +15740,43 @@ body:not(:has(#hero)) .profile-hero-inner {
 .booking-page-hero.svc-hero--stars {
     background: transparent !important;
     background-image: none !important;
+}
+
+/* Bottom CTA bands — same constellation field as inner-page heroes */
+.kl-stars-surface {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: #05090c;
+}
+
+.kl-stars-surface > .svc-hero-stars {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.kl-stars-surface > .container,
+.kl-stars-surface > .svc-cta-band-inner,
+.kl-stars-surface > .profile-cta-box {
+    position: relative;
+    z-index: 2;
+}
+
+.cs-cta-section.kl-stars-surface,
+.svc-cta-section.kl-stars-surface,
+.profile-cta-section.kl-stars-surface,
+.svc-cta-band.kl-stars-surface {
+    background: #05090c !important;
+    border-top-color: rgba(100, 255, 218, 0.14);
+}
+
+.svc-cta-band.kl-stars-surface {
+    border-bottom-color: rgba(100, 255, 218, 0.14);
 }
 
 @media (max-width: 960px) {

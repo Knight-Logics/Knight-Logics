@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="preload" href="/header.html?v=20260701hero4" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="/footer.html?v=20260701hero4" as="fetch" crossorigin="anonymous">
-    <script defer src="/script.js?v=20260709gbp1"></script>
+    <link rel="preload" href="/header.html?v=20260711cs6" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="/footer.html?v=20260711cs6" as="fetch" crossorigin="anonymous">
+    <script defer src="/script.js?v=20260711cs6"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Stripe invoice automation — payment links, webhook routing, and owner notifications tied to job closeout for service businesses.">
@@ -20,7 +20,7 @@
     <meta name="twitter:description" content="Stripe invoice automation — payment links, webhook routing, and owner notifications tied to job closeout for service businesses.">
     <title>Stripe Invoice Automation | Knight Logics</title>
     <link rel="canonical" href="https://knightlogics.com/stripe-invoice-automation">
-    <link rel="stylesheet" href="/style.css?v=20260709center1">
+    <link rel="stylesheet" href="/style.css?v=20260711cs6">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VX36QR7HJW');</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://knightlogics.com/stripe-invoice-automation#webpage","url":"https://knightlogics.com/stripe-invoice-automation","name":"Stripe Invoice Automation","description":"Stripe invoice automation — payment links, webhook routing, and owner notifications tied to job closeout for service businesses.","isPartOf":{"@id":"https://knightlogics.com/#website"},"about":{"@id":"https://knightlogics.com/#organization"},"publisher":{"@id":"https://knightlogics.com/#organization"},"inLanguage":"en-US"}</script>
@@ -46,7 +46,7 @@
                 <nav class="kl-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/ticketing-invoicing-job-workflows">Job Workflows</a><span>/</span><span>Stripe Invoice Automation</span></nav>
                 <span class="svc-eyebrow"><i class="fas fa-file-invoice-dollar"></i> Payments</span>
                 <h1>Stripe Invoice Automation for Service Businesses</h1>
-                <p class="svc-hero-lead">Completed field work should create Stripe invoices or payment links automatically — with paid status synced back to the job record and referral payouts on webhook where applicable.</p>
+                <p class="svc-hero-lead">Completed field work should create Stripe invoices or payment links automatically — with paid status synced back to the job record and referral payouts on webhook where applicable. Cash collection starts at closeout, not days later in a billing spreadsheet.</p>
                 <div class="kl-growth-stats fade-in">
                 <div class="kl-growth-stat">
                     <span class="kl-growth-stat-value">82</span>
@@ -78,6 +78,10 @@
                 <p>api-integration-services provides webhook receivers with retry logic and visible failures — not one-off scripts.</p>
                 <p>Manual invoicing delays cash flow. Automated Stripe paths with webhook confirmation give owners same-day visibility when jobs complete.</p>
                 <p>Invoice automation pairs with ticketing lanes when portal vendors need proof attachments before payment.</p>
+                <p>Contractor Stripe billing should pull line items from the job record — retyping portal tickets into Stripe is where billing lag and typos start.</p>
+                <p>Paid and overdue states belong on the same screen as photos and notes so office staff stop checking a separate Stripe tab every afternoon.</p>
+                <p>Webhook retries and operator-visible failures keep online payment workflows trustworthy when a customer pays after hours.</p>
+                <p>Typical closeout posture: proof attached, invoice or payment link sent same day, paid status synced before the next portal ticket lands.</p>
                 
             </div>
         </div>
@@ -154,11 +158,27 @@
             </div>
         </div>
     </section>
+<section class="kl-growth-section kl-growth-section--alt">
+        <div class="container">
+            <div class="kl-growth-split kl-growth-split--reverse fade-in">
+                <div class="kl-growth-split-copy">
+                    <span class="kl-growth-kicker">Process</span>
+                    <h2>How invoice automation fires at closeout</h2>
+                    <p>Field/PDF/invoice long-tails only convert when the job record owns line items and paid status — not a side Stripe tab.</p>
+                    <ul class="kl-growth-list"><li>1. Map which job status creates invoice draft vs payment link.</li><li>2. Populate line items from job fields — stop retyping portal PDFs.</li><li>3. Deliver customer email with optional proof packet attached.</li><li>4. Stripe webhook marks paid/overdue on the same job screen.</li><li>5. Optional Email-Agent notify when invoice sent or payment fails.</li></ul>
+                </div>
+                <div class="kl-growth-split-media"><div class="kl-growth-media kl-growth-media--solo">
+            <img src="/images/JNS-HomeImage.webp" alt="JNS Construction contractor website" loading="lazy" decoding="async">
+            
+        </div></div>
+            </div>
+        </div>
+    </section>
     <section class="kl-growth-section kl-growth-section--alt">
         <div class="container">
             <div class="section-header fade-in">
                 <h2>Typical deliverables</h2>
-                <p>Scoped to your trade, territory, and ops maturity — not a one-size package.</p>
+                <p>Invoice automation scoped to job milestones — triggers, webhooks, and paid-status sync.</p>
             </div>
             <div class="kl-growth-deliverables">
                 <article class="kl-growth-deliverable fade-in">
@@ -229,7 +249,7 @@
         <div class="container">
             <div class="section-header fade-in">
                 <h2>Outcomes we design for</h2>
-                <p>Measurable operator results — not vanity dashboards.</p>
+                <p>Cash-collection outcomes when billing fires at closeout instead of days later.</p>
             </div>
             <div class="kl-growth-outcomes">
                 <article class="kl-growth-outcome fade-in">
@@ -284,31 +304,23 @@
         <div class="container">
             <div class="section-header fade-in">
                 <h2>Related proof &amp; examples</h2>
-                <p>Live builds and internal workflows behind this service lane.</p>
+                <p>Stripe invoice proof from the Vendoroo ticket-to-invoice pattern — not website SEO stats.</p>
             </div>
             <div class="kl-growth-proof-grid">
-                <a class="kl-growth-proof-card fade-in" href="/case-study-faith-works">
-                    <img src="/images/showcase/faith-works-og-card.jpg" alt="Faith Works land clearing website" loading="lazy" decoding="async">
+                <a class="kl-growth-proof-card fade-in" href="/case-study-vendoroo-ticket-invoice-system">
+                    <img src="/images/showcase/case-study-vendoroo-ticket-mockup.webp" alt="Vendor portal ticket intake, mobile job flow, and Stripe invoice trigger" loading="lazy" decoding="async">
                     <div class="kl-growth-proof-card-copy">
-                        <span class="kl-growth-proof-badge">Live client</span>
-                        <h3>Faith Works — 82-page growth system</h3>
-                        <p>82 land clearing and forestry mulching pages across Central Florida — faithworks OutreachEngine lane, schema, GA4/GSC, and GBP alignment in the full growth stack.</p>
+                        <span class="kl-growth-proof-badge">Active build</span>
+                        <h3>Vendoroo-style ticket workflow</h3>
+                        <p>Portal intake, mobile proof, PDF packets, and Stripe invoice triggers in one path.</p>
                     </div>
                 </a>
-                <a class="kl-growth-proof-card fade-in" href="/case-study-screen-team">
-                    <img src="/images/screen-team-showcase-800.webp" alt="Screen Team pool enclosure website" loading="lazy" decoding="async">
+                <a class="kl-growth-proof-card fade-in" href="/case-study-jns">
+                    <img src="/images/JNS-HomeImage.webp" alt="JNS Construction website" loading="lazy" decoding="async">
                     <div class="kl-growth-proof-card-copy">
                         <span class="kl-growth-proof-badge">Live client</span>
-                        <h3>Screen Team — 36-page growth system</h3>
-                        <p>36 indexable pages for pool enclosure and screen repair across Tampa Bay — st OutreachEngine lane, Email-Agent mapping, and full growth stack.</p>
-                    </div>
-                </a>
-                <a class="kl-growth-proof-card fade-in" href="/case-study-knight-group">
-                    <img src="/images/KGHero.webp" alt="Knight Group handyman website" loading="lazy" decoding="async">
-                    <div class="kl-growth-proof-card-copy">
-                        <span class="kl-growth-proof-badge">Live client</span>
-                        <h3>Knight Group — 97-page growth architecture</h3>
-                        <p>96/100/100 Lighthouse scores, booking flow, and kg OutreachEngine lane with real booked work.</p>
+                        <h3>JNS Construction bundle</h3>
+                        <p>Focused contractor website launch with service clarity and conversion paths.</p>
                     </div>
                 </a>
             </div>
@@ -321,6 +333,10 @@
             </div>
             <div class="kl-growth-faq">
                 <details class="kl-growth-faq-item fade-in">
+                    <summary>How does Stripe invoice automation work?</summary>
+                    <p>A defined job completion status creates an invoice or payment link from job fields; Stripe webhooks sync paid status back to the job record with retry and failure visibility.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
                     <summary>Does this work with Stripe Connect?</summary>
                     <p>Scoped per client — standard Stripe invoicing and webhooks are the default pattern.</p>
                 </details>
@@ -332,10 +348,18 @@
                     <summary>What if job scope changes after completion?</summary>
                     <p>Manual adjustment workflow remains — automation handles the happy path.</p>
                 </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>Who is this for?</summary>
+                    <p>Portal vendors and contractors who finish work days before customers see a bill.</p>
+                </details>
+                <details class="kl-growth-faq-item fade-in">
+                    <summary>Typical timeline?</summary>
+                    <p>Status map and Stripe webhook wiring usually ship after ticketing closeout rules are agreed — often the last mile of a job-workflow build.</p>
+                </details>
             </div>
         </div>
     </section>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does this work with Stripe Connect?","acceptedAnswer":{"@type":"Answer","text":"Scoped per client — standard Stripe invoicing and webhooks are the default pattern."}},{"@type":"Question","name":"Can customers pay by card and ACH?","acceptedAnswer":{"@type":"Answer","text":"Stripe payment link options follow your Stripe account settings."}},{"@type":"Question","name":"What if job scope changes after completion?","acceptedAnswer":{"@type":"Answer","text":"Manual adjustment workflow remains — automation handles the happy path."}}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does Stripe invoice automation work?","acceptedAnswer":{"@type":"Answer","text":"A defined job completion status creates an invoice or payment link from job fields; Stripe webhooks sync paid status back to the job record with retry and failure visibility."}},{"@type":"Question","name":"Does this work with Stripe Connect?","acceptedAnswer":{"@type":"Answer","text":"Scoped per client — standard Stripe invoicing and webhooks are the default pattern."}},{"@type":"Question","name":"Can customers pay by card and ACH?","acceptedAnswer":{"@type":"Answer","text":"Stripe payment link options follow your Stripe account settings."}},{"@type":"Question","name":"What if job scope changes after completion?","acceptedAnswer":{"@type":"Answer","text":"Manual adjustment workflow remains — automation handles the happy path."}},{"@type":"Question","name":"Who is this for?","acceptedAnswer":{"@type":"Answer","text":"Portal vendors and contractors who finish work days before customers see a bill."}},{"@type":"Question","name":"Typical timeline?","acceptedAnswer":{"@type":"Answer","text":"Status map and Stripe webhook wiring usually ship after ticketing closeout rules are agreed — often the last mile of a job-workflow build."}}]}</script>
     <section class="kl-growth-section kl-growth-section--compact">
         <div class="container">
             

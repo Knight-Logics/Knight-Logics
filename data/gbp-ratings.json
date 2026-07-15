@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-07-09T23:37:43.863Z",
+  "fetchedAt": "2026-07-15T17:10:31.886Z",
   "locations": [
     {
       "key": "knight-logics",
@@ -11,19 +11,19 @@
       "locationName": "locations/1248159491432428151",
       "caseStudy": "case-study-knight-logics",
       "homepageMap": true,
-      "fetchedAt": "2026-07-09T23:37:35.605Z"
+      "fetchedAt": "2026-07-15T17:10:22.531Z"
     },
     {
       "key": "knight-group",
       "title": "Knight Group",
       "status": "live",
       "ratingValue": 5,
-      "reviewCount": 9,
+      "reviewCount": 10,
       "locationId": "15551195498878135337",
       "locationName": "locations/15551195498878135337",
       "caseStudy": "case-study-knight-group",
       "homepageMap": false,
-      "fetchedAt": "2026-07-09T23:37:36.085Z"
+      "fetchedAt": "2026-07-15T17:10:22.988Z"
     },
     {
       "key": "screen-team",
@@ -35,7 +35,7 @@
       "locationName": "locations/4667456483992971896",
       "caseStudy": "case-study-screen-team",
       "homepageMap": false,
-      "fetchedAt": "2026-07-09T23:37:36.372Z"
+      "fetchedAt": "2026-07-15T17:10:23.341Z"
     },
     {
       "key": "sals-painting",
@@ -47,7 +47,7 @@
       "locationName": "locations/6578775761523740862",
       "caseStudy": "case-study-sals-painting",
       "homepageMap": false,
-      "fetchedAt": "2026-07-09T23:37:36.838Z"
+      "fetchedAt": "2026-07-15T17:10:23.823Z"
     },
     {
       "key": "moms-resin-tables",
@@ -59,7 +59,7 @@
       "locationName": "locations/7574920725988430136",
       "caseStudy": "case-study-moms-resin-tables",
       "homepageMap": false,
-      "fetchedAt": "2026-07-09T23:37:37.098Z"
+      "fetchedAt": "2026-07-15T17:10:24.113Z"
     },
     {
       "key": "jns-construction",
@@ -71,27 +71,43 @@
       "locationName": "locations/9312896125475130558",
       "caseStudy": "case-study-jns",
       "homepageMap": false,
-      "fetchedAt": "2026-07-09T23:37:37.350Z"
+      "fetchedAt": "2026-07-15T17:10:24.320Z"
     },
     {
       "key": "clearwater-dentist",
       "title": "Clearwater Dentist",
       "status": "live",
       "ratingValue": 4.9,
-      "reviewCount": 620,
+      "reviewCount": 619,
       "locationId": "10173427097989168585",
       "locationName": "locations/10173427097989168585",
       "caseStudy": null,
       "homepageMap": false,
-      "fetchedAt": "2026-07-09T23:37:43.862Z"
+      "fetchedAt": "2026-07-15T17:10:30.959Z"
+    },
+    {
+      "key": "roof-monsters",
+      "title": "Roof Monsters",
+      "status": "live",
+      "ratingValue": 4.4,
+      "reviewCount": 30,
+      "locationId": "10965227831136317523",
+      "locationName": "locations/10965227831136317523",
+      "caseStudy": "case-study-roof-monsters",
+      "homepageMap": false,
+      "fetchedAt": "2026-07-15T17:10:31.444Z"
     },
     {
       "key": "faith-works",
       "title": "Faith Works Outdoor Services",
-      "status": "missing-location-id",
-      "ratingValue": null,
-      "reviewCount": null,
-      "error": "No location id configured"
+      "status": "live",
+      "ratingValue": 5,
+      "reviewCount": 5,
+      "locationId": "11714542974358350290",
+      "locationName": "locations/11714542974358350290",
+      "caseStudy": "case-study-faith-works",
+      "homepageMap": false,
+      "fetchedAt": "2026-07-15T17:10:31.886Z"
     }
   ],
   "byKey": {
@@ -105,19 +121,19 @@
       "locationName": "locations/1248159491432428151",
       "caseStudy": "case-study-knight-logics",
       "homepageMap": true,
-      "fetchedAt": "2026-07-09T23:37:35.605Z"
+      "fetchedAt": "2026-07-15T17:10:22.531Z"
     },
     "knight-group": {
       "key": "knight-group",
       "title": "Knight Group",
       "status": "live",
       "ratingValue": 5,
-      "reviewCount": 9,
+      "reviewCount": 10,
       "locationId": "15551195498878135337",
       "locationName": "locations/15551195498878135337",
       "caseStudy": "case-study-knight-group",
       "homepageMap": false,
-      "fetchedAt": "2026-07-09T23:37:36.085Z"
+      "fetchedAt": "2026-07-15T17:10:22.988Z"
     },
     "screen-team": {
       "key": "screen-team",
@@ -129,7 +145,7 @@
       "locationName": "locations/4667456483992971896",
       "caseStudy": "case-study-screen-team",
       "homepageMap": false,
-      "fetchedAt": "2026-07-09T23:37:36.372Z"
+      "fetchedAt": "2026-07-15T17:10:23.341Z"
     },
     "sals-painting": {
       "key": "sals-painting",
@@ -141,7 +157,7 @@
       "locationName": "locations/6578775761523740862",
       "caseStudy": "case-study-sals-painting",
       "homepageMap": false,
-      "fetchedAt": "2026-07-09T23:37:36.838Z"
+      "fetchedAt": "2026-07-15T17:10:23.823Z"
     },
     "moms-resin-tables": {
       "key": "moms-resin-tables",
@@ -153,7 +169,7 @@
       "locationName": "locations/7574920725988430136",
       "caseStudy": "case-study-moms-resin-tables",
       "homepageMap": false,
-      "fetchedAt": "2026-07-09T23:37:37.098Z"
+      "fetchedAt": "2026-07-15T17:10:24.113Z"
     },
     "jns-construction": {
       "key": "jns-construction",
@@ -165,27 +181,43 @@
       "locationName": "locations/9312896125475130558",
       "caseStudy": "case-study-jns",
       "homepageMap": false,
-      "fetchedAt": "2026-07-09T23:37:37.350Z"
+      "fetchedAt": "2026-07-15T17:10:24.320Z"
     },
     "clearwater-dentist": {
       "key": "clearwater-dentist",
       "title": "Clearwater Dentist",
       "status": "live",
       "ratingValue": 4.9,
-      "reviewCount": 620,
+      "reviewCount": 619,
       "locationId": "10173427097989168585",
       "locationName": "locations/10173427097989168585",
       "caseStudy": null,
       "homepageMap": false,
-      "fetchedAt": "2026-07-09T23:37:43.862Z"
+      "fetchedAt": "2026-07-15T17:10:30.959Z"
+    },
+    "roof-monsters": {
+      "key": "roof-monsters",
+      "title": "Roof Monsters",
+      "status": "live",
+      "ratingValue": 4.4,
+      "reviewCount": 30,
+      "locationId": "10965227831136317523",
+      "locationName": "locations/10965227831136317523",
+      "caseStudy": "case-study-roof-monsters",
+      "homepageMap": false,
+      "fetchedAt": "2026-07-15T17:10:31.444Z"
     },
     "faith-works": {
       "key": "faith-works",
       "title": "Faith Works Outdoor Services",
-      "status": "missing-location-id",
-      "ratingValue": null,
-      "reviewCount": null,
-      "error": "No location id configured"
+      "status": "live",
+      "ratingValue": 5,
+      "reviewCount": 5,
+      "locationId": "11714542974358350290",
+      "locationName": "locations/11714542974358350290",
+      "caseStudy": "case-study-faith-works",
+      "homepageMap": false,
+      "fetchedAt": "2026-07-15T17:10:31.886Z"
     }
   }
 }

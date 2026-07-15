@@ -131,13 +131,27 @@ const flagshipPages = [
         text: 'Queue preview, send windows, brand switcher, and reply counts — the same interface used on Screen Team, Faith Works, and Knight Group campaigns.',
         bullets: ['Flask + SQLite backend with reliable scheduler', 'Brand mapping for kl, kg, st, and faithworks lanes', 'Failure and bounce visibility before the week is wasted'],
         media: { ...videos.crm, title: 'CRM outreach queue', text: 'Segmented sends with daily cap enforcement.' }
+      },
+      {
+        kicker: 'How OutreachEngine works',
+        title: 'Crawlable steps from list build to booked work',
+        text: 'The muted demo shows the UI; these steps are what Google and operators need in prose. Contractor email outreach and property manager outreach follow the same pipeline with different list tags and templates.',
+        align: 'right',
+        bullets: [
+          '1. Build and tag lists by trade, metro, and ICP — bounce-suppress known bad addresses before first send.',
+          '2. Preview templates per brand lane (kl/kg/st/faithworks) so sender identity never crosses brands.',
+          '3. Scheduler fires first_touch then followup under 20–40 daily send caps with bounce flags.',
+          '4. Replies route into Email-Agent crm_reply views; operators triage and book estimates from tracked threads.',
+          '5. Lead-source reporting shows which list and message variant produced replies and booked work.'
+        ],
+        media: { ...videos.crm, title: 'Send → reply → book', text: 'Outbound lead generation with reply routing, not spreadsheet Gmail.' }
       }
     ],
     process: [
-      { title: 'List & offer mapping', text: 'Define ICP, geography, and the service story each segment should hear.' },
-      { title: 'Template & brand setup', text: 'Separate sender profiles, CTAs, and proof links per brand lane.' },
-      { title: 'Scheduler configuration', text: 'first_touch and followup cadence with caps, bounce rules, and preview sends.' },
-      { title: 'Reply workflow & reporting', text: 'Route replies to Email-Agent views and report lead sources weekly.' }
+      { title: 'List & offer mapping', text: 'Define ICP, geography, and the service story each segment should hear — property managers, HOAs, and complementary trades get different offers.' },
+      { title: 'Template & brand setup', text: 'Separate sender profiles, CTAs, and proof links per brand lane so reputation stays isolated.' },
+      { title: 'Scheduler configuration', text: 'first_touch and followup cadence with caps, bounce rules, and preview sends before volume ramps.' },
+      { title: 'Reply workflow & reporting', text: 'Route replies to Email-Agent crm_reply views and report lead sources weekly against booked work.' }
     ],
     idealFor: [
       'Estimate-first trades needing consistent outbound beyond referrals',
@@ -155,9 +169,12 @@ const flagshipPages = [
       linkLabel: 'Knight Group case study'
     },
     faq: [
-      { q: 'What daily send volume do you recommend?', a: 'We typically cap between 20 and 40 sends per day per brand while warming domains and monitoring bounce rates.' },
-      { q: 'Can this connect to my existing inbox?', a: 'Yes — Email-Agent on port 5100 routes CRM replies into crm_reply views separate from manual conversations.' },
-      { q: 'Is OutreachEngine included or custom?', a: 'We deploy and configure OutreachEngine for your brands, lists, and follow-up rules — adapted from our live KL/KG/ST workflows.' }
+      { q: 'How does OutreachEngine work end to end?', a: 'Lists are imported and tagged, templates previewed per brand, scheduler jobs send first_touch and followup under daily caps, bounces are suppressed, and replies land in Email-Agent crm_reply for operator triage into booked work.' },
+      { q: 'What daily send volume do you recommend?', a: 'We typically cap between 20 and 40 sends per day per brand while warming domains and monitoring bounce rates — enough for outbound lead generation without torching reputation.' },
+      { q: 'Can this support property manager outreach?', a: 'Yes — property manager and complementary-trade segments are first-class list tags with dedicated templates and caps separate from consumer blast tools.' },
+      { q: 'Can this connect to my existing inbox?', a: 'Yes — Email-Agent on port 5100 routes CRM replies into crm_reply views separate from manual conversations and Formspree leads.' },
+      { q: 'Is OutreachEngine included or custom?', a: 'We deploy and configure OutreachEngine for your brands, lists, and follow-up rules — adapted from our live KL/KG/ST/faithworks workflows.' },
+      { q: 'Who is CRM outreach for?', a: 'Estimate-first Tampa Bay trades and multi-brand operators who need contractor email outreach with send caps and reply routing — not one-off newsletter blasts.' }
     ],
     links: [
       ['/business-growth-systems', 'Business Growth Systems'],
@@ -289,13 +306,27 @@ const flagshipPages = [
         title: 'Referral dashboard & partner paths',
         text: 'The same referral infrastructure behind Knight Logics partner program — QR, codes, events, and payout visibility in production.',
         media: { ...videos.referral, title: 'Partner attribution dashboard', text: 'See which partners and QR scans produce consults.' }
+      },
+      {
+        kicker: 'How referral tracking works',
+        title: 'From QR scan to earned vs paid',
+        text: 'Partner attribution is a different system from CRM outreach. Events live in Neon; payouts settle through Stripe webhooks; partners see their own lane only.',
+        align: 'right',
+        bullets: [
+          '1. Issue a unique /ref/:partner path and print-ready QR brochure per partner.',
+          '2. Consult forms and landing events write to Neon Postgres with partner code attached.',
+          '3. referral-dashboard shows earned vs paid without exposing owner-only financials.',
+          '4. Stripe webhooks update payout status when fees settle — no spreadsheet reconciliation.',
+          '5. Knight Command Referrals tab embeds the same ops surface operators already open daily.'
+        ],
+        media: { ...videos.referral, title: 'Attribution → settlement', text: 'QR referral tracking with defensible partner credit.' }
       }
     ],
     process: [
-      { title: 'Partner rules & fees', text: 'Document attribution windows, fee structure, and who owns the customer relationship.' },
-      { title: 'Codes & landing paths', text: 'Deploy /ref/:partner routes and brochure QR assets per partner.' },
+      { title: 'Partner rules & fees', text: 'Document attribution windows, fee structure, and who owns the customer relationship before any QR prints.' },
+      { title: 'Codes & landing paths', text: 'Deploy /ref/:partner routes and brochure QR assets per partner — not shared UTM links.' },
       { title: 'Event logging & dashboard', text: 'Neon Postgres events and referral-dashboard views for partners and owners.' },
-      { title: 'Payout workflow', text: 'Stripe webhook settlement with clear earned vs paid reporting.' }
+      { title: 'Payout workflow', text: 'Stripe webhook settlement with clear earned vs paid reporting inside Knight Command.' }
     ],
     idealFor: [
       'Trades with complementary partners who send real work',
@@ -313,9 +344,12 @@ const flagshipPages = [
       linkLabel: 'Referral system case study'
     },
     faq: [
-      { q: 'How do partners check their referrals?', a: 'Partners use /referral-dashboard for lead status, attribution, and payout progress tied to their code or QR path.' },
-      { q: 'What counts as a attributed lead?', a: 'Rules are documented upfront — typically tracked form submits or booked consults within the agreed window from /ref/:partner entry.' },
-      { q: 'Can this work without Stripe payouts?', a: 'Yes — attribution and dashboard visibility can launch first; Stripe webhook payouts add automated settlement when you are ready.' }
+      { q: 'How does partner attribution work?', a: 'Each partner gets a /ref/:partner path and optional QR. Scans, forms, and conversions log to Neon with that code so credit is defensible before payout.' },
+      { q: 'How do partners check their referrals?', a: 'Partners use /referral-dashboard for lead status, attribution, and payout progress tied to their code or QR path — earned vs paid without owner spreadsheet emails.' },
+      { q: 'What counts as an attributed lead?', a: 'Rules are documented upfront — typically tracked form submits or booked consults within the agreed window from /ref/:partner entry.' },
+      { q: 'How is this different from CRM outreach?', a: 'CRM outreach is outbound list sending. Referral tracking attributes inbound partner-sent work and settles fees — different data store, dashboard, and payout path.' },
+      { q: 'Can this work without Stripe payouts?', a: 'Yes — attribution and dashboard visibility can launch first; Stripe webhook payouts add automated settlement when you are ready.' },
+      { q: 'What is the typical timeline?', a: 'Partner rules and codes often ship in days; QR print assets and dashboard access follow once attribution windows are written.' }
     ],
     links: [
       ['/referral-program', 'Join Referral Program'],
@@ -856,6 +890,20 @@ const subPages = [
         title: 'Automation inside Knight Command',
         text: 'AI-assisted workflows embed alongside Outreach CRM, Email Agent, and Social Ops — not a standalone toy app.',
         media: videos.crm
+      },
+      {
+        kicker: 'Safe boundaries',
+        title: 'Where AI helps vs where rules engines own the send',
+        text: 'AI automation for small business works when drafts and triage are assistive, while send caps, brand maps, and approval gates stay deterministic.',
+        align: 'right',
+        bullets: [
+          '1. Audit high-volume steps with clear rules and low customer-facing error cost.',
+          '2. Let AI draft or sort inside Email-Agent and Social Poster queues — humans approve risky sends.',
+          '3. Keep OutreachEngine caps, bounce suppression, and brand isolation as hard rules.',
+          '4. Surface failures in Logs tabs the same day — never silent overnight breakage.',
+          '5. Expand only after operators trust the morning review loop.'
+        ],
+        media: { ...videos.crm, title: 'Assistive AI, owned rules', text: 'Non-hype automation wired to live ops ports.' }
       }
     ],
     process: [
@@ -880,8 +928,11 @@ const subPages = [
       linkLabel: 'Knight Command case study'
     },
     faq: [
+      { q: 'Where does AI help vs where do rules engines run?', a: 'AI assists drafts, sorting, and summaries. Send caps, brand maps, bounce suppression, and customer-facing replies stay rule-backed with human approval where brand risk is high.' },
       { q: 'Do you deploy ChatGPT wrappers?', a: 'No — we automate defined ops steps with logging and integrations. Customer-facing AI is scoped only with explicit guardrails.' },
-      { q: 'What systems can AI connect to?', a: 'OutreachEngine, Email-Agent (5100), referral events, and custom job trackers — depending on your stack.' },
+      { q: 'What systems can automation connect to?', a: 'OutreachEngine, Email-Agent (5100), Social Poster (8501), referral events, and custom job trackers — depending on your stack.' },
+      { q: 'Who is this for?', a: 'Tampa Bay operators already drowning in inbox triage or queue review — not companies shopping for a novelty chatbot.' },
+      { q: 'What is pricing posture?', a: 'Scoped per lane after a process audit — you pay for wired triggers and monitoring, not an unbounded AI retainer.' },
       { q: 'Is training included?', a: 'Yes — staff learn approval queues and when to override automated suggestions.' }
     ],
     links: [['/service-ai-automation', 'Automation Services'], ['/workflow-automation', 'Workflow Automation'], ['/email-agent-automation', 'Email-Agent Automation']],
@@ -1048,10 +1099,24 @@ const subPages = [
         title: 'first_touch and followup scheduler',
         text: 'OutreachEngine scheduler drives first_touch and followup sends with daily caps and bounce detection.',
         media: videos.crm
+      },
+      {
+        kicker: 'Concrete triggers',
+        title: 'Form-to-CRM, job-complete, and stale-lead examples',
+        text: 'Business process automation only sticks when triggers map to jobs your office already recognizes — and failures show up before customers do.',
+        align: 'right',
+        bullets: [
+          '1. Website form submit → CRM or folder record + owner notify (form-to-CRM).',
+          '2. Job status complete → review-request automation with GBP link throttle.',
+          '3. Quote older than N days → stale-lead follow-up without double-messaging booked clients.',
+          '4. Ticket photo missing → block closeout until proof attaches.',
+          '5. Failed runner or webhook → Logs alert same day, pause/resume runbook documented.'
+        ],
+        media: { ...videos.crm, title: 'Trigger → monitor → recover', text: 'Review-request and follow-up automation with visible failures.' }
       }
     ],
     process: [
-      { title: 'Process documentation', text: 'Write the happy path for each job or lead type.' },
+      { title: 'Process documentation', text: 'Write the happy path for each job or lead type before any scheduler job ships.' },
       { title: 'Trigger design', text: 'Define events — form, status change, timer — that start each workflow.' },
       { title: 'Build & test', text: 'Implement with failure logging and owner notifications.' },
       { title: 'Staff rollout', text: 'Simple overrides when automation needs human judgment.' }
@@ -1072,9 +1137,12 @@ const subPages = [
       linkLabel: 'CRM workflow case study'
     },
     faq: [
-      { q: 'Is this the same as Zapier?', a: 'We build owned workflows with logging tied to your CRM and job records — better for critical ops than opaque zaps.' },
+      { q: 'What are example triggers you automate?', a: 'Form-to-CRM routing, job-complete → review request, stale-lead follow-up, photo-required closeout gates, and Stripe completion notifies — each with failure monitoring.' },
+      { q: 'Is this the same as Zapier?', a: 'We build owned workflows with logging tied to your CRM and job records — better for critical ops than opaque zaps that fail silently.' },
       { q: 'Can workflows send SMS?', a: 'Scoped per client — many flows start with email and in-app alerts via Email-Agent.' },
-      { q: 'What if a step fails?', a: 'Failures surface in logs and owner alerts — Knight Command Logs tab pattern for ops visibility.' }
+      { q: 'What if a step fails?', a: 'Failures surface in logs and owner alerts — Knight Command Logs tab pattern for ops visibility before missed revenue.' },
+      { q: 'Who is workflow automation for?', a: 'Tampa Bay service teams repeating the same intake, proof, and follow-up steps every week.' },
+      { q: 'What tools does this replace?', a: 'Spreadsheet reminders, forgotten Gmail follow-ups, and fragile no-code chains for mission-critical paths — not every SaaS in your stack.' }
     ],
     links: [['/automation', 'Automation Overview'], ['/ticketing-invoicing-job-workflows', 'Job Workflows'], ['/review-request-systems', 'Review Requests']],
     cta: { title: 'Which process repeats every week?', text: 'Describe the steps — we will identify automation triggers with safe fallbacks.' }
@@ -1182,6 +1250,20 @@ const subPages = [
         title: 'Email-Agent routing walkthrough',
         text: 'See crm_reply vs formspree_lead separation and brand mapping in the production interface.',
         media: { ...videos.email, title: 'Email-Agent routing', text: 'Multi-inbox views on port 5100.' }
+      },
+      {
+        kicker: 'How views differ',
+        title: 'crm_reply vs formspree_lead vs manual',
+        text: 'Business email ops only work when operators know which queue to open. Multi-inbox routing keeps CRM reply management separate from website Formspree lead routing.',
+        align: 'right',
+        bullets: [
+          '1. Connect Gmail, Zoho, or Microsoft inboxes with KL/KG/ST/FW brand maps.',
+          '2. crm_reply surfaces OutreachEngine responses for daily triage.',
+          '3. formspree_lead isolates website intake from campaign noise.',
+          '4. Manual threads stay operator-owned without mixing into campaign queues.',
+          '5. Bounce signals loop back to OutreachEngine before the next capped send window.'
+        ],
+        media: { ...videos.email, title: 'Provider → view → bounce loop', text: 'Email-Agent brand maps and reply routing.' }
       }
     ],
     process: [
@@ -1206,9 +1288,12 @@ const subPages = [
       linkLabel: 'CRM outreach case study'
     },
     faq: [
-      { q: 'Which email providers work?', a: 'Gmail, Zoho, and Microsoft are supported with per-brand credential mapping.' },
-      { q: 'Is Email-Agent only for CRM?', a: 'It also routes Formspree and manual business threads — crm_reply and formspree_lead are dedicated views.' },
-      { q: 'Can I access it outside Knight Command?', a: 'Port 5100 is reachable directly; Knight Command embeds it for single-sign-on operator workflow.' }
+      { q: 'How do crm_reply and formspree_lead views differ?', a: 'crm_reply is for OutreachEngine campaign responses; formspree_lead isolates website form intake; manual threads stay separate so operators never hunt one mixed Gmail inbox.' },
+      { q: 'Which email providers work?', a: 'Gmail, Zoho, and Microsoft are supported with per-brand credential mapping for KL, KG, ST, and Faith Works lanes.' },
+      { q: 'Is Email-Agent only for CRM?', a: 'No — it also routes Formspree and manual business threads. CRM reply management is one view among several.' },
+      { q: 'How does bounce handling work?', a: 'Bounce and failure signals notify operators and feed back into OutreachEngine so bad addresses stop before the next send window.' },
+      { q: 'Can I access it outside Knight Command?', a: 'Port 5100 is reachable directly; Knight Command embeds it for single-sign-on operator workflow.' },
+      { q: 'Who is this for?', a: 'Multi-brand Tampa Bay operators drowning in mixed inboxes — especially teams already running outbound CRM.' }
     ],
     links: [['/automation', 'Automation Systems'], ['/crm-outreach-lead-generation', 'CRM Outreach'], ['/case-study-crm-outreach-system', 'CRM Case Study']],
     cta: { title: 'Inbox slowing outreach?', text: 'We will map brands, inboxes, and reply routing rules for Email-Agent.' }
@@ -1252,6 +1337,20 @@ const subPages = [
         title: 'Social Poster Streamlit UI',
         text: 'Queue management, posting windows, and failure visibility embedded in Knight Command Social Poster tab.',
         media: { ...videos.social, title: 'Social media manager', text: 'Multi-brand queue on port 8501.' }
+      },
+      {
+        kicker: 'API vs Playwright',
+        title: 'How multi-brand social scheduling actually runs',
+        text: 'LinkedIn/Nextdoor automation and GBP posting need different runners than X/Facebook. Brand isolation keeps KL, KG, and ST credentials from crossing.',
+        align: 'right',
+        bullets: [
+          '1. Audit platforms per brand — API path vs Playwright path.',
+          '2. Queue content with posting windows and preview before send.',
+          '3. Fire X/Facebook via API; Nextdoor/LinkedIn via Playwright workers.',
+          '4. Schedule GBP local posts tied to the same site campaigns.',
+          '5. Report failures and last-success timestamps in Social Ops / Logs.'
+        ],
+        media: { ...videos.social, title: 'Queue → runner → report', text: 'Social scheduling multi-brand with failure reporting.' }
       }
     ],
     process: [
@@ -1276,9 +1375,12 @@ const subPages = [
       linkLabel: 'Social Poster case study'
     },
     faq: [
-      { q: 'Which platforms are supported?', a: 'X and Facebook via API, GBP via API, Nextdoor and LinkedIn via Playwright — scoped per brand at setup.' },
+      { q: 'Which platforms use API vs Playwright?', a: 'X and Facebook use API clients where stable; Nextdoor and LinkedIn typically use Playwright runners; GBP posts use the Business Profile API for local cadence.' },
+      { q: 'How do you keep brands isolated?', a: 'Separate queues and credential vaults per company (KL/KG/ST) so one brand’s content cannot post to another account by accident.' },
       { q: 'Do you create content?', a: 'Systems focus — queue and posting infrastructure. Content can be supplied by your team or scoped separately.' },
-      { q: 'Where do failures show?', a: 'Social Poster UI and Knight Command Logs tab — not silent email-only alerts.' }
+      { q: 'Where do failures show?', a: 'Social Poster UI and Knight Command Logs tab — not silent email-only alerts after a week of quiet accounts.' },
+      { q: 'How do GBP posts relate to the website?', a: 'GBP local posts are scheduled alongside site campaigns so map-pack messaging matches owned service and city pages.' },
+      { q: 'Who is this for?', a: 'Tampa Bay multi-brand operators who need social scheduling with LinkedIn/Nextdoor coverage and visible failure reporting.' }
     ],
     links: [['/automation', 'Automation Overview'], ['/case-study-social-poster', 'Social Poster Case Study'], ['/local-visibility-systems', 'Local Visibility']],
     cta: { title: 'Need reliable social queues?', text: 'List brands and platforms — we will scope API vs Playwright runners.' }
@@ -1890,7 +1992,7 @@ const subPages = [
     meta: 'Automated Stripe invoicing from completed jobs — payment links, status sync, and owner visibility for service businesses.',
     eyebrow: 'Payments',
     h1: 'Stripe Invoice Automation for Service Businesses',
-    lead: 'Completed field work should create Stripe invoices or payment links automatically — with paid status synced back to the job record and referral payouts on webhook where applicable.',
+    lead: 'Completed field work should create Stripe invoices or payment links automatically — with paid status synced back to the job record and referral payouts on webhook where applicable. Cash collection starts at closeout, not days later in a billing spreadsheet.',
     heroIcon: 'fa-file-invoice-dollar',
     problem: {
       kicker: 'Billing lag',
@@ -1916,6 +2018,20 @@ const subPages = [
         title: 'Vendoroo invoice lane',
         text: 'Vendor portal workflow includes Stripe invoice creation on job completion — active build reference.',
         media: images.jns
+      },
+      {
+        kicker: 'Process',
+        title: 'How invoice automation fires at closeout',
+        text: 'Field/PDF/invoice long-tails only convert when the job record owns line items and paid status — not a side Stripe tab.',
+        align: 'right',
+        bullets: [
+          '1. Map which job status creates invoice draft vs payment link.',
+          '2. Populate line items from job fields — stop retyping portal PDFs.',
+          '3. Deliver customer email with optional proof packet attached.',
+          '4. Stripe webhook marks paid/overdue on the same job screen.',
+          '5. Optional Email-Agent notify when invoice sent or payment fails.'
+        ],
+        media: images.jns
       }
     ],
     process: [
@@ -1940,9 +2056,12 @@ const subPages = [
       linkLabel: 'Vendoroo case study'
     },
     faq: [
+      { q: 'How does Stripe invoice automation work?', a: 'A defined job completion status creates an invoice or payment link from job fields; Stripe webhooks sync paid status back to the job record with retry and failure visibility.' },
       { q: 'Does this work with Stripe Connect?', a: 'Scoped per client — standard Stripe invoicing and webhooks are the default pattern.' },
       { q: 'Can customers pay by card and ACH?', a: 'Stripe payment link options follow your Stripe account settings.' },
-      { q: 'What if job scope changes after completion?', a: 'Manual adjustment workflow remains — automation handles the happy path.' }
+      { q: 'What if job scope changes after completion?', a: 'Manual adjustment workflow remains — automation handles the happy path.' },
+      { q: 'Who is this for?', a: 'Portal vendors and contractors who finish work days before customers see a bill.' },
+      { q: 'Typical timeline?', a: 'Status map and Stripe webhook wiring usually ship after ticketing closeout rules are agreed — often the last mile of a job-workflow build.' }
     ],
     links: [['/ticketing-invoicing-job-workflows', 'Job Workflows'], ['/api-integration-services', 'API Integrations'], ['/case-study-vendoroo-ticket-invoice-system', 'Vendoroo Case Study']],
     cta: { title: 'Automating Stripe invoicing?', text: 'Describe job completion flow and current billing steps.' }
@@ -1954,12 +2073,12 @@ const subPages = [
     meta: 'Mobile job photos and PDF completion reports for property managers, vendors, and field service companies.',
     eyebrow: 'Field proof',
     h1: 'Job Photo Attachments & PDF Field Reports',
-    lead: 'Field crews capture photos tied to job ID; office generates branded PDF proof packets for portals, property managers, and customers — Vendoroo active build pattern.',
+    lead: 'Field crews capture photos tied to job ID; office generates branded PDF proof packets for portals, property managers, and customers — Vendoroo active build pattern. Camera-roll hunts after every ticket are the problem this lane removes. Proof before billing keeps disputes and portal rejections down for property maintenance vendors.',
     heroIcon: 'fa-file-image',
     problem: {
       kicker: 'Proof scramble',
       title: 'Completion photos live on phones until someone builds PDFs manually',
-      text: 'Property managers reject vague closeouts. Portal uploads need consistent PDF formats. Crews forget photos when proof is not part of the job status flow.',
+      text: 'Property managers reject vague closeouts. Portal uploads need consistent PDF formats. Crews forget photos when proof is not part of the job status flow — so closeout requires capture before the ticket can finish.',
       bullets: [
         'Photos not required before job can close',
         'PDF layout rebuilt per manager format',
@@ -1979,6 +2098,20 @@ const subPages = [
         kicker: 'Vendor workflow',
         title: 'Vendoroo photo & PDF lane',
         text: 'Ticket jobs with mobile updates, photo attachments, and PDF proof before invoice trigger.',
+        media: images.jns
+      },
+      {
+        kicker: 'Field process',
+        title: 'From camera roll chaos to portal-ready PDF',
+        text: 'Job photo PDF reports sit between mobile closeout and Stripe billing — office reviews proof before money asks leave.',
+        align: 'right',
+        bullets: [
+          '1. Require photo capture on the job page before status can close.',
+          '2. Store images and captions against job ID — not crew phones.',
+          '3. Generate branded PDF with timestamps and manager-required sections.',
+          '4. Export for portal upload or email delivery.',
+          '5. Unlock invoice automation only after proof is attached when configured.'
+        ],
         media: images.jns
       }
     ],
@@ -2004,9 +2137,12 @@ const subPages = [
       linkLabel: 'Vendoroo case study'
     },
     faq: [
+      { q: 'How do job photo PDF reports work?', a: 'Crews attach photos on the job record during closeout; the server generates a branded PDF with notes and timestamps for portal upload or customer delivery.' },
       { q: 'Do crews need a native app?', a: 'Browser mobile flow is default — photos attach from phone browser on job page.' },
-      { q: 'Can PDFs include before and after sections?', a: 'Templates scoped per client — sections defined during intake.' },
-      { q: 'Storage and retention?', a: 'Scoped per compliance needs — typically cloud storage tied to job ID.' }
+      { q: 'Can PDFs include before and after sections?', a: 'Templates scoped per client — sections defined during intake to match manager formats.' },
+      { q: 'When does billing happen?', a: 'Office can require proof attached before Stripe invoice automation fires — fewer disputes and portal rejections.' },
+      { q: 'Storage and retention?', a: 'Scoped per compliance needs — typically cloud storage tied to job ID.' },
+      { q: 'Who is this for?', a: 'Property maintenance vendors and contractors whose managers reject vague closeouts.' }
     ],
     links: [['/ticketing-invoicing-job-workflows', 'Job Workflows'], ['/contractor-growth-systems', 'Contractor Systems'], ['/stripe-invoice-automation', 'Stripe Automation']],
     cta: { title: 'Need field proof packets?', text: 'Share portal requirements and a sample PDF your managers expect.' }
@@ -2018,7 +2154,7 @@ const subPages = [
     meta: 'Review request workflows for Google Business Profile growth — timing, links, tracking, and staff triggers.',
     eyebrow: 'Reputation',
     h1: 'Automated Review Request Systems',
-    lead: 'Systematic Google review requests after completed jobs — correct GBP links, timing rules, and logging without spamming customers or violating platform policies.',
+    lead: 'Systematic Google review requests after completed jobs — correct GBP links, timing rules, and logging without spamming customers or violating platform policies. Reputation velocity should track finished work, not random calendar reminders. One ask at the right moment beats a weekly blast.',
     heroIcon: 'fa-star',
     problem: {
       kicker: 'Map trust',
@@ -2042,7 +2178,21 @@ const subPages = [
       {
         kicker: 'Local proof',
         title: 'Reviews support map-pack trades',
-        text: 'Screen Team and Faith Works local visibility stacks include review strategy as part of GBP alignment.',
+        text: 'Screen Team enclosure jobs and Roof Monsters roofing closeouts use reputation timing as part of GBP alignment — not a shared 82/36/97 website paragraph.',
+        media: images.screenTeam
+      },
+      {
+        kicker: 'Request flow',
+        title: 'How review-request automation fires',
+        text: 'Ask once when satisfaction peaks. Throttle duplicates. Route to the correct Google Business Profile review path.',
+        align: 'right',
+        bullets: [
+          '1. Audit the correct GBP review URL per location and brand.',
+          '2. Trigger on job complete, invoice paid, or staff button.',
+          '3. Send short SMS or email with one-tap review link.',
+          '4. Log who was asked and when — skip duplicates.',
+          '5. Review velocity vs job volume on the monthly dashboard.'
+        ],
         media: images.screenTeam
       }
     ],
@@ -2068,9 +2218,12 @@ const subPages = [
       linkLabel: 'Screen Team case study'
     },
     faq: [
+      { q: 'When should review requests send?', a: 'Usually at job completion or shortly after payment — when customers are happiest — with throttle rules so nobody gets duplicate asks.' },
       { q: 'Do you buy reviews?', a: 'Never — only ethical request timing and correct GBP links.' },
       { q: 'SMS or email requests?', a: 'Either scoped per client; messages stay short and infrequent.' },
-      { q: 'Integration with job tracker?', a: 'Ideal trigger is job completion status from ticketing workflow when available.' }
+      { q: 'Integration with job tracker?', a: 'Ideal trigger is job completion status from ticketing workflow when available.' },
+      { q: 'Who is this for?', a: 'Tampa Bay home-service and contractor teams with satisfied customers but flat Google review velocity.' },
+      { q: 'What does this replace?', a: 'Random “leave us a review” texts and sticky notes — with logged, policy-safe asks tied to finished work.' }
     ],
     links: [['/local-visibility-systems', 'Local Visibility'], ['/service-google-business-profile', 'GBP Services'], ['/home-service-business-growth-systems', 'Home Service Systems']],
     cta: { title: 'Want steady review flow?', text: 'Tell us when customers are happiest in your job cycle — we will design timing rules.' }
@@ -2140,9 +2293,12 @@ const subPages = [
       linkLabel: 'Faith Works case study'
     },
     faq: [
-      { q: 'How many pages do I need?', a: 'Depends on coverage — Screen Team depth for metros; Faith Works scale for multi-county site work. We scope to reality.' },
+      { q: 'How should service-area pages be structured?', a: 'Hub service pages link to city/county children with unique local utility, proof, FAQs, and CTAs — never doorway pages that only swap city names.' },
+      { q: 'How many pages do I need?', a: 'Depends on coverage — Screen Team depth for Tampa Bay metros; Faith Works scale for multi-county site work. We scope to how far crews actually travel.' },
       { q: 'Do you use AI to write city pages?', a: 'Pages follow human-edited standards with local utility — not bulk AI swap.' },
-      { q: 'Ongoing updates?', a: 'New metros or services added with same hub linking rules.' }
+      { q: 'How does this relate to NAP and GBP?', a: 'Website geography must match Google Business Profile service areas and consistent name/address/phone citations — conflicting metros kill map-pack trust.' },
+      { q: 'What about Search Console indexing?', a: 'Launch includes sitemap submission, indexation monitoring, and early crawl-fix fixes so new city pages do not sit undiscovered.' },
+      { q: 'Ongoing updates?', a: 'New metros or services added with the same hub linking rules and content standards.' }
     ],
     links: [['/service-local-seo', 'Local SEO Services'], ['/case-study-screen-team', 'Screen Team Example'], ['/excavation-business-growth-systems', 'Excavation Systems']],
     cta: { title: 'Planning geography pages?', text: 'Share your service radius and trades — we will propose hub and city architecture.' }

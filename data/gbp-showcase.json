@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-12",
+  "updatedAt": "2026-07-15",
   "groups": [
     {
       "id": "established",
@@ -56,7 +56,7 @@
     },
     {
       "key": "roof-monsters",
-      "group": "growing",
+      "group": "established",
       "title": "Roof Monsters",
       "category": "Roofing contractor",
       "relationshipStatus": "active-client",
@@ -65,7 +65,7 @@
       "profileLaunchDate": "2026-05-01",
       "caseStudy": "/case-study-roof-monsters",
       "website": "https://roofmonsters.com",
-      "note": "Recently launched — review growth tracked from onboarding baseline"
+      "note": null
     },
     {
       "key": "screen-team",
@@ -90,8 +90,8 @@
       "publicShowcase": true,
       "profileLaunchDate": "2026-04-01",
       "caseStudy": "/case-study-faith-works",
-      "website": "https://faithworksoutdoorservices.com",
-      "note": "Profile sync pending location ID configuration"
+      "website": "https://faithworksclearing.com",
+      "note": null
     },
     {
       "key": "jns-construction",

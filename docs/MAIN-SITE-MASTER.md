@@ -219,6 +219,14 @@ If those scripts are unavailable or dirty in the current worktree, use direct Pl
 - Desktop release `v1.0.18` was published on 2026-07-15 with the production client, benchmarked native-safe presets, packaged EXE/ZIP, and SHA-256 checksums: `https://github.com/Knight-Logics/v11b-upscaling-app/releases/tag/v1.0.18`.
 - Product-page regression check: `node scripts/pixelforge-page-smoke.mjs http://127.0.0.1:8765/pixelforge-ai.html`; it validates desktop/mobile overflow, release links, visible version, trial/default copy, and SoftwareSourceCode schema.
 
+## Security Baseline
+
+- `vercel.json` enforces CSP, HSTS, `nosniff`, clickjacking protection, strict referrer policy, restricted browser permissions, and COOP for the site.
+- `POST /api/pixelforge-license` and `POST /api/autovid-license` accept native desktop requests with no browser `Origin`, allow the production/loopback origins, and reject all other browser origins without a wildcard CORS response.
+- `.env.production` is explicitly ignored and must never be committed. Production credentials remain in Vercel; developer-only local credentials stay in ignored local files or the sensitive credential registry.
+- Run `npm run test:license-cors`, `npm run test:pixelforge-billing`, and `npm run test:security-render -- http://127.0.0.1:4199 <output-dir>` after security-header or licensing changes.
+- The 2026-07-15 local render smoke verified the homepage, PixelForge page, enforced CSP, YouTube embed, same-origin assets, and trusted/untrusted/native CORS cases.
+
 ## Current Growth Priorities
 
 Technical cleanup is no longer the main bottleneck unless a fresh audit finds a regression.

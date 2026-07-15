@@ -13,8 +13,10 @@
     "qa:lighthouse": "node scripts/qa-lighthouse.js",
     "stripe:sync-catalog": "node scripts/sync-knightlogics-stripe-catalog.js",
     "reviews:sync-google": "node scripts/sync-google-reviews.js",
+    "test:license-cors": "node scripts/license-cors-smoke.js",
     "test:pixelforge-billing": "node scripts/pixelforge-billing-smoke.js",
     "test:pixelforge-billing:db": "node scripts/pixelforge-billing-db-smoke.js",
+    "test:security-render": "node scripts/site-security-render-smoke.js",
     "test:whistle-stop-content": "node scripts/whistle-stop-content-smoke.js"
   },
   "dependencies": {

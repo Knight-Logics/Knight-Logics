@@ -31,15 +31,23 @@ const ALLOWED_ORIGINS = new Set([
     'https://knightlogics.com',
     'https://www.knightlogics.com'
 ]);
+const LOCAL_DEV_ORIGIN_PATTERN = /^http:\/\/(?:127\.0\.0\.1|localhost):\d+$/;
+
+function isAllowedOrigin(origin) {
+    return !origin || ALLOWED_ORIGINS.has(origin) || LOCAL_DEV_ORIGIN_PATTERN.test(origin);
+}
 
 function sendJson(res, statusCode, payload, origin = '') {
     res.statusCode = statusCode;
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
     res.setHeader('Cache-Control', 'no-store, max-age=0');
-    res.setHeader('Access-Control-Allow-Origin', ALLOWED_ORIGINS.has(origin) ? origin : '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
-    res.setHeader('Access-Control-Max-Age', '86400');
+    if (origin) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+        res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
+        res.setHeader('Access-Control-Max-Age', '86400');
+        res.setHeader('Vary', 'Origin');
+    }
     res.end(JSON.stringify(payload));
 }
 
@@ -188,6 +196,9 @@ async function confirmCheckout(sql, stripe, machineId, body) {
 
 module.exports = async function handler(req, res) {
     const origin = req.headers.origin || '';
+    if (!isAllowedOrigin(origin)) {
+        return sendJson(res, 403, { ok: false, error: 'Origin not allowed.' });
+    }
     if (req.method === 'OPTIONS') return sendJson(res, 200, { ok: true }, origin);
     if (req.method !== 'POST') {
         res.setHeader('Allow', 'POST, OPTIONS');
@@ -265,5 +276,6 @@ module.exports = async function handler(req, res) {
 };
 
 module.exports._test = {
+    isAllowedOrigin,
     normalizeLoopbackRedirect
 };

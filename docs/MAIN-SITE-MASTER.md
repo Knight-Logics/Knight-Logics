@@ -216,6 +216,8 @@ If those scripts are unavailable or dirty in the current worktree, use direct Pl
 - Current server-authoritative packages are 32 credits / $5, 68 / $10, and 144 / $20. The desktop app cannot override those amounts.
 - Anonymous diagnostics exclude media, file paths, computer names, raw machine identifiers, and email. The app sends an app-scoped device hash plus coarse render/profile outcomes and supports `V11B_DISABLE_ANONYMOUS_DIAGNOSTICS=1`.
 - Main smoke check: `npm run test:pixelforge-billing`.
+- Desktop release `v1.0.18` was published on 2026-07-15 with the production client, benchmarked native-safe presets, packaged EXE/ZIP, and SHA-256 checksums: `https://github.com/Knight-Logics/v11b-upscaling-app/releases/tag/v1.0.18`.
+- Product-page regression check: `node scripts/pixelforge-page-smoke.mjs http://127.0.0.1:8765/pixelforge-ai.html`; it validates desktop/mobile overflow, release links, visible version, trial/default copy, and SoftwareSourceCode schema.
 
 ## Current Growth Priorities
 

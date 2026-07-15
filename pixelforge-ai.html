@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="page-pixelforge-ai-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,9 +44,9 @@
             "name": "PixelForge AI",
             "alternateName": ["PixForge AI", "Pixel Forge AI", "Pix Forge AI", "v11b Upscaling App"],
             "runtimePlatform": "Windows 10, Windows 11",
-            "version": "1.0.17",
+            "version": "1.0.18",
             "datePublished": "2025-06-01",
-            "dateModified": "2026-06-12",
+            "dateModified": "2026-07-15",
             "creator": {
                 "@type": "Organization",
                 "name": "Knight Logics"
@@ -76,7 +76,7 @@
         "description": "Introduction video for PixelForge AI, a Windows desktop app for local video upscaling with Real-ESRGAN, compare previews, ETA estimates, and built-in GitHub-powered updates.",
         "thumbnailUrl": "https://img.youtube.com/vi/6Rk3b037s8o/maxresdefault.jpg",
         "uploadDate": "2026-04-02T12:00:00-04:00",
-        "embedUrl": "https://www.youtube.com/embed/6Rk3b037s8o",
+        "embedUrl": "https://www.youtube-nocookie.com/embed/6Rk3b037s8o",
         "url": "https://www.youtube.com/watch?v=6Rk3b037s8o",
         "publisher": {
             "@type": "Organization",
@@ -92,8 +92,15 @@
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#64ffda">
 
-    <link rel="stylesheet" href="style.css?v=20260709center1">
+    <link rel="stylesheet" href="style.css?v=20260715pixelforge1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        html.page-pixelforge-ai-root,
+        body.page-pixelforge-ai {
+            max-width: 100%;
+            overflow-x: clip;
+        }
+    </style>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -116,7 +123,7 @@
     </script>
     <script defer src="/script.js?v=20260709gbp1"></script>
 </head>
-<body>
+<body class="page-pixelforge-ai">
     <div id="header-container"></div>
 
     <section class="pixelforge-hero">
@@ -161,7 +168,7 @@
                                 <p class="pixelforge-shell-kicker">PixelForge AI Video Enhancer</p>
                                 <h2>Preview first. Commit later.</h2>
                             </div>
-                            <span class="pixelforge-shell-version">v1.0.17</span>
+                            <span class="pixelforge-shell-version">v1.0.18</span>
                         </div>
                         <div class="pixelforge-compare-mock">
                             <div class="pixelforge-before">Before</div>
@@ -191,7 +198,7 @@
         <div class="container">
             <div class="pixelforge-video-wrapper fade-in">
                 <div class="pixelforge-video-container">
-                    <iframe width="100%" height="600" src="https://www.youtube.com/embed/6Rk3b037s8o" title="PixelForge AI Introduction" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <iframe width="100%" height="600" src="https://www.youtube-nocookie.com/embed/6Rk3b037s8o" title="PixelForge AI Introduction" frameborder="0" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -212,8 +219,8 @@
                 <p>Stage-by-stage processing estimates highlight the slowest parts of the pipeline up front.</p>
             </div>
             <div class="pixelforge-proof-card">
-                <span class="pixelforge-proof-number">Update</span>
-                <p>Built-in GitHub release updates reduce friction after the initial install.</p>
+                <span class="pixelforge-proof-number">20 credits</span>
+                <p>New devices receive a server-backed trial. Buy Credits opens protected Stripe Checkout without putting payment secrets in the app.</p>
             </div>
         </div>
     </section>
@@ -222,7 +229,7 @@
         <div class="container">
             <div class="section-header fade-in">
                 <h2>Built For Real Video Cleanup</h2>
-                <p>Inspired by premium video-tool landing pages, but positioned around this app's actual desktop workflow and feature set.</p>
+                <p>Native-safe AI model and scale combinations, benchmarked defaults, and advanced controls that stay out of the way until you need them.</p>
             </div>
             <div class="pixelforge-feature-grid">
                 <article class="pixelforge-feature-card fade-in">
@@ -259,15 +266,15 @@
                     <div class="pixelforge-profile-list">
                         <div class="pixelforge-profile-item">
                             <strong>Quick Preview</strong>
-                            <span>Faster test renders for early decision making.</span>
+                            <span>A native 2x test render for fast quality checks before a long job.</span>
                         </div>
                         <div class="pixelforge-profile-item">
                             <strong>Balanced Workflow</strong>
-                            <span>A default middle ground for quality and runtime.</span>
+                            <span>The benchmarked neutral 2x default for most natural footage, with color, sharpening, interpolation, and forced resizing left off.</span>
                         </div>
                         <div class="pixelforge-profile-item">
                             <strong>Max Detail</strong>
-                            <span>Higher-fidelity output settings for final passes.</span>
+                            <span>A native 4x final pass when the source truly needs more scale; expect substantially longer processing.</span>
                         </div>
                     </div>
                 </div>
@@ -344,7 +351,7 @@
                 <aside class="pixelforge-download-card fade-in">
                     <h3>Get PixelForge AI</h3>
                     <a href="https://github.com/Knight-Logics/v11b-upscaling-app/releases/latest/download/PixelForge-AI.exe" target="_blank" rel="noopener noreferrer" class="project-link">Direct Download .exe</a>
-                    <a href="https://github.com/Knight-Logics/v11b-upscaling-app/releases/tag/v1.0.17" target="_blank" rel="noopener noreferrer" class="project-link">All Release Assets</a>
+                    <a href="https://github.com/Knight-Logics/v11b-upscaling-app/releases/tag/v1.0.18" target="_blank" rel="noopener noreferrer" class="project-link">All Release Assets</a>
                     <a href="https://github.com/Knight-Logics/v11b-upscaling-app" target="_blank" rel="noopener noreferrer" class="project-link">Source Repository</a>
                     <a href="/service-desktop-apps" class="project-link">Back To Applications</a>
 

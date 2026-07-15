@@ -228,8 +228,12 @@ async function handleHealth(req, res, body) {
 }
 
 module.exports = async function handler(req, res) {
-    const route = String((req.query && req.query.route) || '').trim().toLowerCase();
-    if (route === 'pixelforge-license') {
+    const requestUrl = new URL(req.url || '/', 'http://localhost');
+    const route = String(
+        (req.query && req.query.route) || requestUrl.searchParams.get('route') || ''
+    ).trim().toLowerCase();
+    const requestPath = requestUrl.pathname.replace(/\/+$/, '').toLowerCase();
+    if (route === 'pixelforge-license' || requestPath.endsWith('/pixelforge-license')) {
         return pixelforgeLicenseHandler(req, res);
     }
 

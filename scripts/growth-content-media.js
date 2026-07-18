@@ -12,7 +12,7 @@ const heroPanelPool = [
 const SLUG_HERO_PANELS = {
   'roofing-business-growth-systems': [
     '/images/showcase/roof-monsters-og-card.webp',
-    '/images/showcase/roof-monsters-homepage-wave.png',
+    '/images/showcase/roof-monsters-homepage-wave.webp',
     '/images/showcase/roof-monsters-project.webp',
     '/images/showcase/roof-monsters-showcase-800.webp'
   ]
@@ -30,7 +30,7 @@ const heroImageFocus = {
   '/images/websitehero.webp': { desktop: '38% 36%', mobile: '42% 38%' },
   '/images/websitehero.webp?v=20260604perf1': { desktop: '38% 36%', mobile: '42% 38%' },
   '/images/showcase/roof-monsters-og-card.webp': { desktop: '50% 40%', mobile: '50% 38%' },
-  '/images/showcase/roof-monsters-homepage-wave.png': { desktop: '48% 42%', mobile: '50% 40%' },
+  '/images/showcase/roof-monsters-homepage-wave.webp': { desktop: '48% 42%', mobile: '50% 40%' },
   '/images/showcase/roof-monsters-project.webp': { desktop: '50% 45%', mobile: '52% 48%' },
   '/images/showcase/roof-monsters-showcase-800.webp': { desktop: '50% 42%', mobile: '50% 40%' }
 };
@@ -200,7 +200,7 @@ module.exports = {
     caseStudyReferral: { type: 'image', src: '/images/showcase/case-study-referral-network-mockup.webp', alt: 'Referral network attribution dashboard', width: 1200, height: 675 },
     caseStudySocial: { type: 'image', src: '/images/showcase/case-study-social-poster-mockup.webp', alt: 'Social posting queue dashboard', width: 1200, height: 675 },
     caseStudyRoofing: { type: 'image', src: '/images/showcase/roof-monsters-og-card.webp', alt: 'Roof Monsters live roofing website on roofmonsters.co', width: 1200, height: 630 },
-    roofMonstersHome: { type: 'image', src: '/images/showcase/roof-monsters-homepage-wave.png', alt: 'Roof Monsters homepage — Your Roof Is Our Proof', width: 1920, height: 1080 },
+    roofMonstersHome: { type: 'image', src: '/images/showcase/roof-monsters-homepage-wave.webp', alt: 'Roof Monsters homepage — Your Roof Is Our Proof', width: 1920, height: 1080 },
     roofMonstersProject: { type: 'image', src: '/images/showcase/roof-monsters-project.webp', alt: 'Roof Monsters completed Tampa Bay roofing project', width: 1200, height: 800 },
     roofMonstersLighthouse: { type: 'image', src: '/images/showcase/roof-monsters-lighthouse-97.webp', alt: 'Roof Monsters Lighthouse scores — 97 performance, 100 accessibility SEO', width: 1200, height: 800 },
     roofMonstersSemrush: { type: 'image', src: '/images/showcase/roof-monsters-semrush-99.webp', alt: 'Roof Monsters Semrush site health 99 percent', width: 1200, height: 800 },

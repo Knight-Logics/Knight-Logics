@@ -117,7 +117,7 @@ const PAGES = {
       intro: 'Faith Works Outdoor Services assets from the client workspace — clearing banner, equipment, and stump before/after. No repeated brand cards, no other trade sites in this walkthrough.',
       primary: {
         type: 'image',
-        src: '/images/faith-works/clearing-banner.png',
+        src: '/images/faith-works/clearing-banner.webp',
         alt: 'Faith Works land clearing banner',
         caption: 'Clearing banner from the Faith Works client workspace — outdoor services brand at work.',
         width: 1920,

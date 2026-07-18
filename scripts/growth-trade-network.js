@@ -65,7 +65,7 @@ const SLUG_NETWORK = {
     reference: 'Roof Monsters on roofmonsters.co (live network anchor)',
     complementary: 'screen enclosure, handyman, and insurance-adjacent trades',
     networkImage: {
-      src: '/images/showcase/roof-monsters-homepage-wave.png',
+      src: '/images/showcase/roof-monsters-homepage-wave.webp',
       alt: 'Roof Monsters homepage — Your Roof Is Our Proof',
       width: 1920,
       height: 1080,

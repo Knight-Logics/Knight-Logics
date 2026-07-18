@@ -3,7 +3,7 @@
  * Applied at generate time via applySeoKeywords().
  */
 
-function trimMeta(text, max = 158) {
+function trimMeta(text, max = 155) {
   const clean = String(text || '').replace(/\s+/g, ' ').trim();
   if (clean.length <= max) return clean;
   const cut = clean.slice(0, max - 1);
@@ -19,7 +19,7 @@ function lines(...paras) {
 const PAGE_SEO = {
   'business-growth-systems': {
     terms: ['small business growth systems', 'Tampa Bay local SEO', 'CRM outreach automation', 'referral tracking'],
-    meta: 'Business growth systems for Tampa Bay — hand-coded websites, local SEO, Google Business alignment, CRM outreach, automation, and referral tracking for small businesses.',
+    meta: 'Business growth systems for Tampa Bay — websites, local SEO, GBP, CRM outreach, automation, and referral tracking.',
     contextLines: lines(
       'Owners searching for small business growth systems in Tampa Bay usually need more than a brochure site — they need local SEO structure, map-pack-ready Google Business Profile alignment, and lead follow-up that does not live in one inbox.',
       'Knight Logics connects websites, outreach, referrals, and ops into phased milestones so Pinellas and Hillsborough service businesses can measure leads instead of guessing whether marketing is working.'
@@ -35,7 +35,7 @@ const PAGE_SEO = {
   },
   'home-service-business-growth-systems': {
     terms: ['home service marketing Tampa', 'local SEO home services', 'Google map pack home services'],
-    meta: 'Home service growth systems for Tampa Bay — fast websites, local SEO, Google Business Profile, CRM outreach, reviews, and referral paths for property-facing trades.',
+    meta: 'Home service growth systems for Tampa Bay — fast sites, local SEO, GBP, CRM outreach, reviews, and referral paths.',
     contextLines: lines(
       'Home service leads are urgent — homeowners call three competitors in minutes. Map-pack visibility, call-first CTAs, and review timing separate booked jobs from missed voicemails.',
       'Electricians, painters, handymen, and enclosure trades in the network send attributed referral work when each partner has a credible owned presence and clear service pages.'
@@ -51,7 +51,7 @@ const PAGE_SEO = {
   },
   'website-growth-audit': {
     terms: ['free website audit Tampa', 'website growth audit', 'local SEO audit small business'],
-    meta: 'Free website & growth audit for Tampa Bay businesses — technical SEO, speed, schema, Google Business alignment, and conversion path review with actionable fixes.',
+    meta: 'Free website & growth audit — technical SEO, speed, schema, GBP alignment, and conversion fixes for Tampa Bay businesses.',
     contextLines: lines(
       'A useful audit covers crawlability, Core Web Vitals, schema validity, GBP parity with the website, and whether service-intent searches have a landing page to rank.',
       'Knight Logics audits are built for owners who want a prioritized fix list — not a generic PDF — before committing to a rebuild or local SEO sprint.'
@@ -59,7 +59,7 @@ const PAGE_SEO = {
   },
   'crm-outreach-lead-generation': {
     terms: ['CRM outreach', 'outbound lead generation', 'contractor email outreach', 'property manager outreach', 'send caps reply routing'],
-    meta: 'CRM outreach & outbound lead generation — contractor email outreach, property manager lists, send caps, and Email-Agent reply routing for Tampa Bay trades.',
+    meta: 'CRM outreach & outbound lead gen — contractor email, property manager lists, send caps, and Email-Agent reply routing.',
     contextLines: lines(
       'Outbound lead generation works when lists are segmented, daily send caps protect reputation, and replies route into Email-Agent crm_reply — not personal Gmail.',
       'OutreachEngine brand lanes (kl, kg, st, faithworks) keep contractor email outreach and property manager campaigns isolated with bounce discipline before the next window.'
@@ -67,7 +67,7 @@ const PAGE_SEO = {
   },
   'referral-network-systems': {
     terms: ['referral tracking', 'partner attribution', 'QR referral', 'referral payout dashboard'],
-    meta: 'Referral tracking & partner attribution — /ref/:partner paths, QR referral brochures, Neon events, and earned vs paid dashboards for Tampa Bay trade networks.',
+    meta: 'Referral tracking & partner attribution — /ref paths, QR brochures, Neon events, and earned vs paid dashboards.',
     contextLines: lines(
       'Partner attribution fails when credit is verbal. Tracked /ref/:partner paths, QR referral scans, and Neon events document which partner earned the consult.',
       'Stripe webhook payouts and referral-dashboard earned vs paid views reduce disputes as the Tampa Bay trade roster grows.'
@@ -107,7 +107,7 @@ const PAGE_SEO = {
   },
   'workflow-automation': {
     terms: ['business process automation', 'form-to-CRM', 'review-request automation', 'stale lead follow-up'],
-    meta: 'Business process automation — form-to-CRM routing, review-request automation, stale-lead follow-up, and failure-visible jobs for small service businesses.',
+    meta: 'Business process automation — form-to-CRM, review requests, stale-lead follow-up, and failure-visible jobs.',
     contextLines: lines(
       'Workflow automation should eliminate weekly copy-paste: form submit to CRM, job complete to review ask, stale quote to follow-up — with monitoring when steps fail.',
       'Phased rollout keeps automations reliable before scaling volume across Tampa Bay ops.',
@@ -117,7 +117,7 @@ const PAGE_SEO = {
   },
   'email-agent-automation': {
     terms: ['multi-inbox routing', 'CRM reply management', 'Formspree lead routing', 'business email ops'],
-    meta: 'Email-Agent multi-inbox routing — CRM reply management, Formspree lead routing, Gmail/Zoho/Microsoft brand maps, and bounce loops to OutreachEngine.',
+    meta: 'Email-Agent multi-inbox routing — CRM replies, Formspree leads, brand maps, and bounce loops to OutreachEngine.',
     contextLines: lines(
       'Business email ops break when outreach, Formspree leads, and manual threads share one inbox. crm_reply vs formspree_lead views keep triage fast.',
       'Brand maps for KL/KG/ST/FW and bounce feedback to OutreachEngine protect reputation across providers.',
@@ -127,7 +127,7 @@ const PAGE_SEO = {
   },
   'social-media-automation-systems': {
     terms: ['social scheduling multi-brand', 'GBP posting', 'LinkedIn Nextdoor automation', 'social queue failure reporting'],
-    meta: 'Social scheduling multi-brand — API vs Playwright platforms, GBP posting tied to site campaigns, LinkedIn/Nextdoor automation, and failure reporting on port 8501.',
+    meta: 'Social scheduling multi-brand — API vs Playwright, GBP posts, LinkedIn/Nextdoor runners, and failure reporting.',
     contextLines: lines(
       'Multi-brand social scheduling needs isolated queues and hybrid runners — API where stable, Playwright for LinkedIn and Nextdoor.',
       'GBP posting should match owned website campaigns so map-pack messaging stays coherent with local SEO pages.',
@@ -161,7 +161,7 @@ const PAGE_SEO = {
   },
   'handyman-business-growth-systems': {
     terms: ['handyman website Tampa Bay', 'handyman local SEO', 'handyman booking website'],
-    meta: 'Handyman growth systems for Tampa Bay — estimate-first websites, city service pages, booking paths, CRM outreach, and referral network slots for repair crews.',
+    meta: 'Handyman growth systems for Tampa Bay — estimate-first sites, city pages, CRM outreach, and referral network slots.',
     contextLines: lines(
       'Handyman searches combine service intent and city — "drywall repair Clearwater" and "handyman near me" need separate silos, not one generic Services page.',
       'Knight Group proves 97-page depth with booking, kg outreach, and Lighthouse scores — the network anchor for this trade lane, not a template for your brand.'
@@ -201,7 +201,7 @@ const PAGE_SEO = {
   },
   'excavation-business-growth-systems': {
     terms: ['excavation website Florida', 'land clearing SEO', 'site work contractor marketing'],
-    meta: 'Excavation & site-work growth systems — wide geography SEO, project proof pages, lead routing, and referral paths for land clearing and excavation trades.',
+    meta: 'Excavation & site-work growth systems — geography SEO, project proof, lead routing, and referral paths for land clearing.',
     contextLines: lines(
       'Land clearing and site-work companies sell on capability, radius, and proof — wide geography pages must include unique local utility, not copy-paste city swaps.',
       'Faith Works demonstrates 82-page Central Florida depth with faithworks outreach — the excavation network anchor.'

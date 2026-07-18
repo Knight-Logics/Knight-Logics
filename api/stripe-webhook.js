@@ -231,6 +231,39 @@ function getBountyForAmount(grossAmountCents) {
     return { payoutAmountCents: 50000, tierLabel: '$5,000+ => $500' };
 }
 
+async function queueAutonomousServiceOrder(sql, session) {
+    const metadata = session.metadata || {};
+    const sku = normStr(metadata.sku, 80);
+    const fulfillment = normStr(metadata.fulfillment, 80);
+    const buyerEmail = normStr(
+        (session.customer_details && session.customer_details.email) || metadata.buyerEmail || session.customer_email || '',
+        160
+    );
+    if (!sku || !fulfillment || !buyerEmail) {
+        return { ok: false, error: 'Paid autonomous-service session is missing required metadata.' };
+    }
+    let inputs = {};
+    try {
+        inputs = metadata.inputsJson ? JSON.parse(metadata.inputsJson) : {};
+    } catch (_) {
+        return { ok: false, error: 'Paid autonomous-service session has invalid input metadata.' };
+    }
+    await sql`CREATE TABLE IF NOT EXISTS autonomous_service_orders (
+        id text PRIMARY KEY, sku text NOT NULL, fulfillment text NOT NULL, buyer_email text NOT NULL,
+        inputs jsonb NOT NULL DEFAULT '{}'::jsonb, payment_intent_id text, amount_total integer NOT NULL DEFAULT 0,
+        currency text NOT NULL DEFAULT 'usd', status text NOT NULL DEFAULT 'pending', attempts integer NOT NULL DEFAULT 0,
+        lease_until timestamptz, next_attempt_at timestamptz NOT NULL DEFAULT now(), last_error text,
+        result jsonb, completed_at timestamptz, refunded_at timestamptz, stripe_refund_id text,
+        created_at timestamptz NOT NULL DEFAULT now(), updated_at timestamptz NOT NULL DEFAULT now()
+    )`;
+    const paymentIntent = typeof session.payment_intent === 'string' ? session.payment_intent : null;
+    const inserted = await sql`INSERT INTO autonomous_service_orders
+        (id,sku,fulfillment,buyer_email,inputs,payment_intent_id,amount_total,currency)
+        VALUES (${session.id},${sku},${fulfillment},${buyerEmail},${JSON.stringify(inputs)}::jsonb,${paymentIntent},${normInt(session.amount_total) || 0},${session.currency || 'usd'})
+        ON CONFLICT (id) DO NOTHING RETURNING id`;
+    return { ok: true, queued: inserted.length > 0, order_id: session.id };
+}
+
 async function ensurePartnerTermsTable(sql) {
     await sql`
         CREATE TABLE IF NOT EXISTS kl_referral_partner_terms (
@@ -366,6 +399,18 @@ module.exports = async function handler(req, res) {
             skipped: true,
             reason: 'Checkout completed before payment settled.'
         });
+    }
+
+    if (metadata.app === 'autonomous_service') {
+        try {
+            const sql = neon(databaseUrl);
+            const result = await queueAutonomousServiceOrder(sql, session);
+            if (!result.ok) return sendJson(res, 400, { error: result.error });
+            return sendJson(res, 200, { received: true, autonomous_service: true, ...result });
+        } catch (error) {
+            console.error('[stripe-webhook] Autonomous service queue failed:', error && error.message);
+            return sendJson(res, 500, { error: 'Failed to queue autonomous service order.' });
+        }
     }
 
     if (metadata.app === 'autovid_compiler') {

@@ -1,4 +1,7 @@
 const Stripe = require('stripe');
+const serviceCheckoutHandler = require('./_lib/service-checkout');
+const serviceOrdersHandler = require('./_lib/service-orders');
+const serviceDeliveryHandler = require('./_lib/service-delivery');
 
 const DEFAULT_ALLOWED_ORIGINS = new Set([
     'https://knightlogics.com',
@@ -1211,6 +1214,16 @@ async function sendReferralEvent(apiBase, payload) {
 }
 
 async function handler(req, res) {
+    let serviceRoute = req.query && typeof req.query.serviceRoute === 'string'
+        ? req.query.serviceRoute
+        : '';
+    if (!serviceRoute && typeof req.url === 'string') {
+        try { serviceRoute = new URL(req.url, 'http://localhost').searchParams.get('serviceRoute') || ''; } catch (_) {}
+    }
+    if (serviceRoute === 'checkout') return serviceCheckoutHandler(req, res);
+    if (serviceRoute === 'orders') return serviceOrdersHandler(req, res);
+    if (serviceRoute === 'delivery') return serviceDeliveryHandler(req, res);
+
     const allowedOrigin = getAllowedOrigin(req);
 
     if (allowedOrigin === false) {

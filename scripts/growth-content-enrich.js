@@ -1353,7 +1353,7 @@ const enrichments = {
     walkthrough: {
       title: 'Hospitality system walkthrough',
       intro: 'Capability mockups for events, hours, menus, and ordering — plus the Whistle Stop preview asset used on the case-studies grid until client branding is cleared.',
-      primary: { type: 'image', src: '/images/whistle-stop-pitch.jpg', alt: 'Whistle Stop restaurant system preview', width: 1200, height: 800 },
+      primary: { type: 'image', src: '/images/showcase/hospitality-events-hours-mockup.webp', alt: 'Hospitality events and hours admin pattern', width: 1200, height: 750 },
       proofs: [
         { src: '/images/showcase/hospitality-events-hours-mockup.webp', alt: 'Events and hours admin pattern', caption: 'Events calendar and business hours on the owned domain — not only on social.', width: 1200, height: 750 },
         { src: '/images/showcase/hospitality-menus-ordering-mockup.webp', alt: 'Menus and ordering mockup', caption: 'Admin-editable menu specials with Stripe order-ahead architecture.', width: 1200, height: 750 }

@@ -1509,7 +1509,7 @@ const subPages = [
         kicker: 'Live reference',
         title: 'Roof Monsters on roofmonsters.co',
         text: 'Live Tampa Bay roofing growth system with estimate-first lead capture, service and location depth, gallery proof, and a dark brand system built for mobile. The public site stays honest to referral-driven sales — clear written estimates, licensed operations, and storm response framed as private-pay emergency help.',
-        media: { type: 'image', src: '/images/showcase/roof-monsters-homepage-wave.png', alt: 'Roof Monsters homepage — Your Roof Is Our Proof' }
+        media: { type: 'image', src: '/images/showcase/roof-monsters-homepage-wave.webp', alt: 'Roof Monsters homepage — Your Roof Is Our Proof' }
       },
       {
         kicker: 'Technical proof',

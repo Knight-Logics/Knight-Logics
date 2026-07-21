@@ -316,6 +316,54 @@
       "destination": "/service-local-seo.html"
     },
     {
+      "source": "/service-packages",
+      "destination": "/service-packages.html"
+    },
+    {
+      "source": "/website-health-audit",
+      "destination": "/website-health-audit.html"
+    },
+    {
+      "source": "/white-label-website-audit",
+      "destination": "/white-label-website-audit.html"
+    },
+    {
+      "source": "/local-opportunity-pack",
+      "destination": "/local-opportunity-pack.html"
+    },
+    {
+      "source": "/full-access-website-audit",
+      "destination": "/full-access-website-audit.html"
+    },
+    {
+      "source": "/sample-website-health-audit",
+      "destination": "/sample-website-health-audit.html"
+    },
+    {
+      "source": "/sample-white-label-website-audit",
+      "destination": "/sample-white-label-website-audit.html"
+    },
+    {
+      "source": "/sample-local-opportunity-pack",
+      "destination": "/sample-local-opportunity-pack.html"
+    },
+    {
+      "source": "/sample-full-access-website-audit",
+      "destination": "/sample-full-access-website-audit.html"
+    },
+    {
+      "source": "/search-performance-retainer",
+      "destination": "/search-performance-retainer.html"
+    },
+    {
+      "source": "/growth-systems-offer",
+      "destination": "/growth-systems-offer.html"
+    },
+    {
+      "source": "/trade-partnership",
+      "destination": "/trade-partnership.html"
+    },
+    {
       "source": "/service-websites",
       "destination": "/service-websites.html"
     },

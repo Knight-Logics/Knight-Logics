@@ -7,7 +7,7 @@ async function loadHeaderFooter() {
             const headerContainer = document.getElementById('header-container');
             if (headerContainer) headerContainer.innerHTML = await headerResponse.text();
         }
-        const footerResponse = await fetch('/footer.html?v=20260512a', { cache: 'no-store' });
+        const footerResponse = await fetch('/footer.html?v=20260718labs1', { cache: 'no-store' });
         if (footerResponse.ok) {
             const footerContainer = document.getElementById('footer-container');
             if (footerContainer) footerContainer.innerHTML = await footerResponse.text();

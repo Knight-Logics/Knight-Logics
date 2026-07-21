@@ -34,15 +34,32 @@ function allowedOrigin(origin) {
     return ALLOWED_ORIGINS.has(origin) || (process.env.NODE_ENV !== 'production' && LOCAL_ORIGIN.test(origin));
 }
 
+const SUCCESS_PATHS = Object.freeze({
+    ai_site_health_5: '/website-health-audit',
+    agency_white_label_health_5: '/white-label-website-audit',
+    local_opportunity_50: '/local-opportunity-pack',
+    full_access_gsc_audit: '/full-access-website-audit'
+});
+
+function normalizeWebsiteUrl(value) {
+    let parsed;
+    try { parsed = new URL(value); } catch (_) { throw new Error('Enter a valid public website URL.'); }
+    if (!['http:', 'https:'].includes(parsed.protocol) || parsed.username || parsed.password) {
+        throw new Error('Enter a public HTTP or HTTPS website URL.');
+    }
+    return parsed;
+}
+
 function normalizeInputs(service, body) {
     const input = {};
     for (const key of service.inputKeys) input[key] = clean(body[key], key === 'websiteUrl' ? 300 : 160);
-    if (service.fulfillment === 'paid_external_audit') {
-        let parsed;
-        try { parsed = new URL(input.websiteUrl); } catch (_) { throw new Error('Enter a valid public website URL.'); }
-        if (!['http:', 'https:'].includes(parsed.protocol) || parsed.username || parsed.password) throw new Error('Enter a public HTTP or HTTPS website URL.');
+    if (service.fulfillment === 'paid_external_audit' || service.fulfillment === 'full_access_gsc_audit') {
+        normalizeWebsiteUrl(input.websiteUrl);
         if (input.clientName.length < 2) throw new Error('Enter the client or business name.');
         if (service.sku.startsWith('agency_') && input.agencyName.length < 2) throw new Error('Enter the agency name for the report.');
+    }
+    if (service.fulfillment === 'full_access_gsc_audit') {
+        if (input.gscProperty.length < 3) throw new Error('Enter the Search Console domain or URL-prefix property.');
     }
     if (service.fulfillment === 'prospect_opportunity_pack') {
         input.targetNiche = input.targetNiche.toLowerCase();
@@ -100,8 +117,8 @@ module.exports = async function handler(req, res) {
             line_items: [{ price_data: { currency: 'usd', unit_amount: service.amount, product_data: { name: service.name, description: service.description } }, quantity: 1 }],
             metadata,
             payment_intent_data: { metadata: { app: metadata.app, sku: metadata.sku, offerVersion: metadata.offerVersion } },
-            success_url: `${host}/service-packages?paid=1&session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${host}/service-packages?canceled=1`
+            success_url: `${host}${SUCCESS_PATHS[service.sku] || '/service-packages'}?paid=1&session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${host}${SUCCESS_PATHS[service.sku] || '/service-packages'}?canceled=1`
         });
         return sendJson(res, 200, { url: session.url });
     } catch (error) {

@@ -57,8 +57,11 @@ Disallow: /*offer=
 
 # Allow core site assets
 Allow: /images/
+Allow: /videos/
+Allow: /samples/
 Allow: /style.css
 Allow: /script.js
+Allow: /samples/instant-packages/sample-local-opportunity-pack.csv
 Disallow: /referral-dashboard
 Disallow: /referral-dashboard.html
 Disallow: /admin

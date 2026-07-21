@@ -257,11 +257,12 @@ async function queueAutonomousServiceOrder(sql, session) {
         created_at timestamptz NOT NULL DEFAULT now(), updated_at timestamptz NOT NULL DEFAULT now()
     )`;
     const paymentIntent = typeof session.payment_intent === 'string' ? session.payment_intent : null;
+    const initialStatus = fulfillment === 'full_access_gsc_audit' ? 'awaiting_access' : 'pending';
     const inserted = await sql`INSERT INTO autonomous_service_orders
-        (id,sku,fulfillment,buyer_email,inputs,payment_intent_id,amount_total,currency)
-        VALUES (${session.id},${sku},${fulfillment},${buyerEmail},${JSON.stringify(inputs)}::jsonb,${paymentIntent},${normInt(session.amount_total) || 0},${session.currency || 'usd'})
+        (id,sku,fulfillment,buyer_email,inputs,payment_intent_id,amount_total,currency,status)
+        VALUES (${session.id},${sku},${fulfillment},${buyerEmail},${JSON.stringify(inputs)}::jsonb,${paymentIntent},${normInt(session.amount_total) || 0},${session.currency || 'usd'},${initialStatus})
         ON CONFLICT (id) DO NOTHING RETURNING id`;
-    return { ok: true, queued: inserted.length > 0, order_id: session.id };
+    return { ok: true, queued: inserted.length > 0, order_id: session.id, status: initialStatus };
 }
 
 async function ensurePartnerTermsTable(sql) {

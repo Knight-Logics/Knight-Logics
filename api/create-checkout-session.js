@@ -2,6 +2,7 @@ const Stripe = require('stripe');
 const serviceCheckoutHandler = require('./_lib/service-checkout');
 const serviceOrdersHandler = require('./_lib/service-orders');
 const serviceDeliveryHandler = require('./_lib/service-delivery');
+const serviceStatusHandler = require('./_lib/service-status');
 
 const DEFAULT_ALLOWED_ORIGINS = new Set([
     'https://knightlogics.com',
@@ -1223,6 +1224,7 @@ async function handler(req, res) {
     if (serviceRoute === 'checkout') return serviceCheckoutHandler(req, res);
     if (serviceRoute === 'orders') return serviceOrdersHandler(req, res);
     if (serviceRoute === 'delivery') return serviceDeliveryHandler(req, res);
+    if (serviceRoute === 'status') return serviceStatusHandler(req, res);
 
     const allowedOrigin = getAllowedOrigin(req);
 

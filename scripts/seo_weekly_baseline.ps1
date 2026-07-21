@@ -1,6 +1,10 @@
 # Weekly SEO baseline — run via Task Scheduler (Mondays 8:00 AM default).
 # Logs: MainSite/_seo_audit/_logs/seo-weekly-YYYY-MM-DD.log
 
+param(
+    [switch]$SkipSerp
+)
+
 $ErrorActionPreference = "Stop"
 $MainSite = Split-Path -Parent $PSScriptRoot
 $LogDir = Join-Path $MainSite "_seo_audit\_logs"
@@ -31,8 +35,18 @@ if (-not $python) {
 }
 
 Write-Log "Using: $python"
-& $python scripts/seo_weekly_baseline.py 2>&1 | ForEach-Object { Write-Log $_ }
+$pythonArgs = @("scripts/seo_weekly_baseline.py")
+if ($SkipSerp) {
+    $pythonArgs += "--skip-serp"
+}
+
+# Native stderr is expected when an individual data source fails. Keep logging
+# it so the Python orchestrator can finish and report the complete result.
+$previousErrorActionPreference = $ErrorActionPreference
+$ErrorActionPreference = "Continue"
+& $python @pythonArgs 2>&1 | ForEach-Object { Write-Log ("$_") }
 $code = $LASTEXITCODE
+$ErrorActionPreference = $previousErrorActionPreference
 if ($code -ne 0) {
     Write-Log "FAILED exit code $code (if GSC: run python scripts/gsc_api.py auth)"
     exit $code

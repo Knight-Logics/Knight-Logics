@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preload" href="/header.html?v=20260720wf" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="/footer.html?v=20260720wf" as="fetch" crossorigin="anonymous">
+    <script defer src="/script.js?v=20260720wf"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sample Website Health Audit — walkthrough video, annotated screenshots, and the full $39 Instant Package workflow from Stripe checkout to Playwright/axe/Lighthouse PDF.">
+    <title>Sample: Website Health Audit Report | Knight Logics</title>
+    <link rel="canonical" href="https://knightlogics.com/sample-website-health-audit">
+    <link rel="stylesheet" href="/style.css?v=20260720wf">
+    <link rel="stylesheet" href="/css/instant-packages.css?v=20260720wf">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="robots" content="index,follow">
+</head>
+<body class="kl-growth-page">
+    <div id="header-container"></div>
+    <section class="svc-hero"><div class="svc-hero-overlay" aria-hidden="true"></div><div class="container"><div class="svc-hero-inner fade-in">
+        <nav class="kl-breadcrumb"><a href="/">Home</a><span>/</span><a href="/website-health-audit">Health Audit</a><span>/</span><span>Sample</span></nav>
+        <span class="svc-eyebrow"><i class="fas fa-file-pdf"></i> Actual generated deliverable</span>
+        <h1>Sample Website Health Audit</h1>
+        <p class="svc-hero-lead">This PDF was produced by the same Instant Package runner as paid $39 orders — Playwright, axe-core, mobile Lighthouse — against <strong>knightlogics.com</strong> (2026-07-20). Not a mockup.</p>
+        <div class="svc-cta-row">
+            <a class="btn-primary" href="/samples/instant-packages/sample-website-health-audit.pdf" target="_blank" rel="noopener">Download sample PDF</a>
+            <a class="btn-secondary" href="/website-health-audit">Buy for your URL — $39</a>
+        </div>
+    </div></div></section>
+    <section class="kl-growth-section"><div class="container">
+        <figure class="sp-demo-video">
+            <div class="sp-demo-video__inner">
+                <video controls playsinline preload="metadata" poster="/images/samples/health-cover.png" title="Website Health Audit sample walkthrough">
+                    <source src="/videos/samples/health-walkthrough.webm" type="video/webm">
+                </video>
+            </div>
+            <figcaption>Walkthrough of the generated HTML report (same content printed to the PDF). Captions call out cover → scores → findings → evidence.</figcaption>
+        </figure>
+
+        <div class="sp-workflow">
+            <h2>Case workflow: $39 Website Health Audit</h2>
+            <p>Outside-in only — no Google login. One URL in, one evidence PDF out after quality gates pass.</p>
+            <ol class="sp-workflow-list">
+                <li><div><strong>1. You buy with Stripe</strong><span>Enter the public start URL (and email). Checkout creates the Instant order; no consult call required.</span></div></li>
+                <li><div><strong>2. Worker opens your site in Playwright</strong><span>Chromium renders up to five public HTML pages from that start URL — same browser automation stack used for this sample.</span></div></li>
+                <li><div><strong>3. Accessibility + lab scores run</strong><span>axe-core records violations per page. Mobile Lighthouse scores Performance, Accessibility, SEO, and Best Practices on the start URL.</span></div></li>
+                <li><div><strong>4. Crawl &amp; AI-search signals</strong><span>Public fetches for robots.txt, sitemap.xml, llms.txt, visible FAQ signals, JSON-LD schema types, and security headers (HSTS, CSP, etc.).</span></div></li>
+                <li><div><strong>5. Quality gates</strong><span>The run must produce usable Lighthouse + accessibility evidence. Fail three times → automatic refund.</span></div></li>
+                <li><div><strong>6. PDF delivered by email</strong><span>Private download link (30 days). Optional JSON evidence when under upload size. This sample is that same PDF shape.</span></div></li>
+            </ol>
+        </div>
+
+        <div class="sp-proof">
+            <h2>What’s inside the PDF (annotated)</h2>
+            <p class="sp-proof-note">Screenshots of the generated HTML report before print-to-PDF. Each pane is a real section buyers receive.</p>
+            <div class="sp-shot-grid">
+                <figure class="sp-shot">
+                    <img src="/images/samples/health-cover.png" alt="Health audit cover page with client and URL" width="1200" height="900" loading="lazy">
+                    <figcaption><strong>Cover</strong><span>Client name, audited URL, Knight Logics brand, and run metadata — proves which site was measured.</span></figcaption>
+                </figure>
+                <figure class="sp-shot">
+                    <img src="/images/samples/health-scores.png" alt="Category score cards from Lighthouse and audit areas" width="1200" height="900" loading="lazy">
+                    <figcaption><strong>Score cards</strong><span>At-a-glance category results (lab performance / SEO / accessibility / related areas) so non-technical buyers see status fast.</span></figcaption>
+                </figure>
+                <figure class="sp-shot">
+                    <img src="/images/samples/health-findings.png" alt="Priority findings table" width="1200" height="900" loading="lazy">
+                    <figcaption><strong>Priority findings</strong><span>Ranked issues pulled from the automated pass — what to fix first, with enough detail to hand to a developer.</span></figcaption>
+                </figure>
+                <figure class="sp-shot">
+                    <img src="/images/samples/health-detail.png" alt="Per-page evidence table" width="1200" height="900" loading="lazy">
+                    <figcaption><strong>Page evidence</strong><span>Per-URL rows from the Playwright crawl (titles, signals, axe hits) so you can verify the five-page cap was used honestly.</span></figcaption>
+                </figure>
+            </div>
+        </div>
+        <div class="sp-buy-bar">
+            <p>Want this for <strong>your</strong> site? Same runner, your URL, Stripe checkout.</p>
+            <a class="sp-buy" href="/website-health-audit">Order $39 health audit</a>
+        </div>
+    </div></section>
+    <div id="footer-container"></div>
+</body>
+</html>

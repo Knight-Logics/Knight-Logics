@@ -445,6 +445,7 @@
         var wrap = $('embed-status-' + prefix);
         var frame = $(prefix + '-frame');
         if (!frame) return;
+        var embedUrl = withOpsToken(url);
         if (wrap) {
             wrap.classList.add('open');
             wrap.style.display = 'flex';
@@ -452,42 +453,50 @@
             wrap.querySelector('[data-embed-detail]').textContent = help || 'Loading remote Outreach stack.';
         }
         frame.onload = function () {
-            pushOpsAuthToFrame(frame, url);
+            pushOpsAuthToFrame(frame, embedUrl);
             if (wrap) {
                 wrap.classList.remove('open');
                 wrap.style.display = 'none';
             }
-            log('info', 'Cloud ops iframe loaded', { url: url });
+            log('info', 'Cloud ops iframe loaded', { url: embedUrl });
         };
         frame.onerror = function () {
             if (wrap) {
                 wrap.classList.add('open');
                 wrap.querySelector('[data-embed-title]').textContent = 'Cloud ops unreachable';
                 wrap.querySelector('[data-embed-detail]').textContent =
-                    (help || '') + ' Confirm KL_OUTREACH_URL / ops host is running, then refresh.';
+                    (help || '') + ' Confirm tunnel + local services on this PC, then refresh.';
             }
-            log('warn', 'Cloud ops iframe error', { url: url });
+            log('warn', 'Cloud ops iframe error', { url: embedUrl });
         };
-        if (frame.dataset.loaded !== url) {
-            frame.src = url;
-            frame.dataset.loaded = url;
+        if (frame.dataset.loaded !== embedUrl) {
+            frame.src = embedUrl;
+            frame.dataset.loaded = embedUrl;
         } else {
-            pushOpsAuthToFrame(frame, url);
+            pushOpsAuthToFrame(frame, embedUrl);
             if (wrap) {
                 wrap.classList.remove('open');
                 wrap.style.display = 'none';
             }
         }
-        setTimeout(function () { pushOpsAuthToFrame(frame, url); }, 800);
+        setTimeout(function () { pushOpsAuthToFrame(frame, embedUrl); }, 800);
     }
 
-    function withLocalOpsToken(url) {
+    function withOpsToken(url) {
         if (!state.secret) return url;
         try {
             var parsed = new URL(url);
+            var host = parsed.hostname;
             var port = parsed.port || (parsed.protocol === 'https:' ? '443' : '80');
-            if (parsed.hostname !== '127.0.0.1' && parsed.hostname !== 'localhost') return url;
-            if (port !== '5050' && port !== '5100') return url;
+            var isLocalOps = (host === '127.0.0.1' || host === 'localhost') &&
+                (port === '5050' || port === '5100');
+            var isCloudOps = host === 'ops.knightlogics.com' ||
+                host === 'mail.knightlogics.com' ||
+                host === 'social.knightlogics.com' ||
+                host === 'poster.knightlogics.com';
+            if (!isLocalOps && !isCloudOps) return url;
+            // Streamlit hosts ignore kl_ops_token; only Flask ops need it.
+            if (host === 'social.knightlogics.com' || host === 'poster.knightlogics.com') return url;
             if (!parsed.searchParams.get('kl_ops_token')) {
                 parsed.searchParams.set('kl_ops_token', state.secret);
             }
@@ -495,6 +504,10 @@
         } catch (err) {
             return url;
         }
+    }
+
+    function withLocalOpsToken(url) {
+        return withOpsToken(url);
     }
 
     async function mountLocalEmbed(prefix, url, help) {
@@ -693,7 +706,16 @@
         (health.localModules || []).forEach(function (mod) {
             var remoteKey = mod.moduleKey || mod.id;
             var remote = health.remoteModules && health.remoteModules[remoteKey];
+            // HTTPS admin embeds cloud tunnels — do not surface local 127.0.0.1 probe
+            // failures as "not reachable" when a cloud module (or tunnel fallback) exists.
             if (isUsableRemote(remote)) return;
+            if (window.location.protocol === 'https:') {
+                var fallbackId = null;
+                Object.keys(REMOTE_MODULE_MAP).forEach(function (moduleId) {
+                    if (REMOTE_MODULE_MAP[moduleId] === remoteKey) fallbackId = moduleId;
+                });
+                if (fallbackId && TUNNEL_FALLBACK[fallbackId]) return;
+            }
             var probe = state.localProbe[mod.id.replace(/_/g, '-')] || 'pending';
             var statusClass = probe === 'maybe' ? 'warn' : (probe === 'fail' ? 'err' : 'pending');
             cards.push(
@@ -715,6 +737,13 @@
             var remoteKey = mod.moduleKey || mod.id;
             var remote = health.remoteModules && health.remoteModules[remoteKey];
             if (isUsableRemote(remote)) return;
+            if (window.location.protocol === 'https:') {
+                var fallbackId = null;
+                Object.keys(REMOTE_MODULE_MAP).forEach(function (moduleId) {
+                    if (REMOTE_MODULE_MAP[moduleId] === remoteKey) fallbackId = moduleId;
+                });
+                if (fallbackId && TUNNEL_FALLBACK[fallbackId]) return;
+            }
             probeLocal(mod.url, mod.id.replace(/_/g, '-'));
         });
     }

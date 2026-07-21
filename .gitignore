@@ -78,6 +78,18 @@ overlay.log
 # Personal/sensitive files (add any specific files you don't want to commit)
 # config.js (if it contains sensitive data)
 .vercel
+
+# Synced/generated visibility audit outputs
+.gsc-audit-latest.json
+.website-audit-latest.json
+gsc-audit/
+website-audit/
+_seo_audit/
+_enc_check.txt
+
+# Generated local staging and Python caches
+images/gbp-staging/
+**/__pycache__/
 .env*.local
 .gsc-token.json
 credentials/*.local.json

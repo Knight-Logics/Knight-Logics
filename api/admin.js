@@ -104,6 +104,7 @@ async function handleHealth(req, res, body) {
 
     const remoteModules = {};
     const opsSecret = getAdminSecret();
+    // Blank Vercel overrides must not disable known production tunnel hosts.
     const remoteConfig = [
         {
             key: 'outreach',
@@ -122,63 +123,71 @@ async function handleHealth(req, res, body) {
         {
             key: 'social_ops',
             label: 'Social Ops',
-            envUrl: process.env.KL_SOCIAL_OPS_URL,
+            envUrl: process.env.KL_SOCIAL_OPS_URL || 'https://social.knightlogics.com',
             embedPath: '/?embed=true',
             probePath: '/',
         },
         {
             key: 'social_poster',
             label: 'Social Poster',
-            envUrl: process.env.KL_SOCIAL_POSTER_URL,
+            envUrl: process.env.KL_SOCIAL_POSTER_URL || 'https://poster.knightlogics.com',
             embedPath: '/?embed=true',
             probePath: '/',
         },
     ];
 
     const probeRemoteModule = async (cfg) => {
-        const base = String(cfg.envUrl || '').trim().replace(/\/+$/, '');
-        if (!base) return null;
-        let origin = base;
+        const raw = String(cfg.envUrl || '').trim();
+        if (!raw) return null;
+        let origin = raw;
         try {
-            origin = new URL(base).origin;
+            origin = new URL(raw).origin;
         } catch (error) {
             return {
                 key: cfg.key,
                 module: {
                     label: cfg.label,
-                    base,
+                    base: raw,
                     origin: null,
-                    url: base + cfg.embedPath,
+                    url: raw.replace(/\/+$/, '') + cfg.embedPath,
                     status: 'error',
                     detail: `Invalid KL URL: ${error.message}`,
                 },
             };
         }
+        const base = origin;
         let status = 'pending';
         let detail = 'Configured — browser will connect on tab open.';
-        if (opsSecret) {
-            try {
-                const probeUrl = base + cfg.probePath;
-                const controller = new AbortController();
-                const timer = setTimeout(() => controller.abort(), 5000);
-                const response = await fetch(probeUrl, {
-                    method: 'GET',
-                    headers: { 'X-KL-Ops-Token': opsSecret },
-                    signal: controller.signal,
-                });
-                clearTimeout(timer);
-                if (response.ok) {
-                    status = 'ok';
-                    detail = 'Cloud ops host reachable from Vercel.';
-                } else {
-                    status = 'warning';
-                    detail = `Cloud URL configured; preflight returned HTTP ${response.status}. The browser will connect directly.`;
-                }
-            } catch (error) {
+        // Public health/root probes do not need the ops token. Sending KL_ADMIN_SECRET
+        // as X-KL-Ops-Token can produce false 401s through some edges even when the
+        // browser embed works. Probe anonymously against the origin + public path.
+        try {
+            const probeUrl = base + cfg.probePath;
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), 5000);
+            const response = await fetch(probeUrl, {
+                method: 'GET',
+                signal: controller.signal,
+                redirect: 'follow',
+            });
+            clearTimeout(timer);
+            if (response.ok) {
+                status = 'ok';
+                detail = 'Cloud ops host reachable from Vercel.';
+            } else if (response.status === 401 || response.status === 403) {
+                // Auth-gated HTML still means the tunnel/host is up; admin embeds
+                // pass kl_ops_token / postMessage from the browser.
+                status = 'ok';
+                detail = `Cloud host up (HTTP ${response.status} on anonymous probe). Browser embed uses admin session.`;
+            } else {
                 status = 'warning';
-                detail = 'Cloud URL configured; preflight timed out. The browser will connect directly.';
+                detail = `Cloud URL configured; preflight returned HTTP ${response.status}. The browser will connect directly.`;
             }
-        } else {
+        } catch (error) {
+            status = 'warning';
+            detail = 'Cloud URL configured; preflight timed out. The browser will connect directly.';
+        }
+        if (!opsSecret && status === 'pending') {
             detail = 'Set KL_ADMIN_SECRET to enable server-side ops probe.';
         }
         return {
@@ -201,19 +210,9 @@ async function handleHealth(req, res, body) {
 
     const notes = [
         'Referrals runs fully in the cloud (Vercel + Neon).',
+        'Outreach, Email, Social Ops, and Social Poster use Cloudflare tunnel hosts (ops / mail / social / poster.knightlogics.com). They require this PC on with services + tunnel; watchdogs restart them automatically.',
+        'Local fallback on this PC: Outreach :5050, Email :5100, Social Ops :8500, Social Poster :8501. Ensure script: CRM\\OutreachEngine\\scripts\\ensure-knight-command-stack.ps1',
     ];
-    if (Object.keys(remoteModules).length) {
-        notes.push(
-            'Outreach and Email use their secure cloud ops hosts. Knight Command embeds them from any device.',
-        );
-    } else {
-        notes.push(
-            'Outreach, Email, and Social tools fall back to this PC (127.0.0.1) when cloud ops URLs are not configured.',
-        );
-    }
-    notes.push(
-        'Local fallback: python app.py in CRM\\OutreachEngine (5050). Social: Social-Media-Manager\\run_social_services_hidden.ps1',
-    );
 
     return sendJson(res, 200, {
         ok: true,

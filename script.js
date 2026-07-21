@@ -151,7 +151,7 @@ async function loadSocialIcons() {
     }
 }
 
-const HEADER_FOOTER_VER = '20260703nav1';
+const HEADER_FOOTER_VER = '20260718labs1';
 
 async function loadHeaderFooter() {
     try {
@@ -1601,6 +1601,28 @@ function initNavigation() {
     const navDropdowns = document.querySelectorAll('.nav-dropdown');
     const desktopMega = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1025px)');
 
+    function clearMegaPanelAlign(mega) {
+        if (!mega) return;
+        mega.querySelectorAll('.nav-dropdown-mega-panel').forEach((p) => {
+            p.style.removeProperty('--mega-align-offset');
+        });
+    }
+
+    /** Desktop: line up each panel's first link with its left-side tab row. */
+    function alignMegaPanelToTab(mega, index) {
+        if (!mega) return;
+        const tabs = mega.querySelectorAll('.nav-dropdown-mega-tab');
+        const panels = mega.querySelectorAll('.nav-dropdown-mega-panel');
+        clearMegaPanelAlign(mega);
+        if (!desktopMega.matches) return;
+        const tab = tabs[index];
+        const firstTab = tabs[0];
+        const panel = panels[index];
+        if (!tab || !firstTab || !panel) return;
+        const offset = Math.max(0, tab.offsetTop - firstTab.offsetTop);
+        panel.style.setProperty('--mega-align-offset', `${offset}px`);
+    }
+
     function resetMegaNav(mega) {
         if (!mega) return;
         const tabs = mega.querySelectorAll('.nav-dropdown-mega-tab');
@@ -1617,6 +1639,7 @@ function initNavigation() {
             if (active) p.removeAttribute('hidden');
             else p.setAttribute('hidden', '');
         });
+        alignMegaPanelToTab(mega, 0);
     }
 
     function activateMegaTab(mega, index) {
@@ -1635,6 +1658,9 @@ function initNavigation() {
         });
         if (!desktopMega.matches) {
             mega.classList.add('nav-dropdown-mega--flyout-open');
+            clearMegaPanelAlign(mega);
+        } else {
+            alignMegaPanelToTab(mega, index);
         }
     }
 

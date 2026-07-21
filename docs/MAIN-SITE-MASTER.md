@@ -199,10 +199,12 @@ If those scripts are unavailable or dirty in the current worktree, use direct Pl
 ## Knight Command Cloud Ops
 
 - `/admin` uses `https://ops.knightlogics.com` for Outreach CRM and `https://mail.knightlogics.com` for Email Agent by default.
-- Social Ops and Social Poster use `https://social.knightlogics.com` and `https://poster.knightlogics.com` when Knight Command runs on HTTPS (`MainSite/admin/admin.js` → `TUNNEL_FALLBACK`), or when `KL_SOCIAL_OPS_URL` / `KL_SOCIAL_POSTER_URL` are set on Vercel.
+- Social Ops and Social Poster default to `https://social.knightlogics.com` and `https://poster.knightlogics.com` in both the admin shell (`TUNNEL_FALLBACK`) and `/api/admin` health probes (`KL_SOCIAL_*_URL` overrides still win when set).
 - Vercel environment URL values can override those defaults, but blank values do not disable the known production tunnel hostnames on HTTPS.
-- A server-side preflight timeout is informational; the browser still connects directly to a valid cloud URL. Invalid URLs are the only remote configuration treated as an error.
-- Local ports `5050`, `5100`, `8500`, and `8501` are development fallbacks. On **HTTPS** live admin, the shell prefers cloud tunnel URLs — you may briefly see `127.0.0.1:5050` in the Overview health cards while local probes run; that is not the embed target when tunnels are up.
+- Server-side preflight probes the tunnel origin anonymously (no ops token). HTTP 401/403 on the probe still counts as host-up because browser embeds authenticate separately.
+- On HTTPS Command Center, local `127.0.0.1` probe cards are suppressed when cloud tunnel modules are configured — mixed-content local probes are not the embed path.
+- Keep-alive: Task Scheduler `KnightCommandStackWatchdog` / `KnightCommandStackAtLogon` run `CRM/OutreachEngine/scripts/ensure-knight-command-stack.ps1` (Email :5100, Outreach :5050, Social :8500/:8501, cloudflared). `KnightSocialServicesWatchdog` remains a second Social-only guard.
+- Local ports `5050`, `5100`, `8500`, and `8501` are development fallbacks. On **HTTPS** live admin, the shell prefers cloud tunnel URLs.
 - **What runs where:** Referrals (Neon + Vercel APIs) work from any device with no PC dependency. Outreach, Email, Social Ops, and Social Poster run on **this computer** and are exposed through Cloudflare Tunnel — remote tabs work when the PC is on and tunnel + services are running. See `CRM/OutreachEngine/deploy/cloudflare-tunnel/README.md`.
 - **Social Poster restore reference:** `Social/Social-Media-Manager/docs/social-poster-master.md`
 - **Social Ops restore reference:** `Social/Social-Media-Manager/docs/social-ops-master.md`

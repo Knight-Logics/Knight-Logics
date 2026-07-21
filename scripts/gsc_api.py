@@ -185,8 +185,14 @@ def _search_analytics(
     return out
 
 
-def cmd_queries(cfg: dict[str, str], days: int, export: Path | None) -> int:
-    svc = _service(cfg)
+def cmd_queries(
+    cfg: dict[str, str],
+    days: int,
+    export: Path | None,
+    *,
+    allow_interactive: bool = True,
+) -> int:
+    svc = _service(cfg, allow_interactive=allow_interactive)
     rows = _search_analytics(svc, cfg["site_url"], days=days, dimensions=["query"])
     normalized = [{**r, "query": r.pop("key")} for r in rows]
     payload = {
@@ -207,8 +213,14 @@ def cmd_queries(cfg: dict[str, str], days: int, export: Path | None) -> int:
     return 0
 
 
-def cmd_pages(cfg: dict[str, str], days: int, export: Path | None) -> int:
-    svc = _service(cfg)
+def cmd_pages(
+    cfg: dict[str, str],
+    days: int,
+    export: Path | None,
+    *,
+    allow_interactive: bool = True,
+) -> int:
+    svc = _service(cfg, allow_interactive=allow_interactive)
     rows = _search_analytics(svc, cfg["site_url"], days=days, dimensions=["page"])
     normalized = [{**r, "page": r.pop("key")} for r in rows]
     payload = {
@@ -231,6 +243,11 @@ def cmd_pages(cfg: dict[str, str], days: int, export: Path | None) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Google Search Console API helper")
+    parser.add_argument(
+        "--non-interactive",
+        action="store_true",
+        help="Fail fast instead of opening a browser when OAuth needs reauthorization",
+    )
     sub = parser.add_subparsers(dest="command", required=True)
 
     sub.add_parser("auth", help="Run OAuth consent (opens browser once)")
@@ -255,9 +272,9 @@ def main() -> int:
     if args.command == "check":
         return cmd_check(cfg)
     if args.command == "queries":
-        return cmd_queries(cfg, args.days, args.export)
+        return cmd_queries(cfg, args.days, args.export, allow_interactive=not args.non_interactive)
     if args.command == "pages":
-        return cmd_pages(cfg, args.days, args.export)
+        return cmd_pages(cfg, args.days, args.export, allow_interactive=not args.non_interactive)
     if args.command == "coverage-export":
         from gsc_coverage_export import main as coverage_main
 

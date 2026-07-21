@@ -78,7 +78,16 @@ def main() -> int:
     ]
     for name, subcmd in gsc_exports:
         export = f"{rel}/{name}-api.json"
-        cmd = [py, "scripts/gsc_api.py", *subcmd, "--days", str(args.days), "--export", export]
+        cmd = [
+            py,
+            "scripts/gsc_api.py",
+            "--non-interactive",
+            *subcmd,
+            "--days",
+            str(args.days),
+            "--export",
+            export,
+        ]
         code = _run(cmd, cwd=ROOT, dry_run=args.dry_run)
         manifest["steps"].append({"tool": "gsc_api", "name": name, "export": export, "ok": code == 0})
         failures += code != 0

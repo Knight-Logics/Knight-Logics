@@ -27,6 +27,15 @@ const SERVICES = Object.freeze({
         inputKeys: ['targetNiche', 'location', 'radiusMiles'],
         fulfillment: 'prospect_opportunity_pack',
         offerVersion: '2026-07-v2'
+    }),
+    full_access_gsc_audit: Object.freeze({
+        sku: 'full_access_gsc_audit',
+        name: 'Full-Access Search Console Pack',
+        description: 'After Full GSC access for audits@knightlogics.com: 90-day Search Analytics, sitemaps, URL Inspection sample, analysis findings, plus bundled outside-in Playwright/axe/Lighthouse health PDF. Auto-refund if access is not granted within 14 days.',
+        amount: 29900,
+        inputKeys: ['clientName', 'websiteUrl', 'gscProperty'],
+        fulfillment: 'full_access_gsc_audit',
+        offerVersion: '2026-07-v2'
     })
 });
 

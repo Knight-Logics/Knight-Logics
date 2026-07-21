@@ -137,6 +137,26 @@
       "permanent": true
     },
     {
+      "source": "/sample-website-health-audit.html",
+      "destination": "/sample-website-health-audit",
+      "permanent": true
+    },
+    {
+      "source": "/sample-white-label-website-audit.html",
+      "destination": "/sample-white-label-website-audit",
+      "permanent": true
+    },
+    {
+      "source": "/sample-local-opportunity-pack.html",
+      "destination": "/sample-local-opportunity-pack",
+      "permanent": true
+    },
+    {
+      "source": "/sample-full-access-website-audit.html",
+      "destination": "/sample-full-access-website-audit",
+      "permanent": true
+    },
+    {
       "source": "/service-google-business-profile.html",
       "destination": "/service-google-business-profile",
       "permanent": true
@@ -1282,6 +1302,24 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/header.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/footer.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
         }
       ]
     }

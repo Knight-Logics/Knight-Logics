@@ -43,6 +43,20 @@ async function ensureTable(sql) {
     )`;
 }
 
+async function issueRefund(sql, orderId, order, reason) {
+    if (order.stripe_refund_id) return { ok: true, already_refunded: true };
+    const key = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_API_KEY;
+    if (!key) throw Object.assign(new Error('Stripe is unavailable.'), { status: 503 });
+    if (!order.payment_intent_id) throw Object.assign(new Error('Order has no payment intent.'), { status: 409 });
+    const stripe = new Stripe(key, { apiVersion: '2025-03-31.basil' });
+    const refund = await stripe.refunds.create(
+        { payment_intent: order.payment_intent_id, reason: 'requested_by_customer', metadata: { order_id: orderId, reason } },
+        { idempotencyKey: `autonomous-service-refund-${orderId}` }
+    );
+    await sql`UPDATE autonomous_service_orders SET status='refunded',refunded_at=now(),stripe_refund_id=${refund.id},lease_until=null,last_error=${String(reason).slice(0, 800)},updated_at=now() WHERE id=${orderId}`;
+    return { ok: true, refunded: true, refund_id: refund.id };
+}
+
 module.exports = async function handler(req, res) {
     if (!authorized(req)) return sendJson(res, 401, { error: 'Unauthorized.' });
     const databaseUrl = process.env.KL_DATABASE_URL || process.env.DATABASE_URL;
@@ -50,10 +64,33 @@ module.exports = async function handler(req, res) {
     const sql = neon(databaseUrl); await ensureTable(sql);
     if (req.method === 'GET') {
         try {
-            const rows = await sql`UPDATE autonomous_service_orders SET status='processing', attempts=attempts+1, lease_until=now()+interval '45 minutes', updated_at=now()
-                WHERE id=(SELECT id FROM autonomous_service_orders WHERE ((status IN ('pending','failed') AND attempts<3 AND next_attempt_at<=now()) OR (status='processing' AND lease_until<now() AND attempts<3)) ORDER BY created_at FOR UPDATE SKIP LOCKED LIMIT 1) RETURNING id,sku,fulfillment,buyer_email,inputs,attempts`;
+            const rows = await sql`
+                UPDATE autonomous_service_orders
+                SET status='processing',
+                    attempts=CASE
+                        WHEN status IN ('pending','failed') THEN attempts+1
+                        WHEN status='processing' AND lease_until<now() THEN attempts+1
+                        ELSE attempts
+                    END,
+                    lease_until=now()+interval '45 minutes',
+                    updated_at=now()
+                WHERE id=(
+                    SELECT id FROM autonomous_service_orders
+                    WHERE (
+                        (status IN ('pending','failed') AND attempts<3 AND next_attempt_at<=now())
+                        OR (status='awaiting_access' AND next_attempt_at<=now())
+                        OR (status='processing' AND lease_until<now() AND (attempts<3 OR fulfillment='full_access_gsc_audit'))
+                    )
+                    ORDER BY created_at
+                    FOR UPDATE SKIP LOCKED
+                    LIMIT 1
+                )
+                RETURNING id,sku,fulfillment,buyer_email,inputs,attempts,created_at,status`;
             return sendJson(res, 200, { order: rows[0] || null });
-        } catch (error) { console.error('[service-orders] Claim failed:', error && error.message); return sendJson(res, 500, { error: 'Could not claim an order.' }); }
+        } catch (error) {
+            console.error('[service-orders] Claim failed:', error && error.message);
+            return sendJson(res, 500, { error: 'Could not claim an order.' });
+        }
     }
     if (req.method !== 'POST') return sendJson(res, 405, { error: 'Method not allowed.' });
     let body;
@@ -72,11 +109,15 @@ module.exports = async function handler(req, res) {
                     return sendJson(res, 400, { error: 'Artifact payload is invalid.' });
                 }
                 const bytes = Buffer.from(file.base64, 'base64');
-                if (!bytes.length || bytes.toString('base64').replace(/=+$/, '') !== file.base64.replace(/=+$/, '')) return sendJson(res, 400, { error: 'Artifact encoding is invalid.' });
+                if (!bytes.length || bytes.toString('base64').replace(/=+$/, '') !== file.base64.replace(/=+$/, '')) {
+                    return sendJson(res, 400, { error: 'Artifact encoding is invalid.' });
+                }
                 totalBytes += bytes.length;
                 normalized[name] = { contentType: file.contentType, base64: file.base64 };
             }
-            if (!Object.keys(normalized).length || totalBytes > 3 * 1024 * 1024) return sendJson(res, 400, { error: 'Artifact bundle must contain 1 byte to 3 MB.' });
+            if (!Object.keys(normalized).length || totalBytes > 3 * 1024 * 1024) {
+                return sendJson(res, 400, { error: 'Artifact bundle must contain 1 byte to 3 MB.' });
+            }
             const exists = await sql`SELECT id FROM autonomous_service_orders WHERE id=${orderId} AND status='processing' LIMIT 1`;
             if (!exists.length) return sendJson(res, 409, { error: 'Order is not processing.' });
             const token = crypto.randomBytes(24).toString('base64url');
@@ -91,6 +132,16 @@ module.exports = async function handler(req, res) {
             const rows = await sql`UPDATE autonomous_service_orders SET status='completed', result=${JSON.stringify(result)}::jsonb, completed_at=now(), lease_until=null, last_error=null, updated_at=now() WHERE id=${orderId} AND status='processing' RETURNING id`;
             return sendJson(res, rows.length ? 200 : 409, { ok: rows.length > 0 });
         }
+        if (action === 'await_access') {
+            const message = typeof body.error === 'string' ? body.error.slice(0, 800) : 'Search Console property not yet accessible.';
+            const rows = await sql`UPDATE autonomous_service_orders
+                SET status='awaiting_access', last_error=${message}, lease_until=null,
+                    next_attempt_at=now()+interval '30 minutes', updated_at=now()
+                WHERE id=${orderId} AND status='processing' AND fulfillment='full_access_gsc_audit'
+                RETURNING id,created_at`;
+            if (!rows.length) return sendJson(res, 409, { error: 'Order is not processing for access wait.' });
+            return sendJson(res, 200, { ok: true, status: 'awaiting_access' });
+        }
         if (action === 'fail') {
             const message = typeof body.error === 'string' ? body.error.slice(0, 800) : 'Unknown fulfillment failure.';
             const rows = await sql`UPDATE autonomous_service_orders SET status='failed', last_error=${message}, lease_until=null, next_attempt_at=now()+interval '15 minutes', updated_at=now() WHERE id=${orderId} AND status='processing' RETURNING attempts`;
@@ -98,18 +149,33 @@ module.exports = async function handler(req, res) {
             return sendJson(res, 200, { ok: true, refund_required: Number(rows[0].attempts) >= 3 });
         }
         if (action === 'refund') {
-            const rows = await sql`SELECT payment_intent_id,attempts,status,stripe_refund_id FROM autonomous_service_orders WHERE id=${orderId} LIMIT 1`;
+            const rows = await sql`SELECT payment_intent_id,attempts,status,stripe_refund_id,fulfillment,created_at FROM autonomous_service_orders WHERE id=${orderId} LIMIT 1`;
             const order = rows[0];
             if (!order) return sendJson(res, 404, { error: 'Order was not found.' });
             if (order.stripe_refund_id) return sendJson(res, 200, { ok: true, already_refunded: true });
-            if (order.status !== 'failed' || Number(order.attempts) < 3 || !order.payment_intent_id) return sendJson(res, 409, { error: 'Order is not eligible for automatic refund.' });
-            const key = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_API_KEY;
-            if (!key) return sendJson(res, 503, { error: 'Stripe is unavailable.' });
-            const stripe = new Stripe(key, { apiVersion: '2025-03-31.basil' });
-            const refund = await stripe.refunds.create({ payment_intent: order.payment_intent_id, reason: 'requested_by_customer', metadata: { order_id: orderId, reason: 'automated_fulfillment_failed' } }, { idempotencyKey: `autonomous-service-refund-${orderId}` });
-            await sql`UPDATE autonomous_service_orders SET status='refunded',refunded_at=now(),stripe_refund_id=${refund.id},updated_at=now() WHERE id=${orderId}`;
-            return sendJson(res, 200, { ok: true, refunded: true });
+            const accessTimeout = order.fulfillment === 'full_access_gsc_audit'
+                && ['awaiting_access', 'processing', 'failed'].includes(order.status)
+                && (Date.now() - new Date(order.created_at).getTime()) >= 14 * 24 * 60 * 60 * 1000;
+            const failedOut = order.status === 'failed' && Number(order.attempts) >= 3;
+            if (!accessTimeout && !failedOut) {
+                return sendJson(res, 409, { error: 'Order is not eligible for automatic refund.' });
+            }
+            try {
+                const result = await issueRefund(
+                    sql,
+                    orderId,
+                    order,
+                    accessTimeout ? 'gsc_access_not_granted_within_14_days' : 'automated_fulfillment_failed'
+                );
+                return sendJson(res, 200, result);
+            } catch (error) {
+                const status = error.status || 500;
+                return sendJson(res, status, { error: error.message || 'Refund failed.' });
+            }
         }
         return sendJson(res, 400, { error: 'Unknown action.' });
-    } catch (error) { console.error('[service-orders] Update failed:', error && error.message); return sendJson(res, 500, { error: 'Order update failed.' }); }
+    } catch (error) {
+        console.error('[service-orders] Update failed:', error && error.message);
+        return sendJson(res, 500, { error: 'Order update failed.' });
+    }
 };

@@ -895,12 +895,14 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
     flex-direction: column;
     gap: 8px;
     padding: 10px 0 12px;
+    padding-top: calc(10px + var(--mega-align-offset, 0px));
     min-height: 100%;
+    box-sizing: border-box;
 }
 
 .nav-dropdown-mega-panel.is-active {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .nav-dropdown-mega-panel .nav-dropdown-item {
@@ -915,6 +917,7 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
 
     .nav-dropdown-mega {
         overflow: visible;
+        align-items: flex-start;
     }
 
     .nav-dropdown-mega-tab {
@@ -947,10 +950,12 @@ a:where(:not(.cta-button, .nav-link, .nav-brand-link, .nav-dropdown-toggle)):foc
         pointer-events: auto;
     }
 
+    /* Top-align with left tabs; --mega-align-offset shifts each panel to its tab row */
     .nav-dropdown-mega-panel.is-active {
-        flex: 1 1 auto;
-        justify-content: center;
-        min-height: 100%;
+        flex: 0 0 auto;
+        justify-content: flex-start;
+        min-height: 0;
+        align-self: flex-start;
     }
 
     .nav-dropdown-mega-back {
@@ -12989,6 +12994,7 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
     #services.kl-services-animate .kl-services-enter--d6:not(.services-showcase-card) { animation-delay: 0.24s; }
     #services.kl-services-animate .kl-services-enter--d7:not(.services-showcase-card) { animation-delay: 0.28s; }
     #services.kl-services-animate .kl-services-enter--d8:not(.services-showcase-card) { animation-delay: 0.32s; }
+    #services.kl-services-animate .kl-services-enter--d9:not(.services-showcase-card) { animation-delay: 0.36s; }
 
     .services--unified-v1 .kl-services-showcase:not(.kl-services-showcase-animate) .kl-services-enter {
         opacity: 0;
@@ -13233,7 +13239,7 @@ body.reduced-motion .kl-trust-bridge .kl-local-trust-parallax {
     }
 }
 
-/* Homepage seven-pillar services grid */
+/* Homepage nine-pillar services grid */
 .services--unified-v1 .kl-services-grid--pillars {
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -15841,4 +15847,11 @@ body:not(:has(#hero)) .profile-hero-inner {
         position: static;
         order: 2;
     }
+}
+
+/* Inline body links: distinguishable without color alone (axe link-in-text-block) */
+main p a,
+main li a {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
 }

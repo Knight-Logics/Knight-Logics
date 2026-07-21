@@ -15,3 +15,9 @@ regexTarget = "secret"
 regexes = [
   '''(?i)^\s*(?:change[-_ ]?me|replace[-_ ]?me|your[-_ ].*|example|placeholder|dummy|test|\[?set\]?|<[^>]+>)\s*$'''
 ]
+
+[allowlist]
+description = "Public IndexNow verification key committed with the public key file"
+regexes = [
+  '''c11d1576b012440ea9fd020d6fd81d4b''',
+]

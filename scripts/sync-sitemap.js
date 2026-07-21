@@ -70,6 +70,21 @@ const PRODUCTS = [
   'auto-vid-compiler',
 ];
 
+const OFFERS = [
+  { loc: 'service-packages', priority: '0.9' },
+  { loc: 'website-health-audit', priority: '0.9' },
+  { loc: 'white-label-website-audit', priority: '0.88' },
+  { loc: 'local-opportunity-pack', priority: '0.88' },
+  { loc: 'full-access-website-audit', priority: '0.88' },
+  { loc: 'sample-website-health-audit', priority: '0.7' },
+  { loc: 'sample-white-label-website-audit', priority: '0.7' },
+  { loc: 'sample-local-opportunity-pack', priority: '0.7' },
+  { loc: 'sample-full-access-website-audit', priority: '0.7' },
+  { loc: 'search-performance-retainer', priority: '0.88' },
+  { loc: 'growth-systems-offer', priority: '0.9' },
+  { loc: 'trade-partnership', priority: '0.84' },
+];
+
 const LEGAL = [
   'privacy-policy',
   'terms-of-service',
@@ -78,7 +93,7 @@ const LEGAL = [
   'disclaimer',
 ];
 
-const DISCOVERY = ['ai.txt', 'llms.txt', 'llms-full.txt'];
+const DISCOVERY = ['ai.txt'];
 
 function urlEntry(loc, priority, changefreq = 'monthly') {
   const href = loc ? `https://knightlogics.com/${loc}` : 'https://knightlogics.com/';
@@ -115,6 +130,7 @@ growthCases.forEach((slug) => add(slug, '0.84'));
 PROOF.forEach((slug) => add(slug, slug === 'case-studies' ? '0.88' : '0.84'));
 LOCAL.forEach((slug) => add(slug, slug.includes('tampa') || slug.includes('clearwater') ? '0.85' : '0.8'));
 PRODUCTS.forEach((slug) => add(slug, '0.65'));
+OFFERS.forEach((offer) => add(offer.loc, offer.priority));
 LEGAL.forEach((slug) => add(slug, '0.3', 'yearly'));
 DISCOVERY.forEach((slug) => add(slug, '0.3'));
 
@@ -127,5 +143,23 @@ ${entries.join('\n')}
 </urlset>
 `;
 
-fs.writeFileSync(path.join(root, 'sitemap.xml'), xml, 'utf8');
-console.log(`Sitemap synced: ${entries.length} URLs, lastmod=${LASTMOD}`);
+const sitemapPath = path.join(root, 'sitemap.xml');
+const desiredUrls = new Set(
+  [...seen].map((route) =>
+    route === '/' ? 'https://knightlogics.com/' : `https://knightlogics.com/${route}`
+  )
+);
+const currentXml = fs.existsSync(sitemapPath) ? fs.readFileSync(sitemapPath, 'utf8') : '';
+const currentUrls = new Set(
+  [...currentXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1].trim())
+);
+const routeSetMatches =
+  desiredUrls.size === currentUrls.size &&
+  [...desiredUrls].every((url) => currentUrls.has(url));
+
+if (routeSetMatches) {
+  console.log(`Sitemap already synchronized: ${desiredUrls.size} URLs`);
+} else {
+  fs.writeFileSync(sitemapPath, xml, 'utf8');
+  console.log(`Sitemap synced: ${entries.length} URLs, lastmod=${LASTMOD}`);
+}

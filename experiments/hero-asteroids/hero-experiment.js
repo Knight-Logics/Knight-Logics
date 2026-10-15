@@ -1093,13 +1093,31 @@
     /* ── Main loop ── */
     let last = performance.now();
 
+    /* perf: gate the animation loop (start after load/idle or first interaction, pause offscreen/hidden, cap fps on small screens) */
+    let loopActive = false;
+    let loopQueued = false;
+    let heroVisible = true;
+    const minFrameMs = window.matchMedia('(max-width: 900px)').matches ? 33 : 0;
+    function queueLoop() {
+        if (loopQueued || !loopActive || !heroVisible || document.hidden) return;
+        loopQueued = true;
+        requestAnimationFrame((t) => { loopQueued = false; loop(t); });
+    }
+    function startLoop() {
+        if (loopActive) return;
+        loopActive = true;
+        last = performance.now();
+        queueLoop();
+    }
     function loop(now) {
-        const dt = now - last;
+        if (!loopActive || !heroVisible || document.hidden) return;
+        if (minFrameMs && now - last < minFrameMs) { queueLoop(); return; }
+        const dt = Math.min(now - last, 100);
         last = now;
 
         if (W < 1 || H < 1) {
             sizeCanvases();
-            requestAnimationFrame(loop);
+            queueLoop();
             return;
         }
 
@@ -1113,7 +1131,7 @@
 
         updateProofParallax();
 
-        requestAnimationFrame(loop);
+        queueLoop();
     }
 
     window.__klHeroExperimentReady = true;
@@ -1123,7 +1141,25 @@
     ensurePageScroll();
     sizeCanvases();
     buildStars();
-    requestAnimationFrame(loop);
+    (function gateLoopStart() {
+        const kick = () => startLoop();
+        ['pointerdown', 'pointermove', 'keydown', 'touchstart', 'scroll', 'wheel'].forEach((ev) =>
+            window.addEventListener(ev, kick, { once: true, passive: true }));
+        const afterLoad = () => {
+            const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+            setTimeout(() => idle(kick, { timeout: 2000 }), 2500);
+        };
+        if (document.readyState === 'complete') afterLoad();
+        else window.addEventListener('load', afterLoad, { once: true });
+        document.addEventListener('visibilitychange', () => { if (!document.hidden) { last = performance.now(); queueLoop(); } });
+        const heroEl = starsCanvas.closest('section') || starsCanvas.parentElement;
+        if (heroEl && 'IntersectionObserver' in window) {
+            new IntersectionObserver((entries) => {
+                heroVisible = entries[entries.length - 1].isIntersecting;
+                if (heroVisible) { last = performance.now(); queueLoop(); }
+            }, { rootMargin: '100px 0px' }).observe(heroEl);
+        }
+    })();
 
     function boot() {
         syncParallaxMode();

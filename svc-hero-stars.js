@@ -153,7 +153,7 @@
             canvas.style.height = `${H}px`;
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
             buildStars();
-            if (reduced) drawStatic();
+            if (reduced || !running) drawStatic();
             else if (!raf && !document.hidden) raf = requestAnimationFrame(draw);
         }
 
@@ -286,8 +286,12 @@
             drawFrame(0);
         }
 
+        let lastDraw = 0;
+        const minFrame = window.matchMedia('(max-width: 900px)').matches ? 33 : 0;
         function draw(now) {
             if (!running) return;
+            if (minFrame && now - lastDraw < minFrame) { raf = requestAnimationFrame(draw); return; }
+            lastDraw = now;
             drawFrame(now);
             raf = requestAnimationFrame(draw);
         }
@@ -310,8 +314,23 @@
         hero.addEventListener('mouseleave', onPointerLeave);
 
         resize();
-        if (!reduced) raf = requestAnimationFrame(draw);
-        else drawStatic();
+        drawStatic();
+        if (!reduced) {
+            running = false;
+            const kick = () => {
+                if (running || document.hidden) return;
+                running = true;
+                raf = requestAnimationFrame(draw);
+            };
+            ['pointerdown', 'pointermove', 'keydown', 'touchstart', 'scroll', 'wheel'].forEach((ev) =>
+                window.addEventListener(ev, kick, { once: true, passive: true }));
+            const afterLoad = () => {
+                const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+                setTimeout(() => idle(kick, { timeout: 2000 }), 2500);
+            };
+            if (document.readyState === 'complete') afterLoad();
+            else window.addEventListener('load', afterLoad, { once: true });
+        }
 
         if (ro) {
             ro.observe(zone);

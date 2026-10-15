@@ -365,9 +365,12 @@
         }
     }
 
+    let hiApiDown = false;
     async function fetchGlobalHiScore() {
+        if (hiApiDown) return;
         try {
             const res = await fetch(HI_API, { cache: 'no-store' });
+            if (res.status === 404 || res.status === 405) { hiApiDown = true; return; } /* static hosting: no API */
             if (!res.ok) return;
             const data = await res.json();
             applyHiScore(Number(data.score), data.initials || '');
@@ -1046,6 +1049,7 @@
     }
 
     function updateAsteroids(ctx, dt) {
+        const k = Math.max(1, Math.min(dt / 16.667, 3)); /* never slower than one step per frame (original feel); catch up when frames drop */
         spawnTimer += dt;
         if (spawnTimer > 2800 && !reducedMotion) {
             spawnTimer = 0;
@@ -1053,10 +1057,10 @@
         }
 
         rocks.forEach((rock) => {
-            rock.x += rock.vx;
-            rock.y += rock.vy;
-            rock.rot += rock.rotV;
-            rock.vy += 0.008;
+            rock.x += rock.vx * k;
+            rock.y += rock.vy * k;
+            rock.rot += rock.rotV * k;
+            rock.vy += 0.008 * k;
 
             if (rock.x < rock.r) {
                 rock.x = rock.r;
@@ -1097,7 +1101,6 @@
     let loopActive = false;
     let loopQueued = false;
     let heroVisible = true;
-    const minFrameMs = window.matchMedia('(max-width: 900px)').matches ? 33 : 0;
     function queueLoop() {
         if (loopQueued || !loopActive || !heroVisible || document.hidden) return;
         loopQueued = true;
@@ -1111,7 +1114,6 @@
     }
     function loop(now) {
         if (!loopActive || !heroVisible || document.hidden) return;
-        if (minFrameMs && now - last < minFrameMs) { queueLoop(); return; }
         const dt = Math.min(now - last, 100);
         last = now;
 
@@ -1147,7 +1149,7 @@
             window.addEventListener(ev, kick, { once: true, passive: true }));
         const afterLoad = () => {
             const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
-            setTimeout(() => idle(kick, { timeout: 2000 }), 2500);
+            idle(kick, { timeout: 300 });
         };
         if (document.readyState === 'complete') afterLoad();
         else window.addEventListener('load', afterLoad, { once: true });

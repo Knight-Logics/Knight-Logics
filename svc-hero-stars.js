@@ -287,7 +287,7 @@
         }
 
         let lastDraw = 0;
-        const minFrame = window.matchMedia('(max-width: 900px)').matches ? 33 : 0;
+        const minFrame = 0;
         function draw(now) {
             if (!running) return;
             if (minFrame && now - lastDraw < minFrame) { raf = requestAnimationFrame(draw); return; }
@@ -326,7 +326,7 @@
                 window.addEventListener(ev, kick, { once: true, passive: true }));
             const afterLoad = () => {
                 const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
-                setTimeout(() => idle(kick, { timeout: 2000 }), 2500);
+                idle(kick, { timeout: 300 });
             };
             if (document.readyState === 'complete') afterLoad();
             else window.addEventListener('load', afterLoad, { once: true });

@@ -365,7 +365,7 @@
         }
     }
 
-    let hiApiDown = false;
+    let hiApiDown = !window.KL_HISCORE_API; /* static GitHub Pages has no /api; set window.KL_HISCORE_API = true to re-enable */
     async function fetchGlobalHiScore() {
         if (hiApiDown) return;
         try {

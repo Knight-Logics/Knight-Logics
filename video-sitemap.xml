@@ -43,11 +43,60 @@
   <url>
     <loc>https://knightlogics.com/pixelforge-ai</loc>
     <video:video>
-      <video:thumbnail_loc>https://img.youtube.com/vi/6Rk3b037s8o/maxresdefault.jpg</video:thumbnail_loc>
-      <video:title>PixelForge AI — Introduction &amp; Feature Overview</video:title>
-      <video:description>Introduction video for PixelForge AI, a Windows desktop app for local AI video upscaling with Real-ESRGAN, compare previews, ETA estimates, and automatic GitHub updates.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/6Rk3b037s8o</video:player_loc>
-      <video:publication_date>2026-04-02T12:00:00-04:00</video:publication_date>
+      <video:thumbnail_loc>https://knightlogics.com/videos/apps/pixelforge-ai-walkthrough.jpg</video:thumbnail_loc>
+      <video:title>PixelForge AI — Upscale Your Videos Locally (Product Walkthrough)</video:title>
+      <video:description>Load a clip, pick a profile, preview a before/after compare frame, check the ETA and credit cost, run a local GPU upscale with Smooth 60 FPS, and export 1440p60.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/Yg5Eyn1Ttis</video:player_loc>
+      <video:duration>83</video:duration>
+      <video:publication_date>2026-10-18</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/videoforge</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/apps/videoforge-studio-walkthrough.jpg</video:thumbnail_loc>
+      <video:title>VideoForge Studio — Create Ranked Top 5 Videos (Product Walkthrough)</video:title>
+      <video:description>Build a Top 5 countdown: titles, 9:16 preset, five ranked clips, narration, music, intermissions and word captions, local FFmpeg render and export.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/D6WhkqjndmQ</video:player_loc>
+      <video:duration>72</video:duration>
+      <video:publication_date>2026-10-18</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/display-control-plus</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/apps/display-control-plus-walkthrough.jpg</video:thumbnail_loc>
+      <video:title>Display Control+ — Per-Monitor Screensaver and OLED Protection (Product Walkthrough)</video:title>
+      <video:description>Tray-first OLED protection: per-monitor idle timeouts, Input/Activity/Both detection, slideshow overlay on the idle display only, pause from the tray.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/u4l8LRn_frU</video:player_loc>
+      <video:duration>69</video:duration>
+      <video:publication_date>2026-10-18</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/auto-vid-compiler</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/apps/auto-vid-compiler-walkthrough.jpg</video:thumbnail_loc>
+      <video:title>Auto Vid Compiler — Turn Clips into Full-Length Content (Product Walkthrough)</video:title>
+      <video:description>Point it at a folder of clips, keep the last seconds of each, add an intro and music, and compile one highlight reel with bundled FFmpeg.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/hs7oETTqvmo</video:player_loc>
+      <video:duration>66</video:duration>
+      <video:publication_date>2026-10-18</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/ticketing-invoicing-job-workflows</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/automation/kg-dispatch-walkthrough.jpg</video:thumbnail_loc>
+      <video:title>Knight Group Dispatch — Handyman Ticket Manager Walkthrough</video:title>
+      <video:description>Narrated walkthrough of the handyman ticket manager: job board, auto estimate, e-signature, scheduling, field photos, invoicing and Stripe payment, branded composites, and weekly books.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/automation/kg-dispatch-walkthrough.mp4</video:content_loc>
+      <video:duration>182</video:duration>
+      <video:publication_date>2026-10-16T09:00:00-04:00</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
     </video:video>
   </url>

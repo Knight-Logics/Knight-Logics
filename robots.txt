@@ -1,53 +1,18 @@
 User-agent: *
 Allow: /
-Allow: /manifest.json
-Allow: /llms.txt
-Allow: /llms-full.txt
-Allow: /ai.txt
-Allow: /humans.txt
-Allow: /.well-known/security.txt
 
-# Sitemaps
 Sitemap: https://knightlogics.com/sitemap.xml
 Sitemap: https://knightlogics.com/video-sitemap.xml
 
-# AI / LLM summary files (kept as comments here to avoid validator issues with non-standard directives)
-# Summary: https://knightlogics.com/llms.txt
-# Full summary: https://knightlogics.com/llms-full.txt
-# AI pointer: https://knightlogics.com/ai.txt
-
-# Disallow APIs, internal tooling, scratch files, and raw source assets
+# Non-page endpoints and junk query URLs
 Disallow: /api/
-Disallow: /header
-Disallow: /header.html
-Disallow: /footer
-Disallow: /footer.html
-Disallow: /.git/
-Disallow: /.venv/
-Disallow: /.vercel/
-Disallow: /node_modules/
-Disallow: /Powershell/
-Disallow: /PythonScripts/
-Disallow: /SQLqueries/
-Disallow: /Test/
-Disallow: /null
-Disallow: /overlay.log
-Disallow: /_*
+Disallow: /*?search=
+Disallow: /*openPackage=
+Disallow: /*purchase=
+Disallow: /*package=
+Disallow: /*offer=
 
-# Disallow scripts, raw data files, and sensitive file patterns
-Disallow: /*.ps1
-Disallow: /*.py
-Disallow: /*.sql
-Disallow: /*.csv
-Disallow: /gallagher.json
-Disallow: /knightlogics.json
-Disallow: /knightlogics-rerun.json
-Disallow: /percepture.json
-Disallow: /thirteen05.json
-
-# Legacy portfolio/demo apps are intentionally omitted from the sitemap.
-# They redirect at the platform layer so crawlers can consolidate them into current service pages.
-# Also hard-disallow so they stop appearing as crawled-not-indexed junk in GSC.
+# Retired legacy demo apps
 Disallow: /Chess-Game-main/
 Disallow: /CRM-Management-System/
 Disallow: /Ecommerce-Management-System/
@@ -56,25 +21,3 @@ Disallow: /Invoice-Management-System/
 Disallow: /JavaScript-Tic-Tac-Toe-master/
 Disallow: /Project-Management-System/
 Disallow: /Tic-Tac-Toe/
-
-# Block URL parameters that generate junk crawl URLs
-Disallow: /*?search=
-Disallow: /*openPackage=
-Disallow: /*purchase=
-Disallow: /*package=
-Disallow: /*offer=
-
-# Allow core site assets
-Allow: /images/
-Allow: /videos/
-Allow: /samples/
-Allow: /style.css
-Allow: /script.js
-Allow: /samples/instant-packages/sample-local-opportunity-pack.csv
-Disallow: /referral-dashboard
-Disallow: /referral-dashboard.html
-Disallow: /admin
-Disallow: /admin.html
-Disallow: /referral-verify
-Disallow: /referral-verify.html
-Disallow: /ref/

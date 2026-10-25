@@ -1,0 +1,78 @@
+﻿/* kl-polish.css - sitewide visual polish layer (Oct 2026). Loaded after style.css.
+   Scope: never touches #hero / .svc-hero / .cs-hero. Remove the <link> to roll back. */
+:root{--klp-accent:#64ffda;--klp-accent2:#7c8cff;--klp-warm:#ffb86b;--klp-card:rgba(255,255,255,.035);--klp-line:rgba(100,255,218,.16)}
+
+/* 1. Section rhythm: alternating ambient backgrounds fill empty space */
+.kl-growth-section,.services,.testimonials,.contact,.section-faq,.home-pricing-router,.klp-projects{position:relative;isolation:isolate}
+.kl-growth-section:nth-of-type(even)::before,.home-pricing-router::before,.klp-projects::before,.section-faq::before{
+ content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:
+  radial-gradient(60% 50% at 8% 0%,rgba(100,255,218,.07),transparent 70%),
+  radial-gradient(50% 45% at 100% 100%,rgba(124,140,255,.07),transparent 70%),
+  linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px) 0 0/48px 48px,
+  linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px) 0 0/48px 48px;
+ -webkit-mask-image:linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent);
+         mask-image:linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent)}
+.kl-growth-section:nth-of-type(odd)::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:radial-gradient(40% 35% at 92% 10%,rgba(100,255,218,.05),transparent 70%)}
+
+/* 2. Section headings get a gradient accent bar + kicker glow */
+.section-header h2,.kl-growth-section>.container>h2,.home-pricing-router__intro h2,.klp-projects h2{position:relative}
+.section-header h2::after,.kl-growth-section>.container>h2::after,.home-pricing-router__intro h2::after,.klp-projects h2::after{
+ content:"";display:block;width:64px;height:3px;margin:.6rem auto 0;border-radius:3px;
+ background:linear-gradient(90deg,var(--klp-accent),var(--klp-accent2))}
+.kl-growth-section>.container>h2::after{margin-left:0}
+.starter-packages-kicker,.kl-growth-kicker,.klp-kicker{letter-spacing:.14em;text-transform:uppercase;font-size:.74rem;font-weight:700;color:var(--klp-accent);text-shadow:0 0 18px rgba(100,255,218,.35)}
+
+/* 3. Cards: consistent glass surface, gradient border on hover, lift */
+.kl-growth-feature,.kl-growth-outcome,.kl-growth-ideal-card,.kl-growth-deliverable,.kl-growth-step,.sp-card,.svc-feature-card,.cs-audit-card,.home-pricing-lane-card,.kl-growth-proof-card,.booking-faq-item,.kl-growth-faq-item{
+ background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
+ border:1px solid var(--klp-line);border-radius:16px;
+ transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.kl-growth-feature:hover,.kl-growth-outcome:hover,.kl-growth-ideal-card:hover,.kl-growth-deliverable:hover,.sp-card:hover,.svc-feature-card:hover,.cs-audit-card:hover,.home-pricing-lane-card:hover,.kl-growth-proof-card:hover{
+ transform:translateY(-4px);border-color:rgba(100,255,218,.45);
+ box-shadow:0 14px 40px -18px rgba(100,255,218,.35),0 0 0 1px rgba(124,140,255,.15) inset}
+.kl-growth-feature-icon,.svc-card-icon{display:inline-grid;place-items:center;width:46px;height:46px;border-radius:12px;
+ background:linear-gradient(135deg,rgba(100,255,218,.18),rgba(124,140,255,.18));box-shadow:0 0 22px -6px rgba(100,255,218,.45)}
+
+/* 4. Stats get gradient numerals */
+.kl-growth-stat-value,.kl-growth-metric strong,.cs-score-item strong{
+ background:linear-gradient(90deg,var(--klp-accent),var(--klp-accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* 5. Media frames */
+.kl-growth-split-media img,.kl-growth-media img,.kl-proof-gallery img,.kl-growth-split-media video,.kl-growth-media video{
+ border-radius:14px;border:1px solid var(--klp-line);box-shadow:0 24px 60px -30px rgba(0,0,0,.8)}
+
+/* 6. CTA bands glow */
+.svc-cta-band,.kl-growth-cta{background:radial-gradient(70% 120% at 50% 0%,rgba(100,255,218,.12),transparent 70%),linear-gradient(135deg,rgba(124,140,255,.08),rgba(100,255,218,.04));border-top:1px solid var(--klp-line);border-bottom:1px solid var(--klp-line)}
+
+/* 7. Legacy-pricing notice (package-* and old tier pages) */
+.klp-notice{max-width:1100px;margin:1.25rem auto;padding:1rem 1.25rem;border-radius:14px;border:1px solid rgba(255,184,107,.45);
+ background:linear-gradient(90deg,rgba(255,184,107,.12),rgba(255,184,107,.03));color:#fff;font-size:.95rem;line-height:1.55}
+.klp-notice strong{color:var(--klp-warm)}.klp-notice a{color:var(--klp-accent);font-weight:600}
+
+/* 8. Our Projects grid (homepage) */
+.klp-projects{padding:90px 0}
+.klp-projects__intro{text-align:center;max-width:760px;margin:0 auto 2rem}
+.klp-projects__intro p{color:rgba(255,255,255,.75)}
+.klp-filter{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:0 0 1.5rem}
+.klp-filter button{font:inherit;font-size:.82rem;padding:.4rem .9rem;border-radius:999px;border:1px solid var(--klp-line);background:transparent;color:#fff;cursor:pointer}
+.klp-filter button[aria-pressed="true"]{background:var(--klp-accent);color:#0a0a0a;border-color:var(--klp-accent)}
+.klp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.klp-card{display:flex;flex-direction:column;gap:.35rem;padding:16px 16px 14px;border-radius:14px;text-decoration:none;color:#fff;
+ background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));border:1px solid var(--klp-line);
+ transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;min-height:132px}
+.klp-card:hover,.klp-card:focus-visible{transform:translateY(-3px);border-color:rgba(100,255,218,.5);box-shadow:0 12px 34px -18px rgba(100,255,218,.45)}
+.klp-card h3{font-size:1rem;margin:0;line-height:1.25}
+.klp-card p{font-size:.84rem;margin:0;color:rgba(255,255,255,.72);line-height:1.45;flex:1}
+.klp-card__top{display:flex;justify-content:space-between;align-items:center;gap:.5rem;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.55)}
+.klp-card__url{font-size:.76rem;color:var(--klp-accent);word-break:break-all}
+.klp-badge{font-size:.66rem;padding:.15rem .5rem;border-radius:999px;font-weight:700;letter-spacing:.06em}
+.klp-badge--live{background:rgba(100,255,218,.15);color:var(--klp-accent)}
+.klp-badge--pilot{background:rgba(124,140,255,.18);color:#b9c2ff}
+.klp-badge--client{background:rgba(255,255,255,.1);color:#fff}
+.klp-badge--soon{background:rgba(255,184,107,.16);color:var(--klp-warm)}
+.klp-card[hidden]{display:none}
+@media (max-width:520px){.klp-grid{grid-template-columns:1fr 1fr;gap:10px}.klp-card{padding:12px;min-height:118px}.klp-card p{font-size:.78rem}}
+@media (max-width:360px){.klp-grid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.klp-card,.kl-growth-feature,.sp-card,.home-pricing-lane-card{transition:none}.klp-card:hover{transform:none}}

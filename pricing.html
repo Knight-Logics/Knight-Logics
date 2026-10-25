@@ -12,6 +12,7 @@
 <meta property="og:url" content="https://knightlogics.com/pricing"><meta property="og:image" content="https://knightlogics.com/images/KnightLogicsLogo2.png">
 <link rel="icon" href="/favicon.ico"><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#64ffda">
 <link rel="stylesheet" href="/style.css?v=20260709center1">
+    <link rel="stylesheet" href="/kl-polish.css?v=20261025a">
 <script defer src="/script.js?v=20260823sales3"></script>
 <style>
 .klx{max-width:1120px;margin:0 auto;padding:7rem 1.25rem 4rem;color:var(--text-primary,#e6e6e6)}
@@ -33,6 +34,7 @@
 .klx details{border-bottom:1px solid rgba(255,255,255,.1);padding:.8rem 0}.klx summary{cursor:pointer;font-weight:600}
 .klx-band{margin-top:3rem;padding:2rem;border-radius:12px;background:rgba(100,255,218,.06);text-align:center}
 @media(max-width:600px){.klx{padding-top:5.5rem}.klx table{font-size:.85rem}}
+.klx-addons{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin:1rem 0 2rem}.klx-addon-group{background:rgba(100,255,218,.04);border:1px solid rgba(100,255,218,.18);border-radius:14px;padding:1.25rem 1.4rem}.klx-addon-group h3{margin:0 0 .6rem}.klx-addon-list{list-style:none;margin:0;padding:0}.klx-addon-list li{display:flex;justify-content:space-between;gap:1rem;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.08)}.klx-addon-list li:last-child{border-bottom:0}.klx-addon-list a{color:inherit;text-decoration:none}.klx-addon-list a:hover{color:#64ffda}.klx-addon-list span{color:#64ffda;font-weight:600;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -44,7 +46,25 @@
 <p class="lead">Every package has a set price, a set timeline and a written list of what you get. Nothing is billed by the hour, and there are no surprise add-ons. Not sure which one fits? Book a call and we'll tell you, even if the answer is "none yet."</p>
 <p><a class="klx-cta" href="/book-consultation">Book a call</a></p>
 <h2>Packages</h2>
-<div class="klx-grid"><article class="klx-card"><h3>Aria Voice Receptionist</h3><div class="klx-price">$1,500</div><div class="klx-meta">setup + call usage · Timeline: 7–10 days</div><ul><li>AI phone agent that answers in your business name</li><li>Script and FAQs written with you</li><li>Booking and lead capture</li><li>Call summaries sent to you after every call</li><li>1 revision round</li></ul></article><article class="klx-card"><h3>Ticketing &amp; Dispatch Setup</h3><div class="klx-price">$3,500</div><div class="klx-meta">one-time · Timeline: 2–3 weeks</div><ul><li>Ticket intake from calls, forms and portals</li><li>Job statuses from new to paid</li><li>Tech assignment</li><li>SMS / email status updates</li><li>Hand-off to invoicing</li></ul></article><article class="klx-card"><h3>Automation Sprint</h3><div class="klx-price">$1,200</div><div class="klx-meta">one-time · Timeline: 1 week</div><ul><li>3 documented workflows</li><li>Example: lead to CRM</li><li>Example: review requests</li><li>Example: invoice reminders</li></ul></article><article class="klx-card"><h3>Website Build</h3><div class="klx-price">$2,500</div><div class="klx-meta">one-time · Timeline: 2–3 weeks</div><ul><li>Up to 8 pages, mobile-ready</li><li>SEO basics</li><li>Google Business Profile hookup</li><li>Forms that feed your ticketing</li></ul></article><article class="klx-card feature"><h3>Full Ops Bundle</h3><div class="klx-price">$7,500</div><div class="klx-meta">one-time · about $1,200 off · Timeline: 4–6 weeks</div><ul><li>Aria Voice Receptionist</li><li>Ticketing &amp; Dispatch Setup</li><li>Website Build</li><li>1 Automation Sprint</li></ul></article><article class="klx-card feature"><h3>Partnership</h3><div class="klx-price">$397/mo</div><div class="klx-meta">3-month minimum · Timeline: Ongoing</div><ul><li>Hosted Aria + your ticketing, so every job is tracked</li><li>Monthly report</li><li>2 hours of changes each month</li><li>Support</li><li>Setup fees waived on a 12-month term</li></ul></article></div>
+<div class="klx-grid"><article class="klx-card" id="aria"><h3>Aria Voice Receptionist</h3><div class="klx-price">$1,500</div><div class="klx-meta">setup + call usage · Timeline: 7–10 days</div><ul><li>AI phone agent that answers in your business name</li><li>Script and FAQs written with you</li><li>Booking and lead capture</li><li>Call summaries sent to you after every call</li><li>1 revision round</li></ul></article><article class="klx-card" id="ticketing"><h3>Ticketing &amp; Dispatch Setup</h3><div class="klx-price">$3,500</div><div class="klx-meta">one-time · Timeline: 2–3 weeks</div><ul><li>Ticket intake from calls, forms and portals</li><li>Job statuses from new to paid</li><li>Tech assignment</li><li>SMS / email status updates</li><li>Hand-off to invoicing</li></ul></article><article class="klx-card" id="automation-sprint"><h3>Automation Sprint</h3><div class="klx-price">$1,200</div><div class="klx-meta">one-time · Timeline: 1 week</div><ul><li>3 documented workflows</li><li>Example: lead to CRM</li><li>Example: review requests</li><li>Example: invoice reminders</li></ul></article><article class="klx-card" id="website-build"><h3>Website Build</h3><div class="klx-price">$2,500</div><div class="klx-meta">one-time · Timeline: 2–3 weeks</div><ul><li>Up to 8 pages, mobile-ready</li><li>SEO basics</li><li>Google Business Profile hookup</li><li>Forms that feed your ticketing</li><li>New-business launch basics and online-store scope are quoted inside this build, as a flat price in writing</li></ul></article><article class="klx-card feature" id="full-ops"><h3>Full Ops Bundle</h3><div class="klx-price">$7,500</div><div class="klx-meta">one-time · about $1,200 off · Timeline: 4–6 weeks</div><ul><li>Aria Voice Receptionist</li><li>Ticketing &amp; Dispatch Setup</li><li>Website Build</li><li>1 Automation Sprint</li></ul></article><article class="klx-card feature" id="partnership"><h3>Partnership</h3><div class="klx-price">$397/mo</div><div class="klx-meta">3-month minimum · Timeline: Ongoing</div><ul><li>Hosted Aria + your ticketing, so every job is tracked</li><li>Monthly report</li><li>2 hours of changes each month</li><li>Support</li><li>Setup fees waived on a 12-month term</li></ul></article></div>
+<h2 id="addons">Add-ons &amp; quick audits</h2>
+<p class="lead">Smaller fixed-price items you can add to any package or buy on their own.</p>
+<div class="klx-addons">
+<section class="klx-addon-group" id="gbp-optional"><h3>Google Business Profile</h3><ul class="klx-addon-list">
+<li><a href="/service-google-business-profile">GBP Setup</a><span>$497 one-time</span></li>
+<li><a href="/service-google-business-profile">GBP Maintenance</a><span>$147/mo</span></li>
+<li><a href="/service-google-business-profile">GBP Optimization</a><span>$500&ndash;$900, scoped</span></li>
+<li><a href="/service-google-business-profile">GBP Recovery</a><span>$750&ndash;$1,500+, scoped</span></li>
+</ul></section>
+<section class="klx-addon-group" id="audits"><h3>Self-serve audits</h3><ul class="klx-addon-list">
+<li><a href="/website-health-audit">AI Search + Website Health Audit</a><span>$39</span></li>
+<li><a href="/white-label-website-audit">White-Label Website Health Audit</a><span>$49</span></li>
+<li><a href="/local-opportunity-pack">Local Opportunity Intelligence Pack</a><span>$49</span></li>
+<li><a href="/ai-search-readiness">AI Search Readiness Pack</a><span>$79</span></li>
+<li><a href="/conversion-leak-audit">Conversion Leak Audit</a><span>$99</span></li>
+<li><a href="/full-access-website-audit">Full-Access Search Console Pack</a><span>$299</span></li>
+</ul><p class="klx-meta"><a href="/service-packages">Compare all audits</a></p></section>
+</div>
 <h2>How the Partnership works</h2>
 <p class="lead">You run your calls through Aria and your jobs through our ticketing system. Every call, ticket and invoice is tracked in one place, and you get a monthly report. On a 12-month term the setup fees for Aria and Ticketing are waived.</p>
 <h2>Questions</h2>

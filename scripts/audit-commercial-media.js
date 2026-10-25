@@ -28,6 +28,8 @@ function collectHtmlFiles(directory) {
 
 const packageFiles = fs.readdirSync(ROOT)
   .filter((name) => /^package-[a-z0-9-]+\.html$/i.test(name))
+  // Legacy package pages that are meta-refresh redirects to /pricing carry no media.
+  .filter((name) => !/http-equiv="refresh"/i.test(fs.readFileSync(path.join(ROOT, name), 'utf8')))
   .sort();
 const relatedCaseStudies = fs.readdirSync(ROOT)
   .filter((name) => /^case-study-.*\.html$/i.test(name))

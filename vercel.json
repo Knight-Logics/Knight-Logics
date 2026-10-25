@@ -557,11 +557,6 @@
       "permanent": true
     },
     {
-      "source": "/starting-a-new-business.html",
-      "destination": "/starting-a-new-business",
-      "permanent": true
-    },
-    {
       "source": "/stripe-invoice-automation.html",
       "destination": "/stripe-invoice-automation",
       "permanent": true
@@ -719,6 +714,96 @@
     {
       "source": "/web-designer-plant-city.html",
       "destination": "/web-designer-plant-city",
+      "permanent": true
+    },
+    {
+      "source": "/starting-a-new-business",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/starting-a-new-business.html",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/package-demo-preview",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/package-demo-preview.html",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/package-preview-launch",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/package-preview-launch.html",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/package-local-launch",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/package-local-launch.html",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/package-authority-site",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/package-authority-site.html",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/package-max-authority",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/package-max-authority.html",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/package-authority-network",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/package-authority-network.html",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/package-storefront",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/package-storefront.html",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/package-growth-system",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/package-growth-system.html",
+      "destination": "/pricing",
       "permanent": true
     }
   ],

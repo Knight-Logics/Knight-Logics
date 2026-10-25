@@ -150,26 +150,20 @@ test('city pages keep unique copy and do not add new cities', () => {
     }
 });
 
-test('package pages preserve canonical website bands and Growth setup prices', () => {
-    assert.match(read('package-demo-preview.html'), /1[–-]5 pages/i);
-    assert.match(read('package-preview-launch.html'), /up to 10/i);
-    assert.match(read('package-local-launch.html'), /up to 15 live pages/i);
-    assert.match(read('package-authority-site.html'), /up to 30 (?:planned )?live pages/i);
-    assert.match(read('package-max-authority.html'), /up to 40/i);
-    assert.match(read('package-authority-network.html'), /60[–-]100\+/i);
-
-    const growth = read('package-growth-system.html');
-    for (const expected of [
-        '$5,000 setup + $397/mo',
-        '$7,500 setup + $697/mo',
-        '$10,000 setup + $1,000/mo',
-        '$2,500 setup + $397/mo',
-        '$3,500 setup + $697/mo',
-        '$8,000 setup + $1,000/mo'
+test('legacy package pages redirect to flat-rate pricing', () => {
+    for (const page of [
+        'package-demo-preview.html', 'package-preview-launch.html', 'package-local-launch.html',
+        'package-authority-site.html', 'package-max-authority.html', 'package-authority-network.html',
+        'package-storefront.html', 'package-growth-system.html', 'starting-a-new-business.html'
     ]) {
-        assert.ok(growth.includes(expected), `Growth package page is missing ${expected}.`);
+        const html = read(page);
+        assert.match(html, /<meta http-equiv="refresh" content="0;url=\/pricing/i, `${page} should redirect to /pricing.`);
+        assert.match(html, /noindex/i, `${page} should be noindex.`);
     }
-    assert.doesNotMatch(growth, /70\+\s+page/i);
+    const pricing = read('pricing.html');
+    for (const expected of ['$1,500', '$3,500', '$1,200', '$2,500', '$7,500', '$397/mo', 'id="addons"']) {
+        assert.ok(pricing.includes(expected), `pricing.html is missing ${expected}.`);
+    }
 });
 
 test('catalog proof paths resolve and planned proof records are explicit', () => {

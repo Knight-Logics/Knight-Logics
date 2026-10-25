@@ -55,83 +55,26 @@ const PARITY_FIELDS = [
 ];
 
 const STRUCTURED_DATA_EXPECTATIONS = {
-    'service-websites.html': [
-        'website-demo-preview',
-        'website-preview-launch',
-        'website-local-seo-starter',
-        'website-local-launch-plus',
-        'website-local-launch-max',
-        'website-authority-network'
-    ],
-    'service-ecommerce.html': [
-        'ecommerce-preview-catalog',
-        'ecommerce-payment-links',
-        'ecommerce-launch',
-        'ecommerce-growth-store',
-        'ecommerce-advanced-system'
-    ],
+    // Website, e-commerce and automation pages now quote the six flat-rate
+    // packages from /pricing (Oct 2026) and no longer embed catalog Offers.
     'service-google-business-profile.html': [
         'gbp-setup',
         'gbp-maintenance',
         'gbp-optimization',
         'gbp-recovery'
-    ],
-    'service-ai-automation.html': [
-        'ops-automation-build'
-    ],
-    'automation.html': [
-        'ops-automation-build',
-        'ops-growth-system-starter',
-        'ops-full-growth-system',
-        'ops-custom-automation-system',
-        'ops-growth-systems-only-starter',
-        'ops-growth-systems-only-full',
-        'ops-growth-systems-only-field'
     ]
 };
 
 const REQUIRED_COPY = {
-    'service-websites.html': [
-        '$200', '1–5 preview pages',
-        '$750', 'Up to 10 preview pages',
-        '$1,200', 'Up to 15 live pages',
-        '$2,000', 'Up to 30',
-        '$4,500', 'Up to 40',
-        'From $6,500', '60–100+'
-    ],
-    'service-ecommerce.html': [
-        '$750', '$1,200', '$2,997', '$3,997', 'From $7,500'
-    ],
+    // Flat-rate packages (see /pricing). Legacy package-* pages are redirects.
+    'service-websites.html': ['$2,500', '$7,500', '$397/mo'],
+    'service-ecommerce.html': ['$2,500'],
     'service-google-business-profile.html': [
         '$497', '$147/mo', '$500–$900', '$750–$1,500+'
     ],
-    'service-ai-automation.html': [
-        '$500–$10,000+'
-    ],
-    'automation.html': [
-        '$500–$10,000+',
-        '$5,000 setup + $397/mo',
-        '$7,500 setup + $697/mo',
-        '$10,000 setup + $1,000/mo',
-        '$2,500 setup + $397/mo',
-        '$3,500 setup + $697/mo',
-        '$8,000 setup + $1,000/mo'
-    ],
-    'package-demo-preview.html': ['$200', '1–5 pages'],
-    'package-preview-launch.html': ['$750', 'up to 10'],
-    'package-local-launch.html': ['$1,200', 'up to 15'],
-    'package-authority-site.html': ['$2,000', 'up to 30'],
-    'package-max-authority.html': ['$4,500', 'up to 40'],
-    'package-authority-network.html': ['From $6,500', '60–100+', '$2,500'],
-    'package-storefront.html': ['$750', '$1,200', '$2,997', '$3,997', 'from $7,500', '$2,500'],
-    'package-growth-system.html': [
-        '$5,000 setup + $397/mo',
-        '$7,500 setup + $697/mo',
-        '$10,000 setup + $1,000/mo',
-        '$2,500 setup + $397/mo',
-        '$3,500 setup + $697/mo',
-        '$8,000 setup + $1,000/mo'
-    ],
+    'service-ai-automation.html': ['$1,200', '$397/mo'],
+    'automation.html': ['$1,200', '$3,500', '$397/mo'],
+    'pricing.html': ['$1,500', '$3,500', '$1,200', '$2,500', '$7,500', '$397/mo', '$497', '$147/mo', '$39', '$299'],
     'ai.txt': [
         '$200', '$750', '$1,200', '$2,000', '$4,500', '$6,500',
         '$2,997', '$3,997', '$7,500', '$497', '$147',

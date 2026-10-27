@@ -30,6 +30,26 @@ Knight Logics, KnightLogics, Nicholas Knight web design, Tampa Bay web designer,
 - [Sitemap](https://knightlogics.com/sitemap.xml)
 - [Full LLM summary](https://knightlogics.com/llms-full.txt)
 
+
+## Explainer Videos
+Short narrated explainers (under 40 seconds each, with chapters and full transcripts) of each Knight Logics system.
+- [All explainer videos](https://knightlogics.com/explainer-videos)
+- [AI Voice Receptionist](https://knightlogics.com/video-ai-voice-receptionist): how Aria answers in your business name, books the job and texts you a summary after every call.
+- [Service Business Websites](https://knightlogics.com/video-service-business-websites): how a hand-coded site gets found, loads fast on a phone and turns visits into calls.
+- [Google Business Profile Optimization](https://knightlogics.com/video-google-business-profile): why the top three map spots get the calls and what a complete, active Google profile looks like.
+- [Local SEO](https://knightlogics.com/video-local-seo): crawl, fix, build service and city pages, keep listings consistent and measure calls.
+- [Website and Google Audit](https://knightlogics.com/video-website-google-audit): what we check on your website and Google profile, and the ranked fix list you get back.
+- [CRM Outreach and Lead Generation](https://knightlogics.com/video-crm-outreach): targeted lists, scheduled follow-ups with safe limits, and one reply queue for hot leads.
+- [Review Request Systems](https://knightlogics.com/video-review-requests): one review request after each job, shown on Google and your site, logged so nobody gets nagged.
+- [Stripe Invoice Automation](https://knightlogics.com/video-stripe-invoicing): from a closed ticket to an invoice with a pay button per property, with paid status synced.
+- [Job Photo and PDF Reports](https://knightlogics.com/video-job-photo-reports): before, during and after photos become a branded PDF report and marketing content.
+- [Email Agent Automation](https://knightlogics.com/video-email-agent): forms, campaign replies and everyday email sorted into queues, with hot-lead alerts.
+- [Social Media Automation](https://knightlogics.com/video-social-media-automation): job photos become scheduled posts on five platforms, with quiet accounts flagged the same day.
+- [Business Dashboards](https://knightlogics.com/video-business-dashboards): leads, jobs, invoices and reviews on one phone-friendly screen with same-day alerts.
+- [Workflow and API Automation](https://knightlogics.com/video-workflow-automation): one trigger, many steps: forms, finished jobs and quiet quotes set off the right actions.
+- [Online Ordering Systems](https://knightlogics.com/video-online-ordering): orders on your own domain, staff-editable specials, fast mobile checkout, customers you keep.
+- [Referral Tracking Systems](https://knightlogics.com/video-referral-tracking): partner codes, QR brochures, automatic credit and a dashboard of earned and paid rewards.
+- [Business Growth Systems](https://knightlogics.com/video-business-growth-system): get found, answer every call, get paid, earn reviews and post the work, in one loop.
 ## Identity
 - Founder: Nicholas Knight
 - Business: Knight Logics

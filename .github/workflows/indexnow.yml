@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - pages-static
 
 permissions:
   contents: read
@@ -70,8 +71,9 @@ jobs:
               llms.txt|llms-full.txt|robots.txt|humans.txt)
                 add_url "$HOST/$file"
                 ;;
-              sitemap.xml)
+              sitemap.xml|video-sitemap.xml)
                 add_url "$HOST/sitemap.xml"
+                add_url "$HOST/video-sitemap.xml"
                 add_sitemap_urls
                 ;;
               .well-known/security.txt)

@@ -21,7 +21,8 @@
         "route": "/",
         "sitemap": {
           "priority": "1.0",
-          "changefreq": "weekly"
+          "changefreq": "weekly",
+          "lastmod": "2026-10-26"
         }
       },
       {
@@ -49,7 +50,8 @@
         "file": "website-growth-audit.html",
         "route": "/website-growth-audit",
         "sitemap": {
-          "priority": "0.92"
+          "priority": "0.92",
+          "lastmod": "2026-10-26"
         }
       },
       {
@@ -63,14 +65,16 @@
         "file": "business-growth-systems.html",
         "route": "/business-growth-systems",
         "sitemap": {
-          "priority": "0.90"
+          "priority": "0.90",
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "crm-outreach-lead-generation.html",
         "route": "/crm-outreach-lead-generation",
         "sitemap": {
-          "priority": "0.90"
+          "priority": "0.90",
+          "lastmod": "2026-10-26"
         }
       },
       {
@@ -84,91 +88,104 @@
         "file": "referral-network-systems.html",
         "route": "/referral-network-systems",
         "sitemap": {
-          "priority": "0.90"
+          "priority": "0.90",
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "local-visibility-systems.html",
         "route": "/local-visibility-systems",
         "sitemap": {
-          "priority": "0.90"
+          "priority": "0.90",
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "online-ordering-systems.html",
         "route": "/online-ordering-systems",
         "sitemap": {
-          "priority": "0.90"
+          "priority": "0.90",
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "contractor-growth-systems.html",
         "route": "/contractor-growth-systems",
         "sitemap": {
-          "priority": "0.90"
+          "priority": "0.90",
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "home-service-business-growth-systems.html",
         "route": "/home-service-business-growth-systems",
         "sitemap": {
-          "priority": "0.90"
+          "priority": "0.90",
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "performance-partner-program.html",
         "route": "/performance-partner-program",
         "sitemap": {
-          "priority": "0.90"
+          "priority": "0.90",
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "service-websites.html",
         "route": "/service-websites",
         "sitemap": {
-          "priority": "0.95"
+          "priority": "0.95",
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "service-areas.html",
         "route": "/service-areas",
         "sitemap": {
-          "priority": "0.90"
+          "priority": "0.90",
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "home-service-websites.html",
         "route": "/home-service-websites",
         "sitemap": {
-          "priority": "0.90"
+          "priority": "0.90",
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "service-local-seo.html",
         "route": "/service-local-seo",
         "sitemap": {
-          "priority": "0.90"
+          "priority": "0.90",
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "service-google-business-profile.html",
         "route": "/service-google-business-profile",
         "sitemap": {
-          "priority": "0.88"
+          "priority": "0.88",
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "service-ecommerce.html",
         "route": "/service-ecommerce",
         "sitemap": {
-          "priority": "0.85"
+          "priority": "0.85",
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "service-ai-automation.html",
         "route": "/service-ai-automation",
         "sitemap": {
-          "priority": "0.86"
+          "priority": "0.86",
+          "lastmod": "2026-10-26"
         }
       },
       {
@@ -181,92 +198,128 @@
       {
         "file": "ai-business-automation.html",
         "route": "/ai-business-automation",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "internal-business-tools.html",
         "route": "/internal-business-tools",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "api-integration-services.html",
         "route": "/api-integration-services",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "workflow-automation.html",
         "route": "/workflow-automation",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "business-dashboard-development.html",
         "route": "/business-dashboard-development",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "email-agent-automation.html",
         "route": "/email-agent-automation",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "social-media-automation-systems.html",
         "route": "/social-media-automation-systems",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "handyman-business-growth-systems.html",
         "route": "/handyman-business-growth-systems",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "roofing-business-growth-systems.html",
         "route": "/roofing-business-growth-systems",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "screen-enclosure-business-growth-systems.html",
         "route": "/screen-enclosure-business-growth-systems",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "excavation-business-growth-systems.html",
         "route": "/excavation-business-growth-systems",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "electrician-business-growth-systems.html",
         "route": "/electrician-business-growth-systems",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "painter-business-growth-systems.html",
         "route": "/painter-business-growth-systems",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "restaurant-bar-growth-systems.html",
         "route": "/restaurant-bar-growth-systems",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "stripe-invoice-automation.html",
         "route": "/stripe-invoice-automation",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "job-photo-pdf-reports.html",
         "route": "/job-photo-pdf-reports",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "review-request-systems.html",
         "route": "/review-request-systems",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "service-area-page-strategy.html",
         "route": "/service-area-page-strategy",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "case-study-knight-command.html",
@@ -328,14 +381,16 @@
         "file": "automation.html",
         "route": "/automation",
         "sitemap": {
-          "priority": "0.84"
+          "priority": "0.84",
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "referral-program.html",
         "route": "/referral-program",
         "sitemap": {
-          "priority": "0.84"
+          "priority": "0.84",
+          "lastmod": "2026-10-26"
         }
       },
       {
@@ -516,7 +571,9 @@
       {
         "file": "remote-us-services.html",
         "route": "/remote-us-services",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "display-control-plus.html",
@@ -550,32 +607,38 @@
         "file": "service-packages.html",
         "route": "/service-packages",
         "sitemap": {
-          "priority": "0.90"
+          "priority": "0.90",
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "website-health-audit.html",
         "route": "/website-health-audit",
         "sitemap": {
-          "priority": "0.90"
+          "priority": "0.90",
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "white-label-website-audit.html",
         "route": "/white-label-website-audit",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "local-opportunity-pack.html",
         "route": "/local-opportunity-pack",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "ai-search-readiness.html",
         "route": "/ai-search-readiness",
         "sitemap": {
           "priority": "0.90",
-          "lastmod": "2026-10-24"
+          "lastmod": "2026-10-26"
         }
       },
       {
@@ -583,31 +646,37 @@
         "route": "/conversion-leak-audit",
         "sitemap": {
           "priority": "0.90",
-          "lastmod": "2026-10-24"
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "full-access-website-audit.html",
         "route": "/full-access-website-audit",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "search-performance-retainer.html",
         "route": "/search-performance-retainer",
-        "sitemap": true
+        "sitemap": {
+          "lastmod": "2026-10-26"
+        }
       },
       {
         "file": "growth-systems-offer.html",
         "route": "/growth-systems-offer",
         "sitemap": {
-          "priority": "0.90"
+          "priority": "0.90",
+          "lastmod": "2026-10-26"
         }
       },
       {
         "file": "trade-partnership.html",
         "route": "/trade-partnership",
         "sitemap": {
-          "priority": "0.84"
+          "priority": "0.84",
+          "lastmod": "2026-10-26"
         }
       },
       {
@@ -648,6 +717,159 @@
         "sitemap": {
           "priority": "0.30",
           "changefreq": "yearly"
+        }
+      },
+      {
+        "file": "explainer-videos.html",
+        "route": "/explainer-videos",
+        "sitemap": {
+          "priority": "0.70",
+          "changefreq": "monthly",
+          "lastmod": "2026-10-26"
+        }
+      },
+      {
+        "file": "video-ai-voice-receptionist.html",
+        "route": "/video-ai-voice-receptionist",
+        "sitemap": {
+          "priority": "0.60",
+          "changefreq": "monthly",
+          "lastmod": "2026-10-26"
+        }
+      },
+      {
+        "file": "video-service-business-websites.html",
+        "route": "/video-service-business-websites",
+        "sitemap": {
+          "priority": "0.60",
+          "changefreq": "monthly",
+          "lastmod": "2026-10-26"
+        }
+      },
+      {
+        "file": "video-google-business-profile.html",
+        "route": "/video-google-business-profile",
+        "sitemap": {
+          "priority": "0.60",
+          "changefreq": "monthly",
+          "lastmod": "2026-10-26"
+        }
+      },
+      {
+        "file": "video-local-seo.html",
+        "route": "/video-local-seo",
+        "sitemap": {
+          "priority": "0.60",
+          "changefreq": "monthly",
+          "lastmod": "2026-10-26"
+        }
+      },
+      {
+        "file": "video-website-google-audit.html",
+        "route": "/video-website-google-audit",
+        "sitemap": {
+          "priority": "0.60",
+          "changefreq": "monthly",
+          "lastmod": "2026-10-26"
+        }
+      },
+      {
+        "file": "video-crm-outreach.html",
+        "route": "/video-crm-outreach",
+        "sitemap": {
+          "priority": "0.60",
+          "changefreq": "monthly",
+          "lastmod": "2026-10-26"
+        }
+      },
+      {
+        "file": "video-review-requests.html",
+        "route": "/video-review-requests",
+        "sitemap": {
+          "priority": "0.60",
+          "changefreq": "monthly",
+          "lastmod": "2026-10-26"
+        }
+      },
+      {
+        "file": "video-stripe-invoicing.html",
+        "route": "/video-stripe-invoicing",
+        "sitemap": {
+          "priority": "0.60",
+          "changefreq": "monthly",
+          "lastmod": "2026-10-26"
+        }
+      },
+      {
+        "file": "video-job-photo-reports.html",
+        "route": "/video-job-photo-reports",
+        "sitemap": {
+          "priority": "0.60",
+          "changefreq": "monthly",
+          "lastmod": "2026-10-26"
+        }
+      },
+      {
+        "file": "video-email-agent.html",
+        "route": "/video-email-agent",
+        "sitemap": {
+          "priority": "0.60",
+          "changefreq": "monthly",
+          "lastmod": "2026-10-26"
+        }
+      },
+      {
+        "file": "video-social-media-automation.html",
+        "route": "/video-social-media-automation",
+        "sitemap": {
+          "priority": "0.60",
+          "changefreq": "monthly",
+          "lastmod": "2026-10-26"
+        }
+      },
+      {
+        "file": "video-business-dashboards.html",
+        "route": "/video-business-dashboards",
+        "sitemap": {
+          "priority": "0.60",
+          "changefreq": "monthly",
+          "lastmod": "2026-10-26"
+        }
+      },
+      {
+        "file": "video-workflow-automation.html",
+        "route": "/video-workflow-automation",
+        "sitemap": {
+          "priority": "0.60",
+          "changefreq": "monthly",
+          "lastmod": "2026-10-26"
+        }
+      },
+      {
+        "file": "video-online-ordering.html",
+        "route": "/video-online-ordering",
+        "sitemap": {
+          "priority": "0.60",
+          "changefreq": "monthly",
+          "lastmod": "2026-10-26"
+        }
+      },
+      {
+        "file": "video-referral-tracking.html",
+        "route": "/video-referral-tracking",
+        "sitemap": {
+          "priority": "0.60",
+          "changefreq": "monthly",
+          "lastmod": "2026-10-26"
+        }
+      },
+      {
+        "file": "video-business-growth-system.html",
+        "route": "/video-business-growth-system",
+        "sitemap": {
+          "priority": "0.60",
+          "changefreq": "monthly",
+          "lastmod": "2026-10-26"
         }
       }
     ],

@@ -10,3 +10,22 @@
 .kl-explainer__note{margin:.65rem 0 0;font-size:.8rem;color:rgba(200,210,230,.62);text-align:center}
 .klx .kl-explainer__media{margin:1.6rem 0 1.8rem}
 .klx .kl-explainer__note{text-align:left}
+
+/* Watch pages and hub (added 2026-10-26) */
+.kl-explainer__more{margin:.5rem 0 0;text-align:center;font-size:.92rem}
+.kl-explainer__more a{color:#64ffda;font-weight:600}
+.kl-crumbs{font-size:.85rem;color:#9aa;margin:0 0 1rem}.kl-crumbs a{color:#64ffda}
+.kl-watch .kl-explainer__media{margin:1.4rem 0 1rem}
+.kl-chapters{list-style:none;padding:0;margin:0;display:grid;gap:.4rem}
+.kl-chapters a{display:flex;gap:.9rem;align-items:baseline;padding:.6rem .8rem;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(100,255,218,.12);color:#e6eefb;text-decoration:none}
+.kl-chapters a:hover{border-color:#64ffda}
+.kl-chapters span,.kl-ts{font-variant-numeric:tabular-nums;color:#64ffda;font-weight:700;min-width:2.6rem;text-decoration:none}
+.kl-transcript p{margin:.45rem 0;line-height:1.6;color:#d6deec}
+.kl-related{line-height:1.9}.kl-related a{color:#64ffda}
+.kl-vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem}
+.kl-vgrid--hub{grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin:1.6rem 0}
+.kl-vcard{display:flex;flex-direction:column;gap:.35rem;text-decoration:none;color:#e6eefb;background:rgba(255,255,255,.03);border:1px solid rgba(100,255,218,.14);border-radius:12px;padding:.6rem;transition:border-color .2s}
+.kl-vcard:hover{border-color:#64ffda}
+.kl-vcard img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:8px;display:block}
+.kl-vcard__t{font-weight:700;font-size:1rem}
+.kl-vcard__m{font-size:.82rem;color:#9aa6bf}

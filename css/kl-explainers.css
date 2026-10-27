@@ -1,0 +1,12 @@
+/* Narrated explainer videos (added 2026-10-26). One block per page, placed after the hero. */
+.kl-explainer{background:#08111f;border-top:1px solid rgba(100,255,218,.08);border-bottom:1px solid rgba(100,255,218,.08)}
+.kl-explainer__head{max-width:860px;margin:0 auto 1.4rem;text-align:center}
+.kl-explainer__kicker{display:inline-flex;align-items:center;gap:.5rem;margin:0 0 .55rem;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:#64ffda;font-weight:700}
+.kl-explainer__kicker svg{width:16px;height:16px;flex:none}
+.kl-explainer__head h2{margin:0 0 .7rem;font-size:clamp(1.45rem,2.6vw,2.15rem);line-height:1.15;color:#fff}
+.kl-explainer__head p{margin:0;color:rgba(230,238,255,.82);line-height:1.6;font-size:1.02rem}
+.kl-explainer__media{max-width:1180px;margin:0 auto}
+.kl-explainer__video{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:14px;background:#04070d;border:1px solid rgba(100,255,218,.2);box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.kl-explainer__note{margin:.65rem 0 0;font-size:.8rem;color:rgba(200,210,230,.62);text-align:center}
+.klx .kl-explainer__media{margin:1.6rem 0 1.8rem}
+.klx .kl-explainer__note{text-align:left}

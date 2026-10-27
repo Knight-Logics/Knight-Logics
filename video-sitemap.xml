@@ -39,6 +39,15 @@
       <video:publication_date>2026-05-19T12:00:00-04:00</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
     </video:video>
+      <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/automation.jpg</video:thumbnail_loc>
+      <video:title>How the pieces connect</video:title>
+      <video:description>One trigger, many steps: a form, a finished job or a quiet quote sets off the right actions across your tools, and every run is logged so nothing fails silently.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/automation.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
   </url>
   <url>
     <loc>https://knightlogics.com/pixelforge-ai</loc>
@@ -97,6 +106,582 @@
       <video:content_loc>https://knightlogics.com/videos/automation/kg-dispatch-walkthrough.mp4</video:content_loc>
       <video:duration>182</video:duration>
       <video:publication_date>2026-10-16T09:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/aria-receptionist.jpg</video:thumbnail_loc>
+      <video:title>Aria answers every call</video:title>
+      <video:description>Aria picks up in your business name, answers questions from your script and FAQs, books the job or takes the details, and sends you a summary after every call.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/aria-receptionist.mp4</video:content_loc>
+      <video:duration>36</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/case-study-aria</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/aria-receptionist.jpg</video:thumbnail_loc>
+      <video:title>Aria answers every call</video:title>
+      <video:description>Aria picks up in your business name, answers questions from your script and FAQs, books the job or takes the details, and sends you a summary after every call.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/aria-receptionist.mp4</video:content_loc>
+      <video:duration>36</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/service-websites</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/websites.jpg</video:thumbnail_loc>
+      <video:title>Websites that turn searches into calls</video:title>
+      <video:description>How a hand-coded site gets found, loads fast on a phone, and turns a visit into a call or a quote request that reaches you in seconds.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/websites.mp4</video:content_loc>
+      <video:duration>36</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/home-service-websites</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/websites.jpg</video:thumbnail_loc>
+      <video:title>Websites that turn searches into calls</video:title>
+      <video:description>How a hand-coded site gets found, loads fast on a phone, and turns a visit into a call or a quote request that reaches you in seconds.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/websites.mp4</video:content_loc>
+      <video:duration>36</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/remote-us-services</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/websites.jpg</video:thumbnail_loc>
+      <video:title>Websites that turn searches into calls</video:title>
+      <video:description>How a hand-coded site gets found, loads fast on a phone, and turns a visit into a call or a quote request that reaches you in seconds.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/websites.mp4</video:content_loc>
+      <video:duration>36</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/service-areas</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/websites.jpg</video:thumbnail_loc>
+      <video:title>Websites that turn searches into calls</video:title>
+      <video:description>How a hand-coded site gets found, loads fast on a phone, and turns a visit into a call or a quote request that reaches you in seconds.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/websites.mp4</video:content_loc>
+      <video:duration>36</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/service-google-business-profile</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/gbp.jpg</video:thumbnail_loc>
+      <video:title>Get into the map pack</video:title>
+      <video:description>Why the top three map spots get most of the calls, what a complete and active Google Business Profile looks like, and how your profile and website back each other up.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/gbp.mp4</video:content_loc>
+      <video:duration>35</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/local-visibility-systems</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/gbp.jpg</video:thumbnail_loc>
+      <video:title>Get into the map pack</video:title>
+      <video:description>Why the top three map spots get most of the calls, what a complete and active Google Business Profile looks like, and how your profile and website back each other up.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/gbp.mp4</video:content_loc>
+      <video:duration>35</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/service-local-seo</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/local-seo.jpg</video:thumbnail_loc>
+      <video:title>Local SEO you can see</video:title>
+      <video:description>We crawl the site, fix what blocks ranking, build the service and city pages people search for, keep your listings consistent, and measure calls each month.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/local-seo.mp4</video:content_loc>
+      <video:duration>37</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/search-performance-retainer</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/local-seo.jpg</video:thumbnail_loc>
+      <video:title>Local SEO you can see</video:title>
+      <video:description>We crawl the site, fix what blocks ranking, build the service and city pages people search for, keep your listings consistent, and measure calls each month.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/local-seo.mp4</video:content_loc>
+      <video:duration>37</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/service-area-page-strategy</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/local-seo.jpg</video:thumbnail_loc>
+      <video:title>Local SEO you can see</video:title>
+      <video:description>We crawl the site, fix what blocks ranking, build the service and city pages people search for, keep your listings consistent, and measure calls each month.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/local-seo.mp4</video:content_loc>
+      <video:duration>37</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/website-growth-audit</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/audit.jpg</video:thumbnail_loc>
+      <video:title>Your website and Google check</video:title>
+      <video:description>Send your website and Google profile. We check speed, mobile layout, indexing, schema and your profile, then give you a short written report with fixes ranked by impact.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/audit.mp4</video:content_loc>
+      <video:duration>34</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/website-health-audit</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/audit.jpg</video:thumbnail_loc>
+      <video:title>Your website and Google check</video:title>
+      <video:description>Send your website and Google profile. We check speed, mobile layout, indexing, schema and your profile, then give you a short written report with fixes ranked by impact.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/audit.mp4</video:content_loc>
+      <video:duration>34</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/full-access-website-audit</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/audit.jpg</video:thumbnail_loc>
+      <video:title>Your website and Google check</video:title>
+      <video:description>Send your website and Google profile. We check speed, mobile layout, indexing, schema and your profile, then give you a short written report with fixes ranked by impact.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/audit.mp4</video:content_loc>
+      <video:duration>34</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/white-label-website-audit</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/audit.jpg</video:thumbnail_loc>
+      <video:title>Your website and Google check</video:title>
+      <video:description>Send your website and Google profile. We check speed, mobile layout, indexing, schema and your profile, then give you a short written report with fixes ranked by impact.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/audit.mp4</video:content_loc>
+      <video:duration>34</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/conversion-leak-audit</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/audit.jpg</video:thumbnail_loc>
+      <video:title>Your website and Google check</video:title>
+      <video:description>Send your website and Google profile. We check speed, mobile layout, indexing, schema and your profile, then give you a short written report with fixes ranked by impact.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/audit.mp4</video:content_loc>
+      <video:duration>34</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/ai-search-readiness</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/audit.jpg</video:thumbnail_loc>
+      <video:title>Your website and Google check</video:title>
+      <video:description>Send your website and Google profile. We check speed, mobile layout, indexing, schema and your profile, then give you a short written report with fixes ranked by impact.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/audit.mp4</video:content_loc>
+      <video:duration>34</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/local-opportunity-pack</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/audit.jpg</video:thumbnail_loc>
+      <video:title>Your website and Google check</video:title>
+      <video:description>Send your website and Google profile. We check speed, mobile layout, indexing, schema and your profile, then give you a short written report with fixes ranked by impact.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/audit.mp4</video:content_loc>
+      <video:duration>34</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/service-packages</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/audit.jpg</video:thumbnail_loc>
+      <video:title>Your website and Google check</video:title>
+      <video:description>Send your website and Google profile. We check speed, mobile layout, indexing, schema and your profile, then give you a short written report with fixes ranked by impact.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/audit.mp4</video:content_loc>
+      <video:duration>34</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/crm-outreach-lead-generation</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/outreach.jpg</video:thumbnail_loc>
+      <video:title>Outreach that books work</video:title>
+      <video:description>Lists built by trade, area and size, a message written for each group, follow-ups on schedule with safe daily limits, and one reply queue so hot leads never sit.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/outreach.mp4</video:content_loc>
+      <video:duration>34</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/review-request-systems</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/reviews.jpg</video:thumbnail_loc>
+      <video:title>Review requests, done right</video:title>
+      <video:description>One short request right after the job, straight to your review page, shown on your profile and your website, and logged so nobody gets nagged.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/reviews.mp4</video:content_loc>
+      <video:duration>31</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/stripe-invoice-automation</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/invoicing.jpg</video:thumbnail_loc>
+      <video:title>From finished job to paid invoice</video:title>
+      <video:description>The tech closes the ticket with photos, the invoice builds itself from the job record, managers get one email with a pay button per property, and paid status updates on its own.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/invoicing.mp4</video:content_loc>
+      <video:duration>34</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/job-photo-pdf-reports</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/photo-reports.jpg</video:thumbnail_loc>
+      <video:title>Job photos that do three jobs</video:title>
+      <video:description>Before, during and after photos on the job ticket become a branded PDF report for the property manager and before-and-after content for your website and social posts.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/photo-reports.mp4</video:content_loc>
+      <video:duration>31</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/email-agent-automation</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/email-agent.jpg</video:thumbnail_loc>
+      <video:title>Every inbox, sorted</video:title>
+      <video:description>Website forms, campaign replies and everyday email sorted into separate queues for each business, with hot-lead alerts and bad addresses removed before the next send.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/email-agent.mp4</video:content_loc>
+      <video:duration>32</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/social-media-automation-systems</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/social.jpg</video:thumbnail_loc>
+      <video:title>Finished jobs become posts</video:title>
+      <video:description>Photos from finished jobs go into a posting queue per business, publish on schedule to Facebook, X, LinkedIn, Nextdoor and your Google profile, and quiet accounts get flagged the same day.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/social.mp4</video:content_loc>
+      <video:duration>30</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/business-dashboard-development</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/dashboard.jpg</video:thumbnail_loc>
+      <video:title>Your business on one screen</video:title>
+      <video:description>Leads, open jobs, invoices and reviews on one phone-friendly screen, with week-over-week context and same-day alerts when a follow-up or payment fails.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/dashboard.mp4</video:content_loc>
+      <video:duration>28</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/internal-business-tools</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/dashboard.jpg</video:thumbnail_loc>
+      <video:title>Your business on one screen</video:title>
+      <video:description>Leads, open jobs, invoices and reviews on one phone-friendly screen, with week-over-week context and same-day alerts when a follow-up or payment fails.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/dashboard.mp4</video:content_loc>
+      <video:duration>28</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/workflow-automation</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/automation.jpg</video:thumbnail_loc>
+      <video:title>How the pieces connect</video:title>
+      <video:description>One trigger, many steps: a form, a finished job or a quiet quote sets off the right actions across your tools, and every run is logged so nothing fails silently.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/automation.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/api-integration-services</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/automation.jpg</video:thumbnail_loc>
+      <video:title>How the pieces connect</video:title>
+      <video:description>One trigger, many steps: a form, a finished job or a quiet quote sets off the right actions across your tools, and every run is logged so nothing fails silently.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/automation.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/ai-business-automation</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/automation.jpg</video:thumbnail_loc>
+      <video:title>How the pieces connect</video:title>
+      <video:description>One trigger, many steps: a form, a finished job or a quiet quote sets off the right actions across your tools, and every run is logged so nothing fails silently.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/automation.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/service-ai-automation</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/automation.jpg</video:thumbnail_loc>
+      <video:title>How the pieces connect</video:title>
+      <video:description>One trigger, many steps: a form, a finished job or a quiet quote sets off the right actions across your tools, and every run is logged so nothing fails silently.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/automation.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/online-ordering-systems</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/ordering.jpg</video:thumbnail_loc>
+      <video:title>Orders on your own website</video:title>
+      <video:description>Your menu on your own domain, specials your staff can edit, quick mobile checkout, and orders that land with you instantly while the customer list stays yours.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/ordering.mp4</video:content_loc>
+      <video:duration>30</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/service-ecommerce</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/ordering.jpg</video:thumbnail_loc>
+      <video:title>Orders on your own website</video:title>
+      <video:description>Your menu on your own domain, specials your staff can edit, quick mobile checkout, and orders that land with you instantly while the customer list stays yours.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/ordering.mp4</video:content_loc>
+      <video:duration>30</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/restaurant-bar-growth-systems</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/ordering.jpg</video:thumbnail_loc>
+      <video:title>Orders on your own website</video:title>
+      <video:description>Your menu on your own domain, specials your staff can edit, quick mobile checkout, and orders that land with you instantly while the customer list stays yours.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/ordering.mp4</video:content_loc>
+      <video:duration>30</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/referral-network-systems</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/referrals.jpg</video:thumbnail_loc>
+      <video:title>Referrals you can track and pay</video:title>
+      <video:description>Every partner gets a code, link and QR brochure, every scan and request is credited automatically, and partners can see what they have earned and what has been paid.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/referrals.mp4</video:content_loc>
+      <video:duration>26</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/referral-program</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/referrals.jpg</video:thumbnail_loc>
+      <video:title>Referrals you can track and pay</video:title>
+      <video:description>Every partner gets a code, link and QR brochure, every scan and request is credited automatically, and partners can see what they have earned and what has been paid.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/referrals.mp4</video:content_loc>
+      <video:duration>26</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/performance-partner-program</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/referrals.jpg</video:thumbnail_loc>
+      <video:title>Referrals you can track and pay</video:title>
+      <video:description>Every partner gets a code, link and QR brochure, every scan and request is credited automatically, and partners can see what they have earned and what has been paid.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/referrals.mp4</video:content_loc>
+      <video:duration>26</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/trade-partnership</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/referrals.jpg</video:thumbnail_loc>
+      <video:title>Referrals you can track and pay</video:title>
+      <video:description>Every partner gets a code, link and QR brochure, every scan and request is credited automatically, and partners can see what they have earned and what has been paid.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/referrals.mp4</video:content_loc>
+      <video:duration>26</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/business-growth-systems</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/growth-system.jpg</video:thumbnail_loc>
+      <video:title>The system behind a busy business</video:title>
+      <video:description>Get found, answer every call, follow up until booked, document the job, get paid, earn the review and post the work, all in one loop.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/growth-system.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/growth-systems-offer</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/growth-system.jpg</video:thumbnail_loc>
+      <video:title>The system behind a busy business</video:title>
+      <video:description>Get found, answer every call, follow up until booked, document the job, get paid, earn the review and post the work, all in one loop.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/growth-system.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/contractor-growth-systems</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/growth-system.jpg</video:thumbnail_loc>
+      <video:title>The system behind a busy business</video:title>
+      <video:description>Get found, answer every call, follow up until booked, document the job, get paid, earn the review and post the work, all in one loop.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/growth-system.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/home-service-business-growth-systems</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/growth-system.jpg</video:thumbnail_loc>
+      <video:title>The system behind a busy business</video:title>
+      <video:description>Get found, answer every call, follow up until booked, document the job, get paid, earn the review and post the work, all in one loop.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/growth-system.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/handyman-business-growth-systems</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/growth-system.jpg</video:thumbnail_loc>
+      <video:title>The system behind a busy business</video:title>
+      <video:description>Get found, answer every call, follow up until booked, document the job, get paid, earn the review and post the work, all in one loop.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/growth-system.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/painter-business-growth-systems</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/growth-system.jpg</video:thumbnail_loc>
+      <video:title>The system behind a busy business</video:title>
+      <video:description>Get found, answer every call, follow up until booked, document the job, get paid, earn the review and post the work, all in one loop.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/growth-system.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/electrician-business-growth-systems</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/growth-system.jpg</video:thumbnail_loc>
+      <video:title>The system behind a busy business</video:title>
+      <video:description>Get found, answer every call, follow up until booked, document the job, get paid, earn the review and post the work, all in one loop.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/growth-system.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/excavation-business-growth-systems</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/growth-system.jpg</video:thumbnail_loc>
+      <video:title>The system behind a busy business</video:title>
+      <video:description>Get found, answer every call, follow up until booked, document the job, get paid, earn the review and post the work, all in one loop.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/growth-system.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/screen-enclosure-business-growth-systems</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/growth-system.jpg</video:thumbnail_loc>
+      <video:title>The system behind a busy business</video:title>
+      <video:description>Get found, answer every call, follow up until booked, document the job, get paid, earn the review and post the work, all in one loop.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/growth-system.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://knightlogics.com/roofing-business-growth-systems</loc>
+    <video:video>
+      <video:thumbnail_loc>https://knightlogics.com/videos/explainers/growth-system.jpg</video:thumbnail_loc>
+      <video:title>The system behind a busy business</video:title>
+      <video:description>Get found, answer every call, follow up until booked, document the job, get paid, earn the review and post the work, all in one loop.</video:description>
+      <video:content_loc>https://knightlogics.com/videos/explainers/growth-system.mp4</video:content_loc>
+      <video:duration>33</video:duration>
+      <video:publication_date>2026-10-26T12:00:00-04:00</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
     </video:video>
   </url>

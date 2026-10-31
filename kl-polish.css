@@ -76,3 +76,6 @@
 @media (max-width:520px){.klp-grid{grid-template-columns:1fr 1fr;gap:10px}.klp-card{padding:12px;min-height:118px}.klp-card p{font-size:.78rem}}
 @media (max-width:360px){.klp-grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.klp-card,.kl-growth-feature,.sp-card,.home-pricing-lane-card{transition:none}.klp-card:hover{transform:none}}
+
+/* a11y 2026-10-31: links inside footer text must not rely on color alone */
+.site-footer-labs a { text-decoration: underline; text-underline-offset: 2px; }

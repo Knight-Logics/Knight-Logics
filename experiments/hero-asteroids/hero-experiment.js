@@ -25,6 +25,7 @@
     if (!document.querySelector('#hero') || !isEnabled()) {
         const heroOff = document.querySelector('#hero');
         if (heroOff) {
+            heroOff.querySelectorAll('.hero-experiment-layers[data-kl-static]').forEach((el) => el.remove());
             heroOff.classList.remove('hero-experiment-active');
             heroOff.querySelectorAll('.parallax-bg-far, .parallax-bg-mid, .parallax-bg-near')
                 .forEach((layer) => layer.removeAttribute('hidden'));
@@ -33,7 +34,8 @@
     }
 
     const hero = document.querySelector('#hero');
-    if (hero.querySelector('.hero-experiment-layers')) return;
+    if (hero.querySelector('.hero-experiment-layers:not([data-kl-static])') || hero.dataset.klHeroBooted) return;
+    hero.dataset.klHeroBooted = '1';
 
     const orphanParallax = document.getElementById('klHeroParallax');
     if (orphanParallax && !hero.contains(orphanParallax)) {
@@ -107,20 +109,23 @@
     });
 
     /* ── DOM injection ── */
-    const layers = document.createElement('div');
-    layers.className = 'hero-experiment-layers';
-    layers.innerHTML = `
-        <div class="hero-experiment-parallax" id="klHeroParallax" aria-hidden="true">
-            <div class="hero-experiment-bg"></div>
-            <canvas class="hero-experiment-canvas hero-experiment-canvas--stars" id="klHeroStars" aria-hidden="true"></canvas>
-            <canvas class="hero-experiment-canvas hero-experiment-canvas--asteroids" id="klHeroAsteroids" aria-hidden="true"></canvas>
-        </div>
-        <div class="hero-experiment-foreground" aria-hidden="true">
-            <img class="hero-experiment-cutout" id="klHeroCutout" src="${CUTOUT_SRC}" srcset="${CUTOUT_BASE}/hero-cutout-320.webp?v=${CUTOUT_VER} 320w, ${CUTOUT_BASE}/hero-cutout-480.webp?v=${CUTOUT_VER} 480w, ${CUTOUT_BASE}/hero-cutout-800.webp?v=${CUTOUT_VER} 800w, ${CUTOUT_BASE}/hero-cutout.webp?v=${CUTOUT_VER} 1135w" sizes="(max-width: 768px) min(42vw, 220px), (max-width: 1200px) 400px, 600px" alt="" width="1135" height="1041" decoding="async" fetchpriority="high">
-        </div>
-    `;
-    const wrapper = hero.querySelector('.hero-content-wrapper');
-    hero.insertBefore(layers, wrapper);
+    let layers = hero.querySelector('.hero-experiment-layers[data-kl-static]');
+    if (!layers) {
+        layers = document.createElement('div');
+        layers.className = 'hero-experiment-layers';
+        layers.innerHTML = `
+            <div class="hero-experiment-parallax" id="klHeroParallax" aria-hidden="true">
+                <div class="hero-experiment-bg"></div>
+                <canvas class="hero-experiment-canvas hero-experiment-canvas--stars" id="klHeroStars" aria-hidden="true"></canvas>
+                <canvas class="hero-experiment-canvas hero-experiment-canvas--asteroids" id="klHeroAsteroids" aria-hidden="true"></canvas>
+            </div>
+            <div class="hero-experiment-foreground" aria-hidden="true">
+                <img class="hero-experiment-cutout" id="klHeroCutout" src="${CUTOUT_SRC}" srcset="${CUTOUT_BASE}/hero-cutout-320.webp?v=${CUTOUT_VER} 320w, ${CUTOUT_BASE}/hero-cutout-480.webp?v=${CUTOUT_VER} 480w, ${CUTOUT_BASE}/hero-cutout-800.webp?v=${CUTOUT_VER} 800w, ${CUTOUT_BASE}/hero-cutout.webp?v=${CUTOUT_VER} 1135w" sizes="(max-width: 768px) min(42vw, 220px), (max-width: 1200px) 400px, 600px" alt="" width="1135" height="1041" decoding="async" fetchpriority="high">
+            </div>
+        `;
+        const wrapper = hero.querySelector('.hero-content-wrapper');
+        hero.insertBefore(layers, wrapper);
+    }
 
     const hudMount = document.createElement('div');
     hudMount.className = 'hero-experiment-hud-mount';

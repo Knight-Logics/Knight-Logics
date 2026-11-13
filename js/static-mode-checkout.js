@@ -1,4 +1,4 @@
-/* Static (GitHub Pages) mode: online checkout disabled. Pricing CTAs route to contact. */
+/* Contact fallback only when /api/health is missing or checkout is not ready. */
 (function () {
   var CONTACT = '/contact.html';
   function label(el) {
@@ -9,6 +9,7 @@
     var sel = '[data-sku], .pricing-card-cta, [href*="openPackage="], [href*="pay-invoice"], #checkout-button, [data-checkout]';
     document.querySelectorAll(sel).forEach(function (el) {
       if (el.dataset.staticDone) return;
+      if (el.classList && el.classList.contains('sp-buy')) return;
       el.dataset.staticDone = '1';
       var dest = /pay-invoice/.test(el.getAttribute('href') || '') ? CONTACT : label(el);
       var a = document.createElement('a');
@@ -28,6 +29,15 @@
       el.textContent = 'Next step: Contact us to confirm scope and payment terms.';
     });
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', convert); else convert();
-  new MutationObserver(convert).observe(document.documentElement, { childList: true, subtree: true });
+  function boot() {
+    fetch('/api/health', { headers: { Accept: 'application/json' }, cache: 'no-store' })
+      .then(function (response) { return response.ok ? response.json() : null; })
+      .then(function (body) {
+        if (body && body.ok === true && body.checkout === true) return;
+        convert();
+      })
+      .catch(convert);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
 })();

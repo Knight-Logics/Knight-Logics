@@ -1,6 +1,6 @@
 'use strict';
 
-const Stripe = require('stripe');
+const { createStripe } = require('./_lib/stripe-client');
 const { neon } = require('@neondatabase/serverless');
 const {
     isStaticApprovedPayoutAttribution,
@@ -150,7 +150,7 @@ async function creditAutovidSession(sql, session) {
         let periodEnd = null;
         if (subscriptionId) {
             try {
-                const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || process.env.STRIPE_API_KEY, { apiVersion: '2025-03-31.basil' });
+                const stripe = createStripe(process.env.STRIPE_SECRET_KEY || process.env.STRIPE_API_KEY, { apiVersion: '2025-03-31.basil' });
                 const subscription = await stripe.subscriptions.retrieve(subscriptionId);
                 subscriptionStatus = subscription.status || subscriptionStatus;
                 periodEnd = subscription.current_period_end
@@ -364,7 +364,7 @@ module.exports = async function handler(req, res) {
 
     let event;
     try {
-        const stripe = new Stripe(stripeSecretKey, { apiVersion: '2025-03-31.basil' });
+        const stripe = createStripe(stripeSecretKey, { apiVersion: '2025-03-31.basil' });
         const rawBody = await readRawBody(req);
         event = stripe.webhooks.constructEvent(rawBody, signature, webhookSecret);
     } catch (error) {

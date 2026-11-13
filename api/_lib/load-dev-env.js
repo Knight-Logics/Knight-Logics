@@ -50,13 +50,25 @@ function loadDevEnv() {
         return;
     }
 
-    const root = path.join(__dirname, '..', '..');
+    let moduleDir = '';
+    try {
+        moduleDir = __dirname;
+    } catch (_error) {
+        return;
+    }
+    if (!moduleDir) return;
+    const root = path.join(moduleDir, '..', '..');
     for (const file of ENV_FILES) {
         const filePath = path.join(root, file);
-        if (!fs.existsSync(filePath)) {
+        let text;
+        try {
+            if (!fs.existsSync(filePath)) {
+                continue;
+            }
+            text = fs.readFileSync(filePath, 'utf8');
+        } catch (_error) {
             continue;
         }
-        const text = fs.readFileSync(filePath, 'utf8');
         for (const line of text.split(/\r?\n/)) {
             const parsed = parseEnvLine(line);
             if (!parsed || !ENV_KEYS.includes(parsed.key) || process.env[parsed.key]) {

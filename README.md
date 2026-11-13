@@ -21,4 +21,9 @@ Local preview:
 npm run dev
 ```
 
+Payments:
+
+- GitHub Pages does not run `api/`. The Worker in `worker/` serves `/api/*` when it is deployed. Setup, secret names, the Stripe test plan, and the go-live checklist are in `worker/DEPLOY.md`.
+- Buy buttons and Pay Invoice call `GET /api/health`. They use checkout when that response has `checkout: true`, and they stay on the contact link when it does not.
+
 Do not edit or deploy from Downloads copies, zip extracts, or detached validation worktrees.

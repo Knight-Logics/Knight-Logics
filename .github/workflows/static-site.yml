@@ -8,6 +8,18 @@ permissions:
   contents: read
 
 jobs:
+  api-worker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install Node dependencies
+        run: npm ci
+      - name: Test the API Worker with Stripe mocked
+        run: npm run test:worker
+
   validate:
     runs-on: ubuntu-latest
     steps:

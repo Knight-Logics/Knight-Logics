@@ -1,7 +1,7 @@
 'use strict';
 
 const crypto = require('crypto');
-const Stripe = require('stripe');
+const { createStripe } = require('./stripe-client');
 const { neon } = require('@neondatabase/serverless');
 
 function sendJson(res, status, payload) {
@@ -48,7 +48,7 @@ async function issueRefund(sql, orderId, order, reason) {
     const key = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_API_KEY;
     if (!key) throw Object.assign(new Error('Stripe is unavailable.'), { status: 503 });
     if (!order.payment_intent_id) throw Object.assign(new Error('Order has no payment intent.'), { status: 409 });
-    const stripe = new Stripe(key, { apiVersion: '2025-03-31.basil' });
+    const stripe = createStripe(key, { apiVersion: '2025-03-31.basil' });
     const refund = await stripe.refunds.create(
         { payment_intent: order.payment_intent_id, reason: 'requested_by_customer', metadata: { order_id: orderId, reason } },
         { idempotencyKey: `autonomous-service-refund-${orderId}` }

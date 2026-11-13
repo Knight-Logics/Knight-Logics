@@ -1,6 +1,6 @@
 'use strict';
 
-const Stripe = require('stripe');
+const { createStripe } = require('./stripe-client');
 const { SERVICES } = require('./service-catalog');
 
 const ALLOWED_ORIGINS = new Set(['https://knightlogics.com', 'https://www.knightlogics.com']);
@@ -114,7 +114,7 @@ module.exports = async function handler(req, res) {
 
     const host = origin && allowedOrigin(origin) ? origin : 'https://knightlogics.com';
     try {
-        const stripe = new Stripe(key, { apiVersion: '2025-03-31.basil' });
+        const stripe = createStripe(key, { apiVersion: '2025-03-31.basil' });
         const session = await stripe.checkout.sessions.create({
             mode: 'payment',
             customer_email: buyerEmail,

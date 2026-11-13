@@ -1,6 +1,6 @@
 'use strict';
 
-const Stripe = require('stripe');
+const { createStripe } = require('./_lib/stripe-client');
 
 const DEFAULT_ALLOWED_ORIGINS = new Set([
     'https://knightlogics.com',
@@ -19,7 +19,7 @@ const MAX_AMOUNT_CENTS = 5000000; // $50,000.00 maximum
 const INVOICE_NUMBER_PATTERN = /^[A-Za-z0-9\-_.#/]{1,60}$/;
 
 const requestBuckets = new Map();
-let stripeFactory = (secretKey) => new Stripe(secretKey, { apiVersion: '2024-06-20' });
+let stripeFactory = (secretKey) => createStripe(secretKey, { apiVersion: '2024-06-20' });
 
 function createHttpError(statusCode, message) {
     const error = new Error(message);
@@ -368,5 +368,5 @@ module.exports.setStripeFactoryForTests = function setStripeFactoryForTests(fact
     stripeFactory = factory;
 };
 module.exports.resetStripeFactoryForTests = function resetStripeFactoryForTests() {
-    stripeFactory = (secretKey) => new Stripe(secretKey, { apiVersion: '2024-06-20' });
+    stripeFactory = (secretKey) => createStripe(secretKey, { apiVersion: '2024-06-20' });
 };

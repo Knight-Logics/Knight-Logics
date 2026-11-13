@@ -209,9 +209,17 @@ If those scripts are unavailable or dirty in the current worktree, use direct Pl
 - **Social Poster restore reference:** `Social/Social-Media-Manager/docs/social-poster-master.md`
 - **Social Ops restore reference:** `Social/Social-Media-Manager/docs/social-ops-master.md`
 
+## Payments on the static site
+
+- Live HTML is GitHub Pages from `pages-static`. Pages returns 404 for `/api/*`.
+- `worker/` is the Cloudflare Worker that runs the existing `api/` checkout, invoice, referral, and license handlers. It is not deployed by the Pages publish. Secret names, the Stripe test plan, and the go-live checklist are in `worker/DEPLOY.md`.
+- The route in `wrangler.jsonc` stays commented until that checklist. Attaching it does not change DNS. Pages keeps serving HTML.
+- Buy buttons and Pay Invoice call `GET /api/health`. Checkout is enabled only when the JSON has `ok: true` and `checkout: true`. Otherwise the contact link stays.
+- License and referral rows stay in the existing Neon database (`KL_DATABASE_URL`). The Worker does not add D1 or KV.
+
 ## PixelForge Production Billing
 
-- Public desktop builds use `POST /api/pixelforge-license`; Stripe and database secrets remain in Vercel only.
+- `POST /api/pixelforge-license`, `POST /api/knight-account` (and `/api/knight-account/*`), and the Display Control+ `/api/licenses/*` paths are forwarded to the `KNIGHT_ACCOUNT` service binding (`knight-account-api`). Auto Video Compiler stays on this Worker's Neon `POST /api/autovid-license`. Secret names and the binding are in `worker/DEPLOY.md`. The certification below is the previous Vercel deployment of the Neon handlers.
 - `api/_lib/pixelforge-billing.js` owns the server plans, 8-credit new-device trial, account balance, render reservations, idempotent Stripe session crediting, and privacy-limited event records.
 - Render billing is reservation-based: `reserve` deducts atomically, `commit` finalizes a valid output, and `release` returns the exact trial/paid split after cancellation or failure.
 - Stripe package metadata uses `app=pixelforge_ai`; `api/stripe-webhook.js` credits completed sessions even when the desktop app closes before confirmation.

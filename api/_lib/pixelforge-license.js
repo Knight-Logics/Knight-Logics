@@ -1,6 +1,6 @@
 'use strict';
 
-const Stripe = require('stripe');
+const { createStripe } = require('./stripe-client');
 const { neon } = require('@neondatabase/serverless');
 const {
     commitReservation,
@@ -83,7 +83,7 @@ function getSql() {
 
 function getStripe() {
     const secretKey = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_API_KEY;
-    return secretKey ? new Stripe(secretKey, { apiVersion: '2025-03-31.basil' }) : null;
+    return createStripe(secretKey, { apiVersion: '2025-03-31.basil' });
 }
 
 function normalizeLoopbackRedirect(value, expectedPath) {

@@ -246,7 +246,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <section class="invoice-result-section" id="invoiceOffline" style="display:none;" aria-live="polite">
         <div class="invoice-result-card">
             <h2>Invoice payment is offline</h2>
-            <p>Online checkout is not reachable from this browser right now.</p>
+            <p>Online checkout is not reachable from this browser right now. Please <a href="/contact.html">contact us</a> or call <a href="tel:+18137735553">(813) 773-5553</a>.</p>
             <div class="invoice-result-actions">
                 <a href="/contact.html" class="cta-button primary">Contact Us</a>
             </div>
@@ -467,13 +467,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             document.getElementById('invoicePaymentMain').style.display = 'none';
             document.getElementById('invoiceCancelledSection').style.display = 'flex';
         } else {
+            var invoiceSubmit = document.getElementById('invoiceSubmitBtn');
+            if (invoiceSubmit) invoiceSubmit.disabled = true;
             fetch('/api/health', { headers: { Accept: 'application/json' }, cache: 'no-store' })
                 .then(function (response) { return response.ok ? response.json() : null; })
                 .then(function (body) {
                     if (!body || body.ok !== true || body.checkout !== true) {
                         document.getElementById('invoicePaymentMain').style.display = 'none';
                         document.getElementById('invoiceOffline').style.display = 'flex';
+                        return;
                     }
+                    if (invoiceSubmit) invoiceSubmit.disabled = false;
                 })
                 .catch(function () {
                     document.getElementById('invoicePaymentMain').style.display = 'none';

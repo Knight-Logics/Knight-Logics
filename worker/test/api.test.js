@@ -233,6 +233,46 @@ test('Knight Account paths are forwarded and nothing else is', async () => {
     assert.equal((await health.json()).knightAccount, true);
 });
 
+test('webhook rejects a bad signature and accepts a valid one', async () => {
+    const Stripe = require('stripe');
+    const payload = JSON.stringify({
+        id: 'evt_test_review',
+        object: 'event',
+        type: 'checkout.session.completed',
+        data: { object: { id: 'cs_test_review', payment_status: 'unpaid', metadata: {} } }
+    });
+    const secret = `whsec_${'ab'.repeat(16)}`;
+    const stripe = new Stripe('sk_test_mock', {
+        apiVersion: '2025-03-31.basil',
+        httpClient: Stripe.createFetchHttpClient()
+    });
+    const header = stripe.webhooks.generateTestHeaderString({ payload, secret });
+    const env = {
+        STRIPE_SECRET_KEY: 'sk_test_mock',
+        STRIPE_WEBHOOK_SECRET: secret,
+        KL_DATABASE_URL: 'postgres://example.invalid/db',
+        NODE_ENV: 'test'
+    };
+    const bad = await worker.fetch(request('/api/stripe-webhook', {
+        method: 'POST',
+        body: JSON.parse(payload),
+        headers: { 'stripe-signature': 't=1,v1=deadbeef' }
+    }), env);
+    assert.equal(bad.status, 400);
+    assert.match((await bad.json()).error, /signature/i);
+    const good = await worker.fetch(new Request('http://127.0.0.1:8787/api/stripe-webhook', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+            'stripe-signature': header
+        },
+        body: payload
+    }), env);
+    const goodBody = await good.json();
+    assert.equal(good.status, 200, JSON.stringify(goodBody));
+    assert.equal(goodBody.received, true);
+});
+
 test('webhook refuses to run until Stripe and the database are configured', async () => {
     const response = await worker.fetch(request('/api/stripe-webhook', {
         method: 'POST',

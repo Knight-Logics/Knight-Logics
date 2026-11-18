@@ -26,6 +26,7 @@
     "audit:media": "node scripts/audit-commercial-media.js",
     "verify:commercial": "npm run pricing:generate && npm run pricing:check && npm run test:pricing && npm run audit:routes && npm run audit:media",
     "reviews:sync-google": "node scripts/sync-google-reviews.js",
+    "test:worker": "npm test --prefix worker",
     "test:license-cors": "node scripts/license-cors-smoke.js",
     "test:pixelforge-billing": "node scripts/pixelforge-billing-smoke.js",
     "test:pixelforge-billing:db": "node scripts/pixelforge-billing-db-smoke.js",

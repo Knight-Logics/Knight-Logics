@@ -1,4 +1,4 @@
-const Stripe = require('stripe');
+const { createStripe } = require('./_lib/stripe-client');
 const serviceCheckoutHandler = require('./_lib/service-checkout');
 const serviceOrdersHandler = require('./_lib/service-orders');
 const serviceDeliveryHandler = require('./_lib/service-delivery');
@@ -29,7 +29,7 @@ const RATE_LIMIT_MAX_REQUESTS = 30;
 const requestBuckets = new Map();
 const KL_PRODUCT_KEY_META = 'kl_package_key';
 const KL_PAYMENT_OPTION_META = 'kl_payment_option';
-let stripeFactory = (secretKey) => new Stripe(secretKey, {
+let stripeFactory = (secretKey) => createStripe(secretKey, {
     apiVersion: '2025-03-31.basil'
 });
 
@@ -1626,7 +1626,7 @@ module.exports.setStripeFactoryForTests = function setStripeFactoryForTests(fact
     stripeFactory = factory;
 };
 module.exports.resetStripeFactoryForTests = function resetStripeFactoryForTests() {
-    stripeFactory = (secretKey) => new Stripe(secretKey, {
+    stripeFactory = (secretKey) => createStripe(secretKey, {
         apiVersion: '2025-03-31.basil'
     });
 };

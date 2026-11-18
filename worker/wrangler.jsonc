@@ -1,0 +1,34 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "knightlogics-api",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-13",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "services": [
+    {
+      "binding": "KNIGHT_ACCOUNT",
+      "service": "knight-account-api"
+    }
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1
+    },
+    "traces": {
+      "enabled": true,
+      "head_sampling_rate": 1
+    }
+  },
+  // Do not uncomment until the go-live checklist in DEPLOY.md is done.
+  // A route runs this Worker in front of the existing Cloudflare-proxied
+  // knightlogics.com origin (GitHub Pages). It does not change DNS.
+  // Uncommenting these lines and running wrangler deploy attaches /api/* only.
+  // "routes": [
+  //   { "pattern": "knightlogics.com/api/*", "zone_name": "knightlogics.com" },
+  //   { "pattern": "www.knightlogics.com/api/*", "zone_name": "knightlogics.com" }
+  // ]
+}

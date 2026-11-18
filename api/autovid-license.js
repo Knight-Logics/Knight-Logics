@@ -1,7 +1,7 @@
 'use strict';
 
 const crypto = require('crypto');
-const Stripe = require('stripe');
+const { createStripe } = require('./_lib/stripe-client');
 const { neon } = require('@neondatabase/serverless');
 
 const FREE_LIMIT = 20;
@@ -119,7 +119,7 @@ function stripeSeconds(value) {
 function getStripe() {
     const stripeSecretKey = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_API_KEY;
     if (!stripeSecretKey) return null;
-    return new Stripe(stripeSecretKey, { apiVersion: '2025-03-31.basil' });
+    return createStripe(stripeSecretKey, { apiVersion: '2025-03-31.basil' });
 }
 
 function getSql() {

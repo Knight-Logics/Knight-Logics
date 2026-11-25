@@ -1,0 +1,6 @@
+# Copy to worker/.dev.vars for `npx wrangler dev`. Do not commit .dev.vars.
+# Use Stripe test-mode keys only (sk_test_..., whsec_...). Never put live keys here.
+# STRIPE_SECRET_KEY=
+# STRIPE_WEBHOOK_SECRET=
+# KL_DATABASE_URL=
+# NODE_ENV=development
